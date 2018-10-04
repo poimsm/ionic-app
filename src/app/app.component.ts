@@ -4,29 +4,47 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { Subscription } from "rxjs/Subscription";
 import { AuthProvider } from "../providers/auth/auth";
-import { BedroomPage } from "../pages/bedroom/bedroom";
 import {
   AjustesPage,
-  HomePage,
+  OutfitsPage,
   PerfilPage,
   LoginPage,
-  OutfitPage,
-  SubirTresPage,
   PublicacionesPage,
   CuponesPage,
   NuevaTiendaPage,
   TiendaPage,
-  NuevoBlogPage,
   BlogsPage,
   GuardadoPage,
   PedidosPage,
-  MarketPage
+  MarketPage,
+  NewProductPage,
+  NewOutfitPage,
+  NewBlogPage,
+  RoomsPage
 } from "../pages/index.pages";
 
 @Component({
   templateUrl: "app.html"
 })
 export class MyApp {
+  outfitCategories = [
+    "Moda",
+    "Blusa",
+    "Bebé y niños",
+    "Pantalones",
+    "Carteras y bolsos",
+    "Zapatos"
+  ];
+
+  homeCategories = [
+    "Ropa de cama",
+    "Ropa de cama infantil",
+    "Dormitorio",
+    "Cosina",
+    "Living",
+    "Baño"
+  ];
+
   isAuth = true;
   isMarket = false;
   authSubscription: Subscription;
@@ -36,8 +54,8 @@ export class MyApp {
   login = LoginPage;
 
   blogs = BlogsPage;
-  home = HomePage;
-  bedroom = BedroomPage;
+  outfits = OutfitsPage;
+  rooms = RoomsPage;
   market = MarketPage;
 
   publicaciones = PublicacionesPage;
@@ -46,10 +64,10 @@ export class MyApp {
   guardado = GuardadoPage;
   pedidos = PedidosPage;
 
-  crearBlog = NuevoBlogPage;
-  crearProducto = SubirTresPage;
+  crearBlog = NewBlogPage;
+  crearProducto = NewProductPage;
   crearTienda = NuevaTiendaPage;
-  crearOutfit = OutfitPage;
+  crearOutfit = NewOutfitPage;
 
   rootPage: any;
   // rootPage: any = HomePage;
@@ -62,7 +80,7 @@ export class MyApp {
   ) {
     _auth.loadStorage().then(isAuth => {
       if (isAuth) {
-        this.rootPage = this.home;
+        this.rootPage = this.outfits;
       } else {
         this.rootPage = this.login;
       }
@@ -73,12 +91,11 @@ export class MyApp {
     });
   }
   openPage(pagina) {
-    if (pagina !== this.market) {
-      this.rootPage = pagina;
-      this.menuCtrl.close();
-    } else {
-      this.isMarket = true;
-    }
+    this.rootPage = pagina;
+    this.menuCtrl.close();
+  }
+  menuNav(direction) {
+    this.isMarket = true;
   }
   // ionViewWillLeave() {
   //   this.authSubscription.unsubscribe();

@@ -92,19 +92,6 @@ export class ProductProvider {
         this.addImgByProduct(category, postId, imagenes);
       });
   }
-  // async addImgByProduct(postId, base64data) {
-  //   let urls = [];
-  //   for (let i = 0; i < base64data.length; i++) {
-  //     const file = "data:image/jpg;base64," + base64data[i];
-  //     const filePath = "img/" + postId + "_" + i;
-  //     let url = await this.getUrl(filePath, file);
-  //     urls.push(url);
-  //   }
-  //   this.afs
-  //     .collection("products")
-  //     .doc(postId)
-  //     .update({ imgs: { ...urls } });
-  // }
   async addImgByProduct(category, postId, base64data) {
     let urls = [];
     for (let i = 0; i < base64data.length; i++) {
@@ -133,5 +120,25 @@ export class ProductProvider {
           });
       });
     });
+  }
+
+  // ----------------------------------------------------
+  //           GETS
+  // ----------------------------------------------------
+
+  getProducts(category, orden) {
+    const outfit = this.afs.collection(category, ref =>
+      ref.orderBy(orden, "desc").limit(6)
+    );
+    return outfit.snapshotChanges().pipe(
+      map(docArray => {
+        return docArray.map(doc => {
+          return {
+            id: doc.payload.doc.id,
+            ...doc.payload.doc.data()
+          };
+        });
+      })
+    );
   }
 }

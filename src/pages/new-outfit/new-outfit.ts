@@ -8,10 +8,10 @@ import { BrowserProvider } from "../../providers/browser/browser";
 
 @IonicPage()
 @Component({
-  selector: "page-outfit",
-  templateUrl: "outfit.html"
+  selector: "page-new-outfit",
+  templateUrl: "new-outfit.html"
 })
-export class OutfitPage {
+export class NewOutfitPage {
   imagePreview: any;
   base64Image = "";
   titulo = "";

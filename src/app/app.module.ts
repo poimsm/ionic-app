@@ -41,14 +41,11 @@ import {
   SubproductoPage,
   EjemploPage,
   ReviewPage,
-  OutfitPage,
-  SubirTresPage,
   DescuentosPage,
   PublicacionesPage,
   CuponesPage,
   NuevaTiendaPage,
   TiendaPage,
-  NuevoBlogPage,
   GuardadoPage,
   PedidosPage,
   FiltrosPage,
@@ -56,9 +53,13 @@ import {
   PopBlogPage,
   UserPage,
   CommentsPage,
-  BedroomPage,
   ListPage,
-  MarketPage
+  MarketPage,
+  NewProductPage,
+  NewBlogPage,
+  NewOutfitPage,
+  OutfitsPage,
+  RoomsPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { BrowserProvider } from "../providers/browser/browser";
@@ -68,9 +69,9 @@ import { AuthProvider } from "../providers/auth/auth";
 import { SubirProvider } from "../providers/subir/subir";
 import { BlogProvider } from "../providers/blog/blog";
 import { FollowProvider } from "../providers/follow/follow";
-import { MarketProvider } from '../providers/market/market';
-import { OutfitProvider } from '../providers/outfit/outfit';
-import { ProductProvider } from '../providers/product/product';
+import { MarketProvider } from "../providers/market/market";
+import { OutfitProvider } from "../providers/outfit/outfit";
+import { ProductProvider } from "../providers/product/product";
 
 @NgModule({
   declarations: [
@@ -87,14 +88,11 @@ import { ProductProvider } from '../providers/product/product';
     SubproductoPage,
     EjemploPage,
     ReviewPage,
-    OutfitPage,
-    SubirTresPage,
     DescuentosPage,
     PublicacionesPage,
     CuponesPage,
     NuevaTiendaPage,
     TiendaPage,
-    NuevoBlogPage,
     GuardadoPage,
     PedidosPage,
     FiltrosPage,
@@ -102,9 +100,13 @@ import { ProductProvider } from '../providers/product/product';
     PopBlogPage,
     UserPage,
     CommentsPage,
-    BedroomPage,
     ListPage,
-    MarketPage
+    MarketPage,
+    NewProductPage,
+    NewBlogPage,
+    NewOutfitPage,
+    OutfitsPage,
+    RoomsPage
   ],
   imports: [
     BrowserModule,
@@ -132,14 +134,11 @@ import { ProductProvider } from '../providers/product/product';
     SubproductoPage,
     EjemploPage,
     ReviewPage,
-    OutfitPage,
-    SubirTresPage,
     DescuentosPage,
     PublicacionesPage,
     CuponesPage,
     NuevaTiendaPage,
     TiendaPage,
-    NuevoBlogPage,
     GuardadoPage,
     PedidosPage,
     FiltrosPage,
@@ -147,9 +146,13 @@ import { ProductProvider } from '../providers/product/product';
     PopBlogPage,
     UserPage,
     CommentsPage,
-    BedroomPage,
     ListPage,
-    MarketPage
+    MarketPage,
+    NewProductPage,
+    NewBlogPage,
+    NewOutfitPage,
+    OutfitsPage,
+    RoomsPage
   ],
   providers: [
     StatusBar,

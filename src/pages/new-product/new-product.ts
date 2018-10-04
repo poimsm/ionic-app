@@ -7,10 +7,10 @@ import { SubirProvider } from "../../providers/subir/subir";
 
 @IonicPage()
 @Component({
-  selector: "page-subir-tres",
-  templateUrl: "subir-tres.html"
+  selector: "page-new-product",
+  templateUrl: "new-product.html"
 })
-export class SubirTresPage {
+export class NewProductPage {
   imagePreview: any;
   base64Image = "";
   principalPreview: any;

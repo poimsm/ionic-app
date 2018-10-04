@@ -56,78 +56,34 @@
                 <button ion-item (click)="isMarket = !isMarket" style="background:#f2f3f5">
                     <ion-icon name="ios-arrow-back" style="color:gray" item-start></ion-icon>
                     Menú
-                    <!-- <span style="font-size:20px;color:#686f7a;font-weight:300">
-                        Menú
-                    </span> -->
                 </button>
                 <ion-item-divider color="white">
                     <div style="font-size:14px;font-weight:600;color:#444">
                         OUTFITS
                     </div>
                 </ion-item-divider>
-
-                <button ion-item (click)="openPage(market)">
+                <button *ngFor="let category of outfitCategories" (click)="openMarket(category)" ion-item>
                     <ion-icon name="leaf" style="color:white" item-start></ion-icon>
-                    Moda
-                </button>
-                <button ion-item (click)="openPage(market)">
-                    <ion-icon name="leaf" style="color:white" item-start></ion-icon>
-                    Blusa
-                </button>
-                <button ion-item (click)="openPage(market)">
-                    <ion-icon name="leaf" style="color:white" item-start></ion-icon>
-                    Bebés y niños
-                </button>
-                <button ion-item (click)="openPage(market)">
-                    <ion-icon name="leaf" style="color:white" item-start></ion-icon>
-                    Pantalones
-                </button>
-                <button ion-item (click)="openPage(market)">
-                    <ion-icon name="leaf" style="color:white" item-start></ion-icon>
-                    Carteras y bolsos
-                </button>
-                <button ion-item (click)="openPage(market)">
-                    <ion-icon name="leaf" style="color:white" item-start></ion-icon>
-                    Zapatos
+                    {{category}}
                 </button>
                 <ion-item-divider color="white">
                     <div style="font-size:14px;font-weight:600;color:#444">
                         DECORACIÓN DEL HOGAR
                     </div>
                 </ion-item-divider>
-                <button ion-item (click)="openPage(market)">
+                <button *ngFor="let category of homeCategories" (click)="openMarket(category)" ion-item>
                     <ion-icon name="leaf" style="color:white" item-start></ion-icon>
-                    Ropa de cama
-                </button>
-                <button ion-item (click)="openPage(market)">
-                    <ion-icon name="leaf" style="color:white" item-start></ion-icon>
-                    Ropa de cama infantil
-                </button>
-                <button ion-item (click)="openPage(market)">
-                    <ion-icon name="leaf" style="color:white" item-start></ion-icon>
-                    Dormitorio
-                </button>
-                <button ion-item (click)="openPage(market)">
-                    <ion-icon name="leaf" style="color:white" item-start></ion-icon>
-                    Cocina
-                </button>
-                <button ion-item (click)="openPage(market)">
-                    <ion-icon name="leaf" style="color:white" item-start></ion-icon>
-                    Living
-                </button>
-                <button ion-item (click)="openPage(market)">
-                    <ion-icon name="leaf" style="color:white" item-start></ion-icon>
-                    Baño
+                    {{category}}
                 </button>
             </div>
             <div *ngIf="!isMarket">
-                <button ion-item (click)="openPage(home)">
+                <button ion-item (click)="openPage(outfits)">
                     <div item-start style="height:35px;width:35px;border-radius:50%;background:#51c0f3;display:flex;justify-content:center;align-items:center">
                         <ion-icon name="md-home" style="color:white;font-size:25px"></ion-icon>
                     </div>
                     Outfits
                 </button>
-                <button ion-item (click)="openPage(bedroom)">
+                <button ion-item (click)="openPage(rooms)">
                     <div item-start style="height:35px;width:35px;border-radius:50%;background:#51c0f3;display:flex;justify-content:center;align-items:center">
                         <ion-icon name="md-cafe" style="color:white;font-size:25px"></ion-icon>
                     </div>

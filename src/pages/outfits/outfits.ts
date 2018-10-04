@@ -1,15 +1,16 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
-import { NavController, Slides, Content } from "ionic-angular";
+import { IonicPage, NavController, Slides, Content } from "ionic-angular";
 import { ProductoPage } from "../index.pages";
 import { SubirProvider } from "../../providers/subir/subir";
 import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs/Subject";
 
+@IonicPage()
 @Component({
-  selector: "page-bedroom",
-  templateUrl: "bedroom.html"
+  selector: "page-outfits",
+  templateUrl: "outfits.html"
 })
-export class BedroomPage {
+export class OutfitsPage {
   @ViewChild("slider")
   slider: Slides;
   @ViewChild(Content)
@@ -38,25 +39,25 @@ export class BedroomPage {
   ];
   categorias = [
     "Destacado",
-    "Dormitorio",
-    "Baño",
-    "Cosina",
-    "Living",
-    "Zona de trabajo",
-    "Infantil",
-    "Vintage",
+    "Verano",
+    "Casual",
+    "Pantalones",
+    "Outdoor",
+    "En casa",
+    "Estampados",
+    "Profesional",
     "Eventos"
   ];
   toQuery = [
-    "bed-destacados",
-    "colorido",
-    "grises",
-    "gallery",
-    "pequeno",
-    "zona_trabajo",
-    "infantil",
-    "vintage",
-    "nose"
+    "destacados",
+    "verano",
+    "casual",
+    "pantalones",
+    "outdoor",
+    "casa",
+    "estampados",
+    "profesional",
+    "evento"
   ];
   orden = "";
   index = 0;
@@ -76,7 +77,7 @@ export class BedroomPage {
     this.destacados = [];
     this.recientes = [];
     if (idx === 0) {
-      this.queryDestacado(this.toQuery[idx], "destacado");
+      // this.queryDestacado(this.toQuery[idx], "destacado");
       // this.queryReciente(this.toQuery[idx], "novedad");
     } else {
       this.dispatcher.next();

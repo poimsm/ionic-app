@@ -11,10 +11,10 @@ import { PopBlogPage } from "../pop-blog/pop-blog";
 
 @IonicPage()
 @Component({
-  selector: "page-nuevo-blog",
-  templateUrl: "nuevo-blog.html"
+  selector: "page-new-blog",
+  templateUrl: "new-blog.html"
 })
-export class NuevoBlogPage {
+export class NewBlogPage {
   titulo = "Título";
   init = true;
   model = "Escribe algo";

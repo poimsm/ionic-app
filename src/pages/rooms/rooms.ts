@@ -1,17 +1,15 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
-import { NavController, ModalController, Slides, Content } from "ionic-angular";
-import { UserProvider } from "../../providers/user/user";
-import { BlogContentPage } from "../blog-content/blog-content";
-import { Subject } from "rxjs/Subject";
-import { BlogProvider } from "../../providers/blog/blog";
+import { NavController, Slides, Content } from "ionic-angular";
+import { ProductoPage } from "../index.pages";
+import { SubirProvider } from "../../providers/subir/subir";
 import { takeUntil } from "rxjs/operators";
-import { NewBlogPage } from "../new-blog/new-blog";
+import { Subject } from "rxjs/Subject";
 
 @Component({
-  selector: "page-blogs",
-  templateUrl: "blogs.html"
+  selector: 'page-rooms',
+  templateUrl: 'rooms.html',
 })
-export class BlogsPage {
+export class RoomsPage {
   @ViewChild("slider")
   slider: Slides;
   @ViewChild(Content)
@@ -25,66 +23,85 @@ export class BlogsPage {
   startingY: any;
   lastY: any;
   outfits = [];
-  blogs = [];
-  dispatcher = new Subject<boolean>();
   swipeLenght = [
     "0",
     "70",
     "160",
-    "280",
-    "390",
-    "480",
-    "580",
+    "260",
+    "360",
+    "460",
+    "560",
     "660",
     "800",
     "800",
     "800"
   ];
-  categorias = ["Destacados", "Siguiendo", "Buscar"];
-  toQuery = [
-    "Blogs",
-    "Reviews",
-    "Hauls",
-    "Manualidades",
-    "Estilo de vida",
-    "Viajeros",
-    "Libros",
-    "Moda"
+  categorias = [
+    "Destacado",
+    "Dormitorio",
+    "Baño",
+    "Cosina",
+    "Living",
+    "Zona de trabajo",
+    "Infantil",
+    "Vintage",
+    "Eventos"
   ];
+  toQuery = [
+    "bed-destacados",
+    "colorido",
+    "grises",
+    "gallery",
+    "pequeno",
+    "zona_trabajo",
+    "infantil",
+    "vintage",
+    "nose"
+  ];
+  orden = "";
   index = 0;
 
-  constructor(
-    public navCtrl: NavController,
-    private modalCtrl: ModalController,
-    private _blog: BlogProvider
-  ) {
+  bestSellers = [];
+  novedad = [];
+  recientes = [];
+  destacados = [];
+
+  dispatcher = new Subject<boolean>();
+
+  constructor(public navCtrl: NavController, private _subir: SubirProvider) {
     this.fetch(0);
   }
   fetch(idx) {
     console.log(this.categorias[idx]);
-    this.blogs = [];
+    this.destacados = [];
+    this.recientes = [];
     if (idx === 0) {
-      this.queryDestacado("fecha");
+      this.queryDestacado(this.toQuery[idx], "destacado");
+      // this.queryReciente(this.toQuery[idx], "novedad");
     } else {
       this.dispatcher.next();
-      this.queryDestacado("fecha");
+      this.queryDestacado(this.toQuery[idx], "fecha");
+      // this.queryReciente(this.toQuery[idx], "fecha");
     }
   }
-  queryDestacado(orden) {
-    this._blog
-      .getBlogs(orden)
+  queryDestacado(categoria, orden) {
+    this._subir
+      .getOutfits(categoria, orden)
       .pipe(takeUntil(this.dispatcher))
       .subscribe(x => {
-        this.blogs = x;
+        this.destacados = x;
       });
   }
-  openNewBlog() {
-    this.navCtrl.push(NewBlogPage);
+  queryReciente(categoria, orden) {
+    this._subir
+      .getOutfits(categoria, orden)
+      .pipe(takeUntil(this.dispatcher))
+      .subscribe(x => {
+        this.recientes = x;
+      });
   }
-  openBlog(blog) {
-    console.log(blog);
-
-    this.navCtrl.push(BlogContentPage, blog);
+  openOutfit(outfit) {
+    this.navCtrl.push(ProductoPage, outfit);
   }
   handleStart(ev, idx) {
     this.startingX = ev.touches[0].pageX;
@@ -127,6 +144,7 @@ export class BlogsPage {
       } else {
         this.page = (idx + 1).toString();
         this.content.scrollToTop();
+        this.fetch(idx + 1);
         this.scroller.nativeElement.scrollLeft = this.swipeLenght[idx + 1];
         this.holder.nativeElement.style.transform =
           "translate3d(-" + (1 + idx) * window.screen.width + "px,0,0)";
@@ -138,6 +156,7 @@ export class BlogsPage {
       } else {
         this.page = (idx - 1).toString();
         this.scroller.nativeElement.scrollLeft = this.swipeLenght[idx - 1];
+        this.fetch(idx - 1);
         this.holder.nativeElement.style.transform =
           "translate3d(" + (1 - idx) * window.screen.width + "px,0,0)";
       }
@@ -159,5 +178,9 @@ export class BlogsPage {
       $event._snapIndex
     ];
   }
+  openPage(pagina) {
+    this.navCtrl.push(pagina);
+  }
   doInfinite(infiniteScroll) {}
 }
+
