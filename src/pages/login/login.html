@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-segment mode="md" [(ngModel)]="pet" color="danger">
+    <ion-segment-button value="market" (click)="one=true; two=false; three=false">
+      Market
+    </ion-segment-button>
+    <ion-segment-button value="mix" (click)="two=true; one=false; three=false">
+      Mix's
+    </ion-segment-button>
+    <ion-segment-button value="seguir" (click)="three=true; one=false; two=false">
+      Seguir
+    </ion-segment-button>
+  </ion-segment>
+
+  <button ion-button (click)="signInWithFacebook()">
+    facebook
+  </button>
+
+</ion-content>

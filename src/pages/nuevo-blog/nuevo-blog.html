@@ -1,0 +1,194 @@
+<!-- <ion-header>
+  <ion-navbar align-title="center" color="pink">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <div style="color:white;font-weight:800;font-size:22px">
+      Mi histora
+    </div>
+    <ion-buttons right>
+      <button (click)="save()" ion-button icon-only>
+        Publicar
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <img src="assets/03.jpg" style="height:35px;width:35px;border-radius:50%;object-fit:cover">
+    <div (click)="openPop()">
+      <ion-icon name="md-settings" style="color:#bbb;font-size:26px"></ion-icon>
+    </div>
+  </div>
+
+  <ion-textarea style="font-size:18px;font-weight:450;color:#444" [(ngModel)]="titulo" (input)="adjustTextarea($event);">
+  </ion-textarea>
+  <hr>
+
+  <div *ngIf="render.length > 0">
+    <div *ngFor="let item of render; let i = index">
+      <br *ngIf="item.type == 'br'">
+      <div *ngIf="item.type == 'text'">
+        <div class="{{item.class}}">
+          <div (click)="edit(i);init=true" *ngIf="item.isCenter" class="centro">
+            {{item.text}}
+          </div>
+          <div (click)="edit(i);init=true" *ngIf="!item.isCenter">
+            {{item.text}}
+          </div>
+        </div>
+      </div>
+      <div *ngIf="item.type == 'img'">
+        <div class="centerImg">
+          <img [src]="item.img">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ion-textarea [(ngModel)]="model" style="height:100%" (input)="adjustTextarea($event);init=false" [ngClass]="{'n1': n==1, 'init': init, 'n2': n==2, 'n3': n==3, 'n4': n==4 }">
+  </ion-textarea>
+
+  <div style="position:fixed;bottom:0px;left:0px;width:100%;background:white;z-index:10">
+    <hr style="margin:0px;padding:0px">
+    <div style="padding:10px;display:flex;justify-content:space-around">
+      <div *ngIf="n==1" (mousedown)="$event.preventDefault()" (click)="n=2; class = 'n2'" style="color:dodgerblue;font-size:20px">
+        Aa
+      </div>
+      <div *ngIf="n==2" (mousedown)="$event.preventDefault()" (click)="n=3; class = 'n3'" style="color:dodgerblue;font-size:20px;font-style: italic">
+        Aa
+      </div>
+      <div *ngIf="n==3" (mousedown)="$event.preventDefault()" (click)="n=4; class = 'n4'" style="color:dodgerblue;font-size:25px">
+        Aa
+      </div>
+      <div *ngIf="n==4" (mousedown)="$event.preventDefault()" (click)="n=1; class = 'n1'" style="color:dodgerblue;font-size:25px;font-weight:600">
+        Aa
+      </div>
+
+      <div (mousedown)="$event.preventDefault()" (click)="addImg()">
+        <ion-icon name="md-image" style="font-size:27px;color:#bbb"></ion-icon>
+      </div>
+      <div (mousedown)="$event.preventDefault()" (click)="center=!center" style="color:silver;font-size:20px">
+
+        <div style="width:25px;display:flex;justify-content:center;flex-wrap:wrap">
+          <div style="border-radius:0.5px;margin-top:2px;width:12px;height:3px" [ngStyle]="{'background': center ? 'dodgerblue' : '#777' }">
+          </div>
+          <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px" [ngStyle]="{'background': center ? 'dodgerblue' : '#777' }">
+          </div>
+          <div style="border-radius:0.5px;margin-top:2px;width:12px;height:3px" [ngStyle]="{'background': center ? 'dodgerblue' : '#777' }">
+          </div>
+          <div style="border-radius:0.5px;margin-top:2px;width:24px;height:3px" [ngStyle]="{'background': center ? 'dodgerblue' : '#777' }">
+          </div>
+        </div>
+
+      </div>
+      <div (mousedown)="$event.preventDefault()" (click)="add(addKey)" style="color:#555;font-size:20px">
+        {{addKey}}
+      </div>
+    </div>
+  </div>
+
+</ion-content> -->
+
+
+<ion-header>
+  <ion-navbar align-title="center" color="pink">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <div style="color:white;font-weight:800;font-size:22px">
+      Mi
+    </div>
+    <ion-buttons right>
+      <button (click)="save()" ion-button icon-only>
+        Publicar
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <img src="assets/03.jpg" style="height:35px;width:35px;border-radius:50%;object-fit:cover">
+    <div (click)="openPop()">
+      <ion-icon name="md-settings" style="color:#bbb;font-size:26px"></ion-icon>
+    </div>
+  </div>
+
+  <ion-textarea style="font-size:18px;font-weight:450;color:#444" [(ngModel)]="titulo" (input)="adjustTextarea($event);">
+  </ion-textarea>
+  <hr>
+
+  <div *ngIf="render.length > 0">
+    <div *ngFor="let item of render; let i = index">
+      <br *ngIf="item.type == 'br'">
+      <div *ngIf="item.type == 'text'">
+        <div class="{{item.class}}">
+          <div (click)="edit(i);init=true" *ngIf="item.isCenter" class="centro">
+            {{item.text}}
+          </div>
+          <div (click)="edit(i);init=true" *ngIf="!item.isCenter">
+            {{item.text}}
+          </div>
+        </div>
+      </div>
+      <div *ngIf="item.type == 'img'">
+        <div class="centerImg">
+          <img [src]="item.img">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ion-textarea [(ngModel)]="model" style="height:100%" (input)="adjustTextarea($event);init=false" [ngClass]="{'n1': n==1, 'init': init, 'n2': n==2, 'n3': n==3, 'n4': n==4 }">
+  </ion-textarea>
+
+  <div style="position:fixed;bottom:0px;left:0px;width:100%;background:white;z-index:10">
+    <hr style="margin:0px;padding:0px">
+    <div style="padding:10px;display:flex;justify-content:space-around">
+      <div *ngIf="n==1" (mousedown)="$event.preventDefault()" (click)="n=2; class = 'n2'" style="color:dodgerblue;font-size:20px">
+        Aa
+      </div>
+      <div *ngIf="n==2" (mousedown)="$event.preventDefault()" (click)="n=3; class = 'n3'" style="color:dodgerblue;font-size:20px;font-style: italic">
+        Aa
+      </div>
+      <div *ngIf="n==3" (mousedown)="$event.preventDefault()" (click)="n=4; class = 'n4'" style="color:dodgerblue;font-size:25px">
+        Aa
+      </div>
+      <div *ngIf="n==4" (mousedown)="$event.preventDefault()" (click)="n=1; class = 'n1'" style="color:dodgerblue;font-size:25px;font-weight:600">
+        Aa
+      </div>
+
+      <div (mousedown)="$event.preventDefault()" (click)="addImg()">
+        <ion-icon name="md-image" style="font-size:27px;color:#bbb"></ion-icon>
+      </div>
+      <div (mousedown)="$event.preventDefault()" (click)="center=!center" style="color:silver;font-size:20px">
+
+        <div style="width:25px;display:flex;justify-content:center;flex-wrap:wrap">
+          <div style="border-radius:0.5px;margin-top:2px;width:12px;height:3px" [ngStyle]="{'background': center ? 'dodgerblue' : '#777' }">
+          </div>
+          <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px" [ngStyle]="{'background': center ? 'dodgerblue' : '#777' }">
+          </div>
+          <div style="border-radius:0.5px;margin-top:2px;width:12px;height:3px" [ngStyle]="{'background': center ? 'dodgerblue' : '#777' }">
+          </div>
+          <div style="border-radius:0.5px;margin-top:2px;width:24px;height:3px" [ngStyle]="{'background': center ? 'dodgerblue' : '#777' }">
+          </div>
+        </div>
+
+      </div>
+      <div (mousedown)="$event.preventDefault()" (click)="add(addKey)" style="color:#555;font-size:20px">
+        {{addKey}}
+      </div>
+    </div>
+  </div>
+
+</ion-content>

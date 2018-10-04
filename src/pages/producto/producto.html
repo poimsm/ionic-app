@@ -1,0 +1,270 @@
+<ion-header>
+  <ion-navbar align-title="center" color="pink">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <div style="color:white;font-weight:800;font-size:22px">
+      @Boho_Bird
+    </div>
+    <ion-buttons right>
+      <button ion-button icon-only>
+        <ion-icon name="ios-chatbubbles" style="font-size:28px;color:white"></ion-icon>
+      </button>
+      <button ion-button icon-only>
+        <ion-icon name="md-notifications" style="font-size:28px;color:white"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+
+  <img [src]="outfit.img[0]" style="width:100%;object-fit:cover">
+
+  <div style="width:100%;display:flex;justify-content:center;margin-top:-40px">
+    <div style="padding:10px;border:1px solid #eee;border-radius:6px;background:white">
+
+      <div *ngFor="let product of products">
+        <div (click)="openProduct(product)" style="margin-top:3px;display:flex;justify-content:space-between;align-items:center">
+          <img [src]="product.imgs[0]" style="width:50px;height:50px;border-radius:4px;object-fit:cover">
+          <div style="padding-left:20px;padding-right:20px">
+            <div style="font-size:16px;font-weight:600">
+              {{product.title}}
+            </div>
+            <div style="color:deeppink;font-weight:600">
+              <!-- [21%] -->
+              ${{product.price}}
+              <!-- <del style="font-size:14px;font-weight:400;color:#bbb">7.000</del> -->
+            </div>
+          </div>
+          <ion-icon name="ios-arrow-forward" style="font-size:25px;color:#bbb"></ion-icon>
+        </div>
+      </div>
+
+      <!-- <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center">
+        <img src="assets/16.jpg" style="width:50px;height:50px;border-radius:4px">
+        <div style="padding-left:20px;padding-right:20px">
+          <div style="font-size:16px;font-weight:600">
+            producto muy cool...
+          </div>
+          <div style="color:deeppink;font-weight:600">
+            [21%] $3.000
+            <del style="font-size:14px;font-weight:400;color:#bbb">7.000</del>
+          </div>
+        </div>
+        <ion-icon name="ios-arrow-forward" style="font-size:25px;color:#bbb"></ion-icon>
+      </div> -->
+
+    </div>
+  </div>
+  <div>
+
+    <div padding>
+      <div style="font-size:16px;color:#555">
+        {{outfit.title}}
+      </div>
+
+      <div style="margin-top:10px;display:flex;justify-content:flex-start;align-items:flex-start">
+        <ion-icon name="ios-heart-outline" style="margin-right:15px;font-size:25px;color:#444"></ion-icon>
+        <ion-icon name="ios-download-outline" style="margin-right:15px;font-size:25px;color:#444"></ion-icon>
+        <ion-icon name="md-share" style="margin-right:15px;font-size:22px;color:#444"></ion-icon>
+      </div>
+    </div>
+
+    <div style="width:100%;padding:10px;padding-left:15px;background:#edeff1;font-size:14px;font-weight:650;color:#777">
+      Me Gusta (12)
+    </div>
+
+    <div padding style="display:flex;justify-content:flex-start">
+      <img src="assets/18.jpg" style="margin-right:10px;width:35px;height:35px;border-radius:50%;object-fit:cover">
+      <img src="assets/18.jpg" style="margin-right:10px;width:35px;height:35px;border-radius:50%;object-fit:cover">
+      <img src="assets/18.jpg" style="margin-right:10px;width:35px;height:35px;border-radius:50%;object-fit:cover">
+      <div style="width:35px;height:35px;border-radius:50%;background:#eee;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="ios-more" style="font-size:28px;color:#bbb"></ion-icon>
+      </div>
+    </div>
+
+    <div style="width:100%;padding:10px;padding-left:15px;background:#edeff1;font-size:14px;font-weight:650;color:#777">
+      Reseñas (112)
+    </div>
+
+    <div style="width:100%;display:flex;justify-content:flex-start;align-items:flex-end">
+      <ion-icon name="md-star" style="font-size:25px" [ngStyle]="{'color':outfit.starts > 0 ? 'gold' : '#bbb' }"></ion-icon>
+      <ion-icon name="md-star" style="font-size:25px" [ngStyle]="{'color':outfit.starts > 1 ? 'gold' : '#bbb' }"></ion-icon>
+      <ion-icon name="md-star" style="font-size:25px" [ngStyle]="{'color':outfit.starts > 2 ? 'gold' : '#bbb' }"></ion-icon>
+      <ion-icon name="md-star" style="font-size:25px" [ngStyle]="{'color':outfit.starts > 3 ? 'gold' : '#bbb' }"></ion-icon>
+      <ion-icon name="md-star" style="font-size:25px" [ngStyle]="{'color':outfit.starts > 4 ? 'gold' : '#bbb' }"></ion-icon>
+      <div style="margin-left:5px;font-size:16px;color:#777">
+        <!-- {{outfit.totalStarts}} calificaciones -->
+        112 calificaciones
+      </div>
+    </div>
+
+
+    <!-- <div *ngFor="let prenda of prendas" style="padding:3px;font-size:16px;color:forestgreen">
+      <div (click)="openPage(producto.id, prenda)">
+        {{prenda}}
+      </div>
+    </div> -->
+
+    <!-- <div style="background:#EBEBEB;height:6px;width:100%">
+    </div> -->
+
+    <!-- <h5>Likes ({{producto.likes}})</h5>
+    <div style="padding-top:5px;overflow:scroll;white-space:nowrap">
+      <img src="assets/03.jpg" style="height:40px;width:40px;border-radius:50%">
+      <img src="assets/16.jpg" style="height:40px;width:40px;border-radius:50%">
+      <img src="assets/18.jpg" style="height:40px;width:40px;border-radius:50%">
+      <img src="assets/16.jpg" style="height:40px;width:40px;border-radius:50%">
+      <img src="assets/03.jpg" style="height:40px;width:40px;border-radius:50%">
+      <img src="assets/03.jpg" style="height:40px;width:40px;border-radius:50%">
+    </div> -->
+
+    <!-- <div style="background:#EBEBEB;height:4px;width:100%">
+    </div> -->
+
+    <!-- <h5>Reseñas</h5>
+    <div style="display:flex;justify-content:flex-start">
+      <img (click)="yes = true" src="assets/16.jpg" style="height:60px;width:60px;">
+      <img (click)="openModal()" src="assets/03.jpg" style="height:60px;width:60px;">
+      <img src="assets/18.jpg" style="height:60px;width:60px;">
+      <img src="assets/16.jpg" style="height:60px;width:60px;">
+    </div> -->
+
+    <!-- <div style="background:#EBEBEB;height:4px;width:100%;margin-top:10px">
+    </div> -->
+
+    <!-- <h5>Comentarios ({{producto.comments}})</h5> -->
+
+    <!-- <div style="margin-top:10px;">
+
+        <div style="font-size:16px">
+          <span style="font-weight:600;font-size:16px">
+            osca garcia
+          </span>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        </div>
+      </div> -->
+
+    <!-- <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:flex-start">
+      <img src="assets/18.jpg" style="margin-right:10px;width:35px;height:35px;border-radius:50%;object-fit:cover">
+      <div style="width:100%;font-size:16px">
+        adipisicing elit ...
+        <div>
+          <img src="assets/03.jpg" style="width:35px;height:35px;border-radius:3px">
+        </div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:flex-end;width:80px;font-weight:600;color:#777;">
+          <ion-icon name="md-star" style="font-size:18px;color:gold"></ion-icon>
+          <ion-icon name="md-star" style="font-size:18px;color:gold"></ion-icon>
+          <ion-icon name="md-star" style="font-size:18px;color:gold"></ion-icon>
+          <ion-icon name="md-star" style="font-size:18px;color:gold"></ion-icon>
+          <ion-icon name="md-star" style="font-size:18px;color:gold"></ion-icon>
+        </div>
+      </div>
+    </div>
+    <div style="margin-left:40px;margin-top:10px;width:100%;display:flex;align-items:center">
+      <img src="assets/16.jpg" style="margin-right:5px;width:30px;height:30px;border-radius:50%;object-fit:cover"> Cuanto te salio el envio?
+    </div>
+    <div style="margin-left:40px;margin-top:10px;width:100%;display:flex;align-items:center">
+      <img src="assets/18.jpg" style="margin-right:5px;width:30px;height:30px;border-radius:50%;object-fit:cover"> solo 3000 en dos dias
+    </div>
+    <div style="margin-left:40px;margin-top:10px;width:100%;display:flex;align-items:center">
+      <img src="assets/03.jpg" style="margin-right:5px;width:30px;height:30px;border-radius:50%;object-fit:cover"> Cuanto te salio el envio?
+    </div>
+    <hr> -->
+
+
+
+
+
+    <div padding>
+
+      <div style="margin-top:0px;display:flex;justify-content:space-between;align-items:flex-start">
+        <img src="assets/18.jpg" style="margin-right:10px;width:35px;height:35px;border-radius:50%;object-fit:cover">
+        <div style="width:100%;font-size:14px;color:#222">
+          <div>
+            <div style="font-weight:600;color:#222">
+              _daniela
+            </div>
+            <div style="display:flex;justify-content:flex-start;width:80px;font-weight:600;color:#777;">
+              <ion-icon name="md-star" style="font-size:18px;color:gold"></ion-icon>
+              <ion-icon name="md-star" style="font-size:18px;color:gold"></ion-icon>
+              <ion-icon name="md-star" style="font-size:18px;color:gold"></ion-icon>
+            </div>
+          </div>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit sed nemo.
+          <div style="margin-top:5px">
+            <img src="assets/03.jpg" style="width:50px;height:50px;border-radius:0px">
+          </div>
+        </div>
+        <div>
+          <div style="width:100%;font-size:14;color:#888;font-weight:500;display:flex;align-items:center">
+            2
+            <ion-icon name="ios-heart-outline" style="margin-left:5px;font-size:25px;color:#bbb"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:flex-start">
+        <img src="assets/18.jpg" style="margin-right:10px;width:35px;height:35px;border-radius:50%;object-fit:cover">
+        <div style="width:100%;font-size:14px;color:#222">
+          <div>
+            <div style="font-weight:600;color:#222">
+              asd32
+            </div>
+            <div style="display:flex;justify-content:flex-start;width:80px;font-weight:600;color:#777;">
+              <ion-icon name="md-star" style="font-size:18px;color:gold"></ion-icon>
+              <ion-icon name="md-star" style="font-size:18px;color:gold"></ion-icon>
+              <ion-icon name="md-star" style="font-size:18px;color:gold"></ion-icon>
+              <ion-icon name="md-star" style="font-size:18px;color:gold"></ion-icon>
+              <!-- <ion-icon name="md-star" style="font-size:18px;color:orange"></ion-icon> -->
+            </div>
+          </div>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit sed nemo.
+          <div style="margin-top:5px">
+            <!-- <img src="assets/03.jpg" style="width:50px;height:50px;border-radius:0px"> -->
+          </div>
+        </div>
+        <div>
+          <div style="width:100%;display:flex;justify-content:flex-end">
+            <ion-icon name="ios-heart-outline" style="font-size:25px;color:#bbb"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:flex-start">
+      <img src="assets/18.jpg" style="margin-right:10px;width:35px;height:35px;border-radius:50%;object-fit:cover">
+      <div style="width:100%;font-size:14px;color:#555">
+        <div style="font-size:14px;font-weight:600;color:#222">
+          _Daniela3
+        </div>
+        <div style="margin-top:0px;display:flex;justify-content:flex-start;width:80px;font-weight:600;color:#777;">
+          <ion-icon name="md-star" style="font-size:20px;color:orange"></ion-icon>
+          <ion-icon name="md-star" style="font-size:20px;color:orange"></ion-icon>
+          <ion-icon name="md-star" style="font-size:20px;color:orange"></ion-icon>
+          <ion-icon name="md-star" style="font-size:20px;color:orange"></ion-icon>
+          <ion-icon name="md-star" style="font-size:20px;color:orange"></ion-icon>
+        </div>
+        <div style="margin-top:5px;font-size:15px">
+          adipisicing elit asdoi si pero no vale mucho la pena comprar tres items al tiro..
+        </div>
+        <div style="margin-top:10px;width:100%;display:flex;justify-content:space-between;align-items:flex-end">
+          <div>
+            <img src="assets/03.jpg" style="width:60px;height:60px;border-radius:0px">
+          </div>
+          <ion-icon name="ios-heart-outline" style="font-size:25px;color:#bbb"></ion-icon>
+        </div>
+      </div>
+    </div> -->
+    </div>
+
+
+
+  </div>
+
+</ion-content>

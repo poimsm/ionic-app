@@ -1,22 +1,86 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { Component } from "@angular/core";
+import { Platform, MenuController } from "ionic-angular";
+import { StatusBar } from "@ionic-native/status-bar";
+import { SplashScreen } from "@ionic-native/splash-screen";
+import { Subscription } from "rxjs/Subscription";
+import { AuthProvider } from "../providers/auth/auth";
+import { BedroomPage } from "../pages/bedroom/bedroom";
+import {
+  AjustesPage,
+  HomePage,
+  PerfilPage,
+  LoginPage,
+  OutfitPage,
+  SubirTresPage,
+  PublicacionesPage,
+  CuponesPage,
+  NuevaTiendaPage,
+  TiendaPage,
+  NuevoBlogPage,
+  BlogsPage,
+  GuardadoPage,
+  PedidosPage,
+  MarketPage
+} from "../pages/index.pages";
 
-import { HomePage } from '../pages/home/home';
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: "app.html"
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  isAuth = true;
+  isMarket = false;
+  authSubscription: Subscription;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  ajustes = AjustesPage;
+  perfil = PerfilPage;
+  login = LoginPage;
+
+  blogs = BlogsPage;
+  home = HomePage;
+  bedroom = BedroomPage;
+  market = MarketPage;
+
+  publicaciones = PublicacionesPage;
+  cupones = CuponesPage;
+  tienda = TiendaPage;
+  guardado = GuardadoPage;
+  pedidos = PedidosPage;
+
+  crearBlog = NuevoBlogPage;
+  crearProducto = SubirTresPage;
+  crearTienda = NuevaTiendaPage;
+  crearOutfit = OutfitPage;
+
+  rootPage: any;
+  // rootPage: any = HomePage;
+  constructor(
+    private menuCtrl: MenuController,
+    platform: Platform,
+    statusBar: StatusBar,
+    _auth: AuthProvider,
+    splashScreen: SplashScreen
+  ) {
+    _auth.loadStorage().then(isAuth => {
+      if (isAuth) {
+        this.rootPage = this.home;
+      } else {
+        this.rootPage = this.login;
+      }
+    });
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
     });
   }
+  openPage(pagina) {
+    if (pagina !== this.market) {
+      this.rootPage = pagina;
+      this.menuCtrl.close();
+    } else {
+      this.isMarket = true;
+    }
+  }
+  // ionViewWillLeave() {
+  //   this.authSubscription.unsubscribe();
+  // }
 }
-

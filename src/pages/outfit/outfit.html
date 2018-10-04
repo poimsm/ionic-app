@@ -1,0 +1,133 @@
+<ion-header>
+  <ion-navbar color="pink" align-title="center">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      {{titulo | placeHolder:'Crear nuevo post'}}
+    </ion-title>
+    <ion-buttons right>
+      <button ion-button (click)="saveData()">
+        Crear
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div style="background-image: linear-gradient(to right, #ff5b9d, #ffad68);position:relative;width:300px;height:100px;border-radius:8px">
+    <div style="font-size:25px;font-weight:600;position:absolute;bottom:60px;left:15px;color:white">
+      100
+    </div>
+    <div style="font-size:20px;position:absolute;bottom:35px;left:15px;color:white">
+      Exclusivo para usuarios nuevos
+    </div>
+    <div style="font-weight:300;position:absolute;bottom:5px;left:15px;color:white">
+      Sirve para una compra en la tienda
+    </div>
+    <div style="position:absolute;bottom:28px;left:0px;width:100%;height:0px;border-top:2px dashed white">
+    </div>
+    <div style="position:absolute;bottom:20px;left:-8px;width:16px;height:16px;border-radius:50%;background:white">
+    </div>
+    <div style="position:absolute;bottom:20px;right:-8px;width:16px;height:16px;border-radius:50%;background:white">
+    </div>
+  </div>
+
+  <div style="background-image: linear-gradient(to right, #53e89e, #3cb4b8);position:relative;width:300px;height:100px;border-radius:8px">
+    <div style="font-size:25px;font-weight:600;position:absolute;bottom:60px;left:15px;color:white">
+      100
+    </div>
+    <div style="font-size:20px;position:absolute;bottom:35px;left:15px;color:white">
+      Exclusivo para usuarios nuevos
+    </div>
+    <div style="font-weight:300;position:absolute;bottom:5px;left:15px;color:white">
+      Sirve para una compra en la tienda
+    </div>
+    <div style="position:absolute;bottom:28px;left:0px;width:100%;height:0px;border-top:2px dashed white">
+    </div>
+    <div style="position:absolute;bottom:20px;left:-8px;width:16px;height:16px;border-radius:50%;background:white">
+    </div>
+    <div style="position:absolute;bottom:20px;right:-8px;width:16px;height:16px;border-radius:50%;background:white">
+    </div>
+  </div>
+
+
+  <div *ngIf="imagePreview">
+    <img [src]="imagePreview" style="height:70px;width:70px;object-fit:cover">
+  </div>
+
+
+  <div style="width:100%;display:flex;justify-content:center;margin-bottom:20px">
+    <button mode="md" ion-button color="primary" (click)="outfit()">
+      OUTFIT
+    </button>
+  </div>
+
+
+  <ion-list style="margin-top:10px">
+    <ion-item>
+      <ion-input [(ngModel)]="titulo" type="text" placeholder="Título"></ion-input>
+    </ion-item>
+
+    <div style="margin-top:20px;width:100%;display:flex;justify-content:space-around">
+      <button (click)="opt = 'outfit';destacado='destacado'" ion-button>
+        Outfit
+      </button>
+      <button (click)="opt = 'bedroom';destacado='bed-destacados'" ion-button>
+        Bedroom
+      </button>
+    </div>
+
+
+
+    <ion-item *ngIf="opt == 'outfit'" no-lines>
+      <ion-label style="color:#6c757d">Categoria</ion-label>
+      <ion-select [(ngModel)]="categoria">
+        <ion-option value="verano">Verano</ion-option>
+        <ion-option value="casual">Casual</ion-option>
+        <ion-option value="pantalones">Pantalones</ion-option>
+        <ion-option value="outdoor">Outdoor</ion-option>
+        <ion-option value="casa">Casa</ion-option>
+        <ion-option value="estampados">Estampados</ion-option>
+        <ion-option value="evento">Evento</ion-option>
+        <ion-option value="profesional">Profesional</ion-option>
+        <ion-option value="retro">Retro</ion-option>
+      </ion-select>   
+    </ion-item>
+
+    <ion-item *ngIf="opt == 'bedroom'" no-lines>
+      <ion-label style="color:#6c757d">Categoria</ion-label>
+      <ion-select [(ngModel)]="categoria">
+        <ion-option value="colorido">Colorido</ion-option>
+        <ion-option value="grises">Grises</ion-option>
+        <ion-option value="gallery">Gallery wall</ion-option>
+        <ion-option value="pequeno">Espacios pequeños</ion-option>
+        <ion-option value="zona_trabajo">Zona de trabajo</ion-option>
+        <ion-option value="infantil">Infantil</ion-option>
+        <ion-option value="vintage">Vintage</ion-option>
+        <ion-option value="nose">Eventos</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+    <button ion-button (click)="fileInput.click()">Seleccionar</button>
+
+    <button ion-button block outline (click)="findProducts()">Crear lista de prendas</button>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6 col-md-4 col-xl-3 *ngFor="let product of products">
+          <img [src]="product.doc.imgs['0']" (click)="collection(product.doc.id)" [ngStyle]="{'border':product.active ? '2px solid #777' : '2px solid white' }"
+            style="height:100px;width:100%;object-fit:cover">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-list>
+
+
+</ion-content>

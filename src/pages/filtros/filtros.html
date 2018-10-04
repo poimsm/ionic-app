@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-navbar align-title="center" color="gray">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="close()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      Opciones
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-item-group>
+    <ion-item-divider color="light">
+      <div style="font-size:14px;font-weight:600;color:#444">
+        MOSTRAR
+      </div>
+    </ion-item-divider>
+    <ion-item (click)="mostrarOpt('outfit')">
+      <ion-icon name="leaf" style="color:white" item-start></ion-icon>
+      Outfit
+      <ion-icon *ngIf="mostrar !== 'outfit'" name="md-radio-button-off" style="color:gray" item-end></ion-icon>
+      <ion-icon *ngIf="mostrar == 'outfit'" name="md-radio-button-on" style="color:dodgerblue" item-end></ion-icon>
+    </ion-item>
+    <ion-item (click)="mostrarOpt('producto')">
+      <ion-icon name="leaf" style="color:white" item-start></ion-icon>
+      Producto
+      <ion-icon *ngIf="mostrar !== 'producto'" name="md-radio-button-off" style="color:gray" item-end></ion-icon>
+      <ion-icon *ngIf="mostrar == 'producto'" name="md-radio-button-on" style="color:dodgerblue" item-end></ion-icon>
+    </ion-item>
+    <ion-item (click)="mostrarOpt('categoria')">
+      <ion-icon name="leaf" style="color:white" item-start></ion-icon>
+      Categoría
+      <ion-icon *ngIf="mostrar !== 'categoria'" name="md-radio-button-off" style="color:gray" item-end></ion-icon>
+      <ion-icon *ngIf="mostrar == 'categoria'" name="md-radio-button-on" style="color:dodgerblue" item-end></ion-icon>
+    </ion-item>
+    <ion-item-divider color="light">
+      <div style="font-size:14px;font-weight:600;color:#444">
+        ORDENAR POR
+      </div>
+    </ion-item-divider>
+    <ion-item (click)="ordenOpt('descuento')">
+      Productos en descuento
+      <ion-icon name="md-checkmark" [ngStyle]="{'color': ordenar == 'descuento' ? 'dodgerblue' : 'white' }" item-end></ion-icon>
+    </ion-item>
+    <ion-item (click)="ordenOpt('valorados')">
+      Mejor valorados
+      <ion-icon name="md-checkmark" [ngStyle]="{'color': ordenar == 'valorados' ? 'dodgerblue' : 'white' }" item-end></ion-icon>
+    </ion-item>
+    <ion-item (click)="ordenOpt('vendidos')">
+      Más vendidos
+      <ion-icon name="md-checkmark" [ngStyle]="{'color': ordenar == 'vendidos' ? 'dodgerblue' : 'white' }" item-end></ion-icon>
+    </ion-item>
+    <ion-item (click)="ordenOpt('cronologico')">
+      Orden cronológico
+      <ion-icon name="md-checkmark" [ngStyle]="{'color': ordenar == 'cronologico' ? 'dodgerblue' : 'white' }" item-end></ion-icon>
+    </ion-item>
+  </ion-item-group>
+</ion-content>

@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-navbar color="pink" align-title="center">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      {{titulo | placeHolder:'Nuevo producto'}}
+    </ion-title>
+    <ion-buttons right>
+      <button ion-button (click)="saveData()">
+        <!-- <button ion-button (click)="saveData()" [disabled]="titulo.length <= 1 || descripcion <= 1 || base64Image <= 1 || catsActivas.length <= 1"> -->
+        Crear
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+  <button ion-button (click)="fileInput.click()">Seleccionar</button>
+
+  <div *ngIf="imagePreview" style="display:flex;justify-content:flex-start;flex-wrap:wrap">
+    <div *ngFor="let item of imagenesPreview">
+      <img [src]="item" style="margin:10px;height:70px;width:70px;object-fit:cover">
+    </div>
+  </div>
+  <div style="width:100%;display:flex;justify-content:center;margin-bottom:20px">
+    <button mode="md" ion-button color="primary" (click)="addImg()">
+      Subir Imagenes
+    </button>
+  </div>
+
+  <ion-list style="margin-top:10px">
+    <ion-item>
+      <ion-input [(ngModel)]="titulo" type="text" placeholder="Título"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="precio" type="number" placeholder="Precio"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea [(ngModel)]="descripcion" placeholder="Descripción" #myInput id="myInput" rows="6" (keyup)="resize()" [(ngModel)]="model"></ion-textarea>
+    </ion-item>
+  </ion-list>
+
+
+  <div style="font-size:16px;background:#fff8dc;padding:5px">
+    <div style="margin-bottom:10px">
+      Agrega una talla y sus colores disponibles en tu descripción así:
+    </div>
+    <div style="width:100%;display:flex;justify-content:center">
+      <div style="font-size:20px">
+        <span style="color:#444">[</span>
+        <span style="color:dodgerblue">Talla</span>,
+        <span style="color:dodgerblue">Color #1</span>,
+        <span style="color:dodgerblue">Color #2</span>
+        <span style="color:#444">]</span>
+      </div>
+    </div>
+    <!-- <div style="margin-bottom:10px;margin-top:10px">
+        Ejemplo,
+      </div>
+      <div style="font-size:22px; color: #444">
+        <div style="width:100%;display:flex;justify-content:center">
+          [s, negro, amarillo-verde]
+        </div>
+      </div> -->
+  </div>
+  <button ion-button outline (click)="openEjemplo()">Ejemplo</button>
+
+
+
+
+
+</ion-content>
