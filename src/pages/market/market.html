@@ -31,6 +31,14 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6 col-md-4 col-xl-3 *ngFor="let product of products">
+        <img [src]="product.imgs[0]" (click)="openProduct(product)" style="height:150px;width:100%;object-fit:cover">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

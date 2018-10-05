@@ -40,7 +40,7 @@ export class BlogsPage {
     "800",
     "800"
   ];
-  categorias = ["Destacados", "Siguiendo", "Buscar"];
+  categorias = ["Pan", "Pan gourmet", "Desayunos"];
   toQuery = [
     "Blogs",
     "Reviews",

@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-navbar align-title="center" color="pink">
     <ion-buttons left>
       <button ion-button icon-only menuToggle>
@@ -33,26 +33,11 @@
 
 <ion-content>
 
-  <!-- <ion-grid>
-    <ion-row>
-      <ion-col col-6 col-md-4 col-xl-3 *ngFor="let outfit of outfits">
-        <img [src]="outfit.img[0]" (click)="open(outfit)" style="height:100px;width:100%;object-fit:cover">
-      </ion-col>
-    </ion-row>
-  </ion-grid> -->
-
-
   <ion-fab right bottom>
     <button (click)="openNewBlog()" ion-fab mini color="danger">
       <ion-icon name="ios-add"></ion-icon>
     </button>
   </ion-fab>
-
-  <!-- <input id="image-file" type="file" /> -->
-  <!-- <input type="file" [(ngModel)]="hm" name="pic" accept="image/*"> -->
-
-
-
 
   <div #holder style="margin-top:0px;will-change: transform;position:relative">
     <div *ngFor="let categoria of categorias; let i = index">
@@ -75,11 +60,6 @@
                 </div>
               </div>
             </div>
-            <!-- <div style="color:#ccc;margin-right:10px">
-              <div style="color:#bbb;font-size:12px;font-weight:400">
-                Hace 2 horas
-              </div>
-            </div> -->
             <ion-icon name="ios-more" style="font-size:28px;color:#ccc;margin-right:10px"></ion-icon>
 
 
@@ -115,74 +95,325 @@
               <div style="font-size:14px;color:#bbb">
                 Sin categoria
               </div>
-              <!-- <div style="width:50px;margin-right:10px;display:flex">
-                <ion-icon name="ios-more" style="font-size:26px;color:#ccc"></ion-icon>
-                <div style="font-size:16px;color:#ccc;margin-left:8px">
-                  {{blog.replay}}
+            </div>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div *ngIf="i>0" style="position:absolute;top:0px;width:100vw" [ngStyle]="{'left': i*100 + 'vw'}" (touchstart)="handleStart($event, i)"
+        (touchmove)="handleMove($event, i)" (touchend)="handleEnd($event, i)">
+        <h1>Hola</h1>
+      </div>
+    </div>
+  </div>
+</ion-content> -->
+
+
+<ion-header>
+  <ion-navbar align-title="center" color="pink">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <div style="color:white;font-weight:800;font-size:22px">
+      Frodo
+    </div>
+    <ion-buttons right>
+      <button ion-button icon-only>
+        <ion-icon name="md-notifications" style="font-size:28px;color:white"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <div #scroller style="margin-top:-8px;overflow:scroll;background:#F55880;white-space:nowrap">
+    <div style="color:white;font-weight:300;display:flex;justify-content:space-around">
+      <div *ngFor="let categoria of categorias; let i = index">
+        <div class="flex" (click)="selectedSlide(i);fetch(i)" [ngClass]="{
+              'select': page === i.toString()}">
+          <ion-icon *ngIf="i==0" name="ios-star"></ion-icon>
+          {{categoria}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-fab right bottom>
+    <button (click)="openNewBlog()" ion-fab mini color="danger">
+      <ion-icon name="ios-add"></ion-icon>
+    </button>
+  </ion-fab>
+
+
+
+  <div #holder style="margin-top:0px;will-change: transform;position:relative">
+    <div *ngFor="let categoria of categorias; let i = index">
+
+
+      <div *ngIf="i==0" style="position:absolute;top:0px;width:100vw" [ngStyle]="{'left': i*100 + 'vw'}" (touchstart)="handleStart($event, i)"
+        (touchmove)="handleMove($event, i)" (touchend)="handleEnd($event, i)">
+
+        <hr>
+        <div padding>
+          <div style="width:100%;display:flex;height:130px">
+            <img src="assets/p01.jpg" style="width:150px;height:130px;object-fit:cover">
+            <div>
+              <div style="padding:10px;font-weight:400;color:#444;font-size:16px">
+                Marraqueta | Panadería San Pablo </div>
+              <div style="padding-left:10px;padding-right:10px;">
+                <div style="color:#777">
+                  Una exquisita y tradicional marraqueta... </div>
+                <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+                  <div style="width:100%;display:flex;justify-content:flex-start;align-items:center">
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                  </div>
+                  <div style="color:dodgerblue;font-size:18px">
+                    $900/kg
+                  </div>
                 </div>
-              </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div padding>
+          <div style="width:100%;display:flex;height:130px">
+            <img src="assets/p02.jpg" style="width:150px;height:130px;object-fit:cover">
+            <div>
+              <div style="padding:10px;font-weight:400;color:#444;font-size:16px">
+                Pan Hallulla - Roggendorf </div>
+              <div style="padding-left:10px;padding-right:10px;">
+                <div style="color:#777">
+                  Unas tortitas no tienen por qué ser poco, y ...
+                </div>
+                <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+                  <div style="width:100%;display:flex;justify-content:flex-start;align-items:center">
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:#bbb"></ion-icon>
+                  </div>
+                  <div style="color:dodgerblue;font-size:18px">
+                    $1100/kg
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div padding>
+          <div style="width:100%;display:flex;height:130px">
+            <img src="assets/p03.jpg" style="width:150px;height:130px;object-fit:cover">
+            <div>
+              <div style="padding:10px;font-weight:400;color:#444;font-size:16px">
+                Baguette Mini </div>
+              <div style="padding-left:10px;padding-right:10px;">
+                <div style="color:#777">
+                  Uno de los preferidos aquí en la... </div>
+                <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+                  <div style="width:100%;display:flex;justify-content:flex-start;align-items:center">
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:#bbb"></ion-icon>
+                  </div>
+                  <div style="color:dodgerblue;font-size:18px">
+                    $800/u
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <hr>
 
       </div>
-      <div *ngIf="i>0" style="position:absolute;top:0px;width:100vw" [ngStyle]="{'left': i*100 + 'vw'}" (touchstart)="handleStart($event, i)"
+
+
+      <div *ngIf="i==1" style="position:absolute;top:0px;width:100vw" [ngStyle]="{'left': i*100 + 'vw'}" (touchstart)="handleStart($event, i)"
         (touchmove)="handleMove($event, i)" (touchend)="handleEnd($event, i)">
 
-        <h1>Hola</h1>
-        <!-- <ion-grid>
-          <ion-row>
-            <ion-col col-6 col-md-4 col-xl-3 *ngFor="let destacado of destacados">
-              <img [src]="destacado.img[0]" (click)="openOutfit(destacado)" style="height:150px;width:100%;object-fit:cover">
-            </ion-col>
-          </ion-row>
-        </ion-grid> -->
+        <hr>
+        <div padding>
+          <div style="width:100%;display:flex;height:130px">
+            <img src="assets/pan01.jpeg" style="width:150px;height:130px;object-fit:cover">
+            <div>
+              <div style="padding:10px;font-weight:400;color:#444;font-size:16px">
+                Baguette Integral </div>
+              <div style="padding-left:10px;padding-right:10px;">
+                <div style="color:#777">
+                  Sabroso baguette elaborado con harinas integrales...
+                </div>
+                <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+                  <div style="width:100%;display:flex;justify-content:flex-start;align-items:center">
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                  </div>
+                  <div style="color:dodgerblue;font-size:18px">
+                    $900/u
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div padding>
+          <div style="width:100%;display:flex;height:130px">
+            <img src="assets/pan02.jpeg" style="width:150px;height:130px;object-fit:cover">
+            <div>
+              <div style="padding:10px;font-weight:400;color:#444;font-size:16px">
+                Pan de Molde </div>
+              <div style="padding-left:10px;padding-right:10px;">
+                <div style="color:#777">
+                  Mezcla de harina de trigo integral, centeno...
+                </div>
+                <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+                  <div style="width:100%;display:flex;justify-content:flex-start;align-items:center">
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:#bbb"></ion-icon>
+                  </div>
+                  <div style="color:dodgerblue;font-size:18px">
+                    $1160/u
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div padding>
+          <div style="width:100%;display:flex;height:130px">
+            <img src="assets/pan03.jpeg" style="width:150px;height:130px;object-fit:cover">
+            <div>
+              <div style="padding:10px;font-weight:400;color:#444;font-size:16px">
+                Pan Artesanal </div>
+              <div style="padding-left:10px;padding-right:10px;">
+                <div style="color:#777">
+                  Elaborado en base a harina de trigo, miel de... </div>
+                <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+                  <div style="width:100%;display:flex;justify-content:flex-start;align-items:center">
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:#bbb"></ion-icon>
+                  </div>
+                  <div style="color:dodgerblue;font-size:18px">
+                    $1100/u
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+      </div>
+
+
+      <div *ngIf="i==2" style="position:absolute;top:0px;width:100vw" [ngStyle]="{'left': i*100 + 'vw'}" (touchstart)="handleStart($event, i)"
+        (touchmove)="handleMove($event, i)" (touchend)="handleEnd($event, i)">
+
+        <hr>
+        <div padding>
+          <div style="width:100%;display:flex;height:130px">
+            <img src="assets/dep01.jpg" style="width:150px;height:130px;object-fit:cover">
+            <div>
+              <div style="padding:10px;font-weight:400;color:#444;font-size:16px">
+                Tortitas de té matcha </div>
+              <div style="padding-left:10px;padding-right:10px;">
+                <div style="color:#777">
+                  Tritura 1 plátano, un huevo, una clara... </div>
+                <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+                  <div style="width:100%;display:flex;justify-content:flex-start;align-items:center">
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                  </div>
+                  <div style="color:dodgerblue;font-size:18px">
+                    $1400
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div padding>
+          <div style="width:100%;display:flex;height:130px">
+            <img src="assets/dep03.jpg" style="width:150px;height:130px;object-fit:cover">
+            <div>
+              <div style="padding:10px;font-weight:400;color:#444;font-size:16px">
+                Crema de avena con plátano y mantequilla de cacahuete
+              </div>
+              <div style="padding-left:10px;padding-right:10px;">
+                <div style="color:#777">
+                  Unas tortitas no tienen por qué ser poco, y ...
+                </div>
+                <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+                  <div style="width:100%;display:flex;justify-content:flex-start;align-items:center">
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:#bbb"></ion-icon>
+                  </div>
+                  <div style="color:dodgerblue;font-size:18px">
+                    $1100
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div padding>
+          <div style="width:100%;display:flex;height:130px">
+            <img src="assets/dep04.jpg" style="width:150px;height:130px;object-fit:cover">
+            <div>
+              <div style="padding:10px;font-weight:400;color:#444;font-size:16px">
+                Avena con mango en tarro </div>
+              <div style="padding-left:10px;padding-right:10px;">
+                <div style="color:#777">
+                  Si desayunas en la oficina, este va... </div>
+                <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+                  <div style="width:100%;display:flex;justify-content:flex-start;align-items:center">
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+                    <ion-icon name="md-star" style="font-size:25px;color:#bbb"></ion-icon>
+                  </div>
+                  <div style="color:dodgerblue;font-size:18px">
+                    $2100
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr>
 
       </div>
     </div>
   </div>
-
-
-  <!-- <div style="margin-top:15px;margin-bottom:15px;width:100%;display:flex;justify-content:flex-start;flex-wrap:wrap">
-    <div style="color:#222;width:100%;font-weight:400;font-size:18px;margin-left:5px;margin-right:5px;margin-bottom:6px">
-      Este es el titulo del blog que es bien claro
-    </div>
-    <div style="width:30%;padding-left:5px">
-      <img src="assets/03.jpg" style="border:0px solid gray;width:100%;height:100%;object-fit:cover">
-    </div>
-    <div style="width:70%;padding-left:10px;padding-right:5px">
-      <div style="display:flex;justify-content:space-between">
-        <div style="color:#bbb">
-          Hace 5 días
-        </div>
-        <div style="color:tomato">
-          ETL
-        </div>
-      </div>
-      <div style="color:#333;margin-top:5px;margin-bottom:5px">
-        MLorem elit. Mollitia at veniam odio, adipisci minima quae id, harum dolor corporis in...
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div style="display:flex;align-items:center;margin-top:5px">
-          <ion-icon name="ios-heart-outline" style="font-size:26px;color:#777"></ion-icon>
-          <div style="font-size:16px;color:#bbb;margin-left:8px;margin-right:20px">
-            23
-          </div>
-          <ion-icon name="md-text" style="font-size:26px;color:#bbb"></ion-icon>
-          <div style="font-size:16px;color:#bbb;margin-left:8px;margin-right:20px">
-            2
-          </div>
-          <ion-icon name="ios-download-outline" style="font-size:26px;color:#999"></ion-icon>
-          <div style="font-size:16px;color:#bbb;margin-left:8px">
-            5
-          </div>
-        </div>
-        <div style="font-weight:600;color:dodgerblue">
-          Leer Más
-        </div>
-      </div>
-    </div>
-  </div> -->
-
 </ion-content>

@@ -58,70 +58,100 @@
                     Menú
                 </button>
                 <ion-item-divider color="white">
-                    <div style="font-size:14px;font-weight:600;color:#444">
+                    <div style="font-size:14px;font-weight:600;color:#0b80d8">
                         OUTFITS
                     </div>
                 </ion-item-divider>
-                <button *ngFor="let category of outfitCategories" (click)="openMarket(category)" ion-item>
+                <button *ngFor="let category of outfitCategories; let i = index" (click)="openMarket(outfitToQuery[i]); isMarket = !isMarket"
+                    ion-item>
                     <ion-icon name="leaf" style="color:white" item-start></ion-icon>
                     {{category}}
                 </button>
                 <ion-item-divider color="white">
-                    <div style="font-size:14px;font-weight:600;color:#444">
+                    <div style="font-size:14px;font-weight:600;color:#0b80d8">
                         DECORACIÓN DEL HOGAR
                     </div>
                 </ion-item-divider>
-                <button *ngFor="let category of homeCategories" (click)="openMarket(category)" ion-item>
+                <button *ngFor="let category of homeCategories; let i = index" (click)="openMarket(homeToQuery[i]); isMarket = !isMarket"
+                    ion-item>
                     <ion-icon name="leaf" style="color:white" item-start></ion-icon>
                     {{category}}
                 </button>
             </div>
-            <div *ngIf="!isMarket">
+            <div *ngIf="!isMarket" style="font-weight:600;color:#444">
                 <button ion-item (click)="openPage(outfits)">
                     <div item-start style="height:35px;width:35px;border-radius:50%;background:#51c0f3;display:flex;justify-content:center;align-items:center">
-                        <ion-icon name="md-home" style="color:white;font-size:25px"></ion-icon>
+                        <ion-icon name="md-cafe" style="color:white;font-size:25px"></ion-icon>
                     </div>
                     Outfits
                 </button>
                 <button ion-item (click)="openPage(rooms)">
                     <div item-start style="height:35px;width:35px;border-radius:50%;background:#51c0f3;display:flex;justify-content:center;align-items:center">
-                        <ion-icon name="md-cafe" style="color:white;font-size:25px"></ion-icon>
+                        <ion-icon name="md-home" style="color:white;font-size:25px"></ion-icon>
                     </div>
-                    Casa
+                    Rooms
                 </button>
 
                 <button ion-item (click)="openPage(blogs)">
                     <div item-start style="height:35px;width:35px;border-radius:50%;background:#51c0f3;display:flex;justify-content:center;align-items:center">
                         <ion-icon name="md-create" style="color:white;font-size:25px"></ion-icon>
                     </div>
-                    Blogging
+                    Blogs
                 </button>
                 <div style="height:10px;width:100%;background:#eee">
                 </div>
+
                 <button ion-item (click)="openPage(publicaciones)">
-                    <div item-start style="height:35px;width:35px;border-radius:50%;background:#fb4c48;display:flex;justify-content:center;align-items:center">
-                        <ion-icon name="apps" style="color:white;font-size:25px"></ion-icon>
-                    </div>
-                    Todos Mis Productos
+                    <ion-icon item-start name="apps" style="color:#bbb;font-size:25px"></ion-icon>
+                    <span style="color:#444;font-weight:600">
+                        Mis Posts
+                    </span>
+                </button>
+                <button ion-item (click)="openPage(crearOutfit)">
+                    <ion-icon item-start name="md-shirt" style="color:#bbb;font-size:25px"></ion-icon>
+                    <span style="color:#444;font-weight:600">
+                        Crea Outfit
+                    </span>
                 </button>
                 <button ion-item (click)="openPage(crearProducto)">
+                    <ion-icon item-start name="md-pricetags" style="color:#bbb;font-size:25px"></ion-icon>
+                    <span style="color:#444;font-weight:600">
+                        Crea Producto
+                    </span>
+                </button>
+
+                <!-- <button ion-item (click)="openPage(publicaciones)">
                     <div item-start style="height:35px;width:35px;border-radius:50%;background:#fb4c48;display:flex;justify-content:center;align-items:center">
                         <ion-icon name="apps" style="color:white;font-size:25px"></ion-icon>
                     </div>
-                    Subir Nuevo Producto
+                    Mis Posts
                 </button>
                 <button ion-item (click)="openPage(crearOutfit)">
                     <div item-start style="height:35px;width:35px;border-radius:50%;background:#fb4c48;display:flex;justify-content:center;align-items:center">
-                        <ion-icon name="apps" style="color:white;font-size:25px"></ion-icon>
+                        <ion-icon name="ios-shirt-outline" style="color:white;font-size:25px"></ion-icon>
                     </div>
-                    Crea un Outfit
-                </button>
-                <button ion-item (click)="openPage(tienda)">
-                    <div item-start style="height:35px;width:35px;border-radius:50%;background:#fb4c48;display:flex;justify-content:center;align-items:center">
-                        <ion-icon name="apps" style="color:white;font-size:25px"></ion-icon>
+                    Crea Outfit
+                </button> -->
+                <div style="height:10px;width:100%;background:#eee">
+                </div>
+                <!-- <button ion-item (click)="openPage(tienda)">
+                    <div item-start style="height:35px;width:35px;border-radius:50%;background:#fe8b04;display:flex;justify-content:center;align-items:center">
+                        <ion-icon name="md-basket" style="color:white;font-size:25px"></ion-icon>
                     </div>
                     Mi Tienda
+                </button> -->
+                <button ion-item (click)="openPage(crearProducto)">
+                    <div item-start style="height:35px;width:35px;border-radius:50%;background:#9d87d2;display:flex;justify-content:center;align-items:center">
+                        <ion-icon name="md-pricetags" style="color:white;font-size:25px"></ion-icon>
+                    </div>
+                    Crear Producto
                 </button>
+                <!-- <button ion-item (click)="openPage(crearProducto)">
+                    <div item-start style="height:35px;width:35px;border-radius:50%;background:#4db3f7;display:flex;justify-content:center;align-items:center">
+                        <ion-icon name="apps" style="color:white;font-size:25px"></ion-icon>
+                    </div>
+                    Crear Producto
+                </button> -->
             </div>
 
             <div style="height:10px;width:100%;background:#eee">

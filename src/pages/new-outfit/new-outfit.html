@@ -77,7 +77,7 @@
       <button (click)="opt = 'outfit';destacado='destacado'" ion-button>
         Outfit
       </button>
-      <button (click)="opt = 'bedroom';destacado='bed-destacados'" ion-button>
+      <button (click)="opt = 'bedroom';destacado='room-destacados'" ion-button>
         Bedroom
       </button>
     </div>
@@ -96,17 +96,17 @@
         <ion-option value="evento">Evento</ion-option>
         <ion-option value="profesional">Profesional</ion-option>
         <ion-option value="retro">Retro</ion-option>
-      </ion-select>   
+      </ion-select>
     </ion-item>
 
     <ion-item *ngIf="opt == 'bedroom'" no-lines>
       <ion-label style="color:#6c757d">Categoria</ion-label>
       <ion-select [(ngModel)]="categoria">
-        <ion-option value="colorido">Colorido</ion-option>
-        <ion-option value="grises">Grises</ion-option>
-        <ion-option value="gallery">Gallery wall</ion-option>
-        <ion-option value="pequeno">Espacios pequeños</ion-option>
-        <ion-option value="zona_trabajo">Zona de trabajo</ion-option>
+        <ion-option value="dormitorio">Dormitorio</ion-option>
+        <ion-option value="living">Living</ion-option>
+        <ion-option value="cosina">Cosina</ion-option>
+        <ion-option value="zona_de_trabajo">Zona de trabajo</ion-option>
+        <ion-option value="bano">Baño</ion-option>
         <ion-option value="infantil">Infantil</ion-option>
         <ion-option value="vintage">Vintage</ion-option>
         <ion-option value="nose">Eventos</ion-option>

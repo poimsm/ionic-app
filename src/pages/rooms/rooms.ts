@@ -6,8 +6,8 @@ import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs/Subject";
 
 @Component({
-  selector: 'page-rooms',
-  templateUrl: 'rooms.html',
+  selector: "page-rooms",
+  templateUrl: "rooms.html"
 })
 export class RoomsPage {
   @ViewChild("slider")
@@ -39,21 +39,21 @@ export class RoomsPage {
   categorias = [
     "Destacado",
     "Dormitorio",
-    "Baño",
-    "Cosina",
     "Living",
+    "Cosina",
     "Zona de trabajo",
+    "Baño",
     "Infantil",
     "Vintage",
     "Eventos"
   ];
   toQuery = [
-    "bed-destacados",
-    "colorido",
-    "grises",
-    "gallery",
-    "pequeno",
-    "zona_trabajo",
+    "room-destacados",
+    "dormitorio",
+    "living",
+    "cosina",
+    "zona_de_trabajo",
+    "bano",
     "infantil",
     "vintage",
     "nose"
@@ -183,4 +183,3 @@ export class RoomsPage {
   }
   doInfinite(infiniteScroll) {}
 }
-

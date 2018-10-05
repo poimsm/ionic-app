@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { AuthProvider } from "../../providers/auth/auth";
 import { EjemploPage } from "../ejemplo/ejemplo";
 import { SubirProvider } from "../../providers/subir/subir";
+import { ProductProvider } from "../../providers/product/product";
 
 @IonicPage()
 @Component({
@@ -17,6 +18,10 @@ export class NewProductPage {
   base64Principal = "";
 
   usuario = {};
+
+  opt = "outfit";
+  destacado = "";
+  category = "";
 
   titulo = "";
   precio: number;
@@ -35,7 +40,7 @@ export class NewProductPage {
     private navParams: NavParams,
     public navCtrl: NavController,
     private imagePicker: ImagePicker,
-    private _subir: SubirProvider,
+    private _product: ProductProvider,
     private _auth: AuthProvider
   ) {}
   openEjemplo() {
@@ -110,15 +115,25 @@ export class NewProductPage {
     );
   }
   saveData() {
-    this.buscar();
+    // this.buscar();
     // console.log("Uno", this.imagenes[0]);
     // console.log("Dos", this.imagenes.splice(0, 1));
     // console.log("tres", this.imagenes);
-    this._subir.addProduct(
+    // this._product.addProduct(
+    //   this.category,
+    //   this.titulo,
+    //   this.descripcionFiltrada,
+    //   this.precio,
+    //   this.tallaColores,
+    //   this.imagenes,
+    //   this._auth.authData.userId
+    // );
+    this._product.addProduct(
+      this.category,
       this.titulo,
-      this.descripcionFiltrada,
-      this.precio,
-      this.tallaColores,
+      "hola",
+      23,
+      { hola: "yes" },
       this.imagenes,
       this._auth.authData.userId
     );

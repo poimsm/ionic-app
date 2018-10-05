@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { Platform, MenuController } from "ionic-angular";
+import { Component, ViewChild } from "@angular/core";
+import { Platform, MenuController, NavController } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { Subscription } from "rxjs/Subscription";
@@ -35,7 +35,14 @@ export class MyApp {
     "Carteras y bolsos",
     "Zapatos"
   ];
-
+  outfitToQuery = [
+    "moda",
+    "blusa",
+    "bebe_ninos",
+    "pantalones",
+    "carteras_bolsos",
+    "zapatos"
+  ];
   homeCategories = [
     "Ropa de cama",
     "Ropa de cama infantil",
@@ -44,6 +51,17 @@ export class MyApp {
     "Living",
     "Baño"
   ];
+  homeToQuery = [
+    "ropa_de_cama",
+    "ropa_de_cama_infantil",
+    "prod_dormitorio",
+    "cosina",
+    "living",
+    "bano"
+  ];
+
+  @ViewChild("content")
+  nav: NavController;
 
   isAuth = true;
   isMarket = false;
@@ -94,10 +112,10 @@ export class MyApp {
     this.rootPage = pagina;
     this.menuCtrl.close();
   }
-  menuNav(direction) {
-    this.isMarket = true;
+  openMarket(category) {
+    this.nav.push(this.market, {
+      cat: category
+    });
+    this.menuCtrl.close();
   }
-  // ionViewWillLeave() {
-  //   this.authSubscription.unsubscribe();
-  // }
 }

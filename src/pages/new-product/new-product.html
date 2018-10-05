@@ -46,6 +46,41 @@
     </ion-item>
   </ion-list>
 
+  <div style="margin-top:20px;width:100%;display:flex;justify-content:space-around">
+    <button (click)="opt = 'outfit';destacado='destacado'" ion-button>
+      Outfit
+    </button>
+    <button (click)="opt = 'room';destacado='bed-destacados'" ion-button>
+      Room
+    </button>
+  </div>
+
+  <ion-item *ngIf="opt == 'outfit'" no-lines>
+    <ion-label style="color:#6c757d">Categoria</ion-label>
+    <ion-select [(ngModel)]="category">
+      <ion-option value="moda">Moda</ion-option>
+      <ion-option value="blusa">Blusa</ion-option>
+      <ion-option value="bebe_ninos">Bebé y niños</ion-option>
+      <ion-option value="pantalones">Pantalones</ion-option>
+      <ion-option value="carteras_bolsos">Carteras y bolsos</ion-option>
+      <ion-option value="zapatos">Zapatos</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="opt == 'room'" no-lines>
+    <ion-label style="color:#6c757d">Categoria</ion-label>
+    <ion-select [(ngModel)]="category">
+      <ion-option value="ropa_de_cama">Ropa de cama</ion-option>
+      <ion-option value="ropa_de_cama_infantil">Ropa de cama infantil</ion-option>
+      <ion-option value="prod_dormitorio">Dormitorio</ion-option>
+      <ion-option value="cosina">Cosina</ion-option>
+      <ion-option value="living">Living</ion-option>
+      <ion-option value="bano">Baño</ion-option>
+    </ion-select>
+  </ion-item>
+
+
+
 
   <div style="font-size:16px;background:#fff8dc;padding:5px">
     <div style="margin-bottom:10px">
