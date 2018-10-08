@@ -13,19 +13,23 @@ import {
   AngularFirestoreCollection
 } from "angularfire2/firestore";
 
-export interface Blog {
+export interface Product {
+  category: string;
   title: string;
+  description: string;
+  price: number;
+  pricePer: string;
+  img: string;
   fecha: number;
-  postId: string;
-  userName: string;
+  productId: string;
   userId: string;
-  userImage: string;
-  format: object;
-  imgs: object;
+  storeName: string;
   likes: number;
-  comments: number;
-  replay: number;
-  popular: number;
+  reviews: number;
+  buys: number;
+  totalStarts: number;
+  sumStarts: number;
+  starts: number;
 }
 export interface Comment {
   postId_time: string;
@@ -45,7 +49,7 @@ export interface Like {
 }
 
 @Injectable()
-export class BlogProvider {
+export class LikeComentProvider {
   constructor(
     private afAuth: AngularFireAuth,
     public afDB: AngularFireDatabase,
@@ -57,9 +61,9 @@ export class BlogProvider {
   // ----------------------------------------------------
   //           GETS
   // ----------------------------------------------------
-  getBlogs(orden) {
-    const outfit = this.afs.collection("Blogs", ref =>
-      ref.orderBy(orden, "desc").limit(15)
+  getBlogs(category, order) {
+    const outfit = this.afs.collection(category, ref =>
+      ref.orderBy(order, "desc").limit(15)
     );
     return outfit.snapshotChanges().pipe(
       map(docArray => {
@@ -72,25 +76,27 @@ export class BlogProvider {
       })
     );
   }
-  getOneBlog(postId) {
-    const outfit = this.afs.collection("Blogs", ref =>
-      ref.where("postId", "==", postId)
+  getOneProduct(category, postId) {
+    const product = this.afs.collection(category, ref =>
+      ref.where("productId", "==", postId)
     );
-    return outfit.valueChanges().pipe(
+    return product.valueChanges().pipe(
       map(data => {
+        console.log("PROD", data[0]);
+
         return data[0];
       })
     );
   }
   getLikesOrComments(postId, collection, limit) {
-    const blog = this.afs.collection(collection, ref =>
+    const product = this.afs.collection(collection, ref =>
       ref
         .orderBy("postId_time")
         .startAt(postId)
         .endAt(postId + "\uf8ff")
         .limit(limit)
     );
-    return blog.snapshotChanges().pipe(
+    return product.snapshotChanges().pipe(
       map(docArray => {
         return docArray.map(doc => {
           return {
@@ -118,9 +124,9 @@ export class BlogProvider {
   //           UPDATES
   // ----------------------------------------------------
 
-  updateLikes(postId: string, user) {
+  updateLikes(category, postId: string, user) {
     this.afs
-      .doc("Blogs/" + postId)
+      .doc(category + "/" + postId)
       .valueChanges()
       .pipe(take(1))
       .subscribe((blog: any) => {
@@ -133,12 +139,12 @@ export class BlogProvider {
         };
         const cont = blog.likes + 1;
         this.afs.collection("likes").add(like);
-        this.afs.doc("Blogs/" + postId).update({ likes: cont });
+        this.afs.doc(category + "/" + postId).update({ likes: cont });
       });
   }
-  updateComments(postId: string, message, user) {
+  updateComments(category, postId: string, message, user) {
     this.afs
-      .doc("Blogs/" + postId)
+      .doc(category + "/" + postId)
       .valueChanges()
       .pipe(take(1))
       .subscribe((blog: any) => {
@@ -153,7 +159,7 @@ export class BlogProvider {
         };
         const cont = blog.comments + 1;
         this.afs.collection("comments").add(comment);
-        this.afs.doc("Blogs/" + postId).update({ comments: cont });
+        this.afs.doc(category + "/" + postId).update({ comments: cont });
       });
   }
   // ----------------------------------------------------

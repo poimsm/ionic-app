@@ -1,3 +1,6 @@
+export { DirectionPage } from './direction/direction';
+export { CestaPage } from './cesta/cesta';
+export { DeliveryPage } from './delivery/delivery';
 export { RoomsPage } from "./rooms/rooms";
 export { OutfitsPage } from "./outfits/outfits";
 export { NewOutfitPage } from "./new-outfit/new-outfit";

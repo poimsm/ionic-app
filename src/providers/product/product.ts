@@ -14,15 +14,16 @@ import {
 } from "angularfire2/firestore";
 
 export interface Product {
+  category: string;
   title: string;
   description: string;
   price: number;
-  imgs: object;
+  pricePer: string;
+  img: string;
   fecha: number;
   productId: string;
-  postIds: object;
   userId: string;
-  keyValues: object;
+  storeName: string;
   likes: number;
   reviews: number;
   buys: number;
@@ -57,26 +58,19 @@ export class ProductProvider {
   //           ADDS
   // ----------------------------------------------------
 
-  addProduct(
-    category,
-    titulo,
-    descripcion,
-    precio,
-    keyValues,
-    imagenes,
-    userId
-  ) {
+  addProduct(category, titulo, descripcion, precio, pricePer,imagen, user) {
     const postId = this.afs.createId();
     const product: Product = {
+      category: category,
       title: titulo,
       description: descripcion,
       price: precio,
-      imgs: {},
-      postIds: {},
+      pricePer: pricePer,
+      img: "",
       fecha: new Date().getTime(),
-      userId: userId,
+      userId: user.userId,
+      storeName: user.storeName,
       productId: postId,
-      keyValues: { ...keyValues },
       likes: 0,
       reviews: 0,
       buys: 0,
@@ -89,21 +83,17 @@ export class ProductProvider {
       .doc(postId)
       .set(product)
       .then(data => {
-        this.addImgByProduct(category, postId, imagenes);
+        this.addImgByProduct(category, postId, imagen);
       });
   }
   async addImgByProduct(category, postId, base64data) {
-    let urls = [];
-    for (let i = 0; i < base64data.length; i++) {
-      const file = base64data[i];
-      const filePath = "img/" + postId + "_" + i;
-      let url = await this.getUrl(filePath, file);
-      urls.push(url);
-    }
+    const file = base64data;
+    const filePath = "img/" + postId;
+    let url = await this.getUrl(filePath, file);
     this.afs
       .collection(category)
       .doc(postId)
-      .update({ imgs: { ...urls } });
+      .update({ img: url });
   }
   getUrl(filePath, file) {
     return new Promise((resolve, reject) => {
@@ -141,4 +131,5 @@ export class ProductProvider {
       })
     );
   }
+
 }

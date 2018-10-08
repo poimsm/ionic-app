@@ -59,7 +59,10 @@ import {
   NewBlogPage,
   NewOutfitPage,
   OutfitsPage,
-  RoomsPage
+  RoomsPage,
+  DeliveryPage,
+  CestaPage,
+  DirectionPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { BrowserProvider } from "../providers/browser/browser";
@@ -72,6 +75,9 @@ import { FollowProvider } from "../providers/follow/follow";
 import { MarketProvider } from "../providers/market/market";
 import { OutfitProvider } from "../providers/outfit/outfit";
 import { ProductProvider } from "../providers/product/product";
+import { LikeComentProvider } from "../providers/like-coment/like-coment";
+import { NotificationProvider } from "../providers/notification/notification";
+import { BasketProvider } from '../providers/basket/basket';
 
 @NgModule({
   declarations: [
@@ -106,7 +112,10 @@ import { ProductProvider } from "../providers/product/product";
     NewBlogPage,
     NewOutfitPage,
     OutfitsPage,
-    RoomsPage
+    RoomsPage,
+    DeliveryPage,
+    CestaPage,
+    DirectionPage
   ],
   imports: [
     BrowserModule,
@@ -152,7 +161,10 @@ import { ProductProvider } from "../providers/product/product";
     NewBlogPage,
     NewOutfitPage,
     OutfitsPage,
-    RoomsPage
+    RoomsPage,
+    DeliveryPage,
+    CestaPage,
+    DirectionPage
   ],
   providers: [
     StatusBar,
@@ -171,7 +183,10 @@ import { ProductProvider } from "../providers/product/product";
     FollowProvider,
     MarketProvider,
     OutfitProvider,
-    ProductProvider
+    ProductProvider,
+    LikeComentProvider,
+    NotificationProvider,
+    BasketProvider
   ]
 })
 export class AppModule {}

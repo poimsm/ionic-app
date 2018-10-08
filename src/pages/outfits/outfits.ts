@@ -27,7 +27,7 @@ export class OutfitsPage {
   outfits = [];
   swipeLenght = [
     "0",
-    "70",
+    "30",
     "160",
     "260",
     "360",
@@ -38,22 +38,12 @@ export class OutfitsPage {
     "800",
     "800"
   ];
-  categorias = [
-    "Destacado",
-    "Verano",
-    "Casual",
-    "Pantalones",
-    "Outdoor",
-    "En casa",
-    "Estampados",
-    "Profesional",
-    "Eventos"
-  ];
+  categorias = ["Pan", "Pan gourmet", "Desayunos", "Cafetería"];
   toQuery = [
-    "destacados",
-    "verano",
-    "casual",
-    "pantalones",
+    "pan",
+    "pan_gourmet",
+    "desayunos",
+    "cafeteria",
     "outdoor",
     "casa",
     "estampados",
@@ -66,7 +56,7 @@ export class OutfitsPage {
   bestSellers = [];
   novedad = [];
   recientes = [];
-  destacados = [];
+  products = [];
 
   dispatcher = new Subject<boolean>();
 
@@ -75,10 +65,10 @@ export class OutfitsPage {
   }
   fetch(idx) {
     console.log(this.categorias[idx]);
-    this.destacados = [];
+    this.products = [];
     this.recientes = [];
     if (idx === 0) {
-      // this.queryDestacado(this.toQuery[idx], "destacado");
+      this.queryDestacado(this.toQuery[idx], "likes");
       // this.queryReciente(this.toQuery[idx], "novedad");
     } else {
       this.dispatcher.next();
@@ -91,7 +81,7 @@ export class OutfitsPage {
       .getOutfits(categoria, orden)
       .pipe(takeUntil(this.dispatcher))
       .subscribe(x => {
-        this.destacados = x;
+        this.products = x;
       });
   }
   queryReciente(categoria, orden) {
@@ -102,8 +92,8 @@ export class OutfitsPage {
         this.recientes = x;
       });
   }
-  openOutfit(outfit) {
-    this.navCtrl.push(ProductoPage, outfit);
+  openProduct(product) {
+    this.navCtrl.push(ProductoPage, product);
   }
   handleStart(ev, idx) {
     this.startingX = ev.touches[0].pageX;

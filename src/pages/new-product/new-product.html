@@ -11,7 +11,6 @@
     </ion-title>
     <ion-buttons right>
       <button ion-button (click)="saveData()">
-        <!-- <button ion-button (click)="saveData()" [disabled]="titulo.length <= 1 || descripcion <= 1 || base64Image <= 1 || catsActivas.length <= 1"> -->
         Crear
       </button>
     </ion-buttons>
@@ -30,7 +29,7 @@
   </div>
   <div style="width:100%;display:flex;justify-content:center;margin-bottom:20px">
     <button mode="md" ion-button color="primary" (click)="addImg()">
-      Subir Imagenes
+      Subir Imágen
     </button>
   </div>
 
@@ -39,75 +38,42 @@
       <ion-input [(ngModel)]="titulo" type="text" placeholder="Título"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input [(ngModel)]="precio" type="number" placeholder="Precio"></ion-input>
-    </ion-item>
-    <ion-item>
       <ion-textarea [(ngModel)]="descripcion" placeholder="Descripción" #myInput id="myInput" rows="6" (keyup)="resize()" [(ngModel)]="model"></ion-textarea>
     </ion-item>
   </ion-list>
 
-  <div style="margin-top:20px;width:100%;display:flex;justify-content:space-around">
-    <button (click)="opt = 'outfit';destacado='destacado'" ion-button>
-      Outfit
-    </button>
-    <button (click)="opt = 'room';destacado='bed-destacados'" ion-button>
-      Room
-    </button>
+  <div style="width:100%;display:flex;justify-content:space-between">
+    <div style="display:flex;align-items:center">
+      <div style="color:#777;font-size:18px">
+        $
+      </div>
+      <ion-item>
+        <ion-input [(ngModel)]="precio" type="number" placeholder="Precio"></ion-input>
+      </ion-item>
+    </div>
+    <div style="width:250px">
+      <ion-item>
+        <ion-label style="color:#6c757d">Por</ion-label>
+        <ion-select [(ngModel)]="pricePer">
+          <ion-option value="kg">
+            kg
+          </ion-option>
+          <ion-option value="u">c/u</ion-option>
+        </ion-select>
+      </ion-item>
+    </div>
   </div>
 
-  <ion-item *ngIf="opt == 'outfit'" no-lines>
+
+  <ion-item>
     <ion-label style="color:#6c757d">Categoria</ion-label>
     <ion-select [(ngModel)]="category">
-      <ion-option value="moda">Moda</ion-option>
-      <ion-option value="blusa">Blusa</ion-option>
-      <ion-option value="bebe_ninos">Bebé y niños</ion-option>
-      <ion-option value="pantalones">Pantalones</ion-option>
-      <ion-option value="carteras_bolsos">Carteras y bolsos</ion-option>
-      <ion-option value="zapatos">Zapatos</ion-option>
+      <ion-option value="pan">Pan</ion-option>
+      <ion-option value="pan_gourmet">Pan gourmet</ion-option>
+      <ion-option value="desayunos">Desayunos</ion-option>
+      <ion-option value="cafeteria">Cafetería</ion-option>
     </ion-select>
   </ion-item>
-
-  <ion-item *ngIf="opt == 'room'" no-lines>
-    <ion-label style="color:#6c757d">Categoria</ion-label>
-    <ion-select [(ngModel)]="category">
-      <ion-option value="ropa_de_cama">Ropa de cama</ion-option>
-      <ion-option value="ropa_de_cama_infantil">Ropa de cama infantil</ion-option>
-      <ion-option value="prod_dormitorio">Dormitorio</ion-option>
-      <ion-option value="cosina">Cosina</ion-option>
-      <ion-option value="living">Living</ion-option>
-      <ion-option value="bano">Baño</ion-option>
-    </ion-select>
-  </ion-item>
-
-
-
-
-  <div style="font-size:16px;background:#fff8dc;padding:5px">
-    <div style="margin-bottom:10px">
-      Agrega una talla y sus colores disponibles en tu descripción así:
-    </div>
-    <div style="width:100%;display:flex;justify-content:center">
-      <div style="font-size:20px">
-        <span style="color:#444">[</span>
-        <span style="color:dodgerblue">Talla</span>,
-        <span style="color:dodgerblue">Color #1</span>,
-        <span style="color:dodgerblue">Color #2</span>
-        <span style="color:#444">]</span>
-      </div>
-    </div>
-    <!-- <div style="margin-bottom:10px;margin-top:10px">
-        Ejemplo,
-      </div>
-      <div style="font-size:22px; color: #444">
-        <div style="width:100%;display:flex;justify-content:center">
-          [s, negro, amarillo-verde]
-        </div>
-      </div> -->
-  </div>
-  <button ion-button outline (click)="openEjemplo()">Ejemplo</button>
-
-
-
 
 
 </ion-content>

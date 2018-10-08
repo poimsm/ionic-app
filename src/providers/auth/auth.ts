@@ -10,15 +10,21 @@ export interface User {
   password?: string;
   userId: string;
   userImg: string;
-  categories: object;
   reputation: number;
   isStore: boolean;
+  storeName: string;
   provider: string;
 }
 export interface AuthData {
   name: string;
+  email?: string;
+  password?: string;
   userId: string;
   userImg: string;
+  reputation: number;
+  isStore: boolean;
+  storeName: string;
+  provider: string;
 }
 
 @Injectable()
@@ -76,7 +82,11 @@ export class AuthProvider {
     this.authData = {
       name: data.name,
       userId: data.userId,
-      userImg: data.userImg
+      userImg: data.userImg,
+      provider: data.provider,
+      reputation: 0,
+      isStore: false,
+      storeName: "None"
     };
     this.user = {
       name: data.name,
@@ -85,7 +95,7 @@ export class AuthProvider {
       provider: data.provider,
       reputation: 0,
       isStore: false,
-      categories: {}
+      storeName: "None"
     };
     this.saveStorage();
     this.addUser();

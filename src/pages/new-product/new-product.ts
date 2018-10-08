@@ -16,7 +16,7 @@ export class NewProductPage {
   base64Image = "";
   principalPreview: any;
   base64Principal = "";
-
+  showKg = true;
   usuario = {};
 
   opt = "outfit";
@@ -25,6 +25,7 @@ export class NewProductPage {
 
   titulo = "";
   precio: number;
+  pricePer = "";
   descripcion = "";
   descripcionFiltrada = "";
   imagenes = [];
@@ -74,7 +75,7 @@ export class NewProductPage {
   onFileChanged(event) {
     const file = event.target.files[0];
     this.base64Image = file;
-    this.imagenes.push(this.base64Image);
+    this.base64Image = file;
     console.log("file", file);
   }
   addImg() {
@@ -115,27 +116,14 @@ export class NewProductPage {
     );
   }
   saveData() {
-    // this.buscar();
-    // console.log("Uno", this.imagenes[0]);
-    // console.log("Dos", this.imagenes.splice(0, 1));
-    // console.log("tres", this.imagenes);
-    // this._product.addProduct(
-    //   this.category,
-    //   this.titulo,
-    //   this.descripcionFiltrada,
-    //   this.precio,
-    //   this.tallaColores,
-    //   this.imagenes,
-    //   this._auth.authData.userId
-    // );
     this._product.addProduct(
       this.category,
       this.titulo,
-      "hola",
-      23,
-      { hola: "yes" },
-      this.imagenes,
-      this._auth.authData.userId
+      this.descripcion,
+      this.precio,
+      this.pricePer,
+      this.base64Image,
+      this._auth.authData
     );
   }
 }

@@ -20,7 +20,10 @@ import {
   NewProductPage,
   NewOutfitPage,
   NewBlogPage,
-  RoomsPage
+  RoomsPage,
+  DeliveryPage,
+  CestaPage,
+  DirectionPage
 } from "../pages/index.pages";
 
 @Component({
@@ -28,10 +31,10 @@ import {
 })
 export class MyApp {
   outfitCategories = [
-    "Moda",
-    "Blusa",
-    "Bebé y niños",
-    "Pantalones",
+    "Pan",
+    "Pan gourmet",
+    "Desayunos",
+    "Cafetería",
     "Carteras y bolsos",
     "Zapatos"
   ];
@@ -67,6 +70,10 @@ export class MyApp {
   isMarket = false;
   authSubscription: Subscription;
 
+  cesta = CestaPage;
+  delivery = DeliveryPage;
+  direction = DirectionPage;
+
   ajustes = AjustesPage;
   perfil = PerfilPage;
   login = LoginPage;
@@ -87,8 +94,8 @@ export class MyApp {
   crearTienda = NuevaTiendaPage;
   crearOutfit = NewOutfitPage;
 
-  rootPage: any;
-  // rootPage: any = HomePage;
+  // rootPage: any;
+  rootPage: any = OutfitsPage;
   constructor(
     private menuCtrl: MenuController,
     platform: Platform,
@@ -96,13 +103,13 @@ export class MyApp {
     _auth: AuthProvider,
     splashScreen: SplashScreen
   ) {
-    _auth.loadStorage().then(isAuth => {
-      if (isAuth) {
-        this.rootPage = this.outfits;
-      } else {
-        this.rootPage = this.login;
-      }
-    });
+    // _auth.loadStorage().then(isAuth => {
+    //   if (isAuth) {
+    //     this.rootPage = this.outfits;
+    //   } else {
+    //     this.rootPage = this.login;
+    //   }
+    // });
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();

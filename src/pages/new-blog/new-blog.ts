@@ -110,6 +110,6 @@ export class NewBlogPage {
     }
     console.log(format);
 
-    this._blog.addBlog(this.titulo, format, this.imgs, this._auth.authData);
+    // this._blog.addBlog(this.titulo, format, this.imgs, this._auth.authData);
   }
 }
