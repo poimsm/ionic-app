@@ -33,6 +33,8 @@ export class LoginPage {
           .auth()
           .signInWithCredential(facebookCredential)
           .then(user => {
+            console.log("Full user", user);
+
             const authData = {
               name: user.displayName,
               userId: user.uid,
@@ -48,6 +50,8 @@ export class LoginPage {
         .signInWithPopup(new firebase.auth.FacebookAuthProvider())
         .then(res => {
           const user = res.user;
+          console.log("Full user", user);
+
           const authData = {
             name: user.displayName,
             userId: user.uid,

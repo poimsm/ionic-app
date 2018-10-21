@@ -38,13 +38,13 @@ export class OutfitsPage {
     "800",
     "800"
   ];
-  categorias = ["Pan", "Pan gourmet", "Desayunos", "Cafetería"];
+  categorias = ["Pan", "Pan gourmet", "Desayunos", "Desayunos sorpresa", "Cafetería"];
   toQuery = [
     "pan",
     "pan_gourmet",
     "desayunos",
+    "sorpresa",
     "cafeteria",
-    "outdoor",
     "casa",
     "estampados",
     "profesional",

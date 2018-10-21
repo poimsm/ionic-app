@@ -13,12 +13,11 @@ import {
   AngularFirestoreCollection
 } from "angularfire2/firestore";
 
-export interface Product {
+export interface Menu {
   category: string;
   title: string;
   description: string;
-  price: number;
-  pricePer: string;
+  options: object;
   img: string;
   fecha: number;
   productId: string;
@@ -31,14 +30,19 @@ export interface Product {
   sumStarts: number;
   starts: number;
 }
-export interface SavedProduct {
-  userName: string;
+export interface Product {
+  userId_collection_date: string;
   title: string;
-  description: string;
   price: number;
-  city: string;
+  fecha: number;
   productId: string;
-  whoLikedUserId_fecha: string;
+  userId: string;
+}
+export interface Collection {
+  userId: string;
+  collectionId: string;
+  title: string;
+  itemsIn: number;
 }
 export interface Imagen {
   postId: string;
@@ -57,15 +61,26 @@ export class ProductProvider {
   // ----------------------------------------------------
   //           ADDS
   // ----------------------------------------------------
-
-  addProduct(category, titulo, descripcion, precio, pricePer,imagen, user) {
+  addCollection(title, user) {
+    const id = this.afs.createId();
+    const collection: Collection = {
+      userId: user.userId,
+      collectionId: id,
+      title: title,
+      itemsIn: 0
+    };
+    this.afs
+      .collection("colecciones")
+      .doc(id)
+      .set(collection);
+  }
+  addMenu(category, titulo, descripcion, opciones, imagen, user) {
     const postId = this.afs.createId();
-    const product: Product = {
+    const menu: Menu = {
       category: category,
       title: titulo,
       description: descripcion,
-      price: precio,
-      pricePer: pricePer,
+      options: opciones,
       img: "",
       fecha: new Date().getTime(),
       userId: user.userId,
@@ -81,9 +96,28 @@ export class ProductProvider {
     this.afs
       .collection(category)
       .doc(postId)
-      .set(product)
+      .set(menu)
       .then(data => {
         this.addImgByProduct(category, postId, imagen);
+      });
+  }
+  addProduct(coleccion, titulo, precio, user) {
+    const postId = this.afs.createId();
+    const fecha = new Date().getTime();
+    const product: Product = {
+      userId_collection_date: `${user.userId}_${coleccion}_${fecha}`,
+      title: titulo,
+      price: precio,
+      fecha: new Date().getTime(),
+      userId: user.userId,
+      productId: postId
+    };
+    this.afs
+      .collection("products")
+      .doc(postId)
+      .set(product)
+      .then(data => {
+        // this.addImgByProduct(category, postId, imagen);
       });
   }
   async addImgByProduct(category, postId, base64data) {
@@ -111,11 +145,9 @@ export class ProductProvider {
       });
     });
   }
-
   // ----------------------------------------------------
   //           GETS
   // ----------------------------------------------------
-
   getProducts(category, orden) {
     const outfit = this.afs.collection(category, ref =>
       ref.orderBy(orden, "desc").limit(6)
@@ -131,5 +163,35 @@ export class ProductProvider {
       })
     );
   }
+  getCollections(user) {
+    const data = this.afs.collection("colecciones", ref =>
+      ref.where("userId", "==", user.userId)
+    );
+    return data.snapshotChanges().pipe(
+      map(docArray => {
+        return docArray.map(doc => {
+          return {
+            id: doc.payload.doc.id,
+            ...doc.payload.doc.data()
+          };
+        });
+      })
+    );
+  }
+  // ----------------------------------------------------
+  //           UPDATES
+  // ----------------------------------------------------
+  async updateCollection(id) {
+    const data: any = await this.getOneCollection(id);
+    console.log("dataa", data);
 
+    this.afs.doc("colecciones/" + id).update({ itemsIn: data[0].itemsIn + 1 });
+  }
+  getOneCollection(id: string) {
+    return this.afs
+      .collection("colecciones", ref => ref.where("collectionId", "==", id))
+      .valueChanges()
+      .pipe(take(1))
+      .toPromise();
+  }
 }

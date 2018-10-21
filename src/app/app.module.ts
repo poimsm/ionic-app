@@ -19,6 +19,8 @@ import { Facebook } from "@ionic-native/facebook";
 import { Camera } from "@ionic-native/camera";
 import { IonicStorageModule } from "@ionic/storage";
 
+import { HttpClientModule } from "@angular/common/http";
+
 export const firebaseConfig = {
   apiKey: "AIzaSyDbblV3zsLhNYwlHX_5_njNJj6KYXxEJi4",
   authDomain: "joopiterapp-2a5e4.firebaseapp.com",
@@ -62,7 +64,12 @@ import {
   RoomsPage,
   DeliveryPage,
   CestaPage,
-  DirectionPage
+  DirectionPage,
+  BestPage,
+  NewServicePage,
+  ComboPage,
+  CuponPage,
+CabanaPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { BrowserProvider } from "../providers/browser/browser";
@@ -77,7 +84,8 @@ import { OutfitProvider } from "../providers/outfit/outfit";
 import { ProductProvider } from "../providers/product/product";
 import { LikeComentProvider } from "../providers/like-coment/like-coment";
 import { NotificationProvider } from "../providers/notification/notification";
-import { BasketProvider } from '../providers/basket/basket';
+import { BasketProvider } from "../providers/basket/basket";
+import { HttpClient } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -115,7 +123,12 @@ import { BasketProvider } from '../providers/basket/basket';
     RoomsPage,
     DeliveryPage,
     CestaPage,
-    DirectionPage
+    DirectionPage,
+    BestPage,
+    NewServicePage,
+    ComboPage,
+    CuponPage,
+CabanaPage
   ],
   imports: [
     BrowserModule,
@@ -126,7 +139,8 @@ import { BasketProvider } from '../providers/basket/basket';
     AngularFireStorageModule,
     AngularFirestoreModule,
     PipesModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -164,7 +178,12 @@ import { BasketProvider } from '../providers/basket/basket';
     RoomsPage,
     DeliveryPage,
     CestaPage,
-    DirectionPage
+    DirectionPage,
+    BestPage,
+    NewServicePage,
+    ComboPage,
+    CuponPage,
+CabanaPage
   ],
   providers: [
     StatusBar,

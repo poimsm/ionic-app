@@ -23,7 +23,11 @@ import {
   RoomsPage,
   DeliveryPage,
   CestaPage,
-  DirectionPage
+  DirectionPage,
+  NewServicePage,
+  ComboPage,
+  CuponPage,
+CabanaPage
 } from "../pages/index.pages";
 
 @Component({
@@ -78,6 +82,8 @@ export class MyApp {
   perfil = PerfilPage;
   login = LoginPage;
 
+  cupon = CuponPage;
+  cabana = CabanaPage;
   blogs = BlogsPage;
   outfits = OutfitsPage;
   rooms = RoomsPage;
@@ -89,8 +95,10 @@ export class MyApp {
   guardado = GuardadoPage;
   pedidos = PedidosPage;
 
+  crearCombo = ComboPage;
   crearBlog = NewBlogPage;
   crearProducto = NewProductPage;
+  crearServicio = NewServicePage;
   crearTienda = NuevaTiendaPage;
   crearOutfit = NewOutfitPage;
 

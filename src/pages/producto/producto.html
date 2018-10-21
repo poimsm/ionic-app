@@ -31,16 +31,8 @@
     </div>
   </div>
   <div style="box-shadow: inset 0px 60px 20px rgba(100,100,100,0.2)">
-    <!-- <img [src]="product.imgs[0]" style="position:relative;z-index:-2;height:350px;width:100%;object-fit:cover"> -->
-    <!-- <img [src]="product.imgs[0]" style="position:relative;z-index:-2"> -->
     <img src="assets/pan01.jpeg" style="position:relative;z-index:-2;width:100%">
-
   </div>
-
-  <!-- <img src="assets/pan01.jpeg" style="width:100%;object-fit:cover"> -->
-
-  <!-- <img [src]="data.img" style="width:100%;object-fit:cover"> -->
-
 
   <div padding>
     <div style="font-size:16px;font-weight:500">
@@ -53,98 +45,33 @@
       consectetur quod. Sint fugiat voluptas perspiciatis odio obcaecati similique quaerat odit reprehenderit maxime.
     </div>
 
-
     <div style="width:100%;display:flex;justify-content:space-between">
       <div style="margin-top:10px;display:flex;justify-content:flex-start;align-items:flex-start">
         <ion-icon name="ios-heart-outline" style="font-size:28px;color:#444"></ion-icon>
-
         <div *ngIf="userLike.arrive" (click)="addLike(data.id, userLike.flag, userLike.id)">
           <ion-icon *ngIf="userLike.flag" name="ios-heart" style="font-size:28px;color:red"></ion-icon>
           <ion-icon *ngIf="!userLike.flag" name="ios-heart-outline" style="font-size:28px;color:#444"></ion-icon>
         </div>
       </div>
+      <div style="width:100%;display:flex;justify-content:center;align-items:center">
+        <button ion-button icon-only round clear>
+          <div style="height:35px;width:35px;display:flex;justify-content:center;align-items:center;border-radius:50%;border:1px solid #eee;font-size:22px;font-weight:600;color:#555">
+            -
+          </div>
+        </button>
+        <div style="font-weight:600;border:0px solid #eee;border-radius:2px;margin-left:10px;margin-right:10px;padding:10px;padding-left:15px;padding-right:15px;font-size:18px;color:#555">
+          100 gr
+        </div>
+        <button ion-button icon-only round clear>
+          <div style="height:35px;width:35px;display:flex;justify-content:center;align-items:center;border-radius:50%;border:1px solid #eee;font-size:22px;font-weight:600;color:#555">
+            +
+          </div>
+        </button>
+      </div>
       <button ion-button clear>
         $ 4000/kg
       </button>
     </div>
-
-    <!-- <div style="width:100%;display:flex;justify-content:center">
-      <button ion-button icon-only>
-        <div style="padding:5px;padding-left:10px;padding-right:10px;font-size:20px;border-radius:2px;color:white;font-weight:600">
-          -
-        </div>
-      </button>
-      <div style="border:1px solid #eee;border-radius:2px;margin-left:10px;margin-right:10px;padding:10px;padding-left:15px;padding-right:15px;font-size:18px;color:#555">
-        100 gr
-      </div>
-      <button ion-button icon-only>
-        <div style="padding:5px;padding-left:10px;padding-right:10px;font-size:20px;border-radius:2px;color:white;font-weight:600">
-          +
-        </div>
-      </button>
-    </div> -->
-
-
-    <div style="width:100%;display:flex;justify-content:center;align-items:center">
-
-      <button ion-button icon-only round clear>
-        <div style="height:35px;width:35px;display:flex;justify-content:center;align-items:center;border-radius:50%;border:1px solid #eee;font-size:22px;font-weight:600;color:#555">
-          -
-        </div>
-      </button>
-
-      <div style="font-weight:600;border:0px solid #eee;border-radius:2px;margin-left:10px;margin-right:10px;padding:10px;padding-left:15px;padding-right:15px;font-size:18px;color:#555">
-        100 gr
-      </div>
-      <button ion-button icon-only round clear>
-        <div style="height:35px;width:35px;display:flex;justify-content:center;align-items:center;border-radius:50%;border:1px solid #eee;font-size:22px;font-weight:600;color:#555">
-          +
-        </div>
-      </button>
-    </div>
-
-    <button ion-button block color="btn1" style="margin-top:20px">
-      Añadir a la Cesta
-    </button>
-
-
-    <!-- <div style="width:100%;display:flex;justify-content:center">
-        <button ion-button icon-only clear>      
-          <div style="padding:5px;padding-left:10px;padding-right:10px;font-size:20px;border-radius:2px;color:white;font-weight:600">
-              -
-            </div>
-        </button>
-        <div style="border:1px solid #eee;border-radius:2px;margin-left:10px;margin-right:10px;padding:10px;padding-left:15px;padding-right:15px;font-size:18px;color:#555">
-          100 gr
-        </div>
-        <button ion-button icon-only>
-          <div style="padding:5px;padding-left:10px;padding-right:10px;font-size:20px;border-radius:2px;color:white;font-weight:600">
-            +
-          </div>
-        </button>
-      </div> -->
-
-    <!-- <div style="margin-top:20px;width:100%;display:flex;justify-content:flex-end">
-      <div style="font-size:18px;color:#777;display:flex">
-        <div style="color:#444">
-          Total
-        </div>
-        <div style="margin-left:10px">
-          $3500
-        </div>
-      </div>
-    </div>
-    <div style="margin-top:0px;width:100%;display:flex;justify-content:flex-end">
-      <div style="font-size:18px;color:#777;display:flex">
-        <div style="color:#444">
-          Trayecto
-        </div>
-        <div style="margin-left:10px">
-          $500
-        </div>
-      </div>
-    </div> -->
-
 
   </div>
 
@@ -178,38 +105,44 @@
   </div>
 
 
-  <div style="width:100%;height:50px;background:white;display:flex;justify-content:center;align-items:center">
+  <!-- <div style="width:100%;height:50px;background:white;display:flex;justify-content:center;align-items:center">
     <img src="assets/18.jpg" style="margin-right:10px;width:35px;height:35px;border-radius:50%;object-fit:cover">
     <div style="width:250px;height:32px">
       <textarea [(ngModel)]="message" style="border:0px;padding:6px;margin:0px;width:250px;height:32px;border-radius:5px;background:rgb(248, 248, 248);font-size:15px;color:#444">
         </textarea>
     </div>
     <ion-icon (click)="addComment(data.id)" name="md-send" style="margin-left:10px;font-size:28px;color:#bbb"></ion-icon>
-  </div>
+  </div> -->
 
   <div padding>
-
     <div *ngFor="let comment of comments$ | async" style="margin-top:0px;display:flex;justify-content:space-between;align-items:flex-start">
       <img [src]="comment.userImage" style="margin-right:10px;width:35px;height:35px;border-radius:50%;object-fit:cover">
-      <div style="width:100%;font-size:14px;color:#222">
-        <div>
-          <div style="font-weight:600;color:#222">
-            {{comment.userName}}
-          </div>
-          <div style="display:flex;justify-content:flex-start;width:80px;font-weight:600;color:#777;">
-            <ion-icon name="md-star" style="font-size:18px;color:gold"></ion-icon>
-            <ion-icon name="md-star" style="font-size:18px;color:gold"></ion-icon>
-            <ion-icon name="md-star" style="font-size:18px;color:gold"></ion-icon>
-          </div>
+      <div style="width:100%;font-size:14px;color:#777">
+        <div style="font-weight:600;color:#222">
+          {{comment.userName}}
         </div>
-        {{comment.message}}
+        <div style="margin-top:-3px;display:flex;justify-content:flex-start;width:80px;font-weight:600;color:#777;">
+          <ion-icon name="md-star" style="font-size:14px;color:gold"></ion-icon>
+          <ion-icon name="md-star" style="font-size:14px;color:gold"></ion-icon>
+          <ion-icon name="md-star" style="font-size:14px;color:gold"></ion-icon>
+        </div>
+        <div>
+          {{comment.message}}
+        </div>
       </div>
     </div>
-
-
+  </div>
+  <hr>
+  <div>
+    Mas productos de la tienda
   </div>
 
-
-
-
 </ion-content>
+
+<ion-footer padding style="background:white">
+  <button ion-button block color="btn1" style="text-transform: none">
+    <div style="font-size:16px;font-weight:500;">
+      Añadir a la Cesta
+    </div>
+  </button>
+</ion-footer>

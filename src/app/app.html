@@ -76,19 +76,37 @@
 
                 <div padding style="width:100%;display:flex;justify-content:space-around">
                     <div (click)="openPage(outfits)">
-                        <div style="height:45px;width:45px;border-radius:50%;background:#51c0f3;display:flex;justify-content:center;align-items:center">
-                            <ion-icon name="ios-home" style="color:white;font-size:35px"></ion-icon>
+                        <div style="height:45px;width:45px;border-radius:50%;background:orangered;display:flex;justify-content:center;align-items:center">
+                            <ion-icon name="md-pizza" style="color:white;font-size:35px"></ion-icon>
                         </div>
                         <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
-                            Inicio
+                            Pedidos
                         </div>
                     </div>
+
                     <div (click)="openPage(cesta)">
                         <div style="height:45px;width:45px;border-radius:50%;background:#40d1b0;display:flex;justify-content:center;align-items:center">
                             <ion-icon name="md-cart" style="color:white;font-size:35px"></ion-icon>
                         </div>
                         <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
                             Cesta
+                        </div>
+                    </div>
+                </div>
+
+                <div padding style="width:100%;display:flex;justify-content:space-around">
+                    <div (click)="openPage(outfits)">
+                        <div style="height:45px;width:45px;border-radius:50%;background:#51c0f3;display:flex;justify-content:center;align-items:center">
+                            <ion-icon name="md-boat" style="color:white;font-size:35px"></ion-icon>
+                        </div>
+                        <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
+                            Explorar
+                        </div>
+                    </div>
+                    <div (click)="openPage(cupon)">
+                        <img src="assets/coupon.svg" style="width:45px">
+                        <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
+                            Cupón
                         </div>
                     </div>
                 </div>
@@ -102,12 +120,18 @@
                             Alertas
                         </div>
                     </div>
-                    <div (click)="openPage(direction)">
+                    <!-- <div (click)="openPage(cesta)">
+                        <img src="assets/gift.svg" style="width:45px">
+                        <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
+                            Desayuno
+                        </div>
+                    </div> -->
+                    <div (click)="openPage(cabana)">
                         <div style="height:45px;width:45px;border-radius:50%;background:#FD6360;display:flex;justify-content:center;align-items:center">
-                            <ion-icon name="md-pin" style="color:white;font-size:30px"></ion-icon>
+                            <ion-icon name="ios-home" style="color:white;font-size:30px"></ion-icon>
                         </div>
                         <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
-                            Entrega
+                            Reservar
                         </div>
                     </div>
                 </div>
@@ -121,7 +145,7 @@
                 </button>
                 <div style="height:10px;width:100%;background:#eee">
                 </div>
-                <button ion-item (click)="openPage(publicaciones)">
+                <button ion-item (click)="openPage(tienda)">
                     <ion-icon item-start name="apps" style="color:#bbb;font-size:25px"></ion-icon>
                     <span style="color:#444;font-weight:600">
                         Mi Tienda
@@ -130,7 +154,19 @@
                 <button ion-item (click)="openPage(crearProducto)">
                     <ion-icon item-start name="md-pricetags" style="color:#bbb;font-size:25px"></ion-icon>
                     <span style="color:#444;font-weight:600">
-                        Crear Producto
+                        Crear producto
+                    </span>
+                </button>
+                <button ion-item (click)="openPage(crearCombo)">
+                    <ion-icon item-start name="md-pricetags" style="color:#bbb;font-size:25px"></ion-icon>
+                    <span style="color:#444;font-weight:600">
+                        Combo delivery
+                    </span>
+                </button>
+                <button ion-item (click)="openPage(crearServicio)">
+                    <ion-icon item-start name="md-pricetags" style="color:#bbb;font-size:25px"></ion-icon>
+                    <span style="color:#444;font-weight:600">
+                        Crear servicio
                     </span>
                 </button>
                 <div style="height:10px;width:100%;background:#eee">

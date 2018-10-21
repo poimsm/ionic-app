@@ -1,3 +1,8 @@
+export { CuponPage } from './cupon/cupon';
+export { CabanaPage } from './cabana/cabana';
+export { ComboPage } from './combo/combo';
+export { NewServicePage } from './new-service/new-service';
+export { BestPage } from './best/best';
 export { DirectionPage } from './direction/direction';
 export { CestaPage } from './cesta/cesta';
 export { DeliveryPage } from './delivery/delivery';

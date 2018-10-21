@@ -8,6 +8,8 @@ import "firebase/storage";
 import { map, mergeMap, switchMap } from "rxjs/operators";
 import { forkJoin, Observable } from "rxjs";
 import { from } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+
 import {
   AngularFirestore,
   AngularFirestoreCollection
@@ -43,9 +45,13 @@ export class OutfitProvider {
     private afAuth: AngularFireAuth,
     public afDB: AngularFireDatabase,
     public afs: AngularFirestore,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    public http: HttpClient
   ) {
     console.log("Hello StoreProvider Provider");
+    http
+      .get("https://jsonplaceholder.typicode.com/users")
+      .subscribe(data => console.log(data));
   }
   // ----------------------------------------------------
   //           ADDS

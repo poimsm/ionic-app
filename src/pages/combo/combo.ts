@@ -1,21 +1,16 @@
 import { Component, ViewChild } from "@angular/core";
 import { ImagePicker, ImagePickerOptions } from "@ionic-native/image-picker";
-import {
-  IonicPage,
-  NavController,
-  NavParams,
-  AlertController
-} from "ionic-angular";
+import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { AuthProvider } from "../../providers/auth/auth";
 import { EjemploPage } from "../ejemplo/ejemplo";
 import { ProductProvider } from "../../providers/product/product";
 
 @IonicPage()
 @Component({
-  selector: "page-new-product",
-  templateUrl: "new-product.html"
+  selector: "page-combo",
+  templateUrl: "combo.html"
 })
-export class NewProductPage {
+export class ComboPage {
   imagePreview: any;
   base64Image = "";
   principalPreview: any;
@@ -26,18 +21,15 @@ export class NewProductPage {
   opt = "outfit";
   destacado = "";
   category = "";
-  coleccion = "none";
-  coleccionArray = [];
 
-  collections = [];
   titulo = "";
   precio: number;
   pricePer = "";
   descripcion = "";
-  descripcionFiltrada = "";
+  opciones = "";
   imagenes = [];
   imagenesPreview = [];
-  tallaColores = [];
+  opcionesArreglo = [];
 
   go =
     "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
@@ -45,50 +37,35 @@ export class NewProductPage {
   @ViewChild("myInput")
   myInput;
   constructor(
-    public alertCtrl: AlertController,
     private navParams: NavParams,
     public navCtrl: NavController,
     private imagePicker: ImagePicker,
     private _product: ProductProvider,
     private _auth: AuthProvider
-  ) {
-    // this.fetchCollections();
-  }
+  ) {}
   openEjemplo() {
     this.navCtrl.push(EjemploPage);
   }
-  newCollection() {
-    const prompt = this.alertCtrl.create({
-      title: "Colección",
-      // message: "Enter a name for this new album you're so keen on adding",
-      inputs: [
-        {
-          name: "title",
-          placeholder: "Título"
-        }
-      ],
-      buttons: [
-        {
-          text: "Cancelar",
-          handler: data => {
-            console.log("Cancel clicked");
-          }
-        },
-        {
-          text: "Guardar",
-          handler: data => {
-            this._product.addCollection(data.title, this._auth.authData);
-            console.log("Saved clicked");
-          }
-        }
-      ]
-    });
-    prompt.present();
-  }
-  fetchCollections() {
-    this._product
-      .getCollections(this._auth.authData)
-      .subscribe(data => (this.collections = data));
+
+  buscar() {
+    let tem_1 = 0;
+    let extractionPoints = [];
+    const text = this.opciones;
+    for (let i = 0; i < text.length; i++) {
+      if (text.charAt(i) == "[") {
+        tem_1 = i;
+      }
+      if (text.charAt(i) == "]") {
+        extractionPoints.push({
+          start: tem_1,
+          end: i
+        });
+      }
+    }
+    for (let item of extractionPoints) {
+      let tem_2 = text.substr(item.start + 1, item.end - 1 - item.start);
+      this.opcionesArreglo.push(tem_2);
+    }
   }
   onFileChanged(event) {
     const file = event.target.files[0];
@@ -134,14 +111,17 @@ export class NewProductPage {
     );
   }
   saveData() {
-    if (this.coleccion != "none") {
-      console.log(this.coleccion);
-      this._product.updateCollection(this.coleccion);
+    this.buscar();
+    let opcionesObject = {};
+    for (let i = 0; i < this.opcionesArreglo.length; i++) {
+      opcionesObject[i] = this.opcionesArreglo[i];
     }
-    this._product.addProduct(
-      this.coleccion,
+    this._product.addMenu(
+      this.category,
       this.titulo,
-      this.precio,
+      this.descripcion,
+      opcionesObject,
+      this.base64Image,
       this._auth.authData
     );
   }

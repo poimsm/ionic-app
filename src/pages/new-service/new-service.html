@@ -1,0 +1,166 @@
+<ion-header no-border>
+  <ion-navbar color="white" align-title="center">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>
+      {{titulo | placeHolder:'Nuevo producto'}}
+    </ion-title>
+    <ion-buttons right>
+      <button ion-button>
+        <ion-icon name="ios-eye" style="font-size:28px;color:#bbb"></ion-icon>
+      </button>
+      <button ion-button>
+        <ion-icon name="md-checkmark" style="font-size:28px;color:#bbb"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <!-- <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput> -->
+  <!-- <button ion-button (click)="fileInput.click()">Seleccionar</button> -->
+
+  <div *ngIf="imagePreview" style="display:flex;justify-content:flex-start;flex-wrap:wrap">
+    <div *ngFor="let item of imagenesPreview">
+      <img [src]="item" style="margin:10px;height:70px;width:70px;object-fit:cover">
+    </div>
+  </div>
+  <div style="width:100%;display:flex;justify-content:center;margin-bottom:20px">
+    <button mode="md" ion-button color="primary" (click)="addImg()">
+      <ion-icon name="md-images" style="margin-right:3px;color:white;font-size:35px"></ion-icon>
+      Subir Imágen
+    </button>
+  </div>
+
+  <ion-list style="margin-top:10px">
+    <ion-item>
+      <ion-input [(ngModel)]="titulo" type="text" placeholder="Título"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input [(ngModel)]="precio" type="number" placeholder="Precio"></ion-input>
+    </ion-item>
+    <!-- <ion-item>
+      <ion-textarea [(ngModel)]="descripcion" placeholder="Descripción" #myInput id="myInput" rows="6" (keyup)="resize()" [(ngModel)]="model"></ion-textarea>
+    </ion-item> -->
+    <ion-item>
+      <ion-label style="color:#6c757d">Categoria</ion-label>
+      <ion-select [(ngModel)]="category">
+        <ion-option value="pan_gourmet">Fútbol</ion-option>
+        <ion-option value="cafeteria">Actividad por Agua</ion-option>
+        <ion-option value="pan_gourmet">Paseo en Barco</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-list>
+    <ion-item>
+      <ion-input [(ngModel)]="titulo" type="text" placeholder="Título de la lista"></ion-input>
+      <button item-end clear ion-button icon-only>
+        <ion-icon name="md-trash" style="color:#777;font-size:25px"></ion-icon>
+      </button>
+    </ion-item>
+    <ion-item>
+      <ion-radio item-start checked="false" value="go"></ion-radio>
+      <ion-input [(ngModel)]="titulo" type="text" placeholder="Escribir"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-radio item-start checked="false" value="go"></ion-radio>
+      <ion-input [(ngModel)]="titulo" type="text" placeholder="Escribir"></ion-input>
+    </ion-item>
+    <button ion-item block outline color="white" style="text-transform: none">
+      <div style="text-align:right;font-size:16px;font-weight:600;color:#777">
+        + Añadir Otro Item
+      </div>
+    </button>
+  </ion-list>
+
+  <ion-list>
+    <ion-item>
+      <ion-input [(ngModel)]="titulo" type="text" placeholder="Título de la lista"></ion-input>
+      <button item-end clear ion-button icon-only>
+        <ion-icon name="md-trash" style="color:#777;font-size:25px"></ion-icon>
+      </button>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox class="checkbox-square" checked="false">value 1</ion-checkbox>
+      <ion-input [(ngModel)]="titulo" type="text" placeholder="Escribir"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox class="checkbox-square" checked="false">value 1</ion-checkbox>
+      <ion-input [(ngModel)]="titulo" type="text" placeholder="Escribir"></ion-input>
+    </ion-item>
+    <button ion-item block outline color="white" style="text-transform: none">
+      <div style="text-align:right;font-size:16px;font-weight:600;color:#777">
+        + Añadir Otro Item
+      </div>
+    </button>
+  </ion-list>
+
+
+
+
+
+  <div padding style="font-size:16px;font-weight:600;color:#488aff">
+    + Agrear Lista
+  </div>
+
+  <button ion-button icon-only clear>
+    <div style="padding:8px">
+      <div style="width:35px;display:flex;justify-content:center;flex-wrap:wrap;align-items:center">
+        <div style="height:10px;width:10px;border:2px solid #777;margin-right:5px;border-radius:50%">
+        </div>
+        <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px" [ngStyle]="{'background': center ? 'dodgerblue' : '#777' }">
+        </div>
+
+        <div style="margin-top:2px;height:10px;width:10px;border:2px solid #777;margin-right:5px;border-radius:50%">
+        </div>
+        <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px" [ngStyle]="{'background': center ? 'dodgerblue' : '#777' }">
+        </div>
+
+        <div style="margin-top:2px;height:10px;width:10px;border:2px solid #777;margin-right:5px;border-radius:50%">
+        </div>
+        <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px" [ngStyle]="{'background': center ? 'dodgerblue' : '#777' }">
+        </div>
+      </div>
+    </div>
+  </button>
+
+  <button ion-button icon-only clear>
+    <div style="padding:8px">
+      <div style="width:35px;display:flex;justify-content:center;flex-wrap:wrap;align-items:center">
+        <div style="height:10px;width:10px;border:2px solid #777;margin-right:5px">
+        </div>
+        <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px;background:#777">
+        </div>
+
+        <div style="margin-top:2px;height:10px;width:10px;border:2px solid #777;margin-right:5px">
+        </div>
+        <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px;background:#777">
+        </div>
+
+        <div style="margin-top:2px;height:10px;width:10px;border:2px solid #777;margin-right:5px">
+        </div>
+        <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px;background:#777">
+        </div>
+      </div>
+    </div>
+  </button>
+
+
+
+
+
+
+
+
+
+
+
+
+</ion-content>
