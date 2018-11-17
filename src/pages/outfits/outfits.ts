@@ -38,17 +38,23 @@ export class OutfitsPage {
     "800",
     "800"
   ];
-  categorias = ["Pan", "Pan gourmet", "Desayunos", "Desayunos sorpresa", "Cafetería"];
+  categorias = [
+    "Destacado",
+    "Desayunos",
+    "Cajitas surtidas",
+    "Desayunos sorpresa",
+    "Panadería artesanal",
+    "Kit de ingredientes",
+    "Heladería & cafetería"
+  ];
   toQuery = [
-    "pan",
-    "pan_gourmet",
+    "destacados",
     "desayunos",
-    "sorpresa",
-    "cafeteria",
-    "casa",
-    "estampados",
-    "profesional",
-    "evento"
+    "cajitas_surtidas",
+    "desayunos_sorpresa",
+    "panaderia_artesanal",
+    "kit_ingredientes",
+    "helados_cafes"
   ];
   orden = "";
   index = 0;

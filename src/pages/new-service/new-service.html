@@ -5,162 +5,509 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-
     <ion-title>
       {{titulo | placeHolder:'Nuevo producto'}}
     </ion-title>
     <ion-buttons right>
-      <button ion-button>
+      <button mode="ios" (click)="save()" ion-button small>
+        Vista previa
+      </button>
+      <!-- <button ion-button>
         <ion-icon name="ios-eye" style="font-size:28px;color:#bbb"></ion-icon>
       </button>
-      <button ion-button>
+      <button (click)="save()" ion-button>
         <ion-icon name="md-checkmark" style="font-size:28px;color:#bbb"></ion-icon>
-      </button>
+      </button> -->
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 
-<ion-content padding>
-  <!-- <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput> -->
-  <!-- <button ion-button (click)="fileInput.click()">Seleccionar</button> -->
+<ion-content [ngStyle]="{'background': showTopBar ? '#f5f4f4' : 'white' }">
 
-  <div *ngIf="imagePreview" style="display:flex;justify-content:flex-start;flex-wrap:wrap">
-    <div *ngFor="let item of imagenesPreview">
-      <img [src]="item" style="margin:10px;height:70px;width:70px;object-fit:cover">
+  <div *ngIf="showTopBar" (click)="presentActionSheet()" style="padding:10px;background:#32db64;width:100%;text-align:center;color:white;font-weight:600;font-size:16px">
+    {{type | uppercase}}
+  </div>
+  <div *ngIf="!showTopBar" style="height:100%;width:100%;position:relative">
+    <div (click)="presentActionSheet()" style="position:absolute;top:40%;left:0px;padding:10px;background:#32db64;width:100%;text-align:center;color:white;font-weight:600;font-size:16px">
+      {{type | uppercase}}
     </div>
   </div>
-  <div style="width:100%;display:flex;justify-content:center;margin-bottom:20px">
-    <button mode="md" ion-button color="primary" (click)="addImg()">
-      <ion-icon name="md-images" style="margin-right:3px;color:white;font-size:35px"></ion-icon>
-      Subir Imágen
-    </button>
-  </div>
-
-  <ion-list style="margin-top:10px">
-    <ion-item>
-      <ion-input [(ngModel)]="titulo" type="text" placeholder="Título"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input [(ngModel)]="precio" type="number" placeholder="Precio"></ion-input>
-    </ion-item>
-    <!-- <ion-item>
-      <ion-textarea [(ngModel)]="descripcion" placeholder="Descripción" #myInput id="myInput" rows="6" (keyup)="resize()" [(ngModel)]="model"></ion-textarea>
-    </ion-item> -->
-    <ion-item>
-      <ion-label style="color:#6c757d">Categoria</ion-label>
-      <ion-select [(ngModel)]="category">
-        <ion-option value="pan_gourmet">Fútbol</ion-option>
-        <ion-option value="cafeteria">Actividad por Agua</ion-option>
-        <ion-option value="pan_gourmet">Paseo en Barco</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
 
 
-  <ion-list>
-    <ion-item>
-      <ion-input [(ngModel)]="titulo" type="text" placeholder="Título de la lista"></ion-input>
-      <button item-end clear ion-button icon-only>
-        <ion-icon name="md-trash" style="color:#777;font-size:25px"></ion-icon>
+  <div [ngSwitch]="type">
+
+    <div *ngSwitchCase="'carta'">
+      <ion-list>
+        <ion-item>
+          <ion-input [(ngModel)]="titulo" type="text" placeholder="Título"></ion-input>
+        </ion-item>
+        <ion-item>
+          <div item-start>
+            <div style="background:#fff;padding:5px;padding-right:30px;border-right:1px solid #bbb;color:#777;font-weight:600">
+              $
+            </div>
+          </div>
+          <ion-input [(ngModel)]="precio" type="number" placeholder="Precio"></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-item no-lines>
+        <ion-label style="color:#6c757d">Colección</ion-label>
+        <ion-select [(ngModel)]="coleccion">
+          <div *ngFor="let collection of collections">
+            <ion-option [value]="collection.id">
+              {{collection.title}} ({{collection.itemsIn}})
+            </ion-option>
+          </div>
+        </ion-select>
+      </ion-item>
+
+      <div padding center>
+        <button mode="md" ion-button block outline color="primary" (click)="newCollection()" style="text-transform: none">
+          <div style="font-size:16px;font-weight:600;color:#488aff">
+            + Añadir Una Colección
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="'combo'">
+
+
+      <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+      <button ion-button (click)="fileInput.click()">Seleccionar</button>
+
+      <!-- <div *ngIf="imagePreview" style="display:flex;justify-content:flex-start;flex-wrap:wrap">
+        <img [src]="imagePreview" style="margin:10px;height:70px;width:70px;object-fit:cover">
+      </div>
+      <div style="width:100%;display:flex;justify-content:center;margin-bottom:20px">
+        <button mode="md" ion-button color="primary" (click)="addImg()">
+          <ion-icon name="md-images" style="margin-right:3px;color:white;font-size:35px"></ion-icon>
+          Subir Imágen
+        </button>
+      </div> -->
+
+      <ion-list style="margin-top:10px">
+        <ion-item>
+          <ion-input [(ngModel)]="titulo" type="text" placeholder="Título"></ion-input>
+        </ion-item>
+        <ion-item>
+          <div item-start>
+            <div style="background:#fff;padding:5px;padding-right:30px;border-right:1px solid #bbb;color:#777;font-weight:600">
+              $
+            </div>
+          </div>
+          <ion-input [(ngModel)]="precio" type="number" placeholder="Precio"></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-item no-lines style="margin-bottom:15px">
+        <ion-label style="color:#6c757d">Categoria</ion-label>
+        <ion-select [(ngModel)]="categoria">
+          <ion-option value="sushi_handroll">Sushi & handrolls</ion-option>
+          <ion-option value="completos">Completos</ion-option>
+          <ion-option value="pichangas">Pichangas</ion-option>
+          <ion-option value="pizzas">Pizzas</ion-option>
+          <ion-option value="sandwich">Sandwich</ion-option>
+          <ion-option value="papas_bravas">Papas bravas</ion-option>
+          <ion-option value="peruana">Peruana</ion-option>
+          <ion-option value="vegetariano">Vegetariano</ion-option>
+          <ion-option value="comida_rapida">Comida rápida</ion-option>
+          <ion-option value="comida_tradicional">Comida tradicional</ion-option>
+          <ion-option value="comida_internacional">Comida internacional</ion-option>
+        </ion-select>
+      </ion-item>
+
+
+      <ion-list *ngFor="let list of lists; let k = index">
+        <ion-item>
+          <ion-input [(ngModel)]="list.title" type="text" placeholder="Título de la lista"></ion-input>
+          <button (click)="deleteList(k)" item-end clear ion-button icon-only>
+            <ion-icon name="md-trash" style="color:#777;font-size:25px"></ion-icon>
+          </button>
+        </ion-item>
+        <ion-item *ngFor="let item of list.items; let i = index">
+          <ion-radio *ngIf="list.type=='A'" item-start checked="false" value="go"></ion-radio>
+          <ion-checkbox *ngIf="list.type=='B'" class="checkbox-square" checked="false">value 1</ion-checkbox>
+          <ion-input [(ngModel)]="item[i]" type="text" placeholder="Escribir"></ion-input>
+        </ion-item>
+        <button (click)="addItem('combo', k, list.items.length)" ion-item block outline color="white" style="text-transform: none">
+          <div style="text-align:right;font-size:16px;font-weight:600;color:#777">
+            + Añadir Otro Item
+          </div>
+        </button>
+      </ion-list>
+
+
+      <div padding style="font-size:16px;font-weight:600;color:#488aff">
+        + Agrear Lista
+      </div>
+
+      <button (click)="addList('A')" ion-button icon-only clear>
+        <div style="padding:8px">
+          <div style="width:35px;display:flex;justify-content:center;flex-wrap:wrap;align-items:center">
+            <div style="height:10px;width:10px;border:2px solid #777;margin-right:5px;border-radius:50%">
+            </div>
+            <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px" [ngStyle]="{'background': center ? 'dodgerblue' : '#777' }">
+            </div>
+
+            <div style="margin-top:2px;height:10px;width:10px;border:2px solid #777;margin-right:5px;border-radius:50%">
+            </div>
+            <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px" [ngStyle]="{'background': center ? 'dodgerblue' : '#777' }">
+            </div>
+
+            <div style="margin-top:2px;height:10px;width:10px;border:2px solid #777;margin-right:5px;border-radius:50%">
+            </div>
+            <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px" [ngStyle]="{'background': center ? 'dodgerblue' : '#777' }">
+            </div>
+          </div>
+        </div>
       </button>
-    </ion-item>
-    <ion-item>
-      <ion-radio item-start checked="false" value="go"></ion-radio>
-      <ion-input [(ngModel)]="titulo" type="text" placeholder="Escribir"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-radio item-start checked="false" value="go"></ion-radio>
-      <ion-input [(ngModel)]="titulo" type="text" placeholder="Escribir"></ion-input>
-    </ion-item>
-    <button ion-item block outline color="white" style="text-transform: none">
-      <div style="text-align:right;font-size:16px;font-weight:600;color:#777">
-        + Añadir Otro Item
-      </div>
-    </button>
-  </ion-list>
 
-  <ion-list>
-    <ion-item>
-      <ion-input [(ngModel)]="titulo" type="text" placeholder="Título de la lista"></ion-input>
-      <button item-end clear ion-button icon-only>
-        <ion-icon name="md-trash" style="color:#777;font-size:25px"></ion-icon>
+      <button (click)="addList('B')" ion-button icon-only clear>
+        <div style="padding:8px">
+          <div style="width:35px;display:flex;justify-content:center;flex-wrap:wrap;align-items:center">
+            <div style="height:10px;width:10px;border:2px solid #777;margin-right:5px">
+            </div>
+            <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px;background:#777">
+            </div>
+
+            <div style="margin-top:2px;height:10px;width:10px;border:2px solid #777;margin-right:5px">
+            </div>
+            <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px;background:#777">
+            </div>
+
+            <div style="margin-top:2px;height:10px;width:10px;border:2px solid #777;margin-right:5px">
+            </div>
+            <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px;background:#777">
+            </div>
+          </div>
+        </div>
       </button>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox class="checkbox-square" checked="false">value 1</ion-checkbox>
-      <ion-input [(ngModel)]="titulo" type="text" placeholder="Escribir"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-checkbox class="checkbox-square" checked="false">value 1</ion-checkbox>
-      <ion-input [(ngModel)]="titulo" type="text" placeholder="Escribir"></ion-input>
-    </ion-item>
-    <button ion-item block outline color="white" style="text-transform: none">
-      <div style="text-align:right;font-size:16px;font-weight:600;color:#777">
-        + Añadir Otro Item
+
+    </div>
+
+
+
+    <div *ngSwitchCase="'pack'">
+
+      <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+      <button ion-button (click)="fileInput.click()">Seleccionar</button>
+
+      <ion-list style="margin-top:10px">
+        <ion-item>
+          <ion-input [(ngModel)]="titulo" type="text" placeholder="Título"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-textarea placeholder="Descripción" rows="6" [(ngModel)]="descripcion"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <div item-start>
+            <div style="background:#fff;padding:5px;padding-right:30px;border-right:1px solid #bbb;color:#777;font-weight:600">
+              $
+            </div>
+          </div>
+          <ion-input [(ngModel)]="precio" type="number" placeholder="Precio"></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-item no-lines style="margin-bottom:15px">
+        <ion-label style="color:#6c757d">Categoria</ion-label>
+        <ion-select [(ngModel)]="categoria">
+          <ion-option value="desayunos">Desayunos</ion-option>
+          <ion-option value="cajitas_surtidas">Cajitas surtidas</ion-option>
+          <ion-option value="desayunos_sorpresa">Desayunos sorpresa</ion-option>
+          <ion-option value="panaderia_artesanal">Panadería artesanal</ion-option>
+          <ion-option value="kit_ingredientes">Kit de ingredientes</ion-option>
+          <ion-option value="helados_cafes">Heladería & cafetería</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-list>
+        <ion-item-divider>
+          TABLA DE CONTENIDO
+        </ion-item-divider>
+        <ion-item *ngFor="let item of contenido; let i = index">
+          <div item-start style="font-weight:600;color:#333">
+            {{i + 1}}
+          </div>
+          <ion-input [(ngModel)]="item[i]" type="text" placeholder="Escribir"></ion-input>
+        </ion-item>
+        <button (click)="addItem('pack', 0, contenido.length)" ion-item block outline color="white" style="text-transform: none">
+          <div style="text-align:right;font-size:16px;font-weight:600;color:#777">
+            + Añadir Otro Item
+          </div>
+        </button>
+      </ion-list>
+
+    </div>
+
+
+    <div *ngSwitchCase="'cupon'">
+
+      <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+      <button ion-button (click)="fileInput.click()">Seleccionar</button>
+
+      <ion-list style="margin-top:10px">
+        <ion-item>
+          <ion-input [(ngModel)]="titulo" type="text" placeholder="Título"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-textarea placeholder="Descripción" rows="6" [(ngModel)]="descripcion"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label style="color:#6c757d">Categoria</ion-label>
+          <ion-select [(ngModel)]="categoria">
+            <ion-option value="productos">Productos</ion-option>
+            <ion-option value="bienestar_belleza">Bienestar & belleza</ion-option>
+            <ion-option value="gastronomia">Gastronomía</ion-option>
+            <ion-option value="servicios">Servicios</ion-option>
+            <ion-option value="panoramas">Panoramas</ion-option>
+            <ion-option value="eventos">Eventos</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <div item-start>
+            <div style="background:#fff;padding:5px;padding-right:30px;border-right:0px solid #bbb;color:#777;font-weight:600">
+              $
+            </div>
+          </div>
+          <ion-input [(ngModel)]="precio" type="number" placeholder="Precio"></ion-input>
+        </ion-item>
+        <ion-item>
+          <div item-start>
+            <div style="width:70px;padding:2px;color:#777;font-weight:600">
+              Cupones
+            </div>
+          </div>
+          <ion-input [(ngModel)]="disponibles" type="number" placeholder="Cupones disponibles"></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-list>
+        <ion-item-divider style="font-weight:600;color:#333">
+          CONDICIONES
+        </ion-item-divider>
+        <ion-item *ngFor="let item of condiciones; let i = index">
+          <div item-start style="font-weight:600;color:#333">
+            {{i + 1}}
+          </div>
+          <ion-input [(ngModel)]="item[i]" type="text" placeholder="Escribir"></ion-input>
+        </ion-item>
+        <button (click)="addItem('cupon', 0, condiciones.length)" ion-item block outline color="white" style="text-transform: none">
+          <div style="text-align:right;font-size:16px;font-weight:600;color:#777">
+            + Añadir Otro Item
+          </div>
+        </button>
+      </ion-list>
+
+      <ion-list>
+        <ion-item-divider style="font-weight:600;color:#333">
+          PERIODO DE VALIDEZ
+        </ion-item-divider>
+        <ion-item>
+          <div item-start>
+            <div style="width:70px;padding:2px;color:#777;font-weight:600">
+              Inicio
+            </div>
+          </div>
+          <ion-label>Fecha de inicio</ion-label>
+          <ion-datetime displayFormat="D/MM/YYYY" [(ngModel)]="fechaInicio"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <div item-start>
+            <div style="width:70px;padding:2px;color:#777;font-weight:600">
+              Término
+            </div>
+          </div>
+          <ion-label>Fecha de término</ion-label>
+          <ion-datetime displayFormat="D/MM/YYYY" [(ngModel)]="fechaTermino"></ion-datetime>
+        </ion-item>
+      </ion-list>
+
+
+    </div>
+
+
+
+    <div *ngSwitchCase="'explorar'" style="padding-bottom:30px">
+
+
+      <div style="width:100%;background:white;padding:20px;display:flex;justify-content:center">
+        <input style="display: none" type="file" (change)="onFileChangedMany($event)" #fileInput>
+        <button ion-button outline small (click)="fileInput.click()">Seleccionar</button>
       </div>
-    </button>
-  </ion-list>
+
+
+      <!-- <div *ngIf="imagePreview" style="display:flex;justify-content:flex-start;flex-wrap:wrap">
+        <img [src]="imagePreview" style="margin:10px;height:70px;width:70px;object-fit:cover">
+      </div>
+      <div style="width:100%;display:flex;justify-content:center;margin-bottom:20px">
+        <button mode="md" ion-button color="primary" (click)="addImg()">
+          <ion-icon name="md-images" style="margin-right:3px;color:white;font-size:35px"></ion-icon>
+          Subir Imágenes
+        </button>
+      </div> -->
+
+      <ion-list style="margin-top:10px">
+        <ion-item>
+          <ion-input [(ngModel)]="titulo" type="text" placeholder="Título"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-textarea placeholder="Descripción" rows="6" [(ngModel)]="descripcion"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label style="color:#6c757d">Categoria</ion-label>
+          <ion-select [(ngModel)]="categoria">
+            <ion-option value="tours_experiencias">Tours y Experiencias</ion-option>
+            <ion-option value="spa_peluqueria_belleza">SPA peluquería y belleza</ion-option>
+            <ion-option value="hoteles_cabanas">Hoteles y cabañas</ion-option>
+            <ion-option value="profesionales">Profesionales</ion-option>
+            <ion-option value="instalaciones_deportivas">Instalaciones deportivas</ion-option>
+            <ion-option value="eventos">Eventos</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <div item-start>
+            <div style="background:#fff;padding:5px;padding-right:30px;border-right:1px solid #bbb;color:#777;font-weight:600">
+              $
+            </div>
+          </div>
+          <ion-input [(ngModel)]="precio" type="number" placeholder="Precio"></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-list *ngIf="modo == 'evento'">
+        <ion-item>
+          <div item-start>
+            <div style="width:70px;padding:2px;color:#777;font-weight:600">
+              Fecha
+            </div>
+          </div>
+          <ion-label>Día de la actividad</ion-label>
+          <ion-datetime displayFormat="D/MM/YYYY" [(ngModel)]="fecha"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <div item-start>
+            <div style="width:70px;padding:2px;color:#777;font-weight:600">
+              Inicio
+            </div>
+          </div>
+          <ion-label>Hora de inicio</ion-label>
+          <ion-datetime displayFormat="h:m A" [(ngModel)]="inicio"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <div item-start>
+            <div style="width:70px;padding:2px;color:#777;font-weight:600">
+              Término
+            </div>
+          </div>
+          <ion-label>Hora de término</ion-label>
+          <ion-datetime displayFormat="h:m A" [(ngModel)]="termino"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <div item-start>
+            <div style="width:70px;padding:2px;color:#777;font-weight:600">
+              Lugar
+            </div>
+          </div>
+          <ion-input [(ngModel)]="lugar" type="text" placeholder="Av. Ramon Picarte 401"></ion-input>
+        </ion-item>
+      </ion-list>
 
 
 
+      <ion-list *ngIf="modo == 'servicio'">
+        <ion-item>
+          <ion-label>Todo los días idéntico</ion-label>
+          <ion-toggle checked="true"></ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-label>Configurar cada día</ion-label>
+          <ion-toggle checked="false"></ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-label style="color:#6c757d">Duración de la actividad</ion-label>
+          <ion-select [(ngModel)]="duracion">
+            <ion-option value="15 min">15 min</ion-option>
+            <ion-option value="30 min">30 min</ion-option>
+            <ion-option value="1h">1h</ion-option>
+            <ion-option value="1h 30min">1h 30min</ion-option>
+            <ion-option value="2h">2h</ion-option>
+            <ion-option value="2h 30min">2h 30min</ion-option>
+            <ion-option value="3h">3h</ion-option>
+            <ion-option value="4h">4h</ion-option>
+            <ion-option value="5h">5h</ion-option>
+            <ion-option value="6h">6h</ion-option>
+            <ion-option value="7h">8h</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <div item-start>
+            <div style="width:70px;padding:2px;color:#777;font-weight:600">
+              Lugar
+            </div>
+          </div>
+          <ion-input [(ngModel)]="lugar" type="text" placeholder="Av. Ramon Picarte 401"></ion-input>
+        </ion-item>
+        <ion-item *ngFor="let item of horas; let i = index">
+          <div item-start>
+            <div style="width:70px;padding:2px;color:#777;font-weight:600">
+              Inicio
+            </div>
+          </div>
+          <ion-label>Hora de inicio</ion-label>
+          <ion-datetime displayFormat="h:m A" [(ngModel)]="item[i]"></ion-datetime>
+        </ion-item>
+        <button (click)="addItem('explorar', 0, horas.length)" ion-item block outline color="white" style="text-transform: none">
+          <div style="text-align:right;font-size:16px;font-weight:600;color:#777">
+            + Añadir Otra Hora
+          </div>
+        </button>
+      </ion-list>
+
+      <div (click)="presentPopover($event, 'MODO')" style="margin-bottom:15px;padding:4px;background:dodgerblue;width:100%;text-align:center;color:white;font-weight:600;font-size:16px">
+        Añadir modalidad
+        <ion-icon name="md-arrow-dropdown" style="color:white;margin-left:5px"></ion-icon>
+      </div>
+
+      <ion-list *ngFor="let list of lists; let k = index">
+        <ion-item>
+          <ion-input [(ngModel)]="list.title" type="text" placeholder="Título de la lista"></ion-input>
+          <button (click)="deleteList(k)" item-end clear ion-button icon-only>
+            <ion-icon name="md-trash" style="color:#777;font-size:25px"></ion-icon>
+          </button>
+        </ion-item>
+        <ion-item *ngFor="let item of list.items; let i = index">
+          <ion-radio *ngIf="list.type=='A'" item-start checked="false" value="go"></ion-radio>
+          <ion-checkbox *ngIf="list.type=='B'" class="checkbox-square" checked="false">value 1</ion-checkbox>
+          <ion-input [(ngModel)]="item[i]" type="text" placeholder="Escribir"></ion-input>
+        </ion-item>
+        <button (click)="addItem('combo', k, list.items.length)" ion-item block outline color="white" style="text-transform: none">
+          <div style="text-align:right;font-size:16px;font-weight:600;color:#777">
+            + Añadir Otro Item
+          </div>
+        </button>
+      </ion-list>
+
+      <div (click)="presentPopover($event, 'LISTA')" style="margin-top:0px;padding:4px;background:dodgerblue;width:100%;text-align:center;color:white;font-weight:600;font-size:16px">
+        Añadir opciones
+        <ion-icon name="md-arrow-dropdown" style="color:white;margin-left:5px"></ion-icon>
+      </div>
+
+      <!-- <div style="padding:15px;padding-top:0px">
+        <button color="orange1" ion-button block outline small (click)="presentPopover($event, 'LISTA')">
+          Añadir alertas
+          <ion-icon name="md-arrow-dropdown" style="color:orangered;margin-left:5px"></ion-icon>
+        </button>
+      </div> -->
+
+    </div>
 
 
-  <div padding style="font-size:16px;font-weight:600;color:#488aff">
-    + Agrear Lista
+
   </div>
-
-  <button ion-button icon-only clear>
-    <div style="padding:8px">
-      <div style="width:35px;display:flex;justify-content:center;flex-wrap:wrap;align-items:center">
-        <div style="height:10px;width:10px;border:2px solid #777;margin-right:5px;border-radius:50%">
-        </div>
-        <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px" [ngStyle]="{'background': center ? 'dodgerblue' : '#777' }">
-        </div>
-
-        <div style="margin-top:2px;height:10px;width:10px;border:2px solid #777;margin-right:5px;border-radius:50%">
-        </div>
-        <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px" [ngStyle]="{'background': center ? 'dodgerblue' : '#777' }">
-        </div>
-
-        <div style="margin-top:2px;height:10px;width:10px;border:2px solid #777;margin-right:5px;border-radius:50%">
-        </div>
-        <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px" [ngStyle]="{'background': center ? 'dodgerblue' : '#777' }">
-        </div>
-      </div>
-    </div>
-  </button>
-
-  <button ion-button icon-only clear>
-    <div style="padding:8px">
-      <div style="width:35px;display:flex;justify-content:center;flex-wrap:wrap;align-items:center">
-        <div style="height:10px;width:10px;border:2px solid #777;margin-right:5px">
-        </div>
-        <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px;background:#777">
-        </div>
-
-        <div style="margin-top:2px;height:10px;width:10px;border:2px solid #777;margin-right:5px">
-        </div>
-        <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px;background:#777">
-        </div>
-
-        <div style="margin-top:2px;height:10px;width:10px;border:2px solid #777;margin-right:5px">
-        </div>
-        <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px;background:#777">
-        </div>
-      </div>
-    </div>
-  </button>
-
-
-
-
-
-
-
-
-
-
 
 
 </ion-content>

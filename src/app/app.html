@@ -11,6 +11,82 @@
                 </div>
             </div>
         </div>
+
+        <div padding style="display:flex;justify-content:space-around;flex-wrap:wrap">
+            <div padding (click)="openPage(home)">
+                <div style="height:45px;width:45px;border-radius:50%;background:orangered;display:flex;justify-content:center;align-items:center">
+                    <ion-icon name="md-pizza" style="color:white;font-size:35px"></ion-icon>
+                </div>
+                <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
+                    Pedidos
+                </div>
+            </div>
+            <div padding (click)="openPage(pedidos)">
+                <div style="height:45px;width:45px;border-radius:50%;background:#51c0f3;display:flex;justify-content:center;align-items:center">
+                    <ion-icon name="md-boat" style="color:white;font-size:35px"></ion-icon>
+                </div>
+                <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
+                    Explorar
+                </div>
+            </div>
+
+            <div padding (click)="openPage(cupon)">
+                <img src="assets/coupon.svg" style="width:45px">
+                <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
+                    Cupón
+                </div>
+            </div>
+
+            <div padding (click)="openPage(cabana)">
+                <div style="height:45px;width:45px;border-radius:50%;background:#FD6360;display:flex;justify-content:center;align-items:center">
+                    <ion-icon name="ios-home" style="color:white;font-size:30px"></ion-icon>
+                </div>
+                <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
+                    Reservar
+                </div>
+            </div>
+            <div padding (click)="openPage(outfits)">
+                <div style="height:45px;width:45px;border-radius:50%;background:slateblue;display:flex;justify-content:center;align-items:center">
+                    <ion-icon name="md-cafe" style="color:white;font-size:30px"></ion-icon>
+                </div>
+                <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
+                    Packs
+                </div>
+            </div>
+            <div padding (click)="openPage(outfits)">
+                <div style="height:45px;width:45px;border-radius:50%;background:#51c0f3;display:flex;justify-content:center;align-items:center">
+                    <ion-icon name="md-boat" style="color:white;font-size:35px"></ion-icon>
+                </div>
+                <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
+                    Explorar
+                </div>
+            </div>
+
+            <div padding (click)="openPage(cupon)">
+                <img src="assets/coupon.svg" style="width:45px">
+                <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
+                    Cupón
+                </div>
+            </div>
+
+            <div padding (click)="openPage(cabana)">
+                <div style="height:45px;width:45px;border-radius:50%;background:#FD6360;display:flex;justify-content:center;align-items:center">
+                    <ion-icon name="ios-home" style="color:white;font-size:30px"></ion-icon>
+                </div>
+                <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
+                    Reservar
+                </div>
+            </div>
+            <div padding (click)="openPage(outfits)">
+                <div style="height:45px;width:45px;border-radius:50%;background:slateblue;display:flex;justify-content:center;align-items:center">
+                    <ion-icon name="md-cafe" style="color:white;font-size:30px"></ion-icon>
+                </div>
+                <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
+                    Packs
+                </div>
+            </div>
+        </div>
+
         <ion-list no-lines>
             <div style="height:10px;width:100%;background:#eee">
             </div>
@@ -120,12 +196,6 @@
                             Alertas
                         </div>
                     </div>
-                    <!-- <div (click)="openPage(cesta)">
-                        <img src="assets/gift.svg" style="width:45px">
-                        <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
-                            Desayuno
-                        </div>
-                    </div> -->
                     <div (click)="openPage(cabana)">
                         <div style="height:45px;width:45px;border-radius:50%;background:#FD6360;display:flex;justify-content:center;align-items:center">
                             <ion-icon name="ios-home" style="color:white;font-size:30px"></ion-icon>
@@ -135,6 +205,21 @@
                         </div>
                     </div>
                 </div>
+
+                <div padding style="width:100%;display:flex;justify-content:space-around">
+                    <div (click)="openPage(outfits)">
+                        <div style="height:45px;width:45px;border-radius:50%;background:slateblue;display:flex;justify-content:center;align-items:center">
+                            <ion-icon name="md-cafe" style="color:white;font-size:30px"></ion-icon>
+                        </div>
+                        <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
+                            Packs
+                        </div>
+                    </div>
+                    <div style="width:50px">
+                    </div>
+                </div>
+
+
                 <div style="height:10px;width:100%;background:#eee">
                 </div>
                 <button ion-item (click)="openPage(crearOutfit)">

@@ -6,6 +6,8 @@ import { HomePage } from "../../pages/home/home";
 import { Platform } from "ionic-angular";
 import { Facebook } from "@ionic-native/facebook";
 import { AuthProvider } from "../../providers/auth/auth";
+// import { HttpClient, Headers } from "@angular/common/http";
+
 
 @IonicPage()
 @Component({
@@ -21,6 +23,7 @@ export class LoginPage {
     private fb: Facebook,
     private platform: Platform,
     public appCtrl: App
+    // public http: HttpClient
   ) {}
 
   signInWithFacebook() {
@@ -63,4 +66,5 @@ export class LoginPage {
         });
     }
   }
+
 }

@@ -111,18 +111,18 @@ export class ComboPage {
     );
   }
   saveData() {
-    this.buscar();
-    let opcionesObject = {};
-    for (let i = 0; i < this.opcionesArreglo.length; i++) {
-      opcionesObject[i] = this.opcionesArreglo[i];
-    }
-    this._product.addMenu(
-      this.category,
-      this.titulo,
-      this.descripcion,
-      opcionesObject,
-      this.base64Image,
-      this._auth.authData
-    );
+    // this.buscar();
+    // let opcionesObject = {};
+    // for (let i = 0; i < this.opcionesArreglo.length; i++) {
+    //   opcionesObject[i] = this.opcionesArreglo[i];
+    // }
+    // this._product.addMenu(
+    //   this.category,
+    //   this.titulo,
+    //   this.descripcion,
+    //   opcionesObject,
+    //   this.base64Image,
+    //   this._auth.authData
+    // );
   }
 }

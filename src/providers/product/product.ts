@@ -13,14 +13,12 @@ import {
   AngularFirestoreCollection
 } from "angularfire2/firestore";
 
-export interface Menu {
+export interface Combo {
   category: string;
   title: string;
-  description: string;
-  options: object;
+  price: number;
   img: string;
   fecha: number;
-  productId: string;
   userId: string;
   storeName: string;
   likes: number;
@@ -29,6 +27,90 @@ export interface Menu {
   totalStarts: number;
   sumStarts: number;
   starts: number;
+  lists: object;
+  isList: boolean;
+}
+export interface Pack {
+  category: string;
+  title: string;
+  description;
+  price: number;
+  img: string;
+  fecha: number;
+  userId: string;
+  storeName: string;
+  likes: number;
+  reviews: number;
+  buys: number;
+  totalStarts: number;
+  sumStarts: number;
+  starts: number;
+  table: object;
+}
+export interface Coupon {
+  category: string;
+  title: string;
+  description: string;
+  coupons: number;
+  price: number;
+  img: string;
+  initDate: string;
+  endDate: string;
+  fecha: number;
+  userId: string;
+  storeName: string;
+  storeAvatar: string;
+  likes: number;
+  reviews: number;
+  buys: number;
+  totalStarts: number;
+  sumStarts: number;
+  starts: number;
+  conditions: object;
+}
+export interface Event {
+  category: string;
+  title: string;
+  description: string;
+  price: number;
+  imgs: object;
+  fecha: number;
+  date: string;
+  userId: string;
+  hourInit: string;
+  hourEnd: string;
+  site: string;
+  storeName: string;
+  storeAvatar: string;
+  reviews: number;
+  buys: number;
+  totalStarts: number;
+  sumStarts: number;
+  starts: number;
+  lists: object;
+  isList: boolean;
+}
+export interface Service {
+  category: string;
+  title: string;
+  description: string;
+  price: number;
+  imgs: object;
+  fecha: number;
+  userId: string;
+  hourInits: string;
+  site: string;
+  duration: number;
+  storeName: string;
+  storeAvatar: string;
+  likes: number;
+  buys: number;
+  lists: object;
+  isList: boolean;
+}
+export interface List {
+  comboId: string;
+  lists: object;
 }
 export interface Product {
   userId_collection_date: string;
@@ -74,18 +156,18 @@ export class ProductProvider {
       .doc(id)
       .set(collection);
   }
-  addMenu(category, titulo, descripcion, opciones, imagen, user) {
+  addCombo(categoria, titulo, precio, imagen, listas, isList, user) {
     const postId = this.afs.createId();
-    const menu: Menu = {
-      category: category,
+    const combo: Combo = {
+      category: categoria,
       title: titulo,
-      description: descripcion,
-      options: opciones,
+      price: precio,
       img: "",
+      lists: listas,
+      isList: isList,
       fecha: new Date().getTime(),
       userId: user.userId,
       storeName: user.storeName,
-      productId: postId,
       likes: 0,
       reviews: 0,
       buys: 0,
@@ -94,11 +176,165 @@ export class ProductProvider {
       starts: 0
     };
     this.afs
-      .collection(category)
+      .collection("combo_" + categoria)
       .doc(postId)
-      .set(menu)
+      .set(combo)
       .then(data => {
-        this.addImgByProduct(category, postId, imagen);
+        this.addOneImg("combo", categoria, postId, imagen);
+      });
+  }
+  addPack(categoria, imagen, titulo, descripcion, precio, tabla, user) {
+    const postId = this.afs.createId();
+    const pack: Pack = {
+      category: categoria,
+      title: titulo,
+      description: descripcion,
+      price: precio,
+      img: "",
+      table: tabla,
+      fecha: new Date().getTime(),
+      userId: user.userId,
+      storeName: user.storeName,
+      likes: 0,
+      reviews: 0,
+      buys: 0,
+      totalStarts: 0,
+      sumStarts: 0,
+      starts: 0
+    };
+    this.afs
+      .collection("pack_" + categoria)
+      .doc(postId)
+      .set(pack)
+      .then(data => {
+        this.addOneImg("pack", categoria, postId, imagen);
+      });
+  }
+  addCoupon(
+    categoria,
+    imagen,
+    titulo,
+    descripcion,
+    precio,
+    disponibles,
+    condiciones,
+    inicio,
+    termino,
+    user
+  ) {
+    const postId = this.afs.createId();
+    const coupon: Coupon = {
+      category: categoria,
+      title: titulo,
+      description: descripcion,
+      price: precio,
+      coupons: disponibles,
+      img: "",
+      conditions: condiciones,
+      initDate: inicio,
+      endDate: termino,
+      fecha: new Date().getTime(),
+      userId: user.userId,
+      storeName: user.storeName,
+      storeAvatar: user.userImg,
+      likes: 0,
+      reviews: 0,
+      buys: 0,
+      totalStarts: 0,
+      sumStarts: 0,
+      starts: 0
+    };
+    this.afs
+      .collection("cupon_" + categoria)
+      .doc(postId)
+      .set(coupon)
+      .then(data => {
+        this.addOneImg("cupon", categoria, postId, imagen);
+      });
+  }
+  addEvent(
+    categoria,
+    imagen,
+    titulo,
+    descripcion,
+    precio,
+    fecha,
+    inicio,
+    termino,
+    lugar,
+    lists,
+    isList,
+    user
+  ) {
+    const postId = this.afs.createId();
+    const event: Event = {
+      category: categoria,
+      title: titulo,
+      description: descripcion,
+      price: precio,
+      imgs: {},
+      lists: lists,
+      isList: isList,
+      fecha: new Date().getTime(),
+      date: fecha,
+      hourInit: inicio,
+      hourEnd: termino,
+      site: lugar,
+      userId: user.userId,
+      storeName: user.storeName,
+      storeAvatar: user.userImg,
+      reviews: 0,
+      buys: 0,
+      totalStarts: 0,
+      sumStarts: 0,
+      starts: 0
+    };
+    this.afs
+      .collection("evento_" + categoria)
+      .doc(postId)
+      .set(event)
+      .then(data => {
+        this.addManyImgs("evento", categoria, postId, imagen);
+      });
+  }
+  addService(
+    categoria,
+    imagenes,
+    titulo,
+    descripcion,
+    precio,
+    duracion,
+    lugar,
+    inicios,
+    lists,
+    isList,
+    user
+  ) {
+    const postId = this.afs.createId();
+    const service: Service = {
+      category: categoria,
+      title: titulo,
+      description: descripcion,
+      price: precio,
+      imgs: {},
+      fecha: new Date().getTime(),
+      userId: user.userId,
+      hourInits: inicios,
+      site: lugar,
+      duration: duracion,
+      storeName: user.storeName,
+      storeAvatar: user.userImg,
+      likes: 0,
+      buys: 0,
+      lists: lists,
+      isList: isList
+    };
+    this.afs
+      .collection("servicios_" + categoria)
+      .doc(postId)
+      .set(service)
+      .then(data => {
+        this.addManyImgs("servicios", categoria, postId, imagenes);
       });
   }
   addProduct(coleccion, titulo, precio, user) {
@@ -120,14 +356,27 @@ export class ProductProvider {
         // this.addImgByProduct(category, postId, imagen);
       });
   }
-  async addImgByProduct(category, postId, base64data) {
+  async addOneImg(collection, category, postId, base64data) {
     const file = base64data;
     const filePath = "img/" + postId;
     let url = await this.getUrl(filePath, file);
     this.afs
-      .collection(category)
+      .collection(`${collection}_${category}`)
       .doc(postId)
       .update({ img: url });
+  }
+  async addManyImgs(collection, category, postId, base64data) {
+    let urls = [];
+    for (let i = 0; i < base64data.length; i++) {
+      const file = base64data[i];
+      const filePath = "img/" + postId + "_" + i;
+      let url = await this.getUrl(filePath, file);
+      urls.push(url);
+    }
+    this.afs
+      .collection(`${collection}_${category}`)
+      .doc(postId)
+      .update({ imgs: { ...urls } });
   }
   getUrl(filePath, file) {
     return new Promise((resolve, reject) => {

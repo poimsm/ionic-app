@@ -4,6 +4,7 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { Subscription } from "rxjs/Subscription";
 import { AuthProvider } from "../providers/auth/auth";
+import { HomePage } from "../pages/home/home";
 import {
   AjustesPage,
   OutfitsPage,
@@ -27,7 +28,7 @@ import {
   NewServicePage,
   ComboPage,
   CuponPage,
-CabanaPage
+  CabanaPage
 } from "../pages/index.pages";
 
 @Component({
@@ -88,6 +89,7 @@ export class MyApp {
   outfits = OutfitsPage;
   rooms = RoomsPage;
   market = MarketPage;
+  home = HomePage;
 
   publicaciones = PublicacionesPage;
   cupones = CuponesPage;
@@ -103,7 +105,7 @@ export class MyApp {
   crearOutfit = NewOutfitPage;
 
   // rootPage: any;
-  rootPage: any = OutfitsPage;
+  rootPage: any = HomePage;
   constructor(
     private menuCtrl: MenuController,
     platform: Platform,
@@ -113,7 +115,7 @@ export class MyApp {
   ) {
     // _auth.loadStorage().then(isAuth => {
     //   if (isAuth) {
-    //     this.rootPage = this.outfits;
+    //     this.rootPage = this.home;
     //   } else {
     //     this.rootPage = this.login;
     //   }

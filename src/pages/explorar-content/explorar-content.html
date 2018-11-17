@@ -1,0 +1,555 @@
+<ion-header no-border>
+  <ion-navbar align-title="center" color="white">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button ion-button icon-only>
+        <ion-icon name="md-bulb" style="color:#333"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+
+<!-- <ion-content>
+  <img src="assets/03.jpg" style="width:100%">
+
+  <div style="padding:15px;font-size:19px;color:#777;">
+    Navega en la noche valdiviana marques de mancera
+  </div>
+
+  <div style="padding-left:15px;padding-right:15px;font-size:15px;color:#777">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam dolor porro vel, cupiditate asperiores sint corrupti placeat
+    quo, non quis earum ratione ab accusamus nesciunt. Deserunt error ea nihil veritatis.
+  </div>
+
+
+</ion-content>
+
+<ion-footer padding style="background:white">
+  <button ion-button block color="btn1" style="text-transform: none">
+    <div style="font-size:16px;font-weight:500;">
+      Realizar reserva
+    </div>
+  </button>
+</ion-footer> -->
+
+<ion-content style="background: #f5f4f4">
+  <!-- <div style="position:relative">
+    <img src="assets/03.jpg" style="width:100%">
+    <div style="position:absolute;bottom:-10px;right:20px;z-index:10">
+      <button ion-button round color="white" icon-only>
+        <ion-icon name="ios-heart-outline" style="font-size:28px;color:#444"></ion-icon>
+      </button>
+    </div>
+  </div> -->
+
+  <div style="top:0px;left:0px">
+    <ion-slides pager>
+      <ion-slide>
+        <img src="assets/barco01.jpg" style="width:100%;height:200px;object-fit:cover">
+      </ion-slide>
+      <ion-slide>
+        <img src="assets/pac02.jpg" style="width:100%;height:200px;object-fit:cover">
+      </ion-slide>
+      <ion-slide>
+        <img src="assets/pac03.jpg" style="width:100%;height:200px;object-fit:cover">
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <div style="background:white">
+    <div padding>
+      <div style="font-size:18px;font-weight:600;color:#333">
+        Pan de Mostaza sin Lactosa Universidad
+      </div>
+      <!-- <div style="width:100%;display:flex;justify-content:flex-start;align-items:flex-end">
+        <ion-icon name="md-star" style="font-size:20px;color:gold"></ion-icon>
+        <ion-icon name="md-star" style="font-size:20px;color:gold"></ion-icon>
+        <ion-icon name="md-star" style="font-size:20px;color:gold"></ion-icon>
+        <ion-icon name="md-star" style="font-size:20px;color:#eee"></ion-icon>
+        <ion-icon name="md-star" style="font-size:20px;color:#eee"></ion-icon>
+        <div style="margin-left:5px;font-size:14px;color:#777">
+          112 calificaciones
+        </div>
+      </div> -->
+    </div>
+
+
+    <hr style="padding:0px;margin:0px">
+    <button ion-item text-wrap no-lines>
+      <div style="width:100%;display:flex;justify-content:flex-start;align-items:flex-end">
+        <ion-icon name="md-star" style="font-size:20px;color:gold"></ion-icon>
+        <ion-icon name="md-star" style="font-size:20px;color:gold"></ion-icon>
+        <ion-icon name="md-star" style="font-size:20px;color:gold"></ion-icon>
+        <ion-icon name="md-star" style="font-size:20px;color:#eee"></ion-icon>
+        <ion-icon name="md-star" style="font-size:20px;color:#eee"></ion-icon>
+        <div style="margin-left:5px;font-size:14px;color:#777">
+          112 calificaciones
+        </div>
+      </div>
+      <ion-icon name="ios-arrow-forward" style="color:#777;font-size:16px" item-end></ion-icon>
+    </button>
+
+    <hr style="padding:0px;margin:0px">
+    <button ion-item text-wrap no-lines>
+      <ion-icon item-start name="md-pin" style="color:#777;font-size:20px"></ion-icon>
+      <div style="color:#999">
+        Av. Ramon Picarte 403
+      </div>
+      <ion-icon name="ios-arrow-forward" style="color:#777;font-size:16px" item-end></ion-icon>
+    </button>
+    <hr style="padding:0px;margin:0px">
+
+    <div style="width:100%;padding:15px;display:flex;justify-content:flex-start">
+
+      <div style="padding:7px;padding-left:10px;padding-right:10px;margin-right:5px">
+        <div style="font-size:18px;color:#555;font-weight:430">
+          Lun
+        </div>
+      </div>
+      <div style="padding:7px;padding-left:10px;padding-right:10px;margin-right:5px">
+        <div style="font-size:18px;color:#555;font-weight:430">
+          Mar
+        </div>
+      </div>
+      <div style="padding:7px;padding-left:10px;padding-right:10px;margin-right:5px">
+        <div style="font-size:18px;color:#555;font-weight:430">
+          Mié
+        </div>
+        <div style="width:100%;display:flex;justify-content:center">
+          <div style="height:8px;width:8px;border-radius:50%;background:orange">
+          </div>
+        </div>
+      </div>
+      <div (click)="openCalendar()" style="padding:7px;padding-left:10px;padding-right:10px;background:#40cead;margin-right:5px">
+        <div style="font-size:18px;color:#fff;font-weight:500">
+          Jue
+        </div>
+        <div style="width:100%;display:flex;justify-content:center">
+          <div style="height:8px;width:8px;border-radius:50%;background:orange">
+          </div>
+          <div style="margin-left:5px;height:8px;width:8px;border-radius:50%;background:orangered">
+          </div>
+        </div>
+      </div>
+      <div style="padding:7px;padding-left:10px;padding-right:10px;margin-right:5px">
+        <div style="font-size:18px;color:#555;font-weight:430">
+          Vie
+        </div>
+        <div style="width:100%;display:flex;justify-content:center">
+          <div style="height:8px;width:8px;border-radius:50%;background:orange">
+          </div>
+          <div style="margin-left:5px;height:8px;width:8px;border-radius:50%;background:orangered">
+          </div>
+        </div>
+      </div>
+      <div style="padding:7px;padding-left:10px;padding-right:10px;margin-right:5px">
+        <div style="font-size:18px;color:#555;font-weight:430">
+          Sáb
+        </div>
+        <div style="width:100%;display:flex;justify-content:center">
+          <div style="height:8px;width:8px;border-radius:50%;background:orange">
+          </div>
+          <div style="margin-left:5px;height:8px;width:8px;border-radius:50%;background:orangered">
+          </div>
+        </div>
+      </div>
+
+      <!-- <button ion-button clear style="text-transform: none">
+        <div style="font-size:18px;color:#555;font-weight:430">
+          Lun
+        </div>
+      </button>
+      <button ion-button clear style="text-transform: none">
+        <div style="font-size:18px;color:#555;font-weight:430">
+          Mar
+        </div>
+      </button>
+      <button ion-button clear style="text-transform: none">
+        <div style="font-size:18px;color:#555;font-weight:430">
+          Mié
+        </div>
+      </button>
+      <button ion-button color="btn4" style="text-transform: none">
+        <div>
+          <div style="font-size:18px;color:#fff;font-weight:500">
+            Sá
+          </div>
+          <div style="margin-top:3px;width:100%;display:flex;justify-content:center">
+            <div style="height:8px;width:8px;border-radius:50%;background:orange">
+            </div>
+            <div style="margin-left:5px;height:8px;width:8px;border-radius:50%;background:orangered">
+            </div>
+          </div>
+        </div>
+      </button>
+      <button ion-button clear style="text-transform: none">
+        <div>
+          <div style="font-size:18px;color:#555;font-weight:430">
+            Sáb
+          </div>
+          <div style="margin-top:3px;width:100%;display:flex;justify-content:center">
+            <div style="height:8px;width:8px;border-radius:50%;background:orange">
+            </div>
+            <div style="margin-left:5px;height:8px;width:8px;border-radius:50%;background:orangered">
+            </div>
+          </div>
+        </div>
+      </button>
+      <button ion-button clear style="text-transform: none">
+        <div>
+          <div style="font-size:18px;color:#555;font-weight:430">
+            Sáb
+          </div>
+          <div style="margin-top:3px;width:100%;display:flex;justify-content:center">
+            <div style="height:8px;width:8px;border-radius:50%;background:orange">
+            </div>
+            <div style="margin-left:5px;height:8px;width:8px;border-radius:50%;background:orangered">
+            </div>
+          </div>
+        </div>
+      </button> -->
+
+    </div>
+    <hr style="padding:0px;margin:0px">
+
+
+    <!-- <div style="padding:10px;padding-left:20px;width:100%;display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;align-items:center">
+        <ion-icon name="md-pin" style="color:#444;font-size:20px"></ion-icon>
+        <div style="margin-left:20px;color:#444;font-size:15px">
+          Av. Ramon Picarte 403
+        </div>
+      </div>
+      <ion-icon name="ios-arrow-forward" style="color:#777;font-size:20px" item-end></ion-icon>
+    </div> -->
+
+
+
+    <!-- <div style="padding:15px;display:flex;align-items:center;">
+      <div style="width:70%;border-right:1px solid #eee">
+        <div style="padding:5px;width:100%;display:flex;align-items:center">
+          <ion-icon name="md-time" style="color:#999;font-size:20px"></ion-icon>
+          <div style="margin-left:20px;color:#999;font-size:15px">
+            Dura 1 hora, 30 minutos
+          </div>
+        </div>
+        <div style="padding:5px;width:100%;display:flex;align-items:center">
+          <ion-icon name="md-calendar" style="color:#999;font-size:20px"></ion-icon>
+          <div style="margin-left:20px;color:#999;font-size:15px">
+            Abre todos los días
+          </div>
+        </div>
+      </div>
+      <div style="padding:15px;padding-left:22px">
+        <ion-icon name="md-call" style="color:orangered;font-size:26px"></ion-icon>
+      </div>
+    </div> -->
+
+
+
+
+    <!-- <ion-list style="margin-top:20px">
+      <button ion-item>
+        <ion-icon item-start name="md-pin" style="color:#999;font-size:20px"></ion-icon>
+        <div style="color:#999">
+          Av. Ramon Picarte 403
+        </div>
+        <ion-icon name="ios-arrow-forward" style="color:#777" item-end></ion-icon>
+      </button>
+      <button ion-item>
+        <ion-icon item-start name="md-time" style="color:#999;font-size:20px"></ion-icon>
+        <div style="color:#999">
+          1 hora, 30 minutos
+        </div>
+        <ion-icon name="ios-arrow-forward" style="color:#777" item-end></ion-icon>
+      </button>
+      <button ion-item>
+        <ion-icon item-start name="md-calendar" style="color:#999;font-size:20px"></ion-icon>
+        <div style="color:#999">
+          Todo los días
+        </div>
+        <ion-icon name="ios-arrow-forward" style="color:#777" item-end></ion-icon>
+      </button>
+    </ion-list> -->
+
+    <!-- <div padding>
+      <div style="display:inline-block;padding:3px;font-size:16px;color:#fff;background:springgreen">
+        Resumen
+      </div>
+      <div style="display:inline-block;padding:3px;font-size:16px;color:#555">
+        Resumen
+      </div>
+      <div style="display:flex;align-items:center">
+        <div style="font-size:14px;color:#777;width:85%">
+          Consectetur quod. Sint fugiat voluptas perspiciatis odio obcaecati similique quaerat odit reprehenderit maxime...
+        </div>
+        <ion-icon name="ios-arrow-forward" style="color:#777;font-size:20px" item-end></ion-icon>
+      </div>
+    </div> -->
+
+    <div style="margin-top:15px;margin-left:15px;display:inline-block;padding:3px;font-size:16px;color:#555">
+      Resumen
+    </div>
+
+    <button ion-item text-wrap no-lines>
+      <div style="color:#999">
+        Multiline text that should wrap when it is too long to fit on one line in the item...
+      </div>
+      <ion-icon name="ios-arrow-forward" style="color:#777" item-end></ion-icon>
+    </button>
+
+    <hr style="padding:0px;margin:0px">
+
+
+    <div style="padding:15px;display:flex;align-items:center;">
+      <div style="width:70%;border-right:1px solid #eee">
+        <div style="padding:5px;width:100%;display:flex;align-items:center">
+          <ion-icon name="md-time" style="color:#999;font-size:20px"></ion-icon>
+          <div style="margin-left:20px;color:#999;font-size:15px">
+            Dura 1 hora, 30 minutos
+          </div>
+        </div>
+        <div style="padding:5px;width:100%;display:flex;align-items:center">
+          <ion-icon name="md-calendar" style="color:#999;font-size:20px"></ion-icon>
+          <div style="margin-left:20px;color:#999;font-size:15px">
+            Abre todos los días
+          </div>
+        </div>
+      </div>
+      <div style="padding:15px;padding-left:22px">
+        <ion-icon name="md-call" style="color:orangered;font-size:26px"></ion-icon>
+      </div>
+    </div>
+
+    <!-- <button ion-item text-wrap>
+      <ion-icon item-start name="md-pin" style="color:#999;font-size:20px"></ion-icon>
+      <div style="color:#999">
+        Multiline text that should wrap when it is too long to fit on one line in the item.
+      </div>
+      <ion-icon name="ios-arrow-forward" style="color:#777" item-end></ion-icon>
+    </button> -->
+
+
+
+  </div>
+
+
+  <div style="background:white;margin-top:10px">
+
+    <!-- <ion-list>
+      <button ion-item>
+        <div style="color:#999">
+          Ver todos los comentarios
+        </div>
+        <div style="width:100%;display:flex;justify-content:flex-start;align-items:flex-end">
+          <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+          <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+          <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+          <ion-icon name="md-star" style="font-size:25px;color:#eee"></ion-icon>
+          <ion-icon name="md-star" style="font-size:25px;color:#eee"></ion-icon>
+          <div style="margin-left:5px;font-size:16px;color:#777">
+            112 calificaciones
+          </div>
+        </div>
+        <ion-icon name="ios-arrow-forward" style="color:#777" item-end></ion-icon>
+      </button>
+    </ion-list> -->
+    <div>
+      <div style="padding-left:10px;padding-top:20px;display:flex;justify-content:space-between;align-items:flex-start">
+        <img src="assets/06.jpg" style="margin-right:10px;width:50px;height:50px;border-radius:50%;object-fit:cover">
+        <div style="width:100%">
+          <div style="margin-top:-3px;display:flex;justify-content:flex-start;width:80px;font-weight:600;color:#777;">
+            <ion-icon name="md-star" style="font-size:20px;color:gold"></ion-icon>
+            <ion-icon name="md-star" style="font-size:20px;color:gold"></ion-icon>
+            <ion-icon name="md-star" style="font-size:20px;color:gold"></ion-icon>
+            <ion-icon name="md-star" style="font-size:20px;color:gold"></ion-icon>
+            <ion-icon name="md-star" style="font-size:20px;color:#eee"></ion-icon>
+          </div>
+          <div style="color:#555;font-size:15px;width:70%">
+            muy buenooo todo el local! pero le falta un poco de onda disco y keda OK
+          </div>
+          <div style="font-size:14px">
+            <span style="color:#3294de;font-weight:600;">
+              Oscar Garcia
+            </span>
+            <span style="margin-left:10px;color:#999">
+              504 Rep
+            </span>
+            <span style="margin-left:10px;color:#999">
+              Hace 13h
+            </span>
+          </div>
+        </div>
+      </div>
+      <div style="width:100%;padding-left:40px;display:flex;justify-content:flex-start">
+        <img src="assets/03.jpg" style="padding:6px;width:60px;height:60px;object-fit:cover">
+        <img src="assets/03.jpg" style="padding:6px;width:60px;height:60px;object-fit:cover">
+        <img src="assets/03.jpg" style="padding:6px;width:60px;height:60px;object-fit:cover">
+      </div>
+    </div>
+    <div>
+      <div style="padding:10px;margin-top:0px;display:flex;justify-content:space-between;align-items:flex-start">
+        <img src="assets/16.jpg" style="margin-right:10px;width:50px;height:50px;border-radius:50%;object-fit:cover">
+        <div style="width:100%">
+          <div style="margin-top:-3px;display:flex;justify-content:flex-start;width:80px;font-weight:600;color:#777;">
+            <ion-icon name="md-star" style="font-size:20px;color:gold"></ion-icon>
+            <ion-icon name="md-star" style="font-size:20px;color:gold"></ion-icon>
+            <ion-icon name="md-star" style="font-size:20px;color:gold"></ion-icon>
+            <ion-icon name="md-star" style="font-size:20px;color:gold"></ion-icon>
+            <ion-icon name="md-star" style="font-size:20px;color:#eee"></ion-icon>
+          </div>
+          <div style="color:#555;font-size:15px">
+            muy buenooo todo el local!
+          </div>
+          <!-- <div style="color:#999">
+            Oscar Garcia
+          </div> -->
+          <div style="font-size:14px">
+            <span style="color:#3294de;font-weight:600;">
+              Oscar Garcia
+            </span>
+            <span style="margin-left:10px;color:#999">
+              504 Rep
+            </span>
+            <span style="margin-left:10px;color:#999">
+              Hace 13h
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="padding:10px;margin-top:0px;display:flex;justify-content:space-between;align-items:flex-start">
+        <img src="assets/18.jpg" style="margin-right:10px;width:50px;height:50px;border-radius:50%;object-fit:cover">
+        <div style="width:100%">
+
+          <div style="margin-top:-3px;display:flex;justify-content:flex-start;width:80px;font-weight:600;color:#777;">
+            <ion-icon name="md-star" style="font-size:20px;color:gold"></ion-icon>
+            <ion-icon name="md-star" style="font-size:20px;color:gold"></ion-icon>
+            <ion-icon name="md-star" style="font-size:20px;color:gold"></ion-icon>
+            <ion-icon name="md-star" style="font-size:20px;color:gold"></ion-icon>
+            <ion-icon name="md-star" style="font-size:20px;color:#eee"></ion-icon>
+          </div>
+          <div style="color:#555;font-size:15px">
+            muy buenooo todo el local!
+          </div>
+          <div style="font-size:14px">
+            <span style="color:#3294de;font-weight:600;">
+              Oscar Garcia
+            </span>
+            <span style="margin-left:10px;color:#999">
+              504 Rep
+            </span>
+            <span style="margin-left:10px;color:#999">
+              Hace 13h
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button ion-item no-lines>
+      <div style="color:#999">
+        Ver todos los comentarios
+      </div>
+      <!-- <div style="width:100%;display:flex;justify-content:flex-start;align-items:flex-end">
+          <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+          <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+          <ion-icon name="md-star" style="font-size:25px;color:gold"></ion-icon>
+          <ion-icon name="md-star" style="font-size:25px;color:#eee"></ion-icon>
+          <ion-icon name="md-star" style="font-size:25px;color:#eee"></ion-icon>
+          <div style="margin-left:5px;font-size:16px;color:#777">
+            112 calificaciones
+          </div>
+        </div> -->
+      <ion-icon name="ios-arrow-forward" style="color:#777" item-end></ion-icon>
+    </button>
+    <!-- <div style="font-weight:600;width:100%;text-align:right;color:dodgerblue;padding-right:15px">
+      Ver todo
+    </div> -->
+  </div>
+
+  <div style="margin-top:10px;background:white">
+
+
+    <div style="padding:10px;font-size:16px;font-weight:600;color:#222">
+      Importante
+    </div>
+
+    <div style="padding:15px;width:100%;display:flex;align-items:flex-start">
+      <div style="padding-top:5px">
+        <div style="margin-right:10px;height:10px;width:10px;border-radius:50%;background:orangered">
+        </div>
+      </div>
+      <div style="width:90%;color:#777;font-size:14px">
+        Debes llegar al punto de encuentro al menos 15 minutos antes de la hora de inicio
+      </div>
+    </div>
+
+    <div style="padding:15px;padding-top:5px;width:100%;display:flex;align-items:flex-start">
+      <div style="padding-top:5px">
+        <div style="margin-right:10px;height:10px;width:10px;border-radius:50%;background:orangered">
+        </div>
+      </div>
+      <div style="width:90%;color:#777;font-size:14px">
+        Te recomendamos llevar un calzado cómodo
+      </div>
+    </div>
+
+    <div style="padding:15px;padding-top:5px;width:100%;display:flex;align-items:flex-start">
+      <div style="padding-top:5px">
+        <div style="margin-right:10px;height:10px;width:10px;border-radius:50%;background:orangered">
+        </div>
+      </div>
+      <div style="width:90%;color:#777;font-size:14px">
+        Por motivos de seguridad, no permiten bolsas, bolsos ni mochilas </div>
+    </div>
+
+    <!-- <ion-list>
+      <ion-item>
+        <div item-start style="height:10px;width:10px;border-radius:50%;background:orangered">
+        </div>
+        Debes llegar al punto de encuentro al menos 15 minutos antes de la hora de inicio
+      </ion-item>
+      <ion-item>
+        <div item-start style="height:10px;width:10px;border-radius:50%;background:orangered">
+        </div>
+        Debes llegar al punto de encuentro al menos 15 minutos antes de la hora de inicio
+      </ion-item>
+    </ion-list> -->
+  </div>
+
+
+  <div style="margin-top:10px;margin-bottom:30px;background:white;padding:15px">
+    <div style="font-size:16px;font-weight:600;color:#222;margin-bottom:5px">
+      <!-- {{data.title}} -->
+      Lugar de encuentro
+    </div>
+
+    <img src="assets/map01.jpg" style="width:100%;height:150px;object-fit:cover">
+    <!-- <div>
+      <img src="assets/18.jpg" style="margin-right:10px;width:50px;height:50px;border-radius:50%;object-fit:cover">
+    </div> -->
+  </div>
+
+
+</ion-content>
+
+<ion-footer no-border>
+  <div style="padding:4px;width:100%;background:#333;display:flex;justify-content:space-around;align-items:center">
+    <div style="color:white;font-size:20px;padding:5px">
+      $50 000
+    </div>
+    <button ion-button color="white" style="text-transform: none">
+      <div style="font-size:16px;font-weight:500;">
+        Comprar ticket
+      </div>
+    </button>
+  </div>
+
+</ion-footer>

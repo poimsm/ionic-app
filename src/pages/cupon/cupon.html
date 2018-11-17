@@ -9,8 +9,8 @@
       Cupones
     </div>
     <ion-buttons right>
-      <button (click)="save()" ion-button icon-only>
-        Publicar
+      <button (click)="presentPopover($event)" ion-button icon-only>
+        <ion-icon name="md-more"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -19,37 +19,100 @@
 
 
 <ion-content>
+
+
+
+  <!-- <div style="display:flex;justify-content:space-around;flex-wrap:wrap">
+    <div (click)="openPage(pedidos)">
+      <div style="height:45px;width:45px;border-radius:50%;background:orangered;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="md-pizza" style="color:white;font-size:35px"></ion-icon>
+      </div>
+      <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
+        Pedidos
+      </div>
+    </div>
+    <div (click)="openPage(explorar)">
+      <div style="height:45px;width:45px;border-radius:50%;background:#51c0f3;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="md-boat" style="color:white;font-size:35px"></ion-icon>
+      </div>
+      <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
+        Explorar
+      </div>
+    </div>
+
+    <div (click)="openPage(cupon)">
+      <img src="assets/coupon.svg" style="width:45px">
+      <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
+        Cupón
+      </div>
+    </div>
+    <div (click)="openPage(outfits)">
+      <div style="height:45px;width:45px;border-radius:50%;background:slateblue;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="md-cafe" style="color:white;font-size:30px"></ion-icon>
+      </div>
+      <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
+        Packs
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <button (click)="presentPopover()" ion-button>
+    Presentate
+  </button> -->
   <ion-grid>
     <ion-row>
       <ion-col col-6 col-md-4 col-xl-3>
         <div style="border:1px solid #eee;border-radius:0px">
           <div style="position:relative">
-            <img src="assets/desa06.jpg" style="height:100px;width:100%;object-fit:cover" />
+            <img src="assets/desa06.jpg" style="height:150px;width:100%;object-fit:cover" />
             <div style="position:absolute;top:10px;left:0px;background:orangered;color:white;padding:3px;font-size:14px;font-weight:600">
               30%
             </div>
-          </div>
-          <div style="padding:5px;padding-bottom:0px;width:100%;font-size:16px;color:#444">
-            Promoción en zapatos
-          </div>
-          <div style="display:flex;align-items:flex-end;justify-content:space-between;color:#40d1b0;font-size:13px;padding:3px">
-            <div style="color:#333;font-weight:600;font-size:16px">
-              $1600
-            </div>
-            <div>
+            <div style="position:absolute;bottom:10px;right:0px;background:#444;color:white;padding:3px;font-size:14px;font-weight:600">
               143 vendidos
             </div>
           </div>
-          <div style="border-top:1px dashed #ccc;padding:5px;width:100%;display:flex;justify-content:space-between">
-            <div style="display:flex;align-items:center">
-              <img src="assets/03.jpg" style="height:20px;width:20px;border-radius:50%">
-              <div style="margin-left:3px;font-size:12px;color:#222">
-                Tienda St...
+          <div style="padding:5px;width:100%;font-size:16px;color:#444">
+            Promoción en zapatos
+          </div>
+          <div style="border-top:0.5px dashed #eee;padding:5px;">
+            <div style="width:100%;display:flex;align-items:flex-end;justify-content:flex-end;font-size:15px">
+              <div style="color:orangered;font-weight:500;font-size:18px">
+                $1600
+              </div>
+              <div style=" text-decoration: line-through;color:#777;margin-left:10px">
+                $5000
               </div>
             </div>
-            <div style="color:#444">
-              23
-              <ion-icon name="ios-thumbs-up-outline" style="font-size:20px;color:#bbb"></ion-icon>
+            <!-- <div style="width:100%;text-align:right;color:#777;font-size:13px">
+              143 vendidos
+            </div> -->
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col col-6 col-md-4 col-xl-3>
+        <div style="border:1px solid #eee;border-radius:0px">
+          <div style="position:relative">
+            <img src="assets/desa06.jpg" style="height:150px;width:100%;object-fit:cover" />
+            <div style="position:absolute;top:10px;left:0px;background:orangered;color:white;padding:3px;font-size:14px;font-weight:600">
+              30%
+            </div>
+            <div style="position:absolute;bottom:10px;right:0px;background:#444;color:white;padding:3px;font-size:14px;font-weight:600">
+              143 vendidos
+            </div>
+          </div>
+          <div style="padding:5px;width:100%;font-size:16px;color:#444">
+            Promoción en zapatos
+          </div>
+          <div style="border-top:0.5px dashed #eee;padding:5px;">
+            <div style="width:100%;display:flex;align-items:flex-end;justify-content:flex-end;font-size:15px">
+              <div style="color:orangered;font-weight:500;font-size:18px">
+                $1600
+              </div>
+              <div style=" text-decoration: line-through;color:#777;margin-left:10px">
+                $5000
+              </div>
             </div>
           </div>
         </div>
@@ -58,7 +121,229 @@
       <ion-col col-6 col-md-4 col-xl-3>
         <div style="border:1px solid #eee;border-radius:0px">
           <div style="position:relative">
-            <img src="assets/desa06.jpg" style="height:100px;width:100%;object-fit:cover" />
+            <img src="assets/desa06.jpg" style="height:150px;width:100%;object-fit:cover" />
+            <div style="position:absolute;top:10px;left:0px;background:orangered;color:white;padding:3px;font-size:14px;font-weight:600">
+              30%
+            </div>
+            <div style="position:absolute;bottom:10px;right:0px;background:#444;color:white;padding:3px;font-size:14px;font-weight:600">
+              143 vendidos
+            </div>
+          </div>
+          <div style="padding:5px;width:100%;font-size:16px;color:#444">
+            Promoción en zapatos
+          </div>
+          <div style="border-top:0.5px dashed #eee;padding:5px;">
+            <div style="width:100%;display:flex;align-items:flex-end;justify-content:flex-end;font-size:15px">
+              <div style="color:orangered;font-weight:500;font-size:18px">
+                $1600
+              </div>
+              <div style=" text-decoration: line-through;color:#777;margin-left:10px">
+                $5000
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col col-6 col-md-4 col-xl-3>
+        <div style="border:1px solid #eee;border-radius:0px">
+          <div style="position:relative">
+            <img src="assets/desa06.jpg" style="height:150px;width:100%;object-fit:cover" />
+            <div style="position:absolute;top:10px;left:0px;background:orangered;color:white;padding:3px;font-size:14px;font-weight:600">
+              30%
+            </div>
+            <div style="position:absolute;bottom:10px;right:0px;background:#444;color:white;padding:3px;font-size:14px;font-weight:600">
+              143 vendidos
+            </div>
+          </div>
+          <div style="padding:5px;width:100%;font-size:16px;color:#444">
+            Promoción en zapatos
+          </div>
+          <div style="border-top:0.5px dashed #eee;padding:5px;">
+            <div style="width:100%;display:flex;align-items:flex-end;justify-content:flex-end;font-size:15px">
+              <div style="color:orangered;font-weight:500;font-size:18px">
+                $1600
+              </div>
+              <div style=" text-decoration: line-through;color:#777;margin-left:10px">
+                $5000
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col col-6 col-md-4 col-xl-3>
+        <div style="border:1px solid #eee;border-radius:0px">
+          <div style="position:relative">
+            <img src="assets/16.jpg" style="height:150px;width:100%;object-fit:cover" />
+            <div style="position:absolute;top:10px;left:0px;background:orangered;color:white;padding:3px;font-size:14px;font-weight:600">
+              30%
+            </div>
+          </div>
+          <div style="padding:5px;width:100%;font-size:16px;color:#444">
+            Promoción en zapatos finos A3...
+          </div>
+          <div style="border-top:0.5px dashed #eee;padding:5px;">
+            <div style="width:100%;display:flex;align-items:flex-end;justify-content:space-between;color:#40d1b0;font-size:13px;align-items:flex-end">
+              <div style="color:#333;font-weight:500;font-size:16px">
+                $1600
+              </div>
+              <div>
+                143 vendidos
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col col-6 col-md-4 col-xl-3>
+        <div style="border:1px solid #eee;border-radius:0px">
+          <div style="position:relative">
+            <img src="assets/06.jpg" style="height:150px;width:100%;object-fit:cover" />
+            <div style="position:absolute;top:10px;left:0px;background:orangered;color:white;padding:3px;font-size:14px;font-weight:600">
+              30%
+            </div>
+          </div>
+          <div style="padding:5px;width:100%;font-size:16px;color:#444">
+            Promoción en zapatos
+          </div>
+          <div style="border-top:0.5px dashed #eee;padding:5px;">
+            <div style="width:100%;display:flex;align-items:flex-end;justify-content:space-between;color:#40d1b0;font-size:13px;align-items:flex-end">
+              <div style="color:#333;font-weight:500;font-size:16px">
+                $1600
+              </div>
+              <div>
+                143 vendidos
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col col-6 col-md-4 col-xl-3>
+        <div style="border:1px solid #eee;border-radius:0px">
+          <div style="position:relative">
+            <img src="assets/18.jpg" style="height:150px;width:100%;object-fit:cover" />
+            <div style="position:absolute;top:10px;left:0px;background:orangered;color:white;padding:3px;font-size:14px;font-weight:600">
+              30%
+            </div>
+          </div>
+          <div style="padding:5px;width:100%;font-size:16px;color:#444">
+            Promoción en zapatos finos A3...
+          </div>
+          <div style="border-top:0.5px dashed #eee;padding:5px;">
+            <div style="width:100%;display:flex;align-items:flex-end;justify-content:space-between;color:#40d1b0;font-size:13px;align-items:flex-end">
+              <div style="color:#333;font-weight:500;font-size:16px">
+                $1600
+              </div>
+              <div>
+                143 vendidos
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col col-6 col-md-4 col-xl-3>
+        <div style="border:1px solid #eee;border-radius:0px">
+          <div style="position:relative">
+            <img src="assets/03.jpg" style="height:150px;width:100%;object-fit:cover" />
+            <div style="position:absolute;top:10px;left:0px;background:orangered;color:white;padding:3px;font-size:14px;font-weight:600">
+              30%
+            </div>
+          </div>
+          <div style="padding:5px;width:100%;font-size:16px;color:#444">
+            Promoción en zapatos
+          </div>
+          <div style="border-top:0.5px dashed #eee;padding:5px;">
+            <div style="width:100%;display:flex;align-items:flex-end;justify-content:space-between;color:#40d1b0;font-size:13px;align-items:flex-end">
+              <div style="color:#333;font-weight:500;font-size:16px">
+                $1600
+              </div>
+              <div>
+                143 vendidos
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col col-6 col-md-4 col-xl-3>
+        <div style="border:1px solid #eee;border-radius:0px">
+          <div style="position:relative">
+            <img src="assets/16.jpg" style="height:150px;width:100%;object-fit:cover" />
+            <div style="position:absolute;top:10px;left:0px;background:orangered;color:white;padding:3px;font-size:14px;font-weight:600">
+              30%
+            </div>
+          </div>
+          <div style="padding:5px;width:100%;font-size:16px;color:#444">
+            Promoción en zapatos finos A3...
+          </div>
+          <div style="border-top:0.5px dashed #eee;padding:5px;">
+            <div style="width:100%;display:flex;align-items:flex-end;justify-content:space-between;color:#40d1b0;font-size:13px;align-items:flex-end">
+              <div style="color:#333;font-weight:500;font-size:16px">
+                $1600
+              </div>
+              <div>
+                143 vendidos
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col col-6 col-md-4 col-xl-3>
+        <div style="border:1px solid #eee;border-radius:0px">
+          <div style="position:relative">
+            <img src="assets/desa06.jpg" style="height:150px;width:100%;object-fit:cover" />
+            <div style="position:absolute;top:10px;left:0px;background:orangered;color:white;padding:3px;font-size:14px;font-weight:600">
+              30%
+            </div>
+          </div>
+          <div style="padding:5px;width:100%;font-size:16px;color:#444">
+            Promoción en zapatos
+          </div>
+          <div style="border-top:0.5px dashed #eee;padding:5px;">
+            <div style="width:100%;display:flex;align-items:flex-end;justify-content:space-between;color:#40d1b0;font-size:13px;align-items:flex-end">
+              <div style="color:#333;font-weight:500;font-size:16px">
+                $1600
+              </div>
+              <div>
+                143 vendidos
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <ion-col col-6 col-md-4 col-xl-3>
+        <div style="border:1px solid #eee;border-radius:0px">
+          <div style="position:relative">
+            <img src="assets/16.jpg" style="height:150px;width:100%;object-fit:cover" />
+            <div style="position:absolute;top:10px;left:0px;background:orangered;color:white;padding:3px;font-size:14px;font-weight:600">
+              30%
+            </div>
+          </div>
+          <div style="padding:5px;width:100%;font-size:16px;color:#444">
+            Promoción en zapatos finos A3...
+          </div>
+          <div style="border-top:0.5px dashed #eee;padding:5px;">
+            <div style="width:100%;display:flex;align-items:flex-end;justify-content:space-between;color:#40d1b0;font-size:13px;align-items:flex-end">
+              <div style="color:#333;font-weight:500;font-size:16px">
+                $1600
+              </div>
+              <div>
+                143 vendidos
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <!-- <ion-col col-6 col-md-4 col-xl-3>
+        <div style="border:1px solid #eee;border-radius:0px">
+          <div style="position:relative">
+            <img src="assets/desa06.jpg" style="height:150px;width:100%;object-fit:cover" />
             <div style="position:absolute;top:10px;left:0px;background:orangered;color:white;padding:3px;font-size:14px;font-weight:600">
               30%
             </div>
@@ -87,36 +372,9 @@
             </div>
           </div>
         </div>
-      </ion-col>
-      <ion-col col-6 col-md-4 col-xl-3>
-        <ion-card>
-          <div style="position:relative">
-            <img src="assets/desa06.jpg" />
-            <div style="position:absolute;top:10px;left:0px;background:orangered;color:white;padding:3px;font-size:14px;font-weight:600">
-              30%
-            </div>
-          </div>
-          <div style="padding:5px;padding-bottom:0px;width:100%;font-size:16px;font-weight:600;color:#222">
-            Promoción en zapatos
-          </div>
-          <div style="text-align:right;color:#40d1b0;font-size:13px;padding:3px">
-            143 vendidos
-          </div>
-          <div style="border-top:2px dashed #ccc;padding:5px;width:100%;display:flex;justify-content:space-between">
-            <div style="display:flex;align-items:center">
-              <img src="assets/03.jpg" style="height:20px;width:20px;border-radius:50%">
-              <div style="margin-left:3px;font-size:12px;color:#222">
-                Tienda St...
-              </div>
-            </div>
-            <div style="color:#444">
-              23
-              <ion-icon name="ios-thumbs-up-outline" style="font-size:20px;color:#bbb"></ion-icon>
-            </div>
-          </div>
-        </ion-card>
-      </ion-col>
-      <ion-col col-6 col-md-4 col-xl-3>
+      </ion-col> -->
+
+      <!-- <ion-col col-6 col-md-4 col-xl-3>
         <div style="background-image: linear-gradient(to right, #ff5b9d, #ffad68);position:relative;width:100%;height:100px;border-radius:8px">
           <div style="font-size:20px;font-weight:600;position:absolute;bottom:60px;left:15px;color:white">
             100
@@ -134,7 +392,7 @@
           <div style="position:absolute;bottom:20px;right:-8px;width:16px;height:16px;border-radius:50%;background:white">
           </div>
         </div>
-      </ion-col>
+      </ion-col> -->
     </ion-row>
   </ion-grid>
 </ion-content>
