@@ -8,7 +8,6 @@ import {
 import { SubirProvider } from "../../providers/subir/subir";
 import { AuthProvider } from "../../providers/auth/auth";
 import { take } from "rxjs/operators";
-import { FiltrosPage } from "../filtros/filtros";
 import { BrowserProvider } from "../../providers/browser/browser";
 
 @IonicPage()
@@ -31,23 +30,16 @@ export class PublicacionesPage {
   ) {
     // this.fetchOutfits();
   }
-  // ionViewDidEnter() {
-  //   let options = this._browser.get();
-  //   this.mostrar = options[0];
-  //   this.ordenar = options[1];
-  //   console.log("aca", options);
-  // }
   openFiltros() {
-    // this.navCtrl.push(FiltrosPage);
-    let modal = this.modalCtrl.create(FiltrosPage);
-    modal.present();
-    modal.onDidDismiss(data => {
-      console.log(data);
-      if (data.mostrar && data.ordernar) {
-        this.mostrar = data.mostrar;
-        this.ordenar = data.ordenar;
-      }
-    });
+    // let modal = this.modalCtrl.create(FiltrosPage);
+    // modal.present();
+    // modal.onDidDismiss(data => {
+    //   console.log(data);
+    //   if (data.mostrar && data.ordernar) {
+    //     this.mostrar = data.mostrar;
+    //     this.ordenar = data.ordenar;
+    //   }
+    // });
   }
   hola() {
     console.log(this.outfits);

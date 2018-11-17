@@ -1,15 +1,17 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
-import { NavController, Slides, Content } from "ionic-angular";
+import { IonicPage, NavController, Slides, Content } from "ionic-angular";
 import { ProductoPage } from "../index.pages";
 import { SubirProvider } from "../../providers/subir/subir";
 import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs/Subject";
+import { OutfitProvider } from "../../providers/outfit/outfit";
 
+@IonicPage()
 @Component({
-  selector: "page-rooms",
-  templateUrl: "rooms.html"
+  selector: "page-packs",
+  templateUrl: "packs.html"
 })
-export class RoomsPage {
+export class PacksPage {
   @ViewChild("slider")
   slider: Slides;
   @ViewChild(Content)
@@ -25,7 +27,7 @@ export class RoomsPage {
   outfits = [];
   swipeLenght = [
     "0",
-    "70",
+    "30",
     "160",
     "260",
     "360",
@@ -38,25 +40,21 @@ export class RoomsPage {
   ];
   categorias = [
     "Destacado",
-    "Dormitorio",
-    "Living",
-    "Cosina",
-    "Zona de trabajo",
-    "Baño",
-    "Infantil",
-    "Vintage",
-    "Eventos"
+    "Desayunos",
+    "Cajitas surtidas",
+    "Desayunos sorpresa",
+    "Panadería artesanal",
+    "Kit de ingredientes",
+    "Heladería & cafetería"
   ];
   toQuery = [
-    "room-destacados",
-    "dormitorio",
-    "living",
-    "cosina",
-    "zona_de_trabajo",
-    "bano",
-    "infantil",
-    "vintage",
-    "nose"
+    "destacados",
+    "desayunos",
+    "cajitas_surtidas",
+    "desayunos_sorpresa",
+    "panaderia_artesanal",
+    "kit_ingredientes",
+    "helados_cafes"
   ];
   orden = "";
   index = 0;
@@ -64,19 +62,19 @@ export class RoomsPage {
   bestSellers = [];
   novedad = [];
   recientes = [];
-  destacados = [];
+  products = [];
 
   dispatcher = new Subject<boolean>();
 
-  constructor(public navCtrl: NavController, private _subir: SubirProvider) {
+  constructor(public navCtrl: NavController, private _outfit: OutfitProvider) {
     this.fetch(0);
   }
   fetch(idx) {
     console.log(this.categorias[idx]);
-    this.destacados = [];
+    this.products = [];
     this.recientes = [];
     if (idx === 0) {
-      this.queryDestacado(this.toQuery[idx], "destacado");
+      this.queryDestacado(this.toQuery[idx], "likes");
       // this.queryReciente(this.toQuery[idx], "novedad");
     } else {
       this.dispatcher.next();
@@ -85,23 +83,23 @@ export class RoomsPage {
     }
   }
   queryDestacado(categoria, orden) {
-    this._subir
+    this._outfit
       .getOutfits(categoria, orden)
       .pipe(takeUntil(this.dispatcher))
       .subscribe(x => {
-        this.destacados = x;
+        this.products = x;
       });
   }
   queryReciente(categoria, orden) {
-    this._subir
+    this._outfit
       .getOutfits(categoria, orden)
       .pipe(takeUntil(this.dispatcher))
       .subscribe(x => {
         this.recientes = x;
       });
   }
-  openOutfit(outfit) {
-    this.navCtrl.push(ProductoPage, outfit);
+  openProduct(product) {
+    this.navCtrl.push(ProductoPage, product);
   }
   handleStart(ev, idx) {
     this.startingX = ev.touches[0].pageX;

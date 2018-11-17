@@ -5,8 +5,6 @@ import {
   NavController,
   NavParams
 } from "ionic-angular";
-import { SubproductoPage } from "../subproducto/subproducto";
-import { ReviewPage } from "../review/review";
 import { AuthProvider } from "../../providers/auth/auth";
 import { Observable } from "rxjs";
 import { LikeComentProvider } from "../../providers/like-coment/like-coment";
@@ -73,14 +71,5 @@ export class ProductoPage {
       this.message,
       this._auth.authData
     );
-  }
-  openProduct(product) {
-    this.navCtrl.push(SubproductoPage, product);
-  }
-  openPage(id, prenda) {
-    this.navCtrl.push(SubproductoPage, { id, prenda });
-  }
-  openModal() {
-    this.modalCtrl.create(ReviewPage).present();
   }
 }

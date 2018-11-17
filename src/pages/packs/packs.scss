@@ -1,0 +1,16 @@
+page-packs {
+  .flex {
+    display: flex;
+    justify-content: center;
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-bottom: 6px;
+    padding-top: 6px;
+    font-size: 16px;
+  }
+  .select {
+    border-bottom: 3px solid white;
+    color: white;
+    font-weight: 520;
+  }
+}
