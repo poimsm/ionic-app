@@ -26,7 +26,6 @@ import {
   CestaPage,
   DirectionPage,
   NewServicePage,
-  ComboPage,
   CuponPage,
   CabanaPage
 } from "../pages/index.pages";
@@ -35,38 +34,6 @@ import {
   templateUrl: "app.html"
 })
 export class MyApp {
-  outfitCategories = [
-    "Pan",
-    "Pan gourmet",
-    "Desayunos",
-    "Cafetería",
-    "Carteras y bolsos",
-    "Zapatos"
-  ];
-  outfitToQuery = [
-    "moda",
-    "blusa",
-    "bebe_ninos",
-    "pantalones",
-    "carteras_bolsos",
-    "zapatos"
-  ];
-  homeCategories = [
-    "Ropa de cama",
-    "Ropa de cama infantil",
-    "Dormitorio",
-    "Cosina",
-    "Living",
-    "Baño"
-  ];
-  homeToQuery = [
-    "ropa_de_cama",
-    "ropa_de_cama_infantil",
-    "prod_dormitorio",
-    "cosina",
-    "living",
-    "bano"
-  ];
 
   @ViewChild("content")
   nav: NavController;
@@ -97,7 +64,6 @@ export class MyApp {
   guardado = GuardadoPage;
   pedidos = PedidosPage;
 
-  crearCombo = ComboPage;
   crearBlog = NewBlogPage;
   crearProducto = NewProductPage;
   crearServicio = NewServicePage;

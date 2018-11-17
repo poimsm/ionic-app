@@ -18,7 +18,6 @@ import {
   CestaPage,
   DirectionPage,
   NewServicePage,
-  ComboPage,
   CuponPage,
   CabanaPage,
   ExplorarPage
@@ -41,7 +40,6 @@ export class HomePage {
   guardado = GuardadoPage;
   pedidos = PedidosPage;
 
-  crearCombo = ComboPage;
   crearProducto = NewProductPage;
   crearServicio = NewServicePage;
   crearTienda = NuevaTiendaPage;
