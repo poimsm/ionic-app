@@ -50,18 +50,12 @@ import {
   PacksPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
-import { BrowserProvider } from "../providers/browser/browser";
 import { DataProvider } from "../providers/data/data";
 import { UserProvider } from "../providers/user/user";
 import { AuthProvider } from "../providers/auth/auth";
 import { SubirProvider } from "../providers/subir/subir";
-import { BlogProvider } from "../providers/blog/blog";
-import { FollowProvider } from "../providers/follow/follow";
-import { MarketProvider } from "../providers/market/market";
-import { OutfitProvider } from "../providers/outfit/outfit";
 import { ProductProvider } from "../providers/product/product";
 import { LikeComentProvider } from "../providers/like-coment/like-coment";
-import { NotificationProvider } from "../providers/notification/notification";
 import { BasketProvider } from "../providers/basket/basket";
 import { HttpClientModule } from "@angular/common/http";
 
@@ -127,7 +121,6 @@ import { HttpClientModule } from "@angular/common/http";
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    BrowserProvider,
     AngularFireDatabase,
     DataProvider,
     ImagePicker,
@@ -136,13 +129,8 @@ import { HttpClientModule } from "@angular/common/http";
     Camera,
     AuthProvider,
     SubirProvider,
-    BlogProvider,
-    FollowProvider,
-    MarketProvider,
-    OutfitProvider,
     ProductProvider,
     LikeComentProvider,
-    NotificationProvider,
     BasketProvider
   ]
 })

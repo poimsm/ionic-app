@@ -4,7 +4,6 @@ import { ProductoPage } from "../index.pages";
 import { SubirProvider } from "../../providers/subir/subir";
 import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs/Subject";
-import { OutfitProvider } from "../../providers/outfit/outfit";
 
 @IonicPage()
 @Component({
@@ -74,7 +73,7 @@ export class PedidosPage {
 
   dispatcher = new Subject<boolean>();
 
-  constructor(public navCtrl: NavController, private _outfit: OutfitProvider) {
+  constructor(public navCtrl: NavController) {
     this.fetch(0);
   }
   fetch(idx) {
@@ -91,20 +90,20 @@ export class PedidosPage {
     }
   }
   queryDestacado(categoria, orden) {
-    this._outfit
-      .getOutfits(categoria, orden)
-      .pipe(takeUntil(this.dispatcher))
-      .subscribe(x => {
-        this.products = x;
-      });
+    // this._outfit
+    //   .getOutfits(categoria, orden)
+    //   .pipe(takeUntil(this.dispatcher))
+    //   .subscribe(x => {
+    //     this.products = x;
+    //   });
   }
   queryReciente(categoria, orden) {
-    this._outfit
-      .getOutfits(categoria, orden)
-      .pipe(takeUntil(this.dispatcher))
-      .subscribe(x => {
-        this.recientes = x;
-      });
+    // this._outfit
+    //   .getOutfits(categoria, orden)
+    //   .pipe(takeUntil(this.dispatcher))
+    //   .subscribe(x => {
+    //     this.recientes = x;
+    //   });
   }
   openProduct(product) {
     this.navCtrl.push(ProductoPage, product);

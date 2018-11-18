@@ -8,7 +8,6 @@ import {
 import { SubirProvider } from "../../providers/subir/subir";
 import { AuthProvider } from "../../providers/auth/auth";
 import { take } from "rxjs/operators";
-import { BrowserProvider } from "../../providers/browser/browser";
 
 @IonicPage()
 @Component({
@@ -26,7 +25,6 @@ export class PublicacionesPage {
     private _auth: AuthProvider,
     private _subir: SubirProvider,
     private modalCtrl: ModalController,
-    private _browser: BrowserProvider
   ) {
     // this.fetchOutfits();
   }

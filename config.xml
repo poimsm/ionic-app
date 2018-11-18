@@ -89,6 +89,6 @@
         <variable name="APP_NAME" value="joopiter" />
     </plugin>
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
-    <engine name="android" spec="6.4.0" />
     <plugin name="cordova-sqlite-storage" spec="^2.3.3" />
+    <engine name="android" spec="6.4.0" />
 </widget>
