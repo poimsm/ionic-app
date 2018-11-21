@@ -1,3 +1,4 @@
+export { MesPage } from './mes/mes';
 export { PacksPage } from "./packs/packs";
 export { CalendarioPage } from "./calendario/calendario";
 export { ExplorarContentPage } from "./explorar-content/explorar-content";

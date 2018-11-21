@@ -27,8 +27,9 @@ export class ExplorarContentPage {
   ) {}
 
   openCalendar() {
-    const modal = this.modalCtrl.create(CalendarioPage);
-    modal.present();
+    this.navCtrl.push(CalendarioPage);
+    // const modal = this.modalCtrl.create(CalendarioPage);
+    // modal.present();
   }
 
   ionViewDidLoad() {

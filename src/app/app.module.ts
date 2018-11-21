@@ -47,7 +47,8 @@ import {
   ExplorarPage,
   ExplorarContentPage,
   CalendarioPage,
-  PacksPage
+  PacksPage,
+  MesPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -80,7 +81,8 @@ import { HttpClientModule } from "@angular/common/http";
     ExplorarPage,
     ExplorarContentPage,
     CalendarioPage,
-    PacksPage
+    PacksPage,
+    MesPage
   ],
   imports: [
     BrowserModule,
@@ -115,7 +117,8 @@ import { HttpClientModule } from "@angular/common/http";
     ExplorarPage,
     ExplorarContentPage,
     CalendarioPage,
-    PacksPage
+    PacksPage,
+    MesPage
   ],
   providers: [
     StatusBar,
