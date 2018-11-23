@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let month of calendar">
+  <div *ngFor="let month of (calendar | async); let i = index">
     <div class="month">{{ month.month }}</div>
     <div class="days">
       <div>Lu</div>
@@ -27,9 +27,9 @@
     <div class="week" *ngFor="let week of month.weeks">
       <div
         class="day"
-        *ngFor="let day of week.days; let i = index"
+        *ngFor="let day of week.days"
         [class.active]="day.isActive"
-        (click)="select(month.month, day, i)"
+        (click)="select(i, day)"
       >
         {{ day.num }}
       </div>

@@ -1,3 +1,55 @@
 page-calendario {
-
+  .holder {
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    justify-content: flex-start;
+  }
+  .box {
+    padding: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 5px;
+    font-size: 18px;
+    color: #555;
+    font-weight: 430;
+  }
+  .active {
+    background: #40cead;
+    color: white;
+  }
+  .bullet-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .bullet-1 {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background: orange;
+  }
+  .bullet-2 {
+    margin-left: 5px;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background: orangered;
+  }
+  .radio {
+    font-size: 19px;
+    color: #555;
+  }
+  .radio-active {
+    font-size: 20px;
+    color: #488aff;
+  }
+  .desc {
+    background: orangered;
+    font-weight: 500;
+    font-size: 14px;
+    color: white;
+    border-radius: 10px;
+    padding: 4px;
+  }
 }

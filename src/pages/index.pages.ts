@@ -1,3 +1,4 @@
+export { ServiceCalendarPage } from './service-calendar/service-calendar';
 export { MesPage } from './mes/mes';
 export { PacksPage } from "./packs/packs";
 export { CalendarioPage } from "./calendario/calendario";

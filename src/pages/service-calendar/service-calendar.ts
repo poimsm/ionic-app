@@ -1,41 +1,36 @@
 import { Component } from "@angular/core";
+import { Observable } from "rxjs/Observable";
+import { Observer } from "rxjs/Observer";
 import {
   IonicPage,
   NavController,
   NavParams,
   ViewController
 } from "ionic-angular";
+import { ObserveOnOperator } from "rxjs/internal/operators/observeOn";
 
 @IonicPage()
 @Component({
-  selector: "page-mes",
-  templateUrl: "mes.html"
+  selector: "page-service-calendar",
+  templateUrl: "service-calendar.html"
 })
-export class MesPage {
-  calendarDB = [
-    {
-      month: "Diciembre",
-      activeDays: [6, 23, 24, 25, 26, 27, 28, 29, 30, 35, 36],
-      days: [6, 31]
-    },
-    {
-      month: "Enero",
-      activeDays: [2, 19, 22, 23, 26, 32],
-      days: [2, 31]
-    },
-    {
-      month: "Febrero",
-      activeDays: [5, 19, 22, 23, 26, 32],
-      days: [5, 28]
-    }
-  ];
-  calendar = [];
+export class ServiceCalendarPage {
+  calendarDB = [];
 
+  calendar = new Observable<any>();
+  calendarData = [];
   constructor(
     public viewCtrl: ViewController,
     public navCtrl: NavController,
     public navParams: NavParams
   ) {
+    this.calendarDB = this.navParams.get("calendar");
+    this.updateDays();
+  }
+
+  updateDays() {
+    this.calendarData = [];
+    const builder = [];
     for (let j = 0; j <= this.calendarDB.length - 1; j++) {
       const start = this.calendarDB[j].days[0];
       const length = this.calendarDB[j].days[1] + start;
@@ -67,40 +62,30 @@ export class MesPage {
           days.push({ isActive: false, num: (i + 1 - start).toString() });
         }
       }
-      this.calendar.push({
+      builder.push({
         month: this.calendarDB[j].month,
         weeks: weeks
       });
     }
+    this.calendar = new Observable(data => {
+      data.next(builder);
+    });
   }
 
   close() {
-    this.viewCtrl.dismiss();
+    this.viewCtrl.dismiss({ calendar: this.calendarDB });
   }
 
-  select(month, day, index) {
-    const fiveDays = [];
-    const target = Number(day.num);
-    console.log(day.num);
+  select(i, day) {
+    const target = Number(day.num) + this.calendarDB[i].days[0] - 1;
+
     if (day.isActive) {
-      if (target - 1 < this.calendarDB[0].days[0]) {
-        fiveDays.push(this.calendarDB[0].days[1] - 1);
-        fiveDays.push(this.calendarDB[0].days[1] - 0);
-        fiveDays.push(target);
-        fiveDays.push(target + 1);
-        fiveDays.push(target + 2);
-      } else if (target + 1 > this.calendarDB[1].days[1]) {
-        fiveDays.push(target - 2);
-        fiveDays.push(target - 1);
-        fiveDays.push(target);
-        fiveDays.push(1);
-        fiveDays.push(2);
-      } else {
-        for (let i = target - 2; i <= target + 2; i++) {
-          fiveDays.push(i);
-        }
-      }
-      this.viewCtrl.dismiss({ fiveDays, index });
+      const index = this.calendarDB[i].activeDays.indexOf(target);
+      this.calendarDB[i].activeDays.splice(index, 1);
+    } else {
+      this.calendarDB[i].activeDays.push(target);
     }
+
+    this.updateDays();
   }
 }

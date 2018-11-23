@@ -7,11 +7,13 @@ import {
   AlertController,
   ActionSheetController,
   PopoverController,
-  Content
+  Content,
+  ModalController
 } from "ionic-angular";
 import { AuthProvider } from "../../providers/auth/auth";
 import { ProductProvider } from "../../providers/product/product";
 import { PopCategoriasPage } from "../pop-categorias/pop-categorias";
+import { ServiceCalendarPage } from "../service-calendar/service-calendar";
 
 @IonicPage()
 @Component({
@@ -59,7 +61,25 @@ export class NewServicePage {
   go =
     "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
 
+  calendarDB = [
+    {
+      month: "Diciembre",
+      activeDays: [],
+      days: [6, 31]
+    },
+    {
+      month: "Enero",
+      activeDays: [],
+      days: [2, 31]
+    },
+    {
+      month: "Febrero",
+      activeDays: [],
+      days: [5, 28]
+    }
+  ];
   constructor(
+    public modalCtrl: ModalController,
     public alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
     private navParams: NavParams,
@@ -71,18 +91,26 @@ export class NewServicePage {
   ) {
     // this.fetchCollections();
   }
+  openMes() {
+    const modal = this.modalCtrl.create(ServiceCalendarPage, {
+      calendar: this.calendarDB
+    });
+    modal.onDidDismiss(data => {
+      this.calendarDB = data.calendar;
+    });
+    modal.present();
+  }
   presentPopover(myEvent, type) {
     let lista = {};
     if (type == "MODO") {
       lista = {
         0: "Evento",
-        1: "Servicio diario",
-        2: "Actividad de 2 o más días"
+        1: "Servicio"
       };
     } else if (type == "LISTA") {
       lista = {
-        0: "Una selección",
-        1: "Multiples selecciones"
+        0: "Seleccione una opción",
+        1: "Multiples opciones"
       };
     }
 

@@ -1,69 +1,25 @@
 <ion-header no-border>
   <ion-navbar align-title="center" color="white">
-    <!--
-      <ion-buttons left>
-        <button ion-button icon-only (click)="close()">
-          <ion-icon name="md-close"></ion-icon>
-        </button>
-      </ion-buttons>
-    -->
     <ion-title> Paseo a bordo catamarán Marqués de Mancera </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <button ion-item text-wrap no-lines (click)="openMes()">
-    <div
-      style="width:100%;padding:15px;display:flex;justify-content:flex-start"
-    >
+    <div class="holder">
       <div
-        style="padding:7px;padding-left:10px;padding-right:10px;margin-right:5px"
+        class="box"
+        *ngFor="let day of fiveDays; let i = index"
+        [class.active]="i == 2"
       >
-        <div style="font-size:18px;color:#555;font-weight:430">Lun</div>
-      </div>
-      <div
-        style="padding:7px;padding-left:10px;padding-right:10px;margin-right:5px"
-      >
-        <div style="font-size:18px;color:#555;font-weight:430">Mar</div>
-      </div>
-      <div
-        style="padding:7px;padding-left:10px;padding-right:10px;margin-right:5px;background:#40cead"
-      >
-        <div style="font-size:18px;color:#fff;font-weight:430">Mié</div>
-        <div style="width:100%;display:flex;justify-content:center">
-          <div
-            style="height:8px;width:8px;border-radius:50%;background:orange"
-          ></div>
-        </div>
-      </div>
-      <div
-        style="padding:7px;padding-left:10px;padding-right:10px;margin-right:5px"
-      >
-        <div style="font-size:18px;color:#555;font-weight:500">Jue</div>
-        <div style="width:100%;display:flex;justify-content:center">
-          <div
-            style="height:8px;width:8px;border-radius:50%;background:orange"
-          ></div>
-          <div
-            style="margin-left:5px;height:8px;width:8px;border-radius:50%;background:orangered"
-          ></div>
-        </div>
-      </div>
-      <div
-        style="padding:7px;padding-left:10px;padding-right:10px;margin-right:5px"
-      >
-        <div style="font-size:18px;color:#555;font-weight:430">Vie</div>
-        <div style="width:100%;display:flex;justify-content:center">
-          <div
-            style="height:8px;width:8px;border-radius:50%;background:orange"
-          ></div>
-          <div
-            style="margin-left:5px;height:8px;width:8px;border-radius:50%;background:orangered"
-          ></div>
+        {{ day.day }}
+        <div>{{ day.num }}</div>
+        <div class="bullet-box">
+          <div class="bullet-1"></div>
+          <!-- <div class="bullet-2"></div> -->
         </div>
       </div>
     </div>
-
     <ion-icon
       name="ios-arrow-forward"
       style="color:#777;font-size:16px"
@@ -71,32 +27,64 @@
     ></ion-icon>
   </button>
 
+  <!--
+    <button ion-item text-wrap no-lines (click)="openMes()">
+      <div class="holder">
+        <div class="box">
+          Lun
+          <div>25</div>
+        </div>
+        <div class="box">
+          Mar
+          <div>25</div>
+        </div>
+        <div class="box active">
+          Mié
+          <div>25</div>
+          <div class="bullet-box"><div class="bullet-1"></div></div>
+        </div>
+        <div class="box">
+          Jue
+          <div>25</div>
+          <div class="bullet-box">
+            <div class="bullet-1"></div>
+            <div class="bullet-2"></div>
+          </div>
+        </div>
+        <div class="box">
+          Vie
+          <div>25</div>
+          <div class="bullet-box">
+            <div class="bullet-1"></div>
+            <div class="bullet-2"></div>
+          </div>
+        </div>
+      </div>
+
+      <ion-icon
+        name="ios-arrow-forward"
+        style="color:#777;font-size:16px"
+        item-end
+      ></ion-icon>
+    </button>
+  -->
+
   <ion-list>
     <button ion-item>
-      <div
-        item-start
-        style="height:15px;width:15px;border-radius:50%;border:1px solid #333"
-      ></div>
+      <ion-icon item-start name="md-radio-button-off" class="radio"></ion-icon>
       <div style="font-size:18px;color:#555">Comienza a las 18:15 hrs</div>
     </button>
     <button ion-item>
-      <div
-        item-start
-        style="height:15px;width:15px;border-radius:50%;border:1px solid #333"
-      ></div>
-      <div
-        item-start
-        style="background:orangered;font-weight:500;font-size:14px;color:white;border-radius:10px;padding:4px"
-      >
-        15% desc.
-      </div>
+      <ion-icon item-start name="md-radio-button-off" class="radio"></ion-icon>
+      <div item-start class="desc">15% desc</div>
       <div style="font-size:18px;color:#555">19:15 hrs</div>
     </button>
     <button ion-item>
-      <div
+      <ion-icon
         item-start
-        style="height:15px;width:15px;border-radius:50%;border:1px solid #333"
-      ></div>
+        name="md-radio-button-on"
+        class="radio-active"
+      ></ion-icon>
       <div style="font-size:18px;color:#555">Comienza a las 20:30 hrs</div>
     </button>
   </ion-list>
@@ -140,15 +128,4 @@
       <div style="font-size:16px;font-weight:500;">Comprar</div>
     </button>
   </div>
-
-  <!--
-    <div
-      style="padding:4px;width:100%;background:#fff;display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap"
-    >
-      <div style="color:#333;font-size:20px;padding:5px">$50 000</div>
-      <button ion-button color="danger" style="text-transform: none">
-        <div style="font-size:16px;font-weight:500;">Comprar ticket</div>
-      </button>
-    </div>
-  -->
 </ion-footer>

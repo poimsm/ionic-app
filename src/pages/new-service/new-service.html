@@ -468,7 +468,7 @@
       </ion-list>
 
       <div (click)="presentPopover($event, 'MODO')" style="margin-bottom:15px;padding:4px;background:dodgerblue;width:100%;text-align:center;color:white;font-weight:600;font-size:16px">
-        Añadir modalidad
+        Modalidad
         <ion-icon name="md-arrow-dropdown" style="color:white;margin-left:5px"></ion-icon>
       </div>
 
@@ -492,9 +492,14 @@
       </ion-list>
 
       <div (click)="presentPopover($event, 'LISTA')" style="margin-top:0px;padding:4px;background:dodgerblue;width:100%;text-align:center;color:white;font-weight:600;font-size:16px">
-        Añadir opciones
+        Añadir elecciones
         <ion-icon name="md-arrow-dropdown" style="color:white;margin-left:5px"></ion-icon>
       </div>
+
+      <div (click)="openMes()" style="margin-top:15px;padding:4px;background:dodgerblue;width:100%;text-align:center;color:white;font-weight:600;font-size:16px">
+          Calendario
+          <ion-icon name="md-arrow-dropdown" style="color:white;margin-left:5px"></ion-icon>
+        </div>
 
       <!-- <div style="padding:15px;padding-top:0px">
         <button color="orange1" ion-button block outline small (click)="presentPopover($event, 'LISTA')">
