@@ -1,5 +1,10 @@
-export { ServiceCalendarPage } from './service-calendar/service-calendar';
-export { MesPage } from './mes/mes';
+export { InfoPage } from './info/info';
+export { OrdersContentPage } from './orders-content/orders-content';
+export { OrdersPage } from './orders/orders';
+export { StoreApplyPage } from "./store-apply/store-apply";
+export { ShopperApplyPage } from "./shopper-apply/shopper-apply";
+export { ServiceCalendarPage } from "./service-calendar/service-calendar";
+export { MesPage } from "./mes/mes";
 export { PacksPage } from "./packs/packs";
 export { CalendarioPage } from "./calendario/calendario";
 export { ExplorarContentPage } from "./explorar-content/explorar-content";

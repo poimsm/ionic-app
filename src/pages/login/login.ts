@@ -6,8 +6,6 @@ import { HomePage } from "../../pages/home/home";
 import { Platform } from "ionic-angular";
 import { Facebook } from "@ionic-native/facebook";
 import { AuthProvider } from "../../providers/auth/auth";
-// import { HttpClient, Headers } from "@angular/common/http";
-
 
 @IonicPage()
 @Component({
@@ -23,7 +21,6 @@ export class LoginPage {
     private fb: Facebook,
     private platform: Platform,
     public appCtrl: App
-    // public http: HttpClient
   ) {}
 
   signInWithFacebook() {
@@ -51,20 +48,11 @@ export class LoginPage {
     } else {
       this.afAuth.auth
         .signInWithPopup(new firebase.auth.FacebookAuthProvider())
-        .then(res => {
-          const user = res.user;
-          console.log("Full user", user);
-
-          const authData = {
-            name: user.displayName,
-            userId: user.uid,
-            userImg: user.photoURL,
-            provider: "facebook"
-          };
-          this._auth.login(authData);
+        .then((res: any) => {
+          const access_token = res.credential.accessToken;
+          this._auth.login(access_token);
           this.appCtrl.getRootNav().setRoot(HomePage);
         });
     }
   }
-
 }

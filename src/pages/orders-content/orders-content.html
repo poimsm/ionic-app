@@ -1,0 +1,75 @@
+<ion-header no-border>
+  <ion-navbar color="white" align-title="center">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button mode="ios" (click)="accept()" ion-button small outline>
+        Aceptar
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-divider color="light" style="font-weight:600;color:#555"
+      >CLIENTE
+    </ion-item-divider>
+    <ion-item>
+      <ion-icon
+        item-start
+        name="md-person"
+        style="margin-right:5px;color:#bbb;font-size:22px"
+      ></ion-icon>
+      Oscar Garcia
+    </ion-item>
+    <ion-item>
+      <ion-icon
+        item-start
+        name="md-call"
+        style="margin-right:5px;color:#bbb;font-size:22px"
+      ></ion-icon>
+      9 8480 9482
+    </ion-item>
+    <ion-item>
+      <ion-icon
+        item-start
+        name="md-pin"
+        style="margin-right:5px;color:#bbb;font-size:22px"
+      ></ion-icon>
+      Simon Bolivar 802
+    </ion-item>
+    <ion-item-divider color="light" style="font-weight:600;color:#555"
+      >LOCAL
+    </ion-item-divider>
+
+    <ion-item>
+      <ion-icon
+        item-start
+        name="md-pizza"
+        style="margin-right:5px;color:#bbb;font-size:22px"
+      ></ion-icon>
+      1X completo azul
+    </ion-item>
+    <ion-item>
+      <div
+        item-start
+        style="width:40px;padding-left:8px;font-size:18px;color:#bbb;font-weight:600"
+      >
+        $
+      </div>
+      6900
+    </ion-item>
+    <ion-item>
+      <ion-icon
+        item-start
+        name="md-pin"
+        style="margin-right:5px;color:#bbb;font-size:22px"
+      ></ion-icon>
+      Av. Ramon Picarte 1202
+    </ion-item>
+  </ion-list>
+</ion-content>

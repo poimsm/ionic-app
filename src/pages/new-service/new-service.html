@@ -9,8 +9,8 @@
       {{titulo | placeHolder:'Nuevo producto'}}
     </ion-title>
     <ion-buttons right>
-      <button mode="ios" (click)="save()" ion-button small>
-        Vista previa
+      <button mode="ios" outline (click)="save()" ion-button small>
+        Crear
       </button>
       <!-- <button ion-button>
         <ion-icon name="ios-eye" style="font-size:28px;color:#bbb"></ion-icon>
@@ -37,43 +37,7 @@
 
   <div [ngSwitch]="type">
 
-    <div *ngSwitchCase="'carta'">
-      <ion-list>
-        <ion-item>
-          <ion-input [(ngModel)]="titulo" type="text" placeholder="Título"></ion-input>
-        </ion-item>
-        <ion-item>
-          <div item-start>
-            <div style="background:#fff;padding:5px;padding-right:30px;border-right:1px solid #bbb;color:#777;font-weight:600">
-              $
-            </div>
-          </div>
-          <ion-input [(ngModel)]="precio" type="number" placeholder="Precio"></ion-input>
-        </ion-item>
-      </ion-list>
-
-      <ion-item no-lines>
-        <ion-label style="color:#6c757d">Colección</ion-label>
-        <ion-select [(ngModel)]="coleccion">
-          <div *ngFor="let collection of collections">
-            <ion-option [value]="collection.id">
-              {{collection.title}} ({{collection.itemsIn}})
-            </ion-option>
-          </div>
-        </ion-select>
-      </ion-item>
-
-      <div padding center>
-        <button mode="md" ion-button block outline color="primary" (click)="newCollection()" style="text-transform: none">
-          <div style="font-size:16px;font-weight:600;color:#488aff">
-            + Añadir Una Colección
-          </div>
-        </button>
-      </div>
-    </div>
-
     <div *ngSwitchCase="'combo'">
-
 
       <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
       <button ion-button (click)="fileInput.click()">Seleccionar</button>
@@ -140,54 +104,12 @@
       </ion-list>
 
 
-      <div padding style="font-size:16px;font-weight:600;color:#488aff">
-        + Agrear Lista
-      </div>
-
-      <button (click)="addList('A')" ion-button icon-only clear>
-        <div style="padding:8px">
-          <div style="width:35px;display:flex;justify-content:center;flex-wrap:wrap;align-items:center">
-            <div style="height:10px;width:10px;border:2px solid #777;margin-right:5px;border-radius:50%">
-            </div>
-            <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px" [ngStyle]="{'background': center ? 'dodgerblue' : '#777' }">
-            </div>
-
-            <div style="margin-top:2px;height:10px;width:10px;border:2px solid #777;margin-right:5px;border-radius:50%">
-            </div>
-            <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px" [ngStyle]="{'background': center ? 'dodgerblue' : '#777' }">
-            </div>
-
-            <div style="margin-top:2px;height:10px;width:10px;border:2px solid #777;margin-right:5px;border-radius:50%">
-            </div>
-            <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px" [ngStyle]="{'background': center ? 'dodgerblue' : '#777' }">
-            </div>
-          </div>
-        </div>
-      </button>
-
-      <button (click)="addList('B')" ion-button icon-only clear>
-        <div style="padding:8px">
-          <div style="width:35px;display:flex;justify-content:center;flex-wrap:wrap;align-items:center">
-            <div style="height:10px;width:10px;border:2px solid #777;margin-right:5px">
-            </div>
-            <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px;background:#777">
-            </div>
-
-            <div style="margin-top:2px;height:10px;width:10px;border:2px solid #777;margin-right:5px">
-            </div>
-            <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px;background:#777">
-            </div>
-
-            <div style="margin-top:2px;height:10px;width:10px;border:2px solid #777;margin-right:5px">
-            </div>
-            <div style="border-radius:0.5px;margin-top:2px;width:20px;height:3px;background:#777">
-            </div>
-          </div>
-        </div>
-      </button>
+      <div (click)="presentPopover($event, 'LISTA')" style="margin-top:0px;padding:4px;background:dodgerblue;width:100%;text-align:center;color:white;font-weight:600;font-size:16px">
+          + Agrear Tabla de Opciones (opcional)
+         <ion-icon name="md-arrow-dropdown" style="color:white;margin-left:5px"></ion-icon>
+       </div>  
 
     </div>
-
 
 
     <div *ngSwitchCase="'pack'">
@@ -269,7 +191,7 @@
         </ion-item>
         <ion-item>
           <div item-start>
-            <div style="background:#fff;padding:5px;padding-right:30px;border-right:0px solid #bbb;color:#777;font-weight:600">
+            <div style="background:#fff;padding:5px;padding-right:30px;color:#777;font-weight:600">
               $
             </div>
           </div>
@@ -277,11 +199,11 @@
         </ion-item>
         <ion-item>
           <div item-start>
-            <div style="width:70px;padding:2px;color:#777;font-weight:600">
-              Cupones
+            <div style="background:#fff;padding:5px;padding-right:25px;color:#777;font-weight:600">
+              N°
             </div>
           </div>
-          <ion-input [(ngModel)]="disponibles" type="number" placeholder="Cupones disponibles"></ion-input>
+          <ion-input [(ngModel)]="disponibles" type="number" placeholder="Número de cupones disponibles"></ion-input>
         </ion-item>
       </ion-list>
 
@@ -294,10 +216,13 @@
             {{i + 1}}
           </div>
           <ion-input [(ngModel)]="item[i]" type="text" placeholder="Escribir"></ion-input>
+          <button  item-end clear ion-button icon-only>
+              <ion-icon name="md-trash" style="color:#777;font-size:25px"></ion-icon>
+            </button>
         </ion-item>
         <button (click)="addItem('cupon', 0, condiciones.length)" ion-item block outline color="white" style="text-transform: none">
           <div style="text-align:right;font-size:16px;font-weight:600;color:#777">
-            + Añadir Otro Item
+            + Añadir Otra Condición
           </div>
         </button>
       </ion-list>
@@ -407,12 +332,23 @@
           <ion-datetime displayFormat="h:m A" [(ngModel)]="termino"></ion-datetime>
         </ion-item>
         <ion-item>
+            <div item-start>
+              <div style="width:70px;padding:2px;color:#777;font-weight:600">
+                N°
+              </div>
+            </div>
+            <ion-input [(ngModel)]="lugar" type="text" placeholder="Tickets disponibles"></ion-input>
+            <button item-end outline ion-button mode="ios" small>
+              info
+            </button>
+          </ion-item>
+        <ion-item>
           <div item-start>
             <div style="width:70px;padding:2px;color:#777;font-weight:600">
               Lugar
             </div>
           </div>
-          <ion-input [(ngModel)]="lugar" type="text" placeholder="Av. Ramon Picarte 401"></ion-input>
+          <ion-input [(ngModel)]="lugar" type="text" placeholder="Dirección de encuentro"></ion-input>
         </ion-item>
       </ion-list>
 
@@ -422,10 +358,6 @@
         <ion-item>
           <ion-label>Todo los días idéntico</ion-label>
           <ion-toggle checked="true"></ion-toggle>
-        </ion-item>
-        <ion-item>
-          <ion-label>Configurar cada día</ion-label>
-          <ion-toggle checked="false"></ion-toggle>
         </ion-item>
         <ion-item>
           <ion-label style="color:#6c757d">Duración de la actividad</ion-label>
@@ -444,12 +376,23 @@
           </ion-select>
         </ion-item>
         <ion-item>
+            <div item-start>
+              <div style="width:70px;padding:2px;color:#777;font-weight:600">
+                N°
+              </div>
+            </div>
+            <ion-input [(ngModel)]="lugar" type="text" placeholder="Tickets disponibles"></ion-input>
+            <button (click)="presentInfo($event)" item-end outline ion-button mode="ios" small>
+              info
+            </button>
+          </ion-item>
+        <ion-item>
           <div item-start>
             <div style="width:70px;padding:2px;color:#777;font-weight:600">
               Lugar
             </div>
           </div>
-          <ion-input [(ngModel)]="lugar" type="text" placeholder="Av. Ramon Picarte 401"></ion-input>
+          <ion-input [(ngModel)]="lugar" type="text" placeholder="Dirección de encuentro"></ion-input>
         </ion-item>
         <ion-item *ngFor="let item of horas; let i = index">
           <div item-start>
@@ -459,6 +402,9 @@
           </div>
           <ion-label>Hora de inicio</ion-label>
           <ion-datetime displayFormat="h:m A" [(ngModel)]="item[i]"></ion-datetime>
+          <button (click)="presentInfo($event)" item-end outline ion-button mode="ios" small>
+              info
+            </button>
         </ion-item>
         <button (click)="addItem('explorar', 0, horas.length)" ion-item block outline color="white" style="text-transform: none">
           <div style="text-align:right;font-size:16px;font-weight:600;color:#777">
@@ -492,14 +438,14 @@
       </ion-list>
 
       <div (click)="presentPopover($event, 'LISTA')" style="margin-top:0px;padding:4px;background:dodgerblue;width:100%;text-align:center;color:white;font-weight:600;font-size:16px">
-        Añadir elecciones
+        Tabla de Opciones (opcional)
         <ion-icon name="md-arrow-dropdown" style="color:white;margin-left:5px"></ion-icon>
       </div>
 
       <div (click)="openMes()" style="margin-top:15px;padding:4px;background:dodgerblue;width:100%;text-align:center;color:white;font-weight:600;font-size:16px">
-          Calendario
-          <ion-icon name="md-arrow-dropdown" style="color:white;margin-left:5px"></ion-icon>
-        </div>
+        Calendario
+        <ion-icon name="md-arrow-dropdown" style="color:white;margin-left:5px"></ion-icon>
+      </div>
 
       <!-- <div style="padding:15px;padding-top:0px">
         <button color="orange1" ion-button block outline small (click)="presentPopover($event, 'LISTA')">

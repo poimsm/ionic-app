@@ -1,78 +1,117 @@
 <ion-menu [content]="content">
-    <ion-content class="card-background-page">
-        <div style="display:flex;justify-content:flex-start;align-items:center;background:#242630;width:100%;height:90px">
-            <img src="assets/03.jpg" style="margin-left:20px;border:2px solid white;width:55px;height:55px;border-radius:50%;object-fit:cover">
-            <div style="color:white;font-size:18px;padding-left:20px">
-                <div>
-                    Oscar Garcia
-                </div>
-                <div style="font-size:15px">
-                    poimsm@gmail.com
-                </div>
-            </div>
+  <ion-content class="card-background-page">
+    <div
+      style="display:flex;justify-content:flex-start;align-items:center;background:#242630;width:100%;height:90px"
+    >
+      <img
+        src="assets/03.jpg"
+        style="margin-left:20px;border:2px solid white;width:55px;height:55px;border-radius:50%;object-fit:cover"
+      />
+      <div style="color:white;font-size:18px;padding-left:20px">
+        <div>Oscar Garcia</div>
+        <div style="font-size:15px">poimsm@gmail.com</div>
+      </div>
+    </div>
+
+    <!--
+      <div padding style="display:flex;justify-content:space-around;flex-wrap:wrap">
+          <div padding (click)="openPage(home)">
+              <div style="height:45px;width:45px;border-radius:50%;background:orangered;display:flex;justify-content:center;align-items:center">
+                  <ion-icon name="md-pizza" style="color:white;font-size:35px"></ion-icon>
+              </div>
+              <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
+                  Pedidos
+              </div>
+          </div>
+      </div>
+    -->
+
+    <ion-list no-lines>
+      <div style="height:10px;width:100%;background:#eee"></div>
+      <button ion-item (click)="openPage(home)">
+        <ion-icon
+          item-start
+          name="md-home"
+          style="color:#FF645D;font-size:25px"
+        ></ion-icon>
+        <span style="color:#222;font-weight:400"> Inicio </span>
+      </button>
+      <button ion-item (click)="openPage(crearOutfit)">
+        <ion-icon
+          item-start
+          name="md-card"
+          style="color:#555;font-size:25px"
+        ></ion-icon>
+        <span style="color:#222;font-weight:400"> Métodos de pago </span>
+      </button>
+      <div style="padding:8px;color:#333;width:100%;background:#f5f4f4">
+        TIENDA
+      </div>
+      <button ion-item (click)="openPage(storeApply)">
+        <ion-icon
+          item-start
+          name="md-send"
+          style="color:#555;font-size:25px"
+        ></ion-icon>
+        <span style="color:#222;font-weight:400"> Inscribir tienda </span>
+      </button>
+      <button ion-item (click)="openPage(tienda)">
+        <ion-icon
+          item-start
+          name="md-list-box"
+          style="color:#555;font-size:25px"
+        ></ion-icon>
+        <span style="color:#222;font-weight:400"> Publicaciones </span>
+      </button>
+      <button ion-item (click)="openPage(tienda)">
+        <ion-icon
+          item-start
+          name="md-calculator"
+          style="color:#555;font-size:25px"
+        ></ion-icon>
+        <span style="color:#222;font-weight:400"> Ventas </span>
+      </button>
+      <button ion-item (click)="openPage(crearServicio)">
+        <ion-icon
+          item-start
+          name="md-create"
+          style="color:#555;font-size:25px"
+        ></ion-icon>
+        <span style="color:#222;font-weight:400"> Nueva publicación </span>
+      </button>
+      <div style="padding:8px;color:#333;width:100%;background:#f5f4f4">
+        DELIVERY
+      </div>
+      <button ion-item (click)="openPage(shopperApply)">
+        <ion-icon
+          item-start
+          name="md-send"
+          style="color:#555;font-size:25px"
+        ></ion-icon>
+        <span style="color:#222;font-weight:400"> Ser delivery </span>
+      </button>
+      <button ion-item (click)="openPage(orders)">
+        <div
+          item-start
+          style="height:35px;width:35px;border-radius:50%;background:slateblue;display:flex;justify-content:center;align-items:center"
+        >
+          <ion-icon
+            name="md-bicycle"
+            style="color:white;font-size:25px"
+          ></ion-icon>
         </div>
-
-        <!-- <div padding style="display:flex;justify-content:space-around;flex-wrap:wrap">
-            <div padding (click)="openPage(home)">
-                <div style="height:45px;width:45px;border-radius:50%;background:orangered;display:flex;justify-content:center;align-items:center">
-                    <ion-icon name="md-pizza" style="color:white;font-size:35px"></ion-icon>
-                </div>
-                <div style="text-align:center;font-size:14px;font-weight:450;color:#555">
-                    Pedidos
-                </div>
-            </div>
-        </div> -->
-
-        <ion-list no-lines>
-            <div style="height:10px;width:100%;background:#eee">
-            </div>
-            <button ion-item (click)="openPage(home)">
-                <ion-icon item-start name="ios-card" style="color:#555;font-size:25px"></ion-icon>
-                <span style="color:#222;font-weight:400">
-                    Inicio
-                </span>
-            </button>
-            <button ion-item (click)="openPage(crearOutfit)">
-                <ion-icon item-start name="ios-card" style="color:#555;font-size:25px"></ion-icon>
-                <span style="color:#222;font-weight:400">
-                    Métodos de pago
-                </span>
-            </button>
-            <div style="height:10px;width:100%;background:#eee">
-            </div>
-            <button ion-item (click)="openPage(tienda)">
-                <ion-icon item-start name="apps" style="color:#555;font-size:25px"></ion-icon>
-                <span style="color:#222;font-weight:400">
-                    Mi Tienda
-                </span>
-            </button>
-            <button ion-item (click)="openPage(crearServicio)">
-                <ion-icon item-start name="md-pricetags" style="color:#555;font-size:25px"></ion-icon>
-                <span style="color:#222;font-weight:400">
-                    Crear producto
-                </span>
-            </button>
-            <div style="height:10px;width:100%;background:#eee">
-            </div>
-            <button ion-item (click)="openPage(home)">
-                <div item-start style="height:35px;width:35px;border-radius:50%;background:#FF645D;display:flex;justify-content:center;align-items:center">
-                    <ion-icon name="md-bicycle" style="color:white;font-size:25px"></ion-icon>
-                </div>
-                <span style="color:#222;font-weight:400">
-                    Tomar ordenes
-                </span>
-            </button>
-            <div style="height:10px;width:100%;background:#eee">
-            </div>
-            <button ion-item (click)="openPage(home)">
-                <ion-icon item-start name="md-exit" style="color:#555;font-size:25px"></ion-icon>
-                <div style="font-size:18px;color:#222">
-                    Cerrar sesión
-                </div>
-            </button>
-        </ion-list>
-    </ion-content>
-
-
+        <span style="color:#222;font-weight:400"> Tomar ordenes </span>
+      </button>
+      <div style="height:10px;width:100%;background:#eee"></div>
+      <button ion-item (click)="openPage(home)">
+        <ion-icon
+          item-start
+          name="md-exit"
+          style="color:dodgerblue;font-size:25px"
+        ></ion-icon>
+        <div style="font-size:18px;color:#222">Cerrar sesión</div>
+      </button>
+    </ion-list>
+  </ion-content>
 </ion-menu>
 <ion-nav [root]="rootPage" #content></ion-nav>

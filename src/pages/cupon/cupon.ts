@@ -27,7 +27,6 @@ export class CuponPage {
       4: "Panoramas",
       5: "Eventos"
     });
-    // popover.present();
     popover.present({
       ev: myEvent
     });
@@ -35,9 +34,5 @@ export class CuponPage {
       console.log(data);
       console.log("mmmmm");
     });
-  }
-
-  ionViewDidLoad() {
-    console.log("ionViewDidLoad CuponPage");
   }
 }

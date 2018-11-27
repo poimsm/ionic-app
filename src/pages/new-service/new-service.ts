@@ -3,7 +3,6 @@ import { ImagePicker, ImagePickerOptions } from "@ionic-native/image-picker";
 import {
   IonicPage,
   NavController,
-  NavParams,
   AlertController,
   ActionSheetController,
   PopoverController,
@@ -14,6 +13,8 @@ import { AuthProvider } from "../../providers/auth/auth";
 import { ProductProvider } from "../../providers/product/product";
 import { PopCategoriasPage } from "../pop-categorias/pop-categorias";
 import { ServiceCalendarPage } from "../service-calendar/service-calendar";
+import { InfoPage } from "../info/info";
+import { DataProvider } from "../../providers/data/data";
 
 @IonicPage()
 @Component({
@@ -52,7 +53,7 @@ export class NewServicePage {
   imagenes64 = [];
   usuario = {};
 
-  type = "Seleccione tipo de producto";
+  type = "Tipo de publicación";
 
   categoria = "";
   coleccion = "none";
@@ -82,15 +83,13 @@ export class NewServicePage {
     public modalCtrl: ModalController,
     public alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
-    private navParams: NavParams,
     public navCtrl: NavController,
     private imagePicker: ImagePicker,
     private _product: ProductProvider,
     private _auth: AuthProvider,
-    public popoverCtrl: PopoverController
-  ) {
-    // this.fetchCollections();
-  }
+    public popoverCtrl: PopoverController,
+    private _data: DataProvider
+  ) {}
   openMes() {
     const modal = this.modalCtrl.create(ServiceCalendarPage, {
       calendar: this.calendarDB
@@ -99,6 +98,13 @@ export class NewServicePage {
       this.calendarDB = data.calendar;
     });
     modal.present();
+  }
+  presentInfo(myEvent) {
+    const popover = this.popoverCtrl.create(InfoPage);
+
+    popover.present({
+      ev: myEvent
+    });
   }
   presentPopover(myEvent, type) {
     let lista = {};
@@ -109,8 +115,8 @@ export class NewServicePage {
       };
     } else if (type == "LISTA") {
       lista = {
-        0: "Seleccione una opción",
-        1: "Multiples opciones"
+        0: "Elegir una opción",
+        1: "Elegir multiples opciones"
       };
     }
 
@@ -120,12 +126,10 @@ export class NewServicePage {
       ev: myEvent
     });
     popover.onDidDismiss(data => {
-      console.log(data);
       if (data != null) {
         if (type == "MODO") {
           if (data.index == 0) this.modo = "evento";
           if (data.index == 1) this.modo = "servicio";
-          if (data.index == 2) this.modo = "";
         }
         if (type == "LISTA") {
           if (data.index == 0) this.addList("A");
@@ -178,16 +182,9 @@ export class NewServicePage {
   }
   presentActionSheet() {
     const actionSheet = this.actionSheetCtrl.create({
-      title: "Modify your album",
+      title: "Seleccione una opción",
       cssClass: ".action-sheet-md",
       buttons: [
-        {
-          text: "Carta delivery",
-          handler: () => {
-            this.type = "carta";
-            this.showTopBar = true;
-          }
-        },
         {
           text: "Combo delivery",
           handler: () => {
@@ -227,51 +224,7 @@ export class NewServicePage {
     });
     actionSheet.present();
   }
-  fetchCollections() {
-    this._product
-      .getCollections(this._auth.authData)
-      .subscribe(data => (this.collections = data));
-  }
-  newCollection() {
-    const prompt = this.alertCtrl.create({
-      title: "Colección",
-      // message: "Enter a name for this new album you're so keen on adding",
-      inputs: [
-        {
-          name: "title",
-          placeholder: "Título"
-        }
-      ],
-      buttons: [
-        {
-          text: "Cancelar",
-          handler: data => {
-            console.log("Cancel clicked");
-          }
-        },
-        {
-          text: "Guardar",
-          handler: data => {
-            this._product.addCollection(data.title, this._auth.authData);
-            console.log("Saved clicked");
-          }
-        }
-      ]
-    });
-    prompt.present();
-  }
   save() {
-    if (this.type == "carta") {
-      if (this.coleccion != "none") {
-        this._product.updateCollection(this.coleccion);
-      }
-      this._product.addProduct(
-        this.coleccion,
-        this.titulo,
-        this.precio,
-        this._auth.authData
-      );
-    }
     if (this.type == "combo") {
       if (this.lists.length > 0) {
         this.isList = true;
@@ -303,18 +256,17 @@ export class NewServicePage {
       );
     }
     if (this.type == "cupon") {
-      this._product.addCoupon(
-        this.categoria,
-        this.imagen64,
-        this.titulo,
-        this.descripcion,
-        this.precio,
-        this.disponibles,
-        this.condiciones,
-        this.fechaInicio,
-        this.fechaTermino,
-        this._auth.authData
-      );
+      const data = {
+        category: this.categoria,
+        title: this.titulo,
+        description: this.descripcion,
+        price: this.precio,
+        img: this.imagen64,
+        initDate: this.fechaInicio,
+        endDate: this.fechaTermino,
+        conditions: this.condiciones
+      };
+      this._data.addCoupon(this._auth.token, data);
     }
     if (this.type == "explorar") {
       if (this.lists.length > 0) {

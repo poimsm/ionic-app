@@ -6,13 +6,6 @@ import {
   ViewController
 } from "ionic-angular";
 
-/**
- * Generated class for the PopCategoriasPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: "page-pop-categorias",
@@ -31,6 +24,6 @@ export class PopCategoriasPage {
     }
   }
   close(index) {
-    this.viewCtrl.dismiss({index});
+    this.viewCtrl.dismiss({ index });
   }
 }

@@ -24,7 +24,7 @@ export class PublicacionesPage {
     public navParams: NavParams,
     private _auth: AuthProvider,
     private _subir: SubirProvider,
-    private modalCtrl: ModalController,
+    private modalCtrl: ModalController
   ) {
     // this.fetchOutfits();
   }
@@ -43,17 +43,17 @@ export class PublicacionesPage {
     console.log(this.outfits);
   }
   async fetchOutfits() {
-    const categories = [];
-    const id = this._auth.authData.userId;
-    const user: any = await this._auth
-      .getUser()
-      .pipe(take(1))
-      .toPromise();
-    Object.keys(user[0].categories).forEach(key => {
-      categories.push(user[0].categories[key]);
-    });
-    this._subir
-      .getOutfitByUserId(categories, id)
-      .subscribe(data => this.outfits.push(data[0]));
+    // const categories = [];
+    // const id = this._auth.authData.userId;
+    // const user: any = await this._auth
+    //   .getUser()
+    //   .pipe(take(1))
+    //   .toPromise();
+    // Object.keys(user[0].categories).forEach(key => {
+    //   categories.push(user[0].categories[key]);
+    // });
+    // this._subir
+    //   .getOutfitByUserId(categories, id)
+    //   .subscribe(data => this.outfits.push(data[0]));
   }
 }

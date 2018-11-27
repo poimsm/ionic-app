@@ -14,7 +14,10 @@ import {
   CestaPage,
   NewServicePage,
   CuponPage,
-  CabanaPage
+  CabanaPage,
+  ShopperApplyPage,
+  StoreApplyPage,
+  OrdersPage
 } from "../pages/index.pages";
 
 @Component({
@@ -40,6 +43,11 @@ export class MyApp {
   publicaciones = PublicacionesPage;
   tienda = TiendaPage;
   pedidos = PedidosPage;
+
+  shopperApply = ShopperApplyPage;
+  storeApply = StoreApplyPage;
+
+  orders = OrdersPage;
 
   crearServicio = NewServicePage;
 
@@ -67,5 +75,5 @@ export class MyApp {
   openPage(pagina) {
     this.rootPage = pagina;
     this.menuCtrl.close();
-  } 
+  }
 }

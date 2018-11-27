@@ -51,9 +51,9 @@ export class ProductoPage {
     );
   }
   findUserLike() {
-    this._like
-      .findIfLikeExist(this.data.id, this._auth.authData.userId)
-      .subscribe(flag => (this.userLike = flag));
+    // this._like
+    //   .findIfLikeExist(this.data.id, this._auth.authData.userId)
+    //   .subscribe(flag => (this.userLike = flag));
   }
   addLike(postId, flag, id) {
     console.log(flag);
