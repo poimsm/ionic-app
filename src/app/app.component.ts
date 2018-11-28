@@ -51,8 +51,8 @@ export class MyApp {
 
   crearServicio = NewServicePage;
 
-  // rootPage: any;
-  rootPage: any = HomePage;
+  rootPage: any;
+  // rootPage: any = HomePage;
   constructor(
     private menuCtrl: MenuController,
     platform: Platform,
@@ -60,13 +60,13 @@ export class MyApp {
     _auth: AuthProvider,
     splashScreen: SplashScreen
   ) {
-    // _auth.loadStorage().then(isAuth => {
-    //   if (isAuth) {
-    //     this.rootPage = this.home;
-    //   } else {
-    //     this.rootPage = this.login;
-    //   }
-    // });
+    _auth.loadStorage().then(isAuth => {
+      if (isAuth) {
+        this.rootPage = this.home;
+      } else {
+        this.rootPage = this.login;
+      }
+    });
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();

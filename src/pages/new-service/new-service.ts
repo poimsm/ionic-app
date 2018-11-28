@@ -62,6 +62,7 @@ export class NewServicePage {
   go =
     "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
 
+  activeDays= {};
   calendarDB = [
     {
       month: "Diciembre",
@@ -96,6 +97,7 @@ export class NewServicePage {
     });
     modal.onDidDismiss(data => {
       this.calendarDB = data.calendar;
+      this.activeDays = {...data.activeDays};      
     });
     modal.present();
   }
@@ -225,36 +227,43 @@ export class NewServicePage {
     actionSheet.present();
   }
   save() {
+
+    this.imagen64 = "data:image/jpg;base64," + this.go;
+    const imagenes64= {
+      0:"data:image/jpg;base64," + this.go,
+      1:"data:image/jpg;base64," + this.go
+    };
+
     if (this.type == "combo") {
+      const data: any = {
+        category: this.categoria,
+        title: this.titulo,
+        price: this.precio,
+        img: this.imagen64
+      };
+
       if (this.lists.length > 0) {
-        this.isList = true;
         for (let i = 0; i < this.lists.length; i++) {
           this.listsObj[i] = this.lists[i];
         }
-      } else {
-        this.listsObj = { 0: "none" };
+        data.lists = this.listsObj
       }
-      this._product.addCombo(
-        this.categoria,
-        this.titulo,
-        this.precio,
-        this.imagen64,
-        this.listsObj,
-        this.isList,
-        this._auth.authData
-      );
+
+      this._data.add(this._auth.token, data, "food").then(res =>console.log("Listooo"));
     }
+    
     if (this.type == "pack") {
-      this._product.addPack(
-        this.categoria,
-        this.imagen64,
-        this.titulo,
-        this.descripcion,
-        this.precio,
-        this.contenido,
-        this._auth.authData
-      );
+      const data = {
+        category: this.categoria,
+        title: this.titulo,
+        description: this.descripcion,
+        price: this.precio,
+        img: this.imagen64,
+        content:  this.contenido
+      };
+      this._data.add(this._auth.token, data, "packs").then(res =>console.log("Listooo"));
     }
+    
     if (this.type == "cupon") {
       const data = {
         category: this.categoria,
@@ -266,47 +275,53 @@ export class NewServicePage {
         endDate: this.fechaTermino,
         conditions: this.condiciones
       };
-      this._data.addCoupon(this._auth.token, data);
+      this._data.add(this._auth.token, data, "coupons").then(res =>console.log("Listooo"));
     }
+
     if (this.type == "explorar") {
+
+      let data: any = {};
+      let route: string;
+
+      if (this.modo == "evento") {
+
+        data = {
+          category: this.categoria,
+          title: this.titulo,
+          description: this.descripcion,
+          price: this.precio,
+          site: this.lugar,
+          imgs: imagenes64,
+          initHour: this.inicio,
+          endHour: this.termino
+        };
+
+        route = "explore/events";
+      } else if (this.modo == "servicio") {
+
+        data = {
+          category: this.categoria,
+          title: this.titulo,
+          description: this.descripcion,
+          price: this.precio,
+          duration: this.duracion,
+          site: this.lugar,
+          imgs: imagenes64,
+          hours: this.horas,
+          activeDays: this.activeDays
+        };
+
+        route = "explore/services";
+      }
+
       if (this.lists.length > 0) {
-        this.isList = true;
         for (let i = 0; i < this.lists.length; i++) {
           this.listsObj[i] = this.lists[i];
         }
-      } else {
-        this.listsObj = { 0: "none" };
+        data.lists = this.listsObj
       }
-      if ((this.modo = "evento")) {
-        this._product.addEvent(
-          this.categoria,
-          this.imagenes64,
-          this.titulo,
-          this.descripcion,
-          this.precio,
-          this.fecha,
-          this.inicio,
-          this.termino,
-          this.lugar,
-          this.listsObj,
-          this.isList,
-          this._auth.authData
-        );
-      } else if ((this.modo = "servicio")) {
-        this._product.addService(
-          this.categoria,
-          this.imagenes64,
-          this.titulo,
-          this.descripcion,
-          this.precio,
-          this.duracion,
-          this.lugar,
-          this.horas,
-          this.listsObj,
-          this.isList,
-          this._auth.authData
-        );
-      }
+
+      this._data.add(this._auth.token, data, route).then(res =>console.log("Listooo"));
     }
   }
 }

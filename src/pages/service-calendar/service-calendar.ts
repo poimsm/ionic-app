@@ -73,7 +73,21 @@ export class ServiceCalendarPage {
   }
 
   close() {
-    this.viewCtrl.dismiss({ calendar: this.calendarDB });
+    
+    const activeDays = [];
+   
+    this.calendarDB.forEach(data => {
+      if (data.activeDays.length > 0) {
+        const set = {
+          month: data.month,
+          activeDays: data.activeDays    
+        }
+        activeDays.push(set);
+      }
+    })
+
+
+    this.viewCtrl.dismiss({calendar: this.calendarDB, activeDays });
   }
 
   select(i, day) {

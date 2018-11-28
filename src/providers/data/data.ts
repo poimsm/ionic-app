@@ -6,7 +6,8 @@ import { Platform } from "ionic-angular";
 
 @Injectable()
 export class DataProvider {
-  apiURL = "https://poimsm-server.herokuapp.com";
+  apiURL = "http://localhost:3000";
+  // apiURL = "https://poimsm-server.herokuapp.com";
 
   constructor(
     private platform: Platform,
@@ -15,8 +16,8 @@ export class DataProvider {
     public http: HttpClient
   ) {}
 
-  addCoupon(token, body) {
-    const url = `${this.apiURL}/apps/coupons`;
+  add(token, body, key) {
+    const url = `${this.apiURL}/apps/${key}`;
     const headers = new HttpHeaders({
       Authorization: `JWT ${token}`
     });
