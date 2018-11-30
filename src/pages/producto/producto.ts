@@ -29,8 +29,8 @@ export class ProductoPage {
     private _auth: AuthProvider
   ) {
     this.data = this.navParams.data;
-    this.getBlog();
-    this.getLikesAndComments();
+    // this.getBlog();
+    // this.getLikesAndComments();
     // this.findUserLike();
   }
   back() {

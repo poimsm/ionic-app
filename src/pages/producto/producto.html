@@ -1,24 +1,5 @@
-<!-- <ion-header>
-  <ion-navbar align-title="center" color="pink">
-    <ion-buttons left>
-      <button ion-button icon-only menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-    </ion-buttons>
-    <div style="color:white;font-weight:800;font-size:22px">
-      {{data.storeName}}
-    </div>
-    <ion-buttons right>
-      <button ion-button icon-only>
-        <ion-icon name="md-notifications" style="font-size:28px;color:white"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header> -->
-<ion-content>
-
-  <div style="font-size:20px;position:fixed;top:0px;left:0px;z-index:9999;color:white;width:100%;height:50px;display:flex;justify-content:space-around;align-items:center">
-    <div (click)="back()" style="margin-left:0px;display:flex;align-items:center">
+<div style="box-shadow: inset 0px 60px 20px rgba(100,100,100,0.2);font-size:20px;position:fixed;top:0px;left:0px;z-index:9999;color:white;width:100%;height:50px;display:flex;justify-content:space-around;align-items:center">
+  <div (click)="back()" style="margin-left:0px;display:flex;align-items:center">
       <ion-icon name="arrow-back"></ion-icon>
       <div style="font-size:14px;margin-left:5px">
         ATRAS
@@ -29,11 +10,11 @@
     </div>
     <div>
     </div>
-  </div>
-  <div style="box-shadow: inset 0px 60px 20px rgba(100,100,100,0.2)">
-    <img src="assets/pan01.jpeg" style="position:relative;z-index:-2;width:100%">
-  </div>
+</div> 
+  
 
+<ion-content>
+  <img src="assets/dep01.jpg" style="position:relative;z-index:-2;width:100%">
   <div padding>
     <div style="font-size:16px;font-weight:500">
       <!-- {{data.title}} -->
@@ -45,53 +26,12 @@
       consectetur quod. Sint fugiat voluptas perspiciatis odio obcaecati similique quaerat odit reprehenderit maxime.
     </div>
 
-    <div style="width:100%;display:flex;justify-content:space-between">
-      <div style="margin-top:10px;display:flex;justify-content:flex-start;align-items:flex-start">
-        <ion-icon name="ios-heart-outline" style="font-size:28px;color:#444"></ion-icon>
-        <div *ngIf="userLike.arrive" (click)="addLike(data.id, userLike.flag, userLike.id)">
-          <ion-icon *ngIf="userLike.flag" name="ios-heart" style="font-size:28px;color:red"></ion-icon>
-          <ion-icon *ngIf="!userLike.flag" name="ios-heart-outline" style="font-size:28px;color:#444"></ion-icon>
-        </div>
-      </div>
-      <div style="width:100%;display:flex;justify-content:center;align-items:center">
-        <button ion-button icon-only round clear>
-          <div style="height:35px;width:35px;display:flex;justify-content:center;align-items:center;border-radius:50%;border:1px solid #eee;font-size:22px;font-weight:600;color:#555">
-            -
-          </div>
-        </button>
-        <div style="font-weight:600;border:0px solid #eee;border-radius:2px;margin-left:10px;margin-right:10px;padding:10px;padding-left:15px;padding-right:15px;font-size:18px;color:#555">
-          100 gr
-        </div>
-        <button ion-button icon-only round clear>
-          <div style="height:35px;width:35px;display:flex;justify-content:center;align-items:center;border-radius:50%;border:1px solid #eee;font-size:22px;font-weight:600;color:#555">
-            +
-          </div>
-        </button>
-      </div>
-      <button ion-button clear>
-        $ 4000/kg
-      </button>
-    </div>
+   
 
   </div>
 
-  <!-- <div style="width:100%;padding:10px;padding-left:15px;background:#edeff1;font-size:14px;font-weight:650;color:#777">
-      Me Gusta ( {{ (product$ | async)?.likes }} )
-    </div>
-
-    <div padding style="display:flex;justify-content:flex-start">
-      <div *ngFor="let like of likes$  | async" style="margin-right:10px">
-        <img [src]="like.userImage" style="width:35px;height:35px;border-radius:50%;object-fit:cover">
-      </div>
-      <div *ngIf=" ((product$ | async)?.likes) > 3 " style="width:35px;height:35px;border-radius:50%;background:#eee;display:flex;justify-content:center;align-items:center">
-        <ion-icon name="ios-more" style="font-size:28px;color:#bbb"></ion-icon>
-      </div>
-    </div> -->
 
   <hr>
-  <!-- <div style="width:100%;padding:10px;padding-left:15px;background:#edeff1;font-size:14px;font-weight:650;color:#777">
-    Comentarios ( {{ (product$ | async)?.comments }} )
-  </div> -->
 
   <div style="width:100%;display:flex;justify-content:flex-start;align-items:flex-end">
     <ion-icon name="md-star" style="font-size:25px" [ngStyle]="{'color':data.starts > 0 ? 'gold' : '#bbb' }"></ion-icon>
@@ -103,38 +43,15 @@
       112 calificaciones
     </div>
   </div>
-
-
-  <!-- <div style="width:100%;height:50px;background:white;display:flex;justify-content:center;align-items:center">
-    <img src="assets/18.jpg" style="margin-right:10px;width:35px;height:35px;border-radius:50%;object-fit:cover">
-    <div style="width:250px;height:32px">
-      <textarea [(ngModel)]="message" style="border:0px;padding:6px;margin:0px;width:250px;height:32px;border-radius:5px;background:rgb(248, 248, 248);font-size:15px;color:#444">
-        </textarea>
-    </div>
-    <ion-icon (click)="addComment(data.id)" name="md-send" style="margin-left:10px;font-size:28px;color:#bbb"></ion-icon>
-  </div> -->
-
-  <div padding>
-    <div *ngFor="let comment of comments$ | async" style="margin-top:0px;display:flex;justify-content:space-between;align-items:flex-start">
-      <img [src]="comment.userImage" style="margin-right:10px;width:35px;height:35px;border-radius:50%;object-fit:cover">
-      <div style="width:100%;font-size:14px;color:#777">
-        <div style="font-weight:600;color:#222">
-          {{comment.userName}}
-        </div>
-        <div style="margin-top:-3px;display:flex;justify-content:flex-start;width:80px;font-weight:600;color:#777;">
-          <ion-icon name="md-star" style="font-size:14px;color:gold"></ion-icon>
-          <ion-icon name="md-star" style="font-size:14px;color:gold"></ion-icon>
-          <ion-icon name="md-star" style="font-size:14px;color:gold"></ion-icon>
-        </div>
-        <div>
-          {{comment.message}}
-        </div>
-      </div>
-    </div>
-  </div>
+  
   <hr>
   <div>
     Mas productos de la tienda
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi nihil magnam perferendis tempore provident accusamus iste? Inventore eaque, dolorem ut placeat nobis maxime expedita quos est, iusto at neque non.
+  </div>
+  <div style="height:250px">
+    <h1>mmm</h1>
+
   </div>
 
 </ion-content>

@@ -27,48 +27,6 @@
     ></ion-icon>
   </button>
 
-  <!--
-    <button ion-item text-wrap no-lines (click)="openMes()">
-      <div class="holder">
-        <div class="box">
-          Lun
-          <div>25</div>
-        </div>
-        <div class="box">
-          Mar
-          <div>25</div>
-        </div>
-        <div class="box active">
-          Mié
-          <div>25</div>
-          <div class="bullet-box"><div class="bullet-1"></div></div>
-        </div>
-        <div class="box">
-          Jue
-          <div>25</div>
-          <div class="bullet-box">
-            <div class="bullet-1"></div>
-            <div class="bullet-2"></div>
-          </div>
-        </div>
-        <div class="box">
-          Vie
-          <div>25</div>
-          <div class="bullet-box">
-            <div class="bullet-1"></div>
-            <div class="bullet-2"></div>
-          </div>
-        </div>
-      </div>
-
-      <ion-icon
-        name="ios-arrow-forward"
-        style="color:#777;font-size:16px"
-        item-end
-      ></ion-icon>
-    </button>
-  -->
-
   <ion-list>
     <button ion-item>
       <ion-icon item-start name="md-radio-button-off" class="radio"></ion-icon>
@@ -76,7 +34,7 @@
     </button>
     <button ion-item>
       <ion-icon item-start name="md-radio-button-off" class="radio"></ion-icon>
-      <div item-start class="desc">15% desc</div>
+      <!-- <div item-start class="desc">15% desc</div> -->
       <div style="font-size:18px;color:#555">19:15 hrs</div>
     </button>
     <button ion-item>
@@ -87,45 +45,78 @@
       ></ion-icon>
       <div style="font-size:18px;color:#555">Comienza a las 20:30 hrs</div>
     </button>
+    <ion-item >
+        <div item-start class="start">Adultos:</div>
+        <div
+          style="width:150px;background:white;display:flex;justify-content:center;align-items:center"
+        >
+          <button ion-button icon-only round color="white">
+            <div
+              style="height:35px;width:35px;display:flex;justify-content:center;align-items:center;border-radius:50%;border:0px solid #eee;font-size:22px;font-weight:600;color:#555"
+            >
+              -
+            </div>
+          </button>
+          <div
+            style="font-weight:500;border:0px solid #eee;border-radius:2px;margin-left:10px;margin-right:10px;padding:10px;padding-left:15px;padding-right:15px;font-size:16px;color:#555"
+          >
+            1
+          </div>
+          <button ion-button icon-only round color="white">
+              <div
+              style="height:35px;width:35px;display:flex;justify-content:center;align-items:center;border-radius:50%;border:0px solid #eee;font-size:22px;font-weight:600;color:#555"
+            >
+              +
+            </div>
+          </button>
+        </div>
+</ion-item>
+    <ion-item >
+            <div item-start class="start">Niños:</div>
+            <div
+              style="width:150px;background:white;display:flex;justify-content:center;align-items:center"
+            >
+              <button ion-button icon-only round color="white">
+                <div
+                  style="height:35px;width:35px;display:flex;justify-content:center;align-items:center;border-radius:50%;border:0px solid #eee;font-size:22px;font-weight:600;color:#555"
+                >
+                  -
+                </div>
+              </button>
+              <div
+                style="font-weight:500;border:0px solid #eee;border-radius:2px;margin-left:10px;margin-right:10px;padding:10px;padding-left:15px;padding-right:15px;font-size:16px;color:#555"
+              >
+                0
+              </div>
+              <button ion-button icon-only round color="white">
+                  <div
+                  style="height:35px;width:35px;display:flex;justify-content:center;align-items:center;border-radius:50%;border:0px solid #eee;font-size:22px;font-weight:600;color:#555"
+                >
+                  +
+                </div>
+              </button>
+            </div>
+    </ion-item>
   </ion-list>
 </ion-content>
 
 <ion-footer padding>
-  <div style="display:flex;align-items:center">
-    <div style="margin-right:20px;font-size:16px">Tickets:</div>
-    <div
-      style="width:150px;background:white;display:flex;justify-content:center;align-items:center"
-    >
-      <button ion-button icon-only round clear>
-        <div
-          style="height:35px;width:35px;display:flex;justify-content:center;align-items:center;border-radius:50%;border:1px solid #eee;font-size:22px;font-weight:600;color:#555"
-        >
-          -
-        </div>
+  <ion-list no-lines>
+      <ion-item>
+          <div style="display:flex;align-items:center;justify-content:flex-start">
+              <div style="margin-right:20px;font-size:16px">Total:</div>
+              <div style="color:#333;font-size:20px;padding:5px">$50 000</div>
+            </div>
+      </ion-item>
+      <button block ion-button color="danger" style="text-transform: none">
+          <div style="font-size:16px;font-weight:500;">Añadir a la cesta</div>
       </button>
-      <div
-        style="font-weight:600;border:0px solid #eee;border-radius:2px;margin-left:10px;margin-right:10px;padding:10px;padding-left:15px;padding-right:15px;font-size:18px;color:#555"
-      >
-        1
-      </div>
-      <button ion-button icon-only round clear>
-        <div
-          style="height:35px;width:35px;display:flex;justify-content:center;align-items:center;border-radius:50%;border:1px solid #eee;font-size:22px;font-weight:600;color:#555"
-        >
-          +
-        </div>
+  </ion-list>
+
+  <!-- <div style="width:100%;display:flex;justify-content:center">
+      <button ion-button color="danger" style="text-transform: none">
+        <div style="font-size:16px;font-weight:500;">Comprar</div>
       </button>
-    </div>
-  </div>
-
-  <div style="display:flex;align-items:center;justify-content:flex-start">
-    <div style="margin-right:20px;font-size:16px">Total:</div>
-    <div style="color:#333;font-size:20px;padding:5px">$50 000</div>
-  </div>
-
-  <div style="width:100%;display:flex;justify-content:center">
-    <button ion-button color="danger" style="text-transform: none">
-      <div style="font-size:16px;font-weight:500;">Comprar</div>
-    </button>
-  </div>
+    </div> -->
+ 
 </ion-footer>

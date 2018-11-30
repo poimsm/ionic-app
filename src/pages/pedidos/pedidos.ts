@@ -4,6 +4,8 @@ import { ProductoPage } from "../index.pages";
 import { SubirProvider } from "../../providers/subir/subir";
 import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs/Subject";
+import { DataProvider } from '../../providers/data/data';
+import { AuthProvider } from '../../providers/auth/auth';
 
 @IonicPage()
 @Component({
@@ -47,21 +49,8 @@ export class PedidosPage {
     "Papas bravas",
     "Peruana",
     "Vegetariano",
-    "Comida rápida",
-    "Comida tradicional",
-    "Comida internacional"
-  ];
-  toQuery = [
-    "destacado",
-    "sushi_handroll",
-    "completos",
-    "pichangas",
-    "sandwich",
-    "papas_bravas",
-    "peruana",
-    "comida_rapida",
-    "comida_tradicional",
-    "comida_internacional"
+    "Tablas",
+    "Comida rápida"
   ];
   orden = "";
   index = 0;
@@ -73,37 +62,40 @@ export class PedidosPage {
 
   dispatcher = new Subject<boolean>();
 
-  constructor(public navCtrl: NavController) {
-    this.fetch(0);
+  constructor(
+    public navCtrl: NavController,
+    private _data: DataProvider,
+    private _auth: AuthProvider
+    ) {
+    // this.fetch(0);
   }
   fetch(idx) {
-    console.log(this.categorias[idx]);
     this.products = [];
-    this.recientes = [];
     if (idx === 0) {
-      this.queryDestacado(this.toQuery[idx], "likes");
-      // this.queryReciente(this.toQuery[idx], "novedad");
+      this.queryDestacados();
     } else {
       this.dispatcher.next();
-      this.queryDestacado(this.toQuery[idx], "fecha");
+      this.queryCategory(this.categorias[idx]);
       // this.queryReciente(this.toQuery[idx], "fecha");
     }
   }
-  queryDestacado(categoria, orden) {
-    // this._outfit
-    //   .getOutfits(categoria, orden)
-    //   .pipe(takeUntil(this.dispatcher))
-    //   .subscribe(x => {
-    //     this.products = x;
-    //   });
+  queryDestacados() {
+    const skip = 0;
+    const limit = 4;
+    const category = 'Destacado';
+    const route = 'explore/services';
+    
+    this._data.get(this._auth.token, route, skip, limit, category)
+    .then(res => console.log(res))
   }
-  queryReciente(categoria, orden) {
-    // this._outfit
-    //   .getOutfits(categoria, orden)
-    //   .pipe(takeUntil(this.dispatcher))
-    //   .subscribe(x => {
-    //     this.recientes = x;
-    //   });
+  queryCategory(categoria) {
+    const skip = 0;
+    const limit = 4;
+    const category = categoria;
+    const route = 'explore/services';
+    
+    this._data.get(this._auth.token, route, skip, limit, category)
+    .then(res => console.log(res))
   }
   openProduct(product) {
     this.navCtrl.push(ProductoPage, product);

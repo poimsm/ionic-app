@@ -54,7 +54,8 @@ import {
   StoreApplyPage,
   OrdersPage,
   OrdersContentPage,
-  InfoPage
+  InfoPage,
+  CuponContentPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -94,7 +95,8 @@ import { HttpClientModule } from "@angular/common/http";
     StoreApplyPage,
     OrdersPage,
     OrdersContentPage,
-    InfoPage
+    InfoPage,
+    CuponContentPage
   ],
   imports: [
     BrowserModule,
@@ -136,7 +138,8 @@ import { HttpClientModule } from "@angular/common/http";
     StoreApplyPage,
     OrdersPage,
     OrdersContentPage,
-    InfoPage
+    InfoPage,
+    CuponContentPage
   ],
   providers: [
     StatusBar,

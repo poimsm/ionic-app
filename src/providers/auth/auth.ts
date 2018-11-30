@@ -6,7 +6,8 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable()
 export class AuthProvider {
-  apiURL = "http://localhost:3000";
+  // apiURL = "http://localhost:3000";
+  apiURL = "http://192.168.1.8:3000";  
   // apiURL = "https://poimsm-server.herokuapp.com";
   user = {};
   token = "";

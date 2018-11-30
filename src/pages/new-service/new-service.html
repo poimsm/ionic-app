@@ -69,17 +69,16 @@
       <ion-item no-lines style="margin-bottom:15px">
         <ion-label style="color:#6c757d">Categoria</ion-label>
         <ion-select [(ngModel)]="categoria">
-          <ion-option value="sushi_handroll">Sushi & handrolls</ion-option>
-          <ion-option value="completos">Completos</ion-option>
-          <ion-option value="pichangas">Pichangas</ion-option>
-          <ion-option value="pizzas">Pizzas</ion-option>
-          <ion-option value="sandwich">Sandwich</ion-option>
-          <ion-option value="papas_bravas">Papas bravas</ion-option>
-          <ion-option value="peruana">Peruana</ion-option>
-          <ion-option value="vegetariano">Vegetariano</ion-option>
-          <ion-option value="comida_rapida">Comida rápida</ion-option>
-          <ion-option value="comida_tradicional">Comida tradicional</ion-option>
-          <ion-option value="comida_internacional">Comida internacional</ion-option>
+          <ion-option value="Sushi & handrolls">Sushi & handrolls</ion-option>
+          <ion-option value="Completos">Completos</ion-option>
+          <ion-option value="Pichangas">Pichangas</ion-option>
+          <ion-option value="Pizzas">Pizzas</ion-option>
+          <ion-option value="Sandwich">Sandwich</ion-option>
+          <ion-option value="Papas bravas">Papas bravas</ion-option>
+          <ion-option value="Peruana">Peruana</ion-option>
+          <ion-option value="Vegetariano">Vegetariano</ion-option>
+          <ion-option value="Tablas">Tablas</ion-option>
+          <ion-option value="Comida rápida">Comida rápida</ion-option>
         </ion-select>
       </ion-item>
 
@@ -181,12 +180,11 @@
         <ion-item>
           <ion-label style="color:#6c757d">Categoria</ion-label>
           <ion-select [(ngModel)]="categoria">
-            <ion-option value="productos">Productos</ion-option>
-            <ion-option value="bienestar_belleza">Bienestar & belleza</ion-option>
-            <ion-option value="gastronomia">Gastronomía</ion-option>
-            <ion-option value="servicios">Servicios</ion-option>
-            <ion-option value="panoramas">Panoramas</ion-option>
-            <ion-option value="eventos">Eventos</ion-option>
+            <ion-option value="Productos">Productos</ion-option>
+            <ion-option value="Spa bienestar & belleza">Spa bienestar & belleza</ion-option>
+            <ion-option value="Comida">Comida</ion-option>
+            <ion-option value="Servicios">Servicios</ion-option>
+            <ion-option value="Deportes & Panoramas">Deportes & Panoramas</ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
@@ -195,7 +193,15 @@
               $
             </div>
           </div>
-          <ion-input [(ngModel)]="precio" type="number" placeholder="Precio"></ion-input>
+          <ion-input [(ngModel)]="precio" type="number" placeholder="Precio original"></ion-input>
+        </ion-item>
+        <ion-item>
+          <div item-start>
+            <div style="background:#fff;padding:5px;padding-right:30px;color:#777;font-weight:600">
+              $
+            </div>
+          </div>
+          <ion-input [(ngModel)]="precioPromocion" type="number" placeholder="Precio en promoción"></ion-input>
         </ion-item>
         <ion-item>
           <div item-start>

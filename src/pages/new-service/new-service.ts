@@ -35,12 +35,13 @@ export class NewServicePage {
   opt = false;
   showTopBar = false;
   precio: number;
-  disponibles: number;
-  lists = new Array();
-  listsObj = new Object();
-  isList = false;
+  precioPromocion: number;
+  disponibles: number;  
   popIndex: number;
   modo: string;
+  lists = new Array();
+  listsObj = new Object();
+
   @ViewChild(Content)
   cont: Content;
 
@@ -56,7 +57,6 @@ export class NewServicePage {
   type = "Tipo de publicación";
 
   categoria = "";
-  coleccion = "none";
 
   collections = [];
   go =
@@ -270,11 +270,14 @@ export class NewServicePage {
         title: this.titulo,
         description: this.descripcion,
         price: this.precio,
+        discountPrice: this.precioPromocion,
         img: this.imagen64,
         initDate: this.fechaInicio,
         endDate: this.fechaTermino,
         conditions: this.condiciones
       };
+      console.log(data);
+      
       this._data.add(this._auth.token, data, "coupons").then(res =>console.log("Listooo"));
     }
 

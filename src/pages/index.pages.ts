@@ -1,3 +1,4 @@
+export { CuponContentPage } from './cupon-content/cupon-content';
 export { InfoPage } from './info/info';
 export { OrdersContentPage } from './orders-content/orders-content';
 export { OrdersPage } from './orders/orders';
