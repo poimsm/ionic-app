@@ -50,6 +50,8 @@ export class LoginPage {
         .signInWithPopup(new firebase.auth.FacebookAuthProvider())
         .then((res: any) => {
           const access_token = res.credential.accessToken;
+          // console.log("access", access_token);
+
           this._auth.login(access_token);
           this.appCtrl.getRootNav().setRoot(HomePage);
         });

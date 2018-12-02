@@ -12,7 +12,7 @@ import {
   TiendaPage,
   PedidosPage,
   CestaPage,
-  NewServicePage,
+  PostPage,
   CuponPage,
   CabanaPage,
   ShopperApplyPage,
@@ -49,7 +49,7 @@ export class MyApp {
 
   orders = OrdersPage;
 
-  crearServicio = NewServicePage;
+  crearPost = PostPage;
 
   rootPage: any;
   // rootPage: any = HomePage;

@@ -1,11 +1,11 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
 import { IonicPage, NavController, Slides, Content } from "ionic-angular";
-import { ProductoPage } from "../index.pages";
 import { SubirProvider } from "../../providers/subir/subir";
 import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs/Subject";
-import { DataProvider } from '../../providers/data/data';
-import { AuthProvider } from '../../providers/auth/auth';
+import { DataProvider } from "../../providers/data/data";
+import { AuthProvider } from "../../providers/auth/auth";
+import { PedidosContentPage } from "../pedidos-content/pedidos-content";
 
 @IonicPage()
 @Component({
@@ -66,7 +66,7 @@ export class PedidosPage {
     public navCtrl: NavController,
     private _data: DataProvider,
     private _auth: AuthProvider
-    ) {
+  ) {
     // this.fetch(0);
   }
   fetch(idx) {
@@ -82,23 +82,25 @@ export class PedidosPage {
   queryDestacados() {
     const skip = 0;
     const limit = 4;
-    const category = 'Destacado';
-    const route = 'explore/services';
-    
-    this._data.get(this._auth.token, route, skip, limit, category)
-    .then(res => console.log(res))
+    const category = "Destacado";
+    const route = "explore/services";
+
+    this._data
+      .get(this._auth.token, route, skip, limit, category)
+      .then(res => console.log(res));
   }
   queryCategory(categoria) {
     const skip = 0;
     const limit = 4;
     const category = categoria;
-    const route = 'explore/services';
-    
-    this._data.get(this._auth.token, route, skip, limit, category)
-    .then(res => console.log(res))
+    const route = "explore/services";
+
+    this._data
+      .get(this._auth.token, route, skip, limit, category)
+      .then(res => console.log(res));
   }
   openProduct(product) {
-    this.navCtrl.push(ProductoPage, product);
+    this.navCtrl.push(PedidosContentPage, product);
   }
   handleStart(ev, idx) {
     this.startingX = ev.touches[0].pageX;

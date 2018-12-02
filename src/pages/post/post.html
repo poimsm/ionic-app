@@ -1,0 +1,47 @@
+<ion-header no-border>
+  <ion-navbar color="white" align-title="center">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title> Nueva publicación </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <button (click)="openPage(pedidos)" ion-item>
+      Pedidos
+      <ion-icon
+        name="ios-arrow-forward"
+        style="color:#777;font-size:18px"
+        item-end
+      ></ion-icon>
+    </button>
+    <button (click)="openPage(packs)" ion-item>
+      Pack
+      <ion-icon
+        name="ios-arrow-forward"
+        style="color:#777;font-size:18px"
+        item-end
+      ></ion-icon>
+    </button>
+    <button (click)="openPage(cupon)" ion-item>
+      Cupón
+      <ion-icon
+        name="ios-arrow-forward"
+        style="color:#777;font-size:18px"
+        item-end
+      ></ion-icon>
+    </button>
+    <button (click)="openPage(explorar)" ion-item>
+      Explorar
+      <ion-icon
+        name="ios-arrow-forward"
+        style="color:#777;font-size:18px"
+        item-end
+      ></ion-icon>
+    </button>
+  </ion-list>
+</ion-content>

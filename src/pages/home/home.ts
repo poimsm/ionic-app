@@ -9,7 +9,6 @@ import {
   TiendaPage,
   PedidosPage,
   CestaPage,
-  NewServicePage,
   CuponPage,
   CabanaPage,
   ExplorarPage,
@@ -29,8 +28,6 @@ export class HomePage {
 
   tienda = TiendaPage;
   pedidos = PedidosPage;
-
-  crearServicio = NewServicePage;
 
   constructor(
     public navCtrl: NavController,

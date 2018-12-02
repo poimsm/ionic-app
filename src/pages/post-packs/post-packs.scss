@@ -1,0 +1,19 @@
+page-post-packs {
+  .imgButton {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .imgBox {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  .img {
+    margin: 10px;
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
+  }
+}

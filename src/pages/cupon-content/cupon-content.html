@@ -1,18 +1,62 @@
-<!--
-  Generated template for the CuponContentPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>cupon-content</ion-title>
+<ion-header no-border>
+  <ion-navbar align-title="center" color="white">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <div style="color:#bbb;font-weight:800;font-size:22px">Cupones</div>
+    <ion-buttons right>
+      <button ion-button icon-only>
+        <ion-icon name="md-cart" style="color:#bbb"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
+<ion-content>
+  <div padding>
+    <img src="assets/desa06.jpg" style="width:100%" />
 
-<ion-content padding>
+    <h5>Arina de pescado en oferta</h5>
+    <div style="font-size:15px;color:#999">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut veritatis
+      eveniet ullam numquam illo odit, id perspiciatis cupiditate libero odio
+      nulla voluptatum error perferendis at rem consequuntur explicabo minus
+      ipsa.
+    </div>
+  </div>
 
+  <div style="height:10px;width:100%;background:#f5f4f4"></div>
+  <div padding>
+    <div style="font-size:16px;color:#555">Condiciones</div>
+    <hr />
+    <div style="color:#777;font-size:14px;margin:4px;margin-top:8px">
+      No debes cambiarlo por algo mas No debes cambiarlo por algo mas
+    </div>
+    <div style="color:#777;font-size:14px;margin:4px;margin-top:8px">
+      No debes cambiarlo por algo mas
+    </div>
+    <div style="color:#777;font-size:14px;margin:4px;margin-top:8px">
+      No debes cambiarlo por algo mas No debes cambiarlo por algo mas
+    </div>
+  </div>
 </ion-content>
+
+<ion-footer>
+  <button (click)="openCalendar()" ion-item text-wrap no-lines>
+    <div style="display:flex">
+      <div
+        style="color:#555;font-size:18px;padding:5px;text-decoration:line-through"
+      >
+        $50 000 |
+      </div>
+      <div style="color:#555;font-size:18px;padding:5px">Comprar</div>
+    </div>
+    <ion-icon
+      name="ios-arrow-forward"
+      style="color:#777;font-size:18px"
+      item-end
+    ></ion-icon>
+  </button>
+</ion-footer>

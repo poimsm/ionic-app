@@ -5,15 +5,7 @@ import {
   NavParams,
   ModalController
 } from "ionic-angular";
-import { CalendarioPage } from "../calendario/calendario";
-
-/**
- * Generated class for the ExplorarContentPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
+import { ExplorarOrderPage } from "../explorar-order/explorar-order";
 @IonicPage()
 @Component({
   selector: "page-explorar-content",
@@ -27,7 +19,7 @@ export class ExplorarContentPage {
   ) {}
 
   openCalendar() {
-    this.navCtrl.push(CalendarioPage);
+    this.navCtrl.push(ExplorarOrderPage);
     // const modal = this.modalCtrl.create(CalendarioPage);
     // modal.present();
   }

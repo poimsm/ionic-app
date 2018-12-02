@@ -7,8 +7,8 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 @Injectable()
 export class AuthProvider {
   // apiURL = "http://localhost:3000";
-  apiURL = "http://192.168.1.8:3000";  
-  // apiURL = "https://poimsm-server.herokuapp.com";
+  // apiURL = "http://192.168.1.8:3000";
+  apiURL = "https://poimsm-server.herokuapp.com";
   user = {};
   token = "";
   authData = {};
@@ -26,7 +26,7 @@ export class AuthProvider {
       const resToken: any = await this.getToken(accessToken);
       const resUser: any = await this.getUser(resToken.token);
       console.log(resUser.user);
-      
+
       this.saveStorage(resUser.user, resToken.token);
       this.authState.next(true);
     } catch (error) {

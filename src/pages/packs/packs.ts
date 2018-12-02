@@ -1,9 +1,9 @@
 import { Component, ViewChild, ElementRef, Renderer2 } from "@angular/core";
 import { IonicPage, NavController, Slides, Content } from "ionic-angular";
-import { ProductoPage } from "../index.pages";
 import { SubirProvider } from "../../providers/subir/subir";
 import { takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs/Subject";
+import { PacksContentPage } from "../packs-content/packs-content";
 
 @IonicPage()
 @Component({
@@ -98,7 +98,7 @@ export class PacksPage {
     //   });
   }
   openProduct(product) {
-    this.navCtrl.push(ProductoPage, product);
+    this.navCtrl.push(PacksContentPage, product);
   }
   handleStart(ev, idx) {
     this.startingX = ev.touches[0].pageX;

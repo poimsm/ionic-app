@@ -6,9 +6,9 @@ import {
   PopoverController
 } from "ionic-angular";
 import { PopCategoriasPage } from "../pop-categorias/pop-categorias";
-import { AuthProvider } from '../../providers/auth/auth';
-import { DataProvider } from '../../providers/data/data';
-import { CuponContentPage } from '../cupon-content/cupon-content';
+import { AuthProvider } from "../../providers/auth/auth";
+import { DataProvider } from "../../providers/data/data";
+import { CuponContentPage } from "../cupon-content/cupon-content";
 
 @IonicPage()
 @Component({
@@ -16,14 +16,13 @@ import { CuponContentPage } from '../cupon-content/cupon-content';
   templateUrl: "cupon.html"
 })
 export class CuponPage {
-
   categorias = [
     "Productos",
     "Spa bienestar & belleza",
     "Comida",
     "Servicios",
     "Deportes & Panoramas"
-  ]
+  ];
 
   constructor(
     public navCtrl: NavController,
@@ -34,7 +33,7 @@ export class CuponPage {
   ) {}
 
   openCupon() {
-    this.navCtrl.push(CuponContentPage)
+    this.navCtrl.push(CuponContentPage);
   }
   presentPopover(myEvent) {
     const popover = this.popoverCtrl.create(PopCategoriasPage, {
@@ -42,13 +41,13 @@ export class CuponPage {
       1: "Spa bienestar & belleza",
       2: "Comida",
       3: "Servicios",
-      4: "Deportes & Panoramas"
+      4: "Panoramas"
     });
     popover.present({
       ev: myEvent
     });
 
-    popover.onDidDismiss(data => {      
+    popover.onDidDismiss(data => {
       this.queryCategory(this.categorias[data.index]);
     });
   }
@@ -57,12 +56,11 @@ export class CuponPage {
     const skip = 0;
     const limit = 4;
     const category = categoria;
-    const route = 'coupons';
+    const route = "coupons";
     console.log(category);
-    
-    
-    this._data.get(this._auth.token, route, skip, limit, category)
-    .then(res => console.log(res))
-  }
 
+    this._data
+      .get(this._auth.token, route, skip, limit, category)
+      .then(res => console.log(res));
+  }
 }
