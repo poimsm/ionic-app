@@ -1,3 +1,9 @@
+export { PostEstudiantePage } from './post-estudiante/post-estudiante';
+export { PostRecreacionPage } from './post-recreacion/post-recreacion';
+export { PostDeportePage } from './post-deporte/post-deporte';
+export { PostServiciosPage } from './post-servicios/post-servicios';
+export { CestaCuponPage } from './cesta-cupon/cesta-cupon';
+export { CestaTicketPage } from './cesta-ticket/cesta-ticket';
 export { PostPedidosPage } from './post-pedidos/post-pedidos';
 export { PostPacksPage } from './post-packs/post-packs';
 export { PostCuponPage } from './post-cupon/post-cupon';

@@ -1,0 +1,131 @@
+<ion-header no-border>
+    <ion-navbar color="white" align-title="center">
+      <ion-title> {{ titulo | placeHolder: "Recreación" }} </ion-title>
+      <ion-buttons right>
+        <button mode="ios" outline (click)="save()" ion-button small>
+          Crear
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+  
+    <div *ngIf="imagePreview" class="imgBox">
+      <img [src]="imagePreview" class="img" />
+    </div>
+    <div class="imgButton">
+      <button ion-button outline small (click)="addImg()">Subir Imágenes</button>
+    </div>
+  
+    <ion-list style="margin-top:10px">
+      <ion-item>
+        <ion-input
+          [(ngModel)]="titulo"
+          type="text"
+          placeholder="Título"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-textarea
+          placeholder="Descripción"
+          rows="6"
+          [(ngModel)]="descripcion"
+        ></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label style="color:#6c757d">Sub categoría</ion-label>
+        <ion-select [(ngModel)]="categoria">
+          <ion-option value="Tours y paseos">Tours y paseos</ion-option>
+          <ion-option value="Deportes y aventura">Deportes y aventura</ion-option>
+          <ion-option value="Talleres y cursos">Parques y ferias</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <div item-start>
+          <div style="padding:5px;padding-right:30px;color:#777;font-weight:600">
+            $
+          </div>
+        </div>
+        <ion-input
+          [(ngModel)]="precio"
+          type="number"
+          placeholder="Precio de referencia"
+        ></ion-input>
+      </ion-item>
+      <ion-item no-lines>
+        <ion-label style="color:#6c757d">Duración de la actividad</ion-label>
+        <ion-select [(ngModel)]="duracion">
+          <ion-option value="15 min">15 min</ion-option>
+          <ion-option value="30 min">30 min</ion-option>
+          <ion-option value="1h">60 min</ion-option>
+          <ion-option value="1h 30min">1h 30min</ion-option>
+          <ion-option value="2h">2h</ion-option>
+          <ion-option value="2h 30min">2h 30min</ion-option>
+          <ion-option value="3h">3h</ion-option>
+          <ion-option value="2h 30min">3h 30min</ion-option>
+          <ion-option value="4h">4h</ion-option>
+          <ion-option value="5h">5h</ion-option>
+          <ion-option value="6h">6h</ion-option>
+          <ion-option value="7h">8h</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item-divider color="light" class="divider">
+        ¿Ubicación?
+      </ion-item-divider>
+      <ion-item no-lines>
+        <ion-input
+          [(ngModel)]="lugar"
+          type="text"
+          placeholder="Ejemplo Av. Ramon Picarte 3020"
+        ></ion-input>
+      </ion-item>
+      <ion-item-divider color="light" class="divider">
+        <ion-label>¿A qué hora comienza?</ion-label>
+        <ion-toggle [(ngModel)]="turn_hour"></ion-toggle>
+      </ion-item-divider>
+  
+      <ion-item *ngFor="let item of horas; let i = index">
+        <ion-label>Seleccionar una hora</ion-label>
+        <ion-datetime displayFormat="h:m A" [(ngModel)]="item[i]"></ion-datetime>
+      </ion-item>
+      <button
+        no-lines
+        (click)="addItem('explorar', 0, horas.length)"
+        ion-item block outline
+        color="white"
+        style="text-transform: none"
+      >
+        <div style="text-align:right;font-size:16px;font-weight:600;color:#777">
+          + Añadir
+        </div>
+      </button>
+
+      <ion-item-divider color="light" class="divider">
+        Horario
+      </ion-item-divider>
+      <button no-lines ion-item (click)="openMes()">
+        <ion-icon
+          name="ios-arrow-forward"
+          style="color:#777;font-size:18px"
+          item-end
+        ></ion-icon>
+        <div style="font-size:16px;color:#555">Fijar Fechas en Calendario</div>
+      </button>
+
+      <ion-item-divider color="light" class="divider">
+        Tienda
+      </ion-item-divider>
+      <ion-item no-lines>
+        <ion-input
+          [(ngModel)]="titulo"
+          type="text"
+          placeholder="¿Nombre de la tienda?"
+        ></ion-input>
+      </ion-item>
+
+    </ion-list>
+  
+ 
+  </ion-content>
+  

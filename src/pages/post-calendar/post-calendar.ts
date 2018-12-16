@@ -91,12 +91,19 @@ export class PostCalendarPage {
   select(i, day) {
     const target = Number(day.num) + this.calendarDB[i].days[0] - 1;
 
+    console.log(target);
+    
+    if (day.num == 0) {
+      return }
+    
+
     if (day.isActive) {
       const index = this.calendarDB[i].activeDays.indexOf(target);
       this.calendarDB[i].activeDays.splice(index, 1);
     } else {
       this.calendarDB[i].activeDays.push(target);
     }
+  
 
     this.updateDays();
   }

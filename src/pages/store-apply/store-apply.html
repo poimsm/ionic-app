@@ -17,9 +17,9 @@
 <ion-content>
   <ion-list>
     <ion-item-divider color="light" style="font-weight:600;color:#555"
-      >GENERAL</ion-item-divider
-    >
-    <ion-item>
+      >Datos personales
+    </ion-item-divider>
+    <!-- <ion-item>
       <ion-icon
         item-start
         name="md-person"
@@ -30,7 +30,37 @@
         type="text"
         placeholder="Tu nombre"
       ></ion-input>
-    </ion-item>
+    </ion-item> -->
+    <ion-item>
+        <ion-icon
+          item-start
+          name="md-call"
+          style="margin-right:5px;color:#bbb;font-size:22px"
+        ></ion-icon>
+        <ion-input
+          [(ngModel)]="telefono"
+          type="number"
+          placeholder="Tú teléfono de contacto"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-icon
+            item-start
+            name="md-mail"
+            style="margin-right:5px;color:#bbb;font-size:22px"
+          ></ion-icon>
+          <ion-input
+            [(ngModel)]="email"
+            type="text"
+            placeholder="Tú correo de contacto"
+          ></ion-input>
+        </ion-item>
+
+    <ion-item-divider color="light" style="font-weight:600;color:#555"
+    >Tienda 
+  </ion-item-divider>
+
     <ion-item>
       <ion-icon
         item-start
@@ -38,35 +68,13 @@
         style="margin-right:5px;color:#bbb;font-size:22px"
       ></ion-icon>
       <ion-input
-        [(ngModel)]="tienda"
+        [(ngModel)]="nombreTienda"
         type="text"
-        placeholder="Nombre de tu tienda"
+        placeholder="Nombre de la tienda"
       ></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-icon
-        item-start
-        name="md-call"
-        style="margin-right:5px;color:#bbb;font-size:22px"
-      ></ion-icon>
-      <ion-input
-        [(ngModel)]="telefono"
-        type="number"
-        placeholder="Teléfono de contacto"
-      ></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-icon
-        item-start
-        name="md-mail"
-        style="margin-right:5px;color:#bbb;font-size:22px"
-      ></ion-icon>
-      <ion-input
-        [(ngModel)]="email"
-        type="text"
-        placeholder="Correo de contacto"
-      ></ion-input>
-    </ion-item>
+   
+ 
     <ion-item no-lines style="margin-bottom:15px">
       <ion-label style="color:#6c757d">Categoria</ion-label>
       <ion-select [(ngModel)]="categoria">

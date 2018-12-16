@@ -17,8 +17,8 @@ export class DataProvider {
     public http: HttpClient
   ) {}
 
-  add(token, body, key) {
-    const url = `${this.apiURL}/apps/${key}`;
+  addStorePost(token, body, path) {
+    const url = `${this.apiURL}/apps/${path}`;
     const headers = new HttpHeaders({
       Authorization: `JWT ${token}`
     });
@@ -26,23 +26,66 @@ export class DataProvider {
     return this.http.post(url, body, { headers }).toPromise();
   }
 
-  get(token, key, skip, limit, category) {
-    const url = `${this.apiURL}/apps/${key}`;
+  storeApply(token, body) {
+    const url = `${this.apiURL}/admin/stores-apply-create`;
 
-    // let headers = new HttpHeaders();
-    // headers.append('Authorization', `JWT ${token}`)
+    const headers = new HttpHeaders({
+      Authorization: `JWT ${token}`
+    });  
+    return this.http.post(url, body, { headers }).toPromise();
+  }
+
+  deliveryApply(token, body) {
+    const url = `${this.apiURL}/admin/delivery-apply-create`;
+
+    const headers = new HttpHeaders({
+      Authorization: `JWT ${token}`
+    });  
+    return this.http.post(url, body, { headers }).toPromise();
+  }
+
+  getAll(token, skip, limit, category, path) {
+
+    let url = `${this.apiURL}/${path}`;
+    url = url + `?limit=${limit}&skip=${skip}`;
+
+    const headers = new HttpHeaders({
+      Authorization: `JWT ${token}`
+    });
+
+    if (category) {
+      url = url + `&category=${category}`;
+    }
+    return this.http.get(url, {headers}).toPromise();
+  }
+
+  getOne(token, id, path) {
+
+    let url = `${this.apiURL}/${path}/${id}`;
+
     const headers = new HttpHeaders({
       Authorization: `JWT ${token}`
     });
     
-
-    let params = new HttpParams();
-    params = params.append('skip', skip);
-    params = params.append('limit', limit);
-    params = params.append('category', category);
-
-    const options = { params, headers };
-
-    return this.http.get(url, options).toPromise();
+    return this.http.get(url, {headers}).toPromise();
   }
+
+  buyOneCoupon(token, body) {
+    const url = `${this.apiURL}/apps/coupons-buy`;
+
+    const headers = new HttpHeaders({
+      Authorization: `JWT ${token}`
+    });  
+    return this.http.post(url, body, { headers }).toPromise();
+  }
+
+  myCoupons(token) {
+    const url = `${this.apiURL}/apps/coupons-me`;
+
+    const headers = new HttpHeaders({
+      Authorization: `JWT ${token}`
+    });  
+    return this.http.get(url, { headers }).toPromise();
+  }
+
 }

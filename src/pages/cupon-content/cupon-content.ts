@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AuthProvider } from '../../providers/auth/auth';
+import { DataProvider } from '../../providers/data/data';
 
-/**
- * Generated class for the CuponContentPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -14,12 +10,29 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'cupon-content.html',
 })
 export class CuponContentPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  cupon: any;
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private _auth: AuthProvider,
+    private _data: DataProvider
+    ) {
+    this.cupon = navParams.get('cupon');
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CuponContentPage');
+  async comprar() {
+
+    const retrieve: any = await this._auth.loadStorage();
+    const token = retrieve.token;
+
+    const data = {
+      coupon: this.cupon._id,
+      store: this.cupon.store      
+    }
+
+    this._data.buyOneCoupon(token, data)
+    .then(res => console.log(res));
+    
   }
 
 }

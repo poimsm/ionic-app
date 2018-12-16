@@ -29,9 +29,9 @@ export class OrdersPage {
 
   presentPopover(myEvent) {
     const popover = this.popoverCtrl.create(PopCategoriasPage, {
-      0: "Ordenes entrantes",
-      1: "Ordenes pendientes",
-      2: "Ordenes tomadas"
+      0: "Entrada",
+      1: "Pendiente",
+      2: "Completado"
     });
     popover.present({
       ev: myEvent

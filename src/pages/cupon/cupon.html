@@ -22,27 +22,29 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col col-6 col-md-4 col-xl-3>
-        <div (click)="openCupon()" style="border:1px solid #eee;border-radius:0px">
+
+      <ion-col *ngFor="let coupon of coupons" col-6 col-md-4 col-xl-3>
+        <div (click)="openCupon(coupon)" style="border:1px solid #eee;border-radius:0px">
           <div style="position:relative">
-            <img src="assets/desa06.jpg" style="height:150px;width:100%;object-fit:cover" />
-            <div style="position:absolute;top:10px;left:0px;background:orangered;color:white;padding:3px;font-size:14px;font-weight:600">
-              30%
+            <img [src]="coupon.img.url" style="height:150px;width:100%;object-fit:cover" />
+            <!-- <img src="assets/desa06.jpg" style="height:150px;width:100%;object-fit:cover" /> -->
+            <div *ngIf="coupon.porcentage" style="position:absolute;top:10px;left:0px;background:orangered;color:white;padding:3px;font-size:14px;font-weight:600">
+              {{coupon.porcentage}}
             </div>
             <div style="position:absolute;bottom:10px;right:0px;background:#444;color:white;padding:3px;font-size:14px;font-weight:600">
               143 vendidos
             </div>
           </div>
           <div style="padding:5px;width:100%;font-size:16px;color:#444">
-            Promoción en zapatos
+            {{coupon.title}}
           </div>
           <div style="border-top:0.5px dashed #eee;padding:5px;">
             <div style="width:100%;display:flex;align-items:flex-end;justify-content:flex-end;font-size:15px">
               <div style="color:orangered;font-weight:500;font-size:18px">
-                $1600
+                {{coupon.discountPrice}}
               </div>
-              <div style=" text-decoration: line-through;color:#777;margin-left:10px">
-                $5000
+              <div style="text-decoration: line-through;color:#777;margin-left:10px">
+                {{coupon.price}}
               </div>
             </div>            
           </div>

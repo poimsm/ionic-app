@@ -85,9 +85,9 @@ export class PedidosPage {
     const category = "Destacado";
     const route = "explore/services";
 
-    this._data
-      .get(this._auth.token, route, skip, limit, category)
-      .then(res => console.log(res));
+    // this._data
+    //   .get(this._auth.token, route, skip, limit, category)
+    //   .then(res => console.log(res));
   }
   queryCategory(categoria) {
     const skip = 0;
@@ -95,9 +95,9 @@ export class PedidosPage {
     const category = categoria;
     const route = "explore/services";
 
-    this._data
-      .get(this._auth.token, route, skip, limit, category)
-      .then(res => console.log(res));
+    // this._data
+    //   .get(this._auth.token, route, skip, limit, category)
+    //   .then(res => console.log(res));
   }
   openProduct(product) {
     this.navCtrl.push(PedidosContentPage, product);

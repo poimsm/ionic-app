@@ -59,12 +59,10 @@ export class PostCuponPage {
     });
   }
 
-  addItem(type, index, i: number) {
+  addItem(i) {
     let item: any = {};
     item[i] = "";
-    if (type == "cupon") {
-      this.condiciones.push(item);
-    }
+    this.condiciones.push(item);
   }
   deleteList(index) {
     this.condiciones.splice(index, 1);
@@ -73,7 +71,12 @@ export class PostCuponPage {
     this.imagePreview = "data:image/jpeg;base64," + this.go;
     // this.base64Image = this.go;
   }
-  save() {
+
+  async save() {
+
+    const retrieve: any = await this._auth.loadStorage();
+    const token = retrieve.token;
+
     this.imagen64 = "data:image/jpg;base64," + this.go;
     const data: any = {
       category: this.categoria,
@@ -81,17 +84,25 @@ export class PostCuponPage {
       description: this.descripcion,
       price: this.precio,
       discountPrice: this.precioPromocion,
-      img: this.imagen64,
-      initDate: this.fechaInicio,
-      endDate: this.fechaTermino
+      img: this.imagen64
+      // initDate: this.fechaInicio,
+      // endDate: this.fechaTermino
     };
+
+    const temp = (this.precio - this.precioPromocion)/this.precio*100;
+    const porcentage = Math.ceil(temp);
+    data.porcentage = porcentage;
     
     if (this.turn_conditions) {
-      data.conditions = this.condiciones
+      const cons = [];
+      this.condiciones.forEach((item,i) => {
+        cons.push(item[i]);
+      })      
+      data.conditions = cons;
     }
     
     this._data
-      .add(this._auth.token, data, "coupons")
+      .addStorePost(token, data, "coupons-create")
       .then(res => console.log("Listooo"));
   }
 }

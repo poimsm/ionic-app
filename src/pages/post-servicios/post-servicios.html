@@ -1,0 +1,68 @@
+<ion-header no-border>
+    <ion-navbar color="white" align-title="center">
+      <ion-title> {{ titulo | placeHolder: "Servicios" }} </ion-title>
+      <ion-buttons right>
+        <button mode="ios" outline (click)="save()" ion-button small>
+          Crear
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+  
+    <div *ngIf="imagePreview" class="imgBox">
+      <img [src]="imagePreview" class="img" />
+    </div>
+    <div class="imgButton">
+      <button ion-button outline small (click)="addImg()">Subir imagen</button>
+    </div>
+  
+    <ion-list style="margin-top:10px">
+      <ion-item>
+        <ion-input
+          [(ngModel)]="titulo"
+          type="text"
+          placeholder="Título"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-textarea
+          placeholder="Descripción"
+          rows="6"
+          [(ngModel)]="descripcion"
+        ></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-input
+          [(ngModel)]="telefono"
+          type="text"
+          placeholder="Tu teléfono"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label style="color:#777">¿Servicio a domicilio?</ion-label>
+        <ion-toggle [(ngModel)]="turn_domicilio"></ion-toggle>
+      </ion-item>
+      <ion-item no-lines *ngIf="!turn_domicilio">
+        <ion-input
+          [(ngModel)]="lugar"
+          type="text"
+          placeholder="Dirección de tu negocio"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label style="color:#6c757d">Sub categoría</ion-label>
+        <ion-select [(ngModel)]="categoria">
+          <ion-option value="Electrodomésticos">Electrodomésticos</ion-option>
+          <ion-option value="Reparaciones del hogar">Reparaciones del hogar</ion-option>
+          <ion-option value="Fletes">Fletes</ion-option>
+          <ion-option value="Arriendo de vehículos">Arriendo de vehículos</ion-option>
+        </ion-select>
+      </ion-item>     
+
+    </ion-list>
+  
+ 
+  </ion-content>
+  

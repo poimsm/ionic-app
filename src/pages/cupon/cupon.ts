@@ -16,7 +16,7 @@ import { CuponContentPage } from "../cupon-content/cupon-content";
   templateUrl: "cupon.html"
 })
 export class CuponPage {
-  categorias = [
+  category = [
     "Productos",
     "Spa bienestar & belleza",
     "Comida",
@@ -24,16 +24,20 @@ export class CuponPage {
     "Deportes & Panoramas"
   ];
 
+  coupons = [];
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public popoverCtrl: PopoverController,
     private _auth: AuthProvider,
     private _data: DataProvider
-  ) {}
+  ) {
+    this.fetchByCategory(-1);
+  }
 
-  openCupon() {
-    this.navCtrl.push(CuponContentPage);
+  openCupon(cupon) {
+    this.navCtrl.push(CuponContentPage, {cupon});
   }
   presentPopover(myEvent) {
     const popover = this.popoverCtrl.create(PopCategoriasPage, {
@@ -48,19 +52,43 @@ export class CuponPage {
     });
 
     popover.onDidDismiss(data => {
-      this.queryCategory(this.categorias[data.index]);
+      if (data) {
+        this.fetchByCategory(data.index);
+      }
     });
   }
 
-  queryCategory(categoria) {
-    const skip = 0;
-    const limit = 4;
-    const category = categoria;
-    const route = "coupons";
-    console.log(category);
-
-    this._data
-      .get(this._auth.token, route, skip, limit, category)
-      .then(res => console.log(res));
+  async fetchOne(id) {
+    const retrieve: any = await this._auth.loadStorage();
+    const token = retrieve.token;
+    const path = 'best/explore-services';
+    this._data.getOne(token, id, path)
+    .then((data: any[]) => {this.coupons = data;console.log(data);
+    });
   }
+
+  async fetchBest() {
+    const retrieve: any = await this._auth.loadStorage();
+    const token = retrieve.token;
+    const path = 'best/explore-services';
+    this._data.getAll(token, 999, 999, "", path)
+    .then((data: any[]) => {this.coupons = data;console.log(data);
+    });
+  }
+
+  async fetchByCategory(index) {
+    const retrieve: any = await this._auth.loadStorage();
+    const token = retrieve.token;
+    const path = 'apps/coupons';
+    let select = "";
+
+    if (index == -1) {
+      select = null;
+    } else {
+      select = this.category[index];      
+    }    
+    this._data.getAll(token, 0, 10, select, path)
+    .then((data: any[]) => this.coupons = data);
+  }
+
 }

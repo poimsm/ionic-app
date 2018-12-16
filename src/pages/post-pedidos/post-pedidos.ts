@@ -101,7 +101,11 @@ export class PostPedidosPage {
     this.imagePreview = "data:image/jpeg;base64," + this.go;
     // this.base64Image = this.go;
   }
-  save() {
+  async save() {
+
+    const retrieve: any = await this._auth.loadStorage();
+    const token = retrieve.token;
+
     this.imagen64 = "data:image/jpg;base64," + this.go;
 
     const data: any = {
@@ -119,7 +123,7 @@ export class PostPedidosPage {
     }
 
     this._data
-      .add(this._auth.token, data, "food")
+      .addStorePost(token, data, "food-create")
       .then(res => console.log("Listooo"));
   }
 }

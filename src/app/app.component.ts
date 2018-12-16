@@ -60,8 +60,10 @@ export class MyApp {
     _auth: AuthProvider,
     splashScreen: SplashScreen
   ) {
-    _auth.loadStorage().then(isAuth => {
-      if (isAuth) {
+    _auth.loadStorage().then((data: any) => {
+      console.log(data.isAuth);
+      
+      if (data.isAuth) {
         this.rootPage = this.home;
       } else {
         this.rootPage = this.login;

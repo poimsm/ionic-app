@@ -104,7 +104,12 @@ export class PostExplorarPage {
     this.imagePreview = "data:image/jpeg;base64," + this.go;
     // this.base64Image = this.go;
   }
-  save() {
+  
+  async save() {
+    
+    const retrieve: any = await this._auth.loadStorage();
+    const token = retrieve.token;
+
     this.imagen64 = "data:image/jpg;base64," + this.go;
     const imagenes64 = {
       0: "data:image/jpg;base64," + this.go,
@@ -126,7 +131,7 @@ export class PostExplorarPage {
         endHour: this.termino
       };
 
-      route = "explore/events";
+      route = "explore/events-create";
     } else if (this.modo == "servicio") {
       data = {
         category: this.categoria,
@@ -147,11 +152,11 @@ export class PostExplorarPage {
         data.isTicket = true;
       }
 
-      route = "explore/services";
+      route = "explore/services-create";
     }
 
     this._data
-      .add(this._auth.token, data, route)
+      .addStorePost(token, data, route)
       .then(res => console.log("Listooo"));
   }
 }

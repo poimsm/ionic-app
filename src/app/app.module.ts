@@ -59,7 +59,13 @@ import {
   PostExplorarPage,
   PostPedidosPage,
   PostPacksPage,
-  PostCuponPage
+  PostCuponPage,
+  CestaCuponPage,
+  CestaTicketPage,
+  PostRecreacionPage,
+  PostDeportePage,
+  PostServiciosPage,
+  PostEstudiantePage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -104,7 +110,13 @@ import { HttpClientModule } from "@angular/common/http";
     PostExplorarPage,
     PostPedidosPage,
     PostPacksPage,
-    PostCuponPage
+    PostCuponPage,
+    CestaCuponPage,
+    CestaTicketPage,
+    PostRecreacionPage,
+    PostDeportePage,
+    PostServiciosPage,
+    PostEstudiantePage
   ],
   imports: [
     BrowserModule,
@@ -151,7 +163,13 @@ import { HttpClientModule } from "@angular/common/http";
     PostExplorarPage,
     PostPedidosPage,
     PostPacksPage,
-    PostCuponPage
+    PostCuponPage,
+    CestaCuponPage,
+    CestaTicketPage,
+    PostRecreacionPage,
+    PostDeportePage,
+    PostServiciosPage,
+    PostEstudiantePage
   ],
   providers: [
     StatusBar,

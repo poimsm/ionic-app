@@ -69,7 +69,12 @@ export class PostPacksPage {
     this.imagePreview = "data:image/jpeg;base64," + this.go;
     // this.base64Image = this.go;
   }
-  save() {
+
+ async save() {
+
+    const retrieve: any = await this._auth.loadStorage();
+    const token = retrieve.token;
+
     this.imagen64 = "data:image/jpg;base64," + this.go;
 
     const data = {
@@ -81,7 +86,7 @@ export class PostPacksPage {
       content: this.contenido
     };
     this._data
-      .add(this._auth.token, data, "packs")
+      .addStorePost(token, data, "packs-create")
       .then(res => console.log("Listooo"));
   }
 }

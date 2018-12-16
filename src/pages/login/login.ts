@@ -49,6 +49,8 @@ export class LoginPage {
       this.afAuth.auth
         .signInWithPopup(new firebase.auth.FacebookAuthProvider())
         .then((res: any) => {
+          console.log(res);
+          
           const access_token = res.credential.accessToken;
           // console.log("access", access_token);
 

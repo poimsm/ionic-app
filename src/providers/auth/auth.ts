@@ -6,9 +6,9 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable()
 export class AuthProvider {
-  // apiURL = "http://localhost:3000";
+  apiURL = "http://localhost:3000";
   // apiURL = "http://192.168.1.8:3000";
-  apiURL = "https://poimsm-server.herokuapp.com";
+  // apiURL = "https://poimsm-server.herokuapp.com";
   user = {};
   token = "";
   authData = {};
@@ -65,12 +65,18 @@ export class AuthProvider {
       } else {
         if (localStorage.getItem("credentials")) {
           const retrievedData = localStorage.getItem("credentials");
-          this.user = JSON.parse(retrievedData).user;
-          this.token = JSON.parse(retrievedData).token;
-          resolve(true);
+
+          const data = {
+            isAuth: true,
+            user: JSON.parse(retrievedData).user,
+            token: JSON.parse(retrievedData).token
+          }
+          
+          resolve(data);
         } else {
-          resolve(false);
-        }
+
+          resolve({ isAuth: false });
+        }  
       }
     });
   }
