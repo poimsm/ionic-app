@@ -1,18 +1,128 @@
-<!--
-  Generated template for the PostDeportePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>post-deporte</ion-title>
+<ion-header no-border>
+  <ion-navbar color="white" align-title="center">
+    <ion-title> {{ titulo | placeHolder: "Deporte" }} </ion-title>
+    <ion-buttons right>
+      <button mode="ios" outline (click)="save()" ion-button small>
+        Crear
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
+<ion-content>
 
-<ion-content padding>
+  <div *ngIf="imagePreview" class="imgBox">
+    <img [src]="imagePreview" class="img" />
+  </div>
+  <div class="imgButton">
+    <button ion-button outline small (click)="addImg()">Subir Imágenes</button>
+  </div>
+
+  <ion-list style="margin-top:10px">
+    <ion-item>
+      <ion-input
+        [(ngModel)]="titulo"
+        type="text"
+        placeholder="Título"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label style="color:#6c757d">Sub categoría</ion-label>
+      <ion-select [(ngModel)]="categoria">
+        <ion-option value="Tours y paseos">Fútbol</ion-option>
+        <ion-option value="Deportes y aventura">Tenis</ion-option>
+        <ion-option value="Deportes y aventura">Otro</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <div item-start>
+        <div style="padding:5px;padding-right:30px;color:#777;font-weight:600">
+          $
+        </div>
+      </div>
+      <ion-input
+        [(ngModel)]="precio"
+        type="number"
+        placeholder="Precio de referencia"
+      ></ion-input>
+    </ion-item>
+    <ion-item-divider color="light" class="divider">
+      ¿Ubicación?
+    </ion-item-divider>
+    <ion-item no-lines>
+      <ion-input
+        [(ngModel)]="lugar"
+        type="text"
+        placeholder="Ejemplo Av. Ramon Picarte 3020"
+      ></ion-input>
+    </ion-item>
+    <ion-item-divider color="light" class="divider">
+      <ion-label>¿A qué hora comienza?</ion-label>
+      <ion-toggle [(ngModel)]="turn_hour"></ion-toggle>
+    </ion-item-divider>
+
+    <ion-item *ngFor="let item of horas; let i = index">
+      <ion-label>Seleccionar una hora</ion-label>
+      <ion-datetime displayFormat="h:m A" [(ngModel)]="item[i]"></ion-datetime>
+    </ion-item>
+    <button
+      no-lines
+      (click)="addItem('explorar', 0, horas.length)"
+      ion-item block outline
+      color="white"
+      style="text-transform: none"
+    >
+      <div style="text-align:right;font-size:16px;font-weight:600;color:#777">
+        + Añadir
+      </div>
+    </button>
+
+    <ion-item-divider color="light" class="divider">
+      Horario
+    </ion-item-divider>
+    <button no-lines ion-item (click)="openMes()">
+      <ion-icon
+        name="ios-arrow-forward"
+        style="color:#777;font-size:18px"
+        item-end
+      ></ion-icon>
+      <div style="font-size:16px;color:#555">Fijar Fechas en Calendario</div>
+    </button>
+
+    <ion-item-divider color="light" class="divider">
+      Bloque 1
+    </ion-item-divider>
+    <ion-item>
+      <ion-label style="color:#6c757d">Desde</ion-label>
+      <ion-select [(ngModel)]="categoria">
+        <ion-option value="Tours y paseos">Lunes</ion-option>
+        <ion-option value="Deportes y aventura">Tenis</ion-option>
+        <ion-option value="Deportes y aventura">Otro</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label style="color:#6c757d">Hasta</ion-label>
+      <ion-select [(ngModel)]="categoria">
+        <ion-option value="Tours y paseos">Lunes</ion-option>
+        <ion-option value="Deportes y aventura">Tenis</ion-option>
+        <ion-option value="Deportes y aventura">Otro</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <div item-start>
+        <div style="padding:5px;padding-right:30px;color:#777;font-weight:600">
+          $
+        </div>
+      </div>
+      <ion-input
+        [(ngModel)]="precio"
+        type="number"
+        placeholder="Precio de referencia"
+      ></ion-input>
+    </ion-item>
+
+  </ion-list>
+
 
 </ion-content>

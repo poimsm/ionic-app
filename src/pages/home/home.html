@@ -47,12 +47,12 @@
     <div (click)="openPage(packs)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
       <div style="position:relative;height:45px;width:45px;border-radius:50%;background:slateblue;display:flex;justify-content:center;align-items:center">
         <ion-icon name="md-cafe" style="color:white;font-size:30px"></ion-icon>
-        <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:-30px;background:red;color:white;padding:4px;border-radius:4px">
+        <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:-30px;background:#f53d3d;color:white;padding:4px;border-radius:4px">
           delivery
         </div>
       </div>
       <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Packs
+        Desayuno
       </div>
     </div>  
 
@@ -68,6 +68,27 @@
 
   <div style="margin-top:10px;display:flex;justify-content:space-between;">
       
+    <!-- <div (click)="openPage(cupon)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+      <div style="height:45px;width:45px;border-radius:50%;background:rgb(48, 160, 48);display:flex;justify-content:center;align-items:center">
+          <ion-icon name="md-nutrition" style="color:white;font-size:30px"></ion-icon>
+        </div>
+      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
+        Vegetales
+      </div>
+    </div> -->
+
+    <div (click)="openPage(packs)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+      <div style="position:relative;height:45px;width:45px;border-radius:50%;background:salmon;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="md-nutrition" style="color:white;font-size:30px"></ion-icon>
+        <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:-30px;background:#f53d3d;color:white;padding:4px;border-radius:4px">
+          delivery
+        </div>
+      </div>
+      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
+        Vegetales
+      </div>
+    </div>  
+
     <div (click)="openPage(cupon)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
       <img src="assets/book.svg" style="width:45px" />
       <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
@@ -81,24 +102,26 @@
         Gimnasio
       </div>
     </div>
-
-    <div (click)="openPage(cupon)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
-      <div style="height:45px;width:45px;border-radius:50%;background:slategray;display:flex;justify-content:center;align-items:center">
-          <ion-icon name="md-construct" style="color:white;font-size:30px"></ion-icon>
-        </div>
-      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Servicios
-      </div>
-    </div>
-
-    <div (click)="openPage(cupon)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+    <!-- <div (click)="openPage(cupon)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
       <div style="height:45px;width:45px;border-radius:50%;background:white;display:flex;justify-content:center;align-items:center">
           <ion-icon name="ios-football" style="color:#444;font-size:40px"></ion-icon>
         </div>
       <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
         Deporte
       </div>
-    </div>
+    </div> -->
+
+    <div (click)="openPage(packs)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+      <div style="position:relative;height:45px;width:45px;border-radius:50%;background:white;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="ios-football" style="color:#444;font-size:40px"></ion-icon>
+        <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:20px;background:white;border:1px solid #eee;color:#777;padding:4px;border-radius:4px">
+          reserva
+        </div>
+      </div>
+      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
+        Deporte
+      </div>
+    </div>  
 
   </div>
 
