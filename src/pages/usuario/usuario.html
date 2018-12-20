@@ -1,0 +1,38 @@
+<ion-header no-border>
+    <ion-navbar align-title="center" color="white">
+    </ion-navbar>
+  </ion-header>
+
+
+<ion-content padding>
+
+  <div style="margin-top:50px;width:100%;display:flex;justify-content:center">
+    <img src="assets/03.jpg" style="width:100px;height:100px;border-radius:50%;object-fit:cover">
+  </div>
+
+  <div style="margin-top:10px;width:100%;display:flex;justify-content:center">
+    <div style="font-size:18px;color:#777;font-weight:600">
+      Oscar Garcia
+    </div>
+  </div>
+
+  <ion-list>
+    <ion-item>
+      <ion-input
+        [(ngModel)]="titulo"
+        type="text"
+        placeholder="Mi teléfono"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-input
+          [(ngModel)]="titulo"
+          type="text"
+          placeholder="Mi dirección"
+        ></ion-input>
+      </ion-item>
+  </ion-list>
+
+
+
+</ion-content>

@@ -1,0 +1,46 @@
+<ion-header no-border>
+  <ion-navbar align-title="center" color="white">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <div style="color:#bbb;font-weight:800;font-size:22px">
+      Once
+    </div>
+    <ion-buttons right>
+      <button (click)="presentPopover($event)" ion-button icon-only>
+        <ion-icon name="md-more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content>
+
+  <ion-grid>
+    <ion-row>
+
+      <ion-col *ngFor="let once of data" col-6 col-md-4 col-xl-3>
+        <div (click)="openOnce(once)" style="border:1px solid #eee;border-radius:0px">
+          <img [src]="once.imgs[0].url" style="height:150px;width:100%;object-fit:cover" />
+          <div style="padding:5px;width:100%;font-size:16px;color:#444;font-weight:600">
+            {{once.titulo}}
+          </div>
+          <div style="border-top:0.5px dashed #eee;padding:5px;">
+            <div style="width:100%;display:flex;align-items:flex-end;justify-content:flex-end;font-size:15px">
+              <div style="color:#555;font-size:16px">
+                <div>
+                  desde {{once.tabla[0].tipo}} por ${{once.tabla[0].precio}}
+                </div>
+              </div>
+            </div>            
+          </div>
+        </div>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+</ion-content>

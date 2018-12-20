@@ -25,7 +25,6 @@ export class AuthProvider {
     try {
       const resToken: any = await this.getToken(accessToken);
       const resUser: any = await this.getUser(resToken.token);
-      console.log(resUser.user);
 
       this.saveStorage(resUser.user, resToken.token);
       this.authState.next(true);
@@ -50,32 +49,43 @@ export class AuthProvider {
     }
   }
 
+  async updateUserStorage(token) {
+    try {
+      const resUser: any = await this.getUser(token);
+      this.saveStorage(resUser.user, token);
+    } catch (error) {
+      console.log("Error", error);
+    }
+  }
+
   loadStorage() {
     return new Promise((resolve, reject) => {
       if (this.platform.is("cordova")) {
         this.storage.get("credentials").then(data => {
+          
           if (data) {
-            this.user = data.user;
-            this.token = data.token;
-            resolve(true);
+            const retrieved = {
+              isAuth: true,
+              user: data.user,
+              token: data.token
+            }
+            resolve(retrieved);
           } else {
-            resolve(false);
+            resolve({isAuth: false});
           }
         });
       } else {
         if (localStorage.getItem("credentials")) {
-          const retrievedData = localStorage.getItem("credentials");
+          const retrieved = localStorage.getItem("credentials");
 
           const data = {
             isAuth: true,
-            user: JSON.parse(retrievedData).user,
-            token: JSON.parse(retrievedData).token
-          }
-          
+            user: JSON.parse(retrieved).user,
+            token: JSON.parse(retrieved).token
+          }          
           resolve(data);
         } else {
-
-          resolve({ isAuth: false });
+          resolve({isAuth: false});
         }  
       }
     });
@@ -94,6 +104,7 @@ export class AuthProvider {
     const body = { access_token: accessToken };
     return this.http.post(url, body).toPromise();
   }
+
   getUser(token) {
     const url = `${this.apiURL}/users/me`;
     const headers = new HttpHeaders({

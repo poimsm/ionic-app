@@ -1,8 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ToastController } from "ionic-angular";
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { Storage } from "@ionic/storage";
-import { Platform } from "ionic-angular";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable()
 export class DataProvider {
@@ -11,14 +9,12 @@ export class DataProvider {
   // apiURL = "https://poimsm-server.herokuapp.com";
 
   constructor(
-    private platform: Platform,
-    private storage: Storage,
     public toastCtrl: ToastController,
     public http: HttpClient
   ) {}
 
-  addStorePost(token, body, path) {
-    const url = `${this.apiURL}/apps/${path}`;
+  addCompra(token, body) {
+    const url = `${this.apiURL}/compras/compras-crear`;
     const headers = new HttpHeaders({
       Authorization: `JWT ${token}`
     });
@@ -26,21 +22,12 @@ export class DataProvider {
     return this.http.post(url, body, { headers }).toPromise();
   }
 
-  storeApply(token, body) {
-    const url = `${this.apiURL}/admin/stores-apply-create`;
-
+  addContacto(token, body) {
+    const url = `${this.apiURL}/compras/compras-guardar-contacto`;
     const headers = new HttpHeaders({
       Authorization: `JWT ${token}`
-    });  
-    return this.http.post(url, body, { headers }).toPromise();
-  }
-
-  deliveryApply(token, body) {
-    const url = `${this.apiURL}/admin/delivery-apply-create`;
-
-    const headers = new HttpHeaders({
-      Authorization: `JWT ${token}`
-    });  
+    });
+    
     return this.http.post(url, body, { headers }).toPromise();
   }
 
@@ -70,21 +57,13 @@ export class DataProvider {
     return this.http.get(url, {headers}).toPromise();
   }
 
-  buyOneCoupon(token, body) {
-    const url = `${this.apiURL}/apps/coupons-buy`;
+  misCompras(token, id) {
+    const url = `${this.apiURL}/compras/compras-por-usuario/${id}`;
 
     const headers = new HttpHeaders({
       Authorization: `JWT ${token}`
-    });  
-    return this.http.post(url, body, { headers }).toPromise();
-  }
+    });
 
-  myCoupons(token) {
-    const url = `${this.apiURL}/apps/coupons-me`;
-
-    const headers = new HttpHeaders({
-      Authorization: `JWT ${token}`
-    });  
     return this.http.get(url, { headers }).toPromise();
   }
 

@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.joopiterweb.com.joopiterapp001" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>joopiterApp</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+<widget id="com.joopiterweb.joopiter001" version="0.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Joopiter</name>
+    <description>App todo en uno</description>
+    <author email="poimsm@gmail.com" href="http://joopiterweb.com/">Oscar Garcia</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -90,5 +90,5 @@
     </plugin>
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <plugin name="cordova-sqlite-storage" spec="^2.3.3" />
-    <engine name="android" spec="6.4.0" />
+    <engine name="android" spec="~6.4.0" />
 </widget>

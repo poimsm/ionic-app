@@ -14,37 +14,56 @@
   </ion-navbar>
 </ion-header>
 
-<!-- <div style="position:fixed;top:0px;left:0px;width:100%;height:100%;background:rgb(0, 0, 0, 0.3);z-index:999;display:flex;justify-content:center;align-items:center">
-  <div style="width:70%;height:50%;border-radius:10px;background:red">
-
-  </div>
-</div> -->
-
 <ion-content>
 
-    <div style="height:190px;margin-top:-10px">
-  <ion-slides pager>
-    <ion-slide>  
-  
-  <div style="display:flex;justify-content:space-between;">
+ 
+  <div style="margin-top:20px;display:flex;justify-content:space-between;">
 
-    <div (click)="openPage(explorar)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
-      <div style="height:45px;width:45px;border-radius:50%;background:#51c0f3;display:flex;justify-content:center;align-items:center">
-        <ion-icon name="md-boat" style="color:white;font-size:30px"></ion-icon>
+    <div style="width:80px"></div>  
+
+    <!-- <div (click)="openPage(usuario)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+      <div style="height:45px;width:45px;border-radius:50%;background:orange;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="md-person" style="color:white;font-size:30px"></ion-icon>
       </div>
       <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Recreación
+        Usuario
       </div>
-    </div>  
+    </div> -->
 
-    <div (click)="openPage(cupon)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
-      <img src="assets/food2.svg" style="width:45px" />
+    <!-- <div (click)="openPage(deporte)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+        <div style="position:relative;height:45px;width:45px;border-radius:50%;background:orange;display:flex;justify-content:center;align-items:center">
+            <ion-icon name="md-person" style="color:white;font-size:30px"></ion-icon>
+          <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:0px;background:white;border:1px solid #eee;color:#777;padding:4px;border-radius:4px">
+            comple
+          </div>
+        </div>
+        <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
+            Usuario
+        </div>
+      </div> -->
+
+    <div (click)="openPage(misCompras)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+      <div style="height:45px;width:45px;border-radius:15px;background:#f53d3d;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="md-basket" style="color:white;font-size:30px"></ion-icon>
+      </div>
       <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Comida
+        Mis compras
       </div>
     </div>
 
-    <div (click)="openPage(packs)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+    <!-- <div (click)="openPage(deporte)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+      <div style="position:relative;height:45px;width:45px;border-radius:50%;background:white;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="ios-football" style="color:#444;font-size:40px"></ion-icon>
+        <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:20px;background:white;border:1px solid #eee;color:#777;padding:4px;border-radius:4px">
+          reservar
+        </div>
+      </div>
+      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
+        Deporte
+      </div>
+    </div> -->
+
+    <div (click)="openPage(once)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
       <div style="position:relative;height:45px;width:45px;border-radius:50%;background:slateblue;display:flex;justify-content:center;align-items:center">
         <ion-icon name="md-cafe" style="color:white;font-size:30px"></ion-icon>
         <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:-30px;background:#f53d3d;color:white;padding:4px;border-radius:4px">
@@ -52,32 +71,35 @@
         </div>
       </div>
       <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Desayuno
-      </div>
-    </div>  
-
-    <div (click)="openPage(cesta)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
-      <div style="height:45px;width:45px;border-radius:15px;background:#f53d3d;display:flex;justify-content:center;align-items:center">
-        <ion-icon name="md-basket" style="color:white;font-size:30px"></ion-icon>
-      </div>
-      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Compras
+        Once
       </div>
     </div>
+    <div style="width:80px"></div>
+
+    <!-- <div (click)="openPage(recreacion)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+      <div style="height:45px;width:45px;border-radius:50%;background:#51c0f3;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="md-boat" style="color:white;font-size:30px"></ion-icon>
+      </div>
+      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
+        Recreación
+      </div>
+    </div>  -->
+
+    <!-- <div (click)="openPage(cesta)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+        <div style="height:45px;width:45px;border-radius:15px;background:#f53d3d;display:flex;justify-content:center;align-items:center">
+          <ion-icon name="md-basket" style="color:white;font-size:30px"></ion-icon>
+        </div>
+        <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
+          Mis compras
+        </div>
+      </div> -->
+
+
   </div>
 
-  <div style="margin-top:10px;display:flex;justify-content:space-between;">
-      
-    <!-- <div (click)="openPage(cupon)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
-      <div style="height:45px;width:45px;border-radius:50%;background:rgb(48, 160, 48);display:flex;justify-content:center;align-items:center">
-          <ion-icon name="md-nutrition" style="color:white;font-size:30px"></ion-icon>
-        </div>
-      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Vegetales
-      </div>
-    </div> -->
-
-    <div (click)="openPage(packs)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+  <!-- <div style="margin-top:15px;display:flex;justify-content:space-between;">
+    
+    <div (click)="openPage(fruta)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
       <div style="position:relative;height:45px;width:45px;border-radius:50%;background:salmon;display:flex;justify-content:center;align-items:center">
         <ion-icon name="md-nutrition" style="color:white;font-size:30px"></ion-icon>
         <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:-30px;background:#f53d3d;color:white;padding:4px;border-radius:4px">
@@ -85,126 +107,22 @@
         </div>
       </div>
       <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Vegetales
+        Frutas
       </div>
-    </div>  
-
-    <div (click)="openPage(cupon)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
-      <img src="assets/book.svg" style="width:45px" />
+    </div>
+    
+    <div (click)="openPage(misCompras)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+      <div style="height:45px;width:45px;border-radius:15px;background:#f53d3d;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="md-basket" style="color:white;font-size:30px"></ion-icon>
+      </div>
       <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Estudiante
+        Mis compras
       </div>
     </div>
 
-    <div (click)="openPage(cupon)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
-      <img src="assets/gym4.svg" style="width:45px;margin:8px" />
-      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Gimnasio
-      </div>
-    </div>
-    <!-- <div (click)="openPage(cupon)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
-      <div style="height:45px;width:45px;border-radius:50%;background:white;display:flex;justify-content:center;align-items:center">
-          <ion-icon name="ios-football" style="color:#444;font-size:40px"></ion-icon>
-        </div>
-      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Deporte
-      </div>
-    </div> -->
+    <div style="width:80px"></div>
+    <div style="width:80px"></div>  
 
-    <div (click)="openPage(packs)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
-      <div style="position:relative;height:45px;width:45px;border-radius:50%;background:white;display:flex;justify-content:center;align-items:center">
-        <ion-icon name="ios-football" style="color:#444;font-size:40px"></ion-icon>
-        <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:20px;background:white;border:1px solid #eee;color:#777;padding:4px;border-radius:4px">
-          reserva
-        </div>
-      </div>
-      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Deporte
-      </div>
-    </div>  
-
-  </div>
-
-  </ion-slide>
-  <ion-slide>
-
-    <div style="display:flex;justify-content:space-between;">
- 
-      <div (click)="openPage(explorar)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
-        <div style="height:45px;width:45px;border-radius:50%;background:white;display:flex;justify-content:center;align-items:center">
-          <ion-icon name="md-woman" style="color:salmon;font-size:40px"></ion-icon>
-        </div>
-        <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-          Belleza
-        </div>
-      </div>
-
-      <div (click)="openPage(packs)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
-        <div style="height:45px;width:45px;border-radius:50%;background:#eee;display:flex;justify-content:center;align-items:center">
-          <ion-icon name="md-home" style="color:#bbb;font-size:30px"></ion-icon>
-        </div>
-        <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-          Hoteles
-        </div>
-      </div>
-
-      <div (click)="openPage(packs)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
-        <div style="height:45px;width:45px;border-radius:50%;background:#eee;display:flex;justify-content:center;align-items:center">
-          <ion-icon name="md-home" style="color:#bbb;font-size:30px"></ion-icon>
-        </div>
-        <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-          Bodas
-        </div>
-      </div>
-
-      <div style="width:80px"></div>
-
-    </div>
-
-    <div style="height:70px"></div>
-
-  </ion-slide>
-</ion-slides>
-
-
-</div>
-
-  <page-best></page-best>
-
-  <div style="margin-top:15px;margin-bottom:10px">
-    <ion-slides pager>
-      <ion-slide>
-        <div style="position:relative">
-          <img
-            src="assets/desa04.png"
-            style="width:100%;height:200px;object-fit:cover"
-          />
-          <div
-            style="position:absolute;left:0px;top:30px;background:rgb(49, 49, 49, 0.8);color:white;padding:3px;font-size:16px;font-weight:500"
-          >
-            $3200
-          </div>
-        </div>
-      </ion-slide>
-      <ion-slide>
-        <img
-          src="assets/desa05.jpg"
-          style="width:100%;height:200px;object-fit:cover"
-        />
-      </ion-slide>
-      <ion-slide>
-        <img
-          src="assets/desa06.jpg"
-          style="width:100%;height:200px;object-fit:cover"
-        />
-      </ion-slide>
-    </ion-slides>
-  </div>
-
-  <div
-    style="font-weight:700;padding:4px;padding-left:15px;color:white;background:salmon;width:100%;margin-bottom:10px"
-  >
-    Lo más popular
-  </div>
+  </div> -->
 
 </ion-content>

@@ -1,0 +1,9 @@
+<ion-content>
+
+  <ion-list no-lines>
+    <div *ngFor="let item of list; let i = index">
+      <button ion-item (click)="close(i)">{{item}}</button>
+    </div>
+  </ion-list>
+  
+  </ion-content>

@@ -1,0 +1,38 @@
+<ion-header no-border>
+  <ion-navbar align-title="center" color="white">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="close('x')">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title> Datos del pedido </ion-title>
+  </ion-navbar>
+</ion-header> 
+
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item>
+      <ion-input
+        [(ngModel)]="telefono"
+        type="number"
+        placeholder="SU TELÉFONO"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-input
+          [(ngModel)]="direccion"
+          type="text"
+          placeholder="SU DIRECCIÓN"
+        ></ion-input>
+      </ion-item>
+  </ion-list>
+
+  <div style="width:100%;display:flex;justify-content:center">
+    <button [disabled]="!(direccion.length>0 && telefono)" (click)="close('o')" ion-button color="secondary" mode="ios">
+      Guardar
+    </button>
+  </div> 
+
+</ion-content>
