@@ -18,9 +18,16 @@ npm-debug.log*
 .sass-cache/
 .tmp/
 .versions/
+
+build.json
+joopiter-key.keystore
+jarsinger
+
+
 coverage/
 dist/
 node_modules/
+platforms/
 tmp/
 temp/
 platforms/
