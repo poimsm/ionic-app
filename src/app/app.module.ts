@@ -20,12 +20,12 @@ import { Camera } from "@ionic-native/camera";
 import { IonicStorageModule } from "@ionic/storage";
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyDbblV3zsLhNYwlHX_5_njNJj6KYXxEJi4",
-  authDomain: "joopiterapp-2a5e4.firebaseapp.com",
-  databaseURL: "https://joopiterapp-2a5e4.firebaseio.com",
-  projectId: "joopiterapp-2a5e4",
-  storageBucket: "joopiterapp-2a5e4.appspot.com",
-  messagingSenderId: "140100374140"
+  apiKey: 'AIzaSyAUecL57weWVkb-4OR0TBCM1f18tHgqi5M',
+  authDomain: 'joopiter-3af7f.firebaseapp.com',
+  databaseURL: 'https://joopiter-3af7f.firebaseio.com',
+  projectId: 'joopiter-3af7f',
+  storageBucket: 'joopiter-3af7f.appspot.com',
+  messagingSenderId: '873508722787'
 };
 
 import {

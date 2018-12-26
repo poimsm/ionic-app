@@ -31,11 +31,15 @@ export class OncePage {
     private _auth: AuthProvider,
     private _data: DataProvider
   ) {
+    // this.fetchByCategory(-1);
+  }
+
+  ionViewDidLoad() {
     this.fetchByCategory(-1);
   }
 
   openOnce(once) {
-    this.navCtrl.push(OnceContentPage, {once});
+    this.navCtrl.push(OnceContentPage, { once });
   }
   presentPopover(myEvent) {
     const popover = this.popoverCtrl.create(CategoriasPage, {
@@ -54,29 +58,27 @@ export class OncePage {
     });
   }
 
-  async fetchOne(id) {
-    const retrieve: any = await this._auth.loadStorage();
-    const token = retrieve.token;
-    const path = 'apps/once-one';
-    this._data.getOne(token, id, path)
-    .then(data => console.log(data));
+  fetchOne(id) {
+    const authData: any = this._auth.credentials;
+    const route = 'apps/once-one';
+    this._data.getOne(authData.token, id, route)
+      .then(data => console.log(data));
   }
 
   async fetchByCategory(index) {
-    const retrieve: any = await this._auth.loadStorage();
-    const token = retrieve.token;
+    const authData: any = this._auth.credentials;
     const route = 'apps/once-all';
     let select = "";
 
     if (index == -1) {
       select = null;
     } else {
-      select = this.category[index];      
-    }    
-    this._data.getAll(token, 0, 10, select, route)
-    .then((data: any[]) => this.data = data
-    
-    );
+      select = this.category[index];
+    }
+    this._data.getAll(authData.token, 0, 10, select, route)
+      .then((data: any[]) => this.data = data
+
+      );
   }
 
 }

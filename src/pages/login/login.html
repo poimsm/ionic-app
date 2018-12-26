@@ -1,28 +1,14 @@
-<ion-header>
+<ion-content style="background:salmon">
+  <div padding style="margin-top:50px;width:100%;font-weight:500;color:white;font-size:30px;text-align:center">
+    joopiter
+  </div>
+  <div padding style="background:white;margin-top:90%;width:100%;display:flex;justify-content:center">
+    <button ion-button mode="ios" color="primary" (click)="signInWithFacebook()">
+      Ingresar con facebook
+    </button>
+  </div>
 
-  <ion-navbar>
-    <ion-title>login</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-  <ion-segment mode="md" [(ngModel)]="pet" color="danger">
-    <ion-segment-button value="market" (click)="one=true; two=false; three=false">
-      Market
-    </ion-segment-button>
-    <ion-segment-button value="mix" (click)="two=true; one=false; three=false">
-      Mix's
-    </ion-segment-button>
-    <ion-segment-button value="seguir" (click)="three=true; one=false; two=false">
-      Seguir
-    </ion-segment-button>
-  </ion-segment>
-
-  <button ion-button (click)="signInWithFacebook()">
-    facebook
-  </button>
+  <!-- <div style="width:100%;height:50px;background:white">
+  </div> -->
 
 </ion-content>

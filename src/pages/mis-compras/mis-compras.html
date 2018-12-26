@@ -1,40 +1,40 @@
 <ion-header no-border>
-    <ion-navbar align-title="center" color="white">
-      <ion-title> Mis compras </ion-title>
-    </ion-navbar>
-  </ion-header>
-  
-  
-  
-  <ion-content>
-    <div padding *ngFor="let compra of compras">
-      <div style="width:100%;display:flex;height:130px">
-        <img [src]="compra.imgUrl" style="width:40%;height:130px;object-fit:cover">
-        <div>
-          <div style="padding:10px;font-weight:400;color:#444;font-weight:600;font-size:16px">
-            {{compra.titulo}}
+  <ion-navbar align-title="center" color="white">
+    <div style="color:#bbb;font-weight:600;font-size:20px">
+      Compras
+    </div>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content>
+  <div padding *ngFor="let compra of compras">
+    <div style="width:100%;display:flex;margin-bottom:0px">
+      <img [src]="compra.imgUrl" style="width:40%;height:130px;object-fit:cover">
+      <div>
+        <div style="padding:10px;font-weight:400;color:#444;font-weight:600;font-size:16px">
+          {{compra.titulo}}
+        </div>
+        <div style="padding-left:10px;padding-right:10px;">
+          <div style="color:#777">
+            {{compra.descripcion}}
           </div>
-          <div style="padding-left:10px;padding-right:10px;">
-            <div style="color:#777">
-              {{compra.descripcion}}
+          <div style="margin:5px;width:100%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+
+            <div style="padding:5px;border:1px solid #eee;color:#555">
+              {{compra.estado}}
             </div>
-            <div style="margin:5px;width:100%;display:flex;justify-content:space-between;align-items:center">
-              
-              <div style="padding:5px;border:1px solid #eee;color:#555">
-                {{compra.estado}}
-                <!-- entregado -->
-              </div>
-              <div style="color:#222;font-weight:400;font-size:16px">
-                Total: ${{compra.precio}}
-              </div>
+            <div style="color:#222;font-weight:400;font-size:16px">
+              Total: ${{compra.precio}}
             </div>
-           
           </div>
+
         </div>
       </div>
     </div>
-    <hr>
-  
-  
-  
-  </ion-content>
+  </div>
+
+
+
+</ion-content>

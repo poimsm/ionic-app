@@ -17,17 +17,21 @@ export class MisComprasPage {
     public navParams: NavParams,
     private _auth: AuthProvider,
     private _data: DataProvider
-    ) {
+  ) {
+    // this.fetchCompras();
+  }
+
+  ionViewDidLoad() {
     this.fetchCompras();
   }
 
-  async fetchCompras() {
-    const retrieve: any = await this._auth.loadStorage();
-    const token = retrieve.token;
-    const user = retrieve.user; 
+  fetchCompras() {
+    const authData: any = this._auth.credentials;
+    const token = authData.token;
+    const user = authData.user;
 
     this._data.misCompras(token, user._id).
-    then(data => this.compras = data);
+      then(data => this.compras = data);
   }
 
 }

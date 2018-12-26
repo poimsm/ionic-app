@@ -1,51 +1,56 @@
 import { Injectable } from "@angular/core";
 import { Storage } from "@ionic/storage";
-import { Platform } from "ionic-angular";
-import { Subject } from "rxjs/Subject";
+import { Platform } from 'ionic-angular';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
 
 @Injectable()
 export class AuthProvider {
-  apiURL = "http://localhost:3000";
-  // apiURL = "http://192.168.1.8:3000";
-  // apiURL = "https://poimsm-server.herokuapp.com";
-  user = {};
-  token = "";
-  authData = {};
+  // apiURL = "http://localhost:3000";
+  apiURL = "https://poimsm-server.herokuapp.com";
 
-  authState = new Subject<boolean>();
+  authState = new BehaviorSubject(false);
+  credentials = {};
 
   constructor(
     private platform: Platform,
     private storage: Storage,
     public http: HttpClient
-  ) {}
+  ) {
+    platform.ready().then(() => {
+      this.loadStorage();
+    });
+  }
 
-  async login(accessToken) {
-    try {
-      const resToken: any = await this.getToken(accessToken);
-      const resUser: any = await this.getUser(resToken.token);
-
-      this.saveStorage(resUser.user, resToken.token);
-      this.authState.next(true);
-    } catch (error) {
-      console.log("Error", error);
-    }
+  login(accessToken) {
+    return new Promise((resolve, reject) => {
+      this.getToken(accessToken).then((resToken: any) => {
+        this.getUser(resToken.token).then((resUser: any) => {
+          this.saveStorage(resUser.user, resToken.token);
+          resolve();
+        })
+      })
+    });
   }
 
   logout() {
-    this.token = null;
-    this.user = null;
+    this.credentials = null;
     this.removeStorage();
     this.authState.next(false);
   }
 
+  isAuthenticated() {
+    return this.authState.value;
+  }
+
   saveStorage(user, token) {
-    const credentials = { user, token };
+    this.credentials = { user, token };
     if (this.platform.is("cordova")) {
-      this.storage.set("credentials", JSON.stringify(credentials));
+      this.storage.set("credentials", JSON.stringify(this.credentials));
+      this.authState.next(true);
     } else {
-      localStorage.setItem("credentials", JSON.stringify(credentials));
+      localStorage.setItem("credentials", JSON.stringify(this.credentials));
+      this.authState.next(true);
     }
   }
 
@@ -59,36 +64,26 @@ export class AuthProvider {
   }
 
   loadStorage() {
-    return new Promise((resolve, reject) => {
-      if (this.platform.is("cordova")) {
-        this.storage.get("credentials").then(data => {
-          
-          if (data) {
-            const retrieved = {
-              isAuth: true,
-              user: data.user,
-              token: data.token
-            }
-            resolve(retrieved);
-          } else {
-            resolve({isAuth: false});
-          }
-        });
-      } else {
-        if (localStorage.getItem("credentials")) {
-          const retrieved = localStorage.getItem("credentials");
+    if (this.platform.is('cordova')) {
+      this.storage.get('credentials').then(res => {
 
-          const data = {
-            isAuth: true,
-            user: JSON.parse(retrieved).user,
-            token: JSON.parse(retrieved).token
-          }          
-          resolve(data);
+        if (res) {
+          this.credentials = { user: res.user, token: res.token };
+          this.authState.next(true);
         } else {
-          resolve({isAuth: false});
-        }  
+          this.authState.next(false);
+        }
+      });
+    } else {
+      if (localStorage.getItem('credentials')) {
+        const res = localStorage.getItem('credentials');
+
+        this.credentials = { user: JSON.parse(res).user, token: JSON.parse(res).token };
+        this.authState.next(true);
+      } else {
+        this.authState.next(false);
       }
-    });
+    }
   }
 
   removeStorage() {

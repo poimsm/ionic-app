@@ -1,0 +1,11 @@
+{
+    "android": {
+        "release": {
+            "keystore": "joopiter-key.keystore",
+            "storePassword": "lospri133",
+            "alias": "joopiter",
+            "password": "lospri133",
+            "keystoreType": ""
+        }
+    }
+}

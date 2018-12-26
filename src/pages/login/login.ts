@@ -13,6 +13,7 @@ import { AuthProvider } from "../../providers/auth/auth";
   templateUrl: "login.html"
 })
 export class LoginPage {
+  rootPage: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -21,41 +22,28 @@ export class LoginPage {
     private fb: Facebook,
     private platform: Platform,
     public appCtrl: App
-  ) {}
+  ) { }
 
   signInWithFacebook() {
+    let that = this;
     if (this.platform.is("cordova")) {
-      this.fb.login(["email", "public_profile"]).then(res => {
-        const facebookCredential = firebase.auth.FacebookAuthProvider.credential(
-          res.authResponse.accessToken
-        );
-        firebase
-          .auth()
-          .signInWithCredential(facebookCredential)
-          .then(user => {
-            console.log("Full user", user);
+      return this.fb.login(['email', 'public_profile']).then(res => {
 
-            const authData = {
-              name: user.displayName,
-              userId: user.uid,
-              userImg: user.photoURL,
-              provider: "facebook"
-            };
-            this._auth.login(authData);
-            this.navCtrl.setRoot(HomePage);
-          });
+        const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+        firebase.auth().signInWithCredential(facebookCredential)
+          .then(() => {
+            this._auth.login(res.authResponse.accessToken)
+              .then(() => that.navCtrl.setRoot(HomePage));
+          })
       });
+
     } else {
       this.afAuth.auth
         .signInWithPopup(new firebase.auth.FacebookAuthProvider())
         .then((res: any) => {
-          console.log(res);
-          
           const access_token = res.credential.accessToken;
-          // console.log("access", access_token);
-
-          this._auth.login(access_token);
-          this.appCtrl.getRootNav().setRoot(HomePage);
+          this._auth.login(access_token)
+            .then(() => that.navCtrl.setRoot(HomePage));
         });
     }
   }

@@ -5,6 +5,7 @@ import { SplashScreen } from "@ionic-native/splash-screen";
 import { AuthProvider } from "../providers/auth/auth";
 import { HomePage } from "../pages/home/home";
 import { LoginPage } from '../pages/login/login';
+import { AngularFireAuth } from "angularfire2/auth";
 
 @Component({
   templateUrl: "app.html"
@@ -13,42 +14,40 @@ export class MyApp {
   @ViewChild("content")
   nav: NavController;
 
-  user = {name: "",  img: ""};
   login = LoginPage;
   home = HomePage;
+
+  state: boolean;
 
   rootPage: any;
   // rootPage: any = HomePage;
   constructor(
+    private afAuth: AngularFireAuth,
     private menuCtrl: MenuController,
     platform: Platform,
     statusBar: StatusBar,
     private _auth: AuthProvider,
     splashScreen: SplashScreen
   ) {
-    _auth.loadStorage().then((data: any) => {
-      
-      if (data.isAuth) {
-        this.rootPage = this.home;
-        this.user = data.user;        
-      } else {
-        this.rootPage = this.login;
-      }
-    });
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
+      this._auth.authState.subscribe(state => {
+        this.state = state;
+        if (state) {
+          this.rootPage = this.home;
+        } else {
+          this.rootPage = this.login;
+        }
+      });
     });
   }
 
-  openPage(pagina) {
-    this.rootPage = pagina;
-    this.menuCtrl.close();
-  }
-  
   logout() {
-    this._auth.logout();
-    this.rootPage = this.login;
-    this.menuCtrl.close();
+    this.afAuth.auth.signOut().then(() => {
+      this._auth.logout();
+      this.nav.push(this.login);
+      this.menuCtrl.close();
+    });
   }
 }

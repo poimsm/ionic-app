@@ -1,13 +1,13 @@
 <ion-menu [content]="content">
   <ion-content class="card-background-page">
-    <div style="display:flex;justify-content:flex-start;align-items:center;background:#242630;width:100%;height:90px">
-      <img [src]="user.img" style="margin-left:20px;border:2px solid white;width:55px;height:55px;border-radius:50%;object-fit:cover"/>
+    <div *ngIf="state" style="display:flex;justify-content:flex-start;align-items:center;background:#242630;width:100%;height:90px">
+      <img [src]="_auth.credentials.user.img" style="margin-left:20px;border:2px solid white;width:55px;height:55px;border-radius:50%;object-fit:cover" />
       <div style="color:white;font-size:18px;padding-left:20px">
-        <div> {{user.name}} </div>
+        <div> {{_auth.credentials.user.name}} </div>
       </div>
-    </div>   
+    </div>
 
-    <ion-list no-lines>
+    <!-- <ion-list no-lines>
       <div style="height:10px;width:100%;background:#eee"></div>
       <button ion-item (click)="openPage(home)">
         <ion-icon
@@ -17,22 +17,18 @@
         ></ion-icon>
         <span style="color:#222;font-weight:400"> Inicio </span>
       </button>
-    </ion-list>
+    </ion-list> -->
   </ion-content>
 
-  <ion-footer>    
+  <ion-footer>
     <!-- <div style="height:10px;width:100%;background:#eee"></div> -->
     <button ion-item no-lines (click)="logout()">
-      <ion-icon
-        item-start
-        name="md-exit"
-        style="color:dodgerblue;font-size:25px"
-      ></ion-icon>
+      <ion-icon item-start name="md-exit" style="color:dodgerblue;font-size:25px"></ion-icon>
       <div style="font-size:18px;color:#222">Cerrar sesión</div>
     </button>
     <div style="margin-top:5px;height:15px;width:100%;background:#eee"></div>
   </ion-footer>
-  
+
 </ion-menu>
 
 <ion-nav [root]="rootPage" #content></ion-nav>

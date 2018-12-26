@@ -10,6 +10,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 export class DatosPersonalesPage {
 
   telefono: number;
+  mensaje: string;
   direccion = '';
   isenabled = false;
 
@@ -18,12 +19,15 @@ export class DatosPersonalesPage {
 
   close(key) {
 
-    const datos = {
+    const datos: any = {
       ok: true,
       telefono: this.telefono,
       direccion: this.direccion
     }
 
+    if (this.mensaje) {
+      datos.mensaje = this.mensaje;
+    }
     if (key == "x") {
       datos.ok = false
     }
