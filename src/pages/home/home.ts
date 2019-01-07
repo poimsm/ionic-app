@@ -1,11 +1,13 @@
 import { Component } from "@angular/core";
-import { NavController} from "ionic-angular";
-import { RecreacionPage } from '../recreacion/recreacion';
-import { DeportePage } from '../deporte/deporte';
-import { FrutaPage } from '../fruta/fruta';
+import { NavController } from "ionic-angular";
 import { OncePage } from '../once/once';
 import { UsuarioPage } from '../usuario/usuario';
-import { MisComprasPage } from '../mis-compras/mis-compras';
+import { AuthProvider } from '../../providers/auth/auth';
+import { BandejaPage } from '../bandeja/bandeja';
+import { ComprasPage } from '../compras/compras';
+import { FormularioPage } from '../formulario/formulario';
+import { PopupsProvider } from '../../providers/popups/popups';
+import { CarroPage } from '../carro/carro';
 
 @Component({
   selector: "page-home",
@@ -13,16 +15,32 @@ import { MisComprasPage } from '../mis-compras/mis-compras';
 })
 export class HomePage {
 
-  recreacion = RecreacionPage;
-  deporte = DeportePage;
-  fruta = FrutaPage;
   once = OncePage;
   usuario = UsuarioPage;
-  misCompras = MisComprasPage
+  carro = CarroPage;
+  compras = ComprasPage;
+  bandeja = BandejaPage;
+  formulario = FormularioPage;
+
+  mensaje = '';
+
+  user: any;
 
   constructor(
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    private _auth: AuthProvider,
+    private _popups: PopupsProvider
   ) { }
+
+  ionViewDidLoad() {
+    this._auth.authState.subscribe((data: any) => {
+
+      if (data.isAuth) {
+        this.user = data.authData.user;
+      }
+    });
+    this.mensaje = this._popups.mensajeHome;
+  }
 
   openPage(pagina) {
     this.navCtrl.push(pagina);

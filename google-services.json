@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "873508722787",
+    "firebase_url": "https://joopiter-3af7f.firebaseio.com",
+    "project_id": "joopiter-3af7f",
+    "storage_bucket": "joopiter-3af7f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873508722787:android:143c92a29f9df7c3",
+        "android_client_info": {
+          "package_name": "com.joopiterweb.joopiter004"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873508722787-m4lmekesgkmr7qdt91qc6n22jcj0us5c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRhFAAK7h5H0rQC8f5FIkRofwO_4CRL94"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

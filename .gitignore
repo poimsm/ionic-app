@@ -21,8 +21,7 @@ npm-debug.log*
 
 build.json
 joopiter-key.keystore
-jarsinger
-
+jarsigner
 
 coverage/
 dist/

@@ -7,7 +7,10 @@
     </ion-buttons>
     <ion-title> joopiter </ion-title>
     <ion-buttons right>
-      <button ion-button icon-only>
+      <button (click)="openPage(formulario)" ion-button icon-only>
+        <ion-icon name="ios-settings" style="color:#777"></ion-icon>
+      </button>
+      <button (click)="openPage(carro)" ion-button icon-only>
         <ion-icon name="md-cart" style="color:#bbb"></ion-icon>
       </button>
     </ion-buttons>
@@ -40,16 +43,49 @@
         <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
             Usuario
         </div>
-      </div> -->
+      </div> *ngIf="user?.isDelivery"-->
 
-    <div (click)="openPage(misCompras)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+    <div *ngIf="user?.isDelivery" (click)="openPage(bandeja)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+      <div style="height:45px;width:45px;border-radius:50%;background:orange;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="md-archive" style="color:white;font-size:30px"></ion-icon>
+      </div>
+      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
+        Bandeja
+      </div>
+    </div>
+
+    <!-- <div (click)="openPage(compras)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+      <div style="position:relative;height:45px;width:45px;border-radius:50%;background:#f53d3d;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="md-basket" style="color:white;font-size:30px"></ion-icon>
+        <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:20px;background:white;border:1px solid #eee;color:#777;padding:4px;border-radius:4px">
+          ecommerce
+        </div>
+      </div>
+      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
+        Compras
+      </div>
+    </div> -->
+
+    <div (click)="openPage(compras)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;margin-right:10px">
+      <div style="position:relative;height:45px;width:45px;border-radius:50%;background:#f53d3d;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="md-basket" style="color:white;font-size:30px"></ion-icon>
+        <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:-45px;background:orange;color:white;padding:4px;border-radius:4px;border:0px solid white">
+          eCommerce
+        </div>
+      </div>
+      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
+        Compras
+      </div>
+    </div>
+
+    <!-- <div (click)="openPage(compras)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
       <div style="height:45px;width:45px;border-radius:15px;background:#f53d3d;display:flex;justify-content:center;align-items:center">
         <ion-icon name="md-basket" style="color:white;font-size:30px"></ion-icon>
       </div>
       <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Mis compras
+        Compras
       </div>
-    </div>
+    </div> -->
 
     <!-- <div (click)="openPage(deporte)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
       <div style="position:relative;height:45px;width:45px;border-radius:50%;background:white;display:flex;justify-content:center;align-items:center">
@@ -74,6 +110,7 @@
         Once
       </div>
     </div>
+
     <div style="width:80px"></div>
 
     <!-- <div (click)="openPage(recreacion)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
@@ -83,7 +120,7 @@
       <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
         Recreación
       </div>
-    </div>  -->
+    </div> -->
 
     <!-- <div (click)="openPage(cesta)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
         <div style="height:45px;width:45px;border-radius:15px;background:#f53d3d;display:flex;justify-content:center;align-items:center">
@@ -131,6 +168,9 @@
 
 <ion-footer padding>
   <div style="margin-top:0px;width:100%;text-align:center;color:#555;font-weight:500;font-size:18px">
-    Servicio disponible en Valdivia
+    {{mensaje}}
   </div>
+  <!-- <div style="margin-top:10px;width:100%;text-align:center;color:#555;font-weight:500;font-size:14px">
+    Servicio disponible en Valdivia
+  </div> -->
 </ion-footer>

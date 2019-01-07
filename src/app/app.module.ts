@@ -12,12 +12,15 @@ import {
   AngularFireDatabase
 } from "angularfire2/database";
 import { AngularFireAuthModule } from "angularfire2/auth";
+import { FirebaseMessaging } from '@ionic-native/firebase-messaging';
+
 
 import { ImagePicker } from "@ionic-native/image-picker";
 import { PipesModule } from "../pipes/pipes.module";
-import { Facebook } from "@ionic-native/facebook";
 import { Camera } from "@ionic-native/camera";
 import { IonicStorageModule } from "@ionic/storage";
+import { AppVersion } from '@ionic-native/app-version';
+
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAUecL57weWVkb-4OR0TBCM1f18tHgqi5M',
@@ -32,20 +35,27 @@ import {
   HomePage,
   LoginPage,
   OncePage,
-  DeportePage,
   UsuarioPage,
-  RecreacionPage,
-  FrutaPage,
   OnceContentPage,
-  FrutaContentPage,
   CategoriasPage,
   DatosPersonalesPage,
-  MisComprasPage
+  BandejaPage,
+  LoginEmailPage,
+  LoginPasswordPage,
+  BandejaContentPage,
+  LoginNamePage,
+  UpgradePage,
+  ComprasPage,
+  FormularioPage,
+  ComprasContentPage,
+  CarroContentPage,
+  CarroPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
 import { AuthProvider } from "../providers/auth/auth";
 import { HttpClientModule } from "@angular/common/http";
+import { PopupsProvider } from '../providers/popups/popups';
 
 @NgModule({
   declarations: [
@@ -53,15 +63,21 @@ import { HttpClientModule } from "@angular/common/http";
     HomePage,
     LoginPage,
     OncePage,
-    DeportePage,
     UsuarioPage,
-    RecreacionPage,
-    FrutaPage,
     OnceContentPage,
-    FrutaContentPage,
     CategoriasPage,
     DatosPersonalesPage,
-    MisComprasPage
+    BandejaPage,
+    LoginEmailPage,
+    LoginPasswordPage,
+    BandejaContentPage,
+    LoginNamePage,
+    UpgradePage,
+    ComprasPage,
+    FormularioPage,
+    ComprasContentPage,
+    CarroContentPage,
+    CarroPage
   ],
   imports: [
     BrowserModule,
@@ -74,6 +90,7 @@ import { HttpClientModule } from "@angular/common/http";
     PipesModule,
     IonicStorageModule.forRoot(),
     HttpClientModule
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -81,15 +98,21 @@ import { HttpClientModule } from "@angular/common/http";
     HomePage,
     LoginPage,
     OncePage,
-    DeportePage,
     UsuarioPage,
-    RecreacionPage,
-    FrutaPage,
     OnceContentPage,
-    FrutaContentPage,
     CategoriasPage,
     DatosPersonalesPage,
-    MisComprasPage
+    BandejaPage,
+    LoginEmailPage,
+    LoginPasswordPage,
+    BandejaContentPage,
+    LoginNamePage,
+    UpgradePage,
+    ComprasPage,
+    FormularioPage,
+    ComprasContentPage,
+    CarroContentPage,
+    CarroPage
   ],
   providers: [
     StatusBar,
@@ -98,9 +121,11 @@ import { HttpClientModule } from "@angular/common/http";
     AngularFireDatabase,
     DataProvider,
     ImagePicker,
-    Facebook,
     Camera,
-    AuthProvider
+    AuthProvider,
+    FirebaseMessaging,
+    AppVersion,
+    PopupsProvider
   ]
 })
-export class AppModule {}
+export class AppModule { }

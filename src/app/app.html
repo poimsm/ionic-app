@@ -1,11 +1,24 @@
 <ion-menu [content]="content">
   <ion-content class="card-background-page">
-    <div *ngIf="state" style="display:flex;justify-content:flex-start;align-items:center;background:#242630;width:100%;height:90px">
-      <img [src]="_auth.credentials.user.img" style="margin-left:20px;border:2px solid white;width:55px;height:55px;border-radius:50%;object-fit:cover" />
-      <div style="color:white;font-size:18px;padding-left:20px">
-        <div> {{_auth.credentials.user.name}} </div>
+    <ion-item no-lines color="dark">
+      <ion-icon item-start *ngIf="!user?.img" name="md-contact" style="color:#bbb;font-size:50px"></ion-icon>
+      <div style="color:white;font-size:16px;">
+        <div> {{user.local?.email}} </div>
+        <div> {{user?.name | titlecase}} </div>
       </div>
-    </div>
+
+      <!-- <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:26px"></ion-icon> -->
+    </ion-item>
+    <!-- <div *ngIf="state" style="display:flex;justify-content:flex-start;align-items:center;background:#242630;width:100%;height:90px">
+      <img *ngIf="user?.img" [src]="user.img" style="margin-left:20px;border:2px solid white;width:55px;height:55px;border-radius:50%;object-fit:cover" />
+      <div *ngIf="!user?.img" style="margin-left:20px;border:2px solid white;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-content:center">
+        <ion-icon name="md-contact" style="color:#bbb;font-size:40px"></ion-icon>
+      </div>
+      <ion-icon *ngIf="!user?.img" name="md-contact" style="margin-left:20px;color:#bbb;font-size:50px"></ion-icon>
+      <div style="color:white;font-size:18px;padding-left:20px">
+        <div> {{user?.name}} </div>
+      </div>
+    </div> -->
 
     <!-- <ion-list no-lines>
       <div style="height:10px;width:100%;background:#eee"></div>
@@ -24,7 +37,7 @@
     <!-- <div style="height:10px;width:100%;background:#eee"></div> -->
     <button ion-item no-lines (click)="logout()">
       <ion-icon item-start name="md-exit" style="color:dodgerblue;font-size:25px"></ion-icon>
-      <div style="font-size:18px;color:#222">Cerrar sesión</div>
+      <div style="font-size:16px;color:#222">Cerrar sesión</div>
     </button>
     <div style="margin-top:5px;height:15px;width:100%;background:#eee"></div>
   </ion-footer>

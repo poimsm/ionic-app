@@ -3,16 +3,18 @@ import { Storage } from "@ionic/storage";
 import { Platform } from 'ionic-angular';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { FirebaseMessaging } from '@ionic-native/firebase-messaging';
+
 
 @Injectable()
 export class AuthProvider {
-  // apiURL = "http://localhost:3000";
-  apiURL = "https://poimsm-server.herokuapp.com";
+  // apiURL = 'http://localhost:3000';
+  apiURL = 'https://poimsm-server.herokuapp.com';
 
-  authState = new BehaviorSubject(false);
-  credentials = {};
+  authState = new BehaviorSubject({ isAuth: false, authData: {} });
 
   constructor(
+    private firebaseMessaging: FirebaseMessaging,
     private platform: Platform,
     private storage: Storage,
     public http: HttpClient
@@ -22,35 +24,52 @@ export class AuthProvider {
     });
   }
 
-  login(accessToken) {
+  loginIn(email, password) {
     return new Promise((resolve, reject) => {
-      this.getToken(accessToken).then((resToken: any) => {
-        this.getUser(resToken.token).then((resUser: any) => {
-          this.saveStorage(resUser.user, resToken.token);
-          resolve();
-        })
+      this.signIn(email, password).then((res: any) => {
+        if (res.ok) {
+          this.saveStorage(res.token, res.user);
+          resolve(true);
+        } else {
+          resolve(false);
+        }
       })
     });
   }
 
-  logout() {
-    this.credentials = null;
+  loginUp(name, email, password) {
+    return new Promise((resolve, reject) => {
+      this.signUp(name, email, password).then((res: any) => {
+        this.saveStorage(res.token, res.user);
+        resolve();
+      })
+    });
+  }
+
+  logout(token, user) {
     this.removeStorage();
-    this.authState.next(false);
+
+    if (user.isDelivery) {
+      this.unsubscribeToNotifications()
+        .then(() => console.log('Usuario desubscrito'))
+    }
+    const authData = {};
+    this.authState.next({ isAuth: false, authData });
   }
 
   isAuthenticated() {
     return this.authState.value;
   }
 
-  saveStorage(user, token) {
-    this.credentials = { user, token };
+  saveStorage(token, user) {
+    const authData = { user, token };
     if (this.platform.is("cordova")) {
-      this.storage.set("credentials", JSON.stringify(this.credentials));
-      this.authState.next(true);
+      this.storage.set("authData", JSON.stringify(authData));
+      this.authState.next({ isAuth: true, authData });
+
     } else {
-      localStorage.setItem("credentials", JSON.stringify(this.credentials));
-      this.authState.next(true);
+      localStorage.setItem("authData", JSON.stringify(authData));
+      this.authState.next({ isAuth: true, authData });
     }
   }
 
@@ -65,38 +84,53 @@ export class AuthProvider {
 
   loadStorage() {
     if (this.platform.is('cordova')) {
-      this.storage.get('credentials').then(res => {
+      this.storage.get('authData').then(res => {
 
         if (res) {
-          this.credentials = { user: res.user, token: res.token };
-          this.authState.next(true);
+          const authData = { user: JSON.parse(res).user, token: JSON.parse(res).token };
+          this.authState.next({ isAuth: true, authData });
         } else {
-          this.authState.next(false);
+          const authData = {};
+          this.authState.next({ isAuth: false, authData });
         }
       });
     } else {
-      if (localStorage.getItem('credentials')) {
-        const res = localStorage.getItem('credentials');
+      if (localStorage.getItem('authData')) {
+        const res = localStorage.getItem('authData');
 
-        this.credentials = { user: JSON.parse(res).user, token: JSON.parse(res).token };
-        this.authState.next(true);
+        const authData = { user: JSON.parse(res).user, token: JSON.parse(res).token };
+        this.authState.next({ isAuth: true, authData });
+
       } else {
-        this.authState.next(false);
+        const authData = {};
+        this.authState.next({ isAuth: false, authData });
       }
     }
   }
 
   removeStorage() {
     if (this.platform.is("cordova")) {
-      this.storage.remove("credendials");
+      this.storage.remove("authData");
     } else {
-      localStorage.removeItem("credentials");
+      localStorage.removeItem("authData");
     }
   }
 
-  getToken(accessToken) {
-    const url = `${this.apiURL}/users/oauth/facebook`;
-    const body = { access_token: accessToken };
+  signIn(email, password) {
+    const url = `${this.apiURL}/users/signin`;
+    const body = { email, password };
+    return this.http.post(url, body).toPromise();
+  }
+
+  signUp(name, email, password) {
+    const url = `${this.apiURL}/users/signup`;
+    const body = { name, email, password };
+    return this.http.post(url, body).toPromise();
+  }
+
+  checkEmail(email) {
+    const url = `${this.apiURL}/users/check-email`;
+    const body = { email };
     return this.http.post(url, body).toPromise();
   }
 
@@ -106,5 +140,13 @@ export class AuthProvider {
       Authorization: `JWT ${token}`
     });
     return this.http.get(url, { headers }).toPromise();
+  }
+
+  subscribeToNotifications() {
+    return this.firebaseMessaging.subscribe("delivery");
+  }
+
+  unsubscribeToNotifications() {
+    return this.firebaseMessaging.unsubscribe("delivery");
   }
 }

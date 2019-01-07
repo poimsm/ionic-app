@@ -3,12 +3,13 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  PopoverController
+  PopoverController,
+  AlertController
 } from "ionic-angular";
-import { AuthProvider } from "../../providers/auth/auth";
 import { DataProvider } from "../../providers/data/data";
 import { OnceContentPage } from "../once-content/once-content";
 import { CategoriasPage } from '../categorias/categorias';
+import { PopupsProvider } from "../../providers/popups/popups";
 
 @IonicPage()
 @Component({
@@ -16,69 +17,64 @@ import { CategoriasPage } from '../categorias/categorias';
   templateUrl: 'once.html',
 })
 export class OncePage {
-  category = [
-    "Galletas",
-    "Pan de pascua",
-    "Tortas"
-  ];
-
+  categorias = [];
+  categoriasObj = {};
   data = [];
+  token = '';
 
   constructor(
+    private alertCtrl: AlertController,
     public navCtrl: NavController,
     public navParams: NavParams,
     public popoverCtrl: PopoverController,
-    private _auth: AuthProvider,
-    private _data: DataProvider
-  ) {
-    // this.fetchByCategory(-1);
-  }
+    private _data: DataProvider,
+    private _popups: PopupsProvider
+  ) { }
 
   ionViewDidLoad() {
-    this.fetchByCategory(-1);
+    this.fetchByCategory(null);
+    this.presentAlert();
+    this.setUp();
+  }
+
+  setUp() {
+    this.categoriasObj = this._popups.categoriasOnce;
+    Object.keys(this.categoriasObj).forEach(key => {
+      this.categorias.push(this.categoriasObj[key]);
+    });
+  }
+
+  presentAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Valdivia',
+      subTitle: 'Servicio disponible en Valdivia',
+      buttons: ['Ok']
+    });
+    alert.present();
   }
 
   openOnce(once) {
     this.navCtrl.push(OnceContentPage, { once });
   }
+
   presentPopover(myEvent) {
-    const popover = this.popoverCtrl.create(CategoriasPage, {
-      0: "Galletas",
-      1: "Pan de pascua",
-      2: "Tortas"
-    });
+    const popover = this.popoverCtrl.create(CategoriasPage, this.categoriasObj);
     popover.present({
       ev: myEvent
     });
 
     popover.onDidDismiss(data => {
       if (data) {
-        this.fetchByCategory(data.index);
+        this.fetchByCategory(this.categorias[data.index]);
       }
     });
   }
 
-  fetchOne(id) {
-    const authData: any = this._auth.credentials;
-    const route = 'apps/once-one';
-    this._data.getOne(authData.token, id, route)
-      .then(data => console.log(data));
-  }
-
-  async fetchByCategory(index) {
-    const authData: any = this._auth.credentials;
+  async fetchByCategory(categoria) {
     const route = 'apps/once-all';
-    let select = "";
 
-    if (index == -1) {
-      select = null;
-    } else {
-      select = this.category[index];
-    }
-    this._data.getAll(authData.token, 0, 10, select, route)
-      .then((data: any[]) => this.data = data
-
-      );
+    this._data.getAll(0, 10, categoria, route)
+      .then((data: any[]) => this.data = data);
   }
 
 }

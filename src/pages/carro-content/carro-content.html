@@ -1,0 +1,43 @@
+<ion-header no-border>
+  <ion-navbar color="white" align-title="center">
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div item-start style="width:100%;min-height:250px; background-size:cover;background-repeat: no-repeat;background-position: center;"
+    [ngStyle]="{'background-image': 'url(' + data.img + ')' }">
+  </div>
+  <div style="height:15px"></div>
+
+  <div padding>
+    <div style="font-size:16px;color:#333;font-weight:600">
+      {{data.titulo}}
+    </div>
+    <div style="margin-top:5px;font-size:16px;color:#555">
+      {{data.descripcion}}
+    </div>
+  </div>
+
+  <div padding>
+    <div *ngIf="data?.variedad" style="margin-top:10px;font-size:16px;color:#777;font-weight:400">
+      VARIEDAD ........ {{data.variedad}}
+    </div>
+    <div *ngIf="data?.tamano" style="margin-top:10px;font-size:16px;color:#777;font-weight:400">
+      TAMAÑO .......... {{data.tamano}}
+    </div>
+    <div style="margin-top:10px;font-size:16px;color:#777;font-weight:400">
+      CANTIDAD ........ {{data.cantidad}}
+    </div>
+    <div style="margin-top:10px;font-size:16px;color:#777;font-weight:400">
+      TOTAL ........... ${{data.total}}
+    </div>
+  </div>
+
+
+
+
+
+
+</ion-content>

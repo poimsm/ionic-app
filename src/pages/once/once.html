@@ -20,7 +20,7 @@
 
 <ion-content>
 
-  <ion-grid>
+  <!-- <ion-grid>
     <ion-row>
 
       <ion-col *ngFor="let once of data" col-6 col-md-4 col-xl-3>
@@ -33,7 +33,37 @@
             <div style="width:100%;display:flex;align-items:flex-end;justify-content:flex-end;font-size:15px">
               <div style="color:#555;font-size:16px">
                 <div>
-                  desde {{once.tabla[0].tipo}} por ${{once.tabla[0].precio}}
+                  {{once.tipo}} por ${{once.precio}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid> -->
+
+
+  <ion-grid>
+    <ion-row>
+
+      <ion-col *ngFor="let once of data" col-6 col-md-4 col-xl-3>
+        <div (click)="openOnce(once)" style="border:1px solid #eee;border-radius:0px">
+          <div style="min-height:150px; background-size:cover;background-repeat: no-repeat;background-position: center;"
+            [ngStyle]="{'background-image': 'url(' + once.imgs[0].url + ')' }">
+          </div>
+          <div style="padding:5px;width:100%;font-size:16px;color:#444;font-weight:600">
+            {{once.titulo}}
+          </div>
+          <div style="border-top:0.5px dashed #eee;padding:5px;">
+            <div style="width:100%;display:flex;align-items:flex-end;justify-content:flex-end;font-size:15px">
+              <div style="color:#555;font-size:16px">
+                <div *ngIf="!once.variedad_tamano.isActive">
+                  ${{once.precio}}
+                </div>
+                <div *ngIf="once.variedad_tamano.isActive">
+                  ${{once.variedad_tamano.variedades[0].precio * once.variedad_tamano.tamanos[0].cantidad}}
                 </div>
               </div>
             </div>
@@ -43,4 +73,6 @@
 
     </ion-row>
   </ion-grid>
+
+
 </ion-content>

@@ -1,0 +1,52 @@
+<ion-header no-border>
+  <ion-navbar align-title="center" color="white">
+    <div style="color:#bbb;font-weight:600;font-size:20px">
+      Compras
+    </div>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content>
+
+  <ion-list>
+    <button ion-item *ngFor="let compra of comprasOnce" (click)="openContent(compra)">
+      <div item-start style="width:38%;min-height:120px; background-size:cover;background-repeat: no-repeat;background-position: center;"
+        [ngStyle]="{'background-image': 'url(' + compra.img + ')' }">
+      </div>
+      <div style="margin:2px;font-weight:400;color:#444;font-weight:600;font-size:16px">
+        {{compra.titulo}}
+      </div>
+      <div style="margin:2px;color:#555">
+        {{compra.descripcion}}
+      </div>
+      <div style="margin:2px;display: inline-block;padding:5px;border:1px solid #eee;color:#555">
+        {{compra.estado}}
+      </div>
+      <div style="margin:2px;color:#555;font-weight:500;font-size:16px">
+        Total: ${{compra.total}}
+      </div>
+    </button>
+  </ion-list>
+
+  <ion-list>
+    <button ion-item *ngFor="let compra of comprasEcommerce" (click)="openContent(compra)">
+      <img item-start [src]="compra.img" style="width:40%;height:130px;object-fit:cover">
+      <div style="margin:2px;font-weight:400;color:#444;font-weight:600;font-size:16px">
+        {{compra.titulo}}
+      </div>
+      <div style="margin:2px;color:#555">
+        {{compra.descripcion}}
+      </div>
+      <div style="margin:2px;display: inline-block;padding:5px;border:1px solid #eee;color:#555">
+        {{compra.estado}}
+      </div>
+      <div style="margin:2px;color:#555;font-weight:500;font-size:16px">
+        Total: ${{compra.total}}
+      </div>
+    </button>
+  </ion-list>
+
+
+</ion-content>
