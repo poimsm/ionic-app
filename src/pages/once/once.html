@@ -59,12 +59,15 @@
           <div style="border-top:0.5px dashed #eee;padding:5px;">
             <div style="width:100%;display:flex;align-items:flex-end;justify-content:flex-end;font-size:15px">
               <div style="color:#555;font-size:16px">
-                <div *ngIf="!once.variedad_tamano.isActive">
-                  ${{once.precio}}
+                <div *ngIf="once.normal.isActive">
+                  ${{once.normal.precio}}
                 </div>
-                <div *ngIf="once.variedad_tamano.isActive">
+                <div *ngIf="once.tamano.isActive">
+                  ${{once.tamano.tamanos[0].precio}}
+                </div>
+                <!-- <div *ngIf="once.variedad_tamano.isActive">
                   ${{once.variedad_tamano.variedades[0].precio * once.variedad_tamano.tamanos[0].cantidad}}
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -74,5 +77,7 @@
     </ion-row>
   </ion-grid>
 
-
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" [enabled]="hayMas">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

@@ -24,8 +24,10 @@ export class FormularioPage {
   variedad_tamano = false;
   isVariedad = false;
   isTamano = false;
+  isNormal = true;
   variedad: string;
   precioVariedad: number;
+  precioTamano: number;
   tamano: string;
   tamanoNum: number;
   variedades = {};
@@ -51,8 +53,7 @@ export class FormularioPage {
 
   agregarVariedad() {
     this.variedades[this.indexVariedad] = {
-      variedad: this.variedad,
-      precio: this.precioVariedad
+      variedad: this.variedad
     };
     console.log(this.variedades);
     this.indexVariedad++;
@@ -61,7 +62,7 @@ export class FormularioPage {
   agregarTamano() {
     this.tamanos[this.indexTamano] = {
       tamano: this.tamano,
-      cantidad: this.tamanoNum
+      precio: Number(this.precioTamano)
     }
     console.log(this.tamanos);
     this.indexTamano++;
@@ -110,9 +111,15 @@ export class FormularioPage {
         descripcion: this.descripcion,
         categoria: this.categoria,
         vendedor: this.vendedor,
-        precio: this.precio,
         upload: imgs
       }
+      const data = {
+        isActive: true,
+        precio: Number(this.precio)
+      }
+      body.normal = data;
+      console.log(body);
+
     } else {
       url = `${this.apiURL}/apps/once-crear`;
       body = {
@@ -125,11 +132,28 @@ export class FormularioPage {
       }
 
       if (this.isVariedad) {
-        body.variedades = this.variedades;
-      } else if (this.isTamano) {
-        body.tamanos = this.tamanos;
-      } else {
-        body.precio = this.precio
+        const data = {
+          isActive: true,
+          variedades: this.variedades
+        }
+        body.variedad = data;
+      }
+
+      if (this.isTamano) {
+        const data = {
+          isActive: true,
+          tamanos: this.tamanos
+        }
+        body.tamano = data;
+        this.isNormal = false;
+      }
+
+      if (this.isNormal) {
+        const data = {
+          isActive: true,
+          precio: this.precio
+        }
+        body.normal = data;
       }
 
     }

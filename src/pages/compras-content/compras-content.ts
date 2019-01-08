@@ -38,7 +38,7 @@ export class ComprasContentPage {
       this.imgs.push(this.data.imgs[key])
     });
 
-    this.precio = this.data.precio;
+    this.precio = this.data.normal.precio;
     this.total = Number(this.cantidad) * this.precio;
 
   }

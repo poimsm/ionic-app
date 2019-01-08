@@ -10,18 +10,26 @@ export class PopupsProvider {
   categoriasEcommerce = {};
   categoriasOnce = {};
   mensajeHome = '';
-
-  // apiURL = 'http://localhost:3000';
-  apiURL = 'https://poimsm-server.herokuapp.com';
-
+  apiURL: string;
 
   constructor(
     private appVersion: AppVersion,
     private platform: Platform,
-    public http: HttpClient) {
+    public http: HttpClient
+  ) {
     platform.ready().then(() => {
       this.loadServerParams();
     });
+    this.setAPI();
+  }
+
+  setAPI() {
+    if (this.platform.is('cordova')) {
+      this.apiURL = 'https://poimsm-server.herokuapp.com';
+    } else {
+      this.apiURL = 'https://poimsm-server.herokuapp.com';
+      // apiURL = 'http://localhost:3000';
+    }
   }
 
   loadServerParams() {

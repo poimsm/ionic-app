@@ -13,10 +13,9 @@
   <div style="top:0px;left:0px">
     <ion-slides pager>
       <ion-slide *ngFor="let img of imgs">
-        <div style="width:100%;min-height:250px; background-size:cover;background-repeat: no-repeat;background-position: center;"
+        <div style="width:100%;min-height:300px; background-size:cover;background-repeat: no-repeat;background-position: center;"
           [ngStyle]="{'background-image': 'url(' + img.url + ')' }">
         </div>
-        <!-- <img [src]="img.url" style="width:100%;height:250px;object-fit:cover" /> -->
         <div style="height:30px"></div>
       </ion-slide>
     </ion-slides>
@@ -43,13 +42,13 @@
       <ion-icon item-end name="md-radio-button-on" class="radio-active"></ion-icon>
       <div style="font-size:16px;color:#555"> {{data.tipo}} por ${{data.precio}}</div>
     </button> -->
-    <ion-item *ngIf="data.variedad_tamano.isActive" no-lines style="margin-top:15px;border:0.5px solid #bbb;border-radius:3px">
+    <ion-item *ngIf="data.variedad.isActive" no-lines style="margin-top:15px;border:0.5px solid #bbb;border-radius:3px">
       <ion-label style="color:#6c757d">Variedad</ion-label>
       <ion-select [(ngModel)]="variedad" (ionChange)="cantidadX(cantidad)">
         <ion-option *ngFor="let variedad of variedades" [value]="variedad"> {{variedad}} </ion-option>
       </ion-select>
     </ion-item>
-    <ion-item *ngIf="data.variedad_tamano.isActive" no-lines style="margin-top:15px;border:0.5px solid #bbb;border-radius:3px">
+    <ion-item *ngIf="data.tamano.isActive" no-lines style="margin-top:15px;border:0.5px solid #bbb;border-radius:3px">
       <ion-label style="color:#6c757d">Tamaño</ion-label>
       <ion-select [(ngModel)]="tamano" (ionChange)="cantidadX(cantidad)">
         <ion-option *ngFor="let tamano of tamanos" [value]="tamano"> {{tamano}} </ion-option>
@@ -76,7 +75,7 @@
 <ion-footer padding style="background:white">
   <ion-item no-lines>
     <ion-label style="color:#6c757d">Cantidad</ion-label>
-    <ion-select [(ngModel)]="cantidad" (ionChange)="cantidadX(cantidad)">
+    <ion-select [(ngModel)]="cantidad" (ionChange)="cantidadX()">
       <ion-option value="1"> X1 </ion-option>
       <ion-option value="2"> X2 </ion-option>
       <ion-option value="3"> X3 </ion-option>

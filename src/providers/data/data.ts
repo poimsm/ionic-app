@@ -1,16 +1,27 @@
 import { Injectable } from "@angular/core";
-import { ToastController } from "ionic-angular";
+import { ToastController, Platform } from 'ionic-angular';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable()
 export class DataProvider {
-  // apiURL = 'http://localhost:3000';
-  apiURL = 'https://poimsm-server.herokuapp.com';
+  apiURL: string;
 
   constructor(
     public toastCtrl: ToastController,
-    public http: HttpClient
-  ) { }
+    public http: HttpClient,
+    private platform: Platform
+  ) {
+    this.setAPI();
+  }
+
+  setAPI() {
+    if (this.platform.is('cordova')) {
+      this.apiURL = 'https://poimsm-server.herokuapp.com';
+    } else {
+      this.apiURL = 'https://poimsm-server.herokuapp.com';
+      // apiURL = 'http://localhost:3000';
+    }
+  }
 
   comprarOnce(token, body) {
     const url = `${this.apiURL}/compras/nueva-compra-once`;

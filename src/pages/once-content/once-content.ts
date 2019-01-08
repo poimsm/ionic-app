@@ -48,31 +48,28 @@ export class OnceContentPage {
       this.imgs.push(this.data.imgs[key])
     });
 
-    if (this.data.variedad_tamano.isActive) {
-      this.variedadesObj = this.data.variedad_tamano.variedades;
-      this.tamanosObj = this.data.variedad_tamano.tamanos;
-
-      this.variedad = this.variedadesObj[0].variedad;
-      this.tamano = this.tamanosObj[0].tamano;
-
-      this.precioVariedad = this.variedadesObj[0].precio;
-      this.cantidadTamano = this.tamanosObj[0].cantidad;
-      this.total = Number(this.cantidad) * this.precioVariedad * this.cantidadTamano;
-
+    if (this.data.variedad.isActive) {
+      this.variedadesObj = this.data.variedad.variedades;
       Object.keys(this.variedadesObj).forEach(key => {
         this.variedades.push(this.variedadesObj[key].variedad);
       });
+      this.variedad = this.variedadesObj[0].variedad;
+    }
+
+    if (this.data.tamano.isActive) {
+      this.tamanosObj = this.data.tamano.tamanos;
       Object.keys(this.tamanosObj).forEach(key => {
         this.tamanos.push(this.tamanosObj[key].tamano);
       });
-
-    } else {
-      this.precio = this.data.precio;
+      this.tamano = this.tamanosObj[0].tamano;
+      this.precio = this.tamanosObj[0].precio;
       this.total = Number(this.cantidad) * this.precio;
-
     }
 
-
+    if (this.data.normal.isActive) {
+      this.precio = this.data.normal.precio;
+      this.total = Number(this.cantidad) * this.precio;
+    }
   }
 
   ionViewDidLoad() {
@@ -84,20 +81,38 @@ export class OnceContentPage {
     });
   }
 
-  select(i) {
-    this.tabla.forEach(item => item.isActive = false);
-    this.tabla[i].isActive = true;
-    this.precio = this.tabla[i].precio;
-    this.total = Number(this.cantidad) * this.precio;
+  variedad_tamano() {
+    this.variedadesObj = this.data.variedad_tamano.variedades;
+    this.tamanosObj = this.data.variedad_tamano.tamanos;
+
+    this.variedad = this.variedadesObj[0].variedad;
+    this.tamano = this.tamanosObj[0].tamano;
+
+    this.precioVariedad = this.variedadesObj[0].precio;
+    this.cantidadTamano = this.tamanosObj[0].cantidad;
+    this.total = Number(this.cantidad) * this.precioVariedad * this.cantidadTamano;
+
+    Object.keys(this.variedadesObj).forEach(key => {
+      this.variedades.push(this.variedadesObj[key].variedad);
+    });
+    Object.keys(this.tamanosObj).forEach(key => {
+      this.tamanos.push(this.tamanosObj[key].tamano);
+    });
+  }
+
+  cantidadVariedadTamano() {
+    const indexVariedad = this.variedades.indexOf(this.variedad);
+    const indexTamano = this.tamanos.indexOf(this.tamano);
+    this.precioVariedad = this.variedadesObj[indexVariedad].precio;
+    this.cantidadTamano = this.tamanosObj[indexTamano].cantidad;
+    this.total = Number(this.cantidad) * this.precioVariedad * this.cantidadTamano;
   }
 
   cantidadX() {
-    if (this.data.variedad_tamano.isActive) {
-      const indexVariedad = this.variedades.indexOf(this.variedad);
+    if (this.data.tamano.isActive) {
       const indexTamano = this.tamanos.indexOf(this.tamano);
-      this.precioVariedad = this.variedadesObj[indexVariedad].precio;
-      this.cantidadTamano = this.tamanosObj[indexTamano].cantidad;
-      this.total = Number(this.cantidad) * this.precioVariedad * this.cantidadTamano;
+      this.precio = this.tamanosObj[indexTamano].precio;
+      this.total = Number(this.cantidad) * this.precio;
     } else {
       this.total = Number(this.cantidad) * this.precio;
     }
@@ -131,6 +146,14 @@ export class OnceContentPage {
       cliente: this.user._id,
       clienteNombre: this.user.name,
       cantidad: `X${this.cantidad}`
+    }
+
+    if (this.data.variedad.isActive) {
+      compra.variedad = this.variedad;
+    }
+
+    if (this.data.tamano.isActive) {
+      compra.tamano = this.tamano;
     }
 
     if (this.data.variedad_tamano.isActive) {

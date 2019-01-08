@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NavController } from "ionic-angular";
+import { NavController, Platform } from 'ionic-angular';
 import { OncePage } from '../once/once';
 import { UsuarioPage } from '../usuario/usuario';
 import { AuthProvider } from '../../providers/auth/auth';
@@ -24,13 +24,20 @@ export class HomePage {
 
   mensaje = '';
 
+  showFormulario = false;
+
   user: any;
 
   constructor(
     public navCtrl: NavController,
     private _auth: AuthProvider,
-    private _popups: PopupsProvider
-  ) { }
+    private _popups: PopupsProvider,
+    private platform: Platform
+  ) {
+    if (!this.platform.is('cordova')) {
+      this.showFormulario = true;
+    }
+  }
 
   ionViewDidLoad() {
     this._auth.authState.subscribe((data: any) => {

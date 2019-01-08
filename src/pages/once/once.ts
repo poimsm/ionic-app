@@ -21,6 +21,11 @@ export class OncePage {
   categoriasObj = {};
   data = [];
   token = '';
+  categoriaActual = null;
+  skip = 0;
+  limit = 5;
+  hayMas = true;
+
 
   constructor(
     private alertCtrl: AlertController,
@@ -65,6 +70,7 @@ export class OncePage {
 
     popover.onDidDismiss(data => {
       if (data) {
+        this.categoriaActual = this.categorias[data.index];
         this.fetchByCategory(this.categorias[data.index]);
       }
     });
@@ -75,6 +81,19 @@ export class OncePage {
 
     this._data.getAll(0, 10, categoria, route)
       .then((data: any[]) => this.data = data);
+  }
+
+  doInfinite(infiniteScroll) {
+    const route = 'apps/once-all';
+    this.skip += 10;
+    this._data.getAll(this.skip, 10, this.categoriaActual, route)
+      .then((data: any[]) => {
+        if (data.length == 0) {
+          this.hayMas = false;
+        }
+        this.data = this.data.concat(data);
+        infiniteScroll.complete();
+      });
   }
 
 }

@@ -55,30 +55,32 @@
       <ion-input [(ngModel)]="descripcion" type="text" placeholder="Descripción"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input [(ngModel)]="precio" type="number" placeholder="Precio"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input [(ngModel)]="tipo" type="text" placeholder="Tipo"></ion-input>
-    </ion-item>
-    <ion-item>
       <ion-input [(ngModel)]="vendedor" type="text" placeholder="Vendedor"></ion-input>
     </ion-item>
-    <!-- <ion-item *ngIf="Tipo == 'Once'">
-      <ion-input [(ngModel)]="tiempoDeEntrega" type="text" placeholder="Tiempo de entrega"></ion-input>
-    </ion-item> -->
+
+    <div style="width:100%;height:10px;background:#eee"></div>
+
+    <ion-item>
+      <ion-label>Normal</ion-label>
+      <ion-toggle [(ngModel)]="isNormal"></ion-toggle>
+    </ion-item>
+
+    <div *ngIf="isNormal">
+      <ion-item>
+        <ion-input [(ngModel)]="precio" type="number" placeholder="Precio"></ion-input>
+      </ion-item>
+    </div>
+
+    <div style="width:100%;height:10px;background:#eee"></div>
+
     <ion-item>
       <ion-label>Variedad</ion-label>
       <ion-toggle [(ngModel)]="isVariedad"></ion-toggle>
     </ion-item>
 
     <div *ngIf="isVariedad">
-
-      <div style="width:100%;height:10px;background:#eee"></div>
       <ion-item>
         <ion-input [(ngModel)]="variedad" type="text" placeholder="Variedad"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input [(ngModel)]="precioVariedad" type="number" placeholder="Precio unitario"></ion-input>
       </ion-item>
       <div padding>
         <button (click)="agregarVariedad()" ion-button block mode="ios">
@@ -87,26 +89,25 @@
       </div>
     </div>
 
+    <div style="width:100%;height:10px;background:#eee"></div>
+
     <ion-item>
       <ion-label>Tamaños</ion-label>
       <ion-toggle [(ngModel)]="isTamano"></ion-toggle>
     </ion-item>
 
     <div *ngIf="isTamano">
-
-      <div style="width:100%;height:10px;background:#eee"></div>
       <ion-item>
         <ion-input [(ngModel)]="tamano" type="text" placeholder="Tamaño"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input [(ngModel)]="tamanoNum" type="number" placeholder="Cantidad"></ion-input>
+        <ion-input [(ngModel)]="precioTamano" type="number" placeholder="Precio"></ion-input>
       </ion-item>
       <div padding>
         <button (click)="agregarTamano()" ion-button block mode="ios">
           Agregar tamaño
         </button>
       </div>
-
     </div>
 
 

@@ -8,8 +8,7 @@ import { FirebaseMessaging } from '@ionic-native/firebase-messaging';
 
 @Injectable()
 export class AuthProvider {
-  // apiURL = 'http://localhost:3000';
-  apiURL = 'https://poimsm-server.herokuapp.com';
+  apiURL: string;
 
   authState = new BehaviorSubject({ isAuth: false, authData: {} });
 
@@ -22,6 +21,16 @@ export class AuthProvider {
     platform.ready().then(() => {
       this.loadStorage();
     });
+    this.setAPI();
+  }
+
+  setAPI() {
+    if (this.platform.is('cordova')) {
+      this.apiURL = 'https://poimsm-server.herokuapp.com';
+    } else {
+      this.apiURL = 'https://poimsm-server.herokuapp.com';
+      // apiURL = 'http://localhost:3000';
+    }
   }
 
   loginIn(email, password) {
