@@ -1,4 +1,4 @@
-<ion-header no-border>
+<!-- <ion-header no-border>
   <ion-navbar color="white" align-title="center">
   </ion-navbar>
 </ion-header>
@@ -30,14 +30,63 @@
     <div *ngIf="data?.tiempoDeEntrega" style="margin-top:10px;font-size:16px;color:#777;font-weight:400">
       ENTREGA ......... {{data.tiempoDeEntrega}}
     </div>
-    <!-- <div style="margin-top:10px;font-size:16px;color:#777;font-weight:400">
-        CANTIDAD ........ {{data.cantidad}}
-      </div>
-      <div style="margin-top:10px;font-size:16px;color:#777;font-weight:400">
-        TOTAL ........... ${{data.total}}
-      </div> -->
   </div>
 
+
+</ion-content> -->
+
+
+<ion-header no-border>
+  <ion-navbar color="white" align-title="center">
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div item-start style="width:100%;min-height:250px; background-size:cover;background-repeat: no-repeat;background-position: center;"
+    [ngStyle]="{'background-image': 'url(' + data.img + ')' }">
+  </div>
+  <div style="height:15px"></div>
+
+  <div padding *ngIf="data.tipo == 'once'">
+    <div style="font-size:18px;color:#333;font-weight:600">
+      {{data.titulo}}
+    </div>
+    <div style="margin-top:5px;font-size:16px;color:#555">
+      {{data.descripcion}}
+    </div>
+  </div>
+
+  <div padding *ngIf="data.tipo == 'fruta'">
+    <div style="font-size:18px;color:#333;font-weight:600">
+      {{data.vendedorNombre}}
+    </div>
+  </div>
+
+  <div padding *ngIf="data.tipo == 'once'">
+    <div *ngIf="data?.variedad" style="margin-top:10px;font-size:16px;color:#777;font-weight:400">
+      VARIEDAD ........ {{data.variedad}}
+    </div>
+    <div *ngIf="data?.tamano" style="margin-top:10px;font-size:16px;color:#777;font-weight:400">
+      TAMAÑO .......... {{data.tamano}}
+    </div>
+  </div>
+
+  <div padding *ngIf="data.tipo == 'fruta'">
+    <div *ngFor="let item of data.productos" style="margin-top:10px;font-size:16px;color:#777;font-weight:400">
+      <div style="padding:5px">
+        PRODUCTO ........ {{item.producto}}
+      </div>
+      <div style="padding:5px">
+        CANTIDAD ........ {{item.cantidad}}
+      </div>
+      <div style="padding:5px">
+        PRECIO .......... {{item.tag}}
+      </div>
+      <hr>
+    </div>
+  </div>
 
 
 

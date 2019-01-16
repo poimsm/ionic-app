@@ -21,17 +21,36 @@
 
   <ion-list>
     <ion-item *ngFor="let item of pedidos; let i = index">
-      <div (click)="openContent(item.compra)" item-start style="width:38%;min-height:120px; background-size:cover;background-repeat: no-repeat;background-position: center;border-radius:5px"
+      <div *ngIf="item.tipo == 'once'" (click)="openContent(item.compra)" item-start style="width:38%;min-height:120px; background-size:cover;background-repeat: no-repeat;background-position: center;border-radius:5px"
         [ngStyle]="{'background-image': 'url(' + item.compra.img + ')' }">
       </div>
-      <div style="margin:2px;font-weight:400;color:#444;font-weight:600;font-size:16px">
-        {{item.compra.titulo}}
+      <div *ngIf="item.tipo == 'once'">
+        <div style="margin:2px;font-weight:400;color:#444;font-weight:600;font-size:16px">
+          {{item.compra.titulo}}
+        </div>
+        <div style="margin:2px;color:#555">
+          {{item.compra.descripcion}}
+        </div>
+        <div style="font-weight:450;margin:2px;color:#ff6633;font-size:16px;margin-top:10px;margin-bottom:10px">
+          ${{item.precio}}
+        </div>
       </div>
-      <div style="margin:2px;color:#555">
-        {{item.compra.descripcion}}
+
+
+
+      <div *ngIf="item.tipo == 'fruta'" (click)="openContent(item.compra)" item-start style="width:38%;min-height:120px; background-size:cover;background-repeat: no-repeat;background-position: center;border-radius:5px"
+        [ngStyle]="{'background-image': 'url(' + item.compra.img + ')' }">
       </div>
-      <div style="margin:2px;color:orange;font-size:16px;margin-top:10px;margin-bottom:10px">
-        ${{item.precio}}
+      <div *ngIf="item.tipo == 'fruta'">
+        <div style="margin:2px;font-weight:400;color:#444;font-weight:600;font-size:16px">
+          {{item.compra.vendedorNombre}}
+        </div>
+        <div style="margin:2px;color:#555">
+          Orden de frutas y verduras
+        </div>
+        <div style="font-weight:450;margin:2px;color:#ff6633;font-size:16px;margin-top:10px;margin-bottom:10px">
+          ${{item.precio}}
+        </div>
       </div>
     </ion-item>
   </ion-list>
