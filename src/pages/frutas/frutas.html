@@ -1,0 +1,33 @@
+<ion-header no-border>
+  <ion-navbar align-title="center" color="white">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <div style="color:#bbb;font-weight:600;font-size:20px">
+      Frutas y verduras
+    </div>
+    <ion-buttons right>
+      <button ion-button icon-only>
+        <ion-icon name="md-more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+    <button *ngFor="let tienda of tiendas" ion-item (click)="openTienda(tienda)">
+      <div style="border-radius:5px;min-height:90px; width:90px;background-size:cover;background-repeat: no-repeat;background-position: center;"
+        [ngStyle]="{'background-image': 'url(' + tienda.imgs[0].url + ')' }">
+      </div>
+      <div style="font-size:18px;font-weight:500;color:#515c6f">
+        {{tienda.vendedor}}
+      </div>
+    </button>
+  </ion-list>
+
+</ion-content>

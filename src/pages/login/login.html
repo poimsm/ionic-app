@@ -1,102 +1,136 @@
-<ion-content style="background: orangered">
+<ion-header *ngIf="loginFirst" no-border>
+  <ion-navbar color="orange2" align-title="center">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="close()">
+        <ion-icon name="md-close" style="font-size:25px"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content *ngIf="loginFirst" style="background: orange">
   <div>
     <div style="padding-top:50px;height:250px;width:100%;color:white">
-
       <div style="width:100%;text-align:center;font-size:40px;font-weight:500">
         joopiter
       </div>
     </div>
-
     <div style="width:100%;margin-top:50px;display:flex;justify-content:center">
-      <button (click)="registrar()" large ion-button mode="ios">
+      <button (click)="registrar()" color="danger" large ion-button mode="ios">
         Registrar
       </button>
+    </div>
+    <div style="margin-top:20px;width:100%;text-align:center;color:white;font-weight:500;font-size:20px">
+      ¿Ya estás registrado?
     </div>
     <div style="width:100%;margin-top:10px;display:flex;justify-content:center">
       <button (click)="sesion()" large ion-button outline color="white" mode="ios">
         Iniciar sesión
       </button>
     </div>
-
   </div>
-
 </ion-content>
 
 
-
-
-<!-- <ion-content>
-  <div>
-    <div style="padding-top:50px;height:250px;width:100%;color:white;background:orangered">
-
-      <div style="width:100%;text-align:center;font-size:30px;font-weight:500">
-        joopiter
-      </div>
-    </div>
-
-    <div *ngIf="!togglear" style="height:300px;width:100%;display:flex;justify-content:center;align-items:center">
-      <div padding style="width:100%">
-        <ion-item>
-          <ion-input [(ngModel)]="name" type="text" placeholder="Nombre"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input [(ngModel)]="email" type="text" placeholder="Ejemplo@gmail.com"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input [(ngModel)]="password" [type]="passwordType" placeholder="Contraseña"></ion-input>
-          <button *ngIf="!showPass" ion-button item-right clear (click)="showHide()">
-            <ion-icon name="md-eye" style="color:#bbb;font-size:32px"></ion-icon>
-          </button>
-          <button *ngIf="showPass" ion-button item-right clear (click)="showHide()">
-            <ion-icon name="md-eye-off" style="color:#bbb;font-size:32px"></ion-icon>
-          </button>
-        </ion-item>
-        <div *ngIf="alertSignUp" style="margin-top:10px;color:#f53d3d;font-size:16px">
-          El email ya está en uso.
+<ion-header *ngIf="loginSecond" no-border>
+  <ion-navbar color="white" align-title="center">
+    <ion-buttons left>
+      <button ion-button (click)="loginFirst=true;loginSecond=false">
+        <ion-icon name="md-arrow-round-back" style="font-size:25px"></ion-icon>
+        <div style="margin-left:10px">
+          Atras
         </div>
-        <button (click)="signUp()" color="secondary" [disabled]="!(password.length>0 && email.length>0 && name.length>0)"
-          style="margin-top:20px" ion-button default mode="ios">
-          Registrar
-        </button>
-        <div style="margin-top:10px;color:#555;font-size:16px">
-          Si ya tienes una cuenta te puedes
-          <span (click)="toggle()" style="color:dodgerblue">
-            Identificar
-          </span>
-        </div>
-      </div>
-    </div>
+      </button>
+    </ion-buttons>
+    <ion-title> Registrar </ion-title>
+  </ion-navbar>
+</ion-header>
 
-    <div *ngIf="togglear" style="background:white;height:300px;width:100%;display:flex;justify-content:center;align-items:center">
-      <div padding style="width:100%">
-        <ion-item>
-          <ion-input [(ngModel)]="email" type="text" placeholder="Ejemplo@gmail.com"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input [(ngModel)]="password" [type]="passwordType" placeholder="Contraseña"></ion-input>
-          <button *ngIf="!showPass" ion-button item-right clear (click)="showHide()">
-            <ion-icon name="md-eye" style="color:#bbb;font-size:32px"></ion-icon>
-          </button>
-          <button *ngIf="showPass" ion-button item-right clear (click)="showHide()">
-            <ion-icon name="md-eye-off" style="color:#bbb;font-size:32px"></ion-icon>
-          </button>
-        </ion-item>
-        <div *ngIf="alertSignIn" style="margin-top:10px;color:#f53d3d;font-size:16px">
-          Contraseña o email incorrecto
-        </div>
-        <button (click)="signIn()" [disabled]="!(password.length>0 && email.length>0)" style="margin-top:20px"
-          ion-button default mode="ios">
-          Identificar
-        </button>
-        <div style="margin-top:10px;color:#555;font-size:16px">
-          Si aun no tienes una cuenta te puedes
-          <span (click)="toggle()" style="color:dodgerblue">
-            Registrar
-          </span>
-        </div>
-      </div>
-    </div>
 
+<ion-content *ngIf="loginSecond">
+  <div style="margin-left:20px;margin-top:100px;width:100%;text-align:left;font-size:15px;color:#777">
+    EMAIL
   </div>
+  <ion-item style="font-size:18px">
+    <ion-input [(ngModel)]="email" type="text" placeholder="Ej. daniel@gmail.com"></ion-input>
+  </ion-item>
+  <div style="margin-left:20px;margin-top:20px;width:100%;text-align:left;font-size:15px;color:#777">
+    NOMBRE
+  </div>
+  <ion-item style="font-size:18px">
+    <ion-input [(ngModel)]="name" type="text" placeholder="Ej. Daniel"></ion-input>
+  </ion-item>
+  <div style="margin-left:20px;margin-top:20px;width:100%;text-align:left;font-size:15px;color:#777">
+    CONTRASEÑA
+  </div>
+  <ion-item style="font-size:18px">
+    <ion-input [(ngModel)]="password" [type]="passwordType" placeholder="**********"></ion-input>
+    <button *ngIf="!showPass" ion-button item-right clear (click)="showHide()">
+      <ion-icon name="md-eye" style="color:#bbb;font-size:32px"></ion-icon>
+    </button>
+    <button *ngIf="showPass" ion-button item-right clear (click)="showHide()">
+      <ion-icon name="md-eye-off" style="color:#bbb;font-size:32px"></ion-icon>
+    </button>
+  </ion-item>
+  <div *ngIf="!obteniendoRespuesta" style="width:100%;display:flex;justify-content:center;margin-bottom:50px;margin-top:20px">
+    <div (click)="signUp()" style="font-size:12px;color:#fff;background:#FFBF00;display:flex;align-items:center;padding:5px;padding-left:80px;padding-right:10px;border-radius:25px">
+      SIGUIENTE
+      <ion-icon name="ios-arrow-dropright-circle" style="color:#fff;font-size:34px;margin-left:60px"></ion-icon>
+    </div>
+  </div>
+  <div *ngIf="obteniendoRespuesta" style="width:100%;display:flex;justify-content:center;margin-bottom:50px;margin-top:20px">
+    <div style="font-size:12px;color:#fff;background:rgb(255, 215, 96);display:flex;align-items:center;padding:5px;padding-left:80px;padding-right:10px;border-radius:25px">
+      SIGUIENTE
+      <ion-icon name="ios-arrow-dropright-circle" style="color:#fff;font-size:34px;margin-left:60px"></ion-icon>
+    </div>
+  </div>
+</ion-content>
 
-</ion-content> -->
+
+<ion-header *ngIf="loginThird" no-border>
+  <ion-navbar color="white" align-title="center">
+    <ion-buttons left>
+      <button ion-button (click)="loginFirst=true;loginThird=false">
+        <ion-icon name="md-arrow-round-back" style="font-size:25px"></ion-icon>
+        <div style="margin-left:10px">
+          Atras
+        </div>
+      </button>
+    </ion-buttons>
+    <ion-title> Iniciar sesión </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content *ngIf="loginThird">
+  <div style="margin-left:20px;margin-top:100px;width:100%;text-align:left;font-size:15px;color:#777">
+    EMAIL
+  </div>
+  <ion-item style="font-size:18px">
+    <ion-input [(ngModel)]="email" type="text" placeholder="Ej. daniel@gmail.com"></ion-input>
+  </ion-item>
+  <div style="margin-left:20px;margin-top:20px;width:100%;text-align:left;font-size:15px;color:#777">
+    CONTRASEÑA
+  </div>
+  <ion-item style="font-size:18px">
+    <ion-input [(ngModel)]="password" [type]="passwordType" placeholder="**********"></ion-input>
+    <button *ngIf="!showPass" ion-button item-right clear (click)="showHide()">
+      <ion-icon name="md-eye" style="color:#bbb;font-size:32px"></ion-icon>
+    </button>
+    <button *ngIf="showPass" ion-button item-right clear (click)="showHide()">
+      <ion-icon name="md-eye-off" style="color:#bbb;font-size:32px"></ion-icon>
+    </button>
+  </ion-item>
+  <div *ngIf="!obteniendoRespuesta" style="width:100%;display:flex;justify-content:center;margin-bottom:50px;margin-top:20px">
+    <div (click)="signIn()" style="font-size:12px;color:white;background:#FFBF00;display:flex;align-items:center;padding:5px;padding-left:80px;padding-right:10px;border-radius:25px">
+      ENTRAR
+      <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:60px"></ion-icon>
+    </div>
+  </div>
+  <div *ngIf="obteniendoRespuesta" style="width:100%;display:flex;justify-content:center;margin-bottom:50px;margin-top:20px">
+    <div style="font-size:12px;color:white;background:rgb(255, 215, 96);display:flex;align-items:center;padding:5px;padding-left:80px;padding-right:10px;border-radius:25px">
+      ENTRAR
+      <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:60px"></ion-icon>
+    </div>
+  </div>
+</ion-content>

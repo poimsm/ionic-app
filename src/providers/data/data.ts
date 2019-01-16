@@ -18,19 +18,9 @@ export class DataProvider {
     if (this.platform.is('cordova')) {
       this.apiURL = 'https://poimsm-server.herokuapp.com';
     } else {
-      this.apiURL = 'https://poimsm-server.herokuapp.com';
-      // apiURL = 'http://localhost:3000';
+      // this.apiURL = 'https://poimsm-server.herokuapp.com';
+      this.apiURL = 'http://localhost:3000';
     }
-  }
-
-  comprarOnce(token, body) {
-    const url = `${this.apiURL}/compras/nueva-compra-once`;
-    const headers = new HttpHeaders({
-      Authorization: `JWT ${token}`
-    });
-
-    this.presentToast();
-    return this.http.post(url, body, { headers }).toPromise();
   }
 
   comprarEcommerce(token, body) {
@@ -57,7 +47,7 @@ export class DataProvider {
     return this.http.get(url, { headers }).toPromise();
   }
 
-  misComprasOnce(token, id) {
+  misPedidos(token, id) {
     const url = `${this.apiURL}/compras/compras-por-usuario-once/${id}`;
     const headers = new HttpHeaders({
       Authorization: `JWT ${token}`
@@ -76,6 +66,11 @@ export class DataProvider {
     return this.http.get(url).toPromise();
   }
 
+  fetchFruta() {
+    const url = `${this.apiURL}/apps/fruta-all`;
+    return this.http.get(url).toPromise();
+  }
+
   getAll(skip, limit, category, route) {
 
     let url = `${this.apiURL}/${route}`;
@@ -89,7 +84,7 @@ export class DataProvider {
 
   presentToast() {
     let toast = this.toastCtrl.create({
-      message: 'Pedido creado con exito',
+      message: '¡Producto agregado!',
       duration: 3000,
       position: 'bottom'
     });

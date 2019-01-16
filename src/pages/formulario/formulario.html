@@ -8,118 +8,179 @@
 
 
 <ion-content>
-  <div padding>
-    <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
-    <button ion-button (click)="fileInput.click()">Seleccionar</button>
-  </div>
-  <div padding>
-    <button (click)="uploadFile()" ion-button mode="ios" block>
-      Upload
-    </button>
-  </div>
 
-  <ion-list no-lines>
-    <ion-item>
-      <ion-label>Módulo</ion-label>
-      <ion-select [(ngModel)]="Tipo">
-        <ion-option value="Ecommerce">Ecommerce</ion-option>
-        <ion-option value="Once">Once</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item *ngIf="Tipo == 'Ecommerce'">
-      <ion-label>Categoria</ion-label>
-      <ion-select [(ngModel)]="categoria">
-        <ion-option *ngFor="let cat of categoriasEcommerce" [value]="cat">{{cat}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item *ngIf="Tipo == 'Once'">
-      <ion-label>Categoria</ion-label>
-      <ion-select [(ngModel)]="categoria">
-        <ion-option *ngFor="let cat of categoriasOnce" [value]="cat">{{cat}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item *ngIf="Tipo == 'Once'">
-      <ion-label>Tiempo de entrega</ion-label>
-      <ion-select [(ngModel)]="tiempoDeEntrega">
-        <ion-option value="Entrega inmediata"> Entrega inmediata </ion-option>
-        <ion-option value="Demora 1 día en entregar"> Demora 1 día en entregar </ion-option>
-        <ion-option value="Demora 2 día en entregar"> Demora 2 día en entregar </ion-option>
-        <ion-option value="Demora 3 día en entregar"> Demora 3 día en entregar </ion-option>
-        <ion-option value="Demora 4 día en entregar"> Demora 4 día en entregar </ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-input [(ngModel)]="titulo" type="text" placeholder="Título"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input [(ngModel)]="descripcion" type="text" placeholder="Descripción"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input [(ngModel)]="vendedor" type="text" placeholder="Vendedor"></ion-input>
-    </ion-item>
+  <ion-item>
+    <ion-label>Fruta</ion-label>
+    <ion-toggle [(ngModel)]="isFruta"></ion-toggle>
+  </ion-item>
 
-    <div style="width:100%;height:10px;background:#eee"></div>
+  <ion-item>
+    <ion-label>Once</ion-label>
+    <ion-toggle [(ngModel)]="isOnce"></ion-toggle>
+  </ion-item>
 
-    <ion-item>
-      <ion-label>Normal</ion-label>
-      <ion-toggle [(ngModel)]="isNormal"></ion-toggle>
-    </ion-item>
+  <!-- -------------------------------------------
+    ONCE
+  ------------------------------------------- -->
 
-    <div *ngIf="isNormal">
-      <ion-item>
-        <ion-input [(ngModel)]="precio" type="number" placeholder="Precio"></ion-input>
-      </ion-item>
+  <div *ngIf="isOnce">
+
+    <div padding>
+      <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+      <button ion-button (click)="fileInput.click()">Seleccionar</button>
+    </div>
+    <div padding>
+      <button (click)="uploadFile()" ion-button mode="ios" block>
+        Upload
+      </button>
     </div>
 
-    <div style="width:100%;height:10px;background:#eee"></div>
-
-    <ion-item>
-      <ion-label>Variedad</ion-label>
-      <ion-toggle [(ngModel)]="isVariedad"></ion-toggle>
-    </ion-item>
-
-    <div *ngIf="isVariedad">
+    <ion-list no-lines>
       <ion-item>
-        <ion-input [(ngModel)]="variedad" type="text" placeholder="Variedad"></ion-input>
+        <ion-label>Módulo</ion-label>
+        <ion-select [(ngModel)]="Tipo">
+          <ion-option value="Ecommerce">Ecommerce</ion-option>
+          <ion-option value="Once">Once</ion-option>
+        </ion-select>
       </ion-item>
-      <div padding>
-        <button (click)="agregarVariedad()" ion-button block mode="ios">
-          Agregar variedad
-        </button>
+      <ion-item *ngIf="Tipo == 'Ecommerce'">
+        <ion-label>Categoria</ion-label>
+        <ion-select [(ngModel)]="categoria">
+          <ion-option *ngFor="let cat of categoriasEcommerce" [value]="cat">{{cat}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="Tipo == 'Once'">
+        <ion-label>Categoria</ion-label>
+        <ion-select [(ngModel)]="categoria">
+          <ion-option *ngFor="let cat of categoriasOnce" [value]="cat">{{cat}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="Tipo == 'Once'">
+        <ion-label>Tiempo de entrega</ion-label>
+        <ion-select [(ngModel)]="tiempoDeEntrega">
+          <ion-option value="Entrega inmediata"> Entrega inmediata </ion-option>
+          <ion-option value="Demora 1 día en entregar"> Demora 1 día en entregar </ion-option>
+          <ion-option value="Demora 2 día en entregar"> Demora 2 día en entregar </ion-option>
+          <ion-option value="Demora 3 día en entregar"> Demora 3 día en entregar </ion-option>
+          <ion-option value="Demora 4 día en entregar"> Demora 4 día en entregar </ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-input [(ngModel)]="titulo" type="text" placeholder="Título"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input [(ngModel)]="descripcion" type="text" placeholder="Descripción"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input [(ngModel)]="vendedor" type="text" placeholder="Vendedor"></ion-input>
+      </ion-item>
+
+      <div style="width:100%;height:10px;background:#eee"></div>
+
+      <ion-item>
+        <ion-label>Normal</ion-label>
+        <ion-toggle [(ngModel)]="isNormal"></ion-toggle>
+      </ion-item>
+
+      <div *ngIf="isNormal">
+        <ion-item>
+          <ion-input [(ngModel)]="precio" type="number" placeholder="Precio"></ion-input>
+        </ion-item>
       </div>
-    </div>
+
+      <div style="width:100%;height:10px;background:#eee"></div>
+
+      <ion-item>
+        <ion-label>Variedad</ion-label>
+        <ion-toggle [(ngModel)]="isVariedad"></ion-toggle>
+      </ion-item>
+
+      <div *ngIf="isVariedad">
+        <ion-item>
+          <ion-input [(ngModel)]="variedad" type="text" placeholder="Variedad"></ion-input>
+        </ion-item>
+        <div padding>
+          <button (click)="agregarVariedad()" ion-button block mode="ios">
+            Agregar variedad
+          </button>
+        </div>
+      </div>
+
+      <div style="width:100%;height:10px;background:#eee"></div>
+
+      <ion-item>
+        <ion-label>Tamaños</ion-label>
+        <ion-toggle [(ngModel)]="isTamano"></ion-toggle>
+      </ion-item>
+
+      <div *ngIf="isTamano">
+        <ion-item>
+          <ion-input [(ngModel)]="tamano" type="text" placeholder="Tamaño"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input [(ngModel)]="precioTamano" type="number" placeholder="Precio"></ion-input>
+        </ion-item>
+        <div padding>
+          <button (click)="agregarTamano()" ion-button block mode="ios">
+            Agregar tamaño
+          </button>
+        </div>
+      </div>
+
+
+    </ion-list>
 
     <div style="width:100%;height:10px;background:#eee"></div>
 
-    <ion-item>
-      <ion-label>Tamaños</ion-label>
-      <ion-toggle [(ngModel)]="isTamano"></ion-toggle>
-    </ion-item>
 
-    <div *ngIf="isTamano">
-      <ion-item>
-        <ion-input [(ngModel)]="tamano" type="text" placeholder="Tamaño"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input [(ngModel)]="precioTamano" type="number" placeholder="Precio"></ion-input>
-      </ion-item>
-      <div padding>
-        <button (click)="agregarTamano()" ion-button block mode="ios">
-          Agregar tamaño
-        </button>
-      </div>
+    <div padding>
+      <button (click)="create()" color="danger" ion-button mode="ios" block>
+        Crear producto
+      </button>
+    </div>
+  </div>
+
+
+  <!-- -------------------------------------------
+     FRUTA
+    ------------------------------------------- -->
+
+  <div *ngIf="isFruta">
+
+    <div padding>
+      <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+      <button ion-button (click)="fileInput.click()">Img tienda</button>
+    </div>
+    <div padding>
+      <button (click)="uploadFile()" ion-button mode="ios" block>
+        Upload
+      </button>
     </div>
 
+    <ion-list no-lines>
+      <ion-item *ngIf="Tipo == 'Once'">
+        <ion-label>Tiempo de entrega</ion-label>
+        <ion-select [(ngModel)]="tiempoDeEntrega">
+          <ion-option value="Entrega inmediata"> Entrega inmediata </ion-option>
+          <ion-option value="Demora 1 día en entregar"> Demora 1 día en entregar </ion-option>
+          <ion-option value="Demora 2 día en entregar"> Demora 2 día en entregar </ion-option>
+          <ion-option value="Demora 3 día en entregar"> Demora 3 día en entregar </ion-option>
+          <ion-option value="Demora 4 día en entregar"> Demora 4 día en entregar </ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item no-lines>
+        <ion-input [(ngModel)]="vendedor" type="text" placeholder="Vendedor"></ion-input>
+      </ion-item>
+    </ion-list>
 
-  </ion-list>
+    <div style="width:100%;height:10px;background:#eee"></div>
 
-  <div style="width:100%;height:10px;background:#eee"></div>
+    <div padding>
+      <button (click)="fruta()" color="danger" ion-button mode="ios" block>
+        Crear producto
+      </button>
+    </div>
 
-
-  <div padding>
-    <button (click)="create()" color="danger" ion-button mode="ios" block>
-      Crear producto
-    </button>
   </div>
 
 

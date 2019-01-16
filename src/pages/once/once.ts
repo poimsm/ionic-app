@@ -26,7 +26,6 @@ export class OncePage {
   limit = 5;
   hayMas = true;
 
-
   constructor(
     private alertCtrl: AlertController,
     public navCtrl: NavController,

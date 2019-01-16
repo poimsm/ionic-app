@@ -22,9 +22,9 @@
 
   <ion-grid>
     <ion-row>
-
+      <!-- (click)="openPage(compra)" -->
       <ion-col *ngFor="let compra of compras" col-6 col-md-4 col-xl-3>
-        <div (click)="openPage(compra)" style="border:1px solid #eee;border-radius:0px">
+        <div style="border:1px solid #eee;border-radius:0px">
           <div style="min-height:150px; background-size:cover;background-repeat: no-repeat;background-position: center;"
             [ngStyle]="{'background-image': 'url(' + compra.imgs[0].url + ')' }">
           </div>

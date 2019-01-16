@@ -15,6 +15,8 @@ export class CarroContentPage {
     public navParams: NavParams
   ) {
     this.data = this.navParams.get('compra');
+    console.log(this.data);
+
   }
 
 }

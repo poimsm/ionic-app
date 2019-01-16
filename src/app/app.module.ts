@@ -49,13 +49,20 @@ import {
   FormularioPage,
   ComprasContentPage,
   CarroContentPage,
-  CarroPage
+  CarroPage,
+  CarroPagarPage,
+  CarroCompraExitosaPage,
+  MisPedidosPage,
+  MisPedidosContentPage,
+  FrutasContentPage,
+  FrutasPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
 import { AuthProvider } from "../providers/auth/auth";
 import { HttpClientModule } from "@angular/common/http";
 import { PopupsProvider } from '../providers/popups/popups';
+import { CarroProvider } from '../providers/carro/carro';
 
 @NgModule({
   declarations: [
@@ -77,7 +84,13 @@ import { PopupsProvider } from '../providers/popups/popups';
     FormularioPage,
     ComprasContentPage,
     CarroContentPage,
-    CarroPage
+    CarroPage,
+    CarroPagarPage,
+    CarroCompraExitosaPage,
+    MisPedidosPage,
+    MisPedidosContentPage,
+    FrutasContentPage,
+    FrutasPage
   ],
   imports: [
     BrowserModule,
@@ -112,7 +125,13 @@ import { PopupsProvider } from '../providers/popups/popups';
     FormularioPage,
     ComprasContentPage,
     CarroContentPage,
-    CarroPage
+    CarroPage,
+    CarroPagarPage,
+    CarroCompraExitosaPage,
+    MisPedidosPage,
+    MisPedidosContentPage,
+    FrutasContentPage,
+    FrutasPage
   ],
   providers: [
     StatusBar,
@@ -125,7 +144,8 @@ import { PopupsProvider } from '../providers/popups/popups';
     AuthProvider,
     FirebaseMessaging,
     AppVersion,
-    PopupsProvider
+    PopupsProvider,
+    CarroProvider
   ]
 })
 export class AppModule { }

@@ -49,8 +49,12 @@ export class AuthProvider {
   loginUp(name, email, password) {
     return new Promise((resolve, reject) => {
       this.signUp(name, email, password).then((res: any) => {
-        this.saveStorage(res.token, res.user);
-        resolve();
+        if (res.ok) {
+          this.saveStorage(res.token, res.user);
+          resolve(true);
+        } else {
+          resolve(false);
+        }
       })
     });
   }

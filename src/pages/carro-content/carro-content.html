@@ -11,7 +11,7 @@
   </div>
   <div style="height:15px"></div>
 
-  <div padding>
+  <div padding *ngIf="data.tipo == 'once'">
     <div style="font-size:16px;color:#333;font-weight:600">
       {{data.titulo}}
     </div>
@@ -20,18 +20,33 @@
     </div>
   </div>
 
-  <div padding>
+  <div padding *ngIf="data.tipo == 'fruta'">
+    <div style="font-size:16px;color:#333;font-weight:600">
+      {{data.vendedorNombre}}
+    </div>
+  </div>
+
+  <div padding *ngIf="data.tipo == 'once'">
     <div *ngIf="data?.variedad" style="margin-top:10px;font-size:16px;color:#777;font-weight:400">
       VARIEDAD ........ {{data.variedad}}
     </div>
     <div *ngIf="data?.tamano" style="margin-top:10px;font-size:16px;color:#777;font-weight:400">
       TAMAÑO .......... {{data.tamano}}
     </div>
-    <div style="margin-top:10px;font-size:16px;color:#777;font-weight:400">
-      CANTIDAD ........ {{data.cantidad}}
-    </div>
-    <div style="margin-top:10px;font-size:16px;color:#777;font-weight:400">
-      TOTAL ........... ${{data.total}}
+  </div>
+
+  <div padding *ngIf="data.tipo == 'fruta'">
+    <div *ngFor="let item of data.productos" style="margin-top:10px;font-size:16px;color:#777;font-weight:400">
+      <div style="padding:5px">
+        PRODUCTO ........ {{item.producto}}
+      </div>
+      <div style="padding:5px">
+        CANTIDAD ........ X{{item.cantidad}}
+      </div>
+      <div style="padding:5px">
+        PRECIO ............ {{item.tag}}
+      </div>
+      <hr>
     </div>
   </div>
 

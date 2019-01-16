@@ -1,0 +1,61 @@
+<ion-header no-border>
+  <ion-navbar align-title="center" color="white">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      joopiter
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content>
+
+  <div style="margin-bottom:10px;margin-top:20px;width:100%;text-align:center;color:#515c6f;font-size:24px;font-weight:700">
+    MIS PEDIDOS
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let item of pedidos; let i = index">
+      <div (click)="openContent(item.compra)" item-start style="width:38%;min-height:120px; background-size:cover;background-repeat: no-repeat;background-position: center;border-radius:5px"
+        [ngStyle]="{'background-image': 'url(' + item.compra.img + ')' }">
+      </div>
+      <div style="margin:2px;font-weight:400;color:#444;font-weight:600;font-size:16px">
+        {{item.compra.titulo}}
+      </div>
+      <div style="margin:2px;color:#555">
+        {{item.compra.descripcion}}
+      </div>
+      <div style="margin:2px;color:orange;font-size:16px;margin-top:10px;margin-bottom:10px">
+        ${{item.precio}}
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <!-- <hr>
+
+  <div style="width:100%;display:flex;justify-content:space-around;align-items:center;margin-bottom:50px;margin-top:20px">
+    <div>
+      <div style="font-weight:350;font-size:12px;color:#d5d6dc">
+        TOTAL
+      </div>
+      <div style="font-size:22px;font-weight:800;color:#555">
+        ${{total}}
+      </div>
+      <div style="font-weight:350;font-size:14px;color:#999">
+        Envio incluido
+      </div>
+    </div>
+    <div (click)="openPagar()" style="font-weight:500;font-size:12px;color:white;background:orange;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
+      PAGAR
+      <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
+    </div>
+  </div> -->
+
+
+
+</ion-content>

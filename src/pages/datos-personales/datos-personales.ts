@@ -13,6 +13,7 @@ export class DatosPersonalesPage {
   mensaje: string;
   direccion = '';
   isenabled = false;
+  tipo = '';
 
   constructor(
     private alertCtrl: AlertController,
@@ -20,6 +21,7 @@ export class DatosPersonalesPage {
     public navCtrl: NavController,
     public navParams: NavParams,
   ) {
+    this.tipo = this.navParams.get('tipo')
   }
 
   presentAlert() {
@@ -51,13 +53,34 @@ export class DatosPersonalesPage {
     alert.present();
   }
 
-  close(key) {
+  close(tipo) {
 
-    const datos: any = {
-      ok: false
+    if (tipo == 'direccion') {
+      const datos: any = {
+        ok: true,
+        tipo: tipo,
+        direccion: this.direccion
+      };
+      this.viewCtrl.dismiss(datos);
     }
 
-    this.viewCtrl.dismiss(datos);
+    if (tipo == 'telefono') {
+      const datos: any = {
+        ok: true,
+        tipo: tipo,
+        telefono: this.telefono
+      };
+      this.viewCtrl.dismiss(datos);
+    }
+
+    if (tipo == 'x') {
+      const datos: any = {
+        ok: false
+      };
+      this.viewCtrl.dismiss(datos);
+    }
+
+
   }
 
   close2(key) {

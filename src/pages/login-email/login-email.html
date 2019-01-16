@@ -1,9 +1,9 @@
 <ion-header no-border>
-  <ion-navbar color="orange" align-title="center">
+  <ion-navbar color="orange2" align-title="center">
     <ion-title> {{key}} </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content style="background:orangered">
+<ion-content style="background:orange">
   <div>
     <div *ngIf="!sesion" style="padding-top:50px;height:100px;width:100%;color:white">
       <div style="width:100%;text-align:center;font-size:26px;font-weight:400">
@@ -13,16 +13,16 @@
     <div style="margin-left:20px;margin-bottom:10px;width:100%;text-align:left;font-size:15px;color:#eee">
       Email
     </div>
-    <ion-item *ngIf="!sesion" style="background:orangered;color:white;font-size:18px">
+    <ion-item *ngIf="!sesion" style="background:orange;color:white;font-size:18px">
       <ion-input [(ngModel)]="email" type="text" placeholder="Ej. daniel@gmail.com"></ion-input>
     </ion-item>
-    <ion-item *ngIf="sesion" style="background:orangered;color:white;font-size:18px">
+    <ion-item *ngIf="sesion" style="background:orange;color:white;font-size:18px">
       <ion-input [(ngModel)]="email" type="text"></ion-input>
     </ion-item>
     <div *ngIf="sesion" style="margin-top:20px;margin-left:20px;margin-bottom:10px;width:100%;text-align:left;font-size:15px;color:#eee">
       Contraseña
     </div>
-    <ion-item *ngIf="sesion" style="background:orangered;color:white;font-size:18px">
+    <ion-item *ngIf="sesion" style="background:orange;color:white;font-size:18px">
       <ion-input [(ngModel)]="password" [type]="passwordType"></ion-input>
       <button *ngIf="!showPass" ion-button item-right clear (click)="showHide()">
         <ion-icon name="md-eye" style="color:#fff;font-size:32px"></ion-icon>

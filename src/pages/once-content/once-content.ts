@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-import { DatosPersonalesPage } from '../datos-personales/datos-personales';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Select } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
-import { DataProvider } from '../../providers/data/data';
+import { CarroProvider } from '../../providers/carro/carro';
 
 @IonicPage()
 @Component({
@@ -10,6 +9,9 @@ import { DataProvider } from '../../providers/data/data';
   templateUrl: 'once-content.html',
 })
 export class OnceContentPage {
+
+  @ViewChild('variedadRef') variedadRef: Select;
+  @ViewChild('tamanoRef') tamanoRef: Select;
 
   imgs = [];
   data: any = {};
@@ -35,11 +37,10 @@ export class OnceContentPage {
   user: any = {};
 
   constructor(
-    public modalCtrl: ModalController,
     public navCtrl: NavController,
     public navParams: NavParams,
     private _auth: AuthProvider,
-    private _data: DataProvider
+    private _carro: CarroProvider
 
   ) {
     this.data = this.navParams.get("once");
@@ -81,6 +82,14 @@ export class OnceContentPage {
     });
   }
 
+  openSelect(key) {
+    if (key == 'variedad') {
+      this.variedadRef.open();
+    } else {
+      this.tamanoRef.open();
+    }
+  }
+
   variedad_tamano() {
     this.variedadesObj = this.data.variedad_tamano.variedades;
     this.tamanosObj = this.data.variedad_tamano.tamanos;
@@ -108,44 +117,15 @@ export class OnceContentPage {
     this.total = Number(this.cantidad) * this.precioVariedad * this.cantidadTamano;
   }
 
-  cantidadX() {
-    if (this.data.tamano.isActive) {
-      const indexTamano = this.tamanos.indexOf(this.tamano);
-      this.precio = this.tamanosObj[indexTamano].precio;
-      this.total = Number(this.cantidad) * this.precio;
-    } else {
-      this.total = Number(this.cantidad) * this.precio;
-    }
-  }
-
-  datos(token, compra) {
-    const modal = this.modalCtrl.create(DatosPersonalesPage);
-    modal.onDidDismiss(data => {
-
-      if (data.ok) {
-        compra.clienteTelefono = data.telefono;
-        compra.clienteDireccion = data.direccion;
-
-        this._data.comprarOnce(token, compra)
-          .then(() => {
-            this._data.notificarCompra(token)
-              .then(() => console.log('listoo'))
-          });
-      }
-    });
-    modal.present();
-  }
-
   save() {
     const compra: any = {
       titulo: this.data.titulo,
       descripcion: this.data.descripcion,
-      total: this.total + 1000,
+      total: this.total,
       img: this.data.imgs[0].url,
       vendedorNombre: this.data.vendedor,
-      cliente: this.user._id,
-      clienteNombre: this.user.name,
-      cantidad: `X${this.cantidad}`
+      tiempoDeEntrega: this.data.tiempoDeEntrega,
+      tipo: 'once'
     }
 
     if (this.data.variedad.isActive) {
@@ -156,12 +136,7 @@ export class OnceContentPage {
       compra.tamano = this.tamano;
     }
 
-    if (this.data.variedad_tamano.isActive) {
-      compra.tamano = this.tamano;
-      compra.variedad = this.variedad;
-    }
-
-    this.datos(this.token, compra);
+    this._carro.agregarItemAlCarro(compra);
   }
 
 }

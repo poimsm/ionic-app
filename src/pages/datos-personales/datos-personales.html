@@ -13,24 +13,26 @@
 <ion-content padding>
 
   <ion-list>
-    <ion-item>
+    <ion-item *ngIf="tipo == 'telefono'">
       <ion-input [(ngModel)]="telefono" type="number" placeholder="TU TELÉFONO"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="tipo == 'direccion'">
       <ion-input [(ngModel)]="direccion" type="text" placeholder="TU DIRECCIÓN"></ion-input>
     </ion-item>
     <!-- <ion-item>
       <ion-textarea placeholder="Deja un mensaje al delivery" rows="3" [(ngModel)]="mensaje"></ion-textarea>
     </ion-item> -->
-    <button ion-item no-lines style="margin-top:15px;border:0px solid #333;border-radius:3px">
-      <ion-icon item-end name="md-radio-button-on" class="radio-active"></ion-icon>
-      <div style="font-size:16px;color:#555"> Cancelar en efectivo</div>
-    </button>
   </ion-list>
 
-  <div style="width:100%;display:flex;justify-content:center">
-    <button [disabled]="!(direccion.length>0 && telefono)" (click)="presentAlert()" ion-button color="secondary" mode="ios">
-      Pedir
+  <div *ngIf="tipo == 'telefono'" style="width:100%;display:flex;justify-content:center">
+    <button [disabled]="!telefono" (click)="close('telefono')" ion-button color="secondary" mode="ios">
+      Agregar
+    </button>
+  </div>
+
+  <div *ngIf="tipo == 'direccion'" style="width:100%;display:flex;justify-content:center">
+    <button [disabled]="!direccion.length>0" (click)="close('direccion')" ion-button color="secondary" mode="ios">
+      Agregar
     </button>
   </div>
 

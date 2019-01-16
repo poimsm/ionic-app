@@ -16,11 +16,14 @@ export class FormularioPage {
   precio: number;
   tipo: string;
   vendedor: string;
+  imgFruta = {};
   imgFiles = [];
   fileNames = [];
   categoriasEcommerce = [];
   categoriasOnce = [];
 
+  isFruta = false;
+  isOnce = false;
   variedad_tamano = false;
   isVariedad = false;
   isTamano = false;
@@ -160,5 +163,30 @@ export class FormularioPage {
 
     this.http.post(url, body).toPromise()
       .then(() => console.log('LISTO!'));
+  }
+
+  fruta() {
+    const url = `${this.apiURL}/apps/fruta-crear-tienda`;
+    let imgs = {};
+
+    this.fileNames.forEach((item, i) => {
+      imgs[i] = item;
+    });
+
+    const body = {
+      vendedor: this.vendedor,
+      upload: imgs,
+      productos: [{
+        nombre: 'Ají morado',
+        precio: 1000,
+        tag: '$1200 c/u',
+        cantidad: 0,
+        total: 0
+      }]
+    }
+
+    this.http.post(url, body).toPromise()
+      .then(() => console.log('LISTO!'));
+
   }
 }

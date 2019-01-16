@@ -1,8 +1,8 @@
 <ion-header no-border>
   <ion-navbar align-title="center" color="white">
-    <div style="color:#bbb;font-weight:600;font-size:20px">
-      Compras
-    </div>
+    <ion-title>
+      joopiter
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -10,24 +10,69 @@
 
 <ion-content>
 
+  <div style="margin-bottom:10px;margin-top:20px;width:100%;text-align:center;color:#515c6f;font-size:24px;font-weight:700">
+    CARRITO DE COMPRAS
+  </div>
+
   <ion-list>
-    <button ion-item *ngFor="let compra of comprasOnce" (click)="openContent(compra)">
-      <div item-start style="width:38%;min-height:120px; background-size:cover;background-repeat: no-repeat;background-position: center;"
-        [ngStyle]="{'background-image': 'url(' + compra.img + ')' }">
+    <ion-item *ngFor="let item of carro; let i = index">
+
+
+      <div *ngIf="item.tipo == 'once'" (click)="openContent(item.compra)" item-start style="width:38%;min-height:120px; background-size:cover;background-repeat: no-repeat;background-position: center;border-radius:5px"
+        [ngStyle]="{'background-image': 'url(' + item.compra.img + ')' }">
       </div>
-      <div style="margin:2px;font-weight:400;color:#444;font-weight:600;font-size:16px">
-        {{compra.titulo}}
+      <div *ngIf="item.tipo == 'once'">
+        <div style="margin:2px;font-weight:400;color:#444;font-weight:600;font-size:16px">
+          {{item.compra.titulo}}
+        </div>
+        <div style="margin:2px;color:#555">
+          {{item.compra.descripcion}}
+        </div>
+        <div style="font-weight:450;margin:2px;color:orange;font-size:16px;margin-top:10px;margin-bottom:10px">
+          ${{item.precio}}
+        </div>
+        <div style="width:100%;display:flex;align-items:center">
+          <div (click)="addMore('-', i)" style="color:#777;background:#eee;width:30px;height:30px;border-radius:50%;font-weight:800;font-size:28px;display:flex;justify-content:center;align-items:center">
+            -
+          </div>
+          <div style="margin-left:10px;margin-right:10px;color:#777;width:25px;height:25px;border-radius:50%;font-weight:600;font-size:17px;display:flex;justify-content:center;align-items:center">
+            {{item.cantidad}}
+          </div>
+          <div (click)="addMore('+', i)" style="color:#777;background:#eee;width:30px;height:30px;border-radius:50%;font-weight:800;font-size:28px;display:flex;justify-content:center;align-items:center">
+            +
+          </div>
+        </div>
       </div>
-      <div style="margin:2px;color:#555">
-        {{compra.descripcion}}
+
+
+
+      <div *ngIf="item.tipo == 'fruta'" (click)="openContent(item.compra)" item-start style="width:38%;min-height:120px; background-size:cover;background-repeat: no-repeat;background-position: center;border-radius:5px"
+        [ngStyle]="{'background-image': 'url(' + item.compra.img + ')' }">
       </div>
-      <div style="margin:2px;display: inline-block;padding:5px;border:1px solid #eee;color:#555">
-        {{compra.estado}}
+      <div *ngIf="item.tipo == 'fruta'">
+        <div style="margin:2px;font-weight:400;color:#444;font-weight:600;font-size:16px">
+          {{item.compra.vendedorNombre}}
+        </div>
+        <div style="margin:2px;color:#555">
+          Orden de frutas y verduras
+        </div>
+        <div style="font-weight:450;margin:2px;color:orange;font-size:16px;margin-top:10px;margin-bottom:10px">
+          ${{item.precio}}
+        </div>
+        <div style="width:100%;display:flex;align-items:center">
+          <div (click)="addMore('-', i)" style="color:#777;background:#eee;width:30px;height:30px;border-radius:50%;font-weight:800;font-size:28px;display:flex;justify-content:center;align-items:center">
+            -
+          </div>
+          <div style="margin-left:10px;margin-right:10px;color:#777;width:25px;height:25px;border-radius:50%;font-weight:600;font-size:17px;display:flex;justify-content:center;align-items:center">
+            {{item.cantidad}}
+          </div>
+          <div (click)="addMore('+', i)" style="color:#777;background:#eee;width:30px;height:30px;border-radius:50%;font-weight:800;font-size:28px;display:flex;justify-content:center;align-items:center">
+            +
+          </div>
+        </div>
       </div>
-      <div style="margin:2px;color:#555;font-weight:500;font-size:16px">
-        Total: ${{compra.total}}
-      </div>
-    </button>
+
+    </ion-item>
   </ion-list>
 
   <ion-list>
@@ -48,5 +93,28 @@
     </button>
   </ion-list>
 
+  <hr>
+
+  <div style="width:100%;display:flex;justify-content:space-around;align-items:center;margin-bottom:50px;margin-top:20px">
+    <div>
+      <div style="font-weight:350;font-size:14px;color:#999">
+        TOTAL
+      </div>
+      <div style="font-size:22px;font-weight:800;color:#555">
+        ${{total + 1000}}
+      </div>
+      <div style="font-weight:350;font-size:14px;color:#999">
+        Envío incluido
+      </div>
+    </div>
+    <div *ngIf="carro.length>0" (click)="openPagar()" style="font-weight:500;font-size:12px;color:white;background:#FFBF00;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
+      PAGAR
+      <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
+    </div>
+    <div *ngIf="!carro.length>0" style="font-weight:500;font-size:12px;color:white;background:rgb(255, 215, 96);display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
+      PAGAR
+      <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
+    </div>
+  </div>
 
 </ion-content>

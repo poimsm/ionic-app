@@ -1,0 +1,69 @@
+<ion-header no-border>
+
+  <ion-navbar color="white">
+    <!-- <ion-title>frutas-content</ion-title> -->
+    <!-- <div style="font-size:18px;font-weight:500;color:#515c6f">
+      Verdularia doña juanita
+    </div> -->
+    <button ion-item no-lines>
+      <img item-start src="assets/03.jpg" style="width:50px;height:50px;border-radius:5px">
+      <div style="font-size:18px;font-weight:500;color:#515c6f">
+        {{tienda.vendedor}}
+      </div>
+    </button>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <!-- <ion-list>
+    <button ion-item (click)="openTienda()">
+      <img item-start src="assets/03.jpg" style="width:90px;height:90px;border-radius:5px">
+      <div style="font-size:18px;font-weight:500;color:#515c6f">
+        Verdularia doña juanita
+      </div>
+    </button>
+  </ion-list> -->
+
+  <ion-list>
+
+    <ion-item *ngFor="let producto of productos; let i = index">
+      <div style="margin-bottom:10px;color:#444;font-size:18px;font-weight:450">
+        {{producto.nombre}} - {{producto.tag}}
+      </div>
+      <div *ngIf="producto.cantidad != 0" style="width:100%;display:flex;align-items:center">
+        <div (click)="addMore('-', i)" style="color:#777;border:1px solid #eee;width:30px;height:30px;border-radius:50%;font-weight:350;font-size:28px;display:flex;justify-content:center;align-items:center">
+          -
+        </div>
+        <div style="margin-left:10px;margin-right:10px;color:#777;width:25px;height:25px;border-radius:50%;font-weight:500;font-size:17px;display:flex;justify-content:center;align-items:center">
+          {{producto.cantidad}}
+        </div>
+        <div (click)="addMore('+', i)" style="color:#777;border:1px solid #eee;width:30px;height:30px;border-radius:50%;font-weight:350;font-size:28px;display:flex;justify-content:center;align-items:center">
+          +
+        </div>
+      </div>
+      <div *ngIf="producto.cantidad == 0" (click)="addMore('add', i)" style="color:#777;background:#eee;border:0px solid #eee;padding:5px;width:100px;border-radius:10px;font-weight:450;font-size:16px;display:flex;justify-content:center;align-items:center">
+        Agregar
+      </div>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+<ion-footer padding style="background:white">
+  <div style="width:100%;display:flex;align-items:center;justify-content:space-between">
+    <div style="font-weight:600;color:#333;width:100px">
+      <span style="font-size:18px;padding:5px">Subtotal:</span>
+      <span style="font-size:18px;padding:5px;padding-left:5px">${{total}}</span>
+    </div>
+    <div *ngIf="total != 0" (click)="save()" style="font-weight:500;font-size:12px;color:white;background:#FFBF00;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px;width:170px">
+      AGREGAR AL CARRITO
+      <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
+    </div>
+    <div *ngIf="total == 0" (click)="save()" style="font-weight:500;font-size:12px;color:white;background:rgb(255, 215, 96);display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px;width:170px">
+      AGREGAR AL CARRITO
+      <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
+    </div>
+  </div>
+</ion-footer>
