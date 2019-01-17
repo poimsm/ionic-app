@@ -19,6 +19,8 @@ export class CarroPagarPage {
   user: any;
   isTelefono = false;
   isDireccion = false;
+  email: string;
+  monto: number;
 
   constructor(
     public modalCtrl: ModalController,
@@ -30,6 +32,7 @@ export class CarroPagarPage {
     this.carro = this.navParams.get('carro');
     this.token = this.navParams.get('token');
     this.user = this.navParams.get('user');
+    this.email = this.user.local.email;
   }
 
   openModal(tipo) {
@@ -48,6 +51,19 @@ export class CarroPagarPage {
   }
 
   pagar() {
+    if (this.efectivo) {
+      this.pagarConEfectivo();
+    } else {
+      this.pagarConFlow(this.email, this.total)
+    }
+  }
+
+  pagarConFlow(email, monto) {
+
+    console.log(email, monto);
+  }
+
+  pagarConEfectivo() {
     const data = {
       carro: this.carro,
       cliente: {
@@ -58,5 +74,6 @@ export class CarroPagarPage {
     this._carro.crearCompra(this.token, data)
       .then(() => this.navCtrl.push(CarroCompraExitosaPage));
   }
+
 
 }

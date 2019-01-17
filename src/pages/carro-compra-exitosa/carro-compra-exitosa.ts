@@ -9,19 +9,13 @@ import { MisPedidosPage } from '../mis-pedidos/mis-pedidos';
 })
 export class CarroCompraExitosaPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CarroCompraExitosaPage');
-  }
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams
+  ) { }
 
   openPedidos() {
-    this.navCtrl.setRoot(MisPedidosPage)
-    // this.navCtrl.popToRoot();
-    // this.navCtrl.push(CarroCompraExitosaPage);
-    // this.navCtrl.push(HomePage);
-    // this.navCtrl.push(MisPedidosPage)
+    this.navCtrl.setRoot(MisPedidosPage);
   }
 
 }
