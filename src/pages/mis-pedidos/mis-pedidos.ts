@@ -43,9 +43,6 @@ export class MisPedidosPage {
             this.pedidos.push(compras);
           });
         });
-        console.log(this.pedidos);
-
-        // this.pedidos = data[0].carro;
       });
   }
 

@@ -59,19 +59,28 @@ export class CarroPagarPage {
   }
 
   pagarConFlow(email, monto) {
-
     console.log(email, monto);
-  }
-
-  pagarConEfectivo() {
-    const data = {
+    // Si todo el flujo de compra fue exitoso entonces
+    // debes llamar al metodo this._carro.crearCompra(this.token, compra)
+    // para guardar la compra en DB.. 
+    const compra = {
       carro: this.carro,
       cliente: {
         uid: this.user._id,
         nombre: this.user.name
       }
     };
-    this._carro.crearCompra(this.token, data)
+  }
+
+  pagarConEfectivo() {
+    const compra = {
+      carro: this.carro,
+      cliente: {
+        uid: this.user._id,
+        nombre: this.user.name
+      }
+    };
+    this._carro.crearCompra(this.token, compra)
       .then(() => this.navCtrl.push(CarroCompraExitosaPage));
   }
 

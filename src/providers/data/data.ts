@@ -48,7 +48,7 @@ export class DataProvider {
   }
 
   misPedidos(token, id) {
-    const url = `${this.apiURL}/compras/compras-por-usuario-once/${id}`;
+    const url = `${this.apiURL}/compras/compras-por-usuario/${id}`;
     const headers = new HttpHeaders({
       Authorization: `JWT ${token}`
     });
