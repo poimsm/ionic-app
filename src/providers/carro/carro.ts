@@ -36,7 +36,7 @@ export class CarroProvider {
   }
 
   crearCompra(token, body) {
-    const url = `${this.apiURL}/compras/crear-compra-once`;
+    const url = `${this.apiURL}/compras/crear-compra`;
     const headers = new HttpHeaders({
       Authorization: `JWT ${token}`
     });
@@ -45,6 +45,9 @@ export class CarroProvider {
   }
 
   notificarCompra() {
+    if (!this.platform.is('cordova')) {
+      return
+    }
     const firebaseURL = 'https://us-central1-joopiter-3af7f.cloudfunctions.net/pushNotification';
     return this.http.get(firebaseURL).toPromise();
   }
