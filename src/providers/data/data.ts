@@ -71,6 +71,11 @@ export class DataProvider {
     return this.http.get(url).toPromise();
   }
 
+  fetchNocturno() {
+    const url = `${this.apiURL}/apps/nocturno-all`;
+    return this.http.get(url).toPromise();
+  }
+
   getAll(skip, limit, category, route) {
 
     let url = `${this.apiURL}/${route}`;

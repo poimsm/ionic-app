@@ -9,6 +9,7 @@ import { FormularioPage } from '../formulario/formulario';
 import { PopupsProvider } from '../../providers/popups/popups';
 import { CarroPage } from '../carro/carro';
 import { FrutasPage } from '../frutas/frutas';
+import { NocturnoPage } from '../nocturno/nocturno';
 
 @Component({
   selector: "page-home",
@@ -23,6 +24,7 @@ export class HomePage {
   bandeja = BandejaPage;
   formulario = FormularioPage;
   frutas = FrutasPage;
+  nocturno = NocturnoPage;
 
   mensaje = '';
 

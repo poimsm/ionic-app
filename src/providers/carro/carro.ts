@@ -8,6 +8,7 @@ export class CarroProvider {
 
   listadoCompras = [];
   apiURL: string;
+  carro: any;
 
   constructor(
     public http: HttpClient,
@@ -24,6 +25,17 @@ export class CarroProvider {
       // this.apiURL = 'https://poimsm-server.herokuapp.com';
       this.apiURL = 'http://localhost:3000';
     }
+  }
+
+  agregarAlCarro(carro) {
+    this.carro = carro;
+    this.presentToast();
+    console.log(this.carro);
+
+  }
+
+  vaciaCarro() {
+    this.carro = {};
   }
 
   agregarItemAlCarro(compra) {

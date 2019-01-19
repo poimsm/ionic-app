@@ -55,7 +55,11 @@ import {
   MisPedidosPage,
   MisPedidosContentPage,
   FrutasContentPage,
-  FrutasPage
+  FrutasPage,
+  NocturnoPage,
+  NocturnoContentPage,
+  NocturnoGaleriaPage,
+  NocturnoImagenPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -90,7 +94,11 @@ import { CarroProvider } from '../providers/carro/carro';
     MisPedidosPage,
     MisPedidosContentPage,
     FrutasContentPage,
-    FrutasPage
+    FrutasPage,
+    NocturnoPage,
+    NocturnoContentPage,
+    NocturnoGaleriaPage,
+    NocturnoImagenPage
   ],
   imports: [
     BrowserModule,
@@ -131,7 +139,11 @@ import { CarroProvider } from '../providers/carro/carro';
     MisPedidosPage,
     MisPedidosContentPage,
     FrutasContentPage,
-    FrutasPage
+    FrutasPage,
+    NocturnoPage,
+    NocturnoContentPage,
+    NocturnoGaleriaPage,
+    NocturnoImagenPage
   ],
   providers: [
     StatusBar,

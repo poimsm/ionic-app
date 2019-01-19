@@ -16,11 +16,13 @@ export class CarroPage {
 
   comprasEcommerce: any = [];
   comprasOnce: any = [];
-  total: number;
+  total = 0;
   token: string;
   user: any;
   isAuth = false;
   carro = [];
+  productos = [];
+  tienda: any;
 
   constructor(
     public modalCtrl: ModalController,
@@ -28,11 +30,22 @@ export class CarroPage {
     public navParams: NavParams,
     private _carro: CarroProvider,
     private _auth: AuthProvider
-  ) { }
+  ) {
+    if (this._carro.carro) {
+      this.productos = this._carro.carro.productos;
+      this.tienda = this._carro.carro.tienda;
+      this.total = this._carro.carro.total;
+    }
+  }
+
+  limpiarCarro() {
+    this.productos = [];
+    this.tienda = {};
+    this.total = 0;
+  }
 
   ionViewDidLoad() {
     this.loadUser();
-    this.loadCarro();
   }
 
   loadUser() {
