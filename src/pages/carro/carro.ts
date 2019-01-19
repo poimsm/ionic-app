@@ -17,10 +17,12 @@ export class CarroPage {
   comprasEcommerce: any = [];
   comprasOnce: any = [];
   total = 0;
+  totalDulce = 0;
+  totalNocturno = 0;
   token: string;
   user: any;
   isAuth = false;
-  carro = [];
+  carroDulce = [];
   productos = [];
   tienda: any;
 
@@ -31,17 +33,21 @@ export class CarroPage {
     private _carro: CarroProvider,
     private _auth: AuthProvider
   ) {
+    if (this._carro.listadoCompras.length != 0) {
+      this.loadCarroDulce();
+    }
+
     if (this._carro.carro) {
       this.productos = this._carro.carro.productos;
       this.tienda = this._carro.carro.tienda;
-      this.total = this._carro.carro.total;
+      this.totalNocturno = this._carro.carro.total + 1000;
     }
   }
 
   limpiarCarro() {
     this.productos = [];
     this.tienda = {};
-    this.total = 0;
+    this.totalNocturno = 0;
   }
 
   ionViewDidLoad() {
@@ -58,7 +64,7 @@ export class CarroPage {
     });
   }
 
-  loadCarro() {
+  loadCarroDulce() {
     const data = this._carro.listadoCompras;
     data.forEach(compra => {
       const once = {
@@ -67,41 +73,42 @@ export class CarroPage {
         precio: compra.total,
         tipo: compra.tipo
       }
-      this.carro.push(once);
+      this.carroDulce.push(once);
     });
-    this.updateTotal();
+    this.updateTotalDulce();
     this.comprasOnce = data;
     console.log(data);
 
   }
 
   addMore(type, index) {
-    if (type == '-' && this.carro[index].cantidad != 0) {
-      this.carro[index].cantidad -= 1;
-      this.carro[index].precio = this.carro[index].compra.total * this.carro[index].cantidad;
-      this.updateTotal();
+    if (type == '-' && this.carroDulce[index].cantidad != 0) {
+      this.carroDulce[index].cantidad -= 1;
+      this.carroDulce[index].precio = this.carroDulce[index].compra.total * this.carroDulce[index].cantidad;
+      this.updateTotalDulce();
     }
 
-    if (type == '-' && this.carro[index].cantidad == 0) {
+    if (type == '-' && this.carroDulce[index].cantidad == 0) {
       setTimeout(() => {
-        this.carro.splice(index, 1);
+        this.carroDulce.splice(index, 1);
         this._carro.quitarItemDelCarro(index);
+        this.updateTotalDulce();
       }, 500);
     }
 
-    if (type == '+' && this.carro[index].cantidad != 5) {
-      this.carro[index].cantidad += 1;
-      this.carro[index].precio = this.carro[index].compra.total * this.carro[index].cantidad;
-      this.updateTotal();
+    if (type == '+' && this.carroDulce[index].cantidad != 5) {
+      this.carroDulce[index].cantidad += 1;
+      this.carroDulce[index].precio = this.carroDulce[index].compra.total * this.carroDulce[index].cantidad;
+      this.updateTotalDulce();
     }
   }
 
-  updateTotal() {
+  updateTotalDulce() {
     let total = 0;
-    this.carro.forEach(item => {
+    this.carroDulce.forEach(item => {
       total += item.precio;
     });
-    this.total = total;
+    this.totalDulce = total + 1000 * this.carroDulce.length;;
   }
 
   openLogin() {
@@ -110,7 +117,7 @@ export class CarroPage {
       if (data.ok) {
         const datos = {
           total: this.total,
-          carro: this.carro,
+          carro: this.carroDulce,
           token: this.token,
           user: this.user
         }
@@ -129,7 +136,7 @@ export class CarroPage {
     if (this.isAuth) {
       const datos = {
         total: this.total,
-        carro: this.carro,
+        carro: this.carroDulce,
         token: this.token,
         user: this.user
       }
