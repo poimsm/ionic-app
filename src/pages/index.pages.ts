@@ -1,3 +1,7 @@
+export { NocturnoImagenPage } from './nocturno-imagen/nocturno-imagen';
+export { NocturnoGaleriaPage } from './nocturno-galeria/nocturno-galeria';
+export { NocturnoPage } from './nocturno/nocturno';
+export { NocturnoContentPage } from './nocturno-content/nocturno-content';
 export { FrutasContentPage } from './frutas-content/frutas-content';
 export { FrutasPage } from './frutas/frutas';
 export { MisPedidosContentPage } from './mis-pedidos-content/mis-pedidos-content';

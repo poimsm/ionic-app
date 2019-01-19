@@ -11,7 +11,7 @@
 
     <div *ngIf="!isAuth" style="padding:20px;background:orange;width:100%;display:flex;justify-content:center">
       <div style="text-align:center;color:white;width:150px;font-size:20px;font-weight:600">
-        Bienvenidos a joopiter!
+        Bienvenidos a joopiter
       </div>
     </div>
 
@@ -25,7 +25,7 @@
       <button *ngIf="isAuth" ion-item (click)="openPage(pedidos)">
         <ion-icon item-start name="md-bicycle" style="color:#bbb"></ion-icon>
         <div style="color:#777;font-weight:500;font-size:16px">
-          Mis pedidos
+          Todas mis compras
         </div>
       </button>
     </ion-list>

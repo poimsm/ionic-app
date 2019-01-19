@@ -189,4 +189,29 @@ export class FormularioPage {
       .then(() => console.log('LISTO!'));
 
   }
+
+  nocturno() {
+    const url = `${this.apiURL}/apps/nocturno-crear-tienda`;
+
+    const body = {
+      tienda: {
+        nombre: 'Mi tienda',
+        isOpen: false,
+        delivery: 'Delivery joopiter - $1000'
+      },
+      galeria: [{
+        url: 'url'
+      }],
+      productos: [{
+        nombre: 'Pizza',
+        precio: 1000,
+        tag: '$1200',
+        cantidad: 0,
+        total: 0
+      }]
+    }
+
+    this.http.post(url, body).toPromise()
+      .then(() => console.log('LISTO!'));
+  }
 }
