@@ -40,9 +40,10 @@
       <img src="assets/01.jpg" style="width:120px;height:120px;margin-right:15px">
     </div>
   </ion-scroll> -->
-  <div style="margin-left:15px;margin-bottom:5px;margin-top:5px;color:#444;font-size:22px;font-weight:500">
+
+  <!-- <div style="margin-left:15px;margin-bottom:5px;margin-top:5px;color:#444;font-size:22px;font-weight:500">
     ¡Menú de hoy!
-  </div>
+  </div> -->
 
   <!-- <div *ngIf="!isMenu" (click)="isMenu=!isMenu" style="margin-left:15px;margin-bottom:5px;margin-top:5px;color:#444;font-size:22px;font-weight:500">
     + Mostrar Menu
@@ -84,7 +85,6 @@
 </ion-content>
 
 <ion-footer padding>
-
   <button *ngIf="total == 0" [disabled]="true" ion-button block mode="ios" color="orange3">
     <div style="font-size:18px;width:100%;display:flex;align-items:center;justify-content:space-between">
       <div>
@@ -96,7 +96,6 @@
       </div>
     </div>
   </button>
-
   <button *ngIf="total != 0" (click)="save()" ion-button block mode="ios" color="orange3">
     <div style="font-size:18px;width:100%;display:flex;align-items:center;justify-content:space-between">
       <div style="font-size:16px;font-weight:600;background:orangered;display:flex;justify-content:center;align-items:center;border-radius:5px;height:25px;width:25px">

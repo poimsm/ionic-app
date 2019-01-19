@@ -11,6 +11,7 @@ export class FrutasContentPage {
   productos = [];
   total = 0;
   tienda: any;
+  contador = 0;
 
   constructor(
     public navCtrl: NavController,
@@ -26,17 +27,20 @@ export class FrutasContentPage {
 
   addMore(type, index) {
     if (type == '-') {
+      this.contador -= 1;
       this.productos[index].cantidad -= 1;
       this.productos[index].total = this.productos[index].precio * this.productos[index].cantidad;
       this.updateTotal();
     }
     if (type == 'add') {
+      this.contador += 1;
       this.productos[index].cantidad += 1;
       this.productos[index].total = this.productos[index].precio * this.productos[index].cantidad;
       this.updateTotal();
     }
 
     if (type == '+' && this.productos[index].cantidad != 5) {
+      this.contador += 1;
       this.productos[index].cantidad += 1;
       this.productos[index].total = this.productos[index].precio * this.productos[index].cantidad;
       this.updateTotal();
@@ -67,8 +71,8 @@ export class FrutasContentPage {
       productos,
       total: this.total,
       tipo: 'fruta',
-      img: this.tienda.imgs[0].url,
-      vendedorNombre: this.tienda.vendedor
+      img: this.tienda.tienda.logo,
+      vendedorNombre: this.tienda.tienda.nombre
     }
     console.log({ compra, tipo: 'frutas' });
     this._carro.agregarItemAlCarro(compra);
