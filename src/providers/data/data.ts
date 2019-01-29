@@ -76,6 +76,46 @@ export class DataProvider {
     return this.http.get(url).toPromise();
   }
 
+  fetchSorpresa() {
+    const url = `${this.apiURL}/apps/once-sorpresa-all`;
+    return this.http.get(url).toPromise();
+  }
+
+  nuevaImgGaleria(body) {
+    const url = `${this.apiURL}/apps/tienda-imagen-galeria`;
+    return this.http.post(url, body).toPromise();
+  }
+
+  nuevaImgPerfil(body) {
+    const url = `${this.apiURL}/apps/tienda-imagen-perfil`;
+    return this.http.put(url, body).toPromise();
+  }
+
+  nuevoProductoTienda(body) {
+    const url = `${this.apiURL}/apps/tienda-nuevo-producto`;
+    return this.http.post(url, body).toPromise();
+  }
+
+  fetchTienda(id) {
+    const url = `${this.apiURL}/apps/tienda-one/${id}`;
+    return this.http.get(url).toPromise();
+  }
+
+  editTienda(id, body) {
+    const url = `${this.apiURL}/apps/tienda-editar/${id}`;
+    return this.http.put(url, body).toPromise();
+  }
+
+  crearProductoOnce(body) {
+    const url = `${this.apiURL}/apps/once-crear`;
+    return this.http.post(url, body).toPromise();
+  }
+
+  onceByTiendID(id) {
+    const url = `${this.apiURL}/apps/once-por-tienda/${id}`;
+    return this.http.get(url).toPromise();
+  }
+
   getAll(skip, limit, category, route) {
 
     let url = `${this.apiURL}/${route}`;

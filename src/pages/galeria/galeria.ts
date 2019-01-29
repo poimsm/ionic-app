@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-import { NocturnoImagenPage } from '../nocturno-imagen/nocturno-imagen';
+import { GaleriaImagenPage } from '../galeria-imagen/galeria-imagen';
+
 
 @IonicPage()
 @Component({
-  selector: 'page-nocturno-galeria',
-  templateUrl: 'nocturno-galeria.html',
+  selector: 'page-galeria',
+  templateUrl: 'galeria.html',
 })
-export class NocturnoGaleriaPage {
+export class GaleriaPage {
 
   galeria = [];
 
@@ -20,7 +21,7 @@ export class NocturnoGaleriaPage {
   }
 
   openModal(url) {
-    const modal = this.modalCtrl.create(NocturnoImagenPage, { url });
+    const modal = this.modalCtrl.create(GaleriaImagenPage, { url });
     modal.present();
   }
 

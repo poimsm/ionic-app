@@ -1,0 +1,104 @@
+<ion-header>
+
+  <ion-navbar color="white">
+    <!-- <ion-title>once-sopresa</ion-title> -->
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <div style="top:0px;left:0px">
+    <ion-slides pager>
+      <ion-slide *ngFor="let img of galeria">
+        <div style="width:100%;min-height:330px; background-size:cover;background-repeat: no-repeat;background-position: center;"
+          [ngStyle]="{'background-image': 'url(' + img.url + ')' }">
+        </div>
+        <div style="height:30px"></div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <div padding style="font-size:18px;font-weight:400;color:#333">
+    {{data.titulo}}
+  </div>
+
+  <hr>
+
+  <!-- <ion-list text-wrap>
+    <button ion-item>
+      <div item-start style="position:relative">
+        <img item-start src="assets/01.jpg" style="width:90px;height:90px;border-radius:5px;object-fit:cover">
+        <div style="text-align:center;border-radius:3px;padding:4px;padding-left:10px;padding-right:10px;background:rgba(0, 0, 0, 0.5);position:absolute;bottom:10px;right:10px;color:white;font-size:14px">
+          12
+        </div>
+      </div>
+      <div style="color:#444;font-weight:600;font-size:22px">
+        Tienda de juan
+      </div>
+      <div style="margin-top:10px;color:#555;font-size:18px">
+        Abierto
+      </div>
+      <div style="color:#555;font-size:15px">
+        delivery 1000
+      </div>
+    </button>
+  </ion-list> -->
+
+  <hr>
+
+  <div style="color:#333;font-size:19px;font-weight:600;margin-left:15px;margin-top:10px">
+    Descripcion
+  </div>
+
+  <div style="margin-left:15px;margin-bottom:15px;white-space: pre-line;font-size:16px;color:#555">
+    {{data.descripcion}}
+  </div>
+
+  <div *ngIf="tematicas.length > 0" style="color:#999;margin-left:15px">
+    TEMÁTICA
+  </div>
+  <div *ngIf="tematicas.length > 0" padding>
+    <div (click)="openSelect('tematica')" style="border-radius:15px;border:1px solid #bbb;padding:10px;font-size:16px;color:#555;display:flex;justify-content:space-between;align-items:center">
+      {{tematica}}
+      <div style="border-left:1px solid #bbb;padding:2px;">
+        <ion-icon name="md-arrow-dropdown" style="color:#ff6633;font-size:24px;margin-left:4px;margin-right:4px"></ion-icon>
+      </div>
+      <ion-select style="max-width: 100% !important;display: none" [(ngModel)]="tematica" #tematicaRef>
+        <ion-option *ngFor="let tematica of tematicas" [value]="tematica"> {{tematica}} </ion-option>
+      </ion-select>
+    </div>
+  </div>
+
+  <div *ngIf="tamanos.length > 0" style="color:#999;margin-left:15px">
+    CANTIDAD
+  </div>
+  <div *ngIf="tamanos.length > 0" padding>
+    <div (click)="openSelect('tamano')" style="border-radius:15px;border:1px solid #bbb;padding:10px;font-size:16px;color:#555;display:flex;justify-content:space-between;align-items:center">
+      {{tamano}}
+      <div style="border-left:1px solid #bbb;padding:2px;">
+        <ion-icon name="md-arrow-dropdown" style="color:#ff6633;font-size:24px;margin-left:4px;margin-right:4px"></ion-icon>
+      </div>
+      <ion-select style="max-width: 100% !important;display: none" [(ngModel)]="tamano" #tamanoRef>
+        <ion-option *ngFor="let tamano of tamanos" [value]="tamano.tamano"> {{tamano.tamano}} </ion-option>
+      </ion-select>
+    </div>
+  </div>
+
+  <!-- <button no-lines ion-item mode="ios" style="color:#999;font-size:14px">
+    DÍA Y HORA DE ENTREGA
+  </button> -->
+
+  <ion-item>
+    <ion-textarea style="border:1px solid #bbb" rows="3" [(ngModel)]="mensaje" placeholder="Mensaje personalizado"></ion-textarea>
+  </ion-item>
+
+
+  <div style="width:100%;display:flex;justify-content:center;margin-bottom:50px;margin-top:20px">
+    <div (click)="save()" style="font-weight:500;font-size:12px;color:white;background:#ff6633;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
+      AGREGAR AL CARRITO
+      <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
+    </div>
+  </div>
+</ion-content>

@@ -8,7 +8,7 @@
     <ion-title> joopiter </ion-title>
     <ion-buttons right>
       <button *ngIf="showFormulario" (click)="openPage(formulario)" ion-button icon-only>
-        <ion-icon name="ios-settings" style="color:#777"></ion-icon>
+        <ion-icon name="md-notifications" style="color:#bbb"></ion-icon>
       </button>
       <button (click)="openPage(carro)" ion-button icon-only>
         <ion-icon name="md-cart" style="color:#bbb"></ion-icon>
@@ -17,14 +17,15 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content style="background:#eee">
 
 
-  <div style="margin-top:20px;display:flex;justify-content:space-around;">
 
-    <div style="width:80px"></div>
+  <!-- <div style="margin-top:20px;display:flex;justify-content:space-around;"> -->
 
-    <!-- <div (click)="openPage(usuario)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+  <!-- <div style="width:80px"></div> -->
+
+  <!-- <div (click)="openPage(usuario)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
       <div style="height:45px;width:45px;border-radius:50%;background:orange;display:flex;justify-content:center;align-items:center">
         <ion-icon name="md-person" style="color:white;font-size:30px"></ion-icon>
       </div>
@@ -33,7 +34,7 @@
       </div>
     </div> -->
 
-    <!-- <div (click)="openPage(deporte)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+  <!-- <div (click)="openPage(deporte)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
         <div style="position:relative;height:45px;width:45px;border-radius:50%;background:orange;display:flex;justify-content:center;align-items:center">
             <ion-icon name="md-person" style="color:white;font-size:30px"></ion-icon>
           <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:0px;background:white;border:1px solid #eee;color:#777;padding:4px;border-radius:4px">
@@ -45,16 +46,16 @@
         </div>
       </div> *ngIf="user?.isDelivery"-->
 
-    <div *ngIf="user?.isDelivery" (click)="openPage(bandeja)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+  <!-- <div *ngIf="user?.isDelivery" (click)="openPage(bandeja)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
       <div style="height:45px;width:45px;border-radius:50%;background:orange;display:flex;justify-content:center;align-items:center">
         <ion-icon name="md-archive" style="color:white;font-size:30px"></ion-icon>
       </div>
       <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
         Bandeja
       </div>
-    </div>
+    </div> -->
 
-    <!-- <div (click)="openPage(compras)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+  <!-- <div (click)="openPage(compras)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
       <div style="position:relative;height:45px;width:45px;border-radius:50%;background:#f53d3d;display:flex;justify-content:center;align-items:center">
         <ion-icon name="md-basket" style="color:white;font-size:30px"></ion-icon>
         <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:20px;background:white;border:1px solid #eee;color:#777;padding:4px;border-radius:4px">
@@ -66,7 +67,7 @@
       </div>
     </div> -->
 
-    <div (click)="openPage(compras)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+  <!-- <div (click)="openPage(compras)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
       <div style="position:relative;height:45px;width:45px;border-radius:50%;background:#f53d3d;display:flex;justify-content:center;align-items:center">
         <ion-icon name="md-basket" style="color:white;font-size:30px"></ion-icon>
         <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:-45px;background:orange;color:white;padding:4px;border-radius:4px;border:0px solid white">
@@ -76,9 +77,9 @@
       <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
         Compras
       </div>
-    </div>
+    </div> -->
 
-    <!-- <div (click)="openPage(compras)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+  <!-- <div (click)="openPage(compras)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
       <div style="height:45px;width:45px;border-radius:15px;background:#f53d3d;display:flex;justify-content:center;align-items:center">
         <ion-icon name="md-basket" style="color:white;font-size:30px"></ion-icon>
       </div>
@@ -87,7 +88,7 @@
       </div>
     </div> -->
 
-    <!-- <div (click)="openPage(deporte)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+  <!-- <div (click)="openPage(deporte)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
       <div style="position:relative;height:45px;width:45px;border-radius:50%;background:white;display:flex;justify-content:center;align-items:center">
         <ion-icon name="ios-football" style="color:#444;font-size:40px"></ion-icon>
         <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:20px;background:white;border:1px solid #eee;color:#777;padding:4px;border-radius:4px">
@@ -99,7 +100,7 @@
       </div>
     </div> -->
 
-    <div (click)="openPage(once)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+  <!-- <div (click)="openPage(once)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
       <div style="position:relative;height:45px;width:45px;border-radius:50%;background:slateblue;display:flex;justify-content:center;align-items:center">
         <ion-icon name="md-cafe" style="color:white;font-size:30px"></ion-icon>
         <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:-30px;background:#fa6e6d;color:white;padding:4px;border-radius:4px">
@@ -107,11 +108,11 @@
         </div>
       </div>
       <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Cosas dulce
+        Algo dulce
       </div>
-    </div>
+    </div> -->
 
-    <!-- <div (click)="openPage(frutas)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+  <!-- <div (click)="openPage(frutas)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
       <div style="position:relative;height:45px;width:45px;border-radius:50%;background:salmon;display:flex;justify-content:center;align-items:center">
         <ion-icon name="md-nutrition" style="color:white;font-size:30px"></ion-icon>
         <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:-30px;background:#f53d3d;color:white;padding:4px;border-radius:4px">
@@ -127,9 +128,9 @@
       </div>
     </div> -->
 
-    <div style="width:80px"></div>
+  <!-- <div style="width:80px"></div> -->
 
-    <!-- <div (click)="openPage(recreacion)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+  <!-- <div (click)="openPage(recreacion)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
       <div style="height:45px;width:45px;border-radius:50%;background:#51c0f3;display:flex;justify-content:center;align-items:center">
         <ion-icon name="md-boat" style="color:white;font-size:30px"></ion-icon>
       </div>
@@ -138,7 +139,7 @@
       </div>
     </div> -->
 
-    <!-- <div (click)="openPage(cesta)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+  <!-- <div (click)="openPage(cesta)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
         <div style="height:45px;width:45px;border-radius:15px;background:#f53d3d;display:flex;justify-content:center;align-items:center">
           <ion-icon name="md-basket" style="color:white;font-size:30px"></ion-icon>
         </div>
@@ -148,12 +149,12 @@
       </div> -->
 
 
-  </div>
-
-  <div style="margin-top:25px;display:flex;justify-content:space-around;">
+  <!-- </div> -->
 
 
-    <div style="width:80px"></div>
+
+
+  <div padding style="background:white;padding-left:40px;padding-right:40px;margin-top:0px;display:flex;justify-content:space-around;">
 
     <div (click)="openPage(frutas)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
       <div style="position:relative;height:45px;width:45px;border-radius:50%;background:#97e253;display:flex;justify-content:center;align-items:center">
@@ -179,15 +180,59 @@
       </div>
     </div>
 
-    <!-- <div style="width:140px"></div> -->
+    <div (click)="openPage(once)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+      <div style="position:relative;height:45px;width:45px;border-radius:50%;background:slateblue;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="md-cafe" style="color:white;font-size:30px"></ion-icon>
+        <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:-30px;background:#fa6e6d;color:white;padding:4px;border-radius:4px">
+          delivery
+        </div>
+      </div>
+      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
+        Algo dulce
+      </div>
+    </div>
 
-    <div style="width:80px"></div>
+    <!-- <div (click)="openPage(nocturno)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+      <div style="position:relative;height:45px;width:45px;border-radius:50%;background:hotpink;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="woman" style="color:white;font-size:30px"></ion-icon>
+      </div>
+      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
+        Estilo
+      </div>
+    </div> -->
+
+    <!-- <div style="width:20px"></div> -->
+
 
   </div>
 
-  <!-- <div style="margin-top:15px;display:flex;justify-content:space-between;">
-    
-    <div (click)="openPage(fruta)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+
+  <div padding style="background:white;padding-left:40px;padding-right:40px;display:flex;justify-content:space-around;">
+
+    <div (click)="openPage(compras)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+      <div style="position:relative;height:45px;width:45px;border-radius:50%;background:#f53d3d;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="md-basket" style="color:white;font-size:30px"></ion-icon>
+        <!-- <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:-45px;background:orange;color:white;padding:4px;border-radius:4px;border:0px solid white">
+            ecommerce
+          </div> -->
+      </div>
+      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
+        Compras
+      </div>
+    </div>
+    <!-- (click)="openPage(estilo)" -->
+    <div style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+      <div style="position:relative;height:45px;width:45px;border-radius:50%;background:hotpink;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="woman" style="color:white;font-size:30px"></ion-icon>
+      </div>
+      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
+        Estilo
+      </div>
+    </div>
+
+    <!-- <div style="width:80px"></div> -->
+
+    <!-- <div (click)="openPage(fruta)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
       <div style="position:relative;height:45px;width:45px;border-radius:50%;background:salmon;display:flex;justify-content:center;align-items:center">
         <ion-icon name="md-nutrition" style="color:white;font-size:30px"></ion-icon>
         <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:-30px;background:#f53d3d;color:white;padding:4px;border-radius:4px">
@@ -197,31 +242,118 @@
       <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
         Frutas
       </div>
-    </div>
-    
-    <div (click)="openPage(misCompras)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
-      <div style="height:45px;width:45px;border-radius:15px;background:#f53d3d;display:flex;justify-content:center;align-items:center">
-        <ion-icon name="md-basket" style="color:white;font-size:30px"></ion-icon>
+    </div> -->
+
+    <div style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+      <div style="position:relative;height:45px;width:45px;border-radius:50%;background:orange;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="ios-home" style="color:#fff;font-size:35px"></ion-icon>
+        <div style="font-size:11px;font-weight:500;position:absolute;top:-10px;right:-30px;background:white;border:1px solid #eee;color:#777;padding:4px;border-radius:4px">
+          reservar
+        </div>
       </div>
       <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Mis compras
+        Alquiler
       </div>
     </div>
+  </div>
 
-    <div style="width:80px"></div>
-    <div style="width:80px"></div>  
 
+
+
+
+  <!-- <div padding style="background:white;margin-top:10px">
+    <ion-slides>
+      <ion-slide>
+        <div style="position:relative">
+          <img src="assets/e02.jpg" style="border-radius:5px;width:100%;height:150px;object-fit:cover">
+          <div style="position:absolute;top:10px;left:10px;width:100%;text-align:left;margin-bottom:20px;color:#fff;font-size:20px;font-weight:600;padding-top:5px">
+            Fiesta de la cerverza 2019
+          </div>
+        </div>
+      </ion-slide>
+      <ion-slide>
+        <div style="position:relative">
+          <img src="assets/02.jpg" style="border-radius:5px;width:100%;height:150px;object-fit:cover">
+          <div style="position:absolute;top:10px;left:10px;width:100%;text-align:left;margin-bottom:20px;color:#444;font-size:16px;font-weight:600;padding-top:5px">
+            Taller de decoración completa en fondant
+          </div>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+
+
+
+
+  <div style="background:white;margin-top:10px">
+    <div style="padding:8px;padding-left:15px;width:100%;background:white;color:#444;font-size:16px;font-weight:600">
+      Ofertas relámpago
+    </div>
+    <ion-scroll scrollX="true" style="display:flex;height:190px;margin-left:10px">
+      <ion-grid>
+        <ion-row nowrap>
+          <ion-col col-5>
+            <div style="position:relative">
+              <img src="assets/w01.jpg" style="width:120px;height:120px;margin-right:15px">
+              <div style="position:absolute;top:10px;left:0px;font-weight:500;color:White;background:orangered;padding:5px;font-size:14px">
+                -30%
+              </div>
+            </div>
+            <div style="width:100%;text-align:right;font-size:16px;color:#333">
+              $4900 CLP
+              <span style="margin-left:5px;text-decoration-line: line-through;">
+                $5600
+              </span>
+            </div>
+          </ion-col>
+
+          <ion-col col-5>
+            <div style="position:relative">
+              <img src="assets/w02.jpg" style="width:120px;height:120px;margin-right:15px">
+              <div style="position:absolute;top:10px;left:0px;font-weight:500;color:White;background:orangered;padding:5px;font-size:14px">
+                -23%
+              </div>
+            </div>
+            <div style="width:100%;text-align:right;font-size:16px;color:#333">
+              $2300 CLP
+              <span style="margin-left:5px;text-decoration-line: line-through;">
+                $6600
+              </span>
+            </div>
+          </ion-col>
+
+          <ion-col col-5>
+            <div style="position:relative">
+              <img src="assets/w03.jpg" style="width:120px;height:120px;margin-right:15px">
+              <div style="position:absolute;top:10px;left:0px;font-weight:500;color:White;background:orangered;padding:5px;font-size:14px">
+                -10%
+              </div>
+            </div>
+            <div style="width:100%;text-align:right;font-size:16px;color:#333">
+              $3000 CLP
+              <span style="margin-left:5px;text-decoration-line: line-through;">
+                $5690
+              </span>
+            </div>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+    </ion-scroll>
   </div> -->
-
 
 
 </ion-content>
 
-<ion-footer padding>
+
+
+
+<!-- <ion-footer padding>
   <div style="margin-top:0px;width:100%;text-align:center;color:#555;font-weight:500;font-size:18px">
     {{mensaje}}
   </div>
-  <!-- <div style="margin-top:10px;width:100%;text-align:center;color:#555;font-weight:500;font-size:14px">
-    Servicio disponible en Valdivia
-  </div> -->
-</ion-footer>
+  <div style="margin-top:0px;width:100%;text-align:center;color:#555;font-weight:500;font-size:18px">
+    Servicios disponibles en Valdivia
+  </div>
+</ion-footer> -->

@@ -48,6 +48,7 @@ export class CarroPage {
     this.productos = [];
     this.tienda = {};
     this.totalNocturno = 0;
+    this._carro.vaciaCarro();
   }
 
   ionViewDidLoad() {
@@ -77,8 +78,6 @@ export class CarroPage {
     });
     this.updateTotalDulce();
     this.comprasOnce = data;
-    console.log(data);
-
   }
 
   addMore(type, index) {
@@ -135,7 +134,7 @@ export class CarroPage {
 
     if (this.isAuth) {
       const datos = {
-        total: this.total,
+        total: this.totalDulce + this.totalNocturno,
         carro: this.carroDulce,
         token: this.token,
         user: this.user
