@@ -15,6 +15,7 @@ export class MisPedidosPage {
   token: string;
   user: any;
   isAuth: boolean;
+  nocturno = [];
 
   constructor(
     public navCtrl: NavController,
@@ -39,8 +40,12 @@ export class MisPedidosPage {
     this._data.misPedidos(token, id)
       .then((data: any) => {
         data.forEach(item => {
-          item.carro.forEach(compras => {
-            this.pedidos.push(compras);
+          item.carro.forEach(compra => {
+            if (compra.tipo != 'nocturno') {
+              this.pedidos.push(compra);
+            } else {
+              this.nocturno.push(compra);
+            }
           });
         });
       });

@@ -29,9 +29,6 @@ export class CarroProvider {
 
   agregarAlCarro(carro) {
     this.carro = carro;
-    this.presentToast();
-    console.log(this.carro);
-
   }
 
   vaciaCarro() {
@@ -53,6 +50,15 @@ export class CarroProvider {
       Authorization: `JWT ${token}`
     });
     this.notificarCompra();
+    return this.http.post(url, body, { headers }).toPromise();
+  }
+
+  iniciarCompra(token, body) {
+    const url = `${this.apiURL}/compras/pago-iniciar`;
+    const headers = new HttpHeaders({
+      Authorization: `JWT ${token}`
+    });
+    //this.notificarCompra();
     return this.http.post(url, body, { headers }).toPromise();
   }
 

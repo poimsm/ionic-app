@@ -10,6 +10,11 @@ import { UsuarioPage } from '../pages/usuario/usuario';
 import { PopupsProvider } from '../providers/popups/popups';
 import { UpgradePage } from '../pages/upgrade/upgrade';
 import { MisPedidosPage } from '../pages/mis-pedidos/mis-pedidos';
+import { TiendaPage } from '../pages/tienda/tienda';
+import { TiendaDeliveryDulcePage } from '../pages/tienda-delivery-dulce/tienda-delivery-dulce';
+import { TiendaDeliveryNormalPage } from '../pages/tienda-delivery-normal/tienda-delivery-normal';
+import { TiendaEcommercePage } from "../pages/index.pages";
+import { TiendaAlojamientoPage } from '../pages/tienda-alojamiento/tienda-alojamiento';
 
 @Component({
   templateUrl: "app.html"
@@ -22,11 +27,13 @@ export class MyApp {
   usuario = UsuarioPage;
   upgrade = UpgradePage;
   pedidos = MisPedidosPage;
+  tienda = TiendaPage;
 
   isAuth = false;
   user: any = {};
   token: string;
   isImg = false;
+  isTienda = false;
 
   rootPage: any;
 
@@ -48,6 +55,7 @@ export class MyApp {
         if (data.isAuth) {
           this.user = data.authData.user;
           this.token = data.authData.token;
+          this.isTienda = this.user.isTienda;
         }
         this.isAuth = data.isAuth;
       });
@@ -80,6 +88,23 @@ export class MyApp {
     const modal = this.modalCtrl.create(LoginPage);
     modal.onDidDismiss(() => console.log('Listo'));
     modal.present();
+  }
+
+  openTienda(tipo) {
+    if (tipo == 'DELIVERY_NORMAL') {
+      this.nav.setRoot(TiendaDeliveryNormalPage, { id: this.user.tienda.id });
+    }
+    if (tipo == 'DELIVERY_DULCE') {
+      this.nav.setRoot(TiendaDeliveryDulcePage, { id: this.user.tienda.id });
+    }
+    if (tipo == 'ECOMMERCE') {
+      this.nav.setRoot(TiendaEcommercePage, { id: this.user.tienda.id });
+    }
+    if (tipo == 'ALOJAMIENTO') {
+      this.nav.setRoot(TiendaAlojamientoPage, { id: this.user.tienda.id });
+    }
+    this.menuCtrl.close();
+
   }
 
   openPage(pagina) {

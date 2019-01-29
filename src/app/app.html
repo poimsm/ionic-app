@@ -1,8 +1,8 @@
 <ion-menu [content]="content">
-  <ion-content class="card-background-page">
+  <ion-content class="card-background-page" style="background:grey">
     <ion-item *ngIf="isAuth" no-lines color="orange2">
       <ion-icon item-start *ngIf="!user?.img" name="md-contact" style="color:#fff;font-size:50px"></ion-icon>
-      <div style="color:white;font-size:16px;">
+      <div style="color:white;font-size:16px;font-weight:500">
         <div> {{user.local?.email}} </div>
         <div> {{user?.name | titlecase}} </div>
       </div>
@@ -15,38 +15,56 @@
       </div>
     </div>
 
-    <ion-list no-lines>
-      <button ion-item (click)="openPage(home)">
-        <ion-icon item-start name="md-home" style="color:#bbb"></ion-icon>
-        <div style="color:#777;font-weight:450;font-size:16px">
+    <ion-list no-lines style="font-weight:500;background:gray">
+
+      <button ion-item (click)="openPage(home)" style="background:gray">
+        <!-- <ion-icon item-start name="md-home" style="color:#bbb"></ion-icon> -->
+        <div item-start style="border-radius:50%;background:palegreen;width:40px;height:40px;display:flex;justify-content:center;align-items:center">
+          <ion-icon name="md-home" style="color:#fff;font-size:22px"></ion-icon>
+        </div>
+        <div style="color:#fff;font-size:18px;font-weight:600">
           Home
         </div>
       </button>
-      <button *ngIf="isAuth" ion-item (click)="openPage(pedidos)">
-        <ion-icon item-start name="md-bicycle" style="color:#bbb"></ion-icon>
-        <div style="color:#777;font-weight:450;font-size:16px">
-          Todas mis compras
+
+      <button *ngIf="isAuth && isTienda" ion-item (click)="openTienda(user?.tienda.tipo)" style="background:gray">
+        <div item-start style="border-radius:50%;background:tomato;width:40px;height:40px;display:flex;justify-content:center;align-items:center">
+          <ion-icon name="md-pin" style="color:#fff;font-size:22px"></ion-icon>
+        </div>
+        <div style="color:#fff;font-size:18px;font-weight:600">
+          Mi tienda
         </div>
       </button>
+
+      <button *ngIf="isAuth" ion-item (click)="openPage(pedidos)" style="background:gray">
+        <!-- <ion-icon item-start name="ios-basket" style="color:#bbb"></ion-icon> -->
+        <div item-start style="border-radius:50%;background:gold;width:40px;height:40px;display:flex;justify-content:center;align-items:center">
+          <ion-icon name="md-basket" style="color:#fff;font-size:22px"></ion-icon>
+        </div>
+        <div style="color:#fff;font-size:18px;font-weight:600">
+          Mis compras
+        </div>
+      </button>
+
     </ion-list>
 
 
   </ion-content>
 
-  <ion-footer *ngIf="isAuth">
-    <button ion-item no-lines (click)="logout()">
-      <ion-icon item-start name="ios-log-out" style="color:dodgerblue;font-size:25px;font-weight:800"></ion-icon>
-      <div style="font-size:16px;color:#222">Cerrar sesión</div>
+  <ion-footer *ngIf="isAuth" style="background:gray">
+    <button ion-item no-lines (click)="logout()" style="background:gray">
+      <ion-icon item-start name="ios-log-out" style="color:white;font-size:25px;font-weight:800"></ion-icon>
+      <div style="font-size:16px;color:#fff">Cerrar sesión</div>
     </button>
-    <div style="margin-top:5px;height:15px;width:100%;background:#eee"></div>
+    <!-- <div style="margin-top:5px;height:15px;width:100%;background:#eee"></div> -->
   </ion-footer>
 
-  <ion-footer *ngIf="!isAuth">
-    <button ion-item no-lines (click)="openLogin()">
-      <div style="font-size:16px;color:#222">Crear cuenta o identifícate</div>
-      <ion-icon item-start name="ios-log-in" style="color:#bbb;font-size:25px;font-weight:800"></ion-icon>
+  <ion-footer *ngIf="!isAuth" style="background:gray">
+    <button ion-item no-lines (click)="openLogin()" style="background:gray">
+      <div style="font-size:16px;color:#fff">Crear cuenta o identifícate</div>
+      <ion-icon item-start name="ios-log-in" style="color:#fff;font-size:25px;font-weight:800"></ion-icon>
     </button>
-    <div style="margin-top:5px;height:15px;width:100%;background:#eee"></div>
+    <!-- <div style="margin-top:5px;height:15px;width:100%;background:#eee"></div> -->
   </ion-footer>
 
 </ion-menu>

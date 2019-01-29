@@ -19,9 +19,57 @@
     Historial de compras
   </div>
 
+
+
+
+
+  <ion-list>
+    <div *ngFor="let data of nocturno">
+
+      <div style="width:100%;display:flex;justify-content:flex-start;align-items:center">
+        <div style="margin-left:15px;min-height:80px;width:80px;border-radius:5px;background-size:cover;background-repeat: no-repeat;background-position: center;"
+          [ngStyle]="{'background-image': 'url(' + data.compra.tienda.logo + ')' }">
+        </div>
+
+        <div style="margin-left:10px">
+          <div style="color:#555;font-weight:500;font-size:18px">
+            {{data.compra.tienda.nombre}}
+          </div>
+          <div style="color:#555;font-size:18px">
+            SubTotal
+          </div>
+          <div style="color:#555;font-size:18px">
+            <span style="color:#ff6633">${{data.compra.total}} </span>
+          </div>
+        </div>
+
+      </div>
+
+      <ion-item *ngFor="let producto of data.compra.productos; let i = index">
+        <div item-start style="color:#444;font-size:18px">
+          X{{producto?.cantidad}}
+        </div>
+        <div style="color:#333;font-size:18px">
+          {{producto?.producto}}
+        </div>
+        <div style="color:#555;font-size:16px">
+          {{producto?.descripcion}}
+        </div>
+        <div item-end style="color:#555;font-size:18px">
+          {{producto?.tag}}
+        </div>
+      </ion-item>
+    </div>
+  </ion-list>
+
+
+
+
+
+
   <ion-list>
     <ion-item *ngFor="let item of pedidos; let i = index">
-      <div *ngIf="item.tipo == 'once'" (click)="openContent(item.compra)" item-start style="width:38%;min-height:120px; background-size:cover;background-repeat: no-repeat;background-position: center;border-radius:5px"
+      <div *ngIf="item.tipo == 'once'" (click)="openContent(item.compra)" item-start style="width:80px;min-height:80px; background-size:cover;background-repeat: no-repeat;background-position: center;border-radius:5px"
         [ngStyle]="{'background-image': 'url(' + item.compra.img + ')' }">
       </div>
       <div *ngIf="item.tipo == 'once'">
@@ -38,7 +86,7 @@
 
 
 
-      <div *ngIf="item.tipo == 'fruta'" (click)="openContent(item.compra)" item-start style="width:38%;min-height:120px; background-size:cover;background-repeat: no-repeat;background-position: center;border-radius:5px"
+      <div *ngIf="item.tipo == 'fruta'" (click)="openContent(item.compra)" item-start style="width:80px;min-height:80px; background-size:cover;background-repeat: no-repeat;background-position: center;border-radius:5px"
         [ngStyle]="{'background-image': 'url(' + item.compra.img + ')' }">
       </div>
       <div *ngIf="item.tipo == 'fruta'">
@@ -55,25 +103,6 @@
     </ion-item>
   </ion-list>
 
-  <!-- <hr>
-
-  <div style="width:100%;display:flex;justify-content:space-around;align-items:center;margin-bottom:50px;margin-top:20px">
-    <div>
-      <div style="font-weight:350;font-size:12px;color:#d5d6dc">
-        TOTAL
-      </div>
-      <div style="font-size:22px;font-weight:800;color:#555">
-        ${{total}}
-      </div>
-      <div style="font-weight:350;font-size:14px;color:#999">
-        Envio incluido
-      </div>
-    </div>
-    <div (click)="openPagar()" style="font-weight:500;font-size:12px;color:white;background:orange;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
-      PAGAR
-      <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
-    </div>
-  </div> -->
 
 
 

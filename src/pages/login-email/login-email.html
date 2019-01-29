@@ -11,13 +11,13 @@
       </div>
     </div>
     <div style="margin-left:20px;margin-bottom:10px;width:100%;text-align:left;font-size:15px;color:#eee">
-      Email
+      Emailee
     </div>
     <ion-item *ngIf="!sesion" style="background:orange;color:white;font-size:18px">
-      <ion-input [(ngModel)]="email" type="text" placeholder="Ej. daniel@gmail.com"></ion-input>
+      <ion-input [(ngModel)]="email" type="email" placeholder="Ej. daniel@gmail.com"></ion-input>
     </ion-item>
     <ion-item *ngIf="sesion" style="background:orange;color:white;font-size:18px">
-      <ion-input [(ngModel)]="email" type="text"></ion-input>
+      <ion-input [(ngModel)]="email" type="email"></ion-input>
     </ion-item>
     <div *ngIf="sesion" style="margin-top:20px;margin-left:20px;margin-bottom:10px;width:100%;text-align:left;font-size:15px;color:#eee">
       Contraseña

@@ -191,17 +191,9 @@ export class FormularioPage {
   }
 
   nocturno() {
-    const url = `${this.apiURL}/apps/nocturno-crear-tienda`;
+    const url = `${this.apiURL}/apps/nocturno-crear-producto`;
 
     const body = {
-      tienda: {
-        nombre: 'Mi tienda',
-        isOpen: false,
-        delivery: 'Delivery joopiter - $1000'
-      },
-      galeria: [{
-        url: 'url'
-      }],
       productos: [{
         nombre: 'Pizza',
         precio: 1000,
@@ -211,6 +203,46 @@ export class FormularioPage {
       }]
     }
 
+    this.http.post(url, body).toPromise()
+      .then(() => console.log('LISTO!'));
+  }
+
+  desayunoSorpresa() {
+    const url = `${this.apiURL}/apps/once-crear-sorpresa`;
+
+    const body = {
+      tienda: {
+        nombre: 'Mi tienda',
+        isOpen: false,
+        delivery: 'Delivery joopiter - $1000'
+      },
+      galeria: [
+        { url: 'url' }
+      ],
+      tematicas: [
+        { tema: 'globo1' },
+        { tema: 'globo1' }
+      ],
+      tamanos: [
+        { tamano: 'globo1', precio: 0 },
+        { tamano: 'globo1', precio: 0 }
+      ]
+    }
+
+    this.http.post(url, body).toPromise()
+      .then(() => console.log('LISTO!'));
+  }
+
+  tiendaCrear() {
+    const url = `${this.apiURL}/apps/tienda-crear`;
+
+    const body = {
+      nombre: 'Tienda de juan',
+      logo: 'url',
+      galeria: [],
+      tipo: 'Ninguno',
+      usuario: '5c25c1dd92896710f008e95c'
+    }
     this.http.post(url, body).toPromise()
       .then(() => console.log('LISTO!'));
   }

@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from "@angular/core";
 import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { AngularFireModule } from "angularfire2";
 import { AngularFirestoreModule } from "angularfire2/firestore";
@@ -20,7 +21,6 @@ import { PipesModule } from "../pipes/pipes.module";
 import { Camera } from "@ionic-native/camera";
 import { IonicStorageModule } from "@ionic/storage";
 import { AppVersion } from '@ionic-native/app-version';
-
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAUecL57weWVkb-4OR0TBCM1f18tHgqi5M',
@@ -58,8 +58,21 @@ import {
   FrutasPage,
   NocturnoPage,
   NocturnoContentPage,
-  NocturnoGaleriaPage,
-  NocturnoImagenPage
+  OnceSopresaContentPage,
+  OnceSopresaPage,
+  TiendaPage,
+  TiendaGaleriaPage,
+  TiendaNuevoPage,
+  TiendaProductoPage,
+  GaleriaImagenPage,
+  GaleriaPage,
+  EstiloPage,
+  EstiloContentPage,
+  TiendaHorarioPage,
+  TiendaDeliveryDulcePage,
+  TiendaDeliveryNormalPage,
+  TiendaAlojamientoPage,
+  TiendaEcommercePage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -97,8 +110,21 @@ import { CarroProvider } from '../providers/carro/carro';
     FrutasPage,
     NocturnoPage,
     NocturnoContentPage,
-    NocturnoGaleriaPage,
-    NocturnoImagenPage
+    OnceSopresaContentPage,
+    OnceSopresaPage,
+    TiendaPage,
+    TiendaGaleriaPage,
+    TiendaNuevoPage,
+    TiendaProductoPage,
+    GaleriaImagenPage,
+    GaleriaPage,
+    EstiloPage,
+    EstiloContentPage,
+    TiendaHorarioPage,
+    TiendaDeliveryDulcePage,
+    TiendaDeliveryNormalPage,
+    TiendaAlojamientoPage,
+    TiendaEcommercePage
   ],
   imports: [
     BrowserModule,
@@ -142,8 +168,21 @@ import { CarroProvider } from '../providers/carro/carro';
     FrutasPage,
     NocturnoPage,
     NocturnoContentPage,
-    NocturnoGaleriaPage,
-    NocturnoImagenPage
+    OnceSopresaContentPage,
+    OnceSopresaPage,
+    TiendaPage,
+    TiendaGaleriaPage,
+    TiendaNuevoPage,
+    TiendaProductoPage,
+    GaleriaImagenPage,
+    GaleriaPage,
+    EstiloPage,
+    EstiloContentPage,
+    TiendaHorarioPage,
+    TiendaDeliveryDulcePage,
+    TiendaDeliveryNormalPage,
+    TiendaAlojamientoPage,
+    TiendaEcommercePage
   ],
   providers: [
     StatusBar,
@@ -157,7 +196,8 @@ import { CarroProvider } from '../providers/carro/carro';
     FirebaseMessaging,
     AppVersion,
     PopupsProvider,
-    CarroProvider
+    CarroProvider,
+    InAppBrowser
   ]
 })
 export class AppModule { }

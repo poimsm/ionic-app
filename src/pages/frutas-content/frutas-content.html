@@ -18,10 +18,20 @@
         Abierto
       </div>
       <div style="color:#555;font-size:15px">
-        $1000 delivery
+        Envío gratis
       </div>
     </ion-item>
   </ion-list>
+
+  <div style="margin:10px;">
+    <div style="background:#fa6e6d;color:white;font-size:18px;width:100%;padding:20px;text-align:center;font-weight:500;border-radius:10px">
+      <!-- ¡Vamos a los lugares con las mejores frutas y verduras, seleccionamos
+      los productos más frescos y sanos para llevarlos a su casa! -->
+      <!-- ¡Seleccionamos los productos más frescos y sanos para llevarlo a su casa! -->
+      ¡Vamos a los lugares con las mejores frutas y verduras y las llevamos a la puerta de su hogar!
+    </div>
+  </div>
+
 
   <ion-list>
 
@@ -51,25 +61,27 @@
 </ion-content>
 
 
-<ion-footer padding>
-  <button *ngIf="total == 0" [disabled]="true" ion-button block mode="ios" color="verderFruta">
-    <div style="font-size:18px;width:100%;display:flex;align-items:center;justify-content:space-between">
+<ion-footer no-border>
+  <button *ngIf="total == 0" [disabled]="true" ion-button full mode="ios" color="orange3" style="margin:0px">
+    <div style="font-weight:400;font-size:18px;width:100%;display:flex;align-items:center;justify-content:space-between">
       <div>
       </div>
       <div>
-        Agregar al pedido
+        <ion-icon name="cart" style="color:white;margin-right:5px"></ion-icon>
+        Agregar al carrito
       </div>
       <div>
       </div>
     </div>
   </button>
-  <button *ngIf="total != 0" (click)="save()" ion-button block mode="ios" color="verderFruta">
-    <div style="font-size:18px;width:100%;display:flex;align-items:center;justify-content:space-between">
-      <div style="font-size:16px;font-weight:600;background:#6fc31f;display:flex;justify-content:center;align-items:center;border-radius:5px;height:25px;width:25px">
+  <button *ngIf="total != 0" (click)="save()" ion-button full mode="ios" color="orange3" style="margin:0px">
+    <div style="font-weight:400;font-size:18px;width:100%;display:flex;align-items:center;justify-content:space-between">
+      <div style="font-size:14px;font-weight:600;background:orangered;display:flex;justify-content:center;align-items:center;border-radius:5px;height:25px;width:25px">
         {{contador}}
       </div>
       <div>
-        Agregar al pedido
+        <ion-icon name="cart" style="color:white;margin-right:5px"></ion-icon>
+        Agregar al carrito
       </div>
       <div>
         ${{total}}

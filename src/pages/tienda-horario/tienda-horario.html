@@ -1,0 +1,76 @@
+<ion-header no-border>
+
+  <ion-navbar color="white">
+    <ion-title>Horario</ion-title>
+    <ion-buttons right>
+      <button ion-button outline mode="ios">
+        Guardar
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-scroll scrollX="true" style="padding:15px;background:white;display:flex;height:80px;font-size:18px">
+
+    <ion-grid>
+      <ion-row nowrap>
+        <ion-col col-2>
+          <div (click)="select('Lunes')" style="background:dodgerblue;border:0px solid #ccc;color:#fff;font-weight:500;width:55px;height:55px;border-radius:5px;display:flex;justify-content:center;align-items:center">
+            Lun
+          </div>
+        </ion-col>
+        <ion-col col-2>
+          <div (click)="select('Martes')" style="border:0px solid #ccc;color:#555;font-weight:500;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-items:center">
+            Mar
+          </div>
+        </ion-col>
+        <ion-col col-2>
+          <div (click)="select('Miércoles')" style="border:0px solid #ccc;color:#555;font-weight:500;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-items:center">
+            Mié
+          </div>
+        </ion-col>
+        <ion-col col-2>
+          <div (click)="select('Jueves')" style="border:0px solid #ccc;color:#555;font-weight:500;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-items:center">
+            Jue
+          </div>
+        </ion-col>
+        <ion-col col-2>
+          <div (click)="select('Viernes')" style="border:0px solid #ccc;color:#555;font-weight:500;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-items:center">
+            Vie
+          </div>
+        </ion-col>
+        <ion-col col-2>
+          <div (click)="select('Sábado')" style="border:0px solid #ccc;color:#555;font-weight:500;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-items:center">
+            Sáb
+          </div>
+        </ion-col>
+        <ion-col col-2>
+          <div (click)="select('Domingo')" style="border:0px solid #ccc;color:#555;font-weight:500;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-items:center">
+            Dom
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-scroll>
+
+  <div style="font-size:20px;color:#444;font-weight:600;margin-left:15px;margin-top:15px;margin-bottom:10px">
+    Mi horario día {{dia}}
+  </div>
+  <!-- <ion-list> -->
+  <ion-item>
+    <ion-label>Hora de inicio</ion-label>
+    <ion-datetime displayFormat="h:mm a"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Hora de cierre</ion-label>
+    <ion-datetime displayFormat="h:mm a"></ion-datetime>
+  </ion-item>
+  <!-- </ion-list> -->
+
+
+</ion-content>

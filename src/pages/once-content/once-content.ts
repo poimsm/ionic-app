@@ -28,11 +28,15 @@ export class OnceContentPage {
 
   variedades = [];
   tamanos = [];
+  variaciones = [];
   variedadesObj: any;
   tamanosObj: any;
   precioVariedad: number;
   cantidadTamano: number;
+  precioArray = [];
+  precioTag = {};
 
+  tag: string;
   token = '';
   user: any = {};
 
@@ -41,35 +45,23 @@ export class OnceContentPage {
     public navParams: NavParams,
     private _auth: AuthProvider,
     private _carro: CarroProvider
-
   ) {
     this.data = this.navParams.get("once");
+    this.imgs = this.data.imgs;
 
-    Object.keys(this.data.imgs).forEach(key => {
-      this.imgs.push(this.data.imgs[key])
-    });
-
-    if (this.data.variedad.isActive) {
-      this.variedadesObj = this.data.variedad.variedades;
-      Object.keys(this.variedadesObj).forEach(key => {
-        this.variedades.push(this.variedadesObj[key].variedad);
-      });
-      this.variedad = this.variedadesObj[0].variedad;
+    if (this.data.variaciones.isActive) {
+      this.variaciones = this.data.variaciones.array;
+      this.variedad = this.data.variaciones.array[0];
     }
 
-    if (this.data.tamano.isActive) {
-      this.tamanosObj = this.data.tamano.tamanos;
-      Object.keys(this.tamanosObj).forEach(key => {
-        this.tamanos.push(this.tamanosObj[key].tamano);
-      });
-      this.tamano = this.tamanosObj[0].tamano;
-      this.precio = this.tamanosObj[0].precio;
-      this.total = Number(this.cantidad) * this.precio;
+    if (this.data.precio.tipo == 'flat') {
+      this.total = this.data.precio.value;
     }
 
-    if (this.data.normal.isActive) {
-      this.precio = this.data.normal.precio;
-      this.total = Number(this.cantidad) * this.precio;
+    if (this.data.precio.tipo != 'flat') {
+      this.precioArray = this.data.precio.array;
+      this.precioTag = this.data.precio.array[0];
+      this.total = this.data.precio.array[0].precio;
     }
   }
 
@@ -90,31 +82,8 @@ export class OnceContentPage {
     }
   }
 
-  variedad_tamano() {
-    this.variedadesObj = this.data.variedad_tamano.variedades;
-    this.tamanosObj = this.data.variedad_tamano.tamanos;
-
-    this.variedad = this.variedadesObj[0].variedad;
-    this.tamano = this.tamanosObj[0].tamano;
-
-    this.precioVariedad = this.variedadesObj[0].precio;
-    this.cantidadTamano = this.tamanosObj[0].cantidad;
-    this.total = Number(this.cantidad) * this.precioVariedad * this.cantidadTamano;
-
-    Object.keys(this.variedadesObj).forEach(key => {
-      this.variedades.push(this.variedadesObj[key].variedad);
-    });
-    Object.keys(this.tamanosObj).forEach(key => {
-      this.tamanos.push(this.tamanosObj[key].tamano);
-    });
-  }
-
-  cantidadVariedadTamano() {
-    const indexVariedad = this.variedades.indexOf(this.variedad);
-    const indexTamano = this.tamanos.indexOf(this.tamano);
-    this.precioVariedad = this.variedadesObj[indexVariedad].precio;
-    this.cantidadTamano = this.tamanosObj[indexTamano].cantidad;
-    this.total = Number(this.cantidad) * this.precioVariedad * this.cantidadTamano;
+  onSelectChange(selectedValue: any) {
+    this.total = selectedValue.precio;
   }
 
   save() {
@@ -123,16 +92,16 @@ export class OnceContentPage {
       descripcion: this.data.descripcion,
       total: this.total,
       img: this.data.imgs[0].url,
-      vendedorNombre: this.data.vendedor,
+      vendedorNombre: this.data.tienda.nombre,
       tiempoDeEntrega: this.data.tiempoDeEntrega,
       tipo: 'once'
     }
 
-    if (this.data.variedad.isActive) {
+    if (this.data.variedades) {
       compra.variedad = this.variedad;
     }
 
-    if (this.data.tamano.isActive) {
+    if (this.data.tamanos) {
       compra.tamano = this.tamano;
     }
 

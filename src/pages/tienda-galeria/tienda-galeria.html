@@ -1,0 +1,37 @@
+<ion-header no-border>
+  <ion-navbar color="white">
+    <!-- <ion-title>tienda-galeria</ion-title> -->
+  </ion-navbar>
+  <!-- <ion-buttons right>     
+      <button ion-button icon-only>
+        <ion-icon name="md-cart" style="color:#bbb"></ion-icon>
+      </button>
+    </ion-buttons> -->
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-fab right bottom>
+    <button (click)="seleccionar_foto()" ion-fab color="light">
+      <ion-icon name="md-camera" style="color:#999"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <div style="margin-left:10px;font-weight:600;color:#444;font-size:20px">
+    Galería
+  </div>
+
+  <ion-grid>
+    <ion-row>
+
+      <ion-col *ngFor="let item of galeria" col-6 col-md-4 col-xl-3>
+        <div (click)="openModal(item.url)" style="min-height:150px; width:100%;border-radius:5px;background-size:cover;background-repeat: no-repeat;background-position: center;"
+          [ngStyle]="{'background-image': 'url(' + item.url + ')' }">
+        </div>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

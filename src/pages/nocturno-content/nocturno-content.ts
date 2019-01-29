@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CarroProvider } from '../../providers/carro/carro';
-import { NocturnoGaleriaPage } from '../nocturno-galeria/nocturno-galeria';
+import { GaleriaPage } from '../galeria/galeria';
 
 @IonicPage()
 @Component({
@@ -23,7 +23,6 @@ export class NocturnoContentPage {
     this.tienda = this.navParams.get('tienda');
     this.productos = this.tienda.productos;
   }
-
 
 
   addMore(type, index) {
@@ -57,7 +56,7 @@ export class NocturnoContentPage {
   }
 
   openGaleria(galeria) {
-    this.navCtrl.push(NocturnoGaleriaPage, { galeria });
+    this.navCtrl.push(GaleriaPage, { galeria });
   }
 
   save() {
@@ -80,6 +79,8 @@ export class NocturnoContentPage {
       tienda: this.tienda.tienda
     }
     this._carro.agregarAlCarro(compra);
+    this._carro.agregarItemAlCarro(compra);
+
   }
 
 }
