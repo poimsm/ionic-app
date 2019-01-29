@@ -92,16 +92,16 @@ export class MyApp {
 
   openTienda(tipo) {
     if (tipo == 'DELIVERY_NORMAL') {
-      this.nav.setRoot(TiendaDeliveryDulcePage, { id: this.user.tienda });
+      this.nav.setRoot(TiendaDeliveryNormalPage, { id: this.user.tienda.id });
     }
     if (tipo == 'DELIVERY_DULCE') {
-      this.nav.setRoot(TiendaDeliveryNormalPage, { id: this.user.tienda });
+      this.nav.setRoot(TiendaDeliveryDulcePage, { id: this.user.tienda.id });
     }
     if (tipo == 'ECOMMERCE') {
-      this.nav.setRoot(TiendaEcommercePage, { id: this.user.tienda });
+      this.nav.setRoot(TiendaEcommercePage, { id: this.user.tienda.id });
     }
     if (tipo == 'ALOJAMIENTO') {
-      this.nav.setRoot(TiendaAlojamientoPage, { id: this.user.tienda });
+      this.nav.setRoot(TiendaAlojamientoPage, { id: this.user.tienda.id });
     }
     this.menuCtrl.close();
 
