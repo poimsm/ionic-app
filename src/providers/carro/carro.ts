@@ -53,6 +53,15 @@ export class CarroProvider {
     return this.http.post(url, body, { headers }).toPromise();
   }
 
+  iniciarCompra(token, body) {
+    const url = `${this.apiURL}/compras/pago-iniciar`;
+    const headers = new HttpHeaders({
+      Authorization: `JWT ${token}`
+    });
+    //this.notificarCompra();
+    return this.http.post(url, body, { headers }).toPromise();
+  }
+
   notificarCompra() {
     if (!this.platform.is('cordova')) {
       return

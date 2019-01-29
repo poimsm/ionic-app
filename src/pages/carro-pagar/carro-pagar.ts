@@ -1,8 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, Select } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, AlertController, Select } from 'ionic-angular';
 import { CarroCompraExitosaPage } from '../carro-compra-exitosa/carro-compra-exitosa';
 import { DatosPersonalesPage } from '../datos-personales/datos-personales';
 import { CarroProvider } from '../../providers/carro/carro';
+
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @IonicPage()
 @Component({
@@ -11,6 +13,8 @@ import { CarroProvider } from '../../providers/carro/carro';
 })
 export class CarroPagarPage {
   efectivo = true;
+  flow = false;
+
   total: number;
   direccion = 'Ej. Simon bolivar 802';
   telefono = 'Ej. 98372928';
@@ -62,7 +66,9 @@ export class CarroPagarPage {
     public modalCtrl: ModalController,
     public navCtrl: NavController,
     public navParams: NavParams,
-    private _carro: CarroProvider
+    private _carro: CarroProvider,
+    private iab: InAppBrowser,
+    private alertCtrl: AlertController
   ) {
     this.total = this.navParams.get('total');
     this.carro = this.navParams.get('carro');
@@ -118,12 +124,20 @@ export class CarroPagarPage {
     if (this.efectivo) {
       this.pagarConEfectivo();
     } else {
-      this.pagarConFlow(this.email, this.total)
+
+      let total = 0;
+
+      this.carro.forEach(item => {
+        total += item.precio * item.cantidad;
+      });
+
+      this.total = total;
+
+      this.pagarConFlow(this.email, this.total);
     }
   }
 
   pagarConFlow(email, monto) {
-    console.log(email, monto);
     // Si todo el flujo de compra fue exitoso entonces
     // debes llamar al metodo this._carro.crearCompra(this.token, compra)
     // para guardar la compra en DB.. 
@@ -131,9 +145,33 @@ export class CarroPagarPage {
       carro: this.carro,
       cliente: {
         uid: this.user._id,
-        nombre: this.user.name
+        nombre: this.user.name,
+        email: email,
+        monto: 18000
       }
     };
+
+    this._carro.iniciarCompra(this.token, compra).then((data) => {
+      let respuesta = JSON.parse(JSON.stringify(data));
+
+      if (respuesta.url != '' || respuesta.url != undefined) {
+
+        let token = respuesta.token;
+        let url = respuesta.url;
+
+        const browser = this.iab.create(url + '?token=' + token);
+        browser.show();
+      } else {
+        let alerta = this.alertCtrl.create({
+          title: 'Error',
+          subTitle: 'Imposible conectar con el sistema de pagos.'
+
+        });
+        alerta.present();
+      }
+
+
+    });
   }
 
   pagarConEfectivo() {
@@ -148,5 +186,12 @@ export class CarroPagarPage {
       .then(() => this.navCtrl.push(CarroCompraExitosaPage));
   }
 
+  cambiarMetodoPago(event, tipo: number) {
+    if (tipo == 1) {
+      this.flow = (event == true) ? false : true;
+    } else {
+      this.efectivo = (event == true) ? false : true;
+    }
+  }
 
 }
