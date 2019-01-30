@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
-import { IonicPage, ViewController, NavParams } from 'ionic-angular';
+import { IonicPage, NavParams, ViewController } from 'ionic-angular';
+
 
 @IonicPage()
 @Component({
-  selector: 'page-nocturno-imagen',
-  templateUrl: 'nocturno-imagen.html',
+  selector: 'page-galeria-imagen',
+  templateUrl: 'galeria-imagen.html',
 })
-export class NocturnoImagenPage {
+export class GaleriaImagenPage {
+
   url: string;
   constructor(
     public navParams: NavParams,

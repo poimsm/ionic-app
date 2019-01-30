@@ -28,8 +28,8 @@ export class AuthProvider {
     if (this.platform.is('cordova')) {
       this.apiURL = 'https://poimsm-server.herokuapp.com';
     } else {
-      this.apiURL = 'https://poimsm-server.herokuapp.com';
-      // apiURL = 'http://localhost:3000';
+      // this.apiURL = 'https://poimsm-server.herokuapp.com';
+      this.apiURL = 'http://localhost:3000';
     }
   }
 

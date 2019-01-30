@@ -10,6 +10,7 @@ import { DataProvider } from "../../providers/data/data";
 import { OnceContentPage } from "../once-content/once-content";
 import { CategoriasPage } from '../categorias/categorias';
 import { PopupsProvider } from "../../providers/popups/popups";
+import { OnceSopresaPage } from "../once-sopresa/once-sopresa";
 
 @IonicPage()
 @Component({
@@ -25,6 +26,8 @@ export class OncePage {
   skip = 0;
   limit = 5;
   hayMas = true;
+  sorpresas = [];
+  precios = [];
 
   constructor(
     private alertCtrl: AlertController,
@@ -36,8 +39,9 @@ export class OncePage {
   ) { }
 
   ionViewDidLoad() {
-    this.fetchByCategory(null);
-    this.presentAlert();
+    this.getOnceByCategory(null);
+    this.getSorpresas();
+    // this.presentAlert();
     this.setUp();
   }
 
@@ -46,6 +50,10 @@ export class OncePage {
     Object.keys(this.categoriasObj).forEach(key => {
       this.categorias.push(this.categoriasObj[key]);
     });
+  }
+
+  getSorpresas() {
+    this._data.fetchSorpresa().then((data: any) => this.sorpresas = data)
   }
 
   presentAlert() {
@@ -70,16 +78,18 @@ export class OncePage {
     popover.onDidDismiss(data => {
       if (data) {
         this.categoriaActual = this.categorias[data.index];
-        this.fetchByCategory(this.categorias[data.index]);
+        this.getOnceByCategory(this.categorias[data.index]);
       }
     });
   }
 
-  async fetchByCategory(categoria) {
+  async getOnceByCategory(categoria) {
     const route = 'apps/once-all';
 
     this._data.getAll(0, 10, categoria, route)
-      .then((data: any[]) => this.data = data);
+      .then((data: any[]) => {
+        this.data = data;
+      });
   }
 
   doInfinite(infiniteScroll) {
@@ -93,6 +103,10 @@ export class OncePage {
         this.data = this.data.concat(data);
         infiniteScroll.complete();
       });
+  }
+
+  openSorpresa(sorpresa) {
+    this.navCtrl.push(OnceSopresaPage, { sorpresa })
   }
 
 }

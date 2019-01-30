@@ -58,8 +58,21 @@ import {
   FrutasPage,
   NocturnoPage,
   NocturnoContentPage,
-  NocturnoGaleriaPage,
-  NocturnoImagenPage
+  OnceSopresaContentPage,
+  OnceSopresaPage,
+  TiendaPage,
+  TiendaGaleriaPage,
+  TiendaNuevoPage,
+  TiendaProductoPage,
+  GaleriaImagenPage,
+  GaleriaPage,
+  EstiloPage,
+  EstiloContentPage,
+  TiendaHorarioPage,
+  TiendaDeliveryDulcePage,
+  TiendaDeliveryNormalPage,
+  TiendaAlojamientoPage,
+  TiendaEcommercePage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -97,8 +110,21 @@ import { CarroProvider } from '../providers/carro/carro';
     FrutasPage,
     NocturnoPage,
     NocturnoContentPage,
-    NocturnoGaleriaPage,
-    NocturnoImagenPage
+    OnceSopresaContentPage,
+    OnceSopresaPage,
+    TiendaPage,
+    TiendaGaleriaPage,
+    TiendaNuevoPage,
+    TiendaProductoPage,
+    GaleriaImagenPage,
+    GaleriaPage,
+    EstiloPage,
+    EstiloContentPage,
+    TiendaHorarioPage,
+    TiendaDeliveryDulcePage,
+    TiendaDeliveryNormalPage,
+    TiendaAlojamientoPage,
+    TiendaEcommercePage
   ],
   imports: [
     BrowserModule,
@@ -142,8 +168,21 @@ import { CarroProvider } from '../providers/carro/carro';
     FrutasPage,
     NocturnoPage,
     NocturnoContentPage,
-    NocturnoGaleriaPage,
-    NocturnoImagenPage
+    OnceSopresaContentPage,
+    OnceSopresaPage,
+    TiendaPage,
+    TiendaGaleriaPage,
+    TiendaNuevoPage,
+    TiendaProductoPage,
+    GaleriaImagenPage,
+    GaleriaPage,
+    EstiloPage,
+    EstiloContentPage,
+    TiendaHorarioPage,
+    TiendaDeliveryDulcePage,
+    TiendaDeliveryNormalPage,
+    TiendaAlojamientoPage,
+    TiendaEcommercePage
   ],
   providers: [
     StatusBar,

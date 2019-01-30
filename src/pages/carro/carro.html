@@ -14,7 +14,7 @@
     MIS PEDIDOS
   </div>
 
-  <ion-list text-wrap *ngIf="tienda?.delivery">
+  <ion-list text-wrap *ngIf="tienda?.isActive">
     <ion-item>
       <div item-start item-start style="min-height:80px;width:80px;border-radius:5px;background-size:cover;background-repeat: no-repeat;background-position: center;"
         [ngStyle]="{'background-image': 'url(' + tienda?.logo + ')' }">
@@ -105,20 +105,7 @@
             + 1000 delivery
           </span>
         </div>
-
-        <!-- <div style="width:100%;display:flex;align-items:center">
-          <div (click)="addMore('-', i)" style="color:#777;background:#eee;width:30px;height:30px;border-radius:50%;font-weight:800;font-size:28px;display:flex;justify-content:center;align-items:center">
-            -
-          </div>
-          <div style="margin-left:10px;margin-right:10px;color:#777;width:25px;height:25px;border-radius:50%;font-weight:600;font-size:17px;display:flex;justify-content:center;align-items:center">
-            {{item.cantidad}}
-          </div>
-          <div (click)="addMore('+', i)" style="color:#777;background:#eee;width:30px;height:30px;border-radius:50%;font-weight:800;font-size:28px;display:flex;justify-content:center;align-items:center">
-            +
-          </div>
-        </div> -->
       </div>
-
 
     </ion-item>
   </ion-list>

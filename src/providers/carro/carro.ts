@@ -29,9 +29,6 @@ export class CarroProvider {
 
   agregarAlCarro(carro) {
     this.carro = carro;
-    this.presentToast();
-    console.log(this.carro);
-
   }
 
   vaciaCarro() {

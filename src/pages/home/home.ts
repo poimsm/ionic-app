@@ -10,6 +10,7 @@ import { PopupsProvider } from '../../providers/popups/popups';
 import { CarroPage } from '../carro/carro';
 import { FrutasPage } from '../frutas/frutas';
 import { NocturnoPage } from '../nocturno/nocturno';
+import { EstiloPage } from '../estilo/estilo';
 
 @Component({
   selector: "page-home",
@@ -25,6 +26,7 @@ export class HomePage {
   formulario = FormularioPage;
   frutas = FrutasPage;
   nocturno = NocturnoPage;
+  estilo = EstiloPage;
 
   mensaje = '';
 
