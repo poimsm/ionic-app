@@ -90,20 +90,22 @@ export class CarroPagarPage {
     this._carro.iniciarCompra(this.token, compra).then((data) => { 
       let respuesta = JSON.parse(JSON.stringify(data));
 
-      if(respuesta.url!='' || respuesta.url!=undefined){
+      if(respuesta.code != undefined && respuesta.code == 108){
 
-        let token = respuesta.token;
-        let url = respuesta.url;
-
-        const browser = this.iab.create(url + '?token=' + token);
-        browser.show();
-      }else{
         let alerta = this.alertCtrl.create({
           title: 'Error',
           subTitle: 'Imposible conectar con el sistema de pagos.'
 
         });
         alerta.present();
+      }else{
+        
+
+        let token = respuesta.token;
+        let url = respuesta.url;
+
+        const browser = this.iab.create(url + '?token=' + token, '_blank', 'location=yes');
+        browser.show();
       }
       
 
