@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform, AlertController, ModalController } from 'ionic-angular';
 import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { TiendaGaleriaPage } from '../tienda-galeria/tienda-galeria';
 import { DataProvider } from '../../providers/data/data';
@@ -23,6 +24,7 @@ export class TiendaDeliveryDulcePage {
   imagenPerfil: string;
 
   constructor(
+    private camera: Camera,
     public modalCtrl: ModalController,
     private alertCtrl: AlertController,
     public navCtrl: NavController,
@@ -51,21 +53,24 @@ export class TiendaDeliveryDulcePage {
   seleccionar_foto() {
 
     if (this.platform.is('cordova')) {
-      const options: ImagePickerOptions = {
+      const options: CameraOptions = {
         quality: 70,
-        outputType: 0,
-        maximumImagesCount: 1
-      }
-      this.imagePicker.getPictures(options).then((results) => {
-        for (var i = 0; i < results.length; i++) {
-          this.imagenPerfil = 'data:image/jpeg;base64,' + results[i];
-          const body = {
-            img: this.imagenPerfil,
-            id: this.tiendaID
-          }
-          this._data.nuevaImgPerfil(body)
-            .then(() => console.log('listoo'));
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE,
+        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+      };
+
+      this.camera.getPicture(options).then((imageData) => {
+        let base64Image = 'data:image/jpeg;base64,' + imageData;
+
+        const body = {
+          img: base64Image,
+          id: this.tiendaID
         }
+        this._data.nuevaImgPerfil(body)
+          .then(() => console.log('listoo'));
+
       }, (err) => { console.log('ERROR') });
     } else {
       const img = "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";

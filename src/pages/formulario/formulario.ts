@@ -90,7 +90,7 @@ export class FormularioPage {
   uploadFile() {
     const url = `${this.apiURL}/imgs/upload`;
     const input = new FormData();
-    input.append('img', this.imgFiles[0]);
+    input.append('image', this.imgFiles[0]);
     this.http.post(url, input).toPromise()
       .then((item: any) => {
         this.fileNames.push(item.nombreArchivo);
