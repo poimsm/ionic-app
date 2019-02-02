@@ -53,7 +53,7 @@ export class PopupsProvider {
       const body = { version };
       return this.http.post(url, body, { headers }).toPromise();
     } else {
-      const version = '0.1.9';
+      const version = '0.2.0';
       const url = `${this.apiURL}/popups/app-version`;
       const headers = new HttpHeaders({
         Authorization: `JWT ${token}`
