@@ -26,8 +26,14 @@ export class AuthProvider {
 
   setAPI() {
     if (this.platform.is('cordova')) {
+      console.log('ENTROO EN CORDOVA PLATFORM');
+
       this.apiURL = 'https://poimsm-server.herokuapp.com';
+      // this.apiURL = 'http://localhost:3000';
+
     } else {
+      console.log('NOOO ENTRO EN CORDOVA PLATFORM');
+
       // this.apiURL = 'https://poimsm-server.herokuapp.com';
       this.apiURL = 'http://localhost:3000';
     }

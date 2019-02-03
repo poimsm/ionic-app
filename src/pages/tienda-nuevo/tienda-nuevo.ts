@@ -102,7 +102,7 @@ export class TiendaNuevoPage {
       this.EjVariacion = 'Ej. Cumpleaños'
     }
     if (event == 'Variedad') {
-      this.EjVariacion = 'Ej. Libre de azucar, sin gluten..'
+      this.EjVariacion = 'Ej. Libre de azucar'
     }
   }
 

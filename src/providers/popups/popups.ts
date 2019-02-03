@@ -26,6 +26,8 @@ export class PopupsProvider {
   setAPI() {
     if (this.platform.is('cordova')) {
       this.apiURL = 'https://poimsm-server.herokuapp.com';
+      // this.apiURL = 'http://localhost:3000';
+
     } else {
       // this.apiURL = 'https://poimsm-server.herokuapp.com';
       this.apiURL = 'http://localhost:3000';
@@ -42,10 +44,14 @@ export class PopupsProvider {
       });
   }
 
+  getCategorias() {
+    const url = `${this.apiURL}/popups/categorias`;
+    return this.http.get(url).toPromise();
+  }
+
   async checkAppVersion(token) {
     if (this.platform.is('cordova')) {
       const version = await this.appVersion.getVersionNumber();
-
       const url = `${this.apiURL}/popups/app-version`;
       const headers = new HttpHeaders({
         Authorization: `JWT ${token}`
@@ -60,7 +66,6 @@ export class PopupsProvider {
       });
       const body = { version };
       return this.http.post(url, body, { headers }).toPromise();
-
     }
   }
 }

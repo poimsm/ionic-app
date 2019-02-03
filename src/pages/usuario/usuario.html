@@ -4,9 +4,17 @@
 </ion-header>
 
 
-<ion-content style="background:#eee">
+<ion-content style="background:rgb(248, 248, 248)">
 
-  <!-- <ion-list> -->
+
+  <ion-item (click)="openTienda()" style="margin:10px" no-lines>
+    <ion-icon item-start name="ice-cream" style="color:orange;font-size:30px"></ion-icon>
+    <div style="color:#777;font-size:22px;font-weight:600">
+      Mi tienda
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </ion-item>
+
   <ion-item style="margin:10px" no-lines>
     <div item-start style="font-size:16px;color:#555;font-weight:500">
       Nombre
@@ -14,8 +22,9 @@
     <div item-end style="font-size:16px;color:#555;font-weight:500">
       Oscar Garcia
     </div>
-    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:26px"></ion-icon>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </ion-item>
+
   <ion-item style="margin:10px" no-lines>
     <div item-start style="font-size:16px;color:#555;font-weight:500">
       Email
@@ -23,7 +32,7 @@
     <div item-end style="font-size:16px;color:#555;font-weight:500">
       poimsm@gmail.com
     </div>
-    <ion-icon item-end name="ios-arrow-forward" style="color:#fff;font-size:26px"></ion-icon>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </ion-item>
   <ion-item style="margin:10px" no-lines>
     <div item-start style="font-size:16px;color:#555;font-weight:500">
@@ -32,7 +41,7 @@
     <div item-end style="font-size:16px;color:#555;font-weight:500">
       Simon Bolivar 802
     </div>
-    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:26px"></ion-icon>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </ion-item>
   <ion-item style="margin:10px" no-lines>
     <div item-start style="font-size:16px;color:#555;font-weight:500">
@@ -41,8 +50,10 @@
     <div item-end style="font-size:16px;color:#555;font-weight:500">
       +5698349887
     </div>
-    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:26px"></ion-icon>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </ion-item>
+
+
   <ion-item style="margin:10px" no-lines>
     <div style="font-size:16px;color:#f53d3d;font-weight:500;width:100%;text-align:center">
       Cerrar sesión

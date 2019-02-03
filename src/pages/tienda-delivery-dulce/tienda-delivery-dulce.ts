@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, AlertController, ModalController } from 'ionic-angular';
-import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
+import { IonicPage, NavController, NavParams, Platform, AlertController, ModalController, ActionSheetController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { TiendaGaleriaPage } from '../tienda-galeria/tienda-galeria';
@@ -9,6 +8,8 @@ import { TiendaNuevoPage } from '../tienda-nuevo/tienda-nuevo';
 import { TiendaProductoPage } from '../tienda-producto/tienda-producto';
 import { TiendaHorarioPage } from '../tienda-horario/tienda-horario';
 import { GaleriaImagenPage } from '../galeria-imagen/galeria-imagen';
+import { ImageProvider } from '../../providers/image/image';
+import { ModalEntregasPage } from '../modal-entregas/modal-entregas';
 
 @IonicPage()
 @Component({
@@ -28,19 +29,26 @@ export class TiendaDeliveryDulcePage {
     public modalCtrl: ModalController,
     private alertCtrl: AlertController,
     public navCtrl: NavController,
-    private imagePicker: ImagePicker,
     private platform: Platform,
     public navParams: NavParams,
-    private _data: DataProvider
+    private _data: DataProvider,
+    private _img: ImageProvider,
+    private actionSheetCtrl: ActionSheetController
   ) {
     this.tiendaID = this.navParams.get('id');
   }
 
-  ionViewDidLoad() {
+  // ionViewDidLoad() {
+  //   this.cargarTienda();
+  // }
+
+  ionViewDidEnter() {
+    this.cargarTienda();
+  }
+
+  cargarTienda() {
     this._data.fetchTienda(this.tiendaID)
-      .then(data =>
-        this.tienda = data
-      );
+      .then(data => this.tienda = data);
   }
 
   openModal(tipo) {
@@ -50,17 +58,65 @@ export class TiendaDeliveryDulcePage {
     modal.present();
   }
 
-  seleccionar_foto() {
+  presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Select Image Source',
+      buttons: [
+        {
+          text: 'Cargar desde galería',
+          handler: () => {
+            this.tomarFoto(this.camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Usar cámara',
+          handler: () => {
+            this.tomarFoto(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  takePicture2(sourceType) {
+    // Create options for the Camera Dialog
+    var options = {
+      quality: 70,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: sourceType,
+      saveToPhotoAlbum: false,
+      correctOrientation: true
+    };
+
+    // Get the data of an image
+    this.camera.getPicture(options).then((imagePath) => {
+      this._img.uploadImage(imagePath)
+        .then(data => {
+          console.log('ENTRO EN UPLOAD');
+        }).catch(e => console.log('ERROR INT'));
+    }).catch(e => {
+      console.log(e);
+    });
+  }
+
+  tomarFoto(sourceType) {
+    const options: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: sourceType,
+      targetWidth: 500,
+      targetHeight: 500,
+      saveToPhotoAlbum: false
+    };
 
     if (this.platform.is('cordova')) {
-      const options: CameraOptions = {
-        quality: 70,
-        destinationType: this.camera.DestinationType.DATA_URL,
-        encodingType: this.camera.EncodingType.JPEG,
-        mediaType: this.camera.MediaType.PICTURE,
-        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
-      };
-
       this.camera.getPicture(options).then((imageData) => {
         let base64Image = 'data:image/jpeg;base64,' + imageData;
 
@@ -80,7 +136,7 @@ export class TiendaDeliveryDulcePage {
         id: this.tiendaID
       }
       this._data.nuevaImgPerfil(body)
-        .then(data => console.log(data));
+        .then(data => this.cargarTienda());
     }
   }
 
@@ -89,6 +145,13 @@ export class TiendaDeliveryDulcePage {
       galeria: this.tienda.galeria,
       id: this.tiendaID
     })
+  }
+
+  openEntregas() {
+    this.navCtrl.push(ModalEntregasPage, {
+      localizacion: this.tienda.localizacion,
+      id: this.tiendaID
+    });
   }
 
   openPage(pagina) {
@@ -135,13 +198,13 @@ export class TiendaDeliveryDulcePage {
           handler: data => {
             if (tipo == 'nombre') {
               const body = { nombre: data.nombre };
-              this._data.editTienda(this.tiendaID, body)
-                .then((data: any) => this.tienda = data);
+              this._data.updateTienda(this.tiendaID, body)
+                .then(() => this.cargarTienda());
             }
             if (tipo == 'telefono') {
               const body = { telefono: data.telefono };
-              this._data.editTienda(this.tiendaID, body)
-                .then((data: any) => this.tienda = data);
+              this._data.updateTienda(this.tiendaID, body)
+                .then(() => this.cargarTienda());
             }
           }
         }

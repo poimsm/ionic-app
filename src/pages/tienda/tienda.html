@@ -55,9 +55,9 @@
       </div>
       <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:26px"></ion-icon>
     </button>
-    <button (click)="seleccionar_foto('telefono')" ion-item style="margin:10px" no-lines>
+    <button (click)="presentActionSheet()" ion-item style="margin:10px" no-lines>
       <div item-start style="font-size:16px;color:#555;font-weight:500">
-        Imágen de perfil
+        Imágen de perfil o logo
       </div>
       <div item-end style="font-size:16px;color:#555;font-weight:500">
         1
@@ -74,7 +74,7 @@
       <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:26px"></ion-icon>
     </button>
 
-    <button (click)="presentPrompt('telefono')" ion-item style="margin:10px" no-lines>
+    <!-- <button (click)="presentPrompt('telefono')" ion-item style="margin:10px" no-lines>
       <div item-start style="font-size:16px;color:#555;font-weight:500">
         Telefono
       </div>
@@ -82,80 +82,23 @@
         {{tienda?.telefono}}
       </div>
       <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:26px"></ion-icon>
-    </button>
+    </button> -->
 
     <div padding style="width:100%;display:flex;justify-content:space-between;align-items:center">
-      <div (click)="openPage(nuevo)" style="border:1px solid #eee;width:45%;height:100px;border-radius:10px;background:#fff;display:flex;justify-content:center;align-items:center">
-        <div style="font-size:16px;color:#555;font-weight:500">
+      <div (click)="openPage(nuevo)" style="background:gray;border:1px solid #eee;width:45%;height:100px;border-radius:10px;display:flex;justify-content:center;align-items:center">
+        <div style="text-align:center;margin:5px;font-size:18px;color:#fff;font-weight:500">
           Nuevo producto
         </div>
       </div>
 
-      <div (click)="openPage(producto)" style="border:1px solid #eee;width:45%;height:100px;border-radius:10px;background:#fff;display:flex;justify-content:center;align-items:center">
-        <div style="font-size:16px;color:#555;font-weight:500">
+      <div (click)="openPage(producto)" style="background:gray;border:1px solid #eee;width:45%;height:100px;border-radius:10px;display:flex;justify-content:center;align-items:center">
+        <div style="text-align:center;margin:5px;font-size:18px;color:#fff;font-weight:500">
           Mis productos (8)
         </div>
       </div>
     </div>
 
   </div>
-
-
-  <div *ngIf="tienda?.tipo == 'estilo'">
-
-    <button (click)="presentPrompt('nombre')" ion-item style="margin:10px" no-lines>
-      <div item-start style="font-size:16px;color:#555;font-weight:500">
-        Nombre
-      </div>
-      <div item-end style="font-size:16px;color:#555;font-weight:500">
-        {{tienda?.nombre}}
-      </div>
-      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:26px"></ion-icon>
-    </button>
-    <button (click)="openGaleria()" ion-item style="margin:10px" no-lines>
-      <div item-start style="font-size:16px;color:#555;font-weight:500">
-        Galería
-      </div>
-      <div item-end style="font-size:16px;color:#555;font-weight:500">
-        {{tienda?.galeria.length}}
-      </div>
-      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:26px"></ion-icon>
-    </button>
-    <button (click)="openHorario()" ion-item style="margin:10px" no-lines>
-      <div item-start style="font-size:16px;color:#555;font-weight:500">
-        Dirección
-      </div>
-      <div item-end style="font-size:16px;color:#555;font-weight:500">
-      </div>
-      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:26px"></ion-icon>
-    </button>
-
-    <button (click)="openHorario()" ion-item style="margin:10px" no-lines>
-      <div item-start style="font-size:16px;color:#555;font-weight:500">
-        Horario
-      </div>
-      <div item-end style="font-size:16px;color:#555;font-weight:500">
-      </div>
-      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:26px"></ion-icon>
-    </button>
-
-    <div padding style="width:100%;display:flex;justify-content:space-between;align-items:center">
-      <div (click)="openPage(nuevo)" style="width:45%;height:100px;border-radius:10px;background:#fff;display:flex;justify-content:center;align-items:center">
-        <div style="font-size:16px;color:#555;font-weight:500">
-          Nuevo producto
-        </div>
-      </div>
-
-      <div (click)="openPage(producto)" style="width:45%;height:100px;border-radius:10px;background:#fff;display:flex;justify-content:center;align-items:center">
-        <div style="font-size:16px;color:#555;font-weight:500">
-          Mis productos
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-
 
 
 

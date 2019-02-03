@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the UsuarioPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { TiendaAlgoDulcePage } from '../tienda-algo-dulce/tienda-algo-dulce';
+import { TiendaComidaPage } from '../tienda-comida/tienda-comida';
 
 @IonicPage()
 @Component({
@@ -14,12 +9,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'usuario.html',
 })
 export class UsuarioPage {
-
+  tiendaID: string;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.tiendaID = this.navParams.get('id');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UsuarioPage');
+  }
+
+  openTienda() {
+    this.navCtrl.push(TiendaComidaPage, { id: this.tiendaID });
   }
 
 }

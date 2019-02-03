@@ -1,24 +1,41 @@
 <ion-menu [content]="content">
-  <ion-content class="card-background-page" style="background:grey">
-    <ion-item *ngIf="isAuth" no-lines color="orange2">
+  <ion-content class="card-background-page">
+    <!-- <ion-item *ngIf="isAuth" no-lines color="orange2">
       <ion-icon item-start *ngIf="!user?.img" name="md-contact" style="color:#fff;font-size:50px"></ion-icon>
       <div style="color:white;font-size:16px;font-weight:500">
         <div> {{user.local?.email}} </div>
         <div> {{user?.name | titlecase}} </div>
       </div>
-      <!-- <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:26px"></ion-icon> -->
-    </ion-item>
+    </ion-item> -->
 
-    <div *ngIf="!isAuth" style="padding:20px;background:orange;width:100%;display:flex;justify-content:center">
+    <div style="padding:20px;background:orange;width:100%;display:flex;justify-content:center">
       <div style="text-align:center;color:white;width:150px;font-size:20px;font-weight:600">
         Bienvenidos a joopiter
       </div>
     </div>
 
-    <ion-list no-lines style="font-weight:500;background:gray">
 
+    <div style="margin-left:20px;margin-top:15px;font-size:20px;font-weight:500;color:#777">
+      Categorías
+    </div>
+    <hr>
+
+    <div *ngFor="let categoria of categorias">
+
+      <div style="margin-left:20px;margin-top:15px;font-size:17px;font-weight:500;color:#555">
+        {{categoria.tipo}}
+      </div>
+
+      <div (click)="openCategoria(categoria.tipo, item)" *ngFor="let item of categoria.data" style="margin-left:20px;margin-top:10px;font-size:16px;color:#777">
+        {{item}}
+      </div>
+
+      <hr style="margin-top:10px">
+
+    </div>
+
+    <!-- <ion-list no-lines style="font-weight:500">
       <button ion-item (click)="openPage(home)" style="background:gray">
-        <!-- <ion-icon item-start name="md-home" style="color:#bbb"></ion-icon> -->
         <div item-start style="border-radius:50%;background:palegreen;width:40px;height:40px;display:flex;justify-content:center;align-items:center">
           <ion-icon name="md-home" style="color:#fff;font-size:22px"></ion-icon>
         </div>
@@ -37,7 +54,6 @@
       </button>
 
       <button *ngIf="isAuth" ion-item (click)="openPage(pedidos)" style="background:gray">
-        <!-- <ion-icon item-start name="ios-basket" style="color:#bbb"></ion-icon> -->
         <div item-start style="border-radius:50%;background:gold;width:40px;height:40px;display:flex;justify-content:center;align-items:center">
           <ion-icon name="md-basket" style="color:#fff;font-size:22px"></ion-icon>
         </div>
@@ -45,8 +61,7 @@
           Mis compras
         </div>
       </button>
-
-    </ion-list>
+    </ion-list> -->
 
 
   </ion-content>

@@ -47,6 +47,8 @@ export class OnceContentPage {
     private _carro: CarroProvider
   ) {
     this.data = this.navParams.get("once");
+    console.log('DATA', this.data);
+
     this.imgs = this.data.imgs;
 
     if (this.data.variaciones.isActive) {
@@ -55,7 +57,7 @@ export class OnceContentPage {
     }
 
     if (this.data.precio.tipo == 'flat') {
-      this.total = this.data.precio.value;
+      this.total = Number(this.data.precio.value);
     }
 
     if (this.data.precio.tipo != 'flat') {
@@ -90,22 +92,14 @@ export class OnceContentPage {
     const compra: any = {
       titulo: this.data.titulo,
       descripcion: this.data.descripcion,
-      total: this.total,
       img: this.data.imgs[0].url,
-      vendedorNombre: this.data.tienda.nombre,
-      tiempoDeEntrega: this.data.tiempoDeEntrega,
-      tipo: 'once'
+      precio: this.total,
+      total: this.total,
+      tienda: this.data.tienda,
+      tipo: 'once',
+      cantidad: 1
     }
-
-    if (this.data.variedades) {
-      compra.variedad = this.variedad;
-    }
-
-    if (this.data.tamanos) {
-      compra.tamano = this.tamano;
-    }
-
-    this._carro.agregarItemAlCarro(compra);
+    this._carro.addToCart(compra);
   }
 
 }

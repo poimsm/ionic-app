@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { ToastController, Platform } from 'ionic-angular';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
+
 @Injectable()
 export class DataProvider {
   apiURL: string;
@@ -17,6 +18,8 @@ export class DataProvider {
   setAPI() {
     if (this.platform.is('cordova')) {
       this.apiURL = 'https://poimsm-server.herokuapp.com';
+      // this.apiURL = 'http://localhost:3000';
+
     } else {
       // this.apiURL = 'https://poimsm-server.herokuapp.com';
       this.apiURL = 'http://localhost:3000';
@@ -101,7 +104,7 @@ export class DataProvider {
     return this.http.get(url).toPromise();
   }
 
-  editTienda(id, body) {
+  updateTienda(id, body) {
     const url = `${this.apiURL}/apps/tienda-editar/${id}`;
     return this.http.put(url, body).toPromise();
   }
@@ -111,15 +114,20 @@ export class DataProvider {
     return this.http.post(url, body).toPromise();
   }
 
+  crearProductoComida(body) {
+    const url = `${this.apiURL}/apps/comida-crear`;
+    return this.http.post(url, body).toPromise();
+  }
+
   onceByTiendID(id) {
     const url = `${this.apiURL}/apps/once-por-tienda/${id}`;
     return this.http.get(url).toPromise();
   }
 
-  getAll(skip, limit, category, route) {
+  getAll(skip, limit, category, ciudad, route) {
 
     let url = `${this.apiURL}/${route}`;
-    url = url + `?limit=${limit}&skip=${skip}`;
+    url = url + `?limit=${limit}&skip=${skip}&ciudad=${ciudad}`;
 
     if (category) {
       url = url + `&category=${category}`;

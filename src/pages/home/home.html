@@ -2,24 +2,28 @@
   <ion-navbar color="white" align-title="center">
     <ion-buttons left>
       <button ion-button icon-only menuToggle>
-        <ion-icon name="menu"></ion-icon>
+        <ion-icon name="menu" style="color:#bbb"></ion-icon>
       </button>
+      <!-- <button ion-button icon-only>
+        <ion-icon name="pin" style="color:rgb(253, 131, 86)"></ion-icon>
+      </button> -->
     </ion-buttons>
     <ion-title> joopiter </ion-title>
     <ion-buttons right>
-      <button *ngIf="showFormulario" (click)="openPage(formulario)" ion-button icon-only>
-        <ion-icon name="md-notifications" style="color:#bbb"></ion-icon>
+      <!-- <button (click)="openPage(carro)" ion-button icon-only>
+        <ion-icon name="pricetag" style="color:#bbb"></ion-icon>
+      </button> -->
+      <button (click)="setLocalizacion()" ion-button icon-only>
+        <ion-icon name="pin" style="color:rgb(253, 131, 86)"></ion-icon>
       </button>
-      <button (click)="openPage(carro)" ion-button icon-only>
-        <ion-icon name="md-cart" style="color:#bbb"></ion-icon>
+      <button ion-button icon-only>
+        <ion-icon name="md-notifications" style="color:#bbb"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content style="background:#eee">
-
-
 
   <!-- <div style="margin-top:20px;display:flex;justify-content:space-around;"> -->
 
@@ -163,19 +167,19 @@
           delivery
         </div>
       </div>
-      <div style="width:100%;text-align:center;font-size:14px;font-weight:400;color:#777">
+      <div style="width:100%;text-align:center;font-size:14px;font-weight:400;color:#555">
         Saludable
       </div>
     </div>
 
-    <div (click)="openPage(nocturno)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+    <div (click)="openPage(comida)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
       <div style="position:relative;height:40px;width:40px;border-radius:50%;background:orangered;display:flex;justify-content:center;align-items:center">
         <ion-icon name="md-pizza" style="color:white;font-size:27px"></ion-icon>
         <div style="font-size:10px;font-weight:450;position:absolute;top:-8px;right:-27px;background:#444;color:white;padding:3px;border-radius:4px">
           Nocturno
         </div>
       </div>
-      <div style="width:100%;text-align:center;font-size:14px;font-weight:400;color:#777">
+      <div style="width:100%;text-align:center;font-size:14px;font-weight:400;color:#555">
         Comida
       </div>
     </div>
@@ -187,7 +191,7 @@
           delivery
         </div>
       </div>
-      <div style="width:100%;text-align:center;font-size:14px;font-weight:400;color:#777">
+      <div style="width:100%;text-align:center;font-size:14px;font-weight:400;color:#555">
         Algo dulce
       </div>
     </div>
@@ -216,7 +220,7 @@
             ecommerce
           </div> -->
       </div>
-      <div style="width:100%;text-align:center;font-size:14px;font-weight:400;color:#777">
+      <div style="width:100%;text-align:center;font-size:14px;font-weight:400;color:#555">
         Compras
       </div>
     </div>
@@ -225,7 +229,7 @@
       <div style="position:relative;height:40px;width:40px;border-radius:50%;background:hotpink;display:flex;justify-content:center;align-items:center">
         <ion-icon name="woman" style="color:white;font-size:27px"></ion-icon>
       </div>
-      <div style="width:100%;text-align:center;font-size:14px;font-weight:400;color:#777">
+      <div style="width:100%;text-align:center;font-size:14px;font-weight:400;color:#555">
         Estilo
       </div>
     </div>
@@ -251,7 +255,7 @@
           reservar
         </div>
       </div>
-      <div style="width:100%;text-align:center;font-size:14px;font-weight:400;color:#777">
+      <div style="width:100%;text-align:center;font-size:14px;font-weight:400;color:#555">
         Alquiler
       </div>
     </div>
@@ -287,7 +291,7 @@
 
 
   <div style="background:white;margin-top:10px">
-    <div style="padding:8px;padding-left:15px;width:100%;background:white;color:#444;font-size:16px;font-weight:600">
+    <div style="padding:8px;padding-left:15px;width:100%;background:white;color:#444;font-size:22px;font-weight:600">
       Ofertas relámpago
     </div>
     <ion-scroll scrollX="true" style="display:flex;height:190px;margin-left:10px">
@@ -359,35 +363,32 @@
 </ion-footer> -->
 
 <ion-footer padding style="background:white" no-border>
-  <div style="width:100%;display:flex;justify-content:space-around;align-items:center">
-    <div style="width:50px;display:flex;flex-wrap:wrap;justify-content:center">
-      <ion-icon name="home" style="font-size:20px;color:#bbb"></ion-icon>
-      <div style="color:#777;width:100%;text-align:center">
-        inicio
+
+  <div style="width:100%;display:flex;justify-content:space-between;align-items:baseline">
+
+    <div (click)="reloadInicio()" style="width:80px;display:flex;flex-wrap:wrap;justify-content:center">
+      <ion-icon name="ios-home-outline" style="font-size:25px;color:#bbb"></ion-icon>
+      <div style="color:#333;width:100%;text-align:center">
+        Inicio
       </div>
     </div>
-    <div style="width:50px;display:flex;flex-wrap:wrap;justify-content:center">
-      <ion-icon name="home" style="font-size:20px;color:#bbb"></ion-icon>
-      <div style="color:#777;width:100%;text-align:center">
-        inicio
+
+    <div (click)="openPage(carro)" style="width:80px;display:flex;flex-wrap:wrap;justify-content:center">
+      <ion-icon name="ios-cart" style="font-size:25px;color:#bbb"></ion-icon>
+      <div style="color:#333;width:100%;text-align:center">
+        Carrito
       </div>
     </div>
-    <div style="width:50px;display:flex;flex-wrap:wrap;justify-content:center">
-      <ion-icon name="home" style="font-size:25px;color:#bbb"></ion-icon>
-      <div style="color:#777;width:100%;text-align:center">
-        inicio
+    <div style="width:100px;display:flex;flex-wrap:wrap;justify-content:center">
+      <ion-icon name="heart-outline" style="font-size:25px;color:#bbb"></ion-icon>
+      <div style="color:#333;width:100%;text-align:center">
+        Lista de deseo
       </div>
     </div>
-    <div style="width:50px;display:flex;flex-wrap:wrap;justify-content:center">
-      <ion-icon name="home" style="font-size:20px;color:#bbb"></ion-icon>
-      <div style="color:#777;width:100%;text-align:center">
-        inicio
-      </div>
-    </div>
-    <div style="width:50px;display:flex;flex-wrap:wrap;justify-content:center">
-      <ion-icon name="home" style="font-size:20px;color:#bbb"></ion-icon>
-      <div style="color:#777;width:100%;text-align:center">
-        inicio
+    <div (click)="openUser()" style="width:80px;display:flex;flex-wrap:wrap;justify-content:center">
+      <ion-icon name="person" style="font-size:25px;color:#bbb"></ion-icon>
+      <div style="color:#333;width:100%;text-align:center">
+        Mi cuenta
       </div>
     </div>
   </div>

@@ -30,7 +30,7 @@
     <ion-input [(ngModel)]="titulo" type="text" placeholder="Título"></ion-input>
   </ion-item>
   <ion-item no-lines>
-    <ion-textarea style="border:0px solid #bbb" rows="3" [(ngModel)]="descripcion" placeholder="Descripción"></ion-textarea>
+    <ion-textarea style="border:0px solid #bbb" rows="3" [(ngModel)]="descripcion" placeholder="Descripción (opcional)"></ion-textarea>
   </ion-item>
 
 
@@ -38,14 +38,14 @@
   <ion-item no-lines style="color:#999;background:rgb(243, 243, 243);font-size:16px;font-weight:500">
     Detalles
   </ion-item>
-  <button ion-item (click)="openSelect('categoria')">
+  <button ion-item no-lines (click)="openSelect('categoria')">
     <ion-label>
-      Categoría
+      Seleccione categoría
       <div style="color:green">
         {{categoria}}
       </div>
     </ion-label>
-    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb"></ion-icon>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px"></ion-icon>
     <ion-select [(ngModel)]="categoria" style="display:none" #categoriaRef>
       <ion-option value="Galletas">Galletas</ion-option>
       <ion-option value="Tortas - pastelitos">Tortas - pastelitos</ion-option>
@@ -64,13 +64,27 @@
         {{tiempoDeEntrega}}
       </div>
     </ion-label>
-    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb"></ion-icon>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px"></ion-icon>
     <ion-select [(ngModel)]="tiempoDeEntrega" style="display:none" #tiempoDeEntregaRef>
       <ion-option value="Entrega inmediata">Entrega inmediata</ion-option>
       <ion-option value="Entrega los fines de semana">Entrega los fines de semana</ion-option>
       <ion-option value="Demora 1 día en entregar">1 día</ion-option>
       <ion-option value="Demora 2 día en entregar">2 día</ion-option>
       <ion-option value="Demora 3 día en entregar">3 día</ion-option>
+    </ion-select>
+  </button>
+  <button ion-item no-lines (click)="openSelect('tiempoDeEntrega')" *ngIf="categoria != 'Desayunos sorpresa'">
+    <ion-label>¿Cómo realizará los repartos?
+      <div style="color:green">
+        {{tiempoDeEntrega}}
+      </div>
+    </ion-label>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px"></ion-icon>
+    <ion-select [(ngModel)]="tiempoDeEntrega" style="display:none" #tiempoDeEntregaRef>
+      <ion-option value="Entrega inmediata">Yo mismo haré los envios a las casas</ion-option>
+      <ion-option value="Entrega los fines de semana">Tengo un punto de entrega</ion-option>
+      <ion-option value="Demora 1 día en entregar">Quiero usar el servicio de entregas de la plataforma para este
+        producto</ion-option>
     </ion-select>
   </button>
 
@@ -87,7 +101,7 @@
         {{variacion}}
       </div>
     </ion-label>
-    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb"></ion-icon>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px"></ion-icon>
     <ion-select (ionChange)="onVaracionChange($event)" [(ngModel)]="variacion" style="display:none" #variacionRef>
       <ion-option value="Color">Color</ion-option>
       <ion-option value="Sabor">Sabor</ion-option>

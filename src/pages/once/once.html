@@ -18,18 +18,108 @@
 
 <ion-content>
 
-  <!-- <div *ngIf="true" style="margin-left:15px;margin-top:15px;margin-bottom:10px;color:#444;font-size:20px;font-weight:500">
-    Destacado
+  <div *ngIf="true" style="margin-left:15px;margin-top:15px;margin-bottom:0px;color:#444;font-size:20px;font-weight:500">
+    Lo más popular
   </div>
-  <ion-scroll *ngIf="true" scrollX="true" style="height:150px;margin-left:10px">
-    <div style="width:100%;display:flex;justify-content:flex-start">
-      <img src="assets/02.jpg" style="width:120px;height:120px;margin-right:15px">
-      <img src="assets/03.jpg" style="width:120px;height:120px;margin-right:15px">
-      <img src="assets/04.jpg" style="width:120px;height:120px;margin-right:15px">
-    </div>
-  </ion-scroll> -->
 
-  <div style="margin-left:15px;margin-top:0px;margin-bottom:10px;color:#444;font-size:20px;font-weight:500">
+  <div style="background:white;margin-top:10px">
+    <ion-scroll scrollX="true" style="display:flex;height:190px;margin-left:10px">
+      <ion-grid>
+        <ion-row nowrap>
+          <ion-col col-5>
+            <div style="position:relative">
+              <img src="assets/02.jpg" style="width:120px;height:120px;margin-right:15px">
+              <div style="position:absolute;top:10px;left:0px;font-weight:500;color:White;background:orangered;padding:5px;font-size:14px">
+                -30%
+              </div>
+            </div>
+            <div style="width:100%;text-align:right;font-size:16px;color:#333">
+              $4900 CLP
+            </div>
+          </ion-col>
+
+          <ion-col col-5>
+            <div style="position:relative">
+              <img src="assets/03.jpg" style="width:120px;height:120px;margin-right:15px">
+              <div style="position:absolute;top:10px;left:0px;font-weight:500;color:White;background:orangered;padding:5px;font-size:14px">
+                -23%
+              </div>
+            </div>
+            <div style="width:100%;text-align:right;font-size:16px;color:#333">
+              $2300 CLP
+            </div>
+          </ion-col>
+
+          <ion-col col-5>
+            <div style="position:relative">
+              <img src="assets/04.jpg" style="width:120px;height:120px;margin-right:15px">
+              <div style="position:absolute;top:10px;left:0px;font-weight:500;color:White;background:orangered;padding:5px;font-size:14px">
+                -10%
+              </div>
+            </div>
+            <div style="width:100%;text-align:right;font-size:16px;color:#333">
+              $3000 CLP
+            </div>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+    </ion-scroll>
+  </div>
+
+
+
+  <div *ngIf="true" style="margin-left:15px;margin-top:0px;margin-bottom:0px;color:#444;font-size:20px;font-weight:500">
+    Desayunos sorpresa
+  </div>
+
+  <div style="background:white;margin-top:10px">
+    <ion-scroll scrollX="true" style="display:flex;height:190px;margin-left:10px">
+      <ion-grid>
+        <ion-row nowrap>
+          <ion-col col-5>
+            <div style="position:relative">
+              <img src="assets/desa01.jpg" style="width:120px;height:120px;margin-right:15px">
+              <div style="position:absolute;top:10px;left:0px;font-weight:500;color:White;background:orangered;padding:5px;font-size:14px">
+                -10%
+              </div>
+            </div>
+            <div style="width:100%;text-align:right;font-size:16px;color:#333">
+              $4900 CLP
+            </div>
+          </ion-col>
+
+          <ion-col col-5>
+            <div style="position:relative">
+              <img src="assets/desa03.jpg" style="width:120px;height:120px;margin-right:15px">
+              <div style="position:absolute;top:10px;left:0px;font-weight:500;color:White;background:orangered;padding:5px;font-size:14px">
+                -10%
+              </div>
+            </div>
+            <div style="width:100%;text-align:right;font-size:16px;color:#333">
+              $2300 CLP
+            </div>
+          </ion-col>
+
+          <ion-col col-5>
+            <div style="position:relative">
+              <img src="assets/desa02.jpg" style="width:120px;height:120px;margin-right:15px">
+              <div style="position:absolute;top:10px;left:0px;font-weight:500;color:White;background:orangered;padding:5px;font-size:14px">
+                -12%
+              </div>
+            </div>
+            <div style="width:100%;text-align:right;font-size:16px;color:#333">
+              $3000 CLP
+            </div>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+    </ion-scroll>
+  </div>
+
+
+  <!-- <div style="margin-left:15px;margin-top:0px;margin-bottom:10px;color:#444;font-size:20px;font-weight:500">
     Desayunos sorpresa
   </div>
 
@@ -50,15 +140,12 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ion-scroll>
+  </ion-scroll> -->
 
 
 
-  <!-- <div style="margin-bottom:10px;width:100%;background:salmon;color:white;font-size:16px;font-weight:500;padding:5px;padding-left:15px">
-    Todas las categorías
-  </div> -->
 
-  <div style="margin-left:15px;margin-top:20px;margin-bottom:10px;color:#444;font-size:20px;font-weight:500">
+  <div style="margin-left:15px;margin-top:0px;margin-bottom:10px;color:#444;font-size:20px;font-weight:500">
     Todas las categorías
   </div>
 

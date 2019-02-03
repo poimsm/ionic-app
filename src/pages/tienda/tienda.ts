@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, AlertController, ModalController } from 'ionic-angular';
-import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
-
+import { IonicPage, NavController, NavParams, Platform, ActionSheetController, AlertController, ModalController } from 'ionic-angular';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { TiendaGaleriaPage } from '../tienda-galeria/tienda-galeria';
 import { DataProvider } from '../../providers/data/data';
 import { TiendaNuevoPage } from '../tienda-nuevo/tienda-nuevo';
@@ -26,18 +25,24 @@ export class TiendaPage {
     public modalCtrl: ModalController,
     private alertCtrl: AlertController,
     public navCtrl: NavController,
-    private imagePicker: ImagePicker,
     private platform: Platform,
     public navParams: NavParams,
-    private _data: DataProvider
+    private _data: DataProvider,
+    private camera: Camera,
+    private actionSheetCtrl: ActionSheetController
+
   ) {
     this.tiendaID = this.navParams.get('id');
   }
 
   ionViewDidLoad() {
+    this.cargarTienda();
+  }
+
+  cargarTienda() {
     this._data.fetchTienda(this.tiendaID)
       .then(data => {
-      this.tienda = data; console.log(data);
+        this.tienda = data; console.log(data);
       });
   }
 
@@ -48,34 +53,68 @@ export class TiendaPage {
     modal.present();
   }
 
-  seleccionar_foto() {
+  presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Select Image Source',
+      buttons: [
+        {
+          text: 'Cargar desde galería',
+          handler: () => {
+            this.tomarFoto(this.camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Usar cámara',
+          handler: () => {
+            this.tomarFoto(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  tomarFoto(sourceType) {
+    const options: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: sourceType,
+      targetWidth: 500,
+      targetHeight: 500,
+      saveToPhotoAlbum: false
+    };
 
     if (this.platform.is('cordova')) {
-      const options: ImagePickerOptions = {
-        quality: 70,
-        outputType: 0,
-        maximumImagesCount: 1
-      }
-      this.imagePicker.getPictures(options).then((results) => {
-        for (var i = 0; i < results.length; i++) {
-          this.imagenPerfil = 'data:image/jpeg;base64,' + results[i];
-          const body = {
-            img: this.imagenPerfil,
-            id: this.tiendaID
-          }
-          this._data.nuevaImgPerfil(body)
-            .then(() => console.log('listoo'));
+      this.camera.getPicture(options).then((imageData) => {
+        let base64Image = 'data:image/jpeg;base64,' + imageData;
+
+        const body = {
+          img: base64Image,
+          id: this.tiendaID
         }
+        this._data.nuevaImgPerfil(body)
+          .then(() => this.cargarTienda());
+
       }, (err) => { console.log('ERROR') });
     } else {
+      const img = "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
+
       const body = {
-        img: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+        img: 'data:image/png;base64,' + img,
         id: this.tiendaID
       }
       this._data.nuevaImgPerfil(body)
-        .then(data => console.log(data));
+        .then(() => this.cargarTienda());
     }
   }
+
+
 
   openGaleria() {
     this.navCtrl.push(TiendaGaleriaPage, {
@@ -128,12 +167,12 @@ export class TiendaPage {
           handler: data => {
             if (tipo == 'nombre') {
               const body = { nombre: data.nombre };
-              this._data.editTienda(this.tiendaID, body)
+              this._data.updateTienda(this.tiendaID, body)
                 .then((data: any) => this.tienda = data);
             }
             if (tipo == 'telefono') {
               const body = { telefono: data.telefono };
-              this._data.editTienda(this.tiendaID, body)
+              this._data.updateTienda(this.tiendaID, body)
                 .then((data: any) => this.tienda = data);
             }
           }

@@ -74,8 +74,8 @@ export class FrutasContentPage {
       img: this.tienda.tienda.logo,
       vendedorNombre: this.tienda.tienda.nombre
     }
-    console.log({ compra, tipo: 'frutas' });
-    this._carro.agregarItemAlCarro(compra);
+    // console.log({ compra, tipo: 'frutas' });
+    // this._carro.agregarItemAlCarro(compra);
   }
 
 }

@@ -14,17 +14,9 @@ import { AuthProvider } from '../../providers/auth/auth';
 })
 export class CarroPage {
 
-  comprasEcommerce: any = [];
-  comprasOnce: any = [];
-  total = 0;
-  totalDulce = 0;
-  totalNocturno = 0;
   token: string;
   user: any;
   isAuth = false;
-  carroDulce = [];
-  productos = [];
-  tienda: any;
 
   constructor(
     public modalCtrl: ModalController,
@@ -32,24 +24,7 @@ export class CarroPage {
     public navParams: NavParams,
     private _carro: CarroProvider,
     private _auth: AuthProvider
-  ) {
-    if (this._carro.listadoCompras.length != 0) {
-      this.loadCarroDulce();
-    }
-
-    if (this._carro.carro) {
-      this.productos = this._carro.carro.productos;
-      this.tienda = this._carro.carro.tienda;
-      this.totalNocturno = this._carro.carro.total + 1000;
-    }
-  }
-
-  limpiarCarro() {
-    this.productos = [];
-    this.tienda = {};
-    this.totalNocturno = 0;
-    this._carro.vaciaCarro();
-  }
+  ) { }
 
   ionViewDidLoad() {
     this.loadUser();
@@ -65,58 +40,14 @@ export class CarroPage {
     });
   }
 
-  loadCarroDulce() {
-    const data = this._carro.listadoCompras;
-    data.forEach(compra => {
-      const once = {
-        compra: compra,
-        cantidad: 1,
-        precio: compra.total,
-        tipo: compra.tipo
-      }
-      this.carroDulce.push(once);
-    });
-    this.updateTotalDulce();
-    this.comprasOnce = data;
-  }
-
-  addMore(type, index) {
-    if (type == '-' && this.carroDulce[index].cantidad != 0) {
-      this.carroDulce[index].cantidad -= 1;
-      this.carroDulce[index].precio = this.carroDulce[index].compra.total * this.carroDulce[index].cantidad;
-      this.updateTotalDulce();
-    }
-
-    if (type == '-' && this.carroDulce[index].cantidad == 0) {
-      setTimeout(() => {
-        this.carroDulce.splice(index, 1);
-        this._carro.quitarItemDelCarro(index);
-        this.updateTotalDulce();
-      }, 500);
-    }
-
-    if (type == '+' && this.carroDulce[index].cantidad != 5) {
-      this.carroDulce[index].cantidad += 1;
-      this.carroDulce[index].precio = this.carroDulce[index].compra.total * this.carroDulce[index].cantidad;
-      this.updateTotalDulce();
-    }
-  }
-
-  updateTotalDulce() {
-    let total = 0;
-    this.carroDulce.forEach(item => {
-      total += item.precio;
-    });
-    this.totalDulce = total + 1000 * this.carroDulce.length;;
-  }
 
   openLogin() {
     const modal = this.modalCtrl.create(LoginPage);
     modal.onDidDismiss(data => {
       if (data.ok) {
         const datos = {
-          total: this.total,
-          carro: this.carroDulce,
+          total: this._carro.total,
+          carro: this._carro.carro,
           token: this.token,
           user: this.user
         }
@@ -134,11 +65,12 @@ export class CarroPage {
 
     if (this.isAuth) {
       const datos = {
-        total: this.totalDulce + this.totalNocturno,
-        carro: this.carroDulce,
+        total: this._carro.total,
+        carro: this._carro.carro,
         token: this.token,
         user: this.user
       }
+
       this.navCtrl.push(CarroPagarPage, datos);
     } else {
       this.openLogin();
