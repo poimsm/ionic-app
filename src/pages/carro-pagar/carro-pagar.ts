@@ -124,15 +124,6 @@ export class CarroPagarPage {
     if (this.efectivo) {
       this.pagarConEfectivo();
     } else {
-
-      let total = 0;
-
-      this.carro.forEach(item => {
-        total += item.precio * item.cantidad;
-      });
-
-      this.total = total;
-
       this.pagarConFlow(this.email, this.total);
     }
   }
@@ -147,7 +138,7 @@ export class CarroPagarPage {
         uid: this.user._id,
         nombre: this.user.name,
         email: email,
-        monto: 18000
+        monto: this.total
       }
     };
 
