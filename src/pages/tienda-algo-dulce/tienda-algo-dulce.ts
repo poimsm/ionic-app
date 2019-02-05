@@ -9,7 +9,7 @@ import { TiendaProductoPage } from '../tienda-producto/tienda-producto';
 import { TiendaHorarioPage } from '../tienda-horario/tienda-horario';
 import { GaleriaImagenPage } from '../galeria-imagen/galeria-imagen';
 import { ImageProvider } from '../../providers/image/image';
-import { ModalEntregasPage } from '../modal-entregas/modal-entregas';
+import { TiendaEnviosPage } from '../tienda-envios/tienda-envios';
 
 
 @IonicPage()
@@ -149,8 +149,8 @@ export class TiendaAlgoDulcePage {
   }
 
   openEntregas() {
-    this.navCtrl.push(ModalEntregasPage, {
-      localizacion: this.tienda.localizacion,
+    this.navCtrl.push(TiendaEnviosPage, {
+      ciudad: this.tienda.ciudad,
       id: this.tiendaID
     });
   }

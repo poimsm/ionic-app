@@ -1,10 +1,12 @@
+export { TiendaEnviosDeliveryPage } from './tienda-envios-delivery/tienda-envios-delivery';
+export { TiendaEnviosEcommercePage } from './tienda-envios-ecommerce/tienda-envios-ecommerce';
+export { TiendaEnviosPage } from './tienda-envios/tienda-envios';
 export { TiendaComidaNuevoPage } from './tienda-comida-nuevo/tienda-comida-nuevo';
 export { TiendaComidaPage } from './tienda-comida/tienda-comida';
 export { TiendaAlgoDulcePage } from './tienda-algo-dulce/tienda-algo-dulce';
 export { TiendaComprasPage } from './tienda-compras/tienda-compras';
 export { ComidaPage } from './comida/comida';
 export { ComidaContentPage } from './comida-content/comida-content';
-export { ModalEntregasPage } from './modal-entregas/modal-entregas';
 export { LocalizacionPage } from './localizacion/localizacion';
 export { WishlistPage } from './wishlist/wishlist';
 export { TiendaDeliveryDulcePage } from './tienda-delivery-dulce/tienda-delivery-dulce';

@@ -4,10 +4,10 @@ import { DataProvider } from '../../providers/data/data';
 
 @IonicPage()
 @Component({
-  selector: 'page-modal-entregas',
-  templateUrl: 'modal-entregas.html',
+  selector: 'page-tienda-envios',
+  templateUrl: 'tienda-envios.html',
 })
-export class ModalEntregasPage {
+export class TiendaEnviosPage {
 
   @ViewChild('precioFijoRef') precioFijoRef: Select;
   @ViewChild('precioTopeRef') precioTopeRef: Select;

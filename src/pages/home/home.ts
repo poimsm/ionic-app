@@ -39,6 +39,7 @@ export class HomePage {
   showFormulario = false;
 
   user: any;
+  token: string;
   isAuth = false;
 
   constructor(
@@ -62,6 +63,7 @@ export class HomePage {
 
       if (data.isAuth) {
         this.user = data.authData.user;
+        this.token = data.authData.token;
         this.isAuth = true;
       }
     });
@@ -97,7 +99,11 @@ export class HomePage {
 
   openUser() {
     if (this.isAuth) {
-      this.navCtrl.push(UsuarioPage, { id: this.user.tienda.id });
+      this.navCtrl.push(UsuarioPage, {
+        tiendaID: this.user.tienda.id,
+        user: this.user,
+        token: this.token
+      });
     } else {
       this.navCtrl.push(LoginPage);
     }

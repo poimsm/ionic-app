@@ -9,8 +9,8 @@ import { TiendaProductoPage } from '../tienda-producto/tienda-producto';
 import { TiendaHorarioPage } from '../tienda-horario/tienda-horario';
 import { GaleriaImagenPage } from '../galeria-imagen/galeria-imagen';
 import { ImageProvider } from '../../providers/image/image';
-import { ModalEntregasPage } from '../modal-entregas/modal-entregas';
 import { TiendaComidaNuevoPage } from '../tienda-comida-nuevo/tienda-comida-nuevo';
+import { TiendaEnviosDeliveryPage } from '../tienda-envios-delivery/tienda-envios-delivery';
 
 
 @IonicPage()
@@ -128,10 +128,12 @@ export class TiendaComidaPage {
     })
   }
 
-  openEntregas() {
-    this.navCtrl.push(ModalEntregasPage, {
-      localizacion: this.tienda.localizacion,
-      id: this.tiendaID
+  openEntregas(isDefined) {
+    this.navCtrl.push(TiendaEnviosDeliveryPage, {
+      ciudad: this.tienda.ciudad,
+      id: this.tiendaID,
+      isDefined,
+      envios: this.tienda.envios
     });
   }
 

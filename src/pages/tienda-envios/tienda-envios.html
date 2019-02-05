@@ -28,22 +28,22 @@
     </ion-item>
 
     <div *ngIf="isPropio" style="margin-top:10px;color:#444">
-      <button text-wrap (click)="A1=!A1;B1=false; openSelect('tope')" ion-item style="color:#777">
+      <!-- <button text-wrap (click)="A1=!A1;B1=false; openSelect('tope')" ion-item style="color:#777">
         <ion-icon *ngIf="A1" item-start name="radio-button-on" style="color:dodgerblue"></ion-icon>
         <ion-icon *ngIf="!A1" item-start name="radio-button-off" style="color:#bbb"></ion-icon>
         <div style="font-size:16px">
-          Hacer repartos gratis por compras sobre cierto valor
+          Hacer envíos gratis por compras que superen cierto valor
         </div>
         <div *ngIf="A1" style="color:green;font-size:16px">
           {{valorTope}}
         </div>
-      </button>
+      </button> -->
 
       <button text-wrap (click)="B1=!B1;A1=false; openSelect('fijo')" ion-item style="color:#777">
         <ion-icon *ngIf="B1" item-start name="radio-button-on" style="color:dodgerblue"></ion-icon>
         <ion-icon *ngIf="!B1" item-start name="radio-button-off" style="color:#bbb"></ion-icon>
         <div style="font-size:16px">
-          Cobrar precio fijo por cada reparto
+          Cobrar precio fijo por cada envío
         </div>
         <div *ngIf="B1" style="color:green;font-size:16px">
           {{valorFijo}}

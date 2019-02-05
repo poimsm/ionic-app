@@ -16,6 +16,7 @@ export class MisPedidosPage {
   user: any;
   isAuth: boolean;
   nocturno = [];
+  carro = [];
 
   constructor(
     public navCtrl: NavController,
@@ -39,19 +40,11 @@ export class MisPedidosPage {
   getPedidos(token, id) {
     this._data.misPedidos(token, id)
       .then((data: any) => {
-        data.forEach(item => {
-          item.carro.forEach(compra => {
-            if (compra.tipo != 'nocturno') {
-              this.pedidos.push(compra);
-            } else {
-              this.nocturno.push(compra);
-            }
-          });
-        });
+        this.pedidos = data[0].carro;
       });
   }
 
-  openContent(compra) {
+  openContentNormal(compra) {
     this.navCtrl.push(MisPedidosContentPage, { compra });
   }
 

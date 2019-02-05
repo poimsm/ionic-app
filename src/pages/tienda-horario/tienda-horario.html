@@ -3,7 +3,7 @@
   <ion-navbar color="white">
     <ion-title>Horario</ion-title>
     <ion-buttons right>
-      <button ion-button outline mode="ios">
+      <button (click)="save()" ion-button outline mode="ios">
         Guardar
       </button>
     </ion-buttons>
@@ -12,65 +12,300 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content style="background:rgb(250, 250, 250)">
 
   <ion-scroll scrollX="true" style="padding:15px;background:white;display:flex;height:80px;font-size:18px">
 
     <ion-grid>
       <ion-row nowrap>
         <ion-col col-2>
-          <div (click)="select('Lunes')" style="background:dodgerblue;border:0px solid #ccc;color:#fff;font-weight:500;width:55px;height:55px;border-radius:5px;display:flex;justify-content:center;align-items:center">
+          <div (click)="select('Lunes')" [ngClass]="{'active': dia=='Lunes', 'normal': dia!='Lunes'}" style="width:50px;height:50px;border-radius:2px;display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
             Lun
+            <div *ngIf="!isLunes" style="margin-top:-15px;font-size:20px;color:white;width:100%;text-align:center">
+              &#9679;
+            </div>
+            <div *ngIf="isLunes" style="margin-top:-15px;font-size:20px;color:rgb(250, 190, 38);width:100%;text-align:center">
+              &#9679;
+            </div>
           </div>
+
         </ion-col>
         <ion-col col-2>
-          <div (click)="select('Martes')" style="border:0px solid #ccc;color:#555;font-weight:500;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-items:center">
+          <div (click)="select('Martes')" [ngClass]="{'active': dia=='Martes', 'normal': dia!='Martes'}" style="width:50px;height:50px;border-radius:2px;display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
             Mar
+            <div style="margin-top:-15px;font-size:20px;color:white;width:100%;text-align:center">
+              &#9679;
+            </div>
           </div>
         </ion-col>
         <ion-col col-2>
-          <div (click)="select('Miércoles')" style="border:0px solid #ccc;color:#555;font-weight:500;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-items:center">
+          <div (click)="select('Miércoles')" [ngClass]="{'active': dia=='Miércoles', 'normal': dia!='Miércoles'}" style="width:50px;height:50px;border-radius:2px;display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
             Mié
           </div>
         </ion-col>
         <ion-col col-2>
-          <div (click)="select('Jueves')" style="border:0px solid #ccc;color:#555;font-weight:500;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-items:center">
+          <div (click)="select('Jueves')" [ngClass]="{'active': dia=='Jueves', 'normal': dia!='Jueves'}" style="width:50px;height:50px;border-radius:2px;display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
             Jue
           </div>
         </ion-col>
         <ion-col col-2>
-          <div (click)="select('Viernes')" style="border:0px solid #ccc;color:#555;font-weight:500;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-items:center">
+          <div (click)="select('Viernes')" [ngClass]="{'active': dia=='Viernes', 'normal': dia!='Viernes'}" style="width:50px;height:50px;border-radius:2px;display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
             Vie
           </div>
         </ion-col>
         <ion-col col-2>
-          <div (click)="select('Sábado')" style="border:0px solid #ccc;color:#555;font-weight:500;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-items:center">
+          <div (click)="select('Sábado')" [ngClass]="{'active': dia=='Sábado', 'normal': dia!='Sábado'}" style="width:50px;height:50px;border-radius:2px;display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
             Sáb
           </div>
         </ion-col>
         <ion-col col-2>
-          <div (click)="select('Domingo')" style="border:0px solid #ccc;color:#555;font-weight:500;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-items:center">
+          <div (click)="select('Domingo')" [ngClass]="{'active': dia=='Domingo', 'normal': dia!='Domingo'}" style="width:50px;height:50px;border-radius:2px;display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
             Dom
           </div>
         </ion-col>
+        <!-- <ion-col col-2>
+          <div (click)="select('Domingo')" style="border:0px solid #ccc;color:#555;font-weight:500;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-items:center">
+            Dom
+          </div>
+        </ion-col> -->
       </ion-row>
     </ion-grid>
   </ion-scroll>
 
-  <div style="font-size:20px;color:#444;font-weight:600;margin-left:15px;margin-top:15px;margin-bottom:10px">
+  <!-- <div style="font-size:20px;color:#444;font-weight:600;margin-left:15px;margin-top:15px;margin-bottom:10px">
     Mi horario día {{dia}}
-  </div>
+  </div> -->
   <!-- <ion-list> -->
-  <ion-item>
-    <ion-label>Hora de inicio</ion-label>
-    <ion-datetime displayFormat="h:mm a"></ion-datetime>
-  </ion-item>
 
-  <ion-item>
-    <ion-label>Hora de cierre</ion-label>
-    <ion-datetime displayFormat="h:mm a"></ion-datetime>
-  </ion-item>
-  <!-- </ion-list> -->
+
+  <!-- <button (click)="openSelect('inicio', tipoHora='inicio')" ion-item style="margin-left:0px">
+    <div style="font-size:16px;color:#555">
+      Hora de inicio
+    </div>
+    <div item-end style="font-size:14px;color:#777">
+      Seleccionar
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
+
+  <button (click)="openSelect('inicio', tipoHora='cierre')" ion-item style="margin-left:0px">
+    <div style="font-size:16px;color:#555">
+      Hora de cierre
+    </div>
+    <div item-end style="font-size:14px;color:#777">
+      Seleccionar
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button> -->
+
+
+
+
+
+  <div *ngFor="let item of matriz">
+    <h3> {{item.dia}}
+    </h3>
+    <button ion-item *ngIf="item.dia === dia">
+      <!-- {{item.dia}} -->
+      <ion-label style="font-size:16px;color:#555">
+        Hora de inicio
+      </ion-label>
+      <div *ngIf="!item.inicio.length >0" item-end style="font-size:14px;color:#777">
+        Seleccionar
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+      <ion-datetime [(ngModel)]="item.inicio" displayFormat="h a"></ion-datetime>
+    </button>
+
+    <button ion-item *ngIf="item.dia === dia">
+      <ion-label style="font-size:16px;color:#555">
+        Hora de cierre
+      </ion-label>
+      <div *ngIf="!item.cierre.length >0" item-end style="font-size:14px;color:#777">
+        Seleccionar
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+      <ion-datetime [(ngModel)]="item.cierre" displayFormat="h a"></ion-datetime>
+    </button>
+  </div>
+
+
+
+
+
+  <!-- <div *ngIf="dia == 'Lunes'">
+    <button ion-item>
+      <ion-label style="font-size:16px;color:#555">
+        Hora de inicio
+      </ion-label>
+      <div *ngIf="!inicioLunes" item-end style="font-size:14px;color:#777">
+        Seleccionar
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+      <ion-datetime [(ngModel)]="inicioLunes" displayFormat="h a"></ion-datetime>
+    </button>
+
+    <button ion-item>
+      <ion-label style="font-size:16px;color:#555">
+        Hora de cierre
+      </ion-label>
+      <div *ngIf="!cierreLunes" item-end style="font-size:14px;color:#777">
+        Seleccionar
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+      <ion-datetime [(ngModel)]="cierreLunes" displayFormat="h a"></ion-datetime>
+    </button>
+  </div> -->
+
+  <div *ngIf="dia == 'Martes'">
+    <button ion-item>
+      <ion-label style="font-size:16px;color:#555">
+        Hora de inicio
+      </ion-label>
+      <div *ngIf="!inicioMartes" item-end style="font-size:14px;color:#777">
+        Seleccionar
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+      <ion-datetime [(ngModel)]="inicioMartes" displayFormat="h a"></ion-datetime>
+    </button>
+
+    <button ion-item>
+      <ion-label style="font-size:16px;color:#555">
+        Hora de cierre
+      </ion-label>
+      <div *ngIf="!cierreMartes" item-end style="font-size:14px;color:#777">
+        Seleccionar
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+      <ion-datetime [(ngModel)]="cierreMartes" displayFormat="h a"></ion-datetime>
+    </button>
+  </div>
+
+
+  <div *ngIf="dia == 'Miércoles'">
+    <button ion-item>
+      <ion-label style="font-size:16px;color:#555">
+        Hora de inicio
+      </ion-label>
+      <div *ngIf="!inicioMiercoles" item-end style="font-size:14px;color:#777">
+        Seleccionar
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+      <ion-datetime [(ngModel)]="inicioMiercoles" displayFormat="h a"></ion-datetime>
+    </button>
+
+    <button ion-item>
+      <ion-label style="font-size:16px;color:#555">
+        Hora de cierre
+      </ion-label>
+      <div *ngIf="!cierreMiercoles" item-end style="font-size:14px;color:#777">
+        Seleccionar
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+      <ion-datetime [(ngModel)]="cierreMiercoles" displayFormat="h a"></ion-datetime>
+    </button>
+  </div>
+
+
+  <div *ngIf="dia == 'Jueves'">
+    <button ion-item>
+      <ion-label style="font-size:16px;color:#555">
+        Hora de inicio
+      </ion-label>
+      <div *ngIf="!inicioJueves" item-end style="font-size:14px;color:#777">
+        Seleccionar
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+      <ion-datetime [(ngModel)]="inicioJueves" displayFormat="h a"></ion-datetime>
+    </button>
+
+    <button ion-item>
+      <ion-label style="font-size:16px;color:#555">
+        Hora de cierre
+      </ion-label>
+      <div *ngIf="!cierreJueves" item-end style="font-size:14px;color:#777">
+        Seleccionar
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+      <ion-datetime [(ngModel)]="cierreJueves" displayFormat="h a"></ion-datetime>
+    </button>
+  </div>
+
+
+  <div *ngIf="dia == 'Viernes'">
+    <button ion-item>
+      <ion-label style="font-size:16px;color:#555">
+        Hora de inicio
+      </ion-label>
+      <div *ngIf="!inicioViernes" item-end style="font-size:14px;color:#777">
+        Seleccionar
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+      <ion-datetime [(ngModel)]="inicioViernes" displayFormat="h a"></ion-datetime>
+    </button>
+
+    <button ion-item>
+      <ion-label style="font-size:16px;color:#555">
+        Hora de cierre
+      </ion-label>
+      <div *ngIf="!cierreViernes" item-end style="font-size:14px;color:#777">
+        Seleccionar
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+      <ion-datetime [(ngModel)]="cierreViernes" displayFormat="h a"></ion-datetime>
+    </button>
+  </div>
+
+
+  <div *ngIf="dia == 'Sábado'">
+    <button ion-item>
+      <ion-label style="font-size:16px;color:#555">
+        Hora de inicio
+      </ion-label>
+      <div *ngIf="!inicioSabado" item-end style="font-size:14px;color:#777">
+        Seleccionar
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+      <ion-datetime [(ngModel)]="inicioSabado" displayFormat="h a"></ion-datetime>
+    </button>
+
+    <button ion-item>
+      <ion-label style="font-size:16px;color:#555">
+        Hora de cierre
+      </ion-label>
+      <div *ngIf="!cierreSabado" item-end style="font-size:14px;color:#777">
+        Seleccionar
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+      <ion-datetime [(ngModel)]="cierreSabado" displayFormat="h a"></ion-datetime>
+    </button>
+  </div>
+
+  <div *ngIf="dia == 'Domingo'">
+    <button ion-item>
+      <ion-label style="font-size:16px;color:#555">
+        Hora de inicio
+      </ion-label>
+      <div *ngIf="!inicioDomingo" item-end style="font-size:14px;color:#777">
+        Seleccionar
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+      <ion-datetime [(ngModel)]="inicioDomingo" displayFormat="h a"></ion-datetime>
+    </button>
+
+    <button ion-item>
+      <ion-label style="font-size:16px;color:#555">
+        Hora de cierre
+      </ion-label>
+      <div *ngIf="!cierreDomingo" item-end style="font-size:14px;color:#777">
+        Seleccionar
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+      <ion-datetime [(ngModel)]="cierreDomingo" displayFormat="h a"></ion-datetime>
+    </button>
+  </div>
+
+
 
 
 </ion-content>

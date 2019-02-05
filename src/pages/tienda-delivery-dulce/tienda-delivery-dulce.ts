@@ -9,7 +9,7 @@ import { TiendaProductoPage } from '../tienda-producto/tienda-producto';
 import { TiendaHorarioPage } from '../tienda-horario/tienda-horario';
 import { GaleriaImagenPage } from '../galeria-imagen/galeria-imagen';
 import { ImageProvider } from '../../providers/image/image';
-import { ModalEntregasPage } from '../modal-entregas/modal-entregas';
+// import { ModalEntregasPage } from '../modal-entregas/modal-entregas';
 
 @IonicPage()
 @Component({
@@ -148,10 +148,10 @@ export class TiendaDeliveryDulcePage {
   }
 
   openEntregas() {
-    this.navCtrl.push(ModalEntregasPage, {
-      localizacion: this.tienda.localizacion,
-      id: this.tiendaID
-    });
+    // this.navCtrl.push(ModalEntregasPage, {
+    //   localizacion: this.tienda.localizacion,
+    //   id: this.tiendaID
+    // });
   }
 
   openPage(pagina) {
