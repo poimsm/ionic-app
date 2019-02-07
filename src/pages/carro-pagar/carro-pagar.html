@@ -37,32 +37,51 @@
 
   <hr>
 
-  <div style="font-weight:400;color:#999;font-size:15px;margin-left:15px">
-    HORARIO DE ENTREGA
-  </div>
-  <ion-list no-lines>
-    <!-- <ion-item>
-      <ion-label style="color:#515c6f">Lo antes posible</ion-label>
-      <ion-toggle [(ngModel)]="lo_antes_posible" style="color:#FFBF00"></ion-toggle>
-    </ion-item> -->
-    <ion-item>
-      <ion-label style="color:#515c6f">Definir día y hora</ion-label>
-      <ion-toggle (ionChange)="openDiaHora($event)" [(ngModel)]="definir_dia_hora" style="color:#FFBF00"></ion-toggle>
-    </ion-item>
-  </ion-list>
+  <ion-item no-lines>
+    <ion-label style="font-weight:400;color:#999;font-size:15px">
+      DEFINIR DIA DE ENTREGA
+    </ion-label>
+    <ion-toggle [(ngModel)]="isDiaHora" style="color:#FFBF00"></ion-toggle>
+  </ion-item>
+  <button *ngIf="isDiaHora" (click)="openSelect('dia')" ion-item>
+    <div style="color:#515c6f;font-size:16px">
+      Día
+    </div>
+    <div item-end style="color:#515c6f;font-size:14px">
+      <div *ngIf="!dia">
+        Seleccionar
+      </div>
+      <div *ngIf="dia">
+        {{dia}}
+      </div>
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
+  <button *ngIf="isDiaHora" (click)="openSelect('hora')" ion-item no-lines>
+    <div style="color:#515c6f;font-size:16px">
+      Hora
+    </div>
+    <div item-end style="color:#515c6f;font-size:14px">
+      <div *ngIf="!hora">
+        Seleccionar
+      </div>
+      <div *ngIf="hora">
+        {{hora}}
+      </div>
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
 
   <ion-item style="display: none">
-    <ion-label>Seleccione día de entrega</ion-label>
-    <ion-select (ionCancel)="onCancel()" (ionChange)="onSelectChange($event)" style="max-width: 100% !important;display: none"
-      [(ngModel)]="dia" #diaRef>
+    <ion-label>¿Día de entrega?</ion-label>
+    <ion-select [(ngModel)]="dia" #diaRef>
       <ion-option *ngFor="let dia of semana" [value]="dia"> {{dia}} </ion-option>
     </ion-select>
   </ion-item>
 
   <ion-item style="display: none">
-    <ion-label>Seleccione hora de entrega</ion-label>
-    <ion-select (ionCancel)="onCancel()" (ionChange)="onSelectChange($event)" style="max-width: 100% !important;display: none"
-      [(ngModel)]="hora" #horaRef>
+    <ion-label>¿Hora de entrega?</ion-label>
+    <ion-select [(ngModel)]="hora" #horaRef>
       <ion-option *ngFor="let hora of horas" [value]="hora"> {{hora}} </ion-option>
     </ion-select>
   </ion-item>
@@ -80,7 +99,7 @@
     </ion-item>
     <ion-item>
       <ion-icon item-start name="md-cash" style="color:#4da34d;font-size:27px;margin-left:10px"></ion-icon>
-      <ion-label style="color:#515c6f;font-weight:600">FLOW</ion-label>
+      <ion-label style="color:#515c6f;font-weight:600">WEBPAY</ion-label>
       <ion-toggle mode="ios" [(ngModel)]="flow" color="orange3" style="color:#FFBF00" (ngModelChange)="cambiarMetodoPago($event,2)"></ion-toggle>
     </ion-item>
   </ion-list>

@@ -101,8 +101,8 @@ export class TiendaEnviosDeliveryPage {
   ) {
     this.tiendaID = this.navParams.get('id');
     this.ciudad = this.navParams.get('ciudad');
-    this.isDefined = this.navParams.get('isDefined');
     this.envios = this.navParams.get('envios');
+    this.isDefined = this.envios.isActive;
   }
 
   openSelect(tipo) {

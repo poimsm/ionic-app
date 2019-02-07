@@ -10,6 +10,7 @@ import { TiendaHorarioPage } from '../tienda-horario/tienda-horario';
 import { GaleriaImagenPage } from '../galeria-imagen/galeria-imagen';
 import { ImageProvider } from '../../providers/image/image';
 import { TiendaEnviosPage } from '../tienda-envios/tienda-envios';
+import { TiendaEnviosDeliveryPage } from '../tienda-envios-delivery/tienda-envios-delivery';
 
 
 @IonicPage()
@@ -84,27 +85,6 @@ export class TiendaAlgoDulcePage {
     actionSheet.present();
   }
 
-  takePicture2(sourceType) {
-    // Create options for the Camera Dialog
-    var options = {
-      quality: 70,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      sourceType: sourceType,
-      saveToPhotoAlbum: false,
-      correctOrientation: true
-    };
-
-    // Get the data of an image
-    this.camera.getPicture(options).then((imagePath) => {
-      this._img.uploadImage(imagePath)
-        .then(data => {
-          console.log('ENTRO EN UPLOAD');
-        }).catch(e => console.log('ERROR INT'));
-    }).catch(e => {
-      console.log(e);
-    });
-  }
-
   tomarFoto(sourceType) {
     const options: CameraOptions = {
       quality: 50,
@@ -149,9 +129,10 @@ export class TiendaAlgoDulcePage {
   }
 
   openEntregas() {
-    this.navCtrl.push(TiendaEnviosPage, {
+    this.navCtrl.push(TiendaEnviosDeliveryPage, {
       ciudad: this.tienda.ciudad,
-      id: this.tiendaID
+      id: this.tiendaID,
+      envios: this.tienda.envios
     });
   }
 

@@ -40,7 +40,12 @@ export class MisPedidosPage {
   getPedidos(token, id) {
     this._data.misPedidos(token, id)
       .then((data: any) => {
-        this.pedidos = data[0].carro;
+        data.forEach(compra => {
+          this.pedidos = this.pedidos.concat(compra.carro)
+        });
+        console.log(this.pedidos);
+
+        // this.pedidos = data[0].carro;
       });
   }
 

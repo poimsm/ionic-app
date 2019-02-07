@@ -26,21 +26,12 @@
     </button>
   </ion-list>
 
-  <ion-item *ngIf="!tienda?.envios.isActive" (click)="openEntregas(false)" style="margin:10px" no-lines>
+  <ion-item (click)="openEntregas(true)" style="margin:10px" no-lines>
     <ion-icon item-start name="bicycle" style="color:orange;font-size:35px"></ion-icon>
     <div style="color:#777;font-size:18px;font-weight:500">
       Definir envios
     </div>
-    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
-  </ion-item>
-
-  <ion-item *ngIf="tienda?.envios.isActive" (click)="openEntregas(true)" style="margin:10px" no-lines>
-    <ion-icon item-start name="bicycle" style="color:orange;font-size:35px"></ion-icon>
-    <div style="color:#777;font-size:18px;font-weight:500">
-      Envios
-    </div>
-    <ion-icon item-end name="checkmark-circle" style="font-size:25px;color:rgb(45, 185, 45)"></ion-icon>
-
+    <ion-icon *ngIf="tienda?.envios.isActive" item-end name="checkmark-circle" style="font-size:22px;color:rgb(45, 185, 45)"></ion-icon>
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </ion-item>
 
@@ -49,6 +40,7 @@
     <div style="color:#777;font-size:18px;font-weight:500">
       Definir horario
     </div>
+    <ion-icon *ngIf="tienda?.horario.isActive" item-end name="checkmark-circle" style="font-size:22px;color:rgb(45, 185, 45)"></ion-icon>
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </ion-item>
 

@@ -109,8 +109,18 @@ export class DataProvider {
     return this.http.put(url, body).toPromise();
   }
 
+  updateTiendaHorario(id, body) {
+    const url = `${this.apiURL}/apps/tienda-editar-horario/${id}`;
+    return this.http.put(url, body).toPromise();
+  }
+
   crearProductoOnce(body) {
     const url = `${this.apiURL}/apps/once-crear`;
+    return this.http.post(url, body).toPromise();
+  }
+
+  crearProductoEcommerce(body) {
+    const url = `${this.apiURL}/apps/ecommerce-crear`;
     return this.http.post(url, body).toPromise();
   }
 
