@@ -1,6 +1,6 @@
 <ion-header no-border>
   <ion-navbar color="white">
-    <ion-title>Nuevo producto</ion-title>
+    <ion-title>Nuevo productoo</ion-title>
     <ion-buttons right>
       <button (click)="save()" ion-button [disabled]="!(imagenes.length>0 && categoria?.length>0 && titulo?.length>0 && descripcion?.length>0 && tiempoDeEntrega?.length>0 && (flatPrice || precioSegunPersonas || precioSegunUnidades))"
         outline mode="ios">
@@ -52,7 +52,8 @@
       <ion-option value="Chocolates">Chocolates</ion-option>
       <ion-option value="Cupcakes">Cupcakes</ion-option>
       <ion-option value="Desayunos sorpresa">Desayunos sorpresa</ion-option>
-      <ion-option value="Miel - mermeladas">Miel - mermeladas</ion-option>
+      <ion-option value="Desayunos sorpresa">San Valentín</ion-option>
+      <ion-option value="Miel - mermeladas">Miel - mermeladas - conservas</ion-option>
     </ion-select>
   </button>
   <button ion-item no-lines (click)="openSelect('tiempoDeEntrega')" *ngIf="categoria != 'Desayunos sorpresa'">

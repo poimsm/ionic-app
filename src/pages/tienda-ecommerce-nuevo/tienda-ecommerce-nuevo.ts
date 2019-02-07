@@ -3,47 +3,36 @@ import { IonicPage, NavController, NavParams, Platform, Select } from 'ionic-ang
 import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
 import { DataProvider } from '../../providers/data/data';
 
-
 @IonicPage()
 @Component({
-  selector: 'page-tienda-nuevo',
-  templateUrl: 'tienda-nuevo.html',
+  selector: 'page-tienda-ecommerce-nuevo',
+  templateUrl: 'tienda-ecommerce-nuevo.html',
 })
-export class TiendaNuevoPage {
+export class TiendaEcommerceNuevoPage {
 
   @ViewChild('tiempoDeEntregaRef') tiempoDeEntregaRef: Select;
   @ViewChild('categoriaRef') categoriaRef: Select;
   @ViewChild('variacionRef') variacionRef: Select;
-  @ViewChild('personasRef') personasRef: Select;
-  @ViewChild('unidadesRef') unidadesRef: Select;
 
 
   categoria: string;
   titulo: string;
   descripcion: string;
 
-  isVariacion = false;
-  flat = true;
-  personas = false;
-  unidades = false;
-  variable = false;
-
   EjVariacion: string;
-  flatPrice: number;
-
-  variaciones = [];
-  imagenes = [];
-  unidadesArray = [];
-  personasArray = [];
-
-  numeroDePersonas = 'Seleccionar';
-  numeroDeUnidades = 'Seleccionar';
-
-  tiempoDeEntrega: string;
   variacion: string;
 
+  isVariacion = false;
+  imagenes = [];
+  variaciones = [];
+
+  valorProducto: number;
+  costoEnvio: number;
+
+  tiempoDeEntrega: string;
   tipo: string;
   tiendaID: string;
+  ciudad: string;
 
   constructor(
     public navCtrl: NavController,
@@ -54,6 +43,7 @@ export class TiendaNuevoPage {
   ) {
     this.tipo = this.navParams.get('tipo');
     this.tiendaID = this.navParams.get('tiendaID');
+    this.ciudad = this.navParams.get('ciudad');
   }
 
   add(item, tipo) {
@@ -62,12 +52,6 @@ export class TiendaNuevoPage {
     }
     if (tipo == 'variacion') {
       this.variaciones.push(item)
-    }
-    if (tipo == 'personas') {
-      this.personasArray.push(item)
-    }
-    if (tipo == 'unidades') {
-      this.unidadesArray.push(item)
     }
     if (tipo == 'imagen') {
       this.imagenes.push(item)
@@ -78,70 +62,34 @@ export class TiendaNuevoPage {
     if (tipo == 'variacion') {
       this.variaciones.splice(index, 1);
     }
-    if (tipo == 'personas') {
-      this.personasArray.splice(index, 1);
-    }
-    if (tipo == 'unidades') {
-      this.unidadesArray.splice(index, 1);
-    }
     if (tipo == 'imagen') {
       this.imagenes.splice(index, 1);
     }
   }
 
-
-
   onVaracionChange(event: any) {
     if (event == 'Color') {
-      this.EjVariacion = 'Ej. Pastel rosado'
+      this.EjVariacion = 'Ej. Morado'
     }
     if (event == 'Sabor') {
       this.EjVariacion = 'Ej. Limón'
     }
-    if (event == 'Temática') {
-      this.EjVariacion = 'Ej. Cumpleaños'
+    if (event == 'Talla') {
+      this.EjVariacion = 'Ej. L'
     }
-    if (event == 'Variedad') {
-      this.EjVariacion = 'Ej. Libre de azucar'
+    if (event == 'Material') {
+      this.EjVariacion = 'Ej. Papel'
     }
   }
+
 
   openSelect(tipo) {
     if (tipo == 'categoria') {
       this.categoriaRef.open();
     }
-    if (tipo == 'tiempoDeEntrega') {
-      this.tiempoDeEntregaRef.open();
-    }
     if (tipo == 'variacion') {
       this.variacionRef.open();
     }
-    if (tipo == 'personas') {
-      this.personasRef.open();
-    }
-    if (tipo == 'unidades') {
-      this.unidadesRef.open();
-    }
-  }
-
-  addPersonas(precio, persona) {
-    if (!precio) {
-      return
-    }
-    if (!persona) {
-      return
-    }
-    this.add({ precio, persona }, 'personas');
-  }
-
-  addUnidades(precio, unidad) {
-    if (!precio) {
-      return
-    }
-    if (!unidad) {
-      return
-    }
-    this.add({ precio, unidad }, 'unidades');
   }
 
   seleccionar_foto() {
@@ -170,11 +118,15 @@ export class TiendaNuevoPage {
       descripcion: this.descripcion,
       imgs: this.imagenes,
       categoria: this.categoria,
-      tiempoDeEntrega: this.tiempoDeEntrega,
-      tienda: this.tiendaID
+      tienda: this.tiendaID,
+      ciudad: this.ciudad,
+      precio: {
+        costoEnvio: Number(this.costoEnvio),
+        valorProducto: Number(this.valorProducto)
+      }
     }
 
-    if (this.isVariacion) {
+    if (this.isVariacion && this.variaciones.length > 0) {
       producto.variaciones = {
         isActive: true,
         tipo: this.variacion,
@@ -182,29 +134,11 @@ export class TiendaNuevoPage {
       }
     }
 
-    if (this.flat) {
-      producto.precio = {
-        tipo: 'flat',
-        value: this.flatPrice
-      }
-    }
-    if (this.unidades) {
-      producto.precio = {
-        tipo: 'unidad',
-        array: this.unidadesArray
-      }
-    }
-
-    if (this.personas) {
-      producto.precio = {
-        tipo: 'persona',
-        array: this.personasArray
-      }
-    }
     console.log(producto);
 
-    this._data.crearProductoOnce(producto)
+    this._data.crearProductoEcommerce(producto)
       .then(() => console.log('listo'));
   }
 
 }
+

@@ -73,7 +73,6 @@ import {
   TiendaDeliveryDulcePage,
   TiendaDeliveryNormalPage,
   TiendaAlojamientoPage,
-  TiendaEcommercePage,
   LocalizacionPage,
   WishlistPage,
   ComidaPage,
@@ -84,7 +83,11 @@ import {
   TiendaComidaNuevoPage,
   TiendaEnviosPage,
   TiendaEnviosDeliveryPage,
-  TiendaEnviosEcommercePage
+  TiendaEnviosEcommercePage,
+  TiendaEcommercePage,
+  TiendaEcommerceNuevoPage,
+  EcommercePage,
+  EcommerceContentPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -138,7 +141,6 @@ import { LocalizacionProvider } from '../providers/localizacion/localizacion';
     TiendaDeliveryDulcePage,
     TiendaDeliveryNormalPage,
     TiendaAlojamientoPage,
-    TiendaEcommercePage,
     LocalizacionPage,
     WishlistPage,
     ComidaPage,
@@ -149,7 +151,11 @@ import { LocalizacionProvider } from '../providers/localizacion/localizacion';
     TiendaComidaNuevoPage,
     TiendaEnviosPage,
     TiendaEnviosDeliveryPage,
-    TiendaEnviosEcommercePage
+    TiendaEnviosEcommercePage,
+    TiendaEcommercePage,
+    TiendaEcommerceNuevoPage,
+    EcommercePage,
+    EcommerceContentPage
   ],
   imports: [
     BrowserModule,
@@ -207,7 +213,6 @@ import { LocalizacionProvider } from '../providers/localizacion/localizacion';
     TiendaDeliveryDulcePage,
     TiendaDeliveryNormalPage,
     TiendaAlojamientoPage,
-    TiendaEcommercePage,
     LocalizacionPage,
     WishlistPage,
     ComidaPage,
@@ -218,7 +223,11 @@ import { LocalizacionProvider } from '../providers/localizacion/localizacion';
     TiendaComidaNuevoPage,
     TiendaEnviosPage,
     TiendaEnviosDeliveryPage,
-    TiendaEnviosEcommercePage
+    TiendaEnviosEcommercePage,
+    TiendaEcommercePage,
+    TiendaEcommerceNuevoPage,
+    EcommercePage,
+    EcommerceContentPage
   ],
   providers: [
     StatusBar,

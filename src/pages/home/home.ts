@@ -15,6 +15,7 @@ import { LocalizacionPage } from '../localizacion/localizacion';
 import { LoginPage } from '../login/login';
 import { LocalizacionProvider } from '../../providers/localizacion/localizacion';
 import { ComidaPage } from '../comida/comida';
+import { EcommercePage } from "../ecommerce/ecommerce";
 
 
 @Component({
@@ -33,6 +34,7 @@ export class HomePage {
   nocturno = NocturnoPage;
   estilo = EstiloPage;
   comida = ComidaPage;
+  ecommerce = EcommercePage;
 
   mensaje = '';
 

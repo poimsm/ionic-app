@@ -4,7 +4,6 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { TiendaGaleriaPage } from '../tienda-galeria/tienda-galeria';
 import { DataProvider } from '../../providers/data/data';
-import { TiendaNuevoPage } from '../tienda-nuevo/tienda-nuevo';
 import { TiendaProductoPage } from '../tienda-producto/tienda-producto';
 import { TiendaHorarioPage } from '../tienda-horario/tienda-horario';
 import { GaleriaImagenPage } from '../galeria-imagen/galeria-imagen';
@@ -154,7 +153,10 @@ export class TiendaComidaPage {
   }
 
   openHorario() {
-    this.navCtrl.push(TiendaHorarioPage);
+    this.navCtrl.push(TiendaHorarioPage, {
+      tiendaID: this.tiendaID,
+      horario: this.tienda.horario
+    });
   }
 
   presentPrompt(tipo) {

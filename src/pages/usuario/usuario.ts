@@ -4,6 +4,7 @@ import { TiendaAlgoDulcePage } from '../tienda-algo-dulce/tienda-algo-dulce';
 import { TiendaComidaPage } from '../tienda-comida/tienda-comida';
 import { MisPedidosPage } from '../mis-pedidos/mis-pedidos';
 import { AuthProvider } from '../../providers/auth/auth';
+import { TiendaEcommercePage } from '../tienda-ecommerce/tienda-ecommerce';
 
 @IonicPage()
 @Component({
@@ -23,10 +24,6 @@ export class UsuarioPage {
     this.tiendaID = this.navParams.get('tiendaID');
     this.user = this.navParams.get('user');
     this.token = this.navParams.get('token');
-    console.log(this.user);
-    console.log(this.user._id);
-
-
   }
 
   reloadUser() {
@@ -38,7 +35,10 @@ export class UsuarioPage {
   }
 
   openTienda() {
-    this.navCtrl.push(TiendaComidaPage, { id: this.tiendaID });
+    // TiendaComidaPage
+    // TiendaAlgoDulcePage
+    // TiendaEcommercePage
+    this.navCtrl.push(TiendaEcommercePage, { id: this.tiendaID });
   }
 
   openHistorial() {

@@ -1,3 +1,7 @@
+export { EcommercePage } from './ecommerce/ecommerce';
+export { EcommerceContentPage } from './ecommerce-content/ecommerce-content';
+export { TiendaEcommercePage } from './tienda-ecommerce/tienda-ecommerce';
+export { TiendaEcommerceNuevoPage } from './tienda-ecommerce-nuevo/tienda-ecommerce-nuevo';
 export { TiendaEnviosDeliveryPage } from './tienda-envios-delivery/tienda-envios-delivery';
 export { TiendaEnviosEcommercePage } from './tienda-envios-ecommerce/tienda-envios-ecommerce';
 export { TiendaEnviosPage } from './tienda-envios/tienda-envios';
@@ -12,7 +16,6 @@ export { WishlistPage } from './wishlist/wishlist';
 export { TiendaDeliveryDulcePage } from './tienda-delivery-dulce/tienda-delivery-dulce';
 export { TiendaDeliveryNormalPage } from './tienda-delivery-normal/tienda-delivery-normal';
 export { TiendaAlojamientoPage } from './tienda-alojamiento/tienda-alojamiento';
-export { TiendaEcommercePage } from './tienda-ecommerce/tienda-ecommerce';
 export { TiendaHorarioPage } from './tienda-horario/tienda-horario';
 export { GaleriaImagenPage } from './galeria-imagen/galeria-imagen';
 export { GaleriaPage } from './galeria/galeria';
@@ -50,7 +53,6 @@ export { OncePage } from './once/once';
 export { UsuarioPage } from './usuario/usuario';
 export { LoginPage } from "./login/login";
 export { HomePage } from "./home/home";
-
 
 
 
