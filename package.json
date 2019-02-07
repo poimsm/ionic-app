@@ -83,7 +83,8 @@
                 "ANDROID_SUPPORT_VERSION": "27.+"
             },
             "cordova-plugin-inappbrowser": {},
-            "cordova-plugin-file-transfer": {}
+            "cordova-plugin-file-transfer": {},
+            "cordova-plugin-camera": {}
         },
         "platforms": [
             "android"
