@@ -1,0 +1,156 @@
+<ion-header no-border>
+  <ion-navbar align-title="center" color="white">
+    <!-- <div style="width:100%;display:flex;align-items:center;justify-content:flex-start">
+        <div style="border-radius:50%;min-height:40px;width:40px;background-size:cover;background-repeat: no-repeat;background-position: center;"
+          [ngStyle]="{'background-image': 'url(' + data?.tienda.logo + ')' }">
+        </div>
+        <div style="margin-left:5px;color:#444;font-weight:500;font-size:16px">
+          {{data?.tienda.nombre}}
+        </div>
+      </div> -->
+    <ion-buttons right>
+      <button (click)="openCart()" ion-button icon-only>
+        <div style="position:relative">
+          <ion-icon name="ios-cart" style="font-size:25px;color:#bbb"></ion-icon>
+          <div *ngIf="_carro.carro.length>0" style="display:flex;justify-content:center;align-items:center;font-size:10px;background:#EF4F45;color:white;width:15px;height:15px;position: absolute;top:-7px;right:-3px;border-radius:50%">
+            {{_carro.carro.length}}
+          </div>
+        </div>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div style="top:0px;left:0px">
+    <ion-slides pager>
+      <ion-slide *ngFor="let img of imgs">
+        <div style="width:100%;min-height:330px; background-size:cover;background-repeat: no-repeat;background-position: center;"
+          [ngStyle]="{'background-image': 'url(' + img.url + ')' }">
+        </div>
+        <div style="height:30px"></div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <div style="padding:10px">
+    <div style="display:flex;border-top:1px solid #eee;border-bottom:1px solid #eee;padding:5px">
+
+      <div style="width:70%;padding:5px;padding-left:20px">
+        <div style="font-size:20px;color:#ff6633;font-weight:700">
+          {{data?.tiempoDeEntrega}}
+        </div>
+        <div style="font-size:14px;color:#999">
+          Entrega
+        </div>
+      </div>
+      <div style="width:30%;border-left:1px solid #eee;display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+        <div style="width:100%;text-align:center;font-size:20px;color:#ff6633;font-weight:700">
+          ${{total}}
+          <div style="font-weight:400;font-size:14px;color:#999">
+            Precio
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div padding style="margin-top:-15px">
+    <div style="font-size:18px;font-weight:500;color:#444">
+      {{data.titulo}}
+    </div>
+  </div>
+
+  <!-- <hr>
+    <ion-list text-wrap>
+      <button ion-item>
+        <div item-start style="position:relative">
+          <img item-start src="assets/01.jpg" style="width:90px;height:90px;border-radius:5px;object-fit:cover">
+          <div style="text-align:center;border-radius:3px;padding:4px;padding-left:10px;padding-right:10px;background:rgba(0, 0, 0, 0.5);position:absolute;bottom:10px;right:10px;color:white;font-size:14px">
+            12
+          </div>
+        </div>
+        <div style="color:#444;font-weight:600;font-size:20px">
+          Tienda de juan
+        </div>
+        <div style="margin-top:10px;color:#555;font-size:18px">
+          Abierto
+        </div>
+        <div style="color:#555;font-size:15px">
+          delivery 1000
+        </div>
+      </button>
+    </ion-list>
+    <hr> -->
+
+  <hr>
+  <ion-list>
+
+    <button (click)="openSelect('aderezo')" ion-item *ngIf="data?.aderezos.isActive">
+      <div style="font-size:18px;color:dodgerblue">
+        Aderezo
+      </div>
+      <div item-end style="width:150px;font-size:15px;color:rgb(103, 161, 219)">
+        {{aderezo}}
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+    </button>
+
+    <button (click)="openSelect('opcion')" ion-item *ngIf="data?.opciones.isActive">
+      <div style="font-size:18px;color:dodgerblue">
+        Opciones
+      </div>
+      <div item-end style="width:150px;font-size:15px;color:rgb(103, 161, 219)">
+        {{opcion}}
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+    </button>
+
+    <button ion-item (click)="openSelect('cantidad')" *ngIf="data?.precio.tipo == 'persona'">
+      <div style="font-size:18px;color:dodgerblue">
+        Cantidad
+      </div>
+      <div item-end style="width:150px;font-size:15px;color:rgb(103, 161, 219)">
+        {{precioTag.persona}} (${{precioTag.precio}})
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+    </button>
+
+  </ion-list>
+
+  <ion-item style="display:none">
+    <ion-label>
+      Seleccione una opción
+    </ion-label>
+    <ion-select (ionChange)="onSelectChange($event)" [(ngModel)]="precioTag" #cantidadRef>
+      <ion-option *ngFor="let precioTag of precioArray" [value]="precioTag">{{precioTag.persona}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item style="display:none">
+    <ion-label>
+      Seleccione una opción
+    </ion-label>
+    <ion-select [(ngModel)]="opcion" #opcionRef>
+      <ion-option *ngFor="let opcion of opciones" [value]="opcion">{{opcion}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item style="display:none">
+    <ion-label>¿Qué salsas quiere agregar?</ion-label>
+    <ion-select [(ngModel)]="aderezo" multiple="true" #aderezoRef>
+      <ion-option *ngFor="let aderezo of aderezos">{{aderezo}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+
+  <div style="width:100%;display:flex;justify-content:center;margin-bottom:50px;margin-top:20px">
+    <div (click)="save()" style="font-weight:500;font-size:12px;color:white;background:#ff6633;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
+      <!-- <ion-icon name="cart" style="color:white;margin-right:5px;font-size:18px"></ion-icon> -->
+      AGREGAR AL CARRITO
+      <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
+    </div>
+  </div>
+
+</ion-content>

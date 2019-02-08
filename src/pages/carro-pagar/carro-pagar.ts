@@ -23,10 +23,7 @@ export class CarroPagarPage {
   user: any;
   isTelefono = false;
   isDireccion = false;
-  email: string;
-  monto: number;
-  lo_antes_posible = true;
-  definir_dia_hora = false;
+  isDiaHora = false;
   isDefinido = false;
   dia: string;
   hora: string;
@@ -74,35 +71,15 @@ export class CarroPagarPage {
     this.carro = this.navParams.get('carro');
     this.token = this.navParams.get('token');
     this.user = this.navParams.get('user');
-    this.email = this.user.local.email;
   }
 
-  openDiaHora(event: any) {
-    if (event.value) {
-      this.isDefinido = false;
+  openSelect(tipo) {
+    if (tipo == 'dia') {
       this.diaRef.open();
-    } else {
-      this.hora = '';
-      this.dia = '';
     }
-  }
-
-  onSelectChange(selectedValue: any) {
-    if (this.horas.indexOf(selectedValue) > -1 && !this.isDefinido) {
-      this.isDefinido = false;
-      this.diaRef.open();
-    } else if (!this.isDefinido) {
-      setTimeout(() => {
-        this.isDefinido = true;
-        this.horaRef.open();
-      }, 500);
+    if (tipo == 'hora') {
+      this.horaRef.open();
     }
-  }
-
-  onCancel() {
-    this.hora = '';
-    this.dia = '';
-    this.definir_dia_hora = false;
   }
 
   openModal(tipo) {
@@ -124,50 +101,60 @@ export class CarroPagarPage {
     if (this.efectivo) {
       this.pagarConEfectivo();
     } else {
-
-      let total = 0;
-
-      this.carro.forEach(item => {
-        total += item.precio * item.cantidad;
-      });
-
-      this.total = total;
-
-      this.pagarConFlow(this.email, this.total);
+      this.pagarConFlow();
     }
   }
 
-  pagarConFlow(email, monto) {
-    // Si todo el flujo de compra fue exitoso entonces
-    // debes llamar al metodo this._carro.crearCompra(this.token, compra)
-    // para guardar la compra en DB.. 
-    const compra = {
+  pagarConFlow() {
+    const compra: any = {
       carro: this.carro,
       cliente: {
         uid: this.user._id,
         nombre: this.user.name,
-        email: email,
-        monto: 18000
+        email: this.user.local.email,
+        direccion: this.direccion,
+        telefono: this.telefono
+      },
+      detalles: {
+        metodo: 'Pago online',
+        monto: this.total
       }
     };
+
+    if (this.isDiaHora) {
+      compra.diaHoraDeEntrega = {
+        isActive: true,
+        dia: this.dia,
+        hora: this.hora
+      }
+    }
 
     this._carro.iniciarCompra(this.token, compra).then((data) => {
       let respuesta = JSON.parse(JSON.stringify(data));
 
-      if (respuesta.url != '' || respuesta.url != undefined) {
+      if (respuesta.code != undefined && respuesta.code == 108) {
 
-        let token = respuesta.token;
-        let url = respuesta.url;
-
-        const browser = this.iab.create(url + '?token=' + token);
-        browser.show();
-      } else {
         let alerta = this.alertCtrl.create({
           title: 'Error',
           subTitle: 'Imposible conectar con el sistema de pagos.'
 
         });
         alerta.present();
+      } else {
+
+
+        let token = respuesta.token;
+        let url = respuesta.url;
+
+        const browser = this.iab.create(url + '?token=' + token, '_blank', 'location=yes');
+        
+
+        browser.on('exit').subscribe(event => {
+          alert("vista cerrada")
+       });
+
+       browser.show();
+
       }
 
 
@@ -175,16 +162,33 @@ export class CarroPagarPage {
   }
 
   pagarConEfectivo() {
-    const compra = {
+    const compra: any = {
       carro: this.carro,
       cliente: {
         uid: this.user._id,
-        nombre: this.user.name
+        nombre: this.user.name,
+        email: this.user.local.email,
+        direccion: this.direccion,
+        telefono: this.telefono
+      },
+      detalles: {
+        metodo: 'Efectivo',
+        monto: this.total
       }
     };
+
+    if (this.isDiaHora) {
+      compra.diaHoraDeEntrega = {
+        isActive: true,
+        dia: this.dia,
+        hora: this.hora
+      }
+    }
+
     this._carro.crearCompra(this.token, compra)
       .then(() => this.navCtrl.push(CarroCompraExitosaPage));
   }
+
 
   cambiarMetodoPago(event, tipo: number) {
     if (tipo == 1) {

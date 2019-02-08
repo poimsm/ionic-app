@@ -1,0 +1,168 @@
+<ion-header no-border>
+
+  <ion-navbar color="white">
+    <!-- <ion-title>Definir entregas</ion-title> -->
+    <ion-buttons right>
+      <button (click)="save()" [disabled]="!isPlataforma && (!A1 && !B1)" ion-button outline mode="ios">
+        Guardar
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style="background:rgb(250, 250, 250)">
+
+  <!-- ------------------------------------------
+          ENVIOS SIN DEFINIR
+  ------------------------------------------ -->
+
+  <div *ngIf="!isDefined">
+
+
+    <div style="margin-top:10px;margin-bottom:10px;background:white;">
+      <ion-item text-wrap no-lines style="color:#777;">
+        <ion-label>
+          <div style="font-size:16px">
+            <div style="font-size:18px;color:#555;font-weight:450">
+              Envíos por mi
+            </div>
+            Yo mismo haré los repartos de mis productos
+          </div>
+        </ion-label>
+        <ion-toggle [(ngModel)]="isPropio" (ngModelChange)="cambiarMetodoPago($event,1)" mode="ios"></ion-toggle>
+      </ion-item>
+
+      <div *ngIf="isPropio" style="margin-top:10px;color:#444">
+        <!-- <button text-wrap (click)="A1=!A1;B1=false; openSelect('tope')" ion-item style="color:#777">
+          <ion-icon *ngIf="A1" item-start name="radio-button-on" style="color:dodgerblue"></ion-icon>
+          <ion-icon *ngIf="!A1" item-start name="radio-button-off" style="color:#bbb"></ion-icon>
+          <div style="font-size:16px">
+            Hacer envíos gratis por compras que superen cierto valor
+          </div>
+          <div *ngIf="A1" style="color:green;font-size:16px">
+            {{valorTope}}
+          </div>
+        </button> -->
+
+        <button no-lines text-wrap (click)="B1=!B1;A1=false; openSelect('fijo')" ion-item style="color:#777">
+          <ion-icon *ngIf="B1" item-start name="radio-button-on" style="color:dodgerblue"></ion-icon>
+          <ion-icon *ngIf="!B1" item-start name="radio-button-off" style="color:#bbb"></ion-icon>
+          <div style="font-size:16px">
+            Cobrar precio fijo por cada envíoo
+          </div>
+          <div *ngIf="B1" style="color:green;font-size:16px">
+            {{valorFijo}}
+          </div>
+        </button>
+      </div>
+
+    </div>
+
+
+    <div style="margin-bottom:10px;background:white;">
+      <ion-item text-wrap no-lines style="color:#777">
+        <ion-label>
+          <div style="font-size:16px">
+            <div style="font-size:18px;color:#555;font-weight:450">
+              Plataforma
+            </div>
+            Realizar envios con el sistema de entregas de la plataforma (joopiter)
+          </div>
+        </ion-label>
+        <ion-toggle [(ngModel)]="isPlataforma" (ngModelChange)="cambiarMetodoPago($event,2)" mode="ios"></ion-toggle>
+      </ion-item>
+      <hr>
+      <div *ngIf="isPlataforma" style="margin-top:10px;color:#444">
+        <ion-item text-wrap no-lines style="color:#777">
+          <div style="color:#555;font-size:18px;font-weight:350;padding:10px">
+            Se cobrará <span style="font-weight:500">$1000</span> al cliente mientras que al vendedor no se le aplicará
+            ningun cobro.
+          </div>
+        </ion-item>
+      </div>
+    </div>
+
+
+    <ion-item style="display:none">
+      <ion-label>
+        ¿Cuánto va a cobrar?
+      </ion-label>
+      <ion-select [(ngModel)]="valorFijo" (ionChange)="onSelectChange(valorFijo, 'fijo')" #precioFijoRef>
+        <ion-option *ngFor="let item of fijoArray" [value]="item.tag">{{item.precio}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item style="display:none">
+      <ion-label>
+        Reparto gratis por compras sobre:
+      </ion-label>
+      <ion-select [(ngModel)]="valorTope" (ionChange)="onSelectChange(valorTope, 'gratisSobre')" #precioTopeRef>
+        <ion-option *ngFor="let item of gratisSobreArray" [value]="item.tag">{{item.precio}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+  </div>
+
+  <!-- ------------------------------------------
+          ENVIOS DEFINIDO
+  ------------------------------------------ -->
+
+  <div *ngIf="isDefined">
+
+    <div padding *ngIf="envios.tipo == 'FIJO'">
+      <div style="background:white;padding:15px;padding-top:22px;width:100%;border:0.5px solid #eee;color:#444;font-weight:350;font-size:17px;border-radius:0px">
+        <div style="margin-bottom:5px;font-size:20px;font-weight:400;color:#555">
+          Resumen
+        </div>
+        <div>
+          Se cobrará adicionalmente
+          <span style="color:#555;font-weight:500">${{envios.precioFijo}}</span>
+          por el envío al cliente en su compra
+        </div>
+        <div style="margin-top:20px;margin-bottom:50px">
+          El envío será realizado por
+          <span style="color:#555;font-weight:500">usted</span>
+        </div>
+        <div style="color:#999;font-size:16px">
+          Configuración
+        </div>
+        <hr>
+        <div (click)="isDefined = false" style="font-size:16px;margin-top:10px;font-weight:400;width:100%;text-align:right;color:dodgerblue">
+          EDITAR
+          <ion-icon name="ios-arrow-forward" style="margin-left:5px;color:dodgerblue;font-size:20px"></ion-icon>
+        </div>
+      </div>
+    </div>
+
+    <div padding *ngIf="envios.tipo == 'PLATAFORMA'">
+      <div style="background:white;padding:15px;padding-top:22px;width:100%;border:0.5px solid #eee;color:#444;font-weight:350;font-size:17px;border-radius:10px">
+        <div style="margin-bottom:5px;font-size:20px;font-weight:400;color:#555">
+          Resumen
+        </div>
+        <div>
+          Se cobrará adicionalmente
+          <span style="color:#555;font-weight:500">$1000</span>
+          por el envío al cliente en su compra
+        </div>
+        <div style="margin-top:20px;margin-bottom:50px">
+          El envío será realizado por la
+          <span style="color:#555;font-weight:500">plataforma</span>
+        </div>
+        <div style="color:#999;font-size:16px">
+          Configuración
+        </div>
+        <hr>
+        <div (click)="isDefined = false" style="font-size:16px;margin-top:10px;font-weight:400;width:100%;text-align:right;color:dodgerblue">
+          EDITAR
+          <ion-icon name="ios-arrow-forward" style="margin-left:5px;color:dodgerblue;font-size:20px"></ion-icon>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+</ion-content>

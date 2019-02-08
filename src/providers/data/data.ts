@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { ToastController, Platform } from 'ionic-angular';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
+
 @Injectable()
 export class DataProvider {
   apiURL: string;
@@ -17,6 +18,8 @@ export class DataProvider {
   setAPI() {
     if (this.platform.is('cordova')) {
       this.apiURL = 'https://poimsm-server.herokuapp.com';
+      // this.apiURL = 'http://localhost:3000';
+
     } else {
       // this.apiURL = 'https://poimsm-server.herokuapp.com';
       this.apiURL = 'http://localhost:3000';
@@ -101,14 +104,35 @@ export class DataProvider {
     return this.http.get(url).toPromise();
   }
 
-  editTienda(id, body) {
+  updateTienda(id, body) {
     const url = `${this.apiURL}/apps/tienda-editar/${id}`;
     return this.http.put(url, body).toPromise();
   }
 
+  updateTiendaHorario(id, body) {
+    const url = `${this.apiURL}/apps/tienda-editar-horario/${id}`;
+    return this.http.put(url, body).toPromise();
+  }
+
   crearProductoOnce(body) {
+    this.productoSubiendo();
     const url = `${this.apiURL}/apps/once-crear`;
-    return this.http.post(url, body).toPromise();
+    this.http.post(url, body).toPromise()
+      .then(() => this.productoCreado());
+  }
+
+  crearProductoEcommerce(body) {
+    this.productoSubiendo();
+    const url = `${this.apiURL}/apps/ecommerce-crear`;
+    this.http.post(url, body).toPromise()
+      .then(() => this.productoCreado());
+  }
+
+  crearProductoComida(body) {
+    this.productoSubiendo();
+    const url = `${this.apiURL}/apps/comida-crear`;
+    this.http.post(url, body).toPromise()
+      .then(() => this.productoCreado());
   }
 
   onceByTiendID(id) {
@@ -116,10 +140,10 @@ export class DataProvider {
     return this.http.get(url).toPromise();
   }
 
-  getAll(skip, limit, category, route) {
+  getAll(skip, limit, category, ciudad, route) {
 
     let url = `${this.apiURL}/${route}`;
-    url = url + `?limit=${limit}&skip=${skip}`;
+    url = url + `?limit=${limit}&skip=${skip}&ciudad=${ciudad}`;
 
     if (category) {
       url = url + `&category=${category}`;
@@ -130,7 +154,25 @@ export class DataProvider {
   presentToast() {
     let toast = this.toastCtrl.create({
       message: '¡Producto agregado!',
-      duration: 3000,
+      duration: 2500,
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
+  productoSubiendo() {
+    let toast = this.toastCtrl.create({
+      message: 'El producto se está subiendo',
+      duration: 2500,
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
+  productoCreado() {
+    let toast = this.toastCtrl.create({
+      message: 'Producto creado con exito',
+      duration: 2500,
       position: 'bottom'
     });
     toast.present();

@@ -1,0 +1,251 @@
+<ion-header no-border>
+  <ion-navbar color="white">
+    <ion-title>Nuevo producto</ion-title>
+    <ion-buttons right>
+      <button (click)="save()" ion-button [disabled]="!(imagenes.length>0 && categoria?.length>0 && titulo?.length>0 && descripcion?.length>0 && (flatPrice || precioSegunPersonas || precioSegunUnidades))"
+        outline mode="ios">
+        Crear
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+  <hr>
+  <div padding style="width:100%;display:flex;justify-content:center;flex-wrap:wrap">
+    <div (click)="seleccionar_foto()" style="margin:10px;width:80px;height:80px;border:1px dashed #eee;display:flex;justify-content:center;align-items:center">
+      <ion-icon name="md-camera" style="font-size:32px;color:#999"></ion-icon>
+    </div>
+    <div *ngFor="let imagen of imagenes">
+      <div style="margin:10px;min-height:80px;width:80px;background-size:cover;background-repeat: no-repeat;background-position: center;"
+        [ngStyle]="{'background-image': 'url(' + imagen + ')' }">
+      </div>
+    </div>
+  </div>
+
+
+  <ion-item>
+    <ion-input [(ngModel)]="titulo" type="text" placeholder="Título"></ion-input>
+  </ion-item>
+  <ion-item no-lines>
+    <ion-textarea style="border:0px solid #bbb" rows="3" [(ngModel)]="descripcion" placeholder="Descripción (opcional)"></ion-textarea>
+  </ion-item>
+
+
+
+  <ion-item no-lines style="color:#999;background:rgb(243, 243, 243);font-size:16px;font-weight:500">
+    Detalles
+  </ion-item>
+  <button ion-item no-lines (click)="openSelect('categoria')">
+    <ion-label>
+      Seleccione categoría
+      <div style="color:green">
+        {{categoria}}
+      </div>
+    </ion-label>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px"></ion-icon>
+    <ion-select [(ngModel)]="categoria" style="display:none" #categoriaRef>
+      <ion-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</ion-option>
+    </ion-select>
+  </button>
+
+
+  <ion-item no-lines style="margin-top:10px;color:#999;background:rgb(243, 243, 243);font-size:16px;font-weight:500">
+    <ion-label>Lista de aderezos o salsas</ion-label>
+    <ion-toggle [(ngModel)]="isAderezo" mode="ios"></ion-toggle>
+  </ion-item>
+
+  <div *ngIf="isAderezo" style="width:100%;padding:15px">
+    <div style="color:#111;font-weight:350;font-size:16px;border:1px solid #eee;border-radius:5px;padding:10px;text-align:center">
+      El cliente podrá seleccionar tantos aderezos como lo desee y gratis
+    </div>
+  </div>
+
+  <div *ngIf="isAderezo  && aderezos.length > 0">
+    <div *ngFor="let aderezo of aderezos;let i = index">
+      <div style="display:flex;justify-content:space-between">
+        <div style="margin-left:15px;padding:3px;font-size:18px;color:green">
+          &#9679; {{aderezo}}
+        </div>
+        <ion-icon (click)="remove(i, 'aderezo')" name="trash" style="color:#bbb;font-size:24px;margin-right:15px"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isAderezo" style="padding:10px;width:100%;display:flex;justify-content:center">
+    <div style="border-radius:3px;width:80%;border:1px solid #eee;display:flex">
+      <ion-input [(ngModel)]="aderezoItem" type="text" placeholder="Ej. Salsa americana" style="font-size:16px;border:0x solid white"></ion-input>
+      <button (click)="add(aderezoItem, 'aderezo')" ion-button icon-only clear>
+        <ion-icon name="md-add-circle" style="color:#ccc;font-size:28px"></ion-icon>
+      </button>
+    </div>
+  </div>
+
+
+  <ion-item no-lines style="margin-top:10px;color:#999;background:rgb(243, 243, 243);font-size:16px;font-weight:500">
+    <ion-label>Lista de opciones o preferencias</ion-label>
+    <ion-toggle [(ngModel)]="isOpciones" mode="ios"></ion-toggle>
+  </ion-item>
+
+  <div *ngIf="isOpciones" style="width:100%;padding:15px">
+    <div style="color:#111;font-weight:350;font-size:16px;border:1px solid #eee;border-radius:5px;padding:10px;text-align:center">
+      El cliente podrá seleccionar solo una opción de la lista para definir
+      mejor su compra
+    </div>
+  </div>
+
+  <div *ngIf="isOpciones  && opciones.length > 0">
+    <div *ngFor="let opcion of opciones;let i = index">
+      <div style="display:flex;justify-content:space-between">
+        <div style="margin-left:15px;padding:3px;font-size:18px;color:green">
+          &#9679; {{opcion}}
+        </div>
+        <ion-icon (click)="remove(i, 'opcion')" name="trash" style="color:#bbb;font-size:24px;margin-right:15px"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isOpciones" style="padding:10px;width:100%;display:flex;justify-content:center">
+    <div style="border-radius:3px;width:90%;border:1px solid #eee;display:flex">
+      <ion-input [(ngModel)]="opcionItem" type="text" placeholder="Ej. Con camarones + bebida" style="font-size:16px;border:0x solid white"></ion-input>
+      <button (click)="add(opcionItem, 'opcion')" ion-button icon-only clear>
+        <ion-icon name="md-add-circle" style="color:#ccc;font-size:28px"></ion-icon>
+      </button>
+    </div>
+  </div>
+
+
+  <ion-item no-lines style="margin-top:10px;color:#999;background:rgb(243, 243, 243);font-size:16px;font-weight:500">
+    Precio
+  </ion-item>
+  <button (click)="flat=!flat;personas=false;unidades=false" ion-item no-lines style="color:#777">
+    <ion-icon *ngIf="flat" item-start name="radio-button-on" style="color:dodgerblue"></ion-icon>
+    <ion-icon item-start *ngIf="!flat" name="radio-button-off" style="color:#bbb"></ion-icon>
+    Usar precio fijo
+  </button>
+
+  <button (click)="personas=!personas;flat=false;unidades=false" ion-item no-lines style="color:#777">
+    <ion-icon *ngIf="personas" item-start name="radio-button-on" style="color:dodgerblue"></ion-icon>
+    <ion-icon *ngIf="!personas" item-start name="radio-button-off" style="color:#bbb"></ion-icon>
+    Variar precio según número de
+    <div>
+      personas o tamaño
+    </div>
+  </button>
+
+  <button (click)="unidades=!unidades;flat=false;personas=false" ion-item no-lines style="color:#777">
+    <ion-icon *ngIf="unidades" item-start name="radio-button-on" style="color:dodgerblue"></ion-icon>
+    <ion-icon *ngIf="!unidades" item-start name="radio-button-off" style="color:#bbb"></ion-icon>
+    Variar precio según número de
+    <div>
+      unidades
+    </div>
+  </button>
+
+
+  <div *ngIf="flat" style="padding:10px;width:100%;display:flex;justify-content:center">
+    <div style="border-radius:3px;width:40%;border:1px solid #eee;display:flex;align-items:center">
+      <div style="font-size:16px;font-weight:500;color:#999;padding:5px;border-right:1px solid #eee">
+        $
+      </div>
+      <ion-input [(ngModel)]="flatPrice" type="tel" placeholder="" style="font-size:16px;border:0x solid white"></ion-input>
+    </div>
+  </div>
+
+  <div *ngIf="unidades  && unidadesArray.length > 0">
+    <div *ngFor="let item of unidadesArray;let i = index">
+      <div style="display:flex;justify-content:space-between">
+        <div style="margin-left:15px;padding:3px;font-size:18px;color:green">
+          &#9679; {{item.unidad}} (${{item.precio}})
+        </div>
+        <ion-icon (click)="remove(i, 'unidades')" name="trash" style="color:#bbb;font-size:24px;margin-right:15px"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="personas  && personasArray.length > 0">
+    <div *ngFor="let item of personasArray;let i = index">
+      <div style="display:flex;justify-content:space-between">
+        <div style="margin-left:15px;padding:3px;font-size:18px;color:green">
+          &#9679; {{item.persona}} (${{item.precio}})
+        </div>
+        <ion-icon (click)="remove(i, 'personas')" name="trash" style="color:#bbb;font-size:24px;margin-right:15px"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="personas" padding style="width:100%;display:flex">
+    <div style="width:120px;border:1px solid #eee;border-right:0px">
+      <ion-input [(ngModel)]="precioSegunPersonas" type="tel" placeholder="$" style="font-size:16px;border:0x solid white"></ion-input>
+    </div>
+    <div style="width:100%;border:1px solid #eee;display:flex;justify-content:space-between">
+      <div (click)="openSelect('personas')" style="margin-left:10px;display:flex;align-items:center;color:#999;font-size:16px">
+        {{numeroDePersonas}}
+        <ion-icon name="arrow-dropdown" style="margin-left:5px;color:#ccc;font-size:28px"></ion-icon>
+      </div>
+      <ion-item style="display:none">
+        <ion-label>
+          Cantidad
+        </ion-label>
+        <ion-select [(ngModel)]="numeroDePersonas" style="display:none" #personasRef>
+          <ion-option value="1 persona">Para 1 persona</ion-option>
+          <ion-option value="2 personas">Para 2 personas</ion-option>
+          <ion-option value="3 personas">Para 3 personas</ion-option>
+          <ion-option value="4 personas">Para 4 personas</ion-option>
+          <ion-option value="5 personas">Para 5 personas</ion-option>
+          <ion-option value="6 personas">Para 6 personas</ion-option>
+          <ion-option value="8 personas">Para 8 personas</ion-option>
+        </ion-select>
+      </ion-item>
+      <button (click)="addPersonas(precioSegunPersonas,numeroDePersonas)" ion-button icon-only clear>
+        <ion-icon name="md-add-circle" style="color:#ccc;font-size:28px"></ion-icon>
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="unidades" padding style="width:100%;display:flex">
+    <div style="width:120px;border:1px solid #eee;border-right:0px">
+      <ion-input [(ngModel)]="precioSegunUnidades" type="tel" placeholder="$" style="font-size:16px;border:0x solid white"></ion-input>
+    </div>
+    <div style="width:100%;border:1px solid #eee;display:flex;justify-content:space-between">
+      <div (click)="openSelect('unidades')" style="margin-left:10px;display:flex;align-items:center;color:#999;font-size:16px">
+        {{numeroDeUnidades}}
+        <ion-icon name="arrow-dropdown" style="margin-left:5px;color:#ccc;font-size:28px"></ion-icon>
+      </div>
+      <ion-item style="display:none">
+        <ion-label>
+          Cantidad
+        </ion-label>
+        <ion-select [(ngModel)]="numeroDeUnidades" #unidadesRef>
+          <ion-option value="1 unidad">1 unidad</ion-option>
+          <ion-option value="2 unidades">2 unidades</ion-option>
+          <ion-option value="3 unidades">3 unidades</ion-option>
+          <ion-option value="4 unidades">4 unidades</ion-option>
+          <ion-option value="5 unidades">5 unidades</ion-option>
+          <ion-option value="6 unidades">6 unidades</ion-option>
+          <ion-option value="8 unidades">8 unidades</ion-option>
+          <ion-option value="10 unidades">10 unidades</ion-option>
+          <ion-option value="12 unidades">12 unidades</ion-option>
+          <ion-option value="15 unidades">15 unidades</ion-option>
+          <ion-option value="20 unidades">20 unidades</ion-option>
+          <ion-option value="25 unidades">25 unidades</ion-option>
+          <ion-option value="30 unidades">35 unidades</ion-option>
+          <ion-option value="30 unidades">40 unidades</ion-option>
+          <ion-option value="30 unidades">45 unidades</ion-option>
+          <ion-option value="30 unidades">50 unidades</ion-option>
+          <ion-option value="30 unidades">55 unidades</ion-option>
+          <ion-option value="30 unidades">60 unidades</ion-option>
+          <ion-option value="30 unidades">70 unidades</ion-option>
+        </ion-select>
+      </ion-item>
+      <button (click)="addUnidades(precioSegunUnidades,numeroDeUnidades)" ion-button icon-only clear>
+        <ion-icon name="md-add-circle" style="color:#ccc;font-size:28px"></ion-icon>
+      </button>
+    </div>
+  </div>
+
+  <div style="height:30px"></div>
+
+</ion-content>

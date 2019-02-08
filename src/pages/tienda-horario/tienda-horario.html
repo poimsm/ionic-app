@@ -3,7 +3,7 @@
   <ion-navbar color="white">
     <ion-title>Horario</ion-title>
     <ion-buttons right>
-      <button ion-button outline mode="ios">
+      <button (click)="save()" ion-button outline mode="ios">
         Guardar
       </button>
     </ion-buttons>
@@ -12,65 +12,37 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content style="background:rgb(250, 250, 250)">
 
-  <ion-scroll scrollX="true" style="padding:15px;background:white;display:flex;height:80px;font-size:18px">
 
-    <ion-grid>
-      <ion-row nowrap>
-        <ion-col col-2>
-          <div (click)="select('Lunes')" style="background:dodgerblue;border:0px solid #ccc;color:#fff;font-weight:500;width:55px;height:55px;border-radius:5px;display:flex;justify-content:center;align-items:center">
-            Lun
-          </div>
-        </ion-col>
-        <ion-col col-2>
-          <div (click)="select('Martes')" style="border:0px solid #ccc;color:#555;font-weight:500;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-items:center">
-            Mar
-          </div>
-        </ion-col>
-        <ion-col col-2>
-          <div (click)="select('Miércoles')" style="border:0px solid #ccc;color:#555;font-weight:500;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-items:center">
-            Mié
-          </div>
-        </ion-col>
-        <ion-col col-2>
-          <div (click)="select('Jueves')" style="border:0px solid #ccc;color:#555;font-weight:500;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-items:center">
-            Jue
-          </div>
-        </ion-col>
-        <ion-col col-2>
-          <div (click)="select('Viernes')" style="border:0px solid #ccc;color:#555;font-weight:500;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-items:center">
-            Vie
-          </div>
-        </ion-col>
-        <ion-col col-2>
-          <div (click)="select('Sábado')" style="border:0px solid #ccc;color:#555;font-weight:500;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-items:center">
-            Sáb
-          </div>
-        </ion-col>
-        <ion-col col-2>
-          <div (click)="select('Domingo')" style="border:0px solid #ccc;color:#555;font-weight:500;width:55px;height:55px;border-radius:50%;display:flex;justify-content:center;align-items:center">
-            Dom
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-scroll>
+  <div *ngFor="let item of matriz">
+    <div style="margin-top:25px;margin-bottom:10px;color:#666;font-weight:600;margin-left:15px;font-size:12px">
+      {{item.dia}}
+      <ion-icon *ngIf="item.inicio && item.cierre" name="checkmark-circle" style="font-size:20px;margin-left:10px;color:rgb(45, 185, 45)"></ion-icon>
 
-  <div style="font-size:20px;color:#444;font-weight:600;margin-left:15px;margin-top:15px;margin-bottom:10px">
-    Mi horario día {{dia}}
+    </div>
+    <button ion-item no-lines>
+      <ion-label style="font-size:16px;color:#555">
+        Inicio
+      </ion-label>
+      <div *ngIf="!item.inicio.length >0" item-end style="font-size:14px;color:#777">
+        Seleccionar
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+      <ion-datetime [(ngModel)]="item.inicio" displayFormat="h a"></ion-datetime>
+    </button>
+
+    <button ion-item no-lines>
+      <ion-label style="font-size:16px;color:#555">
+        Cierre
+      </ion-label>
+      <div *ngIf="!item.cierre.length >0" item-end style="font-size:14px;color:#777">
+        Seleccionar
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+      <ion-datetime [(ngModel)]="item.cierre" displayFormat="h a"></ion-datetime>
+    </button>
   </div>
-  <!-- <ion-list> -->
-  <ion-item>
-    <ion-label>Hora de inicio</ion-label>
-    <ion-datetime displayFormat="h:mm a"></ion-datetime>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Hora de cierre</ion-label>
-    <ion-datetime displayFormat="h:mm a"></ion-datetime>
-  </ion-item>
-  <!-- </ion-list> -->
 
 
 </ion-content>

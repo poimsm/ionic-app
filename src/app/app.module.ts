@@ -21,6 +21,7 @@ import { PipesModule } from "../pipes/pipes.module";
 import { Camera } from "@ionic-native/camera";
 import { IonicStorageModule } from "@ionic/storage";
 import { AppVersion } from '@ionic-native/app-version';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAUecL57weWVkb-4OR0TBCM1f18tHgqi5M',
@@ -72,7 +73,21 @@ import {
   TiendaDeliveryDulcePage,
   TiendaDeliveryNormalPage,
   TiendaAlojamientoPage,
-  TiendaEcommercePage
+  LocalizacionPage,
+  WishlistPage,
+  ComidaPage,
+  ComidaContentPage,
+  TiendaComidaPage,
+  TiendaAlgoDulcePage,
+  TiendaComprasPage,
+  TiendaComidaNuevoPage,
+  TiendaEnviosPage,
+  TiendaEnviosDeliveryPage,
+  TiendaEnviosEcommercePage,
+  TiendaEcommercePage,
+  TiendaEcommerceNuevoPage,
+  EcommercePage,
+  EcommerceContentPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -80,6 +95,8 @@ import { AuthProvider } from "../providers/auth/auth";
 import { HttpClientModule } from "@angular/common/http";
 import { PopupsProvider } from '../providers/popups/popups';
 import { CarroProvider } from '../providers/carro/carro';
+import { ImageProvider } from '../providers/image/image';
+import { LocalizacionProvider } from '../providers/localizacion/localizacion';
 
 @NgModule({
   declarations: [
@@ -124,7 +141,21 @@ import { CarroProvider } from '../providers/carro/carro';
     TiendaDeliveryDulcePage,
     TiendaDeliveryNormalPage,
     TiendaAlojamientoPage,
-    TiendaEcommercePage
+    LocalizacionPage,
+    WishlistPage,
+    ComidaPage,
+    ComidaContentPage,
+    TiendaComidaPage,
+    TiendaAlgoDulcePage,
+    TiendaComprasPage,
+    TiendaComidaNuevoPage,
+    TiendaEnviosPage,
+    TiendaEnviosDeliveryPage,
+    TiendaEnviosEcommercePage,
+    TiendaEcommercePage,
+    TiendaEcommerceNuevoPage,
+    EcommercePage,
+    EcommerceContentPage
   ],
   imports: [
     BrowserModule,
@@ -182,7 +213,21 @@ import { CarroProvider } from '../providers/carro/carro';
     TiendaDeliveryDulcePage,
     TiendaDeliveryNormalPage,
     TiendaAlojamientoPage,
-    TiendaEcommercePage
+    LocalizacionPage,
+    WishlistPage,
+    ComidaPage,
+    ComidaContentPage,
+    TiendaComidaPage,
+    TiendaAlgoDulcePage,
+    TiendaComprasPage,
+    TiendaComidaNuevoPage,
+    TiendaEnviosPage,
+    TiendaEnviosDeliveryPage,
+    TiendaEnviosEcommercePage,
+    TiendaEcommercePage,
+    TiendaEcommerceNuevoPage,
+    EcommercePage,
+    EcommerceContentPage
   ],
   providers: [
     StatusBar,
@@ -197,7 +242,10 @@ import { CarroProvider } from '../providers/carro/carro';
     AppVersion,
     PopupsProvider,
     CarroProvider,
-    InAppBrowser
+    FileTransfer,
+    InAppBrowser,
+    ImageProvider,
+    LocalizacionProvider
   ]
 })
 export class AppModule { }

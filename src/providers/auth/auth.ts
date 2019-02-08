@@ -28,7 +28,6 @@ export class AuthProvider {
     if (this.platform.is('cordova')) {
       this.apiURL = 'https://poimsm-server.herokuapp.com';
     } else {
-      // this.apiURL = 'https://poimsm-server.herokuapp.com';
       this.apiURL = 'http://localhost:3000';
     }
   }
@@ -89,7 +88,7 @@ export class AuthProvider {
   async updateUserStorage(token) {
     try {
       const resUser: any = await this.getUser(token);
-      this.saveStorage(resUser.user, token);
+      this.saveStorage(token, resUser.user);
     } catch (error) {
       console.log("Error", error);
     }
@@ -145,6 +144,16 @@ export class AuthProvider {
     const url = `${this.apiURL}/users/check-email`;
     const body = { email };
     return this.http.post(url, body).toPromise();
+  }
+
+  actualizarUsuario(body, id) {
+    const url = `${this.apiURL}/users/actualizar/${id}`;
+    return this.http.post(url, body).toPromise();
+  }
+
+  obtenerUsuario() {
+    const url = `${this.apiURL}/users/me`;
+    return this.http.get(url).toPromise();
   }
 
   getUser(token) {

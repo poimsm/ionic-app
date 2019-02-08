@@ -23,7 +23,7 @@
 
 
 
-  <ion-list>
+  <!-- <ion-list>
     <div *ngFor="let data of nocturno">
 
       <div style="width:100%;display:flex;justify-content:flex-start;align-items:center">
@@ -60,7 +60,7 @@
         </div>
       </ion-item>
     </div>
-  </ion-list>
+  </ion-list> -->
 
 
 
@@ -68,25 +68,48 @@
 
 
   <ion-list>
-    <ion-item *ngFor="let item of pedidos; let i = index">
+    <button (click)="openContentNormal(item)" ion-item *ngFor="let item of pedidos; let i = index">
+      <div *ngIf="item.tipo == 'comida'" (click)="openContent(item.compra)" item-start style="width:80px;min-height:80px; background-size:cover;background-repeat: no-repeat;background-position: center;border-radius:5px"
+        [ngStyle]="{'background-image': 'url(' + item.img + ')' }">
+      </div>
+      <div *ngIf="item.tipo == 'comida'">
+        <div style="margin:2px;font-weight:400;color:#444;font-weight:600;font-size:16px">
+          {{item.titulo}}
+        </div>
+        <div style="margin:2px;color:#555">
+          {{item.descripcion}}
+        </div>
+        <div style="font-weight:450;margin:2px;color:#ff6633;font-size:16px;margin-top:10px;margin-bottom:10px">
+          ${{item.total}}
+        </div>
+      </div>
+      <ion-icon *ngIf="item.tipo == 'comida'" item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+
+
       <div *ngIf="item.tipo == 'once'" (click)="openContent(item.compra)" item-start style="width:80px;min-height:80px; background-size:cover;background-repeat: no-repeat;background-position: center;border-radius:5px"
-        [ngStyle]="{'background-image': 'url(' + item.compra.img + ')' }">
+        [ngStyle]="{'background-image': 'url(' + item.img + ')' }">
       </div>
       <div *ngIf="item.tipo == 'once'">
         <div style="margin:2px;font-weight:400;color:#444;font-weight:600;font-size:16px">
-          {{item.compra.titulo}}
+          {{item.titulo}}
         </div>
         <div style="margin:2px;color:#555">
-          {{item.compra.descripcion}}
+          {{item.descripcion}}
         </div>
         <div style="font-weight:450;margin:2px;color:#ff6633;font-size:16px;margin-top:10px;margin-bottom:10px">
-          ${{item.precio}}
+          ${{item.total}}
         </div>
       </div>
+      <ion-icon *ngIf="item.tipo == 'once'" item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
 
 
 
-      <div *ngIf="item.tipo == 'fruta'" (click)="openContent(item.compra)" item-start style="width:80px;min-height:80px; background-size:cover;background-repeat: no-repeat;background-position: center;border-radius:5px"
+
+
+
+
+
+      <!-- <div *ngIf="item.tipo == 'fruta'" (click)="openContent(item.compra)" item-start style="width:80px;min-height:80px; background-size:cover;background-repeat: no-repeat;background-position: center;border-radius:5px"
         [ngStyle]="{'background-image': 'url(' + item.compra.img + ')' }">
       </div>
       <div *ngIf="item.tipo == 'fruta'">
@@ -99,8 +122,8 @@
         <div style="font-weight:450;margin:2px;color:#ff6633;font-size:16px;margin-top:10px;margin-bottom:10px">
           ${{item.precio}}
         </div>
-      </div>
-    </ion-item>
+      </div> -->
+    </button>
   </ion-list>
 
 

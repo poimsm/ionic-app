@@ -1,0 +1,100 @@
+<ion-header no-border>
+
+  <ion-navbar color="white">
+    <ion-title>Definir entregas</ion-title>
+    <ion-buttons right>
+      <button (click)="save()" [disabled]="!isPlataforma && (!A1 && !B1)" ion-button outline mode="ios">
+        Guardar
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style="background:rgb(248, 248, 248)">
+
+  <div style="margin-top:10px;margin-bottom:10px;background:white;">
+    <ion-item text-wrap no-lines style="color:#555;">
+      <ion-label>
+        <div style="font-size:16px">
+          <div style="color:#222;font-weight:600">
+            Entregas por mi
+          </div>
+          Yo mismo haré los repartos de mis productos
+        </div>
+      </ion-label>
+      <ion-toggle [(ngModel)]="isPropio" (ngModelChange)="cambiarMetodoPago($event,1)" mode="ios"></ion-toggle>
+    </ion-item>
+
+    <div *ngIf="isPropio" style="margin-top:10px;color:#444">
+      <!-- <button text-wrap (click)="A1=!A1;B1=false; openSelect('tope')" ion-item style="color:#777">
+        <ion-icon *ngIf="A1" item-start name="radio-button-on" style="color:dodgerblue"></ion-icon>
+        <ion-icon *ngIf="!A1" item-start name="radio-button-off" style="color:#bbb"></ion-icon>
+        <div style="font-size:16px">
+          Hacer envíos gratis por compras que superen cierto valor
+        </div>
+        <div *ngIf="A1" style="color:green;font-size:16px">
+          {{valorTope}}
+        </div>
+      </button> -->
+
+      <button text-wrap (click)="B1=!B1;A1=false; openSelect('fijo')" ion-item style="color:#777">
+        <ion-icon *ngIf="B1" item-start name="radio-button-on" style="color:dodgerblue"></ion-icon>
+        <ion-icon *ngIf="!B1" item-start name="radio-button-off" style="color:#bbb"></ion-icon>
+        <div style="font-size:16px">
+          Cobrar precio fijo por cada envío
+        </div>
+        <div *ngIf="B1" style="color:green;font-size:16px">
+          {{valorFijo}}
+        </div>
+      </button>
+    </div>
+
+  </div>
+
+
+  <div style="margin-bottom:10px;background:white;">
+    <ion-item text-wrap no-lines style="color:#555">
+      <ion-label>
+        <div style="font-size:16px">
+          <div style="color:#222;font-weight:600">
+            Joopiter Express
+          </div>
+          Quiero usar el servicio de entregas Joopiter Express
+        </div>
+      </ion-label>
+      <ion-toggle [(ngModel)]="isPlataforma" (ngModelChange)="cambiarMetodoPago($event,2)" mode="ios"></ion-toggle>
+    </ion-item>
+    <hr>
+    <div *ngIf="isPlataforma" style="margin-top:10px;color:#444">
+      <button text-wrap ion-item style="color:#777">
+        <div style="color:#444;font-size:16px;font-weight:350">
+          Se cobrará $1000 al cliente mientras que al vendedor no se le aplicará ningun cobro.
+        </div>
+      </button>
+    </div>
+  </div>
+
+
+  <ion-item style="display:none">
+    <ion-label>
+      ¿Cuánto va a cobrar?
+    </ion-label>
+    <ion-select [(ngModel)]="valorFijo" (ionChange)="onSelectChange(valorFijo, 'fijo')" #precioFijoRef>
+      <ion-option *ngFor="let item of fijoArray" [value]="item.tag">{{item.precio}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item style="display:none">
+    <ion-label>
+      Reparto gratis por compras sobre:
+    </ion-label>
+    <ion-select [(ngModel)]="valorTope" (ionChange)="onSelectChange(valorTope, 'gratisSobre')" #precioTopeRef>
+      <ion-option *ngFor="let item of gratisSobreArray" [value]="item.tag">{{item.precio}}</ion-option>
+    </ion-select>
+  </ion-item>
+
+
+
+</ion-content>

@@ -28,6 +28,9 @@ export class OncePage {
   hayMas = true;
   sorpresas = [];
   precios = [];
+  isCategoria: boolean;
+  categoria: string;
+  ciudad: string;
 
   constructor(
     private alertCtrl: AlertController,
@@ -36,10 +39,18 @@ export class OncePage {
     public popoverCtrl: PopoverController,
     private _data: DataProvider,
     private _popups: PopupsProvider
-  ) { }
+  ) {
+    this.isCategoria = this.navParams.get('isCategoria');
+    this.categoria = this.navParams.get('categoria');
+    this.ciudad = this.navParams.get('ciudad');
+  }
 
   ionViewDidLoad() {
-    this.getOnceByCategory(null);
+    if (this.isCategoria) {
+      this.getOnceByCategory(this.categoria);
+    } else {
+      this.getOnceByCategory(null);
+    }
     this.getSorpresas();
     // this.presentAlert();
     this.setUp();
@@ -77,7 +88,7 @@ export class OncePage {
 
     popover.onDidDismiss(data => {
       if (data) {
-        this.categoriaActual = this.categorias[data.index];
+        this.categoria = this.categorias[data.index];
         this.getOnceByCategory(this.categorias[data.index]);
       }
     });
@@ -86,7 +97,7 @@ export class OncePage {
   async getOnceByCategory(categoria) {
     const route = 'apps/once-all';
 
-    this._data.getAll(0, 10, categoria, route)
+    this._data.getAll(0, 10, categoria, this.ciudad, route)
       .then((data: any[]) => {
         this.data = data;
       });
@@ -95,7 +106,7 @@ export class OncePage {
   doInfinite(infiniteScroll) {
     const route = 'apps/once-all';
     this.skip += 10;
-    this._data.getAll(this.skip, 10, this.categoriaActual, route)
+    this._data.getAll(this.skip, 10, this.categoria, this.ciudad, route)
       .then((data: any[]) => {
         if (data.length == 0) {
           this.hayMas = false;

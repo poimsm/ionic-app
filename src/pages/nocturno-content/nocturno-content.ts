@@ -78,8 +78,8 @@ export class NocturnoContentPage {
       tipo: 'nocturno',
       tienda: this.tienda.tienda
     }
-    this._carro.agregarAlCarro(compra);
-    this._carro.agregarItemAlCarro(compra);
+    this._carro.addToCart(compra);
+    // this._carro.agregarItemAlCarro(compra);
 
   }
 

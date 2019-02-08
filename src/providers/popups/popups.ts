@@ -9,6 +9,7 @@ export class PopupsProvider {
 
   categoriasEcommerce = {};
   categoriasOnce = {};
+  categoriasComida = {};
   mensajeHome = '';
   apiURL: string;
 
@@ -26,6 +27,8 @@ export class PopupsProvider {
   setAPI() {
     if (this.platform.is('cordova')) {
       this.apiURL = 'https://poimsm-server.herokuapp.com';
+      // this.apiURL = 'http://localhost:3000';
+
     } else {
       // this.apiURL = 'https://poimsm-server.herokuapp.com';
       this.apiURL = 'http://localhost:3000';
@@ -38,14 +41,19 @@ export class PopupsProvider {
       .then((data: any) => {
         this.categoriasEcommerce = data.categoriasEcommerce;
         this.categoriasOnce = data.categoriasOnce;
+        this.categoriasComida = data.categoriasComida;
         this.mensajeHome = data.mensajeHome;
       });
+  }
+
+  getCategorias() {
+    const url = `${this.apiURL}/popups/categorias`;
+    return this.http.get(url).toPromise();
   }
 
   async checkAppVersion(token) {
     if (this.platform.is('cordova')) {
       const version = await this.appVersion.getVersionNumber();
-
       const url = `${this.apiURL}/popups/app-version`;
       const headers = new HttpHeaders({
         Authorization: `JWT ${token}`
@@ -53,14 +61,13 @@ export class PopupsProvider {
       const body = { version };
       return this.http.post(url, body, { headers }).toPromise();
     } else {
-      const version = '0.1.9';
+      const version = '0.2.0';
       const url = `${this.apiURL}/popups/app-version`;
       const headers = new HttpHeaders({
         Authorization: `JWT ${token}`
       });
       const body = { version };
       return this.http.post(url, body, { headers }).toPromise();
-
     }
   }
 }

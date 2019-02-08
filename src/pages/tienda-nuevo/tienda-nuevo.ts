@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform, Select } from 'ionic-angular';
 import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
 import { DataProvider } from '../../providers/data/data';
+import { PopupsProvider } from '../../providers/popups/popups';
 
 
 @IonicPage()
@@ -44,16 +45,30 @@ export class TiendaNuevoPage {
 
   tipo: string;
   tiendaID: string;
+  categorias = [];
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private imagePicker: ImagePicker,
     private platform: Platform,
-    private _data: DataProvider
+    private _data: DataProvider,
+    private _popups: PopupsProvider
   ) {
     this.tipo = this.navParams.get('tipo');
     this.tiendaID = this.navParams.get('tiendaID');
+  }
+
+  ionViewDidLoad() {
+    this.setUp();
+  }
+
+  setUp() {
+    let categoriasObj = {};
+    categoriasObj = this._popups.categoriasEcommerce;
+    Object.keys(categoriasObj).forEach(key => {
+      this.categorias.push(categoriasObj[key]);
+    });
   }
 
   add(item, tipo) {
@@ -102,7 +117,7 @@ export class TiendaNuevoPage {
       this.EjVariacion = 'Ej. Cumpleaños'
     }
     if (event == 'Variedad') {
-      this.EjVariacion = 'Ej. Libre de azucar, sin gluten..'
+      this.EjVariacion = 'Ej. Libre de azucar'
     }
   }
 
@@ -180,8 +195,6 @@ export class TiendaNuevoPage {
         tipo: this.variacion,
         array: this.variaciones
       }
-    } else {
-      producto.variaciones.isActive = false;
     }
 
     if (this.flat) {
@@ -203,10 +216,8 @@ export class TiendaNuevoPage {
         array: this.personasArray
       }
     }
-    console.log(producto);
-
-    this._data.crearProductoOnce(producto)
-      .then(() => console.log('listo'));
+    this._data.crearProductoOnce(producto);
+    this.navCtrl.pop();
   }
 
 }

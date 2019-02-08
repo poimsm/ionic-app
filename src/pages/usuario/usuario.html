@@ -4,50 +4,79 @@
 </ion-header>
 
 
-<ion-content style="background:#eee">
+<ion-content style="background:rgb(250, 250, 250)">
 
-  <!-- <ion-list> -->
-  <ion-item style="margin:10px" no-lines>
-    <div item-start style="font-size:16px;color:#555;font-weight:500">
+
+  <ion-item (click)="openTienda()" style="margin:10px" no-lines>
+    <ion-icon item-start name="ice-cream" style="color:orange;font-size:30px"></ion-icon>
+    <div style="color:#777;font-size:18px;font-weight:500">
+      Mi tienda
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </ion-item>
+
+  <ion-item (click)="openHistorial()" style="margin:10px" no-lines>
+    <ion-icon item-start name="cart" style="color:orange;font-size:30px"></ion-icon>
+    <div style="color:#777;font-size:18px;font-weight:500">
+      Historial de compras
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </ion-item>
+
+
+  <div style="margin-left:15px;margin-bottom:10px;margin-top:25px;font-size:11px;font-weight:600;color:#666">
+    CUENTA
+  </div>
+  <ion-item style="margin-left:0px">
+    <div style="font-size:16px;color:#555">
       Nombre
     </div>
-    <div item-end style="font-size:16px;color:#555;font-weight:500">
-      Oscar Garcia
+    <div item-end style="font-size:14px;color:#777">
+      {{user.name}}
     </div>
-    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:26px"></ion-icon>
   </ion-item>
-  <ion-item style="margin:10px" no-lines>
-    <div item-start style="font-size:16px;color:#555;font-weight:500">
+
+  <ion-item style="margin-left:0px" no-lines>
+    <div style="font-size:16px;color:#555">
       Email
     </div>
-    <div item-end style="font-size:16px;color:#555;font-weight:500">
-      poimsm@gmail.com
+    <div item-end style="font-size:14px;color:#777">
+      {{user.local.email}}
     </div>
-    <ion-icon item-end name="ios-arrow-forward" style="color:#fff;font-size:26px"></ion-icon>
   </ion-item>
-  <ion-item style="margin:10px" no-lines>
-    <div item-start style="font-size:16px;color:#555;font-weight:500">
+
+  <div style="margin-left:15px;margin-bottom:10px;margin-top:25px;font-size:11px;font-weight:600;color:#666">
+    CONTACTO
+  </div>
+  <button (click)="presentPrompt('direccion')" ion-item style="margin-top:10px">
+    <div style="font-size:16px;color:#555">
       Dirección
     </div>
-    <div item-end style="font-size:16px;color:#555;font-weight:500">
-      Simon Bolivar 802
+    <ion-icon *ngIf="!user?.address" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
+
+    <div *ngIf="user?.address" item-end style="font-size:14px;color:#777">
+      {{user?.address}}
     </div>
-    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:26px"></ion-icon>
-  </ion-item>
-  <ion-item style="margin:10px" no-lines>
-    <div item-start style="font-size:16px;color:#555;font-weight:500">
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
+  <button (click)="presentPrompt('telefono')" ion-item style="margin:0px" no-lines>
+    <div style="font-size:16px;color:#555">
       Teléfono
     </div>
-    <div item-end style="font-size:16px;color:#555;font-weight:500">
-      +5698349887
+
+    <ion-icon *ngIf="!user?.phone" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
+    <div *ngIf="user?.phone" item-end style="font-size:14px;color:#777">
+      {{user?.phone}}
     </div>
-    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:26px"></ion-icon>
-  </ion-item>
-  <ion-item style="margin:10px" no-lines>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
+
+
+  <button ion-item style="margin-top:25px" no-lines>
     <div style="font-size:16px;color:#f53d3d;font-weight:500;width:100%;text-align:center">
       Cerrar sesión
     </div>
-  </ion-item>
+  </button>
   <!-- </ion-list> -->
 
 

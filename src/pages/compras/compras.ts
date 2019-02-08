@@ -73,8 +73,8 @@ export class ComprasPage {
   fetchByCategory(categoria) {
     const route = 'apps/ecommerce-all';
 
-    this._data.getAll(0, 10, categoria, route)
-      .then((data: any[]) => this.compras = data);
+    // this._data.getAll(0, 10, categoria, route)
+    //   .then((data: any[]) => this.compras = data);
   }
 
 }

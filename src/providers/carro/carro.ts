@@ -8,7 +8,9 @@ export class CarroProvider {
 
   listadoCompras = [];
   apiURL: string;
-  carro: any;
+  carro2: any;
+  carro = [];
+  total = 0;
 
   constructor(
     public http: HttpClient,
@@ -22,27 +24,49 @@ export class CarroProvider {
     if (this.platform.is('cordova')) {
       this.apiURL = 'https://poimsm-server.herokuapp.com';
     } else {
-      // this.apiURL = 'https://poimsm-server.herokuapp.com';
       this.apiURL = 'http://localhost:3000';
     }
   }
 
-  agregarAlCarro(carro) {
-    this.carro = carro;
-  }
-
-  vaciaCarro() {
-    this.carro = {};
-  }
-
-  agregarItemAlCarro(compra) {
-    this.listadoCompras.push(compra);
+  addToCart(compra) {
+    this.carro.push(compra);
     this.presentToast();
+    this.updateTotal();
   }
 
-  quitarItemDelCarro(index) {
-    this.listadoCompras.splice(index, 1);
+  clearCart() {
+    this.carro = [];
   }
+
+  addMore(type, index) {
+    if (type == '-' && this.carro[index].cantidad != 0) {
+      this.carro[index].cantidad -= 1;
+      this.carro[index].total = this.carro[index].precio * this.carro[index].cantidad;
+      this.updateTotal();
+    }
+
+    if (type == '-' && this.carro[index].cantidad == 0) {
+      setTimeout(() => {
+        this.carro.splice(index, 1);
+        this.updateTotal();
+      }, 500);
+    }
+
+    if (type == '+' && this.carro[index].cantidad != 5) {
+      this.carro[index].cantidad += 1;
+      this.carro[index].total = this.carro[index].precio * this.carro[index].cantidad;
+      this.updateTotal();
+    }
+  }
+
+  updateTotal() {
+    let total = 0;
+    this.carro.forEach(item => {
+      total += item.total;
+    });
+    this.total = total + 1000 * this.carro.length;
+  }
+
 
   crearCompra(token, body) {
     const url = `${this.apiURL}/compras/crear-compra`;
@@ -73,7 +97,7 @@ export class CarroProvider {
   presentToast() {
     let toast = this.toastCtrl.create({
       message: 'Se agrego a tu carro de compras.',
-      duration: 3000,
+      duration: 2500,
       position: 'bottom'
     });
     toast.present();
