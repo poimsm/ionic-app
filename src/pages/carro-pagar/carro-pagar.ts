@@ -147,7 +147,14 @@ export class CarroPagarPage {
         let url = respuesta.url;
 
         const browser = this.iab.create(url + '?token=' + token, '_blank', 'location=yes');
-        browser.show();
+        
+
+        browser.on('exit').subscribe(event => {
+          alert("vista cerrada")
+       });
+
+       browser.show();
+
       }
 
 
