@@ -115,18 +115,24 @@ export class DataProvider {
   }
 
   crearProductoOnce(body) {
+    this.productoSubiendo();
     const url = `${this.apiURL}/apps/once-crear`;
-    return this.http.post(url, body).toPromise();
+    this.http.post(url, body).toPromise()
+      .then(() => this.productoCreado());
   }
 
   crearProductoEcommerce(body) {
+    this.productoSubiendo();
     const url = `${this.apiURL}/apps/ecommerce-crear`;
-    return this.http.post(url, body).toPromise();
+    this.http.post(url, body).toPromise()
+      .then(() => this.productoCreado());
   }
 
   crearProductoComida(body) {
+    this.productoSubiendo();
     const url = `${this.apiURL}/apps/comida-crear`;
-    return this.http.post(url, body).toPromise();
+    this.http.post(url, body).toPromise()
+      .then(() => this.productoCreado());
   }
 
   onceByTiendID(id) {
@@ -148,7 +154,25 @@ export class DataProvider {
   presentToast() {
     let toast = this.toastCtrl.create({
       message: '¡Producto agregado!',
-      duration: 3000,
+      duration: 2500,
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
+  productoSubiendo() {
+    let toast = this.toastCtrl.create({
+      message: 'El producto se está subiendo',
+      duration: 2500,
+      position: 'bottom'
+    });
+    toast.present();
+  }
+
+  productoCreado() {
+    let toast = this.toastCtrl.create({
+      message: 'Producto creado con exito',
+      duration: 2500,
       position: 'bottom'
     });
     toast.present();

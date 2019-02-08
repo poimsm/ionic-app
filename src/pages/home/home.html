@@ -203,7 +203,12 @@
     </div>
 
     <div (click)="openPage(carro)" style="width:80px;display:flex;flex-wrap:wrap;justify-content:center">
-      <ion-icon name="ios-cart" style="font-size:25px;color:#bbb"></ion-icon>
+      <div style="position:relative">
+        <ion-icon name="ios-cart" style="font-size:25px;color:#bbb"></ion-icon>
+        <div *ngIf="_carro.carro.length>0" style="display:flex;justify-content:center;align-items:center;font-size:10px;background:#EF4F45;color:white;width:15px;height:15px;position: absolute;top:-3px;right:-10px;border-radius:50%">
+          {{_carro.carro.length}}
+        </div>
+      </div>
       <div style="color:#333;width:100%;text-align:center">
         Carrito
       </div>

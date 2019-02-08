@@ -47,24 +47,7 @@
     </ion-label>
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px"></ion-icon>
     <ion-select [(ngModel)]="categoria" style="display:none" #categoriaRef>
-      <ion-option value="Aretes - piercings">Aretes - piercings</ion-option>
-      <ion-option value="Aros - pulseras - collares">Aros - pulseras - collares</ion-option>
-      <ion-option value="Relojes">Relojes</ion-option>
-      <!-- <ion-option value="Pizza">Relojes - hombre</ion-option> -->
-      <!-- <ion-option value="Sushi & hand rolls">Pantalones - mujer</ion-option>
-      <ion-option value="Sushi & hand rolls">Pantalones - hombre</ion-option>
-      <ion-option value="Sushi & hand rolls">Blusas - chalecos - abrigos</ion-option> -->
-      <ion-option value="Arreglos - decoraciones">Arreglos - decoraciones</ion-option>
-      <ion-option value="Regalos de San Valentín">Regalos de San Valentín</ion-option>
-      <ion-option value="Bodas">Bodas</ion-option>
-      <ion-option value="Carton y papel - DIY">Carton y papel - DIY</ion-option>
-      <ion-option value="Envoltorios - invitaciones">Envoltorios - invitaciones</ion-option>
-      <!-- <ion-option value="Sushi & hand rolls">Fiestas - bodas - ropa</ion-option> -->
-      <!-- <ion-option value="Carnes">Zapatos</ion-option>
-      <ion-option value="Sandwich">Bebes y niños</ion-option>
-      <ion-option value="Pichangas">Tecnología</ion-option>
-      <ion-option value="Almuerzos">Belleza y maquillaje</ion-option>
-      <ion-option value="Otros">Deporte y pasatiempos</ion-option> -->
+      <ion-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</ion-option>
     </ion-select>
   </button>
 
@@ -75,12 +58,9 @@
     <ion-toggle [(ngModel)]="isVariacion" mode="ios"></ion-toggle>
   </ion-item>
 
-  <button *ngIf="isVariacion" ion-item no-lines (click)="openSelect('variacion')">
+  <button *ngIf="isVariacion && addFirst" ion-item no-lines (click)="openSelect('variacion')">
     <ion-label>
       Agregar una variación
-      <div style="color:green">
-        {{variacion}}
-      </div>
     </ion-label>
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px"></ion-icon>
     <ion-select (ionChange)="onVaracionChange($event)" [(ngModel)]="variacion" style="display:none" #variacionRef>
@@ -91,25 +71,49 @@
     </ion-select>
   </button>
 
-  <div *ngIf="isVariacion  && variaciones.length > 0">
-    <div *ngFor="let variacion of variaciones;let i = index">
-      <div style="display:flex;justify-content:space-between">
-        <div style="margin-left:15px;padding:3px;font-size:18px;color:green">
-          &#9679; {{variacion}}
-        </div>
-        <ion-icon (click)="remove(i, 'variacion')" name="trash" style="color:#bbb;font-size:24px;margin-right:15px"></ion-icon>
+  <div *ngIf="isVariacion">
+
+    <div *ngFor="let variacion of variaciones; let i = index">
+
+      <div style="margin-top:10px;color:dodgerblue;margin-left:15px">
+        {{variacion.tipo | uppercase }}
+        <ion-icon (click)="remove(j, 'variacion')" name="trash" style="color:#bbb;font-size:24px;margin-left:15px"></ion-icon>
       </div>
+
+      <div *ngIf="variacion.array.length > 0">
+        <div *ngFor="let item of variacion.array;let j = index">
+          <div style="display:flex;justify-content:space-between">
+            <div style="margin-left:15px;padding:3px;font-size:18px;color:green">
+              &#9679; {{item}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:10px;width:100%;display:flex;justify-content:center">
+        <div style="border-radius:3px;width:80%;border:1px solid #eee;display:flex">
+          <ion-input [(ngModel)]="variacion.auxiliar" type="text" [placeholder]="EjVariacion" style="font-size:16px;border:0x solid white"></ion-input>
+          <button (click)="addVariacion(i, variacion.auxiliar)" ion-button icon-only clear>
+            <ion-icon name="md-add-circle" style="color:#ccc;font-size:28px"></ion-icon>
+          </button>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <div *ngIf="isVariacion  && variacion" style="padding:10px;width:100%;display:flex;justify-content:center">
-    <div style="border-radius:3px;width:80%;border:1px solid #eee;display:flex">
-      <ion-input [(ngModel)]="variacionItem" type="text" [placeholder]="EjVariacion" style="font-size:16px;border:0x solid white"></ion-input>
-      <button (click)="add(variacionItem, 'variacion')" ion-button icon-only clear>
-        <ion-icon name="md-add-circle" style="color:#ccc;font-size:28px"></ion-icon>
-      </button>
-    </div>
-  </div>
+  <button *ngIf="isVariacion && addMore" ion-item no-lines (click)="openSelect('variacion')">
+    <ion-label>
+      Agregar otra variación
+    </ion-label>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px"></ion-icon>
+    <ion-select (ionChange)="onVaracionChange($event)" [(ngModel)]="variacion" style="display:none" #variacionRef>
+      <ion-option value="Color">Color</ion-option>
+      <ion-option value="Sabor">Sabor</ion-option>
+      <ion-option value="Talla">Talla</ion-option>
+      <ion-option value="Material">Material</ion-option>
+    </ion-select>
+  </button>
 
 
   <ion-item no-lines style="margin-top:10px;color:#999;background:rgb(243, 243, 243);font-size:16px;font-weight:500">

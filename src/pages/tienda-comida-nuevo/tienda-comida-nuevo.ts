@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform, Select } from 'ionic-angular';
 import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
 import { DataProvider } from '../../providers/data/data';
+import { PopupsProvider } from '../../providers/popups/popups';
 
 @IonicPage()
 @Component({
@@ -40,17 +41,31 @@ export class TiendaComidaNuevoPage {
   tipo: string;
   tiendaID: string;
   ciudad: string;
+  categorias = [];
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private imagePicker: ImagePicker,
     private platform: Platform,
-    private _data: DataProvider
+    private _data: DataProvider,
+    private _popups: PopupsProvider
   ) {
     this.tipo = this.navParams.get('tipo');
     this.tiendaID = this.navParams.get('tiendaID');
     this.ciudad = this.navParams.get('ciudad');
+  }
+
+  ionViewDidLoad() {
+    this.setUp();
+  }
+
+  setUp() {
+    let categoriasObj = {};
+    categoriasObj = this._popups.categoriasEcommerce;
+    Object.keys(categoriasObj).forEach(key => {
+      this.categorias.push(categoriasObj[key]);
+    });
   }
 
   add(item, tipo) {
@@ -191,8 +206,8 @@ export class TiendaComidaNuevoPage {
     }
     console.log(producto);
 
-    this._data.crearProductoComida(producto)
-      .then(() => console.log('listo'));
+    this._data.crearProductoComida(producto);
+    this.navCtrl.pop();
   }
 
 }

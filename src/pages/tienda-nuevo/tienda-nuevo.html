@@ -47,13 +47,7 @@
     </ion-label>
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px"></ion-icon>
     <ion-select [(ngModel)]="categoria" style="display:none" #categoriaRef>
-      <ion-option value="Galletas">Galletas</ion-option>
-      <ion-option value="Tortas - pastelitos">Tortas - pastelitos</ion-option>
-      <ion-option value="Chocolates">Chocolates</ion-option>
-      <ion-option value="Cupcakes">Cupcakes</ion-option>
-      <ion-option value="Desayunos sorpresa">Desayunos sorpresa</ion-option>
-      <ion-option value="Desayunos sorpresa">San Valentín</ion-option>
-      <ion-option value="Miel - mermeladas">Miel - mermeladas - conservas</ion-option>
+      <ion-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</ion-option>
     </ion-select>
   </button>
   <button ion-item no-lines (click)="openSelect('tiempoDeEntrega')" *ngIf="categoria != 'Desayunos sorpresa'">

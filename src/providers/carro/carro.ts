@@ -34,6 +34,10 @@ export class CarroProvider {
     this.updateTotal();
   }
 
+  clearCart() {
+    this.carro = [];
+  }
+
   addMore(type, index) {
     if (type == '-' && this.carro[index].cantidad != 0) {
       this.carro[index].cantidad -= 1;

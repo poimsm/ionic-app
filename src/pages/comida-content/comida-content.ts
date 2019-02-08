@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Select } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { CarroProvider } from '../../providers/carro/carro';
+import { CarroPage } from '../carro/carro';
 
 @IonicPage()
 @Component({
@@ -78,6 +79,10 @@ export class ComidaContentPage {
         this.user = data.authData.user;
       }
     });
+  }
+
+  openCart() {
+    this.navCtrl.push(CarroPage);
   }
 
   openSelect(key) {

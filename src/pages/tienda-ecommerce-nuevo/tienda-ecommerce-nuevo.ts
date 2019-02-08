@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform, Select } from 'ionic-angular';
 import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
 import { DataProvider } from '../../providers/data/data';
+import { PopupsProvider } from '../../providers/popups/popups';
 
 @IonicPage()
 @Component({
@@ -33,17 +34,34 @@ export class TiendaEcommerceNuevoPage {
   tipo: string;
   tiendaID: string;
   ciudad: string;
+  addFirst = true;
+  addMore = false;
+
+  categorias = [];
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private imagePicker: ImagePicker,
     private platform: Platform,
-    private _data: DataProvider
+    private _data: DataProvider,
+    private _popups: PopupsProvider
   ) {
     this.tipo = this.navParams.get('tipo');
     this.tiendaID = this.navParams.get('tiendaID');
     this.ciudad = this.navParams.get('ciudad');
+  }
+
+  ionViewDidLoad() {
+    this.setUp();
+  }
+
+  setUp() {
+    let categoriasObj = {};
+    categoriasObj = this._popups.categoriasEcommerce;
+    Object.keys(categoriasObj).forEach(key => {
+      this.categorias.push(categoriasObj[key]);
+    });
   }
 
   add(item, tipo) {
@@ -56,6 +74,11 @@ export class TiendaEcommerceNuevoPage {
     if (tipo == 'imagen') {
       this.imagenes.push(item)
     }
+  }
+
+  addVariacion(index, item) {
+    this.variaciones[index].array.push(item);
+    console.log(this.variaciones);
   }
 
   remove(index, tipo) {
@@ -80,6 +103,13 @@ export class TiendaEcommerceNuevoPage {
     if (event == 'Material') {
       this.EjVariacion = 'Ej. Papel'
     }
+    this.addFirst = false;
+    this.addMore = true;
+    const data = {
+      tipo: event,
+      array: []
+    }
+    this.variaciones.push(data);
   }
 
 
@@ -129,15 +159,14 @@ export class TiendaEcommerceNuevoPage {
     if (this.isVariacion && this.variaciones.length > 0) {
       producto.variaciones = {
         isActive: true,
-        tipo: this.variacion,
-        array: this.variaciones
+        data: this.variaciones
       }
     }
 
     console.log(producto);
 
-    this._data.crearProductoEcommerce(producto)
-      .then(() => console.log('listo'));
+    this._data.crearProductoEcommerce(producto);
+    this.navCtrl.pop();
   }
 
 }

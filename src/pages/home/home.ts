@@ -16,6 +16,7 @@ import { LoginPage } from '../login/login';
 import { LocalizacionProvider } from '../../providers/localizacion/localizacion';
 import { ComidaPage } from '../comida/comida';
 import { EcommercePage } from "../ecommerce/ecommerce";
+import { CarroProvider } from '../../providers/carro/carro';
 
 
 @Component({
@@ -50,13 +51,16 @@ export class HomePage {
     private _popups: PopupsProvider,
     private platform: Platform,
     public modalCtrl: ModalController,
-    private _localizacion: LocalizacionProvider
+    private _localizacion: LocalizacionProvider,
+    private _carro: CarroProvider
 
   ) {
     if (!this.platform.is('cordova')) {
       this.showFormulario = true;
     }
-    this._localizacion.showRadio();
+    if (!this._localizacion.ciudad) {
+      this._localizacion.showRadio();
+    }
   }
 
   ionViewDidLoad() {

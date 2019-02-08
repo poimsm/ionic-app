@@ -57,7 +57,7 @@ export class ComidaPage {
   }
 
   setUp() {
-    this.categoriasObj = this._popups.categoriasOnce;
+    this.categoriasObj = this._popups.categoriasComida;
     Object.keys(this.categoriasObj).forEach(key => {
       this.categorias.push(this.categoriasObj[key]);
     });

@@ -47,15 +47,7 @@
     </ion-label>
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px"></ion-icon>
     <ion-select [(ngModel)]="categoria" style="display:none" #categoriaRef>
-      <ion-option value="Completos">Completos</ion-option>
-      <ion-option value="Pizza">Pizza</ion-option>
-      <ion-option value="Papas bravas">Papas bravas</ion-option>
-      <ion-option value="Sushi & hand rolls">Sushi & hand rolls</ion-option>
-      <ion-option value="Carnes">Carnes</ion-option>
-      <ion-option value="Sandwich">Sandwich</ion-option>
-      <ion-option value="Pichangas">Pichangas</ion-option>
-      <ion-option value="Almuerzos">Almuerzos</ion-option>
-      <ion-option value="Otros">Otros</ion-option>
+      <ion-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</ion-option>
     </ion-select>
   </button>
 

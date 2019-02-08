@@ -9,6 +9,7 @@ export class PopupsProvider {
 
   categoriasEcommerce = {};
   categoriasOnce = {};
+  categoriasComida = {};
   mensajeHome = '';
   apiURL: string;
 
@@ -40,6 +41,7 @@ export class PopupsProvider {
       .then((data: any) => {
         this.categoriasEcommerce = data.categoriasEcommerce;
         this.categoriasOnce = data.categoriasOnce;
+        this.categoriasComida = data.categoriasComida;
         this.mensajeHome = data.mensajeHome;
       });
   }

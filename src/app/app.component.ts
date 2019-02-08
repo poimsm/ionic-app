@@ -16,6 +16,8 @@ import { TiendaDeliveryNormalPage } from '../pages/tienda-delivery-normal/tienda
 import { TiendaEcommercePage, OncePage } from "../pages/index.pages";
 import { TiendaAlojamientoPage } from '../pages/tienda-alojamiento/tienda-alojamiento';
 import { LocalizacionProvider } from '../providers/localizacion/localizacion';
+import { EcommercePage } from '../pages/ecommerce/ecommerce';
+import { ComidaPage } from '../pages/comida/comida';
 
 @Component({
   templateUrl: "app.html"
@@ -110,6 +112,32 @@ export class MyApp {
     if (tipo == 'Algo dulce') {
       if (this._localizacion.ciudad) {
         this.nav.push(OncePage, {
+          isCategoria: true,
+          categoria,
+          ciudad: this._localizacion.ciudad
+        });
+      } else {
+        this._localizacion.showRadio();
+      }
+      this.menuCtrl.close();
+    }
+
+    if (tipo == 'Comida') {
+      if (this._localizacion.ciudad) {
+        this.nav.push(ComidaPage, {
+          isCategoria: true,
+          categoria,
+          ciudad: this._localizacion.ciudad
+        });
+      } else {
+        this._localizacion.showRadio();
+      }
+      this.menuCtrl.close();
+    }
+
+    if (tipo == 'Compras') {
+      if (this._localizacion.ciudad) {
+        this.nav.push(EcommercePage, {
           isCategoria: true,
           categoria,
           ciudad: this._localizacion.ciudad
