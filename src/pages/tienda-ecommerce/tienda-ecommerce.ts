@@ -12,6 +12,7 @@ import { TiendaComidaNuevoPage } from '../tienda-comida-nuevo/tienda-comida-nuev
 import { TiendaEnviosDeliveryPage } from '../tienda-envios-delivery/tienda-envios-delivery';
 import { TiendaEcommerceNuevoPage } from '../tienda-ecommerce-nuevo/tienda-ecommerce-nuevo';
 import { TiendaEcommerceProductosPage } from '../tienda-ecommerce-productos/tienda-ecommerce-productos';
+import { stringify } from '@angular/core/src/util';
 
 
 @IonicPage()
@@ -89,13 +90,13 @@ export class TiendaEcommercePage {
 
   tomarFoto(sourceType) {
     const options: CameraOptions = {
-      quality: 50,
+      quality: 90,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: sourceType,
-      targetWidth: 500,
-      targetHeight: 500,
+      targetWidth: 1000,
+      targetHeight: 1000,
       saveToPhotoAlbum: false
     };
 
@@ -108,9 +109,13 @@ export class TiendaEcommercePage {
           id: this.tiendaID
         }
         this._data.nuevaImgPerfil(body)
-          .then(() => console.log('listoo'));
-
-      }, (err) => { console.log('ERROR') });
+          .then(() => this.cargarTienda())
+          .catch(err => {
+            console.log(JSON.stringify(err));
+          });
+      }).catch(err => {
+        console.log(JSON.stringify(err));
+      });
     } else {
       const img = "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
 

@@ -27,7 +27,9 @@
               <div style="color:#555;font-size:16px">
                 ${{item.precio.valorProducto}}
               </div>
-              <ion-icon (click)="presentPopover($event, item._id)" name="more" style="font-size:24px;color:#777"></ion-icon>
+              <button (click)="presentPopover($event, item._id)" icon-only ion-button clear>
+                <ion-icon name="more" style="font-size:24px;color:#777"></ion-icon>
+              </button>
             </div>
           </div>
         </div>

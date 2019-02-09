@@ -120,33 +120,54 @@ export class DataProvider {
     this.http.put(url, body).toPromise();
   }
 
+  uploadImages(images) {
+    const promesas = [];
+    const url = `${this.apiURL}/images/upload-cloudinary`;
+    for (let img of images) {
+      promesas.push(this.http.post(url, img).toPromise());
+    }
+    return Promise.all(promesas);
+  }
+
   crearProductoOnce(body) {
     this.productoSubiendo();
     const url = `${this.apiURL}/apps/once-crear`;
-    this.http.post(url, body).toPromise()
-      .then(() => {
-        this.updateTotalProductsTienda(body.tienda, 1);
-        this.productoCreado();
+    this.uploadImages(body.imgs)
+      .then(imagesData => {
+        body.images = imagesData;
+        this.http.post(url, body).toPromise()
+          .then(() => {
+            this.updateTotalProductsTienda(body.tienda, 1);
+            this.productoCreado();
+          });
       });
   }
 
   crearProductoEcommerce(body) {
     this.productoSubiendo();
     const url = `${this.apiURL}/apps/ecommerce-crear`;
-    this.http.post(url, body).toPromise()
-      .then(() => {
-        this.updateTotalProductsTienda(body.tienda, 1);
-        this.productoCreado();
+    this.uploadImages(body.imgs)
+      .then(imagesData => {
+        body.images = imagesData;
+        this.http.post(url, body).toPromise()
+          .then(() => {
+            this.updateTotalProductsTienda(body.tienda, 1);
+            this.productoCreado();
+          });
       });
   }
 
   crearProductoComida(body) {
     this.productoSubiendo();
     const url = `${this.apiURL}/apps/comida-crear`;
-    this.http.post(url, body).toPromise()
-      .then(() => {
-        this.updateTotalProductsTienda(body.tienda, 1);
-        this.productoCreado();
+    this.uploadImages(body.imgs)
+      .then(imagesData => {
+        body.images = imagesData;
+        this.http.post(url, body).toPromise()
+          .then(() => {
+            this.updateTotalProductsTienda(body.tienda, 1);
+            this.productoCreado();
+          });
       });
   }
 
@@ -202,7 +223,7 @@ export class DataProvider {
 
   productoSubiendo() {
     let toast = this.toastCtrl.create({
-      message: 'El producto se está subiendo',
+      message: 'El producto se está subiendo...',
       duration: 2500,
       position: 'bottom'
     });

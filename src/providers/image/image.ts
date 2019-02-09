@@ -7,7 +7,10 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from "@ionic-nati
 export class ImageProvider {
   apiURL: string;
 
-  constructor(public http: HttpClient, private transfer: FileTransfer, private platform: Platform
+  constructor(
+    public http: HttpClient,
+    private transfer: FileTransfer,
+    private platform: Platform
   ) {
     this.setAPI();
   }
@@ -15,15 +18,16 @@ export class ImageProvider {
   setAPI() {
     if (this.platform.is('cordova')) {
       this.apiURL = 'https://poimsm-server.herokuapp.com';
-      // this.apiURL = 'http://localhost:3000';
-
     } else {
-      // this.apiURL = 'https://poimsm-server.herokuapp.com';
       this.apiURL = 'http://localhost:3000';
     }
   }
 
   uploadImage(img) {
+    console.log('PREVIOO?');
+
+    const fileTransfer: FileTransferObject = this.transfer.create();
+
     console.log('ENTROOO AKA');
 
     const url = `${this.apiURL}/images/upload`;
@@ -38,12 +42,13 @@ export class ImageProvider {
     };
     console.log('ENTROOOO AKII');
 
-
-    const fileTransfer: FileTransferObject = this.transfer.create();
-    console.log('ENTROOOO CREADO');
-
     // Use the FileTransfer to upload the image
-    return fileTransfer.upload(targetPath, url, options);
+    fileTransfer.upload(targetPath, url, options)
+      .then(() => {
+        console.log('SUBIIIIIOOOOOOOOOOOOOOOOOO');
+      }, (err) => {
+        console.log('eeerrrOOOOOOOOOOOOOOOOOO');
+      })
   }
 
 

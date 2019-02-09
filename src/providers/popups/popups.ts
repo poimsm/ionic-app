@@ -27,10 +27,7 @@ export class PopupsProvider {
   setAPI() {
     if (this.platform.is('cordova')) {
       this.apiURL = 'https://poimsm-server.herokuapp.com';
-      // this.apiURL = 'http://localhost:3000';
-
     } else {
-      // this.apiURL = 'https://poimsm-server.herokuapp.com';
       this.apiURL = 'http://localhost:3000';
     }
   }

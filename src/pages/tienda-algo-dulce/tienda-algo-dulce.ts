@@ -88,13 +88,13 @@ export class TiendaAlgoDulcePage {
 
   tomarFoto(sourceType) {
     const options: CameraOptions = {
-      quality: 50,
+      quality: 90,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: sourceType,
-      targetWidth: 500,
-      targetHeight: 500,
+      targetWidth: 1000,
+      targetHeight: 1000,
       saveToPhotoAlbum: false
     };
 
@@ -107,7 +107,7 @@ export class TiendaAlgoDulcePage {
           id: this.tiendaID
         }
         this._data.nuevaImgPerfil(body)
-          .then(() => console.log('listoo'));
+          .then(() => this.cargarTienda());
 
       }, (err) => { console.log('ERROR') });
     } else {
