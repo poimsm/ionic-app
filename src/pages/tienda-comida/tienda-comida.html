@@ -13,7 +13,7 @@
   <ion-list text-wrap style="margin-top:10px">
     <button ion-item>
       <div item-start style="position:relative">
-        <div *ngIf="tienda?.imgPerfil.url" style="min-height:90px;width:90px;border-radius:5px;background-size:cover;background-repeat: no-repeat;background-position: center;"
+        <div *ngIf="tienda?.imgPerfil.url" style="min-height:70px;width:70px;border-radius:5px;background-size:cover;background-repeat: no-repeat;background-position: center;"
           [ngStyle]="{'background-image': 'url(' + tienda?.imgPerfil.url + ')' }">
         </div>
         <div style="text-align:center;border-radius:3px;padding:4px;padding-left:10px;padding-right:10px;background:rgba(0, 0, 0, 0.5);position:absolute;bottom:10px;right:10px;color:white;font-size:14px">
@@ -26,6 +26,9 @@
     </button>
   </ion-list>
 
+  <div style="margin-left:15px;margin-bottom:10px;margin-top:25px;font-size:11px;font-weight:600;color:#666">
+    DEFINIR
+  </div>
   <ion-item (click)="openEntregas(true)" style="margin:10px" no-lines>
     <ion-icon item-start name="bicycle" style="color:orange;font-size:35px"></ion-icon>
     <div style="color:#777;font-size:18px;font-weight:500">
@@ -44,6 +47,32 @@
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </ion-item>
 
+
+  <div style="margin-left:15px;margin-bottom:10px;margin-top:25px;font-size:11px;font-weight:600;color:#666">
+    MÉTRICAS
+  </div>
+  <button (click)="openMisProductos()" ion-item style="margin-top:10px">
+    <div style="font-size:16px;color:#555">
+      Mis productos
+    </div>
+    <div item-end style="font-size:14px;color:#777">
+      {{tienda?.productos}}
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
+  <button ion-item no-lines style="margin:0px">
+    <div style="font-size:16px;color:#555">
+      Mis ventas
+    </div>
+    <div item-end style="font-size:14px;color:#777">
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
+
+
+  <div style="margin-left:15px;margin-bottom:10px;margin-top:25px;font-size:11px;font-weight:600;color:#666">
+    PERFIL
+  </div>
   <button (click)="presentPrompt('nombre')" ion-item style="margin-top:10px">
     <div style="font-size:16px;color:#555">
       Nombre de la tienda
@@ -72,20 +101,11 @@
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </button>
 
-  <div (click)="openNuevoProducto(nuevo)" padding style="margin-top:10px;background:white">
+  <div (click)="openNuevoProducto()" padding style="margin-top:10px;background:white">
     <button ion-button block color="orange3" mode="ios">
       <ion-icon name="add-circle" style="margin-right:10px;font-size:30px"></ion-icon>
       <div style="font-weight:600;font-size:16px">
         Nuevo producto
-      </div>
-    </button>
-  </div>
-
-  <div (click)="openMisProducto(producto)" style="padding-bottom:15px;padding-left:15px;padding-right:15px;background:white;width:600">
-    <button ion-button block color="orange3" mode="ios">
-      <ion-icon name="list" style="margin-right:10px;font-size:30px"></ion-icon>
-      <div style="font-weight:600;font-size:16px">
-        Mis productos (8)
       </div>
     </button>
   </div>

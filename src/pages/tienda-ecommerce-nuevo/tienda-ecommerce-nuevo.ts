@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, Select } from 'ionic-angular';
-import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
+import { IonicPage, NavController, NavParams, Platform, Select, ActionSheetController } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
 import { PopupsProvider } from '../../providers/popups/popups';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @IonicPage()
 @Component({
@@ -42,10 +42,11 @@ export class TiendaEcommerceNuevoPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private imagePicker: ImagePicker,
     private platform: Platform,
     private _data: DataProvider,
-    private _popups: PopupsProvider
+    private _popups: PopupsProvider,
+    private camera: Camera,
+    private actionSheetCtrl: ActionSheetController
   ) {
     this.tipo = this.navParams.get('tipo');
     this.tiendaID = this.navParams.get('tiendaID');
@@ -122,25 +123,54 @@ export class TiendaEcommerceNuevoPage {
     }
   }
 
-  seleccionar_foto() {
+  presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Select Image Source',
+      buttons: [
+        {
+          text: 'Cargar desde galería',
+          handler: () => {
+            this.tomarFoto(this.camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Usar cámara',
+          handler: () => {
+            this.tomarFoto(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  tomarFoto(sourceType) {
+    const options: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: sourceType,
+      targetWidth: 500,
+      targetHeight: 500,
+      saveToPhotoAlbum: false
+    };
 
     if (this.platform.is('cordova')) {
-      const options: ImagePickerOptions = {
-        quality: 70,
-        outputType: 1,
-        maximumImagesCount: 1
-      }
-      this.imagePicker.getPictures(options).then((results) => {
-        for (var i = 0; i < results.length; i++) {
-          this.imagenes.push('data:image/jpeg;base64,' + results[i]);
-        }
+      this.camera.getPicture(options).then((imageData) => {
+        const base64Image = 'data:image/jpeg;base64,' + imageData;
+        this.imagenes.push(base64Image);
       }, (err) => { console.log('ERROR') });
     } else {
       const img = "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
       this.imagenes.push('data:image/png;base64,' + img);
     }
-
   }
+
 
   save() {
     const producto: any = {
@@ -166,7 +196,9 @@ export class TiendaEcommerceNuevoPage {
     console.log(producto);
 
     this._data.crearProductoEcommerce(producto);
-    this.navCtrl.pop();
+    setTimeout(() => {
+      this.navCtrl.pop();
+    }, 100);
   }
 
 }

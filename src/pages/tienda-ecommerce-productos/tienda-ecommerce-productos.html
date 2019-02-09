@@ -1,0 +1,39 @@
+<ion-header no-border>
+  <ion-navbar align-title="center" color="white">
+    <ion-title>Mis productos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+
+  <div style="margin-left:15px;margin-top:0px;margin-bottom:10px;color:#444;font-size:20px;font-weight:500">
+    Todas las categorías
+  </div>
+
+  <ion-grid>
+    <ion-row>
+
+      <ion-col *ngFor="let item of data" col-6 col-md-4 col-xl-3>
+        <div style="border:1px solid #eee;border-radius:0px">
+          <div style="border-radius:0px;min-height:150px; background-size:cover;background-repeat: no-repeat;background-position: center;"
+            [ngStyle]="{'background-image': 'url(' + item.imgs[0].url + ')' }">
+          </div>
+          <!-- <div style="padding:5px;width:100%;font-size:16px;color:#444;font-weight:600">
+                {{item.titulo}}
+              </div> -->
+          <div style="border-top:0.5px dashed #eee;padding:5px;">
+            <div style="width:100%;display:flex;align-items:flex-end;justify-content:space-between;font-size:15px">
+              <div style="color:#555;font-size:16px">
+                ${{item.precio.valorProducto}}
+              </div>
+              <ion-icon (click)="presentPopover($event, item._id)" name="more" style="font-size:24px;color:#777"></ion-icon>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

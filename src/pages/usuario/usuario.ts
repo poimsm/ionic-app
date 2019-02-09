@@ -35,10 +35,15 @@ export class UsuarioPage {
   }
 
   openTienda() {
-    // TiendaComidaPage
-    // TiendaAlgoDulcePage
-    // TiendaEcommercePage
-    this.navCtrl.push(TiendaEcommercePage, { id: this.tiendaID });
+    if (this.user.tienda.tipo == 'algo dulce') {
+      this.navCtrl.push(TiendaAlgoDulcePage, { id: this.tiendaID });
+    }
+    if (this.user.tienda.tipo == 'comida') {
+      this.navCtrl.push(TiendaComidaPage, { id: this.tiendaID });
+    }
+    if (this.user.tienda.tipo == 'ecommerce') {
+      this.navCtrl.push(TiendaEcommercePage, { id: this.tiendaID });
+    }
   }
 
   openHistorial() {
@@ -101,5 +106,14 @@ export class UsuarioPage {
     });
     alert.present();
   }
+
+  logout() {
+    // this.afAuth.auth.signOut().then(() => {
+    this._auth.logout(this.token, this.user);
+    this.navCtrl.pop();
+    // this.menuCtrl.close();
+    // });
+  }
+
 
 }

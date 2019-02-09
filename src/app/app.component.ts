@@ -10,9 +10,6 @@ import { UsuarioPage } from '../pages/usuario/usuario';
 import { PopupsProvider } from '../providers/popups/popups';
 import { UpgradePage } from '../pages/upgrade/upgrade';
 import { MisPedidosPage } from '../pages/mis-pedidos/mis-pedidos';
-import { TiendaPage } from '../pages/tienda/tienda';
-import { TiendaDeliveryDulcePage } from '../pages/tienda-delivery-dulce/tienda-delivery-dulce';
-import { TiendaDeliveryNormalPage } from '../pages/tienda-delivery-normal/tienda-delivery-normal';
 import { TiendaEcommercePage, OncePage } from "../pages/index.pages";
 import { TiendaAlojamientoPage } from '../pages/tienda-alojamiento/tienda-alojamiento';
 import { LocalizacionProvider } from '../providers/localizacion/localizacion';
@@ -30,7 +27,6 @@ export class MyApp {
   usuario = UsuarioPage;
   upgrade = UpgradePage;
   pedidos = MisPedidosPage;
-  tienda = TiendaPage;
 
   isAuth = false;
   user: any = {};
@@ -96,10 +92,10 @@ export class MyApp {
   }
 
   logout() {
-    this.afAuth.auth.signOut().then(() => {
-      this._auth.logout(this.token, this.user);
-      this.menuCtrl.close();
-    });
+    // this.afAuth.auth.signOut().then(() => {
+    this._auth.logout(this.token, this.user);
+    this.menuCtrl.close();
+    // });
   }
 
   openLogin() {
@@ -150,19 +146,19 @@ export class MyApp {
   }
 
   openTienda(tipo) {
-    if (tipo == 'DELIVERY_NORMAL') {
-      this.nav.setRoot(TiendaDeliveryNormalPage, { id: this.user.tienda.id });
-    }
-    if (tipo == 'DELIVERY_DULCE') {
-      this.nav.setRoot(TiendaDeliveryDulcePage, { id: this.user.tienda.id });
-    }
-    if (tipo == 'ECOMMERCE') {
-      this.nav.setRoot(TiendaEcommercePage, { id: this.user.tienda.id });
-    }
-    if (tipo == 'ALOJAMIENTO') {
-      this.nav.setRoot(TiendaAlojamientoPage, { id: this.user.tienda.id });
-    }
-    this.menuCtrl.close();
+    // if (tipo == 'DELIVERY_NORMAL') {
+    //   this.nav.setRoot(TiendaDeliveryNormalPage, { id: this.user.tienda.id });
+    // }
+    // if (tipo == 'DELIVERY_DULCE') {
+    //   this.nav.setRoot(TiendaDeliveryDulcePage, { id: this.user.tienda.id });
+    // }
+    // if (tipo == 'ECOMMERCE') {
+    //   this.nav.setRoot(TiendaEcommercePage, { id: this.user.tienda.id });
+    // }
+    // if (tipo == 'ALOJAMIENTO') {
+    //   this.nav.setRoot(TiendaAlojamientoPage, { id: this.user.tienda.id });
+    // }
+    // this.menuCtrl.close();
 
   }
 

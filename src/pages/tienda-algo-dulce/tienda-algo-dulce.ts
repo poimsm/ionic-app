@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, AlertController, ModalController, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, Platform, AlertController, ModalController, ActionSheetController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { TiendaGaleriaPage } from '../tienda-galeria/tienda-galeria';
 import { DataProvider } from '../../providers/data/data';
-import { TiendaNuevoPage } from '../tienda-nuevo/tienda-nuevo';
 import { TiendaProductoPage } from '../tienda-producto/tienda-producto';
 import { TiendaHorarioPage } from '../tienda-horario/tienda-horario';
 import { GaleriaImagenPage } from '../galeria-imagen/galeria-imagen';
 import { ImageProvider } from '../../providers/image/image';
 import { TiendaEnviosPage } from '../tienda-envios/tienda-envios';
 import { TiendaEnviosDeliveryPage } from '../tienda-envios-delivery/tienda-envios-delivery';
+import { TiendaAlgoDulceNuevoPage } from '../tienda-algo-dulce-nuevo/tienda-algo-dulce-nuevo';
+import { TiendaAlgoDulceProductosPage } from '../tienda-algo-dulce-productos/tienda-algo-dulce-productos';
 
 
 @IonicPage()
@@ -20,13 +21,13 @@ import { TiendaEnviosDeliveryPage } from '../tienda-envios-delivery/tienda-envio
 })
 export class TiendaAlgoDulcePage {
 
-  nuevo = TiendaNuevoPage;
   producto = TiendaProductoPage;
   tiendaID: string;
   tienda: any;
   imagenPerfil: string;
 
   constructor(
+    public toastCtrl: ToastController,
     private camera: Camera,
     public modalCtrl: ModalController,
     private alertCtrl: AlertController,
@@ -140,8 +141,36 @@ export class TiendaAlgoDulcePage {
     this.navCtrl.push(pagina, { tipo: this.tienda.tipo, tiendaID: this.tiendaID });
   }
 
+  openNuevoProducto() {
+    if (this.tienda.logo && this.tienda.nombre) {
+      this.navCtrl.push(TiendaAlgoDulceNuevoPage, {
+        tipo: this.tienda.tipo,
+        tiendaID: this.tiendaID,
+        ciudad: this.tienda.ciudad
+      });
+    } else {
+      this.faltaCompletarToast();
+    }
+  }
+
+  openMisProductos() {
+    this.navCtrl.push(TiendaAlgoDulceProductosPage, {
+      tipo: this.tienda.tipo,
+      tiendaID: this.tiendaID
+    });
+  }
+
   openHorario() {
     this.navCtrl.push(TiendaHorarioPage);
+  }
+
+  faltaCompletarToast() {
+    let toast = this.toastCtrl.create({
+      message: `Por favor completar Nombre y Logo`,
+      duration: 2500,
+      position: 'middle'
+    });
+    toast.present();
   }
 
   presentPrompt(tipo) {

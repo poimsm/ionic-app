@@ -4,7 +4,6 @@ import { OncePage } from '../once/once';
 import { UsuarioPage } from '../usuario/usuario';
 import { AuthProvider } from '../../providers/auth/auth';
 import { BandejaPage } from '../bandeja/bandeja';
-import { ComprasPage } from '../compras/compras';
 import { FormularioPage } from '../formulario/formulario';
 import { PopupsProvider } from '../../providers/popups/popups';
 import { CarroPage } from '../carro/carro';
@@ -28,7 +27,6 @@ export class HomePage {
   once = OncePage;
   usuario = UsuarioPage;
   carro = CarroPage;
-  compras = ComprasPage;
   bandeja = BandejaPage;
   formulario = FormularioPage;
   frutas = FrutasPage;
@@ -71,6 +69,8 @@ export class HomePage {
         this.user = data.authData.user;
         this.token = data.authData.token;
         this.isAuth = true;
+      } else {
+        this.isAuth = false;
       }
     });
     this.mensaje = this._popups.mensajeHome;

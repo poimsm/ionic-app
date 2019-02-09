@@ -34,6 +34,9 @@
     </button>
   </ion-list>
 
+  <div style="margin-left:15px;margin-bottom:10px;margin-top:25px;font-size:11px;font-weight:600;color:#666">
+    DEFINIR
+  </div>
   <ion-item (click)="openEntregas()" style="margin:10px" no-lines>
     <ion-icon item-start name="bicycle" style="color:orange;font-size:35px"></ion-icon>
     <div style="color:#777;font-size:18px;font-weight:500">
@@ -43,6 +46,32 @@
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </ion-item>
 
+
+  <div style="margin-left:15px;margin-bottom:10px;margin-top:25px;font-size:11px;font-weight:600;color:#666">
+    MÉTRICAS
+  </div>
+  <button (click)="openMisProductos()" ion-item style="margin-top:10px">
+    <div style="font-size:16px;color:#555">
+      Mis productos
+    </div>
+    <div item-end style="font-size:14px;color:#777">
+      {{tienda?.productos}}
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
+  <button ion-item no-lines style="margin:0px">
+    <div style="font-size:16px;color:#555">
+      Mis ventas
+    </div>
+    <div item-end style="font-size:14px;color:#777">
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
+
+
+  <div style="margin-left:15px;margin-bottom:10px;margin-top:25px;font-size:11px;font-weight:600;color:#666">
+    PERFIL
+  </div>
   <button (click)="presentPrompt('nombre')" ion-item style="margin-top:10px" no-lines>
     <div style="font-size:16px;color:#555">
       Nombre de la tienda
@@ -71,7 +100,7 @@
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </button>
 
-  <div (click)="openPage(nuevo)" padding style="margin-top:10px;background:white">
+  <div (click)="openNuevoProducto()" padding style="margin-top:10px;background:white">
     <button ion-button block color="orange3" mode="ios">
       <ion-icon name="add-circle" style="margin-right:10px;font-size:30px"></ion-icon>
       <div style="font-weight:600;font-size:16px">
@@ -79,16 +108,5 @@
       </div>
     </button>
   </div>
-
-  <div (click)="openPage(producto)" padding style="background:white;width:600">
-    <button ion-button block color="orange3" mode="ios">
-      <ion-icon name="list" style="margin-right:10px;font-size:30px"></ion-icon>
-      <div style="font-weight:600;font-size:16px">
-        Mis productos (8)
-      </div>
-    </button>
-  </div>
-
-
 
 </ion-content>

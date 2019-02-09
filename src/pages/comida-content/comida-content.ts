@@ -13,7 +13,9 @@ export class ComidaContentPage {
 
   @ViewChild('aderezoRef') aderezoRef: Select;
   @ViewChild('opcionRef') opcionRef: Select;
-  @ViewChild('cantidadRef') cantidadRef: Select;
+  @ViewChild('personaRef') personaRef: Select;
+  @ViewChild('unidadRef') unidadRef: Select;
+
 
   imgs = [];
   data: any = {};
@@ -92,8 +94,11 @@ export class ComidaContentPage {
     if (key == 'opcion') {
       this.opcionRef.open();
     }
-    if (key == 'cantidad') {
-      this.cantidadRef.open();
+    if (key == 'persona') {
+      this.personaRef.open();
+    }
+    if (key == 'unidad') {
+      this.unidadRef.open();
     }
   }
 

@@ -15,7 +15,7 @@
 
   <hr>
   <div padding style="width:100%;display:flex;justify-content:center;flex-wrap:wrap">
-    <div (click)="seleccionar_foto()" style="margin:10px;width:80px;height:80px;border:1px dashed #eee;display:flex;justify-content:center;align-items:center">
+    <div (click)="presentActionSheet()" style="margin:10px;width:80px;height:80px;border:1px dashed #eee;display:flex;justify-content:center;align-items:center">
       <ion-icon name="md-camera" style="font-size:32px;color:#999"></ion-icon>
     </div>
     <div *ngFor="let imagen of imagenes">

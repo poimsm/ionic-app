@@ -1,8 +1,8 @@
 <ion-header no-border>
   <ion-navbar color="white">
-    <ion-title>Nuevo producto</ion-title>
+    <ion-title>Nuevo productoo</ion-title>
     <ion-buttons right>
-      <button (click)="save()" ion-button [disabled]="!(imagenes.length>0 && categoria?.length>0 && titulo?.length>0 && (flatPrice || precioSegunPersonas || precioSegunUnidades))"
+      <button (click)="save()" ion-button [disabled]="!(imagenes.length>0 && categoria?.length>0 && titulo?.length>0 && tiempoDeEntrega?.length>0 && (flatPrice || precioSegunPersonas || precioSegunUnidades))"
         outline mode="ios">
         Crear
       </button>
@@ -11,7 +11,7 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content *ngIf="tipo == 'algo dulce'">
 
   <hr>
   <div padding style="width:100%;display:flex;justify-content:center;flex-wrap:wrap">
@@ -50,74 +50,67 @@
       <ion-option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</ion-option>
     </ion-select>
   </button>
+  <button ion-item no-lines (click)="openSelect('tiempoDeEntrega')" *ngIf="categoria != 'Desayunos sorpresa'">
+    <ion-label>¿Cuántos días
+      <div>
+        demora en tener listo el producto?
+      </div>
+      <div style="color:green">
+        {{tiempoDeEntrega}}
+      </div>
+    </ion-label>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px"></ion-icon>
+    <ion-select [(ngModel)]="tiempoDeEntrega" style="display:none" #tiempoDeEntregaRef>
+      <ion-option value="Entrega inmediata">Entrega inmediata</ion-option>
+      <ion-option value="Entrega los fines de semana">Entrega los fines de semana</ion-option>
+      <ion-option value="Demora 1 día en entregar">1 día</ion-option>
+      <ion-option value="Demora 2 día en entregar">2 día</ion-option>
+      <ion-option value="Demora 3 día en entregar">3 día</ion-option>
+    </ion-select>
+  </button>
 
 
-  <ion-item no-lines style="margin-top:10px;color:#999;background:rgb(243, 243, 243);font-size:16px;font-weight:500">
-    <ion-label>Lista de aderezos o salsas</ion-label>
-    <ion-toggle [(ngModel)]="isAderezo" mode="ios"></ion-toggle>
+  <ion-item no-lines style="color:#999;background:rgb(243, 243, 243);font-size:16px;font-weight:500">
+    <ion-label>Variaciones</ion-label>
+    <ion-toggle [(ngModel)]="isVariacion" mode="ios"></ion-toggle>
   </ion-item>
+  <button *ngIf="isVariacion" ion-item no-lines (click)="openSelect('variacion')">
+    <ion-label>
+      Agregar una variación
+      <div style="color:green">
+        {{variacion}}
+      </div>
+    </ion-label>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px"></ion-icon>
+    <ion-select (ionChange)="onVaracionChange($event)" [(ngModel)]="variacion" style="display:none" #variacionRef>
+      <ion-option value="Color">Color</ion-option>
+      <ion-option value="Sabor">Sabor</ion-option>
+      <ion-option value="Variedad">Variedad</ion-option>
+      <ion-option value="Temática">Temática</ion-option>
+    </ion-select>
+  </button>
 
-  <div *ngIf="isAderezo" style="width:100%;padding:15px">
-    <div style="color:#111;font-weight:350;font-size:16px;border:1px solid #eee;border-radius:5px;padding:10px;text-align:center">
-      El cliente podrá seleccionar tantos aderezos como lo desee y gratis
-    </div>
-  </div>
-
-  <div *ngIf="isAderezo  && aderezos.length > 0">
-    <div *ngFor="let aderezo of aderezos;let i = index">
+  <div *ngIf="isVariacion  && variaciones.length > 0">
+    <div *ngFor="let variacion of variaciones;let i = index">
       <div style="display:flex;justify-content:space-between">
         <div style="margin-left:15px;padding:3px;font-size:18px;color:green">
-          &#9679; {{aderezo}}
+          &#9679; {{variacion}}
         </div>
-        <ion-icon (click)="remove(i, 'aderezo')" name="trash" style="color:#bbb;font-size:24px;margin-right:15px"></ion-icon>
+        <ion-icon (click)="remove(i, 'variacion')" name="trash" style="color:#bbb;font-size:24px;margin-right:15px"></ion-icon>
       </div>
     </div>
   </div>
 
-  <div *ngIf="isAderezo" style="padding:10px;width:100%;display:flex;justify-content:center">
+  <div *ngIf="isVariacion  && variacion" style="padding:10px;width:100%;display:flex;justify-content:center">
     <div style="border-radius:3px;width:80%;border:1px solid #eee;display:flex">
-      <ion-input [(ngModel)]="aderezoItem" type="text" placeholder="Ej. Salsa americana" style="font-size:16px;border:0x solid white"></ion-input>
-      <button (click)="add(aderezoItem, 'aderezo')" ion-button icon-only clear>
+      <ion-input [(ngModel)]="variacionItem" type="text" [placeholder]="EjVariacion" style="font-size:16px;border:0x solid white"></ion-input>
+      <button (click)="add(variacionItem, 'variacion')" ion-button icon-only clear>
         <ion-icon name="md-add-circle" style="color:#ccc;font-size:28px"></ion-icon>
       </button>
     </div>
   </div>
 
-
-  <ion-item no-lines style="margin-top:10px;color:#999;background:rgb(243, 243, 243);font-size:16px;font-weight:500">
-    <ion-label>Lista de opciones o preferencias</ion-label>
-    <ion-toggle [(ngModel)]="isOpciones" mode="ios"></ion-toggle>
-  </ion-item>
-
-  <div *ngIf="isOpciones" style="width:100%;padding:15px">
-    <div style="color:#111;font-weight:350;font-size:16px;border:1px solid #eee;border-radius:5px;padding:10px;text-align:center">
-      El cliente podrá seleccionar solo una opción de la lista para definir
-      mejor su compra
-    </div>
-  </div>
-
-  <div *ngIf="isOpciones  && opciones.length > 0">
-    <div *ngFor="let opcion of opciones;let i = index">
-      <div style="display:flex;justify-content:space-between">
-        <div style="margin-left:15px;padding:3px;font-size:18px;color:green">
-          &#9679; {{opcion}}
-        </div>
-        <ion-icon (click)="remove(i, 'opcion')" name="trash" style="color:#bbb;font-size:24px;margin-right:15px"></ion-icon>
-      </div>
-    </div>
-  </div>
-
-  <div *ngIf="isOpciones" style="padding:10px;width:100%;display:flex;justify-content:center">
-    <div style="border-radius:3px;width:90%;border:1px solid #eee;display:flex">
-      <ion-input [(ngModel)]="opcionItem" type="text" placeholder="Ej. Con camarones + bebida" style="font-size:16px;border:0x solid white"></ion-input>
-      <button (click)="add(opcionItem, 'opcion')" ion-button icon-only clear>
-        <ion-icon name="md-add-circle" style="color:#ccc;font-size:28px"></ion-icon>
-      </button>
-    </div>
-  </div>
-
-
-  <ion-item no-lines style="margin-top:10px;color:#999;background:rgb(243, 243, 243);font-size:16px;font-weight:500">
+  <ion-item no-lines style="margin-top:5px;color:#999;background:rgb(243, 243, 243);font-size:16px;font-weight:500">
     Precio
   </ion-item>
   <button (click)="flat=!flat;personas=false;unidades=false" ion-item no-lines style="color:#777">
@@ -131,7 +124,7 @@
     <ion-icon *ngIf="!personas" item-start name="radio-button-off" style="color:#bbb"></ion-icon>
     Variar precio según número de
     <div>
-      personas o tamaño
+      personas
     </div>
   </button>
 
@@ -187,16 +180,22 @@
       </div>
       <ion-item style="display:none">
         <ion-label>
-          Cantidad
+          Personas
         </ion-label>
         <ion-select [(ngModel)]="numeroDePersonas" style="display:none" #personasRef>
-          <ion-option value="1 persona">Para 1 persona</ion-option>
-          <ion-option value="2 personas">Para 2 personas</ion-option>
-          <ion-option value="3 personas">Para 3 personas</ion-option>
-          <ion-option value="4 personas">Para 4 personas</ion-option>
-          <ion-option value="5 personas">Para 5 personas</ion-option>
-          <ion-option value="6 personas">Para 6 personas</ion-option>
-          <ion-option value="8 personas">Para 8 personas</ion-option>
+          <ion-option value="1 persona">1 persona</ion-option>
+          <ion-option value="2 personas">2 personas</ion-option>
+          <ion-option value="3 personas">3 personas</ion-option>
+          <ion-option value="4 personas">4 personas</ion-option>
+          <ion-option value="5 personas">5 personas</ion-option>
+          <ion-option value="6 personas">6 personas</ion-option>
+          <ion-option value="8 personas">8 personas</ion-option>
+          <ion-option value="10 personas">10 personas</ion-option>
+          <ion-option value="12 personas">12 personas</ion-option>
+          <ion-option value="15 personas">15 personas</ion-option>
+          <ion-option value="20 personas">20 personas</ion-option>
+          <ion-option value="25 personas">25 personas</ion-option>
+          <ion-option value="30 personas">30 personas</ion-option>
         </ion-select>
       </ion-item>
       <button (click)="addPersonas(precioSegunPersonas,numeroDePersonas)" ion-button icon-only clear>
@@ -216,10 +215,10 @@
       </div>
       <ion-item style="display:none">
         <ion-label>
-          Cantidad
+          Unidades
         </ion-label>
         <ion-select [(ngModel)]="numeroDeUnidades" #unidadesRef>
-          <ion-option value="1 unidad">1 unidad</ion-option>
+          <ion-option value="1 unidad">1 unidade</ion-option>
           <ion-option value="2 unidades">2 unidades</ion-option>
           <ion-option value="3 unidades">3 unidades</ion-option>
           <ion-option value="4 unidades">4 unidades</ion-option>
@@ -231,13 +230,7 @@
           <ion-option value="15 unidades">15 unidades</ion-option>
           <ion-option value="20 unidades">20 unidades</ion-option>
           <ion-option value="25 unidades">25 unidades</ion-option>
-          <ion-option value="30 unidades">35 unidades</ion-option>
-          <ion-option value="30 unidades">40 unidades</ion-option>
-          <ion-option value="30 unidades">45 unidades</ion-option>
-          <ion-option value="30 unidades">50 unidades</ion-option>
-          <ion-option value="30 unidades">55 unidades</ion-option>
-          <ion-option value="30 unidades">60 unidades</ion-option>
-          <ion-option value="30 unidades">70 unidades</ion-option>
+          <ion-option value="30 unidades">30 unidades</ion-option>
         </ion-select>
       </ion-item>
       <button (click)="addUnidades(precioSegunUnidades,numeroDeUnidades)" ion-button icon-only clear>

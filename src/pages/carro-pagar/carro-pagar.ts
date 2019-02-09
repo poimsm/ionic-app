@@ -71,6 +71,16 @@ export class CarroPagarPage {
     this.carro = this.navParams.get('carro');
     this.token = this.navParams.get('token');
     this.user = this.navParams.get('user');
+    if (this.user.phone) {
+      this.telefono = this.user.phone;
+      this.isTelefono = true;
+    }
+    if (this.user.address) {
+      this.direccion = this.user.address;
+      this.isDireccion = true;
+    }
+    console.log(this.user);
+
   }
 
   openSelect(tipo) {
@@ -147,13 +157,13 @@ export class CarroPagarPage {
         let url = respuesta.url;
 
         const browser = this.iab.create(url + '?token=' + token, '_blank', 'location=yes');
-        
+
 
         browser.on('exit').subscribe(event => {
           alert("vista cerrada")
-       });
+        });
 
-       browser.show();
+        browser.show();
 
       }
 

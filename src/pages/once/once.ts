@@ -10,7 +10,6 @@ import { DataProvider } from "../../providers/data/data";
 import { OnceContentPage } from "../once-content/once-content";
 import { CategoriasPage } from '../categorias/categorias';
 import { PopupsProvider } from "../../providers/popups/popups";
-import { OnceSopresaPage } from "../once-sopresa/once-sopresa";
 
 @IonicPage()
 @Component({
@@ -116,8 +115,5 @@ export class OncePage {
       });
   }
 
-  openSorpresa(sorpresa) {
-    this.navCtrl.push(OnceSopresaPage, { sorpresa })
-  }
 
 }

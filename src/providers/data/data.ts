@@ -114,30 +114,70 @@ export class DataProvider {
     return this.http.put(url, body).toPromise();
   }
 
+  updateTotalProductsTienda(id, update) {
+    const body = { update };
+    const url = `${this.apiURL}/apps/tienda-actualizar-productos/${id}`;
+    this.http.put(url, body).toPromise();
+  }
+
   crearProductoOnce(body) {
     this.productoSubiendo();
     const url = `${this.apiURL}/apps/once-crear`;
     this.http.post(url, body).toPromise()
-      .then(() => this.productoCreado());
+      .then(() => {
+        this.updateTotalProductsTienda(body.tienda, 1);
+        this.productoCreado();
+      });
   }
 
   crearProductoEcommerce(body) {
     this.productoSubiendo();
     const url = `${this.apiURL}/apps/ecommerce-crear`;
     this.http.post(url, body).toPromise()
-      .then(() => this.productoCreado());
+      .then(() => {
+        this.updateTotalProductsTienda(body.tienda, 1);
+        this.productoCreado();
+      });
   }
 
   crearProductoComida(body) {
     this.productoSubiendo();
     const url = `${this.apiURL}/apps/comida-crear`;
     this.http.post(url, body).toPromise()
-      .then(() => this.productoCreado());
+      .then(() => {
+        this.updateTotalProductsTienda(body.tienda, 1);
+        this.productoCreado();
+      });
   }
 
   onceByTiendID(id) {
     const url = `${this.apiURL}/apps/once-por-tienda/${id}`;
     return this.http.get(url).toPromise();
+  }
+
+  ecommerceByTiendID(id) {
+    const url = `${this.apiURL}/apps/ecommerce-por-tienda/${id}`;
+    return this.http.get(url).toPromise();
+  }
+
+  comidaByTiendID(id) {
+    const url = `${this.apiURL}/apps/comida-por-tienda/${id}`;
+    return this.http.get(url).toPromise();
+  }
+
+  deleteProductOnce(id) {
+    const url = `${this.apiURL}/apps/once-delete/${id}`;
+    return this.http.delete(url).toPromise();
+  }
+
+  deleteProductComida(id) {
+    const url = `${this.apiURL}/apps/comida-delete/${id}`;
+    return this.http.delete(url).toPromise();
+  }
+
+  deleteProductEcommerce(id) {
+    const url = `${this.apiURL}/apps/ecommerce-delete/${id}`;
+    return this.http.delete(url).toPromise();
   }
 
   getAll(skip, limit, category, ciudad, route) {

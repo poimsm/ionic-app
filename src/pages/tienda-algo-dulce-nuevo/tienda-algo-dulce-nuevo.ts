@@ -4,13 +4,12 @@ import { DataProvider } from '../../providers/data/data';
 import { PopupsProvider } from '../../providers/popups/popups';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
-
 @IonicPage()
 @Component({
-  selector: 'page-tienda-comida-nuevo',
-  templateUrl: 'tienda-comida-nuevo.html',
+  selector: 'page-tienda-algo-dulce-nuevo',
+  templateUrl: 'tienda-algo-dulce-nuevo.html',
 })
-export class TiendaComidaNuevoPage {
+export class TiendaAlgoDulceNuevoPage {
 
   @ViewChild('tiempoDeEntregaRef') tiempoDeEntregaRef: Select;
   @ViewChild('categoriaRef') categoriaRef: Select;
@@ -23,35 +22,39 @@ export class TiendaComidaNuevoPage {
   titulo: string;
   descripcion: string;
 
+  isVariacion = false;
   flat = true;
   personas = false;
   unidades = false;
   variable = false;
+
+  EjVariacion: string;
   flatPrice: number;
 
+  variaciones = [];
   imagenes = [];
   unidadesArray = [];
   personasArray = [];
-  aderezos = [];
-  opciones = [];
 
-  numeroDePersonas = 'Personas';
-  numeroDeUnidades = 'Unidades';
+  numeroDePersonas = 'Seleccionar';
+  numeroDeUnidades = 'Seleccionar';
 
   tiempoDeEntrega: string;
+  variacion: string;
+
   tipo: string;
   tiendaID: string;
-  ciudad: string;
   categorias = [];
+  ciudad: string;
 
   constructor(
     public navCtrl: NavController,
+    private camera: Camera,
     public navParams: NavParams,
     private platform: Platform,
     private _data: DataProvider,
     private _popups: PopupsProvider,
-    private actionSheetCtrl: ActionSheetController,
-    private camera: Camera
+    private actionSheetCtrl: ActionSheetController
   ) {
     this.tipo = this.navParams.get('tipo');
     this.tiendaID = this.navParams.get('tiendaID');
@@ -64,7 +67,7 @@ export class TiendaComidaNuevoPage {
 
   setUp() {
     let categoriasObj = {};
-    categoriasObj = this._popups.categoriasComida;
+    categoriasObj = this._popups.categoriasOnce;
     Object.keys(categoriasObj).forEach(key => {
       this.categorias.push(categoriasObj[key]);
     });
@@ -73,6 +76,9 @@ export class TiendaComidaNuevoPage {
   add(item, tipo) {
     if (!item) {
       return
+    }
+    if (tipo == 'variacion') {
+      this.variaciones.push(item)
     }
     if (tipo == 'personas') {
       this.personasArray.push(item)
@@ -83,15 +89,12 @@ export class TiendaComidaNuevoPage {
     if (tipo == 'imagen') {
       this.imagenes.push(item)
     }
-    if (tipo == 'aderezo') {
-      this.aderezos.push(item)
-    }
-    if (tipo == 'opcion') {
-      this.opciones.push(item)
-    }
   }
 
   remove(index, tipo) {
+    if (tipo == 'variacion') {
+      this.variaciones.splice(index, 1);
+    }
     if (tipo == 'personas') {
       this.personasArray.splice(index, 1);
     }
@@ -101,18 +104,34 @@ export class TiendaComidaNuevoPage {
     if (tipo == 'imagen') {
       this.imagenes.splice(index, 1);
     }
-    if (tipo == 'aderezo') {
-      this.aderezos.splice(index, 1);
-    }
-    if (tipo == 'opcion') {
-      this.opciones.splice(index, 1);
-    }
   }
 
+
+
+  onVaracionChange(event: any) {
+    if (event == 'Color') {
+      this.EjVariacion = 'Ej. Pastel rosado'
+    }
+    if (event == 'Sabor') {
+      this.EjVariacion = 'Ej. Limón'
+    }
+    if (event == 'Temática') {
+      this.EjVariacion = 'Ej. Cumpleaños'
+    }
+    if (event == 'Variedad') {
+      this.EjVariacion = 'Ej. Libre de azucar'
+    }
+  }
 
   openSelect(tipo) {
     if (tipo == 'categoria') {
       this.categoriaRef.open();
+    }
+    if (tipo == 'tiempoDeEntrega') {
+      this.tiempoDeEntregaRef.open();
+    }
+    if (tipo == 'variacion') {
+      this.variacionRef.open();
     }
     if (tipo == 'personas') {
       this.personasRef.open();
@@ -190,27 +209,23 @@ export class TiendaComidaNuevoPage {
     }
   }
 
+
   save() {
     const producto: any = {
       titulo: this.titulo,
       descripcion: this.descripcion,
       imgs: this.imagenes,
       categoria: this.categoria,
+      tiempoDeEntrega: this.tiempoDeEntrega,
       tienda: this.tiendaID,
       ciudad: this.ciudad
     }
 
-    if (this.aderezos.length > 0) {
-      producto.aderezos = {
+    if (this.isVariacion) {
+      producto.variaciones = {
         isActive: true,
-        array: this.aderezos
-      }
-    }
-
-    if (this.opciones.length > 0) {
-      producto.opciones = {
-        isActive: true,
-        array: this.opciones
+        tipo: this.variacion,
+        array: this.variaciones
       }
     }
 
@@ -220,7 +235,6 @@ export class TiendaComidaNuevoPage {
         value: this.flatPrice
       }
     }
-
     if (this.unidades) {
       producto.precio = {
         tipo: 'unidad',
@@ -234,11 +248,10 @@ export class TiendaComidaNuevoPage {
         array: this.personasArray
       }
     }
-    console.log(producto);
-
-    this._data.crearProductoComida(producto);
-    this.navCtrl.pop();
+    this._data.crearProductoOnce(producto);
+    setTimeout(() => {
+      this.navCtrl.pop();
+    }, 100);
   }
 
 }
-

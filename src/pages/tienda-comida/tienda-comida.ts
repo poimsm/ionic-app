@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, AlertController, ModalController, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, Platform, AlertController, ModalController, ActionSheetController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { TiendaGaleriaPage } from '../tienda-galeria/tienda-galeria';
@@ -10,6 +10,7 @@ import { GaleriaImagenPage } from '../galeria-imagen/galeria-imagen';
 import { ImageProvider } from '../../providers/image/image';
 import { TiendaComidaNuevoPage } from '../tienda-comida-nuevo/tienda-comida-nuevo';
 import { TiendaEnviosDeliveryPage } from '../tienda-envios-delivery/tienda-envios-delivery';
+import { TiendaComidaProductosPage } from '../tienda-comida-productos/tienda-comida-productos';
 
 
 @IonicPage()
@@ -26,6 +27,7 @@ export class TiendaComidaPage {
   imagenPerfil: string;
 
   constructor(
+    public toastCtrl: ToastController,
     private camera: Camera,
     public modalCtrl: ModalController,
     private alertCtrl: AlertController,
@@ -137,15 +139,19 @@ export class TiendaComidaPage {
   }
 
   openNuevoProducto() {
-    this.navCtrl.push(TiendaComidaNuevoPage, {
-      tipo: this.tienda.tipo,
-      tiendaID: this.tiendaID,
-      ciudad: this.tienda.ciudad
-    });
+    if (this.tienda.logo && this.tienda.nombre) {
+      this.navCtrl.push(TiendaComidaNuevoPage, {
+        tipo: this.tienda.tipo,
+        tiendaID: this.tiendaID,
+        ciudad: this.tienda.ciudad
+      });
+    } else {
+      this.faltaCompletarToast();
+    }
   }
 
-  openMisProducto() {
-    this.navCtrl.push(TiendaComidaNuevoPage, {
+  openMisProductos() {
+    this.navCtrl.push(TiendaComidaProductosPage, {
       tipo: this.tienda.tipo,
       tiendaID: this.tiendaID,
       ciudad: this.tienda.ciudad
@@ -157,6 +163,15 @@ export class TiendaComidaPage {
       tiendaID: this.tiendaID,
       horario: this.tienda.horario
     });
+  }
+
+  faltaCompletarToast() {
+    let toast = this.toastCtrl.create({
+      message: `Por favor completar Nombre y Logo`,
+      duration: 2500,
+      position: 'middle'
+    });
+    toast.present();
   }
 
   presentPrompt(tipo) {
