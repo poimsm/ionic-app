@@ -10,6 +10,7 @@ import { DataProvider } from "../../providers/data/data";
 import { OnceContentPage } from "../once-content/once-content";
 import { CategoriasPage } from '../categorias/categorias';
 import { PopupsProvider } from "../../providers/popups/popups";
+import { LocalizacionProvider } from '../../providers/localizacion/localizacion';
 
 @IonicPage()
 @Component({
@@ -37,7 +38,8 @@ export class OncePage {
     public navParams: NavParams,
     public popoverCtrl: PopoverController,
     private _data: DataProvider,
-    private _popups: PopupsProvider
+    private _popups: PopupsProvider,
+    private _localizacion: LocalizacionProvider
   ) {
     this.isCategoria = this.navParams.get('isCategoria');
     this.categoria = this.navParams.get('categoria');
@@ -46,9 +48,9 @@ export class OncePage {
 
   ionViewDidLoad() {
     if (this.isCategoria) {
-      this.getOnceByCategory(this.categoria);
+      this.getOnceByCategory(this.categoria, this.ciudad);
     } else {
-      this.getOnceByCategory(null);
+      this.getOnceByCategory(null, this.ciudad);
     }
     this.getSorpresas();
     // this.presentAlert();
@@ -79,6 +81,16 @@ export class OncePage {
     this.navCtrl.push(OnceContentPage, { once });
   }
 
+  setLocalizacion() {
+    this._localizacion.seleccionarCiudad()
+      .then((data: any) => {
+        if (data.ok) {
+          this.ciudad = data.ciudad;
+          this.getOnceByCategory(null, data.ciudad);
+        }
+      });
+  }
+
   presentPopover(myEvent) {
     const popover = this.popoverCtrl.create(CategoriasPage, this.categoriasObj);
     popover.present({
@@ -88,15 +100,15 @@ export class OncePage {
     popover.onDidDismiss(data => {
       if (data) {
         this.categoria = this.categorias[data.index];
-        this.getOnceByCategory(this.categorias[data.index]);
+        this.getOnceByCategory(this.categorias[data.index], this.ciudad);
       }
     });
   }
 
-  async getOnceByCategory(categoria) {
+  async getOnceByCategory(categoria, ciudad) {
     const route = 'apps/once-all';
 
-    this._data.getAll(0, 10, categoria, this.ciudad, route)
+    this._data.getAll(0, 10, categoria, ciudad, route)
       .then((data: any[]) => {
         this.data = data;
       });

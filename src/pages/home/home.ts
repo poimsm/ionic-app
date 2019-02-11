@@ -16,6 +16,11 @@ import { LocalizacionProvider } from '../../providers/localizacion/localizacion'
 import { ComidaPage } from '../comida/comida';
 import { EcommercePage } from "../ecommerce/ecommerce";
 import { CarroProvider } from '../../providers/carro/carro';
+import { DataProvider } from '../../providers/data/data';
+import { OnceContentPage } from "../once-content/once-content";
+import { EcommerceContentPage } from '../ecommerce-content/ecommerce-content';
+import { ComidaContentPage } from '../comida-content/comida-content';
+import { CarroPagarPage } from '../carro-pagar/carro-pagar';
 
 
 @Component({
@@ -35,6 +40,11 @@ export class HomePage {
   comida = ComidaPage;
   ecommerce = EcommercePage;
 
+  cosas = [];
+  algoDulce = [];
+  comidas = [];
+  productos = [];
+
   mensaje = '';
 
   showFormulario = false;
@@ -50,15 +60,16 @@ export class HomePage {
     private platform: Platform,
     public modalCtrl: ModalController,
     private _localizacion: LocalizacionProvider,
-    private _carro: CarroProvider
+    private _carro: CarroProvider,
+    private _data: DataProvider
 
   ) {
     if (!this.platform.is('cordova')) {
       this.showFormulario = true;
     }
-    if (!this._localizacion.ciudad) {
-      this._localizacion.showRadio();
-    }
+    // if (!this._localizacion.ciudad) {
+    //   this._localizacion.seleccionarCiudad();
+    // }
   }
 
   ionViewDidLoad() {
@@ -74,10 +85,39 @@ export class HomePage {
       }
     });
     this.mensaje = this._popups.mensajeHome;
+    // this.getCosas();
+    this.getAlgoDulce();
+    this.getComida();
+    this.getEcommerce();
+  }
+
+  getCosas() {
+    this._data.fetchCosas()
+      .then((data: any) => {
+        console.log(data);
+
+        this.cosas = data;
+      });
+  }
+
+  getAlgoDulce() {
+    this._data.fetchAlgoDulceHome()
+      .then((data: any) => this.algoDulce = data);
+  }
+
+  getComida() {
+    this._data.fetchComida()
+      .then((data: any) => this.comidas = data);
+  }
+
+  getEcommerce() {
+    this._data.fetchEcommerce()
+      .then((data: any) => this.productos = data
+      );
   }
 
   setLocalizacion() {
-    this._localizacion.showRadio();
+    this._localizacion.seleccionarCiudad();
   }
 
 
@@ -99,8 +139,29 @@ export class HomePage {
         ciudad: this._localizacion.ciudad
       });
     } else {
-      this._localizacion.showRadio();
+      this._localizacion.seleccionarCiudad()
+        .then((data: any) => {
+          if (data.ok) {
+            this.navCtrl.push(pagina, {
+              isCategoria: false,
+              categoria: 'none',
+              ciudad: data.ciudad
+            });
+          }
+        });
     }
+  }
+
+  openEcommerce() {
+    this.navCtrl.push(EcommercePage, {
+      isCategoria: false,
+      categoria: 'none',
+      ciudad: this._localizacion.ciudad
+    });
+  }
+
+  openCarro() {
+    this.navCtrl.push(CarroPagarPage);
   }
 
   openUser() {
@@ -116,6 +177,23 @@ export class HomePage {
   }
 
   reloadInicio() {
-    console.log('Recargado');
+    // this.getCosas();
+    this.getAlgoDulce();
+    this.getEcommerce();
+    this.getComida();
+  }
+
+  openContent(item, tipo) {
+    if (tipo == 'once') {
+      this.navCtrl.push(OnceContentPage, { once: item });
+    }
+
+    if (tipo == 'comida') {
+      this.navCtrl.push(ComidaContentPage, { once: item });
+    }
+
+    if (tipo == 'ecommerce') {
+      this.navCtrl.push(EcommerceContentPage, { once: item });
+    }
   }
 }

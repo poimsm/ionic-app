@@ -64,8 +64,14 @@ export class DataProvider {
     return this.http.get(url).toPromise();
   }
 
+
   deliveryEcommerce() {
     const url = `${this.apiURL}/compras/delivery-ecommerce`;
+    return this.http.get(url).toPromise();
+  }
+
+  fetchCosas() {
+    const url = `${this.apiURL}/apps/cosas-all`;
     return this.http.get(url).toPromise();
   }
 
@@ -81,6 +87,21 @@ export class DataProvider {
 
   fetchSorpresa() {
     const url = `${this.apiURL}/apps/once-sorpresa-all`;
+    return this.http.get(url).toPromise();
+  }
+
+  fetchAlgoDulceHome() {
+    const url = `${this.apiURL}/apps/once-home/?ciudad=VALDIVIA`;
+    return this.http.get(url).toPromise();
+  }
+
+  fetchComida() {
+    const url = `${this.apiURL}/apps/comida-home/?ciudad=VALDIVIA`;
+    return this.http.get(url).toPromise();
+  }
+
+  fetchEcommerce() {
+    const url = `${this.apiURL}/apps/ecommerce-home/?ciudad=VALDIVIA`;
     return this.http.get(url).toPromise();
   }
 

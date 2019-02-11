@@ -32,13 +32,13 @@
           </span>
         </div>
         <div style="width:100%;display:flex;align-items:center">
-          <div (click)="_carro.addMore('-', i)" style="color:#777;background:#eee;width:30px;height:30px;border-radius:50%;font-weight:800;font-size:28px;display:flex;justify-content:center;align-items:center">
+          <div (click)="_carro.addMore('-', i)" style="color:#777;border:1px solid #eee;width:30px;height:30px;border-radius:50%;font-weight:400;font-size:28px;display:flex;justify-content:center;align-items:center">
             -
           </div>
-          <div style="margin-left:10px;margin-right:10px;color:#777;width:25px;height:25px;border-radius:50%;font-weight:600;font-size:17px;display:flex;justify-content:center;align-items:center">
+          <div style="margin-left:10px;margin-right:10px;color:#777;width:25px;height:25px;border-radius:50%;font-weight:500;font-size:17px;display:flex;justify-content:center;align-items:center">
             {{item.cantidad}}
           </div>
-          <div (click)="_carro.addMore('+', i)" style="color:#777;background:#eee;width:30px;height:30px;border-radius:50%;font-weight:800;font-size:28px;display:flex;justify-content:center;align-items:center">
+          <div (click)="_carro.addMore('+', i)" style="color:#777;border:1px solid #eee;width:30px;height:30px;border-radius:50%;font-weight:400;font-size:28px;display:flex;justify-content:center;align-items:center">
             +
           </div>
         </div>
@@ -60,13 +60,13 @@
           </span>
         </div>
         <div style="width:100%;display:flex;align-items:center">
-          <div (click)="_carro.addMore('-', i)" style="color:#777;background:#eee;width:30px;height:30px;border-radius:50%;font-weight:800;font-size:28px;display:flex;justify-content:center;align-items:center">
+          <div (click)="_carro.addMore('-', i)" style="color:#777;border:1px solid #eee;width:30px;height:30px;border-radius:50%;font-weight:400;font-size:28px;display:flex;justify-content:center;align-items:center">
             -
           </div>
-          <div style="margin-left:10px;margin-right:10px;color:#777;width:25px;height:25px;border-radius:50%;font-weight:600;font-size:17px;display:flex;justify-content:center;align-items:center">
+          <div style="margin-left:10px;margin-right:10px;color:#777;width:25px;height:25px;border-radius:50%;font-weight:500;font-size:17px;display:flex;justify-content:center;align-items:center">
             {{item.cantidad}}
           </div>
-          <div (click)="_carro.addMore('+', i)" style="color:#777;background:#eee;width:30px;height:30px;border-radius:50%;font-weight:800;font-size:28px;display:flex;justify-content:center;align-items:center">
+          <div (click)="_carro.addMore('+', i)" style="color:#777;border:1px solid #eee;width:30px;height:30px;border-radius:50%;font-weight:400;font-size:28px;display:flex;justify-content:center;align-items:center">
             +
           </div>
         </div>
@@ -82,17 +82,17 @@
         <div style="font-size:18px;margin:0px;color:#ff6633;margin-top:5px;margin-bottom:10px">
           ${{item.total}}
           <span style="color:#555">
-            + 1000 delivery
+            + 1000 Envío
           </span>
         </div>
         <div style="width:100%;display:flex;align-items:center">
-          <div (click)="_carro.addMore('-', i)" style="color:#777;background:#eee;width:30px;height:30px;border-radius:50%;font-weight:800;font-size:28px;display:flex;justify-content:center;align-items:center">
+          <div (click)="_carro.addMore('-', i)" style="color:#777;border:1px solid #eee;width:30px;height:30px;border-radius:50%;font-weight:450;font-size:28px;display:flex;justify-content:center;align-items:center">
             -
           </div>
-          <div style="margin-left:10px;margin-right:10px;color:#777;width:25px;height:25px;border-radius:50%;font-weight:600;font-size:17px;display:flex;justify-content:center;align-items:center">
+          <div style="margin-left:10px;margin-right:10px;color:#777;width:25px;height:25px;border-radius:50%;font-weight:500;font-size:17px;display:flex;justify-content:center;align-items:center">
             {{item.cantidad}}
           </div>
-          <div (click)="_carro.addMore('+', i)" style="color:#777;background:#eee;width:30px;height:30px;border-radius:50%;font-weight:800;font-size:28px;display:flex;justify-content:center;align-items:center">
+          <div (click)="_carro.addMore('+', i)" style="color:#777;border:1px solid #eee;width:30px;height:30px;border-radius:50%;font-weight:450;font-size:28px;display:flex;justify-content:center;align-items:center">
             +
           </div>
         </div>
@@ -108,7 +108,10 @@
       <div style="font-weight:600;font-size:16px;color:#444">
         TOTAL
       </div>
-      <div style="font-size:22px;font-weight:800;color:#ff6633">
+      <div *ngIf="_carro.total == 0" style="font-size:22px;font-weight:800;color:#ffa98c">
+        ${{_carro.total}}
+      </div>
+      <div *ngIf="_carro.total > 0" style="font-size:22px;font-weight:800;color:#ff6633">
         ${{_carro.total}}
       </div>
       <div style="font-weight:350;font-size:14px;color:#999">

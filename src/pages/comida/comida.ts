@@ -10,6 +10,7 @@ import { DataProvider } from "../../providers/data/data";
 import { CategoriasPage } from '../categorias/categorias';
 import { PopupsProvider } from "../../providers/popups/popups";
 import { ComidaContentPage } from '../comida-content/comida-content';
+import { LocalizacionProvider } from '../../providers/localizacion/localizacion';
 
 
 @IonicPage()
@@ -38,7 +39,8 @@ export class ComidaPage {
     public navParams: NavParams,
     public popoverCtrl: PopoverController,
     private _data: DataProvider,
-    private _popups: PopupsProvider
+    private _popups: PopupsProvider,
+    private _localizacion: LocalizacionProvider
   ) {
     this.isCategoria = this.navParams.get('isCategoria');
     this.categoria = this.navParams.get('categoria');
@@ -47,12 +49,10 @@ export class ComidaPage {
 
   ionViewDidLoad() {
     if (this.isCategoria) {
-      this.getOnceByCategory(this.categoria);
+      this.getOnceByCategory(this.categoria, this.ciudad);
     } else {
-      this.getOnceByCategory(null);
+      this.getOnceByCategory(null, this.ciudad);
     }
-    this.getSorpresas();
-    // this.presentAlert();
     this.setUp();
   }
 
@@ -63,8 +63,14 @@ export class ComidaPage {
     });
   }
 
-  getSorpresas() {
-    this._data.fetchSorpresa().then((data: any) => this.sorpresas = data)
+  setLocalizacion() {
+    this._localizacion.seleccionarCiudad()
+      .then((data: any) => {
+        if (data.ok) {
+          this.ciudad = data.ciudad;
+          this.getOnceByCategory(null, data.ciudad);
+        }
+      });
   }
 
   presentAlert() {
@@ -89,15 +95,15 @@ export class ComidaPage {
     popover.onDidDismiss(data => {
       if (data) {
         this.categoria = this.categorias[data.index];
-        this.getOnceByCategory(this.categorias[data.index]);
+        this.getOnceByCategory(this.categorias[data.index], this.ciudad);
       }
     });
   }
 
-  async getOnceByCategory(categoria) {
+  async getOnceByCategory(categoria, ciudad) {
     const route = 'apps/comida-all';
 
-    this._data.getAll(0, 10, categoria, this.ciudad, route)
+    this._data.getAll(0, 10, categoria, ciudad, route)
       .then((data: any[]) => {
         this.data = data;
       });

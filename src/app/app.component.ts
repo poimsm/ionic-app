@@ -113,7 +113,7 @@ export class MyApp {
           ciudad: this._localizacion.ciudad
         });
       } else {
-        this._localizacion.showRadio();
+        this._localizacion.seleccionarCiudad();
       }
       this.menuCtrl.close();
     }
@@ -126,7 +126,7 @@ export class MyApp {
           ciudad: this._localizacion.ciudad
         });
       } else {
-        this._localizacion.showRadio();
+        this._localizacion.seleccionarCiudad();
       }
       this.menuCtrl.close();
     }
@@ -139,7 +139,7 @@ export class MyApp {
           ciudad: this._localizacion.ciudad
         });
       } else {
-        this._localizacion.showRadio();
+        this._localizacion.seleccionarCiudad();
       }
       this.menuCtrl.close();
     }

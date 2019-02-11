@@ -93,8 +93,8 @@ export class TiendaComidaPage {
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: sourceType,
-      targetWidth: 1000,
-      targetHeight: 1000,
+      targetWidth: 500,
+      targetHeight: 500,
       saveToPhotoAlbum: false
     };
 

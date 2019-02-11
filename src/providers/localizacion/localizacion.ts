@@ -39,48 +39,55 @@ export class LocalizacionProvider {
           this.ciudades.push(data.ciudades[i]);
         }
       });
-    console.log('pasooo');
-
-    console.log(this.ciudades);
-
   }
 
   cambiarCiudad(ciudad) {
     this.ciudad = ciudad;
   }
 
-  showRadio() {
-    let alert = this.alertController.create();
-    alert.setTitle('Localización');
-    alert.setSubTitle('Seleccione una ciudad');
+  seleccionarCiudad() {
+    return new Promise((resolve, reject) => {
+      let alert = this.alertController.create();
+      alert.setTitle('Localización');
+      alert.setSubTitle('Seleccione una ciudad');
 
-    this.ciudades.forEach(data => {
+      this.ciudades.forEach(data => {
 
-      if (this.ciudad == data.value) {
-        alert.addInput({
-          type: 'radio',
-          label: data.ciudad,
-          value: data.value,
-          checked: true
-        });
-      } else {
-        alert.addInput({
-          type: 'radio',
-          label: data.ciudad,
-          value: data.value,
-          checked: false
-        });
-      }
+        if (this.ciudad == data.value) {
+          alert.addInput({
+            type: 'radio',
+            label: data.ciudad,
+            value: data.value,
+            checked: true
+          });
+        } else {
+          alert.addInput({
+            type: 'radio',
+            label: data.ciudad,
+            value: data.value,
+            checked: false
+          });
+        }
+      });
+
+      alert.addButton({
+        text: 'Cancelar',
+        role: 'cancel',
+        handler: () => {
+          resolve({ ok: false })
+        }
+      });
+
+      alert.addButton({
+        text: 'OK',
+        handler: data => {
+          this.ciudad = data;
+          resolve({ ok: true, ciudad: data })
+        }
+      });
+      alert.present();
     });
 
-    alert.addButton('Cancelar');
-    alert.addButton({
-      text: 'OK',
-      handler: data => {
-        this.ciudad = data;
-      }
-    });
-    alert.present();
   }
 
 
