@@ -21,7 +21,7 @@ import { PipesModule } from "../pipes/pipes.module";
 import { Camera } from "@ionic-native/camera";
 import { IonicStorageModule } from "@ionic/storage";
 import { AppVersion } from '@ionic-native/app-version';
-import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAUecL57weWVkb-4OR0TBCM1f18tHgqi5M',

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from "@ionic-native/file-transfer/ngx";
+import { FileTransfer, FileUploadOptions, FileTransferObject } from "@ionic-native/file-transfer";
 
 @Injectable()
 export class ImageProvider {
@@ -24,12 +24,8 @@ export class ImageProvider {
   }
 
   uploadImage(img) {
-    console.log('PREVIOO?');
 
     const fileTransfer: FileTransferObject = this.transfer.create();
-
-    console.log('ENTROOO AKA');
-
     const url = `${this.apiURL}/images/upload`;
 
     // File for Upload
@@ -40,8 +36,6 @@ export class ImageProvider {
       chunkedMode: false,
       mimeType: 'multipart/form-data'
     };
-    console.log('ENTROOOO AKII');
-
     // Use the FileTransfer to upload the image
     fileTransfer.upload(targetPath, url, options)
       .then(() => {

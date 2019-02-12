@@ -161,7 +161,7 @@ export class HomePage {
   }
 
   openCarro() {
-    this.navCtrl.push(CarroPagarPage);
+    this.navCtrl.push(CarroPage);
   }
 
   openUser() {
@@ -177,6 +177,9 @@ export class HomePage {
   }
 
   reloadInicio() {
+    this.productos = [];
+    this.comidas = [];
+    this.algoDulce = [];
     // this.getCosas();
     this.getAlgoDulce();
     this.getEcommerce();

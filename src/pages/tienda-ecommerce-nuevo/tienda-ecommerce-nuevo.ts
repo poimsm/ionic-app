@@ -36,7 +36,6 @@ export class TiendaEcommerceNuevoPage {
   ciudad: string;
   addFirst = true;
   addMore = false;
-
   categorias = [];
 
   constructor(
@@ -150,13 +149,13 @@ export class TiendaEcommerceNuevoPage {
 
   tomarFoto(sourceType) {
     const options: CameraOptions = {
-      quality: 100,
+      quality: 90,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: sourceType,
-      targetWidth: 1000,
-      targetHeight: 1000,
+      targetWidth: 500,
+      targetHeight: 500,
       saveToPhotoAlbum: false
     };
 
