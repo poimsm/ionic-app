@@ -20,7 +20,7 @@
     </div>
     <div *ngFor="let imagen of imagenes">
       <div style="margin:10px;min-height:80px;width:80px;background-size:cover;background-repeat: no-repeat;background-position: center;"
-        [ngStyle]="{'background-image': 'url(' + imagen + ')' }">
+        [ngStyle]="{'background-image': 'url(' + imagen.url + ')' }">
       </div>
     </div>
   </div>

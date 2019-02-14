@@ -35,7 +35,7 @@ export class TiendaEnviosDeliveryPage {
     {
       tag: 'Se cobrará $800 adicional por el envío',
       precio: '$800',
-      valor: 600
+      valor: 800
     },
     {
       tag: 'Se cobrará $1000 adicional por el envío',
@@ -161,14 +161,14 @@ export class TiendaEnviosDeliveryPage {
         body.envios.precioFijo = this.precioFijo;
       }
       this._data.updateTienda(this.tiendaID, body)
-        .then(() => console.log('listoo'));
+        .then(() => this.navCtrl.pop());
     }
 
     if (this.isPlataforma && this.ciudad == "VALDIVIA") {
       body.envios.tipo = 'PLATAFORMA';
       body.envios.precioFijo = 1000;
       this._data.updateTienda(this.tiendaID, body)
-        .then(() => console.log('listoo'));
+        .then(() => this.navCtrl.pop());
     }
 
   }

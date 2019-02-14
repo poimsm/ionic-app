@@ -17,12 +17,11 @@ export class DataProvider {
 
   setAPI() {
     if (this.platform.is('cordova')) {
-      this.apiURL = 'https://poimsm-server.herokuapp.com';
-      // this.apiURL = 'http://localhost:3000';
-
-    } else {
       // this.apiURL = 'https://poimsm-server.herokuapp.com';
+      this.apiURL = 'http://joopiterweb.com:3000';
+    } else {
       this.apiURL = 'http://localhost:3000';
+      // this.apiURL = 'http://joopiterweb.com:3000';
     }
   }
 
@@ -153,42 +152,30 @@ export class DataProvider {
   crearProductoOnce(body) {
     this.productoSubiendo();
     const url = `${this.apiURL}/apps/once-crear`;
-    this.uploadImages(body.imgs)
-      .then(imagesData => {
-        body.images = imagesData;
-        this.http.post(url, body).toPromise()
-          .then(() => {
-            this.updateTotalProductsTienda(body.tienda, 1);
-            this.productoCreado();
-          });
+    this.http.post(url, body).toPromise()
+      .then(() => {
+        this.updateTotalProductsTienda(body.tienda, 1);
+        this.productoCreado();
       });
   }
 
   crearProductoEcommerce(body) {
     this.productoSubiendo();
     const url = `${this.apiURL}/apps/ecommerce-crear`;
-    this.uploadImages(body.imgs)
-      .then(imagesData => {
-        body.images = imagesData;
-        this.http.post(url, body).toPromise()
-          .then(() => {
-            this.updateTotalProductsTienda(body.tienda, 1);
-            this.productoCreado();
-          });
+    this.http.post(url, body).toPromise()
+      .then(() => {
+        this.updateTotalProductsTienda(body.tienda, 1);
+        this.productoCreado();
       });
   }
 
   crearProductoComida(body) {
     this.productoSubiendo();
     const url = `${this.apiURL}/apps/comida-crear`;
-    this.uploadImages(body.imgs)
-      .then(imagesData => {
-        body.images = imagesData;
-        this.http.post(url, body).toPromise()
-          .then(() => {
-            this.updateTotalProductsTienda(body.tienda, 1);
-            this.productoCreado();
-          });
+    this.http.post(url, body).toPromise()
+      .then(() => {
+        this.updateTotalProductsTienda(body.tienda, 1);
+        this.productoCreado();
       });
   }
 
@@ -212,9 +199,16 @@ export class DataProvider {
     return this.http.delete(url).toPromise();
   }
 
-  deleteProductComida(id) {
-    const url = `${this.apiURL}/apps/comida-delete/${id}`;
-    return this.http.delete(url).toPromise();
+  changeStateProductComida(id, flag) {
+    const url = `${this.apiURL}/apps/comida-isActive/${id}`;
+    const body = { isActive: flag };
+    return this.http.put(url, body).toPromise();
+  }
+
+  promoLanzamientoComida(id, tiendaID) {
+    const url = `${this.apiURL}/apps/comida-promoLanzamiento/${id}`;
+    const body = { tiendaID };
+    return this.http.put(url, body).toPromise();
   }
 
   deleteProductEcommerce(id) {

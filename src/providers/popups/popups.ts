@@ -26,7 +26,8 @@ export class PopupsProvider {
 
   setAPI() {
     if (this.platform.is('cordova')) {
-      this.apiURL = 'https://poimsm-server.herokuapp.com';
+      // this.apiURL = 'https://poimsm-server.herokuapp.com';
+      this.apiURL = 'http://joopiterweb.com:3000';
     } else {
       this.apiURL = 'http://localhost:3000';
     }
@@ -58,7 +59,7 @@ export class PopupsProvider {
       const body = { version };
       return this.http.post(url, body, { headers }).toPromise();
     } else {
-      const version = '0.3.2';
+      const version = '0.3.3';
       const url = `${this.apiURL}/popups/app-version`;
       const headers = new HttpHeaders({
         Authorization: `JWT ${token}`

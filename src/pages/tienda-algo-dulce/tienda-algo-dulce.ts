@@ -155,8 +155,8 @@ export class TiendaAlgoDulcePage {
 
   openMisProductos() {
     this.navCtrl.push(TiendaAlgoDulceProductosPage, {
-      tipo: this.tienda.tipo,
-      tiendaID: this.tiendaID
+      tiendaID: this.tiendaID,
+      promocion: this.tienda.promocion
     });
   }
 

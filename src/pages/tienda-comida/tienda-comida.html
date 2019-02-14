@@ -26,6 +26,15 @@
     </button>
   </ion-list>
 
+  <div (click)="openNuevoProducto()" padding style="margin-top:10px;background:white">
+    <button ion-button block color="orange3" mode="ios">
+      <ion-icon name="add" style="margin-right:10px;font-size:30px"></ion-icon>
+      <div style="font-weight:600;font-size:16px">
+        Nuevo producto
+      </div>
+    </button>
+  </div>
+
   <div style="margin-left:15px;margin-bottom:10px;margin-top:25px;font-size:11px;font-weight:600;color:#666">
     DEFINIR
   </div>
@@ -77,7 +86,8 @@
     <div style="font-size:16px;color:#555">
       Nombre de la tienda
     </div>
-    <div item-end style="font-size:14px;color:#777">
+    <ion-icon *ngIf="!tienda?.nombre" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
+    <div *ngIf="tienda?.nombre" item-end style="font-size:14px;color:#777">
       {{tienda?.nombre}}
     </div>
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
@@ -86,30 +96,83 @@
     <div style="font-size:16px;color:#555">
       Imágen de perfil o logo
     </div>
-    <div item-end style="font-size:14px;color:#777">
+    <ion-icon *ngIf="!tienda?.imgPerfil" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
+    <div *ngIf="tienda?.imgPerfil" item-end style="font-size:14px;color:#777">
       1
     </div>
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </button>
-  <button (click)="openGaleria()" ion-item style="margin:0px" no-lines>
+  <ion-item style="display: none">
+    <ion-label>Ciudad</ion-label>
+    <ion-select [(ngModel)]="ciudad" #ciudadRef>
+      <ion-option *ngFor="let ciudad of ciudades" [value]="ciudad"> {{ciudad}} </ion-option>
+    </ion-select>
+  </ion-item>
+  <button (click)="openSelect('ciudad')" ion-item style="margin-top:0px">
     <div style="font-size:16px;color:#555">
-      Galería
+      Ciudad
     </div>
-    <div item-end style="font-size:14px;color:#777">
-      {{tienda?.galeria.length}}
+    <ion-icon *ngIf="!tienda?.ciudad" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
+    <div *ngIf="tienda?.ciudad" item-end style="font-size:14px;color:#777">
+      {{tienda?.ciudad}}
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
+  <button (click)="presentPrompt('direccion')" ion-item style="margin-top:0px">
+    <div style="font-size:16px;color:#555">
+      Dirección
+    </div>
+    <ion-icon *ngIf="!tienda?.direccion" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
+    <div *ngIf="tienda?.direccion" item-end style="font-size:14px;color:#777">
+      {{tienda?.direccion}}
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
+  <button (click)="presentPrompt('telefono')" ion-item style="margin:0px" no-lines>
+    <div style="font-size:16px;color:#555">
+      Teléfono
+    </div>
+    <ion-icon *ngIf="!tienda?.telefono" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
+    <div *ngIf="tienda?.telefono" item-end style="font-size:14px;color:#777">
+      {{tienda?.telefono}}
     </div>
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </button>
 
-  <div (click)="openNuevoProducto()" padding style="margin-top:10px;background:white">
-    <button ion-button block color="orange3" mode="ios">
-      <ion-icon name="add-circle" style="margin-right:10px;font-size:30px"></ion-icon>
-      <div style="font-weight:600;font-size:16px">
-        Nuevo producto
+
+
+  <div style="display:flex;align-items:center;margin-left:15px;margin-bottom:10px;margin-top:25px;font-size:11px;font-weight:600;color:#666">
+    <div style="margin-right:5px;background:darkorange;width:20px;height:20px;border-radius:50%;display:flex;justify-content:center;align-items:center">
+      <ion-icon name="star" style="font-size:16px;color:white"></ion-icon>
+    </div>
+    <div style="font-weight:600;color:#555;font-size:14px">
+      Administradores
+    </div>
+    <!-- ADMINISTRADORES -->
+  </div>
+
+  <div style="padding:5px;margin-left:25px;display:flex">
+    <div>
+      <div style="margin-left:0px;width:50px;height:50px;border-radius:50%;background:#eee;display:flex;justify-content:center;align-items:center">
+        <div style="font-size:35px;color:#bbb;font-weight:350">+</div>
       </div>
-    </button>
+      <!-- <div style="font-size:12px;width:100px">
+        poimsm@gmail.com
+      </div> -->
+    </div>
+
+    <div style="margin-left:15px;width:50px;height:50px;border-radius:50%;border:2px dashed #ccc;display:flex;justify-content:center;align-items:center">
+      <div style="font-size:35px;color:#bbb;font-weight:350">+</div>
+    </div>
   </div>
 
 
+  <!-- <button (click)="logout()" ion-item style="margin-top:25px;margin-bottom:30px" no-lines>
+    <div style="font-size:16px;color:#f53d3d;font-weight:500;width:100%;text-align:center">
+      Eliminar tienda
+    </div>
+  </button> -->
+
+  <div style="height:30px"></div>
 
 </ion-content>

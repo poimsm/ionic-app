@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, Platform, AlertController, ModalController, ActionSheetController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, Select, NavParams, ToastController, Platform, AlertController, ModalController, ActionSheetController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { TiendaGaleriaPage } from '../tienda-galeria/tienda-galeria';
@@ -20,11 +20,14 @@ import { TiendaComidaProductosPage } from '../tienda-comida-productos/tienda-com
 })
 export class TiendaComidaPage {
 
+  @ViewChild('ciudadRef') ciudadRef: Select;
+
   nuevo = TiendaComidaNuevoPage;
   producto = TiendaProductoPage;
   tiendaID: string;
   tienda: any;
   imagenPerfil: string;
+  ciudades = ['Valdivia', 'Osorno']
 
   constructor(
     public toastCtrl: ToastController,
@@ -152,10 +155,15 @@ export class TiendaComidaPage {
 
   openMisProductos() {
     this.navCtrl.push(TiendaComidaProductosPage, {
-      tipo: this.tienda.tipo,
       tiendaID: this.tiendaID,
-      ciudad: this.tienda.ciudad
+      promocion: this.tienda.promocion
     });
+  }
+
+  openSelect(tipo) {
+    if (tipo == 'ciudad') {
+      this.ciudadRef.open();
+    }
   }
 
   openHorario() {
@@ -185,7 +193,12 @@ export class TiendaComidaPage {
 
     if (tipo == 'telefono') {
       titulo = '¿Teléfono de contacto?';
-      inputType = 'tel';
+      inputType = 'text';
+    }
+
+    if (tipo == 'direccion') {
+      titulo = 'Ingrese dirección de su tienda';
+      inputType = 'text';
     }
 
     let alert = this.alertCtrl.create({
@@ -208,16 +221,18 @@ export class TiendaComidaPage {
         {
           text: 'Ok',
           handler: data => {
+            let body = {};
             if (tipo == 'nombre') {
-              const body = { nombre: data.nombre };
-              this._data.updateTienda(this.tiendaID, body)
-                .then(() => this.cargarTienda());
+              body = { nombre: data.nombre };
             }
             if (tipo == 'telefono') {
-              const body = { telefono: data.telefono };
-              this._data.updateTienda(this.tiendaID, body)
-                .then(() => this.cargarTienda());
+              body = { telefono: data.telefono };
             }
+            if (tipo == 'direccion') {
+              body = { direccion: data.direccion };
+            }
+            this._data.updateTienda(this.tiendaID, body)
+              .then(() => this.cargarTienda());
           }
         }
       ]

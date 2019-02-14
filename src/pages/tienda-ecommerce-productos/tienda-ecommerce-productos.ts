@@ -17,6 +17,7 @@ export class TiendaEcommerceProductosPage {
   data = [];
   token = '';
   tiendaID: string;
+  promocion: any;
 
   constructor(
     public navCtrl: NavController,
@@ -25,6 +26,7 @@ export class TiendaEcommerceProductosPage {
     private _data: DataProvider
   ) {
     this.tiendaID = this.navParams.get('tiendaID');
+    this.promocion = this.navParams.get('promocion');
   }
 
   ionViewDidLoad() {
@@ -40,9 +42,14 @@ export class TiendaEcommerceProductosPage {
   }
 
   presentPopover(myEvent, id) {
-    const opciones = {
-      0: 'Eliminar producto'
+    let opciones: any = {
+      0: 'Desactivar producto'
     }
+
+    if (this.promocion.isActive) {
+      opciones[1] = 'Aplicar promoción de lanzamiento'
+    }
+
     const popover = this.popoverCtrl.create(CategoriasPage, opciones);
     popover.present({
       ev: myEvent

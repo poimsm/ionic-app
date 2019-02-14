@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Platform, Select, ActionSheetContr
 import { DataProvider } from '../../providers/data/data';
 import { PopupsProvider } from '../../providers/popups/popups';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { ImageProvider } from '../../providers/image/image';
 
 @IonicPage()
 @Component({
@@ -45,7 +46,8 @@ export class TiendaEcommerceNuevoPage {
     private _data: DataProvider,
     private _popups: PopupsProvider,
     private camera: Camera,
-    private actionSheetCtrl: ActionSheetController
+    private actionSheetCtrl: ActionSheetController,
+    private _img: ImageProvider
   ) {
     this.tipo = this.navParams.get('tipo');
     this.tiendaID = this.navParams.get('tiendaID');
@@ -150,19 +152,23 @@ export class TiendaEcommerceNuevoPage {
   tomarFoto(sourceType) {
     const options: CameraOptions = {
       quality: 90,
-      destinationType: this.camera.DestinationType.DATA_URL,
+      destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: sourceType,
-      targetWidth: 500,
-      targetHeight: 500,
+      targetWidth: 1000,
+      targetHeight: 1000,
       saveToPhotoAlbum: false
     };
 
     if (this.platform.is('cordova')) {
       this.camera.getPicture(options).then((imageData) => {
-        const base64Image = 'data:image/jpeg;base64,' + imageData;
-        this.imagenes.push(base64Image);
+        this._img.uploadImage(imageData)
+          .then((data: any) => {
+
+            const imagen = JSON.parse(data.response);
+            this.imagenes.push(imagen);
+          });
       }, (err) => { console.log('ERROR') });
     } else {
       const img = "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";

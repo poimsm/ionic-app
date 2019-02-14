@@ -22,7 +22,8 @@ export class CarroProvider {
 
   setAPI() {
     if (this.platform.is('cordova')) {
-      this.apiURL = 'https://poimsm-server.herokuapp.com';
+      // this.apiURL = 'https://poimsm-server.herokuapp.com';
+      this.apiURL = 'http://joopiterweb.com:3000';
     } else {
       this.apiURL = 'http://localhost:3000';
     }

@@ -17,7 +17,8 @@ export class ImageProvider {
 
   setAPI() {
     if (this.platform.is('cordova')) {
-      this.apiURL = 'https://poimsm-server.herokuapp.com';
+      // this.apiURL = 'https://poimsm-server.herokuapp.com';
+      this.apiURL = 'http://joopiterweb.com:3000';
     } else {
       this.apiURL = 'http://localhost:3000';
     }
@@ -26,9 +27,8 @@ export class ImageProvider {
   uploadImage(img) {
 
     const fileTransfer: FileTransferObject = this.transfer.create();
-    const url = `${this.apiURL}/images/upload`;
+    const url = `${this.apiURL}/imgs/upload`;
 
-    // File for Upload
     var targetPath = img;
 
     var options: FileUploadOptions = {
@@ -36,13 +36,7 @@ export class ImageProvider {
       chunkedMode: false,
       mimeType: 'multipart/form-data'
     };
-    // Use the FileTransfer to upload the image
-    fileTransfer.upload(targetPath, url, options)
-      .then(() => {
-        console.log('SUBIIIIIOOOOOOOOOOOOOOOOOO');
-      }, (err) => {
-        console.log('eeerrrOOOOOOOOOOOOOOOOOO');
-      })
+    return fileTransfer.upload(targetPath, url, options);
   }
 
 

@@ -53,7 +53,6 @@
       Dirección
     </div>
     <ion-icon *ngIf="!user?.address" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
-
     <div *ngIf="user?.address" item-end style="font-size:14px;color:#777">
       {{user?.address}}
     </div>
@@ -63,7 +62,6 @@
     <div style="font-size:16px;color:#555">
       Teléfono
     </div>
-
     <ion-icon *ngIf="!user?.phone" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
     <div *ngIf="user?.phone" item-end style="font-size:14px;color:#777">
       {{user?.phone}}
