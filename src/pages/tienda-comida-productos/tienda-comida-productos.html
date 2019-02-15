@@ -7,7 +7,7 @@
 
 <ion-content>
 
-  <div *ngIf="promocion.isActive" style="padding:15px;padding-top:0px">
+  <div *ngIf="promocion.isActive" (click)="openInformaciones('promoLanzamiento')" style="padding:15px;padding-top:0px">
     <div style="position:relative;border-radius:7px;background:linear-gradient(to bottom right, gold, orange);;;color:white">
       <div style="border-radius:0px 0px 7px 7px;background:darkorange;margin-left:50px;text-align:center;color:white;font-size:14px;font-weight:500;padding-left:17px;padding-right:17px;display:inline-block">
         Gratuito
@@ -45,7 +45,7 @@
               [ngStyle]="{'background-image': 'url(' + item.imgs[0].url + ')' }">
             </div>
             <div *ngIf="item.isPromoLanzamiento" style="position:absolute;top:15px;right:0px;background:#333;color:White;font-size:14px;font-weight:600;padding:4px">
-              Gratuito
+              Promo Lanzami...
             </div>
             <div *ngIf="!item.isActive" style="position:absolute;top:45px;right:0px;background:#333;color:White;font-size:14px;font-weight:600;padding:4px">
               Desactivado

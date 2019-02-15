@@ -59,6 +59,19 @@ export class AuthProvider {
     });
   }
 
+  loginUpFormulario(name, email, password) {
+    return new Promise((resolve, reject) => {
+      this.signUpForm(name, email, password).then((res: any) => {
+        if (res.ok) {
+          this.saveStorage(res.token, res.user);
+          resolve({ ok: true, id: res.user._id });
+        } else {
+          resolve({ ok: false });
+        }
+      })
+    });
+  }
+
   logout(token, user) {
     this.removeStorage();
 
@@ -138,6 +151,12 @@ export class AuthProvider {
   signUp(name, email, password) {
     const url = `${this.apiURL}/users/signup`;
     const body = { name, email, password };
+    return this.http.post(url, body).toPromise();
+  }
+
+  signUpForm(name, email, password) {
+    const url = `${this.apiURL}/users/signup`;
+    const body = { name, email, password, isTienda: true };
     return this.http.post(url, body).toPromise();
   }
 

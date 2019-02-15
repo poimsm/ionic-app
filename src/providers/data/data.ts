@@ -89,18 +89,18 @@ export class DataProvider {
     return this.http.get(url).toPromise();
   }
 
-  fetchAlgoDulceHome() {
-    const url = `${this.apiURL}/apps/once-home/?ciudad=VALDIVIA`;
+  fetchAlgoDulceHome(ciudad) {
+    const url = `${this.apiURL}/apps/once-home/?ciudad=${ciudad}`;
     return this.http.get(url).toPromise();
   }
 
-  fetchComida() {
-    const url = `${this.apiURL}/apps/comida-home/?ciudad=VALDIVIA`;
+  fetchComida(ciudad) {
+    const url = `${this.apiURL}/apps/comida-home/?ciudad=${ciudad}`;
     return this.http.get(url).toPromise();
   }
 
-  fetchEcommerce() {
-    const url = `${this.apiURL}/apps/ecommerce-home/?ciudad=VALDIVIA`;
+  fetchEcommerce(ciudad) {
+    const url = `${this.apiURL}/apps/ecommerce-home/?ciudad=${ciudad}`;
     return this.http.get(url).toPromise();
   }
 
@@ -205,8 +205,20 @@ export class DataProvider {
     return this.http.put(url, body).toPromise();
   }
 
+  changeStateProductOnce(id, flag) {
+    const url = `${this.apiURL}/apps/once-isActive/${id}`;
+    const body = { isActive: flag };
+    return this.http.put(url, body).toPromise();
+  }
+
   promoLanzamientoComida(id, tiendaID) {
     const url = `${this.apiURL}/apps/comida-promoLanzamiento/${id}`;
+    const body = { tiendaID };
+    return this.http.put(url, body).toPromise();
+  }
+
+  promoLanzamientoOnce(id, tiendaID) {
+    const url = `${this.apiURL}/apps/once-promoLanzamiento/${id}`;
     const body = { tiendaID };
     return this.http.put(url, body).toPromise();
   }

@@ -1,3 +1,4 @@
+export { InformacionesPage } from './informaciones/informaciones';
 export { TiendaEcommerceProductosPage } from './tienda-ecommerce-productos/tienda-ecommerce-productos';
 export { TiendaComidaProductosPage } from './tienda-comida-productos/tienda-comida-productos';
 export { TiendaAlgoDulceNuevoPage } from './tienda-algo-dulce-nuevo/tienda-algo-dulce-nuevo';
@@ -46,7 +47,6 @@ export { OncePage } from './once/once';
 export { UsuarioPage } from './usuario/usuario';
 export { LoginPage } from "./login/login";
 export { HomePage } from "./home/home";
-
 
 
 

@@ -3,10 +3,12 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  PopoverController
+  PopoverController,
+  ModalController
 } from "ionic-angular";
 import { DataProvider } from "../../providers/data/data";
 import { CategoriasPage } from '../categorias/categorias';
+import { InformacionesPage } from '../informaciones/informaciones';
 
 @IonicPage()
 @Component({
@@ -23,7 +25,8 @@ export class TiendaComidaProductosPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public popoverCtrl: PopoverController,
-    private _data: DataProvider
+    private _data: DataProvider,
+    public modalCtrl: ModalController
   ) {
     this.tiendaID = this.navParams.get('tiendaID');
     this.promocion = this.navParams.get('promocion');
@@ -31,6 +34,13 @@ export class TiendaComidaProductosPage {
 
   ionViewDidLoad() {
     this.getProductos();
+  }
+
+  openInformaciones(tipo) {
+    const modal = this.modalCtrl.create(InformacionesPage, { tipo });
+    modal.onDidDismiss(data => {
+    });
+    modal.present();
   }
 
   cambiarEstadoProducto(id, flag) {

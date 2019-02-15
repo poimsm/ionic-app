@@ -80,7 +80,8 @@ import {
   TiendaEcommerceProductosPage,
   TiendaComidaProductosPage,
   TiendaAlgoDulceNuevoPage,
-  TiendaAlgoDulceProductosPage
+  TiendaAlgoDulceProductosPage,
+  InformacionesPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -141,7 +142,8 @@ import { LocalizacionProvider } from '../providers/localizacion/localizacion';
     TiendaEcommerceProductosPage,
     TiendaComidaProductosPage,
     TiendaAlgoDulceNuevoPage,
-    TiendaAlgoDulceProductosPage
+    TiendaAlgoDulceProductosPage,
+    InformacionesPage
   ],
   imports: [
     BrowserModule,
@@ -206,7 +208,8 @@ import { LocalizacionProvider } from '../providers/localizacion/localizacion';
     TiendaEcommerceProductosPage,
     TiendaComidaProductosPage,
     TiendaAlgoDulceNuevoPage,
-    TiendaAlgoDulceProductosPage
+    TiendaAlgoDulceProductosPage,
+    InformacionesPage
   ],
   providers: [
     StatusBar,

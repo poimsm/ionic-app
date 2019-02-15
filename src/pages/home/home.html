@@ -10,9 +10,9 @@
     </ion-buttons>
     <ion-title> joopiter </ion-title>
     <ion-buttons right>
-      <!-- <button (click)="openPage(carro)" ion-button icon-only>
+      <button *ngIf="showFormulario" (click)="openPage(formulario)" ion-button icon-only>
         <ion-icon name="pricetag" style="color:#bbb"></ion-icon>
-      </button> -->
+      </button>
       <button (click)="setLocalizacion()" ion-button icon-only>
         <ion-icon name="pin" style="color:rgb(253, 131, 86)"></ion-icon>
       </button>

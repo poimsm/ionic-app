@@ -11,7 +11,7 @@ import { ImageProvider } from '../../providers/image/image';
 import { TiendaComidaNuevoPage } from '../tienda-comida-nuevo/tienda-comida-nuevo';
 import { TiendaEnviosDeliveryPage } from '../tienda-envios-delivery/tienda-envios-delivery';
 import { TiendaComidaProductosPage } from '../tienda-comida-productos/tienda-comida-productos';
-
+import { LocalizacionProvider } from '../../providers/localizacion/localizacion';
 
 @IonicPage()
 @Component({
@@ -27,7 +27,7 @@ export class TiendaComidaPage {
   tiendaID: string;
   tienda: any;
   imagenPerfil: string;
-  ciudades = ['Valdivia', 'Osorno']
+  ciudades = [];
 
   constructor(
     public toastCtrl: ToastController,
@@ -38,10 +38,11 @@ export class TiendaComidaPage {
     private platform: Platform,
     public navParams: NavParams,
     private _data: DataProvider,
-    private _img: ImageProvider,
-    private actionSheetCtrl: ActionSheetController
+    private actionSheetCtrl: ActionSheetController,
+    private _localidazacion: LocalizacionProvider
   ) {
     this.tiendaID = this.navParams.get('id');
+    this.ciudades = this._localidazacion.ciudades;
   }
 
   // ionViewDidLoad() {
@@ -142,14 +143,18 @@ export class TiendaComidaPage {
   }
 
   openNuevoProducto() {
-    if (this.tienda.logo && this.tienda.nombre) {
-      this.navCtrl.push(TiendaComidaNuevoPage, {
-        tipo: this.tienda.tipo,
-        tiendaID: this.tiendaID,
-        ciudad: this.tienda.ciudad
-      });
+    if (this.tienda.imagenPerfil && this.tienda.nombre && this.tienda.direccion && this.tienda.telefono && this.tienda.ciudad) {
+      if (this.tienda.envios.isActive) {
+        this.navCtrl.push(TiendaComidaNuevoPage, {
+          tipo: this.tienda.tipo,
+          tiendaID: this.tiendaID,
+          ciudad: this.tienda.ciudad
+        });
+      } else {
+        this.middleToast('Por favor definir envíos');
+      }
     } else {
-      this.faltaCompletarToast();
+      this.middleToast('Por favor completar información de perfil');
     }
   }
 
@@ -173,9 +178,9 @@ export class TiendaComidaPage {
     });
   }
 
-  faltaCompletarToast() {
+  middleToast(frase) {
     let toast = this.toastCtrl.create({
-      message: `Por favor completar Nombre y Logo`,
+      message: frase,
       duration: 2500,
       position: 'middle'
     });

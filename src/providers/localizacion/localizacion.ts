@@ -34,11 +34,7 @@ export class LocalizacionProvider {
     const url = `${this.apiURL}/popups/parametros`;
     this.http.get(url).toPromise()
       .then((data: any) => {
-        console.log(data);
-
-        for (let i = 0; i < Object.keys(data.ciudades).length; i++) {
-          this.ciudades.push(data.ciudades[i]);
-        }
+        this.ciudades = data.ciudades;
       });
   }
 
@@ -52,20 +48,20 @@ export class LocalizacionProvider {
       alert.setTitle('Localización');
       alert.setSubTitle('Seleccione una ciudad');
 
-      this.ciudades.forEach(data => {
+      this.ciudades.forEach(ciudad => {
 
-        if (this.ciudad == data.value) {
+        if (this.ciudad == ciudad) {
           alert.addInput({
             type: 'radio',
-            label: data.ciudad,
-            value: data.value,
+            label: ciudad,
+            value: ciudad,
             checked: true
           });
         } else {
           alert.addInput({
             type: 'radio',
-            label: data.ciudad,
-            value: data.value,
+            label: ciudad,
+            value: ciudad,
             checked: false
           });
         }

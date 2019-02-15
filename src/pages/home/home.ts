@@ -101,17 +101,17 @@ export class HomePage {
   }
 
   getAlgoDulce() {
-    this._data.fetchAlgoDulceHome()
+    this._data.fetchAlgoDulceHome('Valdivia')
       .then((data: any) => this.algoDulce = data);
   }
 
   getComida() {
-    this._data.fetchComida()
+    this._data.fetchComida('Valdivia')
       .then((data: any) => this.comidas = data);
   }
 
   getEcommerce() {
-    this._data.fetchEcommerce()
+    this._data.fetchEcommerce('Valdivia')
       .then((data: any) => this.productos = data
       );
   }

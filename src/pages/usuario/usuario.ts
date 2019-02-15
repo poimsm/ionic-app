@@ -33,7 +33,7 @@ export class UsuarioPage {
         console.log(data);
       });
   }
-  // TiendaEcommercePage
+
   openTienda() {
     if (this.user.tienda.tipo == 'algo dulce') {
       this.navCtrl.push(TiendaAlgoDulcePage, { id: this.tiendaID });
