@@ -143,7 +143,7 @@ export class TiendaComidaPage {
   }
 
   openNuevoProducto() {
-    if (this.tienda.imagenPerfil && this.tienda.nombre && this.tienda.direccion && this.tienda.telefono && this.tienda.ciudad) {
+    if (this.tienda.imgPerfil && this.tienda.nombre && this.tienda.direccion && this.tienda.telefono && this.tienda.ciudad) {
       if (this.tienda.envios.isActive) {
         this.navCtrl.push(TiendaComidaNuevoPage, {
           tipo: this.tienda.tipo,
@@ -198,7 +198,7 @@ export class TiendaComidaPage {
 
     if (tipo == 'telefono') {
       titulo = '¿Teléfono de contacto?';
-      inputType = 'text';
+      inputType = 'tel';
     }
 
     if (tipo == 'direccion') {

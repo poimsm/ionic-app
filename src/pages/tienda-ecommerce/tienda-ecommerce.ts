@@ -103,20 +103,8 @@ export class TiendaEcommercePage {
     if (this.platform.is('cordova')) {
       this.camera.getPicture(options).then((imageData) => {
         this._img.uploadImage(imageData);
-
-        // let base64Image = 'data:image/jpeg;base64,' + imageData;
-        // const body = {
-        //   img: base64Image,
-        //   id: this.tiendaID
-        // }
-        // this._data.nuevaImgPerfil(body)
-        //   .then(() => this.cargarTienda())
-        //   .catch(err => {
-        //     console.log(JSON.stringify(err));
-        //   });
       }).catch(err => {
         console.log('FALLOOOO');
-
         console.log(JSON.stringify(err));
       });
     } else {
