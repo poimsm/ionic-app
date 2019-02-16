@@ -35,8 +35,13 @@ export class DataProvider {
     return this.http.post(url, body, { headers }).toPromise();
   }
 
-  notificarCompra(token) {
+  notificarCompraDelivery() {
     const firebaseURL = 'https://us-central1-joopiter-3af7f.cloudfunctions.net/pushNotification';
+    return this.http.get(firebaseURL).toPromise();
+  }
+
+  notificarCompraTienda(id) {
+    const firebaseURL = `https://us-central1-joopiter-3af7f.cloudfunctions.net/pushNotification?id=${id}`;
     return this.http.get(firebaseURL).toPromise();
   }
 

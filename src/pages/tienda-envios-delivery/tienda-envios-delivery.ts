@@ -129,8 +129,6 @@ export class TiendaEnviosDeliveryPage {
           this.precioFijo = this.fijoArray[i].valor;
         }
       });
-      console.log(this.precioFijo);
-
     }
     if (tipo == 'gratisSobre') {
       this.gratisSobreArray.forEach((item, i) => {
@@ -138,8 +136,6 @@ export class TiendaEnviosDeliveryPage {
           this.precioGratisSobre = this.gratisSobreArray[i].valor;
         }
       });
-      console.log(this.precioGratisSobre);
-
     }
   }
 
@@ -164,7 +160,7 @@ export class TiendaEnviosDeliveryPage {
         .then(() => this.navCtrl.pop());
     }
 
-    if (this.isPlataforma && this.ciudad == "VALDIVIA") {
+    if (this.isPlataforma && this.ciudad == "Valdivia") {
       body.envios.tipo = 'PLATAFORMA';
       body.envios.precioFijo = 1000;
       this._data.updateTienda(this.tiendaID, body)

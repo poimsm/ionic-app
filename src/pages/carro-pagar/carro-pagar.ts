@@ -27,6 +27,8 @@ export class CarroPagarPage {
   isDefinido = false;
   dia: string;
   hora: string;
+  isBrowser = false;
+  transactionID: string;
 
   semana = ['Lunes 8', 'Martes 9', 'Miercoles 10', 'Jueves 13', 'Viernes 14'];
   horas = [
@@ -116,8 +118,11 @@ export class CarroPagarPage {
   }
 
   pagarConFlow() {
-    const compra: any = {
-      carro: this.carro,
+
+    this.isBrowser = true;
+
+    const transaccion: any = {
+      ok: false,
       cliente: {
         uid: this.user._id,
         nombre: this.user.name,
@@ -125,78 +130,82 @@ export class CarroPagarPage {
         direccion: this.direccion,
         telefono: this.telefono
       },
-      detalles: {
-        metodo: 'Pago online',
-        monto: this.total
-      }
-    };
-
-    if (this.isDiaHora) {
-      compra.diaHoraDeEntrega = {
-        isActive: true,
-        dia: this.dia,
-        hora: this.hora
-      }
+      monto: this.total
     }
 
-    this._carro.iniciarCompra(this.token, compra).then((data) => {
-      let respuesta = JSON.parse(JSON.stringify(data));
+    this._carro.createTransaction(transaccion)
+      .then((data: any) => {
 
-      if (respuesta.code != undefined && respuesta.code == 108) {
+        this.transactionID = data.id;
+        transaccion.id = data.id;
 
-        let alerta = this.alertCtrl.create({
-          title: 'Error',
-          subTitle: 'Imposible conectar con el sistema de pagos.'
+        this._carro.iniciarCompra(this.token, transaccion).then((data) => {
+          let respuesta = JSON.parse(JSON.stringify(data));
+
+          if (respuesta.code != undefined && respuesta.code == 108) {
+
+            let alerta = this.alertCtrl.create({
+              title: 'Error',
+              subTitle: 'Imposible conectar con el sistema de pagos.'
+
+            });
+            alerta.present();
+          } else {
+
+
+            let token = respuesta.token;
+            let url = respuesta.url;
+
+            const browser = this.iab.create(url + '?token=' + token, '_blank', 'location=yes');
+
+
+            browser.on('exit').subscribe(event => {
+              this.isBrowser = false;
+              this._carro.getTransaction(this.transactionID)
+                .then((data: any) => {
+                  if (data.ok) {
+                    console.log('Move next page');
+                  }
+                });
+            });
+
+            browser.show();
+          }
 
         });
-        alerta.present();
-      } else {
-
-
-        let token = respuesta.token;
-        let url = respuesta.url;
-
-        const browser = this.iab.create(url + '?token=' + token, '_blank', 'location=yes');
-
-
-        browser.on('exit').subscribe(event => {
-          alert("vista cerrada")
-        });
-
-        browser.show();
-
-      }
-
-
-    });
+      });
   }
 
   pagarConEfectivo() {
-    const compra: any = {
-      carro: this.carro,
-      cliente: {
-        uid: this.user._id,
-        nombre: this.user.name,
-        email: this.user.local.email,
-        direccion: this.direccion,
-        telefono: this.telefono
-      },
-      detalles: {
-        metodo: 'Efectivo',
-        monto: this.total
-      }
-    };
 
-    if (this.isDiaHora) {
-      compra.diaHoraDeEntrega = {
-        isActive: true,
-        dia: this.dia,
-        hora: this.hora
-      }
-    }
+    const promesas = [];
+    this._carro.carros.forEach(carro => {
 
-    this._carro.crearCompra(this.token, compra)
-      .then(() => this.navCtrl.push(CarroCompraExitosaPage));
+      const compra: any = {
+        carro: carro,
+        cliente: {
+          uid: this.user._id,
+          nombre: this.user.name,
+          email: this.user.local.email,
+          direccion: this.direccion,
+          telefono: this.telefono
+        }
+      };
+
+      if (this.isDiaHora) {
+        compra.diaHoraDeEntrega = {
+          isActive: true,
+          dia: this.dia,
+          hora: this.hora
+        }
+      }
+
+      promesas.push(this._carro.crearCompra(this.token, compra));
+    });
+
+    Promise.all(promesas).then(() => {
+      this.navCtrl.push(CarroCompraExitosaPage)
+    });
   }
 
 

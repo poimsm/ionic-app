@@ -5,13 +5,11 @@ import { SplashScreen } from "@ionic-native/splash-screen";
 import { AuthProvider } from "../providers/auth/auth";
 import { HomePage } from "../pages/home/home";
 import { LoginPage } from '../pages/login/login';
-import { AngularFireAuth } from "angularfire2/auth";
 import { UsuarioPage } from '../pages/usuario/usuario';
 import { PopupsProvider } from '../providers/popups/popups';
 import { UpgradePage } from '../pages/upgrade/upgrade';
 import { MisPedidosPage } from '../pages/mis-pedidos/mis-pedidos';
-import { TiendaEcommercePage, OncePage } from "../pages/index.pages";
-import { TiendaAlojamientoPage } from '../pages/tienda-alojamiento/tienda-alojamiento';
+import { OncePage } from "../pages/index.pages";
 import { LocalizacionProvider } from '../providers/localizacion/localizacion';
 import { EcommercePage } from '../pages/ecommerce/ecommerce';
 import { ComidaPage } from '../pages/comida/comida';
@@ -38,9 +36,7 @@ export class MyApp {
   rootPage: any;
 
   constructor(
-    // public navCtrl: NavController,
     public modalCtrl: ModalController,
-    private afAuth: AngularFireAuth,
     private menuCtrl: MenuController,
     platform: Platform,
     statusBar: StatusBar,
@@ -79,8 +75,12 @@ export class MyApp {
         } else {
           this.rootPage = this.home;
           if (this.user.isDelivery) {
-            this._auth.subscribeToNotifications()
-              .then(() => console.log('Usuario subscrito'));
+            this._auth.subscribeToNotifications('delivery')
+              .then(() => console.log('Delivery subscrito'));
+          }
+          if (this.user.isTienda) {
+            this._auth.subscribeToNotifications(this.user.tienda.id)
+              .then(() => console.log('Tienda subscrita'));
           }
         }
       });
@@ -143,23 +143,6 @@ export class MyApp {
       }
       this.menuCtrl.close();
     }
-  }
-
-  openTienda(tipo) {
-    // if (tipo == 'DELIVERY_NORMAL') {
-    //   this.nav.setRoot(TiendaDeliveryNormalPage, { id: this.user.tienda.id });
-    // }
-    // if (tipo == 'DELIVERY_DULCE') {
-    //   this.nav.setRoot(TiendaDeliveryDulcePage, { id: this.user.tienda.id });
-    // }
-    // if (tipo == 'ECOMMERCE') {
-    //   this.nav.setRoot(TiendaEcommercePage, { id: this.user.tienda.id });
-    // }
-    // if (tipo == 'ALOJAMIENTO') {
-    //   this.nav.setRoot(TiendaAlojamientoPage, { id: this.user.tienda.id });
-    // }
-    // this.menuCtrl.close();
-
   }
 
   openPage(pagina) {

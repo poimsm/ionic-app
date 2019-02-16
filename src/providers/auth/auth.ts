@@ -4,6 +4,7 @@ import { Platform } from 'ionic-angular';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { FirebaseMessaging } from '@ionic-native/firebase-messaging';
+import { CarroProvider } from '../carro/carro';
 
 
 @Injectable()
@@ -16,7 +17,8 @@ export class AuthProvider {
     private firebaseMessaging: FirebaseMessaging,
     private platform: Platform,
     private storage: Storage,
-    public http: HttpClient
+    public http: HttpClient,
+    private _carro: CarroProvider
   ) {
     platform.ready().then(() => {
       this.loadStorage();
@@ -73,10 +75,11 @@ export class AuthProvider {
   }
 
   logout(token, user) {
+    this._carro.clearCart();
     this.removeStorage();
 
     if (user.isDelivery) {
-      this.unsubscribeToNotifications()
+      this.unsubscribeToNotifications('delivery')
         .then(() => console.log('Usuario desubscrito'))
     }
     const authData = {};
@@ -183,12 +186,16 @@ export class AuthProvider {
     });
     return this.http.get(url, { headers }).toPromise();
   }
+  // -------------------------------------------
+  //  SUBSCRIBIRSE A NOTIFICACIONES
+  // -------------------------------------------
 
-  subscribeToNotifications() {
-    return this.firebaseMessaging.subscribe("delivery");
+  subscribeToNotifications(topic) {
+    return this.firebaseMessaging.subscribe(topic);
   }
 
-  unsubscribeToNotifications() {
-    return this.firebaseMessaging.unsubscribe("delivery");
+  unsubscribeToNotifications(topic) {
+    return this.firebaseMessaging.unsubscribe(topic);
   }
+
 }
