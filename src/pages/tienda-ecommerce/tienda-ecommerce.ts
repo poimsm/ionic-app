@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, Platform, AlertController, ModalController, ActionSheetController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Select, ToastController, Platform, AlertController, ModalController, ActionSheetController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { TiendaGaleriaPage } from '../tienda-galeria/tienda-galeria';
@@ -8,11 +8,10 @@ import { TiendaProductoPage } from '../tienda-producto/tienda-producto';
 import { TiendaHorarioPage } from '../tienda-horario/tienda-horario';
 import { GaleriaImagenPage } from '../galeria-imagen/galeria-imagen';
 import { ImageProvider } from '../../providers/image/image';
-import { TiendaComidaNuevoPage } from '../tienda-comida-nuevo/tienda-comida-nuevo';
 import { TiendaEnviosDeliveryPage } from '../tienda-envios-delivery/tienda-envios-delivery';
 import { TiendaEcommerceNuevoPage } from '../tienda-ecommerce-nuevo/tienda-ecommerce-nuevo';
 import { TiendaEcommerceProductosPage } from '../tienda-ecommerce-productos/tienda-ecommerce-productos';
-import { stringify } from '@angular/core/src/util';
+import { LocalizacionProvider } from '../../providers/localizacion/localizacion';
 
 
 @IonicPage()
@@ -22,11 +21,13 @@ import { stringify } from '@angular/core/src/util';
 })
 export class TiendaEcommercePage {
 
-  nuevo = TiendaComidaNuevoPage;
+  @ViewChild('ciudadRef') ciudadRef: Select;
+
   producto = TiendaProductoPage;
   tiendaID: string;
   tienda: any;
   imagenPerfil: string;
+  ciudades = [];
 
   constructor(
     public toastCtrl: ToastController,
@@ -38,9 +39,11 @@ export class TiendaEcommercePage {
     public navParams: NavParams,
     private _data: DataProvider,
     private _img: ImageProvider,
-    private actionSheetCtrl: ActionSheetController
+    private actionSheetCtrl: ActionSheetController,
+    private _localidazacion: LocalizacionProvider
   ) {
     this.tiendaID = this.navParams.get('id');
+    this.ciudades = this._localidazacion.ciudades;
   }
 
   // ionViewDidLoad() {
@@ -126,6 +129,12 @@ export class TiendaEcommercePage {
     })
   }
 
+  openSelect(tipo) {
+    if (tipo == 'ciudad') {
+      this.ciudadRef.open();
+    }
+  }
+
   openEntregas(isDefined) {
     this.navCtrl.push(TiendaEnviosDeliveryPage, {
       ciudad: this.tienda.ciudad,
@@ -136,14 +145,18 @@ export class TiendaEcommercePage {
   }
 
   openNuevoProducto() {
-    if (this.tienda.logo && this.tienda.nombre) {
-      this.navCtrl.push(TiendaEcommerceNuevoPage, {
-        tipo: this.tienda.tipo,
-        tiendaID: this.tiendaID,
-        ciudad: this.tienda.ciudad
-      });
+    if (this.tienda.imgPerfil && this.tienda.nombre && this.tienda.direccion && this.tienda.telefono && this.tienda.ciudad) {
+      if (this.tienda.envios.isActive) {
+        this.navCtrl.push(TiendaEcommerceNuevoPage, {
+          tipo: this.tienda.tipo,
+          tiendaID: this.tiendaID,
+          ciudad: this.tienda.ciudad
+        });
+      } else {
+        this.middleToast('Por favor definir envíos');
+      }
     } else {
-      this.faltaCompletarToast();
+      this.middleToast('Por favor completar información de perfil');
     }
   }
 
@@ -170,6 +183,15 @@ export class TiendaEcommercePage {
     toast.present();
   }
 
+  middleToast(frase) {
+    let toast = this.toastCtrl.create({
+      message: frase,
+      duration: 2500,
+      position: 'middle'
+    });
+    toast.present();
+  }
+
   presentPrompt(tipo) {
 
     let titulo = '';
@@ -182,6 +204,11 @@ export class TiendaEcommercePage {
     if (tipo == 'telefono') {
       titulo = '¿Teléfono de contacto?';
       inputType = 'tel';
+    }
+
+    if (tipo == 'direccion') {
+      titulo = 'Ingrese dirección de su tienda';
+      inputType = 'text';
     }
 
     let alert = this.alertCtrl.create({
@@ -204,16 +231,18 @@ export class TiendaEcommercePage {
         {
           text: 'Ok',
           handler: data => {
+            let body = {};
             if (tipo == 'nombre') {
-              const body = { nombre: data.nombre };
-              this._data.updateTienda(this.tiendaID, body)
-                .then(() => this.cargarTienda());
+              body = { nombre: data.nombre };
             }
             if (tipo == 'telefono') {
-              const body = { telefono: data.telefono };
-              this._data.updateTienda(this.tiendaID, body)
-                .then(() => this.cargarTienda());
+              body = { telefono: data.telefono };
             }
+            if (tipo == 'direccion') {
+              body = { direccion: data.direccion };
+            }
+            this._data.updateTienda(this.tiendaID, body)
+              .then(() => this.cargarTienda());
           }
         }
       ]

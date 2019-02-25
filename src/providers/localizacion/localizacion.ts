@@ -6,7 +6,7 @@ import { AlertController, Platform } from 'ionic-angular';
 @Injectable()
 export class LocalizacionProvider {
   apiURL: string;
-  ciudad: string;
+  ciudad = 'Valdivia';
   ciudades = [];
   presentarAlert = true;
 
@@ -14,16 +14,10 @@ export class LocalizacionProvider {
     public http: HttpClient,
     public alertController: AlertController,
     private platform: Platform
-  ) {
-    platform.ready().then(() => {
-      this.loadCiudades();
-    });
-    this.setAPI();
-  }
+  ) { }
 
   setAPI() {
     if (this.platform.is('cordova')) {
-      // this.apiURL = 'https://poimsm-server.herokuapp.com';
       this.apiURL = 'http://joopiterweb.com:3000';
     } else {
       this.apiURL = 'http://localhost:3000';
@@ -31,11 +25,17 @@ export class LocalizacionProvider {
   }
 
   loadCiudades() {
-    const url = `${this.apiURL}/popups/parametros`;
-    this.http.get(url).toPromise()
-      .then((data: any) => {
-        this.ciudades = data.ciudades;
-      });
+
+    this.setAPI();
+
+    return new Promise((resolve, reject) => {
+      const url = `${this.apiURL}/popups/parametros`;
+      this.http.get(url).toPromise()
+        .then((data: any) => {
+          this.ciudades = data.ciudades;
+          resolve();
+        });
+    });
   }
 
   cambiarCiudad(ciudad) {
@@ -43,49 +43,95 @@ export class LocalizacionProvider {
   }
 
   seleccionarCiudad() {
+
     return new Promise((resolve, reject) => {
-      let alert = this.alertController.create();
-      alert.setTitle('Localización');
-      alert.setSubTitle('Seleccione una ciudad');
 
-      this.ciudades.forEach(ciudad => {
+      if (this.ciudades.length == 0) {
+        this.loadCiudades()
+          .then(() => {
+            let alert = this.alertController.create();
+            alert.setTitle('Ubicación');
+            alert.setSubTitle('Seleccione una ciudad');
 
-        if (this.ciudad == ciudad) {
-          alert.addInput({
-            type: 'radio',
-            label: ciudad,
-            value: ciudad,
-            checked: true
+            this.ciudades.forEach(ciudad => {
+
+              if (this.ciudad == ciudad) {
+                alert.addInput({
+                  type: 'radio',
+                  label: ciudad,
+                  value: ciudad,
+                  checked: true
+                });
+              } else {
+                alert.addInput({
+                  type: 'radio',
+                  label: ciudad,
+                  value: ciudad,
+                  checked: false
+                });
+              }
+            });
+
+            alert.addButton({
+              text: 'Omitir',
+              role: 'cancel',
+              handler: () => {
+                resolve({ ok: false })
+              }
+            });
+
+            alert.addButton({
+              text: 'OK',
+              handler: data => {
+                this.ciudad = data;
+                resolve({ ok: true, ciudad: data })
+              }
+            });
+            alert.present();
           });
-        } else {
-          alert.addInput({
-            type: 'radio',
-            label: ciudad,
-            value: ciudad,
-            checked: false
-          });
-        }
-      });
+      } else {
 
-      alert.addButton({
-        text: 'Cancelar',
-        role: 'cancel',
-        handler: () => {
-          resolve({ ok: false })
-        }
-      });
+        let alert = this.alertController.create();
+        alert.setTitle('Ubicación');
+        alert.setSubTitle('Seleccione una ciudad');
 
-      alert.addButton({
-        text: 'OK',
-        handler: data => {
-          this.ciudad = data;
-          resolve({ ok: true, ciudad: data })
-        }
-      });
-      alert.present();
+        this.ciudades.forEach(ciudad => {
+
+          if (this.ciudad == ciudad) {
+            alert.addInput({
+              type: 'radio',
+              label: ciudad,
+              value: ciudad,
+              checked: true
+            });
+          } else {
+            alert.addInput({
+              type: 'radio',
+              label: ciudad,
+              value: ciudad,
+              checked: false
+            });
+          }
+        });
+
+        alert.addButton({
+          text: 'Omitir',
+          role: 'cancel',
+          handler: () => {
+            resolve({ ok: false })
+          }
+        });
+
+        alert.addButton({
+          text: 'OK',
+          handler: data => {
+            this.ciudad = data;
+            resolve({ ok: true, ciudad: data })
+          }
+        });
+        alert.present();
+      }
     });
-
   }
-
 
 }

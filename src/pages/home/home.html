@@ -29,16 +29,19 @@
 
 
   <div *ngIf="true" padding style="background:white;padding-left:40px;padding-right:40px;margin-top:0px;display:flex;justify-content:space-around;">
-
-    <div (click)="openPage(frutas)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
-      <div style="position:relative;height:45px;width:45px;border-radius:50%;background:#97e253;display:flex;justify-content:center;align-items:center">
-        <ion-icon name="md-nutrition" style="color:white;font-size:30px"></ion-icon>
+    <!-- (click)="openPage(frutas)" -->
+    <div style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+      <div style="position:relative;height:45px;width:45px;border-radius:50%;background:darkorange;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="timer" style="color:#fff;font-size:30px"></ion-icon>
         <!-- <div style="font-size:10px;font-weight:450;position:absolute;top:-8px;right:-27px;background:#fa6e6d;color:white;padding:3px;border-radius:4px">
           delivery
         </div> -->
+        <div style="font-size:11px;font-weight:500;position:absolute;top:-8px;right:-27px;background:white;border:1px solid #eee;color:#777;padding:4px;border-radius:4px">
+          pronto
+        </div>
       </div>
       <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Saludable
+        Mercado
       </div>
     </div>
 
@@ -55,7 +58,7 @@
     </div>
 
     <div (click)="openPage(once)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
-      <div style="position:relative;height:45px;width:45px;border-radius:50%;background:slateblue;display:flex;justify-content:center;align-items:center">
+      <div style="position:relative;height:45px;width:45px;border-radius:25px;background:slateblue;display:flex;justify-content:center;align-items:center">
         <ion-icon name="md-cafe" style="color:white;font-size:30px"></ion-icon>
         <div style="font-size:10px;font-weight:450;position:absolute;top:-5px;right:-27px;background:#fa6e6d;color:white;padding:3px;border-radius:4px">
           delivery
@@ -74,15 +77,18 @@
     <div (click)="openEcommerce()" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
       <div style="position:relative;height:45px;width:45px;border-radius:15px;background:#f53d3d;display:flex;justify-content:center;align-items:center">
         <ion-icon name="md-basket" style="color:white;font-size:30px"></ion-icon>
+        <div style="font-size:11px;font-weight:500;position:absolute;top:-8px;right:-40px;background:darkorange;border:0px solid #eee;color:#fff;padding:4px;border-radius:4px">
+          artesanal
+        </div>
       </div>
       <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Compras
+        Tiendas
       </div>
     </div>
 
     <div style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
-      <div style="position:relative;height:45px;width:45px;border-radius:50%;background:hotpink;display:flex;justify-content:center;align-items:center">
-        <ion-icon name="woman" style="color:white;font-size:30px"></ion-icon>
+      <div style="position:relative;height:45px;width:45px;border-radius:50%;background:white;border:1px solid #eee;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="woman" style="color:white;font-size:30px;color:hotpink"></ion-icon>
         <div style="font-size:11px;font-weight:500;position:absolute;top:-8px;right:-27px;background:white;border:1px solid #eee;color:#777;padding:4px;border-radius:4px">
           pronto
         </div>
@@ -93,8 +99,8 @@
     </div>
 
     <div style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
-      <div style="position:relative;height:45px;width:45px;border-radius:50%;background:orange;display:flex;justify-content:center;align-items:center">
-        <ion-icon name="ios-home" style="color:#fff;font-size:30px"></ion-icon>
+      <div style="border:1px solid #eee;position:relative;height:45px;width:45px;border-radius:50%;background:white;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="ios-home" style="color:#fff;font-size:30px;color:orange"></ion-icon>
         <div style="font-size:11px;font-weight:500;position:absolute;top:-8px;right:-27px;background:white;border:1px solid #eee;color:#777;padding:4px;border-radius:4px">
           pronto
         </div>
@@ -214,11 +220,14 @@
             <div style="color:#555;font-size:15px;font-weight:500;height:20px;overflow: hidden;">
               {{item.titulo}}
             </div>
-            <div *ngIf="item.precio.tipo == 'flat'">
+            <div *ngIf="item.precio?.isActive">
               ${{item.precio.value}}
             </div>
-            <div *ngIf="item.precio.tipo != 'flat'">
-              ${{item.precio.array[0].precio}}
+            <div *ngIf="item.cantidad?.isActive">
+              ${{item.cantidad.array[0].value}}
+            </div>
+            <div *ngIf="item.unidades?.isActive">
+              ${{item.unidades.array[0].value}}
             </div>
           </ion-col>
         </ion-row>

@@ -52,6 +52,7 @@ export class HomePage {
   user: any;
   token: string;
   isAuth = false;
+  ciudad: string;
 
   constructor(
     public navCtrl: NavController,
@@ -84,8 +85,10 @@ export class HomePage {
         this.isAuth = false;
       }
     });
-    this.mensaje = this._popups.mensajeHome;
-    // this.getCosas();
+
+    this.ciudad = this._localizacion.ciudad;
+
+    this.setLocalizacion();
     this.getAlgoDulce();
     this.getComida();
     this.getEcommerce();
@@ -93,31 +96,33 @@ export class HomePage {
 
   getCosas() {
     this._data.fetchCosas()
-      .then((data: any) => {
-        console.log(data);
-
-        this.cosas = data;
-      });
+      .then((data: any) => this.cosas = data);
   }
 
   getAlgoDulce() {
-    this._data.fetchAlgoDulceHome('Valdivia')
+    this._data.fetchAlgoDulceHome(this.ciudad)
       .then((data: any) => this.algoDulce = data);
   }
 
   getComida() {
-    this._data.fetchComida('Valdivia')
+    this._data.fetchComida(this.ciudad)
       .then((data: any) => this.comidas = data);
   }
 
   getEcommerce() {
-    this._data.fetchEcommerce('Valdivia')
+    this._data.fetchEcommerce(this.ciudad)
       .then((data: any) => this.productos = data
       );
   }
 
   setLocalizacion() {
-    this._localizacion.seleccionarCiudad();
+    this._localizacion.seleccionarCiudad()
+      .then((data: any) => {
+        if (data.ok) {
+          this.ciudad = data.ciudad,
+            this.reloadInicio();
+        }
+      });
   }
 
 
@@ -180,7 +185,6 @@ export class HomePage {
     this.productos = [];
     this.comidas = [];
     this.algoDulce = [];
-    // this.getCosas();
     this.getAlgoDulce();
     this.getEcommerce();
     this.getComida();

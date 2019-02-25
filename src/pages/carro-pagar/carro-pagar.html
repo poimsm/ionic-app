@@ -7,33 +7,216 @@
 </ion-header>
 
 
+
+
+
+
 <ion-content>
 
   <div style="margin-bottom:50px;margin-top:20px;width:100%;text-align:center;color:#515c6f;font-size:24px;font-weight:700">
     PAGAR
   </div>
 
+  <ion-list>
+    <ion-item no-lines style="font-weight:600;color:#555;font-size:15px;margin-left:15px">
+      DETALLES DE ENTREGA
+    </ion-item>
+    <button (click)="openModal('telefono')" ion-item>
+      <div style="width:100px;font-weight:400;color:#999;font-size:18px;margin-left:15px">
+        Ciudad
+      </div>
+      <div item-end style="color:#7d8593;font-size:16px">
+        {{ciudad}}
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#fff;font-size:18px;margin-left:10px"></ion-icon>
+    </button>
+    <button (click)="openModal('telefono')" ion-item>
+      <div style="width:100px;font-weight:400;color:#999;font-size:18px;margin-left:15px">
+        Dirección
+      </div>
+      <div item-end style="color:#7d8593;font-size:16px">
+        {{direccion}}
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px;margin-left:10px"></ion-icon>
+    </button>
+    <button (click)="openModal('telefono')" ion-item>
+      <div style="width:100px;font-weight:400;color:#999;font-size:18px;margin-left:15px">
+        Teléfono
+      </div>
+      <div item-end style="color:#7d8593;font-size:16px">
+        {{telefono}}
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px;margin-left:10px"></ion-icon>
+    </button>
+  </ion-list>
+
+  <ion-item *ngIf="false" no-lines>
+    <ion-label style="font-weight:400;color:#999;font-size:15px">
+      DEFINIR DIA DE ENTREGA
+    </ion-label>
+    <ion-toggle [(ngModel)]="isDiaHora" style="color:#FFBF00"></ion-toggle>
+  </ion-item>
+  <button *ngIf="isDiaHora" (click)="openSelect('dia')" ion-item>
+    <div style="color:#515c6f;font-size:16px">
+      Día
+    </div>
+    <div item-end style="color:#515c6f;font-size:14px">
+      <div *ngIf="!dia">
+        Seleccionar
+      </div>
+      <div *ngIf="dia">
+        {{dia}}
+      </div>
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
+  <button *ngIf="isDiaHora" (click)="openSelect('hora')" ion-item no-lines>
+    <div style="color:#515c6f;font-size:16px">
+      Hora
+    </div>
+    <div item-end style="color:#515c6f;font-size:14px">
+      <div *ngIf="!hora">
+        Seleccionar
+      </div>
+      <div *ngIf="hora">
+        {{hora}}
+      </div>
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
+
+  <ion-item style="display: none">
+    <ion-label>¿Día de entrega?</ion-label>
+    <ion-select [(ngModel)]="dia" #diaRef>
+      <ion-option *ngFor="let dia of semana" [value]="dia"> {{dia}} </ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item style="display: none">
+    <ion-label>¿Hora de entrega?</ion-label>
+    <ion-select [(ngModel)]="hora" #horaRef>
+      <ion-option *ngFor="let hora of horas" [value]="hora"> {{hora}} </ion-option>
+    </ion-select>
+  </ion-item>
+
+  <hr>
+
+  <ion-item no-lines style="font-weight:600;color:#555;font-size:15px;margin-left:15px">
+    MÉTODO DE PAGO
+  </ion-item>
+  <ion-list *ngIf="_carro.actual_carro_tipo == 'delivery'">
+    <ion-item>
+      <ion-icon item-start name="md-cash" style="color:#4da34d;font-size:27px;margin-left:10px"></ion-icon>
+      <ion-label style="color:#515c6f;font-weight:600">EFECTIVO EN LA ENTREGA</ion-label>
+      <ion-toggle mode="ios" [(ngModel)]="efectivo" color="orange3" style="color:#FFBF00" (ngModelChange)="cambiarMetodoPago($event,1)"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-icon item-start name="md-cash" style="color:#4da34d;font-size:27px;margin-left:10px"></ion-icon>
+      <ion-label style="color:#515c6f;font-weight:600">WEBPAY</ion-label>
+      <ion-toggle mode="ios" [(ngModel)]="flow" color="orange3" style="color:#FFBF00" (ngModelChange)="cambiarMetodoPago($event,2)"></ion-toggle>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="_carro.actual_carro_tipo == 'ecommerce'">
+    <ion-item>
+      <ion-icon item-start name="md-cash" style="color:#4da34d;font-size:27px;margin-left:10px"></ion-icon>
+      <ion-label style="color:#515c6f;font-weight:600">WEBPAY</ion-label>
+      <ion-toggle mode="ios" [(ngModel)]="flow" color="orange3" style="color:#FFBF00"></ion-toggle>
+    </ion-item>
+  </ion-list>
+
+  <hr>
+
+  <div *ngIf="isBrowser" style="width:100%;display:flex;justify-content:center">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <div style="width:100%;display:flex;justify-content:space-around;align-items:center;margin-bottom:50px;margin-top:20px">
+    <div>
+      <div style="font-weight:350;font-size:14px;color:#999">
+        TOTAL
+      </div>
+      <div style="font-size:22px;font-weight:800;color:#555">
+        ${{total}}
+      </div>
+      <div style="font-weight:350;font-size:14px;color:#999">
+        Envío incluido
+      </div>
+    </div>
+
+    <div *ngIf="_carro.actual_carro_tipo == 'ecommerce' && flow">
+      <div *ngIf="isTelefono && isDireccion && !isBrowser " (click)="pagar()" style="font-weight:500;font-size:12px;color:white;background:#ff6633;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
+        CONTINUAR
+        <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
+      </div>
+      <div *ngIf="!isTelefono && !isDireccion" style="font-weight:500;font-size:12px;color:white;background:#ffa98c;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
+        CONTINUAR
+        <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
+      </div>
+      <div *ngIf="isBrowser" style="font-weight:500;font-size:12px;color:white;background:#ffa98c;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
+        CONTINUAR
+        <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
+      </div>
+    </div>
+
+    <div *ngIf="_carro.actual_carro_tipo == 'ecommerce' && !flow" style="font-weight:500;font-size:12px;color:white;background:#ffa98c;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
+      CONTINUAR
+      <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
+    </div>
+
+    <div *ngIf="_carro.actual_carro_tipo == 'delivery'">
+      <div *ngIf="isTelefono && isDireccion && !isBrowser" (click)="pagar()" style="font-weight:500;font-size:12px;color:white;background:#ff6633;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
+        CONTINUAR
+        <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
+      </div>
+      <div *ngIf="!isTelefono && !isDireccion" style="font-weight:500;font-size:12px;color:white;background:#ffa98c;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
+        CONTINUAR
+        <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
+      </div>
+      <div *ngIf="isBrowser" style="font-weight:500;font-size:12px;color:white;background:#ffa98c;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
+        CONTINUAR
+        <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+<!-- <ion-content>
+
+  <div style="margin-bottom:50px;margin-top:20px;width:100%;text-align:center;color:#515c6f;font-size:24px;font-weight:700">
+    PAGAR
+  </div>
+
+
+
   <div style="font-weight:400;color:#999;font-size:15px;margin-left:15px">
     DIRECCIÓN DE ENTREGA
   </div>
-  <ion-list>
-    <button (click)="openModal('direccion')" ion-item style="color:#7d8593">
-      {{direccion}}
-      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:25px;margin-left:10px"></ion-icon>
-    </button>
-  </ion-list>
+  <button no-lines (click)="openModal('direccion')" ion-item style="font-size:16px;color:#7d8593">
+    {{direccion}}
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:25px;margin-left:10px"></ion-icon>
+  </button>
 
   <hr>
 
   <div style="font-weight:400;color:#999;font-size:15px;margin-left:15px">
     TÚ TELEFONO
   </div>
-  <ion-list>
-    <button (click)="openModal('telefono')" ion-item style="color:#7d8593">
-      {{telefono}}
-      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:25px;margin-left:10px"></ion-icon>
-    </button>
-  </ion-list>
+  <button no-lines (click)="openModal('telefono')" ion-item style="font-size:16px;color:#7d8593">
+    {{telefono}}
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:25px;margin-left:10px"></ion-icon>
+  </button>
 
   <hr>
 
@@ -87,7 +270,6 @@
   </ion-item>
 
   <hr>
-  <!-- color:#d5d6dc; -->
   <div style="font-weight:400;color:#999;font-size:15px;margin-left:15px">
     MÉTODO DE PAGO
   </div>
@@ -118,14 +300,14 @@
         Envío incluido
       </div>
     </div>
-    <div *ngIf="isTelefono && isDireccion && !isBrowser" (click)="pagar()" style="font-weight:500;font-size:12px;color:white;background:#ff6633;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
+    <div *ngIf="isTelefono && isDireccion" (click)="pagar()" style="font-weight:500;font-size:12px;color:white;background:#ff6633;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
       CONTINUAR
       <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
     </div>
-    <div *ngIf="!isTelefono && !isDireccion && isBrowser" style="font-weight:500;font-size:12px;color:white;background:#ffa98c;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
+    <div *ngIf="!(isTelefono && isDireccion)" style="font-weight:500;font-size:12px;color:white;background:#ffa98c;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
       CONTINUAR
       <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
     </div>
   </div>
 
-</ion-content>
+</ion-content> -->

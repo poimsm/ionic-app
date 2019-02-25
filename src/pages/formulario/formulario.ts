@@ -393,17 +393,25 @@ export class FormularioPage {
           }
         });
     }
-
-
-
-
-
-
   }
 
   signUp(name, email, password) {
     this._auth.loginUp(name, email, password)
       .then(res => { });
+  }
+
+  modificarDB() {
+    const url = `${this.apiURL}/database/modificar-db`;
+    let imgs = {};
+
+    this.fileNames.forEach((item, i) => {
+      imgs[i] = item;
+    });
+
+    const body = {}
+
+    this.http.put(url, body).toPromise()
+      .then(() => console.log('LISTO!'));
   }
 
 }

@@ -5,6 +5,7 @@ import { DatosPersonalesPage } from '../datos-personales/datos-personales';
 import { CarroProvider } from '../../providers/carro/carro';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { LocalizacionProvider } from '../../providers/localizacion/localizacion';
 
 @IonicPage()
 @Component({
@@ -12,8 +13,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
   templateUrl: 'carro-pagar.html',
 })
 export class CarroPagarPage {
-  efectivo = true;
-  flow = false;
+  efectivo = false;
+  flow = true;
 
   total: number;
   direccion = 'Ej. Simon bolivar 802';
@@ -29,6 +30,7 @@ export class CarroPagarPage {
   hora: string;
   isBrowser = false;
   transactionID: string;
+  ciudad: string;
 
   semana = ['Lunes 8', 'Martes 9', 'Miercoles 10', 'Jueves 13', 'Viernes 14'];
   horas = [
@@ -67,12 +69,14 @@ export class CarroPagarPage {
     public navParams: NavParams,
     private _carro: CarroProvider,
     private iab: InAppBrowser,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private _localizacion: LocalizacionProvider
   ) {
     this.total = this.navParams.get('total');
     this.carro = this.navParams.get('carro');
     this.token = this.navParams.get('token');
     this.user = this.navParams.get('user');
+    this.ciudad = this._localizacion.ciudad;
     if (this.user.phone) {
       this.telefono = this.user.phone;
       this.isTelefono = true;
@@ -134,12 +138,11 @@ export class CarroPagarPage {
     }
 
     this._carro.createTransaction(transaccion)
-      .then((data: any) => {
+      .then((res: any) => {
 
-        this.transactionID = data.id;
-        transaccion.id = data.id;
+        this.transactionID = res._id;
 
-        this._carro.iniciarCompra(this.token, transaccion).then((data) => {
+        this._carro.iniciarCompra(this.token, res).then((data) => {
           let respuesta = JSON.parse(JSON.stringify(data));
 
           if (respuesta.code != undefined && respuesta.code == 108) {
@@ -162,9 +165,11 @@ export class CarroPagarPage {
             browser.on('exit').subscribe(event => {
               this.isBrowser = false;
               this._carro.getTransaction(this.transactionID)
-                .then((data: any) => {
-                  if (data.ok) {
+                .then((result: any) => {
+                  if (result.ok) {
                     console.log('Move next page');
+                    // this.pagoOnline();
+                    this.navCtrl.push(CarroCompraExitosaPage);
                   }
                 });
             });
@@ -176,20 +181,27 @@ export class CarroPagarPage {
       });
   }
 
-  pagarConEfectivo() {
+
+  pagoOnline() {
+
+    this._carro.ordenarCarro();
 
     const promesas = [];
+
     this._carro.carros.forEach(carro => {
 
       const compra: any = {
-        carro: carro,
+        productos: carro.productos,
+        tienda: carro.tienda,
+        total: carro.total,
         cliente: {
           uid: this.user._id,
           nombre: this.user.name,
           email: this.user.local.email,
           direccion: this.direccion,
           telefono: this.telefono
-        }
+        },
+        metodo: 'Pago online'
       };
 
       if (this.isDiaHora) {
@@ -204,7 +216,47 @@ export class CarroPagarPage {
     });
 
     Promise.all(promesas).then(() => {
-      this.navCtrl.push(CarroCompraExitosaPage)
+      this.navCtrl.push(CarroCompraExitosaPage);
+    });
+  }
+
+
+  pagarConEfectivo() {
+
+    this._carro.ordenarCarro();
+
+    const promesas = [];
+
+    this._carro.carros.forEach(carro => {
+
+      const compra: any = {
+        productos: carro.productos,
+        tienda: carro.tienda,
+        total: carro.total,
+        cliente: {
+          uid: this.user._id,
+          nombre: this.user.name,
+          email: this.user.local.email,
+          ciudad: this.ciudad,
+          direccion: this.direccion,
+          telefono: this.telefono
+        },
+        metodo: 'Efectivo en la entrega'
+      };
+
+      if (this.isDiaHora) {
+        compra.diaHoraDeEntrega = {
+          isActive: true,
+          dia: this.dia,
+          hora: this.hora
+        }
+      }
+
+      promesas.push(this._carro.crearCompra(this.token, compra));
+    });
+
+    Promise.all(promesas).then(() => {
+      this.navCtrl.push(CarroCompraExitosaPage);
     });
   }
 

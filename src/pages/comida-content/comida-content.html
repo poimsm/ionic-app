@@ -1,5 +1,15 @@
 <ion-header no-border>
   <ion-navbar align-title="center" color="white">
+
+    <div style="display:flex;align-items:center">
+      <div style="border-radius:50%;min-height:35px;width:35px;background-size:cover;background-repeat: no-repeat;background-position: center;"
+        [ngStyle]="{'background-image': 'url(' + data.tienda.imgPerfil.url + ')' }">
+      </div>
+      <div style="margin-left:10px;color:#666;font-weight:550;font-size:15px">
+        {{data.tienda.nombre}}
+      </div>
+    </div>
+
     <ion-buttons right>
       <button (click)="openCart()" ion-button icon-only>
         <div style="position:relative">
@@ -13,7 +23,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content style="background:rgb(250, 250, 250)">
+<ion-content style="background:white">
   <div style="top:0px;left:0px">
     <ion-slides pager>
       <ion-slide *ngFor="let img of imgs">
@@ -26,138 +36,97 @@
   </div>
 
 
-
   <div padding style="margin-top:-15px;background:white">
-    <div style="margin-top:10px;color:#ff6633;font-weight:500;font-size:18px">
+    <div style="margin-top:10px;color:#ff6633;font-weight:500;font-size:22px">
       ${{total}}
     </div>
     <div style="margin-top:10px;font-size:17px;color:#555">
       {{data.titulo}}
     </div>
-  </div>
-
-
-  <div *ngIf="data.descripcion" style="padding-top:15px;padding-bottom:15px;margin-top:10px;background:white">
-    <div style="margin-left:15px;color:#222;font-size:16px">
-      Descripcion
-    </div>
-    <div style="width:100%;border-top:0.5px solid rgb(250, 250, 250);margin-top:7px">
-    </div>
-    <div style="margin-left:15px;margin-top:10px;font-size:14px;color:#777">
+    <div style="font-size:16px;color:#999">
       {{data.descripcion}}
     </div>
   </div>
 
-  <div *ngIf="data?.aderezos.isActive" style="padding-top:15px;padding-bottom:10px;margin-top:10px;background:white">
-    <div style="margin-left:15px;color:#222;font-size:16px">
-      Agregar
+  <!-- <div padding style="color:#777;font-size:18px;background:rgb(250, 250, 250)">
+    Ingredientes
+  </div>
+  <div style="margin-left:15px;margin-top:15px;margin-bottom:15px;background:white">
+    <div style="font-size:16px;color:#999">
+      Pollo, queso camaron, lechuga aceitosa y muchos colores
     </div>
-    <hr>
-    <!-- <div style="width:100%;border-top:0.5px solid rgb(250, 250, 250);margin-top:7px">
-    </div> -->
-    <button (click)="openSelect('aderezo')" ion-item no-lines *ngIf="data?.aderezos.isActive">
-      <div style="font-size:16px;color:#999">
-        Aderezo
-      </div>
-      <div item-end style="font-size:14px;color:dodgerblue">
-        {{aderezo}}
-      </div>
-      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
-    </button>
+  </div> -->
+
+  <div *ngFor="let lista of listas; let k = index">
+
+    <div *ngIf="lista.tipo == 'solo uno'" padding style="color:#777;font-size:18px;background:rgb(250, 250, 250)">
+      {{lista.titulo}}
+    </div>
+    <div *ngIf="lista.tipo == 'solo uno'" style="margin-left:15px;margin-top:0px;background:white">
+      <ion-list no-lines>
+        <button (click)="seleccionarSoloUno(k, i)" ion-item *ngFor="let opcion of lista.opciones, let i = index">
+          <ion-icon item-start *ngIf="opcion.isActive" name="radio-button-on" style="color:#ff6633;font-size:22px"></ion-icon>
+          <ion-icon item-start *ngIf="!opcion.isActive" name="radio-button-off" style="color:#eee;font-size:22px"></ion-icon>
+          <div style="font-size:16px;color:#666">
+            {{opcion.tag}}
+          </div>
+        </button>
+      </ion-list>
+    </div>
+
+
+    <div *ngIf="lista.tipo == 'multiple'" padding style="color:#777;font-size:18px;background:rgb(250, 250, 250)">
+      {{lista.titulo}}
+    </div>
+    <div *ngIf="lista.tipo == 'multiple'" style="margin-left:15px;margin-top:0px;background:white">
+      <ion-list no-lines>
+        <button (click)="seleccionarMultiple(k, i)" ion-item *ngFor="let opcion of lista.opciones, let i = index">
+          <ion-icon item-start *ngIf="opcion.isActive" name="checkbox" style="color:#ff6633;font-size:22px"></ion-icon>
+          <ion-icon item-start *ngIf="!opcion.isActive" name="ios-square-outline" style="color:#eee;font-size:22px"></ion-icon>
+          <div style="font-size:16px;color:#666">
+            {{opcion.tag}}
+          </div>
+        </button>
+      </ion-list>
+    </div>
+
   </div>
 
-  <div *ngIf="data?.opciones.isActive" style="padding-top:15px;padding-bottom:10px;margin-top:10px;background:white">
-    <div style="margin-left:15px;color:#222;font-size:16px">
-      Gusto o preferencia
-    </div>
-    <hr>
-    <!-- <div style="width:100%;border-top:0.5px solid rgb(250, 250, 250);margin-top:7px">
-    </div> -->
-    <button (click)="openSelect('opcion')" ion-item no-lines *ngIf="data?.opciones.isActive">
-      <div style="font-size:16px;color:#999">
-        Opciones
-      </div>
-      <div item-end style="width:150px;font-size:15px;color:dodgerblue">
-        {{opcion}}
-      </div>
-      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
-    </button>
+
+  <div *ngIf="data.unidades.isActive" padding style="color:#777;font-size:18px;background:rgb(250, 250, 250)">
+    Unidades
+  </div>
+  <div style="margin-left:15px;margin-top:0px;background:white">
+    <ion-list no-lines>
+      <button (click)="seleccionarUnidades(i)" *ngFor="let unidad of unidades_seleccion; let i = index" ion-item>
+        <ion-icon item-start *ngIf="unidad.isActive" name="radio-button-on" style="color:#ff6633;font-size:22px"></ion-icon>
+        <ion-icon item-start *ngIf="!unidad.isActive" name="radio-button-off" style="color:#eee;font-size:22px"></ion-icon>
+        <div style="font-size:16px;color:#666">
+          {{unidad.tag}}
+        </div>
+      </button>
+    </ion-list>
   </div>
 
-  <div *ngIf="data?.precio.tipo == 'persona'" style="padding-top:15px;padding-bottom:10px;margin-top:10px;background:white">
-    <div style="margin-left:15px;color:#222;font-size:16px">
-      Agregar
-    </div>
-    <hr>
-    <!-- <div style="width:100%;border-top:0.5px solid rgb(250, 250, 250);margin-top:7px">
-    </div> -->
-    <button ion-item (click)="openSelect('persona')" no-lines>
-      <div style="font-size:16px;color:#999">
-        Cantidad
-      </div>
-      <div item-end style="width:150px;font-size:15px;color:dodgerblue">
-        {{precioTag.persona}} (${{precioTag.precio}})
-      </div>
-      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
-    </button>
+  <div padding *ngIf="data.cantidad.isActive" style="color:#777;font-size:18px;background:rgb(250, 250, 250)">
+    Cantidad
+  </div>
+  <div style="margin-left:15px;margin-top:0px;background:white">
+    <ion-list no-lines>
+      <button (click)="seleccionarCantidad(i)" *ngFor="let cantidad of cantidad_seleccion; let i = index" ion-item>
+        <ion-icon item-start *ngIf="cantidad.isActive" name="radio-button-on" style="color:#ff6633;font-size:22px"></ion-icon>
+        <ion-icon item-start *ngIf="!cantidad.isActive" name="radio-button-off" style="color:#eee;font-size:22px"></ion-icon>
+        <div style="font-size:16px;color:#666">
+          {{cantidad.tag}}
+        </div>
+      </button>
+    </ion-list>
   </div>
 
-  <div *ngIf="data?.precio.tipo == 'unidad'" style="padding-top:15px;padding-bottom:10px;margin-top:10px;background:white">
-    <div style="margin-left:15px;color:#222;font-size:16px">
-      Agregar
-    </div>
-    <hr>
-    <!-- <div style="width:100%;border-top:0.5px solid rgb(250, 250, 250);margin-top:7px">
-    </div> -->
-    <button ion-item (click)="openSelect('unidad')" no-lines>
-      <div style="font-size:16px;color:#999">
-        Cantidad
-      </div>
-      <div item-end style="width:150px;font-size:15px;color:dodgerblue">
-        {{precioTag.unidad}} (${{precioTag.precio}})
-      </div>
-      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
-    </button>
-  </div>
-
-  <ion-item style="display:none">
-    <ion-label>
-      Seleccione una opción
-    </ion-label>
-    <ion-select (ionChange)="onSelectChange($event)" [(ngModel)]="precioTag" #personaRef>
-      <ion-option *ngFor="let precioTag of precioArray" [value]="precioTag">{{precioTag.persona}}</ion-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-item style="display:none">
-    <ion-label>
-      Seleccione una opción
-    </ion-label>
-    <ion-select (ionChange)="onSelectChange($event)" [(ngModel)]="precioTag" #unidadRef>
-      <ion-option *ngFor="let precioTag of precioArray" [value]="precioTag">{{precioTag.unidad}}</ion-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-item style="display:none">
-    <ion-label>
-      Seleccione una opción
-    </ion-label>
-    <ion-select [(ngModel)]="opcion" #opcionRef>
-      <ion-option *ngFor="let opcion of opciones" [value]="opcion">{{opcion}}</ion-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-item style="display:none">
-    <ion-label>¿Qué salsas quiere agregar?</ion-label>
-    <ion-select [(ngModel)]="aderezo" multiple="true" #aderezoRef>
-      <ion-option *ngFor="let aderezo of aderezos">{{aderezo}}</ion-option>
-    </ion-select>
-  </ion-item>
 
 
-  <div style="border-bottom:0px solid #eee;border-top:0px solid #eee;padding:20px;background:white;width:100%;display:flex;justify-content:center;margin-bottom:50px;margin-top:10px">
-    <div (click)="save()" style="font-weight:500;font-size:14px;color:white;background:#ff6633;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:2px">
-      <!-- <ion-icon name="cart" style="color:white;margin-right:5px;font-size:18px"></ion-icon> -->
+  <div style="margin-top:0px;background:white;width:100%;display:flex;justify-content:center;padding-bottom:50px;padding-top:20px">
+    <div (click)="save()" style="font-weight:500;font-size:12px;color:white;background:#ff6633;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
       AGREGAR AL CARRITO
       <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
     </div>

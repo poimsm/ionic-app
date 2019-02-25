@@ -41,7 +41,7 @@ export class MisPedidosPage {
     this._data.misPedidos(token, id)
       .then((data: any) => {
         data.forEach(compra => {
-          this.pedidos = this.pedidos.concat(compra.carro)
+          this.pedidos = this.pedidos.concat(compra.productos)
         });
         console.log(this.pedidos);
 

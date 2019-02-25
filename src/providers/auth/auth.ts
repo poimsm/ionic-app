@@ -79,8 +79,11 @@ export class AuthProvider {
     this.removeStorage();
 
     if (user.isDelivery) {
-      this.unsubscribeToNotifications('delivery')
-        .then(() => console.log('Usuario desubscrito'))
+      this.unsubscribeToNotifications('delivery');
+    }
+
+    if (user.isTienda) {
+      this.unsubscribeToNotifications(user.tienda.id);
     }
     const authData = {};
     this.authState.next({ isAuth: false, authData });
@@ -191,10 +194,16 @@ export class AuthProvider {
   // -------------------------------------------
 
   subscribeToNotifications(topic) {
+    if (!this.platform.is('cordova')) {
+      return
+    }
     return this.firebaseMessaging.subscribe(topic);
   }
 
   unsubscribeToNotifications(topic) {
+    if (!this.platform.is('cordova')) {
+      return
+    }
     return this.firebaseMessaging.unsubscribe(topic);
   }
 

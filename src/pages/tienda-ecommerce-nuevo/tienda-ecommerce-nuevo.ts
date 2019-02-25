@@ -39,6 +39,38 @@ export class TiendaEcommerceNuevoPage {
   addMore = false;
   categorias = [];
 
+  detalles = [];
+  faceta: string;
+  desc: string;
+
+  dias = [
+    {
+      tag: 'Tengo productos disponibles',
+      select: 'Producto disponible',
+      value: 'disponible'
+    },
+    {
+      tag: 'Lo debo fabricar, demoro 1 día',
+      select: 'Demora 1 día en fabricar',
+      value: '1 día'
+    },
+    {
+      tag: 'Lo debo fabricar, demoro 2 días',
+      select: 'Demora 2 días en fabricar',
+      value: '2 días'
+    },
+    {
+      tag: 'Lo debo fabricar, demoro 4 días',
+      select: 'Demora 4 días en fabricar',
+      value: '2 días'
+    },
+    {
+      tag: 'Lo debo fabricar, demoro 7 días',
+      select: 'Demora 7 días en fabricar',
+      value: '2 días'
+    }
+  ]
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -83,6 +115,17 @@ export class TiendaEcommerceNuevoPage {
     console.log(this.variaciones);
   }
 
+  agregarDetalle() {
+
+    if (!this.faceta && !this.desc) {
+      return;
+    }
+    const detalle = `${this.faceta}: ${this.desc}`;
+    this.detalles.push(detalle);
+    console.log(this.detalles);
+
+  }
+
   remove(index, tipo) {
     if (tipo == 'variacion') {
       this.variaciones.splice(index, 1);
@@ -121,6 +164,9 @@ export class TiendaEcommerceNuevoPage {
     }
     if (tipo == 'variacion') {
       this.variacionRef.open();
+    }
+    if (tipo == 'tiempoDeEntrega') {
+      this.tiempoDeEntregaRef.open();
     }
   }
 
@@ -178,13 +224,23 @@ export class TiendaEcommerceNuevoPage {
 
 
   save() {
+
+    let entrega = '';
+    this.dias.forEach(dia => {
+      if (this.tiempoDeEntrega == dia.select) {
+        entrega = dia.value
+      }
+    });
+
     const producto: any = {
       titulo: this.titulo,
-      descripcion: this.descripcion,
       imgs: this.imagenes,
       categoria: this.categoria,
+      descripcion: this.descripcion,
       tienda: this.tiendaID,
       ciudad: this.ciudad,
+      detalles: this.detalles,
+      tiempoDeEntrega: entrega,
       precio: {
         costoEnvio: Number(this.costoEnvio),
         valorProducto: Number(this.valorProducto)

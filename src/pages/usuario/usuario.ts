@@ -5,6 +5,7 @@ import { TiendaComidaPage } from '../tienda-comida/tienda-comida';
 import { MisPedidosPage } from '../mis-pedidos/mis-pedidos';
 import { AuthProvider } from '../../providers/auth/auth';
 import { TiendaEcommercePage } from '../tienda-ecommerce/tienda-ecommerce';
+import { LocalizacionProvider } from '../../providers/localizacion/localizacion';
 
 @IonicPage()
 @Component({
@@ -15,15 +16,18 @@ export class UsuarioPage {
   tiendaID: string;
   user: any;
   token: string;
+  ciudad: string;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private alertCtrl: AlertController,
-    private _auth: AuthProvider
+    private _auth: AuthProvider,
+    private _localizacion: LocalizacionProvider
   ) {
     this.tiendaID = this.navParams.get('tiendaID');
     this.user = this.navParams.get('user');
     this.token = this.navParams.get('token');
+    this.ciudad = this._localizacion.ciudad;
   }
 
   reloadUser() {
@@ -31,6 +35,15 @@ export class UsuarioPage {
       .then((data: any) => {
         this.user = data.user;
         console.log(data);
+      });
+  }
+
+  setLocalizacion() {
+    this._localizacion.seleccionarCiudad()
+      .then((data: any) => {
+        if (data.ok) {
+          this.ciudad = data.ciudad
+        }
       });
   }
 

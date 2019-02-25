@@ -1,3 +1,4 @@
+export { TiendaComidaListasPage } from './tienda-comida-listas/tienda-comida-listas';
 export { InformacionesPage } from './informaciones/informaciones';
 export { TiendaEcommerceProductosPage } from './tienda-ecommerce-productos/tienda-ecommerce-productos';
 export { TiendaComidaProductosPage } from './tienda-comida-productos/tienda-comida-productos';

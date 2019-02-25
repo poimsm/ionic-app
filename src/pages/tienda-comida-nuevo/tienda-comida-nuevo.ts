@@ -1,9 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, Select, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, ModalController, Select, ActionSheetController } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
 import { PopupsProvider } from '../../providers/popups/popups';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImageProvider } from '../../providers/image/image';
+import { TiendaComidaListasPage } from '../tienda-comida-listas/tienda-comida-listas';
 
 
 @IonicPage()
@@ -45,6 +46,8 @@ export class TiendaComidaNuevoPage {
   ciudad: string;
   categorias = [];
 
+  listas = [];
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -53,7 +56,8 @@ export class TiendaComidaNuevoPage {
     private _popups: PopupsProvider,
     private actionSheetCtrl: ActionSheetController,
     private camera: Camera,
-    private _img: ImageProvider
+    private _img: ImageProvider,
+    public modalCtrl: ModalController
   ) {
     this.tipo = this.navParams.get('tipo');
     this.tiendaID = this.navParams.get('tiendaID');
@@ -72,6 +76,20 @@ export class TiendaComidaNuevoPage {
     });
   }
 
+  openModalLista(tipo) {
+    const modal = this.modalCtrl.create(TiendaComidaListasPage, { tipo });
+    modal.onDidDismiss(data => {
+      if (data.ok) {
+        this.listas.push(data);
+      }
+    });
+    modal.present();
+  }
+
+  rmLista(i) {
+    this.listas.splice(i, 1);
+  }
+
   add(item, tipo) {
     if (!item) {
       return
@@ -85,12 +103,6 @@ export class TiendaComidaNuevoPage {
     if (tipo == 'imagen') {
       this.imagenes.push(item)
     }
-    if (tipo == 'aderezo') {
-      this.aderezos.push(item)
-    }
-    if (tipo == 'opcion') {
-      this.opciones.push(item)
-    }
   }
 
   remove(index, tipo) {
@@ -102,12 +114,6 @@ export class TiendaComidaNuevoPage {
     }
     if (tipo == 'imagen') {
       this.imagenes.splice(index, 1);
-    }
-    if (tipo == 'aderezo') {
-      this.aderezos.splice(index, 1);
-    }
-    if (tipo == 'opcion') {
-      this.opciones.splice(index, 1);
     }
   }
 
@@ -131,7 +137,7 @@ export class TiendaComidaNuevoPage {
     if (!persona) {
       return
     }
-    this.add({ precio, persona }, 'personas');
+    this.add({ value: precio, tag: persona }, 'personas');
   }
 
   addUnidades(precio, unidad) {
@@ -141,7 +147,7 @@ export class TiendaComidaNuevoPage {
     if (!unidad) {
       return
     }
-    this.add({ precio, unidad }, 'unidades');
+    this.add({ value: precio, tag: unidad }, 'unidades');
   }
 
   presentActionSheet() {
@@ -203,47 +209,35 @@ export class TiendaComidaNuevoPage {
       imgs: this.imagenes,
       categoria: this.categoria,
       tienda: this.tiendaID,
-      ciudad: this.ciudad
-    }
-
-    if (this.aderezos.length > 0) {
-      producto.aderezos = {
-        isActive: true,
-        array: this.aderezos
-      }
-    }
-
-    if (this.opciones.length > 0) {
-      producto.opciones = {
-        isActive: true,
-        array: this.opciones
-      }
+      ciudad: this.ciudad,
+      listas: this.listas
     }
 
     if (this.flat) {
       producto.precio = {
-        tipo: 'flat',
+        isActive: true,
         value: this.flatPrice
       }
     }
 
     if (this.unidades) {
-      producto.precio = {
-        tipo: 'unidad',
+      producto.unidades = {
+        isActive: true,
         array: this.unidadesArray
       }
     }
 
     if (this.personas) {
-      producto.precio = {
-        tipo: 'persona',
+      producto.cantidad = {
+        isActive: true,
         array: this.personasArray
       }
     }
+
     console.log(producto);
 
-    this._data.crearProductoComida(producto);
-    this.navCtrl.pop();
+    // this._data.crearProductoComida(producto);
+    // this.navCtrl.pop();
   }
 
 }

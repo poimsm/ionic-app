@@ -15,6 +15,7 @@ export class CarroProvider {
   totalEnvio = 0;
   tiendas = [];
   carros = [];
+  actual_carro_tipo = 'delivery';
 
   constructor(
     public http: HttpClient,
@@ -26,7 +27,6 @@ export class CarroProvider {
 
   setAPI() {
     if (this.platform.is('cordova')) {
-      // this.apiURL = 'https://poimsm-server.herokuapp.com';
       this.apiURL = 'http://joopiterweb.com:3000';
     } else {
       this.apiURL = 'http://localhost:3000';
@@ -34,18 +34,70 @@ export class CarroProvider {
   }
 
   addToCart(compra) {
+
+    if (this.carro.length == 0) {
+
+      this.inicializar_carro_tipo(compra.tipo);
+
+      this.carro.push(compra);
+      this.presentToast();
+      this.calcularEnvio('add', compra.tienda);
+      this.calcularSubTotal();
+
+      return;
+    }
+
     this.carro.push(compra);
-    this.presentToast();
-    this.calcularEnvio('add', compra.tienda);
-    this.calcularSubTotal();
+    let tipo = this.verificar_carro_tipo();
+
+
+    if (tipo == this.actual_carro_tipo) {
+
+      this.presentToast();
+      this.calcularEnvio('add', compra.tienda);
+      this.calcularSubTotal();
+
+    } else {
+
+      this.clearCart();
+      this.inicializar_carro_tipo(compra.tipo);
+
+      this.carro.push(compra);
+      this.presentToast();
+      this.calcularEnvio('add', compra.tienda);
+      this.calcularSubTotal();
+    }
+
+  }
+
+  inicializar_carro_tipo(tipo) {
+    if (tipo == 'ecommerce') {
+      this.actual_carro_tipo = 'ecommerce';
+    } else {
+      this.actual_carro_tipo = 'delivery';
+    }
+  }
+
+  verificar_carro_tipo() {
+    let flag = 'delivery';
+    const ultimo = this.carro.length - 1;
+
+    if (this.carro[ultimo].tipo == 'ecommerce') {
+      flag = 'ecommerce'
+    }
+
+    return flag;
   }
 
   clearCart() {
-    this.total = 0;
+    this.totalEnvio = 0;
+    this.subTotal = 0;
+    this.tiendas = [];
     this.carro = [];
   }
 
   addMore(type, index) {
+
     if (type == '-' && this.carro[index].cantidad != 0) {
       this.carro[index].cantidad -= 1;
       this.carro[index].total = this.carro[index].precio * this.carro[index].cantidad;
@@ -81,6 +133,7 @@ export class CarroProvider {
       let flag = true;
 
       this.tiendas.forEach(tienda => {
+
         if (tienda._id == tiendita._id) {
           flag = false;
         }
@@ -100,6 +153,7 @@ export class CarroProvider {
           }
 
         });
+
         this.totalEnvio = totalEnvio;
       }
 
@@ -113,7 +167,6 @@ export class CarroProvider {
           counter += 1;
         }
       });
-      console.log(counter);
 
       if (counter == 1) {
         let index = 0;
@@ -142,12 +195,11 @@ export class CarroProvider {
   }
 
   ordenarCarro() {
+    this.carros = [];
 
     this.tiendas.forEach(tienda => {
-
       let productos = [];
       let total = 0;
-
       this.carro.forEach(producto => {
 
         if (producto.tienda._id == tienda._id) {
@@ -160,8 +212,6 @@ export class CarroProvider {
       const carro = { tienda, total, productos };
       this.carros.push(carro);
     });
-
-
   }
 
   crearCompra(token, body) {
@@ -169,9 +219,7 @@ export class CarroProvider {
     const headers = new HttpHeaders({
       Authorization: `JWT ${token}`
     });
-    this.tiendas.forEach(tienda => {
-      this.notificarCompra(tienda._id);
-    });
+    this.notificarCompra(body.tienda._id);
     return this.http.post(url, body, { headers }).toPromise();
   }
 
@@ -186,7 +234,7 @@ export class CarroProvider {
   }
 
   iniciarCompra(token, body) {
-    const url = `${this.apiURL}/compras/pago-iniciar`;
+    const url = `${this.apiURL}/transacciones/pago-iniciar`;
     const headers = new HttpHeaders({
       Authorization: `JWT ${token}`
     });

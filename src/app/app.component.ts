@@ -75,12 +75,10 @@ export class MyApp {
         } else {
           this.rootPage = this.home;
           if (this.user.isDelivery) {
-            this._auth.subscribeToNotifications('delivery')
-              .then(() => console.log('Delivery subscrito'));
+            this._auth.subscribeToNotifications('delivery');
           }
           if (this.user.isTienda) {
-            this._auth.subscribeToNotifications(this.user.tienda.id)
-              .then(() => console.log('Tienda subscrita'));
+            this._auth.subscribeToNotifications(this.user.tienda.id);
           }
         }
       });

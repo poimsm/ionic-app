@@ -1,13 +1,15 @@
 <ion-header no-border>
   <ion-navbar align-title="center" color="white">
-    <!-- <div style="width:100%;display:flex;align-items:center;justify-content:flex-start">
-      <div style="border-radius:50%;min-height:40px;width:40px;background-size:cover;background-repeat: no-repeat;background-position: center;"
-        [ngStyle]="{'background-image': 'url(' + data?.tienda.logo + ')' }">
+
+    <div style="display:flex;align-items:center">
+      <div style="border-radius:50%;min-height:35px;width:35px;background-size:cover;background-repeat: no-repeat;background-position: center;"
+        [ngStyle]="{'background-image': 'url(' + data.tienda.imgPerfil.url + ')' }">
       </div>
-      <div style="margin-left:5px;color:#444;font-weight:500;font-size:16px">
-        {{data?.tienda.nombre}}
+      <div style="margin-left:10px;color:#666;font-weight:550;font-size:15px">
+        {{data.tienda.nombre}}
       </div>
-    </div> -->
+    </div>
+
     <ion-buttons right>
       <button (click)="openCart()" ion-button icon-only>
         <div style="position:relative">
@@ -35,7 +37,6 @@
 
   <div style="padding:10px">
     <div style="display:flex;border-top:1px solid #eee;border-bottom:1px solid #eee;padding:5px">
-
       <div style="width:70%;padding:5px;padding-left:20px">
         <div style="font-size:20px;color:#ff6633;font-weight:700">
           {{data.tiempoDeEntrega}}
