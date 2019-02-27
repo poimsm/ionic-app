@@ -172,7 +172,6 @@ export class HomePage {
   openUser() {
     if (this.isAuth) {
       this.navCtrl.push(UsuarioPage, {
-        tiendaID: this.user.tienda.id,
         user: this.user,
         token: this.token
       });

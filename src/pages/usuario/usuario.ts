@@ -24,8 +24,12 @@ export class UsuarioPage {
     private _auth: AuthProvider,
     private _localizacion: LocalizacionProvider
   ) {
-    this.tiendaID = this.navParams.get('tiendaID');
     this.user = this.navParams.get('user');
+    
+    if (this.user.isTienda) {
+      this.tiendaID = this.user.tienda.id;
+    }
+
     this.token = this.navParams.get('token');
     this.ciudad = this._localizacion.ciudad;
   }
