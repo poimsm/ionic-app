@@ -26,7 +26,7 @@
         <ion-label>
           <div style="font-size:16px">
             <div style="font-size:18px;color:#555;font-weight:450">
-              Envíos por mi
+              Mi sistema
             </div>
             Yo mismo haré los repartos de mis productos
           </div>
@@ -50,7 +50,7 @@
           <ion-icon *ngIf="B1" item-start name="radio-button-on" style="color:dodgerblue"></ion-icon>
           <ion-icon *ngIf="!B1" item-start name="radio-button-off" style="color:#bbb"></ion-icon>
           <div style="font-size:16px">
-            Cobrar precio fijo por cada envíoo
+            Cobrar precio fijo por cada envío
           </div>
           <div *ngIf="B1" style="color:green;font-size:16px">
             {{valorFijo}}
@@ -68,7 +68,8 @@
             <div style="font-size:18px;color:#555;font-weight:450">
               Plataforma
             </div>
-            Realizar envios con el sistema de entregas de la plataforma (joopiter)
+            Realizar envios con el sistema de entregas en bici
+            de la plataforma
           </div>
         </ion-label>
         <ion-toggle [(ngModel)]="isPlataforma" (ngModelChange)="cambiarMetodoPago($event,2)" mode="ios"></ion-toggle>
@@ -77,8 +78,8 @@
       <div *ngIf="isPlataforma" style="margin-top:10px;color:#444">
         <ion-item text-wrap no-lines style="color:#777">
           <div style="color:#555;font-size:18px;font-weight:350;padding:10px">
-            Se cobrará <span style="font-weight:500">$1000</span> al cliente mientras que al vendedor no se le aplicará
-            ningun cobro.
+            Se cobrará <span style="font-weight:450;color:#666">$1000</span> al cliente mientras que al vendedor no se
+            le aplicará ningun cobro
           </div>
         </ion-item>
       </div>
@@ -126,7 +127,7 @@
           <span style="color:#555;font-weight:500">usted</span>
         </div>
         <div style="color:#999;font-size:16px">
-          Configuración
+          Configuraciones
         </div>
         <hr>
         <div (click)="isDefined = false" style="font-size:16px;margin-top:10px;font-weight:400;width:100%;text-align:right;color:dodgerblue">
@@ -151,7 +152,7 @@
           <span style="color:#555;font-weight:500">plataforma</span>
         </div>
         <div style="color:#999;font-size:16px">
-          Configuración
+          Configuraciones
         </div>
         <hr>
         <div (click)="isDefined = false" style="font-size:16px;margin-top:10px;font-weight:400;width:100%;text-align:right;color:dodgerblue">

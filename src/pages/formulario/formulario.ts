@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 import { HttpClient } from "@angular/common/http";
 import { PopupsProvider } from '../../providers/popups/popups';
+import { AuthProvider } from '../../providers/auth/auth';
 
 @IonicPage()
 @Component({
@@ -47,7 +48,8 @@ export class FormularioPage {
 
   constructor(
     public http: HttpClient,
-    private _popups: PopupsProvider
+    private _popups: PopupsProvider,
+    private _auth: AuthProvider
   ) { }
 
   ionViewDidLoad() {
@@ -246,4 +248,170 @@ export class FormularioPage {
     this.http.post(url, body).toPromise()
       .then(() => console.log('LISTO!'));
   }
+
+  tiendaCrearEcommerce() {
+
+  }
+  tiendaCrearComida() {
+
+    const email = 'tienda04@joopiter.com';
+    const password = '292933';
+    const ciudad = 'Valdivia'
+
+    this._auth.loginUpFormulario('admin01', email, password)
+      .then((res: any) => {
+        if (res.ok) {
+          const url = `${this.apiURL}/apps/tienda-crear`;
+
+          const body: any = {
+            tipo: 'comida',
+            usuario: res.id,
+            promocion: {
+              isActive: true
+            },
+            ciudad: ciudad,
+            admins: [{ email, password }]
+          }
+
+          this.http.post(url, body).toPromise()
+            .then((data: any) => {
+              const body = {
+                isTienda: true,
+                tienda: {
+                  id: data.id,
+                  tipo: 'comida'
+                }
+              }
+              this._auth.actualizarUsuario(body, res.id)
+                .then(() => console.log('LISTOOO'));
+            });
+        }
+      });
+  }
+
+  crearTienda(tipo) {
+
+    const email = 'tienda01@joopiter.com';
+    const password = '292933';
+    const ciudad = 'Valdivia'
+
+    if (tipo == 'algo dulce') {
+
+      this._auth.loginUpFormulario('admin01', email, password)
+        .then((res: any) => {
+          if (res.ok) {
+            const url = `${this.apiURL}/apps/tienda-crear`;
+
+            const body: any = {
+              tipo: 'algo dulce',
+              usuario: res.id,
+              promocion: {
+                isActive: true
+              },
+              ciudad: ciudad,
+              admins: [{ email, password }]
+            }
+
+            this.http.post(url, body).toPromise()
+              .then((data: any) => {
+                const body = {
+                  isTienda: true,
+                  tienda: {
+                    id: data.id,
+                    tipo: 'algo dulce'
+                  }
+                }
+                this._auth.actualizarUsuario(body, res.id)
+                  .then(() => console.log('LISTOOO'));
+              });
+          }
+        });
+    }
+
+    if (tipo == 'comida') {
+
+      this._auth.loginUpFormulario('admin01', email, password)
+        .then((res: any) => {
+          if (res.ok) {
+            const url = `${this.apiURL}/apps/tienda-crear`;
+
+            const body: any = {
+              tipo: 'comida',
+              usuario: res.id,
+              promocion: {
+                isActive: true
+              },
+              ciudad: ciudad,
+              admins: [{ email, password }]
+            }
+
+            this.http.post(url, body).toPromise()
+              .then((data: any) => {
+                const body = {
+                  isTienda: true,
+                  tienda: {
+                    id: data.id,
+                    tipo: 'comida'
+                  }
+                }
+                this._auth.actualizarUsuario(body, res.id)
+                  .then(() => console.log('LISTOOO'));
+              });
+          }
+        });
+    }
+
+    if (tipo == 'ecommerce') {
+
+      this._auth.loginUpFormulario('admin01', email, password)
+        .then((res: any) => {
+          if (res.ok) {
+            const url = `${this.apiURL}/apps/tienda-crear`;
+
+            const body: any = {
+              tipo: 'ecommerce',
+              usuario: res.id,
+              promocion: {
+                isActive: true
+              },
+              ciudad: ciudad,
+              admins: [{ email, password }]
+            }
+
+            this.http.post(url, body).toPromise()
+              .then((data: any) => {
+                const body = {
+                  isTienda: true,
+                  tienda: {
+                    id: data.id,
+                    tipo: 'ecommerce'
+                  }
+                }
+                this._auth.actualizarUsuario(body, res.id)
+                  .then(() => console.log('LISTOOO'));
+              });
+          }
+        });
+    }
+  }
+
+  signUp(name, email, password) {
+    this._auth.loginUp(name, email, password)
+      .then(res => { });
+  }
+
+  modificarDB() {
+    const url = `${this.apiURL}/database/modificar-db`;
+    let imgs = {};
+
+    this.fileNames.forEach((item, i) => {
+      imgs[i] = item;
+    });
+
+    const body = {}
+
+    this.http.put(url, body).toPromise()
+      .then(() => console.log('LISTO!'));
+  }
+
 }

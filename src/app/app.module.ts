@@ -21,7 +21,7 @@ import { PipesModule } from "../pipes/pipes.module";
 import { Camera } from "@ionic-native/camera";
 import { IonicStorageModule } from "@ionic/storage";
 import { AppVersion } from '@ionic-native/app-version';
-import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyAUecL57weWVkb-4OR0TBCM1f18tHgqi5M',
@@ -42,13 +42,9 @@ import {
   DatosPersonalesPage,
   BandejaPage,
   LoginEmailPage,
-  LoginPasswordPage,
   BandejaContentPage,
-  LoginNamePage,
   UpgradePage,
-  ComprasPage,
   FormularioPage,
-  ComprasContentPage,
   CarroContentPage,
   CarroPage,
   CarroPagarPage,
@@ -59,19 +55,13 @@ import {
   FrutasPage,
   NocturnoPage,
   NocturnoContentPage,
-  OnceSopresaContentPage,
-  OnceSopresaPage,
-  TiendaPage,
   TiendaGaleriaPage,
-  TiendaNuevoPage,
   TiendaProductoPage,
   GaleriaImagenPage,
   GaleriaPage,
   EstiloPage,
   EstiloContentPage,
   TiendaHorarioPage,
-  TiendaDeliveryDulcePage,
-  TiendaDeliveryNormalPage,
   TiendaAlojamientoPage,
   LocalizacionPage,
   WishlistPage,
@@ -79,7 +69,6 @@ import {
   ComidaContentPage,
   TiendaComidaPage,
   TiendaAlgoDulcePage,
-  TiendaComprasPage,
   TiendaComidaNuevoPage,
   TiendaEnviosPage,
   TiendaEnviosDeliveryPage,
@@ -87,7 +76,13 @@ import {
   TiendaEcommercePage,
   TiendaEcommerceNuevoPage,
   EcommercePage,
-  EcommerceContentPage
+  EcommerceContentPage,
+  TiendaEcommerceProductosPage,
+  TiendaComidaProductosPage,
+  TiendaAlgoDulceNuevoPage,
+  TiendaAlgoDulceProductosPage,
+  InformacionesPage,
+  TiendaComidaListasPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -97,6 +92,7 @@ import { PopupsProvider } from '../providers/popups/popups';
 import { CarroProvider } from '../providers/carro/carro';
 import { ImageProvider } from '../providers/image/image';
 import { LocalizacionProvider } from '../providers/localizacion/localizacion';
+import { ConfigProvider } from '../providers/config/config';
 
 @NgModule({
   declarations: [
@@ -110,13 +106,9 @@ import { LocalizacionProvider } from '../providers/localizacion/localizacion';
     DatosPersonalesPage,
     BandejaPage,
     LoginEmailPage,
-    LoginPasswordPage,
     BandejaContentPage,
-    LoginNamePage,
     UpgradePage,
-    ComprasPage,
     FormularioPage,
-    ComprasContentPage,
     CarroContentPage,
     CarroPage,
     CarroPagarPage,
@@ -127,19 +119,13 @@ import { LocalizacionProvider } from '../providers/localizacion/localizacion';
     FrutasPage,
     NocturnoPage,
     NocturnoContentPage,
-    OnceSopresaContentPage,
-    OnceSopresaPage,
-    TiendaPage,
     TiendaGaleriaPage,
-    TiendaNuevoPage,
     TiendaProductoPage,
     GaleriaImagenPage,
     GaleriaPage,
     EstiloPage,
     EstiloContentPage,
     TiendaHorarioPage,
-    TiendaDeliveryDulcePage,
-    TiendaDeliveryNormalPage,
     TiendaAlojamientoPage,
     LocalizacionPage,
     WishlistPage,
@@ -147,7 +133,6 @@ import { LocalizacionProvider } from '../providers/localizacion/localizacion';
     ComidaContentPage,
     TiendaComidaPage,
     TiendaAlgoDulcePage,
-    TiendaComprasPage,
     TiendaComidaNuevoPage,
     TiendaEnviosPage,
     TiendaEnviosDeliveryPage,
@@ -155,7 +140,13 @@ import { LocalizacionProvider } from '../providers/localizacion/localizacion';
     TiendaEcommercePage,
     TiendaEcommerceNuevoPage,
     EcommercePage,
-    EcommerceContentPage
+    EcommerceContentPage,
+    TiendaEcommerceProductosPage,
+    TiendaComidaProductosPage,
+    TiendaAlgoDulceNuevoPage,
+    TiendaAlgoDulceProductosPage,
+    InformacionesPage,
+    TiendaComidaListasPage
   ],
   imports: [
     BrowserModule,
@@ -182,13 +173,9 @@ import { LocalizacionProvider } from '../providers/localizacion/localizacion';
     DatosPersonalesPage,
     BandejaPage,
     LoginEmailPage,
-    LoginPasswordPage,
     BandejaContentPage,
-    LoginNamePage,
     UpgradePage,
-    ComprasPage,
     FormularioPage,
-    ComprasContentPage,
     CarroContentPage,
     CarroPage,
     CarroPagarPage,
@@ -199,19 +186,13 @@ import { LocalizacionProvider } from '../providers/localizacion/localizacion';
     FrutasPage,
     NocturnoPage,
     NocturnoContentPage,
-    OnceSopresaContentPage,
-    OnceSopresaPage,
-    TiendaPage,
     TiendaGaleriaPage,
-    TiendaNuevoPage,
     TiendaProductoPage,
     GaleriaImagenPage,
     GaleriaPage,
     EstiloPage,
     EstiloContentPage,
     TiendaHorarioPage,
-    TiendaDeliveryDulcePage,
-    TiendaDeliveryNormalPage,
     TiendaAlojamientoPage,
     LocalizacionPage,
     WishlistPage,
@@ -219,7 +200,6 @@ import { LocalizacionProvider } from '../providers/localizacion/localizacion';
     ComidaContentPage,
     TiendaComidaPage,
     TiendaAlgoDulcePage,
-    TiendaComprasPage,
     TiendaComidaNuevoPage,
     TiendaEnviosPage,
     TiendaEnviosDeliveryPage,
@@ -227,7 +207,13 @@ import { LocalizacionProvider } from '../providers/localizacion/localizacion';
     TiendaEcommercePage,
     TiendaEcommerceNuevoPage,
     EcommercePage,
-    EcommerceContentPage
+    EcommerceContentPage,
+    TiendaEcommerceProductosPage,
+    TiendaComidaProductosPage,
+    TiendaAlgoDulceNuevoPage,
+    TiendaAlgoDulceProductosPage,
+    InformacionesPage,
+    TiendaComidaListasPage
   ],
   providers: [
     StatusBar,
@@ -245,7 +231,8 @@ import { LocalizacionProvider } from '../providers/localizacion/localizacion';
     FileTransfer,
     InAppBrowser,
     ImageProvider,
-    LocalizacionProvider
+    LocalizacionProvider,
+    ConfigProvider
   ]
 })
 export class AppModule { }

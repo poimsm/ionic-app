@@ -19,6 +19,8 @@ export class LoginPage {
   loginSecond = false;
   loginThird = false;
   obteniendoRespuesta = false;
+  nombre: string;
+  apellido: string;
 
   constructor(
     public viewCtrl: ViewController,
@@ -41,9 +43,14 @@ export class LoginPage {
 
   signUp() {
     this.obteniendoRespuesta = true;
-    if (this.name.length > 0 && this.email.length > 0 && this.password.length > 0) {
-      this._auth.loginUp(this.name, this.email, this.password)
+
+    if (this.nombre && this.apellido && this.email && this.password) {
+      const nombreCompleto = this.nombre + ' ' + this.apellido;
+
+      this._auth.loginUp(nombreCompleto, this.email, this.password)
         .then(res => {
+          console.log('pasoo?');
+          
           if (res) {
             this.obteniendoRespuesta = false;
             this.viewCtrl.dismiss({ ok: true });
@@ -53,7 +60,8 @@ export class LoginPage {
           }
         });
     } else {
-      this.close();
+      console.log('Completar!');
+      
     }
   }
 

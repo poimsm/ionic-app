@@ -7,6 +7,9 @@
     </ion-buttons>
     <ion-title>Algo dulce</ion-title>
     <ion-buttons right>
+      <button (click)="setLocalizacion()" ion-button icon-only>
+        <ion-icon name="pin" style="color:rgb(253, 131, 86)"></ion-icon>
+      </button>
       <button (click)="presentPopover($event)" ion-button icon-only>
         <ion-icon name="md-more"></ion-icon>
       </button>
@@ -17,6 +20,16 @@
 
 
 <ion-content>
+
+  <!-- <div style="background:darkorange;color:white;padding:8px;padding-left:15px;font-weight:600">
+    ¡Prepara tu propia receta!
+  </div>
+  <div style="border-top:1px solid orangered;background:darkorange;color:white;padding:8px;padding-left:15px;font-weight:600">
+    Desayunos sorpresa
+  </div>
+  <div style="border-top:1px solid orangered;background:darkorange;color:white;padding:8px;padding-left:15px;font-weight:600">
+    Snacks saludables
+  </div> -->
 
   <!-- <div *ngIf="true" style="margin-left:15px;margin-top:15px;margin-bottom:0px;color:#444;font-size:20px;font-weight:500">
     Lo más popular

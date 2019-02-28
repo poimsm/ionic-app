@@ -15,20 +15,21 @@
     </div>
 
 
-    <div style="margin-left:20px;margin-top:15px;font-size:20px;font-weight:500;color:#777">
+    <div style="margin-left:15px;margin-top:15px;font-size:20px;font-weight:500;color:#777">
       Categorías
     </div>
     <hr>
 
     <div *ngFor="let categoria of categorias">
 
-      <div style="margin-left:20px;margin-top:15px;font-size:17px;font-weight:500;color:#555">
+      <div style="margin-left:15px;margin-top:15px;font-size:17px;font-weight:500;color:#555">
         {{categoria.tipo}}
       </div>
 
-      <div (click)="openCategoria(categoria.tipo, item)" *ngFor="let item of categoria.data" style="margin-left:20px;margin-top:10px;font-size:16px;color:#777">
+      <button ion-item no-lines (click)="openCategoria(categoria.tipo, item)" *ngFor="let item of categoria.data" style="font-size:16px;color:#777">
         {{item}}
-      </div>
+        <!-- <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon> -->
+      </button>
 
       <hr style="margin-top:10px">
 

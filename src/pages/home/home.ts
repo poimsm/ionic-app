@@ -4,7 +4,6 @@ import { OncePage } from '../once/once';
 import { UsuarioPage } from '../usuario/usuario';
 import { AuthProvider } from '../../providers/auth/auth';
 import { BandejaPage } from '../bandeja/bandeja';
-import { ComprasPage } from '../compras/compras';
 import { FormularioPage } from '../formulario/formulario';
 import { PopupsProvider } from '../../providers/popups/popups';
 import { CarroPage } from '../carro/carro';
@@ -17,6 +16,11 @@ import { LocalizacionProvider } from '../../providers/localizacion/localizacion'
 import { ComidaPage } from '../comida/comida';
 import { EcommercePage } from "../ecommerce/ecommerce";
 import { CarroProvider } from '../../providers/carro/carro';
+import { DataProvider } from '../../providers/data/data';
+import { OnceContentPage } from "../once-content/once-content";
+import { EcommerceContentPage } from '../ecommerce-content/ecommerce-content';
+import { ComidaContentPage } from '../comida-content/comida-content';
+import { CarroPagarPage } from '../carro-pagar/carro-pagar';
 
 
 @Component({
@@ -28,7 +32,6 @@ export class HomePage {
   once = OncePage;
   usuario = UsuarioPage;
   carro = CarroPage;
-  compras = ComprasPage;
   bandeja = BandejaPage;
   formulario = FormularioPage;
   frutas = FrutasPage;
@@ -37,6 +40,11 @@ export class HomePage {
   comida = ComidaPage;
   ecommerce = EcommercePage;
 
+  cosas = [];
+  algoDulce = [];
+  comidas = [];
+  productos = [];
+
   mensaje = '';
 
   showFormulario = false;
@@ -44,6 +52,7 @@ export class HomePage {
   user: any;
   token: string;
   isAuth = false;
+  ciudad: string;
 
   constructor(
     public navCtrl: NavController,
@@ -52,15 +61,16 @@ export class HomePage {
     private platform: Platform,
     public modalCtrl: ModalController,
     private _localizacion: LocalizacionProvider,
-    private _carro: CarroProvider
+    private _carro: CarroProvider,
+    private _data: DataProvider
 
   ) {
     if (!this.platform.is('cordova')) {
       this.showFormulario = true;
     }
-    if (!this._localizacion.ciudad) {
-      this._localizacion.showRadio();
-    }
+    // if (!this._localizacion.ciudad) {
+    //   this._localizacion.seleccionarCiudad();
+    // }
   }
 
   ionViewDidLoad() {
@@ -71,13 +81,48 @@ export class HomePage {
         this.user = data.authData.user;
         this.token = data.authData.token;
         this.isAuth = true;
+      } else {
+        this.isAuth = false;
       }
     });
-    this.mensaje = this._popups.mensajeHome;
+
+    this.ciudad = this._localizacion.ciudad;
+
+    this.setLocalizacion();
+    this.getAlgoDulce();
+    this.getComida();
+    this.getEcommerce();
+  }
+
+  getCosas() {
+    this._data.fetchCosas()
+      .then((data: any) => this.cosas = data);
+  }
+
+  getAlgoDulce() {
+    this._data.fetchAlgoDulceHome(this.ciudad)
+      .then((data: any) => this.algoDulce = data);
+  }
+
+  getComida() {
+    this._data.fetchComida(this.ciudad)
+      .then((data: any) => this.comidas = data);
+  }
+
+  getEcommerce() {
+    this._data.fetchEcommerce(this.ciudad)
+      .then((data: any) => this.productos = data
+      );
   }
 
   setLocalizacion() {
-    this._localizacion.showRadio();
+    this._localizacion.seleccionarCiudad()
+      .then((data: any) => {
+        if (data.ok) {
+          this.ciudad = data.ciudad,
+            this.reloadInicio();
+        }
+      });
   }
 
 
@@ -99,14 +144,34 @@ export class HomePage {
         ciudad: this._localizacion.ciudad
       });
     } else {
-      this._localizacion.showRadio();
+      this._localizacion.seleccionarCiudad()
+        .then((data: any) => {
+          if (data.ok) {
+            this.navCtrl.push(pagina, {
+              isCategoria: false,
+              categoria: 'none',
+              ciudad: data.ciudad
+            });
+          }
+        });
     }
+  }
+
+  openEcommerce() {
+    this.navCtrl.push(EcommercePage, {
+      isCategoria: false,
+      categoria: 'none',
+      ciudad: this._localizacion.ciudad
+    });
+  }
+
+  openCarro() {
+    this.navCtrl.push(CarroPage);
   }
 
   openUser() {
     if (this.isAuth) {
       this.navCtrl.push(UsuarioPage, {
-        tiendaID: this.user.tienda.id,
         user: this.user,
         token: this.token
       });
@@ -116,6 +181,25 @@ export class HomePage {
   }
 
   reloadInicio() {
-    console.log('Recargado');
+    this.productos = [];
+    this.comidas = [];
+    this.algoDulce = [];
+    this.getAlgoDulce();
+    this.getEcommerce();
+    this.getComida();
+  }
+
+  openContent(item, tipo) {
+    if (tipo == 'once') {
+      this.navCtrl.push(OnceContentPage, { once: item });
+    }
+
+    if (tipo == 'comida') {
+      this.navCtrl.push(ComidaContentPage, { once: item });
+    }
+
+    if (tipo == 'ecommerce') {
+      this.navCtrl.push(EcommerceContentPage, { once: item });
+    }
   }
 }

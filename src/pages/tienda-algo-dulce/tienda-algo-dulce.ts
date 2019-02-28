@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, AlertController, ModalController, ActionSheetController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, Select, NavController, NavParams, ToastController, Platform, AlertController, ModalController, ActionSheetController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { TiendaGaleriaPage } from '../tienda-galeria/tienda-galeria';
 import { DataProvider } from '../../providers/data/data';
-import { TiendaNuevoPage } from '../tienda-nuevo/tienda-nuevo';
 import { TiendaProductoPage } from '../tienda-producto/tienda-producto';
 import { TiendaHorarioPage } from '../tienda-horario/tienda-horario';
 import { GaleriaImagenPage } from '../galeria-imagen/galeria-imagen';
-import { ImageProvider } from '../../providers/image/image';
-import { TiendaEnviosPage } from '../tienda-envios/tienda-envios';
 import { TiendaEnviosDeliveryPage } from '../tienda-envios-delivery/tienda-envios-delivery';
+import { TiendaAlgoDulceNuevoPage } from '../tienda-algo-dulce-nuevo/tienda-algo-dulce-nuevo';
+import { TiendaAlgoDulceProductosPage } from '../tienda-algo-dulce-productos/tienda-algo-dulce-productos';
+import { LocalizacionProvider } from '../../providers/localizacion/localizacion';
 
 
 @IonicPage()
@@ -20,13 +20,17 @@ import { TiendaEnviosDeliveryPage } from '../tienda-envios-delivery/tienda-envio
 })
 export class TiendaAlgoDulcePage {
 
-  nuevo = TiendaNuevoPage;
+  @ViewChild('ciudadRef') ciudadRef: Select;
+
+
   producto = TiendaProductoPage;
   tiendaID: string;
   tienda: any;
   imagenPerfil: string;
+  ciudades = [];
 
   constructor(
+    public toastCtrl: ToastController,
     private camera: Camera,
     public modalCtrl: ModalController,
     private alertCtrl: AlertController,
@@ -34,15 +38,12 @@ export class TiendaAlgoDulcePage {
     private platform: Platform,
     public navParams: NavParams,
     private _data: DataProvider,
-    private _img: ImageProvider,
-    private actionSheetCtrl: ActionSheetController
+    private actionSheetCtrl: ActionSheetController,
+    private _localidazacion: LocalizacionProvider
   ) {
     this.tiendaID = this.navParams.get('id');
+    this.ciudades = this._localidazacion.ciudades;
   }
-
-  // ionViewDidLoad() {
-  //   this.cargarTienda();
-  // }
 
   ionViewDidEnter() {
     this.cargarTienda();
@@ -87,13 +88,13 @@ export class TiendaAlgoDulcePage {
 
   tomarFoto(sourceType) {
     const options: CameraOptions = {
-      quality: 50,
+      quality: 90,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: sourceType,
-      targetWidth: 500,
-      targetHeight: 500,
+      targetWidth: 1000,
+      targetHeight: 1000,
       saveToPhotoAlbum: false
     };
 
@@ -106,7 +107,7 @@ export class TiendaAlgoDulcePage {
           id: this.tiendaID
         }
         this._data.nuevaImgPerfil(body)
-          .then(() => console.log('listoo'));
+          .then(() => this.cargarTienda());
 
       }, (err) => { console.log('ERROR') });
     } else {
@@ -128,6 +129,12 @@ export class TiendaAlgoDulcePage {
     })
   }
 
+  openSelect(tipo) {
+    if (tipo == 'ciudad') {
+      this.ciudadRef.open();
+    }
+  }
+
   openEntregas() {
     this.navCtrl.push(TiendaEnviosDeliveryPage, {
       ciudad: this.tienda.ciudad,
@@ -140,8 +147,49 @@ export class TiendaAlgoDulcePage {
     this.navCtrl.push(pagina, { tipo: this.tienda.tipo, tiendaID: this.tiendaID });
   }
 
+  openNuevoProducto() {
+    if (this.tienda.imgPerfil && this.tienda.nombre && this.tienda.direccion && this.tienda.telefono && this.tienda.ciudad) {
+      if (this.tienda.envios.isActive) {
+        this.navCtrl.push(TiendaAlgoDulceNuevoPage, {
+          tipo: this.tienda.tipo,
+          tiendaID: this.tiendaID,
+          ciudad: this.tienda.ciudad
+        });
+      } else {
+        this.middleToast('Por favor definir envíos');
+      }
+    } else {
+      this.middleToast('Por favor completar información de perfil');
+    }
+  }
+
+  middleToast(frase) {
+    let toast = this.toastCtrl.create({
+      message: frase,
+      duration: 2500,
+      position: 'middle'
+    });
+    toast.present();
+  }
+
+  openMisProductos() {
+    this.navCtrl.push(TiendaAlgoDulceProductosPage, {
+      tiendaID: this.tiendaID,
+      promocion: this.tienda.promocion
+    });
+  }
+
   openHorario() {
     this.navCtrl.push(TiendaHorarioPage);
+  }
+
+  faltaCompletarToast() {
+    let toast = this.toastCtrl.create({
+      message: `Por favor completar Nombre y Logo`,
+      duration: 2500,
+      position: 'middle'
+    });
+    toast.present();
   }
 
   presentPrompt(tipo) {
@@ -156,6 +204,11 @@ export class TiendaAlgoDulcePage {
     if (tipo == 'telefono') {
       titulo = '¿Teléfono de contacto?';
       inputType = 'tel';
+    }
+
+    if (tipo == 'direccion') {
+      titulo = 'Ingrese dirección de su tienda';
+      inputType = 'text';
     }
 
     let alert = this.alertCtrl.create({
@@ -178,16 +231,18 @@ export class TiendaAlgoDulcePage {
         {
           text: 'Ok',
           handler: data => {
+            let body = {};
             if (tipo == 'nombre') {
-              const body = { nombre: data.nombre };
-              this._data.updateTienda(this.tiendaID, body)
-                .then(() => this.cargarTienda());
+              body = { nombre: data.nombre };
             }
             if (tipo == 'telefono') {
-              const body = { telefono: data.telefono };
-              this._data.updateTienda(this.tiendaID, body)
-                .then(() => this.cargarTienda());
+              body = { telefono: data.telefono };
             }
+            if (tipo == 'direccion') {
+              body = { direccion: data.direccion };
+            }
+            this._data.updateTienda(this.tiendaID, body)
+              .then(() => this.cargarTienda());
           }
         }
       ]

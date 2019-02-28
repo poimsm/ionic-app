@@ -7,6 +7,9 @@
     </ion-buttons>
     <ion-title>Comida</ion-title>
     <ion-buttons right>
+      <button (click)="setLocalizacion()" ion-button icon-only>
+        <ion-icon name="pin" style="color:rgb(253, 131, 86)"></ion-icon>
+      </button>
       <button (click)="presentPopover($event)" ion-button icon-only>
         <ion-icon name="md-more"></ion-icon>
       </button>
@@ -39,11 +42,14 @@
             <div style="width:100%;display:flex;align-items:flex-end;justify-content:flex-end;font-size:15px">
               <!-- <div style="color:#444;font-weight:600;font-size:16px"> -->
               <div style="color:#555;font-size:16px">
-                <div *ngIf="once.precio.tipo == 'flat'">
+                <div *ngIf="once.precio.isActive">
                   ${{once.precio.value}}
                 </div>
-                <div *ngIf="once.precio.tipo != 'flat'">
-                  ${{once.precio.array[0].precio}}
+                <div *ngIf="once.cantidad.isActive">
+                  ${{once.cantidad.array[0].value}}
+                </div>
+                <div *ngIf="once.unidades.isActive">
+                  ${{once.unidades.array[0].value}}
                 </div>
               </div>
             </div>

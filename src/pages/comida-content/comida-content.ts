@@ -13,7 +13,9 @@ export class ComidaContentPage {
 
   @ViewChild('aderezoRef') aderezoRef: Select;
   @ViewChild('opcionRef') opcionRef: Select;
-  @ViewChild('cantidadRef') cantidadRef: Select;
+  @ViewChild('personaRef') personaRef: Select;
+  @ViewChild('unidadRef') unidadRef: Select;
+
 
   imgs = [];
   data: any = {};
@@ -21,22 +23,17 @@ export class ComidaContentPage {
   titulo: string;
   total: number;
 
-  precioArray = [];
-  precioTag = {};
-
-  aderezos = [];
-  opciones = [];
-  cantidades = [];
-
-  aderezo = 'Seleccionar';
-  cantidad = 'Seleccionar';
-  opcion = 'Seleccionar';
-
-
-
   tag: string;
   token = '';
   user: any = {};
+
+  unidades = [];
+  unidades_seleccion = [];
+
+  cantidad = [];
+  cantidad_seleccion = [];
+
+  listas = [];
 
   constructor(
     public navCtrl: NavController,
@@ -49,26 +46,52 @@ export class ComidaContentPage {
 
     this.imgs = this.data.imgs;
 
-    if (this.data.aderezos.isActive) {
-      this.aderezos = this.data.aderezos.array;
+
+    this.data.listas.forEach(lista => {
+
+      let seleccion = [];
+      lista.opciones.forEach(item => {
+        seleccion.push({
+          isActive: false,
+          tag: item
+        });
+      });
+      this.listas.push({
+        titulo: lista.titulo,
+        tipo: lista.tipo,
+        opciones: seleccion
+      });
+    });
+
+
+    if (this.data.unidades.isActive) {
+      this.unidades = this.data.unidades.array;
+      this.unidades.forEach(data => {
+        this.unidades_seleccion.push({
+          isActive: false,
+          tag: data.tag,
+          value: data.value
+        });
+      });
+      this.unidades_seleccion[0].isActive = true;
+      this.total = this.unidades_seleccion[0].value;
     }
 
-    if (this.data.opciones.isActive) {
-      this.opciones = this.data.opciones.array;
+    if (this.data.cantidad.isActive) {
+      this.cantidad = this.data.cantidad.array;
+      this.cantidad.forEach(data => {
+        this.cantidad_seleccion.push({
+          isActive: false,
+          tag: data.tag,
+          value: data.value
+        });
+      });
+      this.cantidad_seleccion[0].isActive = true;
+      this.total = this.cantidad_seleccion[0].value;
     }
 
-    if (this.data.opciones.isActive) {
-      this.opciones = this.data.opciones.array;
-    }
-
-    if (this.data.precio.tipo == 'flat') {
+    if (this.data.precio.isActive) {
       this.total = Number(this.data.precio.value);
-    }
-
-    if (this.data.precio.tipo != 'flat') {
-      this.precioArray = this.data.precio.array;
-      this.precioTag = this.data.precio.array[0];
-      this.total = this.data.precio.array[0].precio;
     }
   }
 
@@ -81,27 +104,68 @@ export class ComidaContentPage {
     });
   }
 
+  seleccionarMultiple(k, i) {
+    let flag = false;
+    if (!this.listas[k].opciones[i].isActive) {
+      flag = true;
+    }
+    if (flag) {
+      this.listas[k].opciones[i].isActive = true;
+    } else {
+      this.listas[k].opciones[i].isActive = false;
+    }
+  }
+
+  seleccionarSoloUno(k, i) {
+    if (this.listas[k].opciones[i].isActive) {
+      return;
+    }
+    this.listas[k].opciones.forEach(opcion => {
+      opcion.isActive = false;
+    });
+    this.listas[k].opciones[i].isActive = true;
+  }
+
+  seleccionarUnidades(index) {
+    if (this.unidades_seleccion[index].isActive) {
+      return;
+    }
+    this.unidades_seleccion.forEach(opcion => {
+      opcion.isActive = false;
+    });
+    this.unidades_seleccion[index].isActive = true;
+    this.total = this.unidades_seleccion[index].value;
+  }
+
+  seleccionarCantidad(index) {
+    if (this.cantidad_seleccion[index].isActive) {
+      return;
+    }
+    this.cantidad_seleccion.forEach(cantidad => {
+      cantidad.isActive = false;
+    });
+    this.cantidad_seleccion[index].isActive = true;
+    this.total = this.cantidad_seleccion[index].value;
+  }
+
   openCart() {
     this.navCtrl.push(CarroPage);
   }
 
-  openSelect(key) {
-    if (key == 'aderezo') {
-      this.aderezoRef.open();
-    }
-    if (key == 'opcion') {
-      this.opcionRef.open();
-    }
-    if (key == 'cantidad') {
-      this.cantidadRef.open();
-    }
-  }
-
-  onSelectChange(selectedValue: any) {
-    this.total = selectedValue.precio;
-  }
-
   save() {
+
+    const seleccion = [];
+    this.listas.forEach(lista => {
+      lista.opciones.forEach(opcion => {
+        if (opcion.isActive) {
+          seleccion.push({
+            titulo: lista.titulo,
+            opcion: opcion.tag
+          });
+        }
+      });
+    });
+
     const compra: any = {
       titulo: this.data.titulo,
       descripcion: this.data.descripcion,
@@ -109,9 +173,13 @@ export class ComidaContentPage {
       total: Number(this.total),
       precio: Number(this.total),
       tienda: this.data.tienda,
+      seleccion: seleccion,
       tipo: 'comida',
       cantidad: 1
     }
+
+    console.log(compra);
+
     this._carro.addToCart(compra);
   }
 

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, AlertController, ModalController, ActionSheetController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, Select, NavParams, ToastController, Platform, AlertController, ModalController, ActionSheetController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import { TiendaGaleriaPage } from '../tienda-galeria/tienda-galeria';
@@ -10,7 +10,8 @@ import { GaleriaImagenPage } from '../galeria-imagen/galeria-imagen';
 import { ImageProvider } from '../../providers/image/image';
 import { TiendaComidaNuevoPage } from '../tienda-comida-nuevo/tienda-comida-nuevo';
 import { TiendaEnviosDeliveryPage } from '../tienda-envios-delivery/tienda-envios-delivery';
-
+import { TiendaComidaProductosPage } from '../tienda-comida-productos/tienda-comida-productos';
+import { LocalizacionProvider } from '../../providers/localizacion/localizacion';
 
 @IonicPage()
 @Component({
@@ -19,13 +20,17 @@ import { TiendaEnviosDeliveryPage } from '../tienda-envios-delivery/tienda-envio
 })
 export class TiendaComidaPage {
 
+  @ViewChild('ciudadRef') ciudadRef: Select;
+
   nuevo = TiendaComidaNuevoPage;
   producto = TiendaProductoPage;
   tiendaID: string;
   tienda: any;
   imagenPerfil: string;
+  ciudades = [];
 
   constructor(
+    public toastCtrl: ToastController,
     private camera: Camera,
     public modalCtrl: ModalController,
     private alertCtrl: AlertController,
@@ -33,10 +38,11 @@ export class TiendaComidaPage {
     private platform: Platform,
     public navParams: NavParams,
     private _data: DataProvider,
-    private _img: ImageProvider,
-    private actionSheetCtrl: ActionSheetController
+    private actionSheetCtrl: ActionSheetController,
+    private _localidazacion: LocalizacionProvider
   ) {
     this.tiendaID = this.navParams.get('id');
+    this.ciudades = this._localidazacion.ciudades;
   }
 
   // ionViewDidLoad() {
@@ -86,7 +92,7 @@ export class TiendaComidaPage {
 
   tomarFoto(sourceType) {
     const options: CameraOptions = {
-      quality: 50,
+      quality: 90,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
@@ -105,7 +111,7 @@ export class TiendaComidaPage {
           id: this.tiendaID
         }
         this._data.nuevaImgPerfil(body)
-          .then(() => console.log('listoo'));
+          .then(() => this.cargarTienda());
 
       }, (err) => { console.log('ERROR') });
     } else {
@@ -137,19 +143,32 @@ export class TiendaComidaPage {
   }
 
   openNuevoProducto() {
-    this.navCtrl.push(TiendaComidaNuevoPage, {
-      tipo: this.tienda.tipo,
+    if (this.tienda.imgPerfil && this.tienda.nombre && this.tienda.direccion && this.tienda.telefono && this.tienda.ciudad) {
+      if (this.tienda.envios.isActive) {
+        this.navCtrl.push(TiendaComidaNuevoPage, {
+          tipo: this.tienda.tipo,
+          tiendaID: this.tiendaID,
+          ciudad: this.tienda.ciudad
+        });
+      } else {
+        this.middleToast('Por favor definir envíos');
+      }
+    } else {
+      this.middleToast('Por favor completar información de perfil');
+    }
+  }
+
+  openMisProductos() {
+    this.navCtrl.push(TiendaComidaProductosPage, {
       tiendaID: this.tiendaID,
-      ciudad: this.tienda.ciudad
+      promocion: this.tienda.promocion
     });
   }
 
-  openMisProducto() {
-    this.navCtrl.push(TiendaComidaNuevoPage, {
-      tipo: this.tienda.tipo,
-      tiendaID: this.tiendaID,
-      ciudad: this.tienda.ciudad
-    });
+  openSelect(tipo) {
+    if (tipo == 'ciudad') {
+      this.ciudadRef.open();
+    }
   }
 
   openHorario() {
@@ -157,6 +176,15 @@ export class TiendaComidaPage {
       tiendaID: this.tiendaID,
       horario: this.tienda.horario
     });
+  }
+
+  middleToast(frase) {
+    let toast = this.toastCtrl.create({
+      message: frase,
+      duration: 2500,
+      position: 'middle'
+    });
+    toast.present();
   }
 
   presentPrompt(tipo) {
@@ -171,6 +199,11 @@ export class TiendaComidaPage {
     if (tipo == 'telefono') {
       titulo = '¿Teléfono de contacto?';
       inputType = 'tel';
+    }
+
+    if (tipo == 'direccion') {
+      titulo = 'Ingrese dirección de su tienda';
+      inputType = 'text';
     }
 
     let alert = this.alertCtrl.create({
@@ -193,16 +226,18 @@ export class TiendaComidaPage {
         {
           text: 'Ok',
           handler: data => {
+            let body = {};
             if (tipo == 'nombre') {
-              const body = { nombre: data.nombre };
-              this._data.updateTienda(this.tiendaID, body)
-                .then(() => this.cargarTienda());
+              body = { nombre: data.nombre };
             }
             if (tipo == 'telefono') {
-              const body = { telefono: data.telefono };
-              this._data.updateTienda(this.tiendaID, body)
-                .then(() => this.cargarTienda());
+              body = { telefono: data.telefono };
             }
+            if (tipo == 'direccion') {
+              body = { direccion: data.direccion };
+            }
+            this._data.updateTienda(this.tiendaID, body)
+              .then(() => this.cargarTienda());
           }
         }
       ]

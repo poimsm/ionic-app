@@ -1,34 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Platform } from 'ionic-angular';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from "@ionic-native/file-transfer/ngx";
+import { FileTransfer, FileUploadOptions, FileTransferObject } from "@ionic-native/file-transfer";
+import { ConfigProvider } from '../config/config';
 
 @Injectable()
 export class ImageProvider {
   apiURL: string;
 
-  constructor(public http: HttpClient, private transfer: FileTransfer, private platform: Platform
+  constructor(
+    public http: HttpClient,
+    private transfer: FileTransfer,
+    private _config: ConfigProvider
   ) {
-    this.setAPI();
-  }
-
-  setAPI() {
-    if (this.platform.is('cordova')) {
-      this.apiURL = 'https://poimsm-server.herokuapp.com';
-      // this.apiURL = 'http://localhost:3000';
-
-    } else {
-      // this.apiURL = 'https://poimsm-server.herokuapp.com';
-      this.apiURL = 'http://localhost:3000';
-    }
+    this.apiURL = this._config.apiURL;
   }
 
   uploadImage(img) {
-    console.log('ENTROOO AKA');
 
-    const url = `${this.apiURL}/images/upload`;
+    const fileTransfer: FileTransferObject = this.transfer.create();
+    const url = `${this.apiURL}/imgs/upload`;
 
-    // File for Upload
     var targetPath = img;
 
     var options: FileUploadOptions = {
@@ -36,13 +27,6 @@ export class ImageProvider {
       chunkedMode: false,
       mimeType: 'multipart/form-data'
     };
-    console.log('ENTROOOO AKII');
-
-
-    const fileTransfer: FileTransferObject = this.transfer.create();
-    console.log('ENTROOOO CREADO');
-
-    // Use the FileTransfer to upload the image
     return fileTransfer.upload(targetPath, url, options);
   }
 

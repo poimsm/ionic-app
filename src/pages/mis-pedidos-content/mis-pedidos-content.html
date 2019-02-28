@@ -12,7 +12,7 @@
 
   <div style="height:15px"></div>
 
-  <div padding *ngIf="data.tipo == 'comida'">
+  <div padding>
     <div style="font-size:18px;color:#333;font-weight:600">
       {{data.titulo}}
     </div>
@@ -27,18 +27,24 @@
   <div style="margin-left:15px;padding:5px;font-size:16px;color:#555">
     CANTIDAD ......................... X{{data.cantidad}}
   </div>
-  <div style="margin-left:15px;padding:5px;font-size:16px;color:#555">
-    SUB TOTAL ....................... ${{data.precio}}
+  <div *ngIf="data.tipo != 'ecommerce'" style="margin-left:15px;padding:5px;font-size:16px;color:#555">
+    SUB TOTAL ....................... ${{data.total - data.tienda.envios.precioFijo}}
   </div>
-  <div style="margin-left:15px;padding:5px;font-size:16px;color:#555">
-    ENVÍO ............................... ${{data?.tienda.envios.precioFijo}}
+  <div *ngIf="data.tipo != 'ecommerce'" style="margin-left:15px;padding:5px;font-size:16px;color:#555">
+    ENVÍO ............................... ${{data.tienda.envios.precioFijo}}
+  </div>
+  <div *ngIf="data.tipo == 'ecommerce'" style="margin-left:15px;padding:5px;font-size:16px;color:#555">
+    SUB TOTAL ....................... ${{data.total}}
+  </div>
+  <div *ngIf="data.tipo == 'ecommerce'" style="margin-left:15px;padding:5px;font-size:16px;color:#555">
+    ENVÍO ............................... $0
   </div>
   <hr>
   <div style="margin-left:15px;padding:5px;font-size:16px;color:#555">
     TOTAL .............................. ${{data.total}}
   </div>
   <div style="margin-left:15px;padding:5px;font-size:16px;color:#555">
-    {{data.metodoDePago}}
+    {{data.metodo}}
   </div>
 
   <hr>
@@ -49,11 +55,8 @@
         <div style="width:90px;min-height:90px;border-radius:5px;background-size:cover;background-repeat: no-repeat;background-position: center;"
           [ngStyle]="{'background-image': 'url(' + data.tienda.imgPerfil.url + ')' }">
         </div>
-        <div style="text-align:center;border-radius:3px;padding:4px;padding-left:10px;padding-right:10px;background:rgba(0, 0, 0, 0.5);position:absolute;bottom:10px;right:10px;color:white;font-size:14px">
-          12
-        </div>
       </div>
-      <div style="color:#444;font-weight:600;font-size:22px">
+      <div style="color:#444;font-weight:600;font-size:20px">
         {{data.tienda.nombre}}
       </div>
     </button>

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { LoginPasswordPage } from '../login-password/login-password';
 import { AuthProvider } from '../../providers/auth/auth';
 import { HomePage } from '../home/home';
 
@@ -81,7 +80,7 @@ export class LoginEmailPage {
         if (!data.isTaken) {
           this.nextReady = true;
           const data = { email: this.email }
-          this.navCtrl.push(LoginPasswordPage, data)
+          // this.navCtrl.push(LoginPasswordPage, data)
         } else {
           this.nextReady = true;
           this.presentSignUpAlert();

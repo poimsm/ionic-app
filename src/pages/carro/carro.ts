@@ -46,7 +46,7 @@ export class CarroPage {
     modal.onDidDismiss(data => {
       if (data.ok) {
         const datos = {
-          total: this._carro.total,
+          total: this._carro.subTotal + this._carro.totalEnvio,
           carro: this._carro.carro,
           token: this.token,
           user: this.user
@@ -65,7 +65,7 @@ export class CarroPage {
 
     if (this.isAuth) {
       const datos = {
-        total: this._carro.total,
+        total: this._carro.subTotal + this._carro.totalEnvio,
         carro: this._carro.carro,
         token: this.token,
         user: this.user

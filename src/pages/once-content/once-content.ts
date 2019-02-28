@@ -98,8 +98,8 @@ export class OnceContentPage {
       titulo: this.data.titulo,
       descripcion: this.data.descripcion,
       img: this.data.imgs[0].url,
-      precio: this.total,
-      total: this.total,
+      precio: Number(this.total),
+      total: Number(this.total),
       tienda: this.data.tienda,
       tipo: 'once',
       cantidad: 1

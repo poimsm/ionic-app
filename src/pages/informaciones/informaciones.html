@@ -1,0 +1,72 @@
+<ion-header no-border>
+  <ion-navbar color="orange3">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="close()">
+        <ion-icon name="md-close" style="font-size:25px"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Descuento</ion-title>
+  </ion-navbar>
+  <link href="https://unpkg.com/ionicons@4.5.5/dist/css/ionicons.min.css" rel="stylesheet">
+</ion-header>
+
+
+<ion-content>
+
+  <div style="padding:10px;width:100%;display:flex;justify-content:space-around;align-items:center">
+    <ion-icon name="star" style="color:#ffc992;font-size:25px"></ion-icon>
+    <div style="background:orange;padding:5px;color:white;border-radius:10px">
+      Promo lanzamiento
+    </div>
+    <ion-icon name="star" style="color:#ffc992;font-size:25px"></ion-icon>
+  </div>
+
+  <ion-list text-wrap>
+    <hr>
+    <ion-item no-lines>
+      <ion-icon item-start name="thumbs-up" style="color:dodgerblue;font-size:35px"></ion-icon>
+      <div style="font-size:20px;font-weight:550;color:#333">
+        Beneficio
+        <div style="font-size:14.5px;color:#555;font-weight:350;margin-top:5px">
+          Activando esta promoción en un producto le permite vender
+          en la aplicación sin ningun costo (0% de comisión)
+        </div>
+      </div>
+    </ion-item>
+    <hr>
+    <ion-item no-lines>
+      <ion-icon item-start name="flag" style="color:#32db64;font-size:35px"></ion-icon>
+      <div style="font-size:20px;font-weight:550;color:#333">
+        Límite
+        <div style="font-size:14.5px;color:#555;font-weight:350;margin-top:5px">
+          <div>
+            Esta promoción la puede utilizar en 3 productos diferentes
+          </div>
+          <div style="margin-top:10px">
+            Tiene un uso máximo de 50 ventas
+          </div>
+          <div style="margin-top:10px">
+            Es válida indefinidamente o hasta agotar su límite de uso
+          </div>
+          <!-- Esta promocion la puede usar en 1000 ventas y tiene un 
+          uso máximo de 1000 ventas -->
+        </div>
+      </div>
+    </ion-item>
+    <hr>
+    <ion-item no-lines>
+      <ion-icon item-start name="checkmark-circle" style="color:darkorange;font-size:35px"></ion-icon>
+      <div style="font-size:20px;font-weight:550;color:#333">
+        Modo de uso
+        <div style="font-size:14.5px;color:#555;font-weight:350;margin-top:5px">
+          Puede marcar cualquier producto para aplicar esta promoción
+          en cualquier momento y puede ir rotando productos
+        </div>
+      </div>
+    </ion-item>
+    <hr>
+  </ion-list>
+
+
+
+</ion-content>

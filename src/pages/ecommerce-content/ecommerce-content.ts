@@ -26,6 +26,8 @@ export class EcommerceContentPage {
 
   seleccionDelUsuario = [];
 
+  showProductConfig = false;
+
   constructor(
     public toastCtrl: ToastController,
     public navCtrl: NavController,
@@ -38,10 +40,12 @@ export class EcommerceContentPage {
     this.total = this.producto.precio.valorProducto;
 
     if (this.producto.variaciones.isActive) {
+
+      this.showProductConfig = true;
       this.variaciones = this.producto.variaciones.data;
 
       this.variaciones.forEach((item, i) => {
-        this.seleccionDelUsuario[i] = 'Seleccionar'
+        this.seleccionDelUsuario[i] = ''
       });
     }
 
@@ -85,7 +89,7 @@ export class EcommerceContentPage {
     let counter = 0;
     let flag = true;
     for (let item of this.seleccionDelUsuario) {
-      if (item == 'Seleccionar') {
+      if (item == '') {
         this.faltaSelecionar(this.variaciones[counter].tipo);
         flag = false;
         break;

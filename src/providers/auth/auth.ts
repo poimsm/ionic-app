@@ -4,6 +4,8 @@ import { Platform } from 'ionic-angular';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { FirebaseMessaging } from '@ionic-native/firebase-messaging';
+import { CarroProvider } from '../carro/carro';
+import { ConfigProvider } from "../config/config";
 
 
 @Injectable()
@@ -16,20 +18,14 @@ export class AuthProvider {
     private firebaseMessaging: FirebaseMessaging,
     private platform: Platform,
     private storage: Storage,
-    public http: HttpClient
+    public http: HttpClient,
+    private _carro: CarroProvider,
+    private _config: ConfigProvider
   ) {
     platform.ready().then(() => {
       this.loadStorage();
     });
-    this.setAPI();
-  }
-
-  setAPI() {
-    if (this.platform.is('cordova')) {
-      this.apiURL = 'https://poimsm-server.herokuapp.com';
-    } else {
-      this.apiURL = 'http://localhost:3000';
-    }
+    this.apiURL = this._config.apiURL;
   }
 
   loginIn(email, password) {
@@ -58,12 +54,29 @@ export class AuthProvider {
     });
   }
 
+  loginUpFormulario(name, email, password) {
+    return new Promise((resolve, reject) => {
+      this.signUpForm(name, email, password).then((res: any) => {
+        if (res.ok) {
+          this.saveStorage(res.token, res.user);
+          resolve({ ok: true, id: res.user._id });
+        } else {
+          resolve({ ok: false });
+        }
+      })
+    });
+  }
+
   logout(token, user) {
+    this._carro.clearCart();
     this.removeStorage();
 
     if (user.isDelivery) {
-      this.unsubscribeToNotifications()
-        .then(() => console.log('Usuario desubscrito'))
+      this.unsubscribeToNotifications('delivery');
+    }
+
+    if (user.isTienda) {
+      this.unsubscribeToNotifications(user.tienda.id);
     }
     const authData = {};
     this.authState.next({ isAuth: false, authData });
@@ -140,6 +153,12 @@ export class AuthProvider {
     return this.http.post(url, body).toPromise();
   }
 
+  signUpForm(name, email, password) {
+    const url = `${this.apiURL}/users/signup`;
+    const body = { name, email, password, isTienda: true };
+    return this.http.post(url, body).toPromise();
+  }
+
   checkEmail(email) {
     const url = `${this.apiURL}/users/check-email`;
     const body = { email };
@@ -163,12 +182,22 @@ export class AuthProvider {
     });
     return this.http.get(url, { headers }).toPromise();
   }
+  // -------------------------------------------
+  //  SUBSCRIBIRSE A NOTIFICACIONES
+  // -------------------------------------------
 
-  subscribeToNotifications() {
-    return this.firebaseMessaging.subscribe("delivery");
+  subscribeToNotifications(topic) {
+    if (!this.platform.is('cordova')) {
+      return
+    }
+    return this.firebaseMessaging.subscribe(topic);
   }
 
-  unsubscribeToNotifications() {
-    return this.firebaseMessaging.unsubscribe("delivery");
+  unsubscribeToNotifications(topic) {
+    if (!this.platform.is('cordova')) {
+      return
+    }
+    return this.firebaseMessaging.unsubscribe(topic);
   }
+
 }

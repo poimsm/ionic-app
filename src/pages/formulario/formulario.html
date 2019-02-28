@@ -9,8 +9,20 @@
 
 <ion-content>
 
-  <button (click)="tiendaCrear()" ion-button>
-    Crear tienda
+  <button (click)="modificarDB()" color="orange3" ion-button>
+    Modificar DATABSE
+  </button>
+
+  <button (click)="crearTienda('ecommerce')" color="primary" ion-button>
+    Crear tienda ecommerce
+  </button>
+
+  <button (click)="crearTienda('comida')" color="secondary" ion-button>
+    Crear tienda comida
+  </button>
+
+  <button (click)="crearTienda('algo dulce')" color="danger" ion-button>
+    Crear tienda algo dulce
   </button>
 
   <button (click)="desayunoSorpresa()" ion-button>

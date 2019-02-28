@@ -1,8 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, Select } from 'ionic-angular';
-import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
+import { IonicPage, NavController, NavParams, Platform, ModalController, Select, ActionSheetController } from 'ionic-angular';
 import { DataProvider } from '../../providers/data/data';
 import { PopupsProvider } from '../../providers/popups/popups';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { ImageProvider } from '../../providers/image/image';
+import { TiendaComidaListasPage } from '../tienda-comida-listas/tienda-comida-listas';
+
 
 @IonicPage()
 @Component({
@@ -43,13 +46,18 @@ export class TiendaComidaNuevoPage {
   ciudad: string;
   categorias = [];
 
+  listas = [];
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private imagePicker: ImagePicker,
     private platform: Platform,
     private _data: DataProvider,
-    private _popups: PopupsProvider
+    private _popups: PopupsProvider,
+    private actionSheetCtrl: ActionSheetController,
+    private camera: Camera,
+    private _img: ImageProvider,
+    public modalCtrl: ModalController
   ) {
     this.tipo = this.navParams.get('tipo');
     this.tiendaID = this.navParams.get('tiendaID');
@@ -62,10 +70,24 @@ export class TiendaComidaNuevoPage {
 
   setUp() {
     let categoriasObj = {};
-    categoriasObj = this._popups.categoriasEcommerce;
+    categoriasObj = this._popups.categoriasComida;
     Object.keys(categoriasObj).forEach(key => {
       this.categorias.push(categoriasObj[key]);
     });
+  }
+
+  openModalLista(tipo) {
+    const modal = this.modalCtrl.create(TiendaComidaListasPage, { tipo });
+    modal.onDidDismiss(data => {
+      if (data.ok) {
+        this.listas.push(data);
+      }
+    });
+    modal.present();
+  }
+
+  rmLista(i) {
+    this.listas.splice(i, 1);
   }
 
   add(item, tipo) {
@@ -81,12 +103,6 @@ export class TiendaComidaNuevoPage {
     if (tipo == 'imagen') {
       this.imagenes.push(item)
     }
-    if (tipo == 'aderezo') {
-      this.aderezos.push(item)
-    }
-    if (tipo == 'opcion') {
-      this.opciones.push(item)
-    }
   }
 
   remove(index, tipo) {
@@ -98,12 +114,6 @@ export class TiendaComidaNuevoPage {
     }
     if (tipo == 'imagen') {
       this.imagenes.splice(index, 1);
-    }
-    if (tipo == 'aderezo') {
-      this.aderezos.splice(index, 1);
-    }
-    if (tipo == 'opcion') {
-      this.opciones.splice(index, 1);
     }
   }
 
@@ -127,7 +137,7 @@ export class TiendaComidaNuevoPage {
     if (!persona) {
       return
     }
-    this.add({ precio, persona }, 'personas');
+    this.add({ value: precio, tag: persona }, 'personas');
   }
 
   addUnidades(precio, unidad) {
@@ -137,27 +147,59 @@ export class TiendaComidaNuevoPage {
     if (!unidad) {
       return
     }
-    this.add({ precio, unidad }, 'unidades');
+    this.add({ value: precio, tag: unidad }, 'unidades');
   }
 
-  seleccionar_foto() {
+  presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Select Image Source',
+      buttons: [
+        {
+          text: 'Cargar desde galería',
+          handler: () => {
+            this.tomarFoto(this.camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Usar cámara',
+          handler: () => {
+            this.tomarFoto(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  tomarFoto(sourceType) {
+    const options: CameraOptions = {
+      quality: 90,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: sourceType,
+      targetWidth: 1000,
+      targetHeight: 1000,
+      saveToPhotoAlbum: false
+    };
 
     if (this.platform.is('cordova')) {
-      const options: ImagePickerOptions = {
-        quality: 70,
-        outputType: 1,
-        maximumImagesCount: 1
-      }
-      this.imagePicker.getPictures(options).then((results) => {
-        for (var i = 0; i < results.length; i++) {
-          this.imagenes.push('data:image/jpeg;base64,' + results[i]);
-        }
+      this.camera.getPicture(options).then((imageData) => {
+        this._img.uploadImage(imageData)
+          .then((data: any) => {
+
+            const imagen = JSON.parse(data.response);
+            this.imagenes.push(imagen);
+          });
       }, (err) => { console.log('ERROR') });
     } else {
       const img = "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
       this.imagenes.push('data:image/png;base64,' + img);
     }
-
   }
 
   save() {
@@ -167,47 +209,35 @@ export class TiendaComidaNuevoPage {
       imgs: this.imagenes,
       categoria: this.categoria,
       tienda: this.tiendaID,
-      ciudad: this.ciudad
-    }
-
-    if (this.aderezos.length > 0) {
-      producto.aderezos = {
-        isActive: true,
-        array: this.aderezos
-      }
-    }
-
-    if (this.opciones.length > 0) {
-      producto.opciones = {
-        isActive: true,
-        array: this.opciones
-      }
+      ciudad: this.ciudad,
+      listas: this.listas
     }
 
     if (this.flat) {
       producto.precio = {
-        tipo: 'flat',
+        isActive: true,
         value: this.flatPrice
       }
     }
 
     if (this.unidades) {
-      producto.precio = {
-        tipo: 'unidad',
+      producto.unidades = {
+        isActive: true,
         array: this.unidadesArray
       }
     }
 
     if (this.personas) {
-      producto.precio = {
-        tipo: 'persona',
+      producto.cantidad = {
+        isActive: true,
         array: this.personasArray
       }
     }
+
     console.log(producto);
 
-    this._data.crearProductoComida(producto);
-    this.navCtrl.pop();
+    // this._data.crearProductoComida(producto);
+    // this.navCtrl.pop();
   }
 
 }

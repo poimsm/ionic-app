@@ -13,12 +13,14 @@
   <ion-list text-wrap style="margin-top:10px">
     <button ion-item>
       <div item-start style="position:relative">
-        <div *ngIf="tienda?.imgPerfil.url" style="min-height:90px;width:90px;border-radius:5px;background-size:cover;background-repeat: no-repeat;background-position: center;"
+        <div *ngIf="tienda?.imgPerfil" style="min-height:90px;width:90px;border-radius:5px;background-size:cover;background-repeat: no-repeat;background-position: center;"
           [ngStyle]="{'background-image': 'url(' + tienda?.imgPerfil.url + ')' }">
         </div>
-        <div style="text-align:center;border-radius:3px;padding:4px;padding-left:10px;padding-right:10px;background:rgba(0, 0, 0, 0.5);position:absolute;bottom:10px;right:10px;color:white;font-size:14px">
-          {{tienda?.galeria.length}}
+        <div *ngIf="!tienda?.imgPerfil" style="width:90px;height:90px;border-radius:5px;border: 2px dashed #bbb">
         </div>
+        <!-- <div style="text-align:center;border-radius:3px;padding:4px;padding-left:10px;padding-right:10px;background:rgba(0, 0, 0, 0.5);position:absolute;bottom:10px;right:10px;color:white;font-size:14px">
+          {{tienda?.galeria.length}}
+        </div> -->
       </div>
       <div style="color:#444;font-weight:600;font-size:20px">
         {{tienda?.nombre}}
@@ -26,6 +28,18 @@
     </button>
   </ion-list>
 
+  <div (click)="openNuevoProducto()" padding style="margin-top:10px;background:white">
+    <button ion-button block color="orange3" mode="ios">
+      <ion-icon name="add" style="margin-right:10px;font-size:30px"></ion-icon>
+      <div style="font-weight:600;font-size:16px">
+        Nuevo producto
+      </div>
+    </button>
+  </div>
+
+  <div style="margin-left:15px;margin-bottom:10px;margin-top:25px;font-size:11px;font-weight:600;color:#666">
+    DEFINIR
+  </div>
   <ion-item (click)="openEntregas(true)" style="margin:10px" no-lines>
     <ion-icon item-start name="bicycle" style="color:orange;font-size:35px"></ion-icon>
     <div style="color:#777;font-size:18px;font-weight:500">
@@ -35,7 +49,7 @@
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </ion-item>
 
-  <ion-item (click)="openHorario()" style="margin:10px" no-lines>
+  <ion-item *ngIf="false" (click)="openHorario()" style="margin:10px" no-lines>
     <ion-icon item-start name="time" style="color:dodgerblue;font-size:35px"></ion-icon>
     <div style="color:#777;font-size:18px;font-weight:500">
       Definir horario
@@ -44,52 +58,124 @@
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </ion-item>
 
+
+  <div style="margin-left:15px;margin-bottom:10px;margin-top:25px;font-size:11px;font-weight:600;color:#666">
+    MÉTRICAS
+  </div>
+  <button (click)="openMisProductos()" ion-item style="margin-top:10px">
+    <div style="font-size:16px;color:#555">
+      Mis productos
+    </div>
+    <div item-end style="font-size:14px;color:#777">
+      {{tienda?.productos}}
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
+  <button ion-item no-lines style="margin:0px">
+    <div style="font-size:16px;color:#555">
+      Mis ventas
+    </div>
+    <div item-end style="font-size:14px;color:#777">
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
+
+
+  <div style="margin-left:15px;margin-bottom:10px;margin-top:25px;font-size:11px;font-weight:600;color:#666">
+    PERFIL
+  </div>
   <button (click)="presentPrompt('nombre')" ion-item style="margin-top:10px">
     <div style="font-size:16px;color:#555">
       Nombre de la tienda
     </div>
-    <div item-end style="font-size:14px;color:#777">
+    <div *ngIf="tienda?.nombre" item-end style="font-size:14px;color:#777">
       {{tienda?.nombre}}
     </div>
+    <ion-icon *ngIf="!tienda?.nombre" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </button>
   <button (click)="presentActionSheet()" ion-item style="margin:0px">
     <div style="font-size:16px;color:#555">
       Imágen de perfil o logo
     </div>
-    <div item-end style="font-size:14px;color:#777">
+    <ion-icon *ngIf="!tienda?.imgPerfil" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
+    <div *ngIf="tienda?.imgPerfil" item-end style="font-size:14px;color:#777">
       1
     </div>
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </button>
-  <button (click)="openGaleria()" ion-item style="margin:0px" no-lines>
+  <ion-item style="display: none">
+    <ion-label>Ciudad</ion-label>
+    <ion-select [(ngModel)]="ciudad" #ciudadRef>
+      <ion-option *ngFor="let ciudad of ciudades" [value]="ciudad"> {{ciudad}} </ion-option>
+    </ion-select>
+  </ion-item>
+  <button (click)="openSelect('ciudad')" ion-item style="margin-top:0px">
     <div style="font-size:16px;color:#555">
-      Galería
+      Ciudad
     </div>
-    <div item-end style="font-size:14px;color:#777">
-      {{tienda?.galeria.length}}
+    <ion-icon *ngIf="!tienda?.ciudad" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
+    <div *ngIf="tienda?.ciudad" item-end style="font-size:14px;color:#777">
+      {{tienda?.ciudad}}
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
+  <button (click)="presentPrompt('direccion')" ion-item style="margin-top:0px">
+    <div style="font-size:16px;color:#555">
+      Dirección
+    </div>
+    <ion-icon *ngIf="!tienda?.direccion" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
+    <div *ngIf="tienda?.direccion" item-end style="font-size:14px;color:#777">
+      {{tienda?.direccion}}
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
+  <button (click)="presentPrompt('telefono')" ion-item style="margin:0px" no-lines>
+    <div style="font-size:16px;color:#555">
+      Teléfono
+    </div>
+    <ion-icon *ngIf="!tienda?.telefono" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
+    <div *ngIf="tienda?.telefono" item-end style="font-size:14px;color:#777">
+      {{tienda?.telefono}}
     </div>
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </button>
 
-  <div (click)="openNuevoProducto(nuevo)" padding style="margin-top:10px;background:white">
-    <button ion-button block color="orange3" mode="ios">
-      <ion-icon name="add-circle" style="margin-right:10px;font-size:30px"></ion-icon>
-      <div style="font-weight:600;font-size:16px">
-        Nuevo producto
-      </div>
-    </button>
+
+
+  <div style="display:flex;align-items:center;margin-left:15px;margin-bottom:10px;margin-top:25px;font-size:11px;font-weight:600;color:#666">
+    <div style="margin-right:5px;background:darkorange;width:20px;height:20px;border-radius:50%;display:flex;justify-content:center;align-items:center">
+      <ion-icon name="star" style="font-size:16px;color:white"></ion-icon>
+    </div>
+    <div style="font-weight:600;color:#555;font-size:14px">
+      Administradores
+    </div>
   </div>
+  <button ion-item style="margin:0px" no-lines>
+    <div style="font-size:16px;color:#555">
+      {{tienda?.admins[0].email}}
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
 
-  <div (click)="openMisProducto(producto)" style="padding-bottom:15px;padding-left:15px;padding-right:15px;background:white;width:600">
-    <button ion-button block color="orange3" mode="ios">
-      <ion-icon name="list" style="margin-right:10px;font-size:30px"></ion-icon>
-      <div style="font-weight:600;font-size:16px">
-        Mis productos (8)
+  <!-- <div style="padding:5px;margin-left:25px;display:flex">
+    <div>
+      <div style="margin-left:0px;width:50px;height:50px;border-radius:50%;background:#eee;display:flex;justify-content:center;align-items:center">
+        <div style="font-size:35px;color:#bbb;font-weight:350">+</div>
       </div>
-    </button>
-  </div>
+    </div>
+    <div style="margin-left:15px;width:50px;height:50px;border-radius:50%;border:2px dashed #ccc;display:flex;justify-content:center;align-items:center">
+      <div style="font-size:35px;color:#bbb;font-weight:350">+</div>
+    </div>
+  </div> -->
 
 
+  <!-- <button (click)="logout()" ion-item style="margin-top:25px;margin-bottom:30px" no-lines>
+    <div style="font-size:16px;color:#f53d3d;font-weight:500;width:100%;text-align:center">
+      Eliminar tienda
+    </div>
+  </button> -->
+
+  <div style="height:30px"></div>
 
 </ion-content>

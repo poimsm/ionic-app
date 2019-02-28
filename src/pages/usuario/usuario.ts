@@ -5,6 +5,7 @@ import { TiendaComidaPage } from '../tienda-comida/tienda-comida';
 import { MisPedidosPage } from '../mis-pedidos/mis-pedidos';
 import { AuthProvider } from '../../providers/auth/auth';
 import { TiendaEcommercePage } from '../tienda-ecommerce/tienda-ecommerce';
+import { LocalizacionProvider } from '../../providers/localizacion/localizacion';
 
 @IonicPage()
 @Component({
@@ -15,15 +16,22 @@ export class UsuarioPage {
   tiendaID: string;
   user: any;
   token: string;
+  ciudad: string;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private alertCtrl: AlertController,
-    private _auth: AuthProvider
+    private _auth: AuthProvider,
+    private _localizacion: LocalizacionProvider
   ) {
-    this.tiendaID = this.navParams.get('tiendaID');
     this.user = this.navParams.get('user');
+    
+    if (this.user.isTienda) {
+      this.tiendaID = this.user.tienda.id;
+    }
+
     this.token = this.navParams.get('token');
+    this.ciudad = this._localizacion.ciudad;
   }
 
   reloadUser() {
@@ -34,11 +42,25 @@ export class UsuarioPage {
       });
   }
 
+  setLocalizacion() {
+    this._localizacion.seleccionarCiudad()
+      .then((data: any) => {
+        if (data.ok) {
+          this.ciudad = data.ciudad
+        }
+      });
+  }
+
   openTienda() {
-    // TiendaComidaPage
-    // TiendaAlgoDulcePage
-    // TiendaEcommercePage
-    this.navCtrl.push(TiendaEcommercePage, { id: this.tiendaID });
+    if (this.user.tienda.tipo == 'algo dulce') {
+      this.navCtrl.push(TiendaAlgoDulcePage, { id: this.tiendaID });
+    }
+    if (this.user.tienda.tipo == 'comida') {
+      this.navCtrl.push(TiendaComidaPage, { id: this.tiendaID });
+    }
+    if (this.user.tienda.tipo == 'ecommerce') {
+      this.navCtrl.push(TiendaEcommercePage, { id: this.tiendaID });
+    }
   }
 
   openHistorial() {
@@ -101,5 +123,14 @@ export class UsuarioPage {
     });
     alert.present();
   }
+
+  logout() {
+    // this.afAuth.auth.signOut().then(() => {
+    this._auth.logout(this.token, this.user);
+    this.navCtrl.pop();
+    // this.menuCtrl.close();
+    // });
+  }
+
 
 }
