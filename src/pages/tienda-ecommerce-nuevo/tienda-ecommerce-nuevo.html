@@ -2,7 +2,7 @@
   <ion-navbar color="white">
     <ion-title>Nuevo producto</ion-title>
     <ion-buttons right>
-      <button (click)="save()" ion-button [disabled]="!(imagenes.length>0 && categoria?.length>0 && titulo?.length>0 && descripcion?.length>0 && costoEnvio && valorProducto)"
+      <button (click)="save()" ion-button [disabled]="!(imagenes.length>0 && categoria?.length>0 && titulo?.length>0 && descripcion?.length>0 && isEnvio && valorProducto)"
         outline mode="ios">
         Crear
       </button>
@@ -104,9 +104,9 @@
       Detalles del artículo
     </div>
     <hr>
-    <div style="font-size:17px;color:#999">
+    <div style="font-size:17px;color:green">
       <div *ngFor="let detalle of detalles" style="display:flex;align-items:center">
-        <div style="margin-right:10px;height:5px;width:5px;background:#999;border-radius:50%">
+        <div style="margin-right:10px;height:8px;width:8px;background:green;border-radius:50%">
         </div>
         {{detalle}}
       </div>
@@ -227,14 +227,26 @@
   <div style="margin-top:10px;margin-left:15px;font-size:13px;color:#666;font-weight:400">
     COSTO DE ENVÍO
   </div>
-  <div style="padding:10px;width:100%;display:flex;justify-content:center">
+
+  <ion-list no-lines>
+      <button (click)="isEnvio = !isEnvio" ion-item>
+        <ion-icon item-start *ngIf="isEnvio" name="checkbox" style="color:green;font-size:22px"></ion-icon>
+        <ion-icon item-start *ngIf="!isEnvio" name="ios-square-outline" style="color:#eee;font-size:22px"></ion-icon>
+        <div style="font-size:16px;color:#666">
+          Envio gratis
+        </div>
+      </button>
+    </ion-list>
+
+
+  <!-- <div style="padding:10px;width:100%;display:flex;justify-content:center">
     <div style="border-radius:3px;width:40%;border:1px solid #eee;display:flex;align-items:center">
       <div style="font-size:16px;font-weight:500;color:#999;padding:5px;border-right:1px solid #eee">
         $
       </div>
       <ion-input [(ngModel)]="costoEnvio" type="tel" placeholder="" style="font-size:16px;border:0x solid white"></ion-input>
     </div>
-  </div>
+  </div> -->
 
   <div style="height:30px"></div>
 

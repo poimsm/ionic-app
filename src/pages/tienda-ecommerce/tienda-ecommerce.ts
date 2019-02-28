@@ -94,7 +94,7 @@ export class TiendaEcommercePage {
   tomarFoto(sourceType) {
     const options: CameraOptions = {
       quality: 90,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: sourceType,
@@ -105,11 +105,16 @@ export class TiendaEcommercePage {
 
     if (this.platform.is('cordova')) {
       this.camera.getPicture(options).then((imageData) => {
-        this._img.uploadImage(imageData);
-      }).catch(err => {
-        console.log('FALLOOOO');
-        console.log(JSON.stringify(err));
-      });
+        let base64Image = 'data:image/jpeg;base64,' + imageData;
+
+        const body = {
+          img: base64Image,
+          id: this.tiendaID
+        }
+        this._data.nuevaImgPerfil(body)
+          .then(() => this.cargarTienda());
+
+      }, (err) => { console.log('ERROR') });
     } else {
       const img = "iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
 
@@ -146,15 +151,11 @@ export class TiendaEcommercePage {
 
   openNuevoProducto() {
     if (this.tienda.imgPerfil && this.tienda.nombre && this.tienda.direccion && this.tienda.telefono && this.tienda.ciudad) {
-      if (this.tienda.envios.isActive) {
-        this.navCtrl.push(TiendaEcommerceNuevoPage, {
-          tipo: this.tienda.tipo,
-          tiendaID: this.tiendaID,
-          ciudad: this.tienda.ciudad
-        });
-      } else {
-        this.middleToast('Por favor definir envíos');
-      }
+      this.navCtrl.push(TiendaEcommerceNuevoPage, {
+        tipo: this.tienda.tipo,
+        tiendaID: this.tiendaID,
+        ciudad: this.tienda.ciudad
+      });
     } else {
       this.middleToast('Por favor completar información de perfil');
     }

@@ -28,6 +28,23 @@
   </ion-navbar>
 </ion-header>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <ion-content style="background:rgb(250, 250, 250)">
 
   <div style="top:0px;left:0px">
@@ -41,17 +58,17 @@
   </div>
 
   <div padding style="background:white">
-    <!-- <div style="font-size:22px;color:#ff6633;font-weight:500">
-      $ {{total}} - Demora 2 días en estar listo
-    </div> -->
 
     <div style="padding:10px">
       <div style="display:flex;border-top:1px solid #eee;border-bottom:1px solid #eee;padding:5px">
         <div style="width:70%;padding:5px;padding-left:20px">
-          <div style="font-size:20px;color:#ff6633;font-weight:700">
+          <div *ngIf="producto.tiempoDeEntrega == 'disponible'" style="font-size:20px;color:#ff6633;font-weight:700">
+            Disponible ahora
+          </div>
+          <div *ngIf="producto.tiempoDeEntrega != 'disponible'" style="font-size:20px;color:#ff6633;font-weight:700">
             Demora {{producto.tiempoDeEntrega}}
           </div>
-          <div style="font-size:14px;color:#999">
+          <div *ngIf="producto.tiempoDeEntrega != 'disponible'" style="font-size:14px;color:#999">
             En estar listo
           </div>
         </div>
@@ -70,10 +87,10 @@
       {{producto.titulo}}
     </div>
 
-    <div style="font-weight:350;color:#999;font-size:14px;margin-top:10px">
-      Costo total de envío ${{producto.precio.costoEnvio}}
+    <div style="font-weight:350;color:#999;font-size:13px;margin-top:10px">
+      Envio gratis
     </div>
-    <div style="font-weight:350;color:#999;font-size:14px;margin-bottom:10px">
+    <div style="font-weight:350;color:#999;font-size:13px;margin-bottom:10px">
       Demora 4 - 6 días hábiles en llegar
     </div>
   </div>
@@ -81,7 +98,6 @@
   <div padding style="margin-top:10px;background:white;">
 
     <div style="width:100%;display:flex;justify-content:space-between;align-items:Center">
-      <!-- <div style="font-size:16px;font-weight:300;color:#666"> -->
       <div style="margin-top:10px;font-size:18px;font-weight:500;color:#333">
         Detalles del artículo
       </div>
@@ -89,7 +105,7 @@
     </div>
 
     <hr>
-    <div style="font-size:15px;color:#999">
+    <div style="font-size:14px;color:#999">
 
       <div *ngFor="let detalle of producto.detalles" style="display:flex;align-items:center">
         <div style="margin-right:10px;height:5px;width:5px;background:#999;border-radius:50%">
@@ -98,38 +114,34 @@
       </div>
     </div>
 
-
     <div style="width:100%;display:flex;justify-content:space-between;align-items:Center">
-      <div style="margin-top:10px;font-size:18px;font-weight:500;color:#333">
-        Descripción
+        <div style="margin-top:10px;font-size:18px;font-weight:500;color:#333">
+          Descripción
+        </div>
+        <ion-icon name="ios-arrow-down" style="font-size:18px;color:#444"></ion-icon>
       </div>
-      <ion-icon name="ios-arrow-down" style="font-size:18px;color:#444"></ion-icon>
-    </div>
-
-    <hr>
-
-    <div *ngIf="true" style="color:#999;font-size:15px">
-      {{producto.descripcion}}
-    </div>
-
+  
+      <hr>
+      <div *ngIf="true" style="color:#999;font-size:14px">
+        {{producto.descripcion}}
+      </div>
   </div>
 
 
 
-  <div *ngIf="showProductConfig" style="padding-top:15px;padding-bottom:10px;margin-top:10px;background:white">
-
+  <div *ngIf="showProductConfig" style="padding-top:0px;padding-bottom:0px;margin-top:10px;background:white">
     <div *ngFor="let variacion of variaciones; let i = index">
       <button (click)="openSelect(i, variacion)" ion-item no-lines>
-        <div style="font-size:18px;color:#333;font-weight:500">
-          {{variacion.tipo}}
+        <div style="font-size:15px">
+          <span style="color:#999;margin-right:15px">Seleccionar</span>
+          <span style="color:#444"> {{variacion.tipo}} </span>
         </div>
-        <div item-end style="font-size:15px;color:dodgerblue">
+        <div item-end style="font-size:14px;color:#ff6633">
           {{seleccionDelUsuario[i]}}
         </div>
         <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
       </button>
     </div>
-
   </div>
 
 
@@ -153,3 +165,135 @@
   </div>
 
 </ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <ion-content style="background:rgb(250, 250, 250)">
+
+    <div style="top:0px;left:0px">
+      <ion-slides pager>
+        <ion-slide *ngFor="let img of imgs">
+          <div style="width:100%;min-height:330px; background-size:cover;background-repeat: no-repeat;background-position: center;"
+            [ngStyle]="{'background-image': 'url(' + img.url + ')' }">
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </div>
+  
+    <div padding style="background:white">
+  
+      <div style="padding:10px">
+        <div style="display:flex;border-top:1px solid #eee;border-bottom:1px solid #eee;padding:5px">
+          <div style="width:70%;padding:5px;padding-left:20px">
+            <div *ngIf="producto.tiempoDeEntrega == 'disponible'" style="font-size:20px;color:#ff6633;font-weight:700">
+              Disponible ahora
+            </div>
+            <div *ngIf="producto.tiempoDeEntrega != 'disponible'" style="font-size:20px;color:#ff6633;font-weight:700">
+              Demora {{producto.tiempoDeEntrega}}
+            </div>
+            <div *ngIf="producto.tiempoDeEntrega != 'disponible'" style="font-size:14px;color:#999">
+              En estar listo
+            </div>
+          </div>
+          <div style="width:30%;border-left:1px solid #eee;display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
+            <div style="width:100%;text-align:center;font-size:20px;color:#ff6633;font-weight:700">
+              ${{total}}
+              <div style="font-weight:400;font-size:14px;color:#999">
+                Precio
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div style="margin-top:10px;font-size:15px;font-weight:600;color:#222">
+        {{producto.titulo}}
+      </div>
+  
+      <div style="font-weight:350;color:#999;font-size:13px;margin-top:10px">
+        Envio gratis
+      </div>
+      <div style="font-weight:350;color:#999;font-size:13px;margin-bottom:10px">
+        Demora 4 - 6 días hábiles en llegar
+      </div>
+    </div>
+  
+    <div style="margin-top:10px;background:white;"> 
+
+      <div style="margin-left:15px;margin-right:15px">
+          <div style="width:100%;display:flex;justify-content:space-between;align-items:Center">
+            <div style="margin-top:10px;font-size:15px;color:#999">
+              Detalles del artículo
+            </div>
+            <ion-icon name="ios-arrow-down" style="font-size:18px;color:#999"></ion-icon>
+          </div>      
+          <hr>
+          <div style="font-size:14px;color:#666">      
+            <div *ngFor="let detalle of producto.detalles" style="display:flex;align-items:center">
+              <div style="margin-right:10px;height:5px;width:5px;background:#999;border-radius:50%">
+              </div>
+              {{detalle}}
+            </div>
+          </div>
+      </div>      
+      
+      <button  ion-item no-lines>
+        <div style="font-size:15px;color:#999;">
+          Descripción
+        </div>
+        <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+      </button>  
+    </div>  
+  
+    <div *ngIf="showProductConfig" style="padding-top:0px;padding-bottom:0px;margin-top:10px;background:white">
+      <div *ngFor="let variacion of variaciones; let i = index">
+        <button (click)="openSelect(i, variacion)" ion-item no-lines>
+          <div style="font-size:15px">
+            <span style="color:#999;margin-right:15px">Seleccionar</span>
+            <span style="color:#444"> {{variacion.tipo}} </span>
+          </div>
+          <div item-end style="font-size:14px;color:#ff6633">
+            {{seleccionDelUsuario[i]}}
+          </div>
+          <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+        </button>
+      </div>
+    </div>
+  
+  
+    <ion-item style="display:none">
+      <ion-label>
+        Seleccione una opción
+      </ion-label>
+      <ion-select (ionChange)="onSelectChange($event)" [(ngModel)]="item" #variacionRef>
+        <ion-option *ngFor="let item of selections" [value]="item">{{item}}</ion-option>
+      </ion-select>
+    </ion-item>  
+  
+  
+    <div style="margin-top:10px;background:white;width:100%;display:flex;justify-content:center;padding-bottom:50px;padding-top:20px">
+      <div (click)="save()" style="font-weight:500;font-size:12px;color:white;background:#ff6633;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
+        AGREGAR AL CARRITO
+        <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
+      </div>
+    </div>
+  
+  </ion-content> -->

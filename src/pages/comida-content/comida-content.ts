@@ -180,7 +180,7 @@ export class ComidaContentPage {
 
     console.log(compra);
 
-    // this._carro.addToCart(compra);
+    this._carro.addToCart(compra);
   }
 
 }

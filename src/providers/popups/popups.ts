@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AppVersion } from '@ionic-native/app-version';
 import { Platform } from 'ionic-angular';
+import { ConfigProvider } from '../config/config';
 
 
 @Injectable()
@@ -16,21 +17,13 @@ export class PopupsProvider {
   constructor(
     private appVersion: AppVersion,
     private platform: Platform,
-    public http: HttpClient
+    public http: HttpClient,
+    private _config: ConfigProvider
   ) {
     platform.ready().then(() => {
       this.loadServerParams();
     });
-    this.setAPI();
-  }
-
-  setAPI() {
-    if (this.platform.is('cordova')) {
-      // this.apiURL = 'https://poimsm-server.herokuapp.com';
-      this.apiURL = 'http://joopiterweb.com:3000';
-    } else {
-      this.apiURL = 'http://localhost:3000';
-    }
+    this.apiURL = this._config.apiURL;
   }
 
   loadServerParams() {
@@ -59,7 +52,7 @@ export class PopupsProvider {
       const body = { version };
       return this.http.post(url, body, { headers }).toPromise();
     } else {
-      const version = '0.3.5';
+      const version = '0.4.0';
       const url = `${this.apiURL}/popups/app-version`;
       const headers = new HttpHeaders({
         Authorization: `JWT ${token}`

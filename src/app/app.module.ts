@@ -92,6 +92,7 @@ import { PopupsProvider } from '../providers/popups/popups';
 import { CarroProvider } from '../providers/carro/carro';
 import { ImageProvider } from '../providers/image/image';
 import { LocalizacionProvider } from '../providers/localizacion/localizacion';
+import { ConfigProvider } from '../providers/config/config';
 
 @NgModule({
   declarations: [
@@ -230,7 +231,8 @@ import { LocalizacionProvider } from '../providers/localizacion/localizacion';
     FileTransfer,
     InAppBrowser,
     ImageProvider,
-    LocalizacionProvider
+    LocalizacionProvider,
+    ConfigProvider
   ]
 })
 export class AppModule { }

@@ -68,8 +68,27 @@
 
 
   <ion-list>
-    <button (click)="openContentNormal(item)" ion-item *ngFor="let item of pedidos; let i = index">
-      <div *ngIf="item.tipo == 'comida'" (click)="openContent(item.compra)" item-start style="width:80px;min-height:80px; background-size:cover;background-repeat: no-repeat;background-position: center;border-radius:5px"
+    <button (click)="openContent(item)" ion-item *ngFor="let item of pedidos; let i = index">
+      
+      
+      <div *ngIf="item.tipo == 'ecommerce'" item-start style="width:80px;min-height:80px; background-size:cover;background-repeat: no-repeat;background-position: center;border-radius:5px"
+        [ngStyle]="{'background-image': 'url(' + item.img + ')' }">
+      </div>
+      <div *ngIf="item.tipo == 'ecommerce'">
+        <div style="margin:2px;font-weight:400;color:#444;font-weight:600;font-size:16px">
+          {{item.titulo}}
+        </div>
+        <div style="margin:2px;color:#555">
+          {{item.descripcion}}
+        </div>
+        <div style="font-weight:450;margin:2px;color:#ff6633;font-size:16px;margin-top:10px;margin-bottom:10px">
+          ${{item.total}}
+        </div>
+      </div>
+      <ion-icon *ngIf="item.tipo == 'ecommerce'" item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+
+
+      <div *ngIf="item.tipo == 'comida'" item-start style="width:80px;min-height:80px; background-size:cover;background-repeat: no-repeat;background-position: center;border-radius:5px"
         [ngStyle]="{'background-image': 'url(' + item.img + ')' }">
       </div>
       <div *ngIf="item.tipo == 'comida'">
@@ -86,7 +105,7 @@
       <ion-icon *ngIf="item.tipo == 'comida'" item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
 
 
-      <div *ngIf="item.tipo == 'once'" (click)="openContent(item.compra)" item-start style="width:80px;min-height:80px; background-size:cover;background-repeat: no-repeat;background-position: center;border-radius:5px"
+      <div *ngIf="item.tipo == 'once'" item-start style="width:80px;min-height:80px; background-size:cover;background-repeat: no-repeat;background-position: center;border-radius:5px"
         [ngStyle]="{'background-image': 'url(' + item.img + ')' }">
       </div>
       <div *ngIf="item.tipo == 'once'">
@@ -101,12 +120,6 @@
         </div>
       </div>
       <ion-icon *ngIf="item.tipo == 'once'" item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
-
-
-
-
-
-
 
 
       <!-- <div *ngIf="item.tipo == 'fruta'" (click)="openContent(item.compra)" item-start style="width:80px;min-height:80px; background-size:cover;background-repeat: no-repeat;background-position: center;border-radius:5px"

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AlertController, Platform } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
+import { ConfigProvider } from '../config/config';
 
 
 @Injectable()
@@ -13,20 +14,13 @@ export class LocalizacionProvider {
   constructor(
     public http: HttpClient,
     public alertController: AlertController,
-    private platform: Platform
-  ) { }
+    private _config: ConfigProvider
+  ) {
+    this.apiURL = this._config.apiURL;
+   }
 
-  setAPI() {
-    if (this.platform.is('cordova')) {
-      this.apiURL = 'http://joopiterweb.com:3000';
-    } else {
-      this.apiURL = 'http://localhost:3000';
-    }
-  }
 
   loadCiudades() {
-
-    this.setAPI();
 
     return new Promise((resolve, reject) => {
       const url = `${this.apiURL}/popups/parametros`;

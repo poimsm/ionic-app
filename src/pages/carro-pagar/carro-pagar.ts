@@ -31,6 +31,7 @@ export class CarroPagarPage {
   isBrowser = false;
   transactionID: string;
   ciudad: string;
+  next = false;
 
   semana = ['Lunes 8', 'Martes 9', 'Miercoles 10', 'Jueves 13', 'Viernes 14'];
   horas = [
@@ -80,13 +81,14 @@ export class CarroPagarPage {
     if (this.user.phone) {
       this.telefono = this.user.phone;
       this.isTelefono = true;
+      this.toggleBotonContinuar();
     }
     if (this.user.address) {
       this.direccion = this.user.address;
       this.isDireccion = true;
+      this.toggleBotonContinuar();
     }
     console.log(this.user);
-
   }
 
   openSelect(tipo) {
@@ -98,16 +100,26 @@ export class CarroPagarPage {
     }
   }
 
+  toggleBotonContinuar() {    
+    if (this.isTelefono && !this.isBrowser && this.isDireccion) {
+      this.next = true;
+    } else {
+      this.next = false;
+    }
+  }
+
   openModal(tipo) {
     const modal = this.modalCtrl.create(DatosPersonalesPage, { tipo });
     modal.onDidDismiss(data => {
       if (data.ok && data.tipo == 'direccion') {
         this.direccion = data.direccion;
         this.isDireccion = true;
+        this.toggleBotonContinuar();
       }
       if (data.ok && data.tipo == 'telefono') {
         this.telefono = data.telefono;
         this.isTelefono = true;
+        this.toggleBotonContinuar();
       }
     });
     modal.present();
@@ -119,6 +131,10 @@ export class CarroPagarPage {
     } else {
       this.pagarConFlow();
     }
+  }
+
+  pagarConFlow2() {
+    this.comprarAhora('Pago online');
   }
 
   pagarConFlow() {
@@ -167,9 +183,7 @@ export class CarroPagarPage {
               this._carro.getTransaction(this.transactionID)
                 .then((result: any) => {
                   if (result.ok) {
-                    console.log('Move next page');
-                    // this.pagoOnline();
-                    this.navCtrl.push(CarroCompraExitosaPage);
+                    this.comprarAhora('Pago online');
                   }
                 });
             });
@@ -182,47 +196,15 @@ export class CarroPagarPage {
   }
 
 
-  pagoOnline() {
-
-    this._carro.ordenarCarro();
-
-    const promesas = [];
-
-    this._carro.carros.forEach(carro => {
-
-      const compra: any = {
-        productos: carro.productos,
-        tienda: carro.tienda,
-        total: carro.total,
-        cliente: {
-          uid: this.user._id,
-          nombre: this.user.name,
-          email: this.user.local.email,
-          direccion: this.direccion,
-          telefono: this.telefono
-        },
-        metodo: 'Pago online'
-      };
-
-      if (this.isDiaHora) {
-        compra.diaHoraDeEntrega = {
-          isActive: true,
-          dia: this.dia,
-          hora: this.hora
-        }
-      }
-
-      promesas.push(this._carro.crearCompra(this.token, compra));
-    });
-
-    Promise.all(promesas).then(() => {
-      this.navCtrl.push(CarroCompraExitosaPage);
-    });
+  pagarConEfectivo() {
+    this.comprarAhora('Efectivo en la entrega');    
   }
 
+  onSelectChange(e) {
+    console.log('hoola');    
+  }
 
-  pagarConEfectivo() {
-
+  comprarAhora(metodo) {
     this._carro.ordenarCarro();
 
     const promesas = [];
@@ -241,7 +223,7 @@ export class CarroPagarPage {
           direccion: this.direccion,
           telefono: this.telefono
         },
-        metodo: 'Efectivo en la entrega'
+        metodo: metodo
       };
 
       if (this.isDiaHora) {
@@ -264,8 +246,13 @@ export class CarroPagarPage {
   cambiarMetodoPago(event, tipo: number) {
     if (tipo == 1) {
       this.flow = (event == true) ? false : true;
+      // this.toggleBotonContinuar();
+      console.log('passso 1');
+      
     } else {
       this.efectivo = (event == true) ? false : true;
+      console.log('passso 2');
+      // this.toggleBotonContinuar();
     }
   }
 

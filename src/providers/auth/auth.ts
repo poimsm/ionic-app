@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { FirebaseMessaging } from '@ionic-native/firebase-messaging';
 import { CarroProvider } from '../carro/carro';
+import { ConfigProvider } from "../config/config";
 
 
 @Injectable()
@@ -18,21 +19,13 @@ export class AuthProvider {
     private platform: Platform,
     private storage: Storage,
     public http: HttpClient,
-    private _carro: CarroProvider
+    private _carro: CarroProvider,
+    private _config: ConfigProvider
   ) {
     platform.ready().then(() => {
       this.loadStorage();
     });
-    this.setAPI();
-  }
-
-  setAPI() {
-    if (this.platform.is('cordova')) {
-      // this.apiURL = 'https://poimsm-server.herokuapp.com';
-      this.apiURL = 'http://joopiterweb.com:3000';
-    } else {
-      this.apiURL = 'http://localhost:3000';
-    }
+    this.apiURL = this._config.apiURL;
   }
 
   loginIn(email, password) {

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastController, Platform } from 'ionic-angular';
+import { ConfigProvider } from '../config/config';
 
 
 @Injectable()
@@ -20,18 +21,12 @@ export class CarroProvider {
   constructor(
     public http: HttpClient,
     public toastCtrl: ToastController,
-    private platform: Platform
+    private platform: Platform,
+    private _config: ConfigProvider
   ) {
-    this.setAPI();
+    this.apiURL = this._config.apiURL;
   }
 
-  setAPI() {
-    if (this.platform.is('cordova')) {
-      this.apiURL = 'http://joopiterweb.com:3000';
-    } else {
-      this.apiURL = 'http://localhost:3000';
-    }
-  }
 
   addToCart(compra) {
 

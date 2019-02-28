@@ -29,7 +29,8 @@ export class TiendaEcommerceNuevoPage {
   variaciones = [];
 
   valorProducto: number;
-  costoEnvio: number;
+  costoEnvio = 0;
+  isEnvio = true;
 
   tiempoDeEntrega: string;
   tipo: string;

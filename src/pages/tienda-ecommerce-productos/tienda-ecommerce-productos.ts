@@ -42,24 +42,24 @@ export class TiendaEcommerceProductosPage {
   }
 
   presentPopover(myEvent, id) {
-    let opciones: any = {
-      0: 'Desactivar producto'
-    }
+    // let opciones: any = {
+    //   0: 'Desactivar producto'
+    // }
 
-    if (this.promocion.isActive) {
-      opciones[1] = 'Aplicar promoción de lanzamiento'
-    }
+    // if (this.promocion.isActive) {
+    //   opciones[1] = 'Aplicar promoción de lanzamiento'
+    // }
 
-    const popover = this.popoverCtrl.create(CategoriasPage, opciones);
-    popover.present({
-      ev: myEvent
-    });
+    // const popover = this.popoverCtrl.create(CategoriasPage, opciones);
+    // popover.present({
+    //   ev: myEvent
+    // });
 
-    popover.onDidDismiss(data => {
-      if (data) {
-        this.borrarProducto(id);
-      }
-    });
+    // popover.onDidDismiss(data => {
+    //   if (data) {
+    //     this.borrarProducto(id);
+    //   }
+    // });
   }
 
   getProductos() {

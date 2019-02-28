@@ -39,17 +39,15 @@ export class MisPedidosPage {
 
   getPedidos(token, id) {
     this._data.misPedidos(token, id)
-      .then((data: any) => {
-        data.forEach(compra => {
-          this.pedidos = this.pedidos.concat(compra.productos)
+      .then((comprasPorTiendas: any) => {
+        comprasPorTiendas.forEach(tienda => {
+          this.pedidos = this.pedidos.concat(tienda.productos)
         });
         console.log(this.pedidos);
-
-        // this.pedidos = data[0].carro;
       });
   }
 
-  openContentNormal(compra) {
+  openContent(compra) {
     this.navCtrl.push(MisPedidosContentPage, { compra });
   }
 

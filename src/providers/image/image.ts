@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Platform } from 'ionic-angular';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from "@ionic-native/file-transfer";
+import { ConfigProvider } from '../config/config';
 
 @Injectable()
 export class ImageProvider {
@@ -10,18 +10,9 @@ export class ImageProvider {
   constructor(
     public http: HttpClient,
     private transfer: FileTransfer,
-    private platform: Platform
+    private _config: ConfigProvider
   ) {
-    this.setAPI();
-  }
-
-  setAPI() {
-    if (this.platform.is('cordova')) {
-      // this.apiURL = 'https://poimsm-server.herokuapp.com';
-      this.apiURL = 'http://joopiterweb.com:3000';
-    } else {
-      this.apiURL = 'http://localhost:3000';
-    }
+    this.apiURL = this._config.apiURL;
   }
 
   uploadImage(img) {
