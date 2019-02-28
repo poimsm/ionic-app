@@ -57,11 +57,14 @@
           <div style="border-top:0.5px dashed #eee;padding:5px;">
             <div style="width:100%;display:flex;align-items:flex-end;justify-content:space-between;font-size:15px">
               <div style="color:#555;font-size:16px">
-                <div *ngIf="item.precio.tipo == 'flat'">
+                <div *ngIf="item.precio.isActive">
                   ${{item.precio.value}}
                 </div>
-                <div *ngIf="item.precio.tipo != 'flat'">
-                  ${{item.precio.array[0].precio}}
+                <div *ngIf="item.cantidad.isActive">
+                  ${{item.cantidad.array[0].value}}
+                </div>
+                <div *ngIf="item.unidades.isActive">
+                  ${{item.unidades.array[0].value}}
                 </div>
               </div>
               <ion-icon (click)="presentPopover($event, item._id, item.isActive)" name="more" style="font-size:24px;color:#777"></ion-icon>

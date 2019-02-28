@@ -17,6 +17,9 @@ export class CarroPagarPage {
   flow = true;
 
   total: number;
+  totalEnvio: number;
+  subTotal: number;
+
   direccion = 'Ej. Simon bolivar 802';
   telefono = 'Ej. 98372928';
   carro = [];
@@ -74,6 +77,8 @@ export class CarroPagarPage {
     private _localizacion: LocalizacionProvider
   ) {
     this.total = this.navParams.get('total');
+    this.totalEnvio = this.navParams.get('totalEnvio');
+    this.subTotal = this.navParams.get('subTotal');
     this.carro = this.navParams.get('carro');
     this.token = this.navParams.get('token');
     this.user = this.navParams.get('user');
@@ -215,6 +220,8 @@ export class CarroPagarPage {
         productos: carro.productos,
         tienda: carro.tienda,
         total: carro.total,
+        subTotal: this.subTotal,
+        totalEnvio: this.totalEnvio,
         cliente: {
           uid: this.user._id,
           nombre: this.user.name,

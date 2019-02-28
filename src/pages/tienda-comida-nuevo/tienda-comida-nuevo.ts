@@ -236,8 +236,10 @@ export class TiendaComidaNuevoPage {
 
     console.log(producto);
 
-    // this._data.crearProductoComida(producto);
-    // this.navCtrl.pop();
+    this._data.crearProductoComida(producto);
+    setTimeout(() => {
+      this.navCtrl.pop();
+    }, 100);
   }
 
 }

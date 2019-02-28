@@ -66,6 +66,8 @@ export class CarroPage {
     if (this.isAuth) {
       const datos = {
         total: this._carro.subTotal + this._carro.totalEnvio,
+        subTotal: this._carro.subTotal,
+        totalEnvio: this._carro.totalEnvio,
         carro: this._carro.carro,
         token: this.token,
         user: this.user
