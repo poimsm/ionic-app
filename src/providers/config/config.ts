@@ -21,13 +21,13 @@ export class ConfigProvider {
       //        PRODUCCION
       // ------------------------------------
 
-      // this.apiURL = 'http://joopiterweb.com:3000';
+      this.apiURL = 'http://joopiterweb.com:3000';
 
       // ------------------------------------
       //        TESTING
       // ------------------------------------
 
-      this.apiURL = 'http://178.128.155.52:3000';
+      // this.apiURL = 'http://178.128.155.52:3000';
 
     } else {
 
@@ -37,8 +37,8 @@ export class ConfigProvider {
       // ------------------------------------
 
       // this.apiURL = 'http://178.128.155.52:3000';
-
-      this.apiURL = 'http://localhost:3000';
+      this.apiURL = 'http://joopiterweb.com:3000';
+      // this.apiURL = 'http://localhost:3000';
     }
   }
 

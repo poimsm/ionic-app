@@ -59,10 +59,10 @@
 
   <div *ngFor="let lista of listas; let k = index">
 
-    <div *ngIf="lista.tipo == 'solo uno'" padding style="color:#777;font-size:18px;background:rgb(250, 250, 250)">
+    <div *ngIf="lista.tipo == 'solo una'" padding style="color:#777;font-size:18px;background:rgb(250, 250, 250)">
       {{lista.titulo}}
     </div>
-    <div *ngIf="lista.tipo == 'solo uno'" style="margin-left:15px;margin-top:0px;background:white">
+    <div *ngIf="lista.tipo == 'solo una'" style="margin-left:15px;margin-top:0px;background:white">
       <ion-list no-lines>
         <button (click)="seleccionarSoloUno(k, i)" ion-item *ngFor="let opcion of lista.opciones, let i = index">
           <ion-icon item-start *ngIf="opcion.isActive" name="radio-button-on" style="color:#ff6633;font-size:22px"></ion-icon>
