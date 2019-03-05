@@ -2,7 +2,11 @@
   <ion-navbar color="white">
     <ion-title>Nuevo productoo</ion-title>
     <ion-buttons right>
-      <button (click)="save()" ion-button [disabled]="!(imagenes.length>0 && categoria?.length>0 && titulo?.length>0 && tiempoDeEntrega?.length>0 && (flatPrice || precioSegunPersonas || precioSegunUnidades))"
+      <button *ngIf="categoria == 'Desayunos sorpresa'" (click)="save()" ion-button [disabled]="!(imagenes.length>0 && categoria?.length>0 && titulo?.length>0 && (flatPrice || precioSegunPersonas || precioSegunUnidades))"
+        outline mode="ios">
+        Crear
+      </button>
+      <button *ngIf="categoria != 'Desayunos sorpresa'" (click)="save()" ion-button [disabled]="!(imagenes.length>0 && categoria?.length>0 && titulo?.length>0 && tiempoDeEntrega?.length>0 && (flatPrice || precioSegunPersonas || precioSegunUnidades))"
         outline mode="ios">
         Crear
       </button>

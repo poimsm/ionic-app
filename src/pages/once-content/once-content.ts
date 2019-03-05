@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Select } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Select, ToastController } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { CarroProvider } from '../../providers/carro/carro';
 import { CarroPage } from '../carro/carro';
@@ -37,6 +37,8 @@ export class OnceContentPage {
   precioArray = [];
   precioTag = {};
 
+  textoDiaHora = '';
+
   tag: string;
   token = '';
   user: any = {};
@@ -45,7 +47,9 @@ export class OnceContentPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private _auth: AuthProvider,
-    private _carro: CarroProvider
+    private _carro: CarroProvider,
+    public toastCtrl: ToastController,
+
   ) {
     this.data = this.navParams.get("once");
     console.log('DATA', this.data);
@@ -93,7 +97,22 @@ export class OnceContentPage {
     this.total = selectedValue.precio;
   }
 
+  faltaSelecionar() {
+    let toast = this.toastCtrl.create({
+      message: `Por favor defina día y hora de entrega`,
+      duration: 2500,
+      position: 'middle'
+    });
+    toast.present();
+  }
+
   save() {
+    if (this.data.categoria == 'Desayunos sorpresa') {
+      if (this.textoDiaHora.length == 0) {
+        this.faltaSelecionar();
+        return;
+      }
+    }
     const compra: any = {
       titulo: this.data.titulo,
       descripcion: this.data.descripcion,
@@ -101,6 +120,8 @@ export class OnceContentPage {
       precio: Number(this.total),
       total: Number(this.total),
       tienda: this.data.tienda,
+      textoDiaHora: this.textoDiaHora,
+      categoria: this.data.categoria,
       tipo: 'once',
       cantidad: 1
     }

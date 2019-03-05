@@ -2,7 +2,7 @@
   <ion-navbar color="white">
     <ion-title>Nuevo producto</ion-title>
     <ion-buttons right>
-      <button (click)="save()" ion-button [disabled]="!(imagenes.length>0 && categoria?.length>0 && titulo?.length>0 && descripcion?.length>0 && isEnvio && valorProducto)"
+      <button (click)="save()" ion-button [disabled]="!(imagenes.length>0 && categoria?.length>0 && titulo?.length>0 && descripcion?.length>0 && valorProducto)"
         outline mode="ios">
         Crear
       </button>
@@ -224,19 +224,19 @@
     </div>
   </div>
 
-  <div style="margin-top:10px;margin-left:15px;font-size:13px;color:#666;font-weight:400">
+  <!-- <div style="margin-top:10px;margin-left:15px;font-size:13px;color:#666;font-weight:400">
     COSTO DE ENVÍO
-  </div>
+  </div> -->
 
-  <ion-list no-lines>
-      <button (click)="isEnvio = !isEnvio" ion-item>
-        <ion-icon item-start *ngIf="isEnvio" name="checkbox" style="color:green;font-size:22px"></ion-icon>
-        <ion-icon item-start *ngIf="!isEnvio" name="ios-square-outline" style="color:#eee;font-size:22px"></ion-icon>
-        <div style="font-size:16px;color:#666">
-          Envio gratis
-        </div>
-      </button>
-    </ion-list>
+  <!-- <ion-list no-lines>
+    <button (click)="isEnvio = !isEnvio" ion-item>
+      <ion-icon item-start *ngIf="isEnvio" name="checkbox" style="color:green;font-size:22px"></ion-icon>
+      <ion-icon item-start *ngIf="!isEnvio" name="ios-square-outline" style="color:#eee;font-size:22px"></ion-icon>
+      <div style="font-size:16px;color:#666">
+        Envio gratis
+      </div>
+    </button>
+  </ion-list> -->
 
 
   <!-- <div style="padding:10px;width:100%;display:flex;justify-content:center">

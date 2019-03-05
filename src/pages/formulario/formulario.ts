@@ -3,6 +3,7 @@ import { IonicPage } from 'ionic-angular';
 import { HttpClient } from "@angular/common/http";
 import { PopupsProvider } from '../../providers/popups/popups';
 import { AuthProvider } from '../../providers/auth/auth';
+import { ConfigProvider } from '../../providers/config/config';
 
 @IonicPage()
 @Component({
@@ -41,16 +42,16 @@ export class FormularioPage {
 
   tiempoDeEntrega: string;
 
-
-
-  apiURL = 'http://localhost:3000';
-  // apiURL = 'https://poimsm-server.herokuapp.com';
+  apiURL: string;
 
   constructor(
     public http: HttpClient,
     private _popups: PopupsProvider,
-    private _auth: AuthProvider
-  ) { }
+    private _auth: AuthProvider,
+    private _config: ConfigProvider
+  ) { 
+    this.apiURL = this._config.apiURL;
+  }
 
   ionViewDidLoad() {
     this.setUp();
@@ -291,15 +292,20 @@ export class FormularioPage {
 
   crearTienda(tipo) {
 
-    const email = 'tienda03@joopiter.com';
+    const email = 'tienda01@joopiter.com';
     const password = '292933';
     const ciudad = 'Valdivia'
+
+    console.log('Pasoo');
+    
 
     if (tipo == 'algo dulce') {
 
       this._auth.loginUpFormulario('admin01', email, password)
         .then((res: any) => {
           if (res.ok) {
+            console.log('Pasoo2');
+
             const url = `${this.apiURL}/apps/tienda-crear`;
 
             const body: any = {
@@ -310,7 +316,7 @@ export class FormularioPage {
                 limite: 10
               },
               ciudad: ciudad,
-              admins: [{ email, password }]
+              admins: [email]
             }
 
             this.http.post(url, body).toPromise()
@@ -322,6 +328,8 @@ export class FormularioPage {
                     tipo: 'algo dulce'
                   }
                 }
+                console.log('PasooX');
+
                 this._auth.actualizarUsuario(body, res.id)
                   .then(() => console.log('LISTOOO'));
               });
@@ -344,7 +352,7 @@ export class FormularioPage {
                 limite: 10
               },
               ciudad: ciudad,
-              admins: [{ email, password }]
+              admins: [email]
             }
 
             this.http.post(url, body).toPromise()
@@ -377,7 +385,7 @@ export class FormularioPage {
                 isActive: true
               },
               ciudad: ciudad,
-              admins: [{ email, password }]
+              admins: [email]
             }
 
             this.http.post(url, body).toPromise()
