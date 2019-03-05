@@ -133,6 +133,13 @@
     </div>
   </div>
 
+  <div *ngIf="data.categoria == 'Desayunos sorpresa'" style="color:#666;margin-left:15px;font-weight:500;font-size:15px;margin-bottom:10px">
+    ¿Que día quiere recibir el pedido? 
+    </div>
+  <ion-item *ngIf="data.categoria == 'Desayunos sorpresa'" no-lines>
+    <ion-textarea style="border:0px solid #bbb;font-size:15px" rows="2" [(ngModel)]="textoDiaHora" placeholder="Ej. Para este jueves 20 a las 15hrs" style="border:1px solid #eee;border-radius:5px"></ion-textarea>
+  </ion-item>
+
   <div style="width:100%;display:flex;justify-content:center;margin-bottom:50px;margin-top:20px">
     <div (click)="save()" style="font-weight:500;font-size:12px;color:white;background:#ff6633;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
       <!-- <ion-icon name="cart" style="color:white;margin-right:5px;font-size:18px"></ion-icon> -->
