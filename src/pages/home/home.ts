@@ -200,12 +200,12 @@ export class HomePage {
   }
 
   reloadInicio() {
-    this.productos = [];
-    this.comidas = [];
-    this.algoDulce = [];
-    this.getAlgoDulce();
-    this.getEcommerce();
-    this.getComida();
+    this.tortas = [];
+    this.kuchenes = [];
+    this.cupcakes = [];
+    this.getTortas();
+    this.getKuchenes();
+    this.getCupcakes();
   }
 
   openContent(item, tipo) {

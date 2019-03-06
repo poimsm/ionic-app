@@ -92,7 +92,7 @@ export class DataProvider {
   }
 
   fetchAlgoDulceHomeCategoria(ciudad, categoria) {
-    const url = `${this.apiURL}/apps/once-home/?ciudad=${ciudad}&categoria=${categoria}`;
+    const url = `${this.apiURL}/apps/once-home-categoria/?ciudad=${ciudad}&categoria=${categoria}`;
     return this.http.get(url).toPromise();
   }
 
