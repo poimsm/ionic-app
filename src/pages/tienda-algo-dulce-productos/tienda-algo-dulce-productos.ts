@@ -71,9 +71,9 @@ export class TiendaAlgoDulceProductosPage {
       opciones[0] = 'Activar producto'
     }
 
-    if (this.promocion.isActive) {
-      opciones[1] = 'Aplicar promoción de lanzamiento'
-    }
+    // if (this.promocion.isActive) {
+    //   opciones[1] = 'Aplicar promoción de lanzamiento'
+    // }
 
     const popover = this.popoverCtrl.create(CategoriasPage, opciones);
     popover.present({

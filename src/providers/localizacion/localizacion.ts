@@ -7,7 +7,7 @@ import { ConfigProvider } from '../config/config';
 @Injectable()
 export class LocalizacionProvider {
   apiURL: string;
-  ciudad = 'Valdivia';
+  ciudad = 'Osorno';
   ciudades = [];
   presentarAlert = true;
 

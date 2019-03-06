@@ -53,6 +53,9 @@ export class HomePage {
   token: string;
   isAuth = false;
   ciudad: string;
+  tortas = [];
+  kuchenes = [];
+  cupcakes = [];
 
   constructor(
     public navCtrl: NavController,
@@ -89,9 +92,25 @@ export class HomePage {
     this.ciudad = this._localizacion.ciudad;
 
     this.setLocalizacion();
-    this.getAlgoDulce();
-    this.getComida();
-    this.getEcommerce();
+    this.getTortas();
+    this.getKuchenes();
+    this.getCupcakes();
+
+  }
+
+  getTortas() {
+    this._data.fetchAlgoDulceHomeCategoria(this.ciudad, 'Tortas')
+      .then((data: any) => this.tortas = data);
+  }
+
+  getKuchenes() {
+    this._data.fetchAlgoDulceHomeCategoria(this.ciudad, 'Kuchen')
+      .then((data: any) => this.tortas = data);
+  }
+
+  getCupcakes() {
+    this._data.fetchAlgoDulceHomeCategoria(this.ciudad, 'Cupcakes')
+      .then((data: any) => this.tortas = data);
   }
 
   getCosas() {

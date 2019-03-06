@@ -117,7 +117,10 @@ export class TiendaAlgoDulceNuevoPage {
     if (event == 'Sabor') {
       this.EjVariacion = 'Ej. Limón'
     }
-    if (event == 'Temática') {
+    if (event == 'Fruta') {
+      this.EjVariacion = 'Ej. Naranja'
+    }
+    if (event == 'Ocación') {
       this.EjVariacion = 'Ej. Cumpleaños'
     }
     if (event == 'Variedad') {

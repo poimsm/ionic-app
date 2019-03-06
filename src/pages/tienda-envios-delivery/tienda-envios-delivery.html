@@ -50,7 +50,7 @@
           <ion-icon *ngIf="B1" item-start name="radio-button-on" style="color:dodgerblue;font-size:22px"></ion-icon>
           <ion-icon *ngIf="!B1" item-start name="radio-button-off" style="color:#bbb;font-size:22px"></ion-icon>
           <div style="font-size:16px">
-            Cobrar precio fijo por cada envío
+            Cobrar precio fijo por reparto
           </div>
           <div *ngIf="B1" style="color:green;font-size:16px">
             {{valorFijo}}
@@ -61,7 +61,7 @@
     </div>
 
 
-    <div style="margin-bottom:10px;background:white;">
+    <div *ngIf="false" style="margin-bottom:10px;background:white;">
       <ion-item text-wrap no-lines style="color:#777">
         <ion-label>
           <div style="font-size:15px">
@@ -120,7 +120,7 @@
         <div>
           Se cobrará adicionalmente
           <span style="color:#555;font-weight:500">${{envios.precioFijo}}</span>
-          por el envío al cliente en su compra
+          por entregar el pepido del cliente en su casa
         </div>
         <div style="margin-top:20px;margin-bottom:50px">
           El envío será realizado por

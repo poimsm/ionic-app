@@ -91,6 +91,11 @@ export class DataProvider {
     return this.http.get(url).toPromise();
   }
 
+  fetchAlgoDulceHomeCategoria(ciudad, categoria) {
+    const url = `${this.apiURL}/apps/once-home/?ciudad=${ciudad}&categoria=${categoria}`;
+    return this.http.get(url).toPromise();
+  }
+
   fetchComida(ciudad) {
     const url = `${this.apiURL}/apps/comida-home/?ciudad=${ciudad}`;
     return this.http.get(url).toPromise();

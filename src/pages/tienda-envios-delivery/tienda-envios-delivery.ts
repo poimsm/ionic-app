@@ -23,34 +23,39 @@ export class TiendaEnviosDeliveryPage {
   precioGratisSobre: number;
   fijoArray = [
     {
-      tag: 'Los envíos serán gratis',
+      tag: 'Entrega gratis',
       precio: 'Gratis',
       valor: 0
     },
     {
-      tag: 'Se cobrará $600 adicional por el envío',
+      tag: 'Se cobrará $600 adicionales por la entrega a domicilio',
       precio: '$600',
       valor: 600
     },
     {
-      tag: 'Se cobrará $800 adicional por el envío',
+      tag: 'Se cobrará $800 adicionales por la entrega a domicilio',
       precio: '$800',
       valor: 800
     },
     {
-      tag: 'Se cobrará $1000 adicional por el envío',
+      tag: 'Se cobrará $1000 adicionales por la entrega a domicilio',
       precio: '$1000',
       valor: 1000
     },
     {
-      tag: 'Se cobrará $1200 adicional por el envío',
+      tag: 'Se cobrará $1200 adicionales por la entrega a domicilio',
       precio: '$1200',
       valor: 1200
     },
     {
-      tag: 'Se cobrará $1500 adicional por el envío',
+      tag: 'Se cobrará $1500 adicionales por la entrega a domicilio',
       precio: '$1500',
       valor: 1500
+    },
+    {
+      tag: 'Se cobrará $1800 adicionales por la entrega a domicilio',
+      precio: '$1800',
+      valor: 1800
     }
   ];
 
