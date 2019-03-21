@@ -15,9 +15,10 @@ export class LoginPage {
   name: string = '';
   passwordType: string = 'password';
   showPass = false;
-  loginFirst = true;
-  loginSecond = false;
-  loginThird = false;
+  isInicio = true;
+  isRegistrar = false;
+  isSesion = false;
+  isNegocio = false;
   obteniendoRespuesta = false;
   nombre: string;
   apellido: string;
@@ -31,14 +32,32 @@ export class LoginPage {
     private alertCtrl: AlertController
   ) { }
 
+  inicio() {
+    this.isInicio = true;
+    this.isRegistrar = false;
+    this.isSesion = false;
+    this.isNegocio = false;
+  }
+
   registrar() {
-    this.loginFirst = false;
-    this.loginSecond = true;
+    this.isInicio = false;
+    this.isRegistrar = true;
+    this.isSesion = false;
+    this.isNegocio = false;
   }
 
   sesion() {
-    this.loginFirst = false;
-    this.loginThird = true;
+    this.isInicio = false;
+    this.isRegistrar = false;
+    this.isSesion = true;
+    this.isNegocio = false;
+  }
+
+  negocio() {
+    this.isInicio = false;
+    this.isRegistrar = false;
+    this.isSesion = false;
+    this.isNegocio = true;
   }
 
   signUp() {

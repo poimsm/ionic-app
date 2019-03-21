@@ -1,3 +1,20 @@
+export { IntroduccionPage } from './introduccion/introduccion';
+export { OfertaPage } from './oferta/oferta';
+export { PaquetePage } from './paquete/paquete';
+export { TiendaMueblesPage } from './tienda-muebles/tienda-muebles';
+export { TiendaMueblesNuevoPage } from './tienda-muebles-nuevo/tienda-muebles-nuevo';
+export { TiendaMueblesProductosPage } from './tienda-muebles-productos/tienda-muebles-productos';
+export { InscripcionPage } from './inscripcion/inscripcion';
+export { MueblesPage } from './muebles/muebles';
+export { MueblesContentPage } from './muebles-content/muebles-content';
+export { AlquilerPage } from './alquiler/alquiler';
+export { AlquilerContentPage } from './alquiler-content/alquiler-content';
+export { SuperPage } from './super/super';
+export { SuperContentPage } from './super-content/super-content';
+export { MascotasPage } from './mascotas/mascotas';
+export { MascotasContentPage } from './mascotas-content/mascotas-content';
+export { LavadoContentPage } from './lavado-content/lavado-content';
+export { LavadoPage } from './lavado/lavado';
 export { TiendaComidaListasPage } from './tienda-comida-listas/tienda-comida-listas';
 export { InformacionesPage } from './informaciones/informaciones';
 export { TiendaEcommerceProductosPage } from './tienda-ecommerce-productos/tienda-ecommerce-productos';
@@ -48,6 +65,4 @@ export { OncePage } from './once/once';
 export { UsuarioPage } from './usuario/usuario';
 export { LoginPage } from "./login/login";
 export { HomePage } from "./home/home";
-
-
 

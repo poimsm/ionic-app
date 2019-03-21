@@ -292,7 +292,7 @@ export class FormularioPage {
 
   crearTienda(tipo) {
 
-    const email = 'tienda01@joopiter.com';
+    const email = 'mitienda03@joopiter.com';
     const password = '292933';
     const ciudad = 'Valdivia'
 
@@ -325,7 +325,8 @@ export class FormularioPage {
                   isTienda: true,
                   tienda: {
                     id: data.id,
-                    tipo: 'algo dulce'
+                    tipo: 'algo dulce',
+                    isAdmin: true
                   }
                 }
                 console.log('PasooX');

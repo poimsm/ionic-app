@@ -5,6 +5,8 @@ import { Injectable } from "@angular/core";
 export class ConfigProvider {
   apiURL: string;
 
+  // -------  SET HERE  -------
+
   ENTORNO = "dev";
 
   constructor(public http: HttpClient) {

@@ -23,93 +23,323 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content style="background:#eee">
+<ion-content style="background:white">
+    <div style="height:10px;width:100%;background:rgb(248, 248, 248)">
+      </div>
+
+<div>
+
+  <ion-slides pager>
+    <ion-slide *ngIf="true" style="background:white"> 
+
+
+      <div *ngIf="true" padding style="background:white;padding-left:40px;padding-right:40px;margin-top:0px;display:flex;justify-content:space-around;">
+        <div style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+          <div style="position:relative;height:40px;width:40px;border-radius:50%;background:white;display:flex;justify-content:center;align-items:center">
+              <ion-icon name="custom-food" style="color:salmon;font-size:32px"></ion-icon>
+            <div style="font-size:11px;font-weight:500;position:absolute;top:-8px;right:-27px;background:white;border:1px solid #eee;color:#777;padding:4px;border-radius:4px">
+              pronto
+            </div>
+          </div>
+          <div style="margin-top:10px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Comida
+          </div>
+        </div>
+
+        <div (click)="openPage(once)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+          <div style="position:relative;height:40px;width:40px;border-radius:50%;background:white;display:flex;justify-content:center;align-items:center">
+              <ion-icon name="custom-cake" style="color:slateblue;font-size:32px"></ion-icon>
+          </div>
+          <div style="width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Once
+          </div>
+        </div>
+
+        <div (click)="openPage(lavado)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+          <div style="position:relative;height:40px;width:40px;border-radius:25px;background:white;display:flex;justify-content:center;align-items:center">
+              <ion-icon name="custom-car" style="color:darkgray;font-size:32px"></ion-icon>
+            </div>
+          <div style="width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Auto
+          </div>
+        </div>
+
+        <div (click)="openPage(mascotas)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+          <div style="position:relative;height:40px;width:40px;border-radius:25px;background:white;display:flex;justify-content:center;align-items:center">
+              <ion-icon name="custom-dog" style="color:orange;font-size:32px"></ion-icon>
+          </div>
+          <div style="width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Mascotas
+          </div>
+        </div>
+
+      </div>
 
 
 
+      <div *ngIf="true" padding style="background:white;padding-left:40px;padding-right:40px;margin-top:0px;display:flex;justify-content:space-around;">
+        
+        <div (click)="openPage(estilo)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+          <div style="position:relative;height:40px;width:40px;border-radius:50%;background:white;border:0px solid #eee;display:flex;justify-content:center;align-items:center">
+              <ion-icon name="custom-hair" style="color:salmon;font-size:35px"></ion-icon>
+            </div>
+          <div style="width:100%;text-align:center;font-size:13.5px;font-weight:450;color:#555">
+            Estilo
+          </div>
+        </div>
 
-  <div *ngIf="true" padding style="background:white;padding-left:40px;padding-right:40px;margin-top:0px;display:flex;justify-content:space-around;">
-    <div style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
-      <div style="position:relative;height:45px;width:45px;border-radius:50%;background:darkorange;display:flex;justify-content:center;align-items:center">
-        <ion-icon name="timer" style="color:#fff;font-size:30px"></ion-icon>
-        <div style="font-size:11px;font-weight:500;position:absolute;top:-8px;right:-27px;background:white;border:1px solid #eee;color:#777;padding:4px;border-radius:4px">
-          pronto
+        <div (click)="openPage(muebles)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+          <div style="position:relative;height:40px;width:40px;border-radius:25px;background:white;display:flex;justify-content:center;align-items:center">
+              <img src="assets/ico-mueble-01.svg" style="width:30px">
+            </div>
+          <div style="width:100%;text-align:center;font-size:13.5px;font-weight:450;color:#555">
+            Muebles
+          </div>
+        </div>        
+
+        <div (click)="openPage(super)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+          <div style="position:relative;height:40px;width:40px;border-radius:25px;background:white;display:flex;justify-content:center;align-items:center">
+              <ion-icon name="custom-cart" style="color:#488aff;font-size:32px"></ion-icon>
+            </div>
+          <div style="width:100%;text-align:center;font-size:13.5px;font-weight:450;color:#555">
+            Super
+          </div>
+        </div>
+      
+
+        <div (click)="openPage(alquiler)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+          <div style="position:relative;height:40px;width:40px;border-radius:50%;background:white;border:0px solid #eee;display:flex;justify-content:center;align-items:center">
+              <img src="assets/ico-alquiler-01.svg" style="width:32px">
+            </div>
+          <div style="margin-top:10px;width:100%;text-align:center;font-size:13.5px;font-weight:450;color:#555">
+            Alquiler
+          </div>
         </div>
       </div>
-      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Recetas
-      </div>
-    </div>
 
-    <div style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
-      <div style="position:relative;height:45px;width:45px;border-radius:50%;background:orangered;display:flex;justify-content:center;align-items:center">
-        <ion-icon name="md-pizza" style="color:white;font-size:30px"></ion-icon>
-        <div style="font-size:11px;font-weight:500;position:absolute;top:-8px;right:-27px;background:white;border:1px solid #eee;color:#777;padding:4px;border-radius:4px">
-          pronto
+      <div style="height:20px"></div>
+
+  </ion-slide>
+
+
+
+
+
+
+
+
+
+
+
+
+      <ion-slide style="background:white"> 
+  
+  
+        <div *ngIf="true" padding style="background:white;padding-left:40px;padding-right:40px;margin-top:0px;display:flex;justify-content:space-around;">
+          <div style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+            <div style="position:relative;height:45px;width:45px;border-radius:50%;background:white;display:flex;justify-content:center;align-items:center">
+              <img src="assets/ico-comida-circulo.svg" style="width:45px">
+              <div style="font-size:11px;font-weight:500;position:absolute;top:-8px;right:-27px;background:white;border:1px solid #eee;color:#777;padding:4px;border-radius:4px">
+                pronto
+              </div>
+            </div>
+            <div style="margin-top:10px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+              Comida
+            </div>
+          </div>
+  
+          <div (click)="openPage(once)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+            <div style="position:relative;height:40px;width:40px;border-radius:50%;background:white;display:flex;justify-content:center;align-items:center">
+              <img src="assets/ico-once-circulo.svg" style="width:40px">
+            </div>
+            <div style="width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+              Once
+            </div>
+          </div>
+  
+          <div (click)="openPage(lavado)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+            <div style="position:relative;height:45px;width:45px;border-radius:25px;background:white;display:flex;justify-content:center;align-items:center">
+                <img src="assets/ico-auto-circulo.svg" style="width:45px">
+              </div>
+            <div style="width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+              Lavado
+            </div>
+          </div>
+  
+          <div (click)="openPage(mascotas)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+            <div style="position:relative;height:45px;width:45px;border-radius:25px;background:darkorange;display:flex;justify-content:center;align-items:center">
+              <img src="assets/ico-mascota-circulo.svg" style="width:35px;fill:white">
+            </div>
+            <div style="width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+              Mascotas
+            </div>
+          </div>
+  
+        </div>
+  
+  
+  
+        <div *ngIf="true" padding style="background:white;padding-left:40px;padding-right:40px;margin-top:0px;display:flex;justify-content:space-around;">
+          
+          <div (click)="openPage(estilo)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+            <div style="position:relative;height:45px;width:45px;border-radius:50%;background:white;border:1px solid #eee;display:flex;justify-content:center;align-items:center">
+                <img src="assets/ico-estilo-circulo.svg" style="width:45px">
+              </div>
+            <div style="width:100%;text-align:center;font-size:13.5px;font-weight:450;color:#555">
+              Estilo
+            </div>
+          </div>
+  
+          <div (click)="openPage(muebles)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+            <div style="position:relative;height:45px;width:45px;border-radius:25px;background:white;display:flex;justify-content:center;align-items:center">
+                <img src="assets/ico-mueble-circulo.svg" style="width:45px">
+              </div>
+            <div style="width:100%;text-align:center;font-size:13.5px;font-weight:450;color:#555">
+              Muebles
+            </div>
+          </div>        
+  
+          <div (click)="openPage(super)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+            <div style="position:relative;height:45px;width:45px;border-radius:25px;background:white;display:flex;justify-content:center;align-items:center">
+                <img src="assets/ico-super-circulo.svg" style="width:45px">
+              </div>
+            <div style="width:100%;text-align:center;font-size:13.5px;font-weight:450;color:#555">
+              Super
+            </div>
+          </div>
+        
+  
+          <div (click)="openPage(alquiler)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+            <div style="position:relative;height:45px;width:45px;border-radius:50%;background:white;border:1px solid #eee;display:flex;justify-content:center;align-items:center">
+                <img src="assets/ico-alquiler-circulo.svg" style="width:45px">
+              </div>
+            <div style="margin-top:10px;width:100%;text-align:center;font-size:13.5px;font-weight:450;color:#555">
+              Alquiler
+            </div>
+          </div>
+        </div>
+  
+        <div style="height:20px"></div>
+  
+    </ion-slide>
+
+
+
+
+
+
+  <ion-slide *ngIf="false" style="background:white"> 
+
+
+      <div *ngIf="true" padding style="background:white;padding-left:40px;padding-right:40px;margin-top:0px;display:flex;justify-content:space-around;">
+        <div style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+          <div style="position:relative;height:40px;width:40px;border-radius:50%;background:dodgerblue;display:flex;justify-content:center;align-items:center">
+            <ion-icon name="boat" style="color:white;font-size:35px"></ion-icon>
+            <div style="font-size:11px;font-weight:500;position:absolute;top:-8px;right:-27px;background:white;border:1px solid #eee;color:#777;padding:4px;border-radius:4px">
+              pronto
+            </div>
+          </div>
+          <div style="margin-top:10px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Diversión
+          </div>
+        </div>
+
+        <div (click)="openPage(once)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+          <div style="position:relative;height:40px;width:40px;border-radius:50%;background:white;display:flex;justify-content:center;align-items:center">
+            <ion-icon name="tennisball" style="color:greenyellow;font-size:35px"></ion-icon>
+          </div>
+          <div style="width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Deporte
+          </div>
+        </div>
+
+        <div (click)="openPage(lavado)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+          <div style="position:relative;height:40px;width:40px;border-radius:25px;background:white;display:flex;justify-content:center;align-items:center">
+            <ion-icon name="car" style="color:darkorange;font-size:35px"></ion-icon>
+          </div>
+          <div style="width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Gimnasio
+          </div>
+        </div>
+
+        <div (click)="openPage(mascotas)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+          <div style="position:relative;height:40px;width:40px;border-radius:25px;background:white;display:flex;justify-content:center;align-items:center">
+            <ion-icon name="megaphone" style="color:seagreen;font-size:27px;"></ion-icon>
+          </div>
+          <div style="width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Eventos
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div *ngIf="true" padding style="background:white;padding-left:40px;padding-right:40px;margin-top:0px;display:flex;justify-content:space-around;">
+        
+        <div (click)="openPage(estilo)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+          <div style="position:relative;height:40px;width:40px;border-radius:50%;background:white;border:1px solid #eee;display:flex;justify-content:center;align-items:center">
+            <ion-icon name="woman" style="color:hotpink;font-size:27px"></ion-icon>
+            </div>
+          <div style="width:100%;text-align:center;font-size:13.5px;font-weight:450;color:#555">
+            Relax
+          </div>
+        </div>
+
+       
+
+        <div (click)="openPage(ecommerce)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+          <div style="position:relative;height:40px;width:40px;border-radius:25px;background:#f53d3d;display:flex;justify-content:center;align-items:center">
+            <ion-icon name="bookmarks" style="color:white;font-size:27px"></ion-icon>
+          </div>
+          <div style="width:100%;text-align:center;font-size:13.5px;font-weight:450;color:#555">
+            Estudio
+          </div>
+        </div>
+
+        <div (click)="openPage(super)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+          <div style="position:relative;height:40px;width:40px;border-radius:25px;background:white;display:flex;justify-content:center;align-items:center">
+            <img src="assets/drawer.svg" style="width:30px">
+          </div>
+          <div style="width:100%;text-align:center;font-size:13.5px;font-weight:450;color:#555">
+            Muebles
+          </div>
+        </div>
+      
+
+        <div (click)="openPage(alquiler)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+          <div style="position:relative;height:40px;width:40px;border-radius:50%;background:white;border:1px solid #eee;display:flex;justify-content:center;align-items:center">
+            <ion-icon name="bus" style="color:orange;font-size:27px"></ion-icon>
+          </div>
+          <div style="margin-top:10px;width:100%;text-align:center;font-size:13.5px;font-weight:450;color:#555">
+            Transporte
+          </div>
         </div>
       </div>
-      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Comida
-      </div>
-    </div>
-
-    <div (click)="openPage(once)" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
-      <div style="position:relative;height:45px;width:45px;border-radius:25px;background:slateblue;display:flex;justify-content:center;align-items:center">
-        <ion-icon name="md-cafe" style="color:white;font-size:30px"></ion-icon>
-        <div style="font-size:10px;font-weight:450;position:absolute;top:-5px;right:-27px;background:#fa6e6d;color:white;padding:3px;border-radius:4px">
-          delivery
-        </div>
-      </div>
-      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Algo dulce
-      </div>
-    </div>
-
-  </div>
-
-
-  <div *ngIf="false" padding style="background:white;padding-left:40px;padding-right:40px;display:flex;justify-content:space-around;">
-
-    <div (click)="openEcommerce()" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
-      <div style="position:relative;height:45px;width:45px;border-radius:15px;background:#f53d3d;display:flex;justify-content:center;align-items:center">
-        <ion-icon name="md-basket" style="color:white;font-size:30px"></ion-icon>
-        <div style="font-size:11px;font-weight:500;position:absolute;top:-8px;right:-40px;background:darkorange;border:0px solid #eee;color:#fff;padding:4px;border-radius:4px">
-          artesanal
-        </div>
-      </div>
-      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Tiendas
-      </div>
-    </div>
-
-    <div *ngIf="false" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
-      <div style="position:relative;height:45px;width:45px;border-radius:50%;background:white;border:1px solid #eee;display:flex;justify-content:center;align-items:center">
-        <ion-icon name="woman" style="color:white;font-size:30px;color:hotpink"></ion-icon>
-        <div style="font-size:11px;font-weight:500;position:absolute;top:-8px;right:-27px;background:white;border:1px solid #eee;color:#777;padding:4px;border-radius:4px">
-          pronto
-        </div>
-      </div>
-      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Estilo
-      </div>
-    </div>
-
-    <div *ngIf="false" style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap">
-      <div style="border:1px solid #eee;position:relative;height:45px;width:45px;border-radius:50%;background:white;display:flex;justify-content:center;align-items:center">
-        <ion-icon name="ios-home" style="color:#fff;font-size:30px;color:orange"></ion-icon>
-        <div style="font-size:11px;font-weight:500;position:absolute;top:-8px;right:-27px;background:white;border:1px solid #eee;color:#777;padding:4px;border-radius:4px">
-          pronto
-        </div>
-      </div>
-      <div style="width:100%;text-align:center;font-size:14px;font-weight:450;color:#555">
-        Alquiler
-      </div>
-    </div>
-  </div>
 
 
 
-  <div style="background:white;margin-top:0px">
+
+      <div style="height:20px"></div>
+
+  </ion-slide>
+
+
+
+
+
+
+
+
+
+  
+</ion-slides>
+</div>
+
+
+
+
+  <!-- <div style="background:white;margin-top:0px">
     <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
       <div style="padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:600">
         Tortas
@@ -180,7 +410,7 @@
   <div style="background:white;margin-top:0px">
     <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
       <div style="padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:600">
-        Kuchen - recetas alemanas
+        Kuchen
       </div>
       <div (click)="openPage(once)" style="padding:4px;margin-right:15px;color:#ff6633;font-weight:500;font-size:12px">
         VER MÁS
@@ -208,7 +438,151 @@
         </ion-row>
       </ion-grid>
     </ion-scroll>
+  </div> -->
+
+
+
+
+
+
+
+
+
+<hr>
+
+  <div style="background:white;margin-top:0px">
+    <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+      <div style="padding:8px;padding-left:15px;color:#444;font-size:16px;font-weight:600">
+        Tortas, galletas, pasteles...
+      </div>
+      <div (click)="openPage(once)" style="padding:4px;margin-right:15px;color:#ff6633;font-weight:500;font-size:12px">
+        VER MÁS
+      </div>
+    </div>
+    <ion-scroll scrollX="true" style="display:flex;height:190px;margin-left:10px">
+      <ion-grid>
+        <ion-row nowrap>
+          <ion-col *ngFor="let item of algoDulce" (click)="openContent(item, 'once')" col-5>
+            <div style="position:relative">
+              <div style="border-radius:0px;min-height:120px; width:100%; background-size:cover;background-repeat: no-repeat;background-position: center;"
+                [ngStyle]="{'background-image': 'url(' + item.imgs[0].url + ')' }">
+              </div>
+            </div>
+            <div style="color:#555;font-size:15px;font-weight:500;height:20px;overflow: hidden;">
+              {{item.titulo}}
+            </div>
+            <div *ngIf="item.precio.tipo == 'flat'">
+              ${{item.precio.value}}
+            </div>
+            <div *ngIf="item.precio.tipo != 'flat'">
+              ${{item.precio.array[0].precio}}
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-scroll>
   </div>
+
+<hr>
+  <div style="background:white;margin-top:10px">
+    <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+      <div style="padding:8px;padding-left:15px;color:#444;font-size:16px;font-weight:600">
+        Collares, pulseras, relojes...
+      </div>
+      <div (click)="openPage(ecommerce)" style="padding:4px;margin-right:15px;color:#ff6633;font-weight:500;font-size:12px">
+        VER MÁS
+      </div>
+    </div>
+    <ion-scroll scrollX="true" style="display:flex;height:190px;margin-left:10px">
+      <ion-grid>
+        <ion-row nowrap>
+          <ion-col *ngFor="let item of productos" (click)="openContent(item, 'ecommerce')" col-5>
+            <div style="position:relative">
+              <div style="border-radius:0px;min-height:120px; width:100%; background-size:cover;background-repeat: no-repeat;background-position: center;"
+                [ngStyle]="{'background-image': 'url(' + item.imgs[0].url + ')' }">
+              </div>
+            </div>
+            <div style="color:#555;font-size:15px;font-weight:500;height:20px;overflow: hidden;">
+              {{item.titulo}}
+            </div>
+            <div>
+              ${{item.precio.valorProducto}}
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-scroll>
+  </div>
+
+<hr>
+  <div style="background:white;margin-top:10px">
+    <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+      <div style="padding:8px;padding-left:15px;color:#444;font-size:16px;font-weight:600">
+        Completos, sushi, pizza...
+      </div>
+      <div (click)="openPage(comida)" style="padding:4px;margin-right:15px;color:#ff6633;font-weight:500;font-size:12px">
+        VER MÁS
+      </div>
+    </div>
+    <ion-scroll scrollX="true" style="display:flex;height:190px;margin-left:10px">
+      <ion-grid>
+        <ion-row nowrap>
+          <ion-col *ngFor="let item of comidas" (click)="openContent(item, 'comida')" col-5>
+            <div style="position:relative">
+              <div style="border-radius:0px;min-height:120px; width:100%; background-size:cover;background-repeat: no-repeat;background-position: center;"
+                [ngStyle]="{'background-image': 'url(' + item.imgs[0].url + ')' }">
+              </div>
+            </div>
+            <div style="color:#555;font-size:15px;font-weight:500;height:20px;overflow: hidden;">
+              {{item.titulo}}
+            </div>
+            <div *ngIf="item.precio?.isActive">
+              ${{item.precio.value}}
+            </div>
+            <div *ngIf="item.cantidad?.isActive">
+              ${{item.cantidad.array[0].value}}
+            </div>
+            <div *ngIf="item.unidades?.isActive">
+              ${{item.unidades.array[0].value}}
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-scroll>
+  </div>
+
+
+  <div *ngIf="false" style="background:white;margin-top:10px">
+    <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+      <div style="padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:600">
+        Tours, experiencias y aventura...
+      </div>
+      <div style="margin-right:15px;color:#ff6633;font-weight:500;font-size:13px">
+        VER MASS
+      </div>
+    </div>
+    <ion-scroll scrollX="true" style="display:flex;height:190px;margin-left:10px">
+      <ion-grid>
+        <ion-row nowrap>
+          <ion-col *ngFor="let item of cosas" col-5>
+            <div style="position:relative">
+              <img [src]="item.img" style="width:100%;height:120px;margin-right:15px;object-fit:cover">
+              <!-- <div style="position:absolute;top:10px;left:0px;font-weight:500;color:White;background:orangered;padding:5px;font-size:14px">
+                -30%
+              </div> -->
+            </div>
+            <div style="color:#555;font-size:15px;font-weight:500;height:20px;overflow: hidden;">
+              {{item.titulo}}
+            </div>
+            <div style="width:100%;text-align:right;font-size:16px;color:#333">
+              ${{item.precio}}
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-scroll>
+  </div>
+
  
 
 

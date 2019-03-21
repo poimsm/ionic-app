@@ -3,7 +3,7 @@ import { ErrorHandler, NgModule } from "@angular/core";
 import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { InAppBrowser } from "@ionic-native/in-app-browser";
 
 import { AngularFireModule } from "angularfire2";
 import { AngularFirestoreModule } from "angularfire2/firestore";
@@ -13,23 +13,22 @@ import {
   AngularFireDatabase
 } from "angularfire2/database";
 import { AngularFireAuthModule } from "angularfire2/auth";
-import { FirebaseMessaging } from '@ionic-native/firebase-messaging';
-
+import { FirebaseMessaging } from "@ionic-native/firebase-messaging";
 
 import { ImagePicker } from "@ionic-native/image-picker";
 import { PipesModule } from "../pipes/pipes.module";
 import { Camera } from "@ionic-native/camera";
 import { IonicStorageModule } from "@ionic/storage";
-import { AppVersion } from '@ionic-native/app-version';
-import { FileTransfer } from '@ionic-native/file-transfer';
+import { AppVersion } from "@ionic-native/app-version";
+import { FileTransfer } from "@ionic-native/file-transfer";
 
 export const firebaseConfig = {
-  apiKey: 'AIzaSyAUecL57weWVkb-4OR0TBCM1f18tHgqi5M',
-  authDomain: 'joopiter-3af7f.firebaseapp.com',
-  databaseURL: 'https://joopiter-3af7f.firebaseio.com',
-  projectId: 'joopiter-3af7f',
-  storageBucket: 'joopiter-3af7f.appspot.com',
-  messagingSenderId: '873508722787'
+  apiKey: "AIzaSyAUecL57weWVkb-4OR0TBCM1f18tHgqi5M",
+  authDomain: "joopiter-3af7f.firebaseapp.com",
+  databaseURL: "https://joopiter-3af7f.firebaseio.com",
+  projectId: "joopiter-3af7f",
+  storageBucket: "joopiter-3af7f.appspot.com",
+  messagingSenderId: "873508722787"
 };
 
 import {
@@ -82,17 +81,34 @@ import {
   TiendaAlgoDulceNuevoPage,
   TiendaAlgoDulceProductosPage,
   InformacionesPage,
-  TiendaComidaListasPage
+  TiendaComidaListasPage,
+  LavadoContentPage,
+  LavadoPage,
+  AlquilerPage,
+  AlquilerContentPage,
+  SuperPage,
+  SuperContentPage,
+  MascotasPage,
+  MascotasContentPage,
+  MueblesPage,
+  MueblesContentPage,
+  InscripcionPage,
+  TiendaMueblesPage,
+  TiendaMueblesNuevoPage,
+  TiendaMueblesProductosPage,
+  OfertaPage,
+  PaquetePage,
+  IntroduccionPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
 import { AuthProvider } from "../providers/auth/auth";
 import { HttpClientModule } from "@angular/common/http";
-import { PopupsProvider } from '../providers/popups/popups';
-import { CarroProvider } from '../providers/carro/carro';
-import { ImageProvider } from '../providers/image/image';
-import { LocalizacionProvider } from '../providers/localizacion/localizacion';
-import { ConfigProvider } from '../providers/config/config';
+import { PopupsProvider } from "../providers/popups/popups";
+import { CarroProvider } from "../providers/carro/carro";
+import { ImageProvider } from "../providers/image/image";
+import { LocalizacionProvider } from "../providers/localizacion/localizacion";
+import { ConfigProvider } from "../providers/config/config";
 
 @NgModule({
   declarations: [
@@ -146,7 +162,24 @@ import { ConfigProvider } from '../providers/config/config';
     TiendaAlgoDulceNuevoPage,
     TiendaAlgoDulceProductosPage,
     InformacionesPage,
-    TiendaComidaListasPage
+    TiendaComidaListasPage,
+    LavadoContentPage,
+    LavadoPage,
+    AlquilerPage,
+    AlquilerContentPage,
+    SuperPage,
+    SuperContentPage,
+    MascotasPage,
+    MascotasContentPage,
+    MueblesPage,
+    MueblesContentPage,
+    InscripcionPage,
+    TiendaMueblesPage,
+    TiendaMueblesNuevoPage,
+    TiendaMueblesProductosPage,
+    OfertaPage,
+    PaquetePage,
+    IntroduccionPage
   ],
   imports: [
     BrowserModule,
@@ -159,7 +192,6 @@ import { ConfigProvider } from '../providers/config/config';
     PipesModule,
     IonicStorageModule.forRoot(),
     HttpClientModule
-
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -213,7 +245,24 @@ import { ConfigProvider } from '../providers/config/config';
     TiendaAlgoDulceNuevoPage,
     TiendaAlgoDulceProductosPage,
     InformacionesPage,
-    TiendaComidaListasPage
+    TiendaComidaListasPage,
+    LavadoContentPage,
+    LavadoPage,
+    AlquilerPage,
+    AlquilerContentPage,
+    SuperPage,
+    SuperContentPage,
+    MascotasPage,
+    MascotasContentPage,
+    MueblesPage,
+    MueblesContentPage,
+    InscripcionPage,
+    TiendaMueblesPage,
+    TiendaMueblesNuevoPage,
+    TiendaMueblesProductosPage,
+    OfertaPage,
+    PaquetePage,
+    IntroduccionPage
   ],
   providers: [
     StatusBar,

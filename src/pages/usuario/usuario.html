@@ -8,15 +8,22 @@
 
 
   <ion-item *ngIf="user.isTienda" (click)="openTienda()" style="margin:10px" no-lines>
-    <ion-icon item-start name="ice-cream" style="color:orange;font-size:30px"></ion-icon>
+    <!-- <ion-icon item-start name="ice-cream" style="color:orange;font-size:30px"></ion-icon> -->
     <div style="color:#777;font-size:18px;font-weight:500">
-      Mi tienda
+      Mi negocio
     </div>
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </ion-item>
 
+  <!-- <ion-item *ngIf="!user.isTienda" (click)="openTienda()" style="margin:10px" no-lines>
+    <div style="color:#777;font-size:18px;font-weight:500">
+      Inscribir mi negocio
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </ion-item> -->
+
   <ion-item (click)="openHistorial()" style="margin:10px" no-lines>
-    <ion-icon item-start name="cart" style="color:orange;font-size:30px"></ion-icon>
+    <!-- <ion-icon item-start name="cart" style="color:orange;font-size:30px"></ion-icon> -->
     <div style="color:#777;font-size:18px;font-weight:500">
       Historial de compras
     </div>
@@ -45,10 +52,10 @@
     </div>
   </ion-item>
 
-  <div style="margin-left:15px;margin-bottom:10px;margin-top:25px;font-size:11px;font-weight:600;color:#666">
+  <div *ngIf="!user.tienda.isAdmin" style="margin-left:15px;margin-bottom:10px;margin-top:25px;font-size:11px;font-weight:600;color:#666">
     DETALLES DE ENTREGA
   </div>
-  <button (click)="presentPrompt('direccion')" ion-item style="margin-top:10px">
+  <button *ngIf="!user.tienda.isAdmin" (click)="presentPrompt('direccion')" ion-item style="margin-top:10px">
     <div style="font-size:16px;color:#555">
       Dirección
     </div>
@@ -58,7 +65,7 @@
     </div>
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </button>
-  <button (click)="presentPrompt('telefono')" ion-item style="margin:0px" no-lines>
+  <button *ngIf="!user.tienda.isAdmin" (click)="presentPrompt('telefono')" ion-item style="margin:0px" no-lines>
     <div style="font-size:16px;color:#555">
       Teléfono
     </div>
@@ -68,9 +75,13 @@
     </div>
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </button>
+  
 
+  <div (click)="openInscripcion()" style="margin-top:35px;margin-bottom:20px;width:100%;text-align:center;text-decoration:underline;color:#666;font-size:16px">
+    Inscribir mi negocio
+  </div>
 
-  <button (click)="logout()" ion-item style="margin-top:25px" no-lines>
+  <button (click)="logout()" ion-item style="margin-top:0px" no-lines>
     <div style="font-size:16px;color:#f53d3d;font-weight:500;width:100%;text-align:center">
       Cerrar sesión
     </div>

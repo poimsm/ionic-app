@@ -3,7 +3,10 @@
   <ion-navbar color="white">
     <ion-title>Estilo</ion-title>
     <ion-buttons right>
-      <button ion-button icon-only>
+      <button (click)="setLocalizacion()" ion-button icon-only>
+        <ion-icon name="pin" style="color:rgb(253, 131, 86)"></ion-icon>
+      </button>
+      <button (click)="presentPopover($event)" ion-button icon-only>
         <ion-icon name="md-more"></ion-icon>
       </button>
     </ion-buttons>
@@ -12,116 +15,268 @@
 </ion-header>
 
 
-<ion-content style="background:#eee">
+<ion-content>
 
-  <div style="padding-left:15px;padding-right:15px;padding-top:25px;padding-bottom:25px;margin-bottom:10px;background:white">
-    <div style="color:#555;font-size:20px;font-weight:600">
-      Salon de belleza
-    </div>
-    <div style="margin-top:5px;margin-bottom:0px;display:flex;justify-content:space-between;width:100%">
-      <div>
-        <ion-icon name="time" style="color:#bbb"></ion-icon>
-        <span style="color:#bbb;size:16px;margin-left:5px">
-          Sábados 9:00am - 7:30pm
-        </span>
-      </div>
-      <ion-icon name="ios-arrow-dropright" style="font-size:20px;color:#ccc"></ion-icon>
-    </div>
-    <div style="margin-top:5px;margin-bottom:10px">
-      <ion-icon name="pin" style="color:orangered"></ion-icon>
-      <span style="color:#bbb;size:16px;margin-left:5px">
-        Los carreras 320
-      </span>
-    </div>
-    <hr>
-    <div style="margin-top:10px;width:100%;display:flex;justify-content:space-between;align-items:center">
-      <div style="position:relative">
-        <img src="assets/p01.jpg" style="border-radius:5px;width:100px;height:100px;object-fit:cover">
-        <div style="position:absolute;left:10px;bottom:10px;color:white;font-size:16px;overflow: hidden;height:40px">
-          Estiloso corte de cabello
+  <div *ngIf="true" style="margin-top:15px;">
+
+    <ion-slides>
+      <ion-slide style="background:white">
+
+        <div *ngIf="true"
+          style="background:white;padding-left:20px;padding-right:20px;margin-top:0px;display:flex;justify-content:space-between;">
+          <div style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+            <div
+              style="position:relative;height:40px;width:40px;border-radius:50%;background:white;display:flex;justify-content:center;align-items:center">
+              <ion-icon name="custom-nail" style="color:salmon;font-size:35px"></ion-icon>
+            </div>
+            <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+              Uñas
+            </div>
+          </div>
+
+          <div (click)="openPage(once)"
+            style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+            <div
+              style="position:relative;height:40px;width:40px;border-radius:50%;background:white;display:flex;justify-content:center;align-items:center">
+              <ion-icon name="custom-hair" style="color:saddlebrown;font-size:30px"></ion-icon>
+            </div>
+            <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+              Cabello
+            </div>
+          </div>
+
+
+          <div (click)="openPage(once)"
+            style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+            <div
+              style="position:relative;height:40px;width:40px;border-radius:50%;background:white;display:flex;justify-content:center;align-items:center">
+              <ion-icon name="custom-maditation" style="color:dodgerblue;font-size:30px"></ion-icon>
+            </div>
+            <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+              Cuerpo
+            </div>
+          </div>
+
+          <div (click)="openPage(lavado)"
+            style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+            <div
+              style="position:relative;height:40px;width:40px;border-radius:25px;background:white;display:flex;justify-content:center;align-items:center">
+              <ion-icon name="custom-wax" style="color:salmon;font-size:30px"></ion-icon>
+            </div>
+            <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+              Piel
+            </div>
+          </div>
+
+          <div (click)="openPage(mascotas)"
+            style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+            <div
+              style="position:relative;height:40px;width:40px;border-radius:25px;background:white;display:flex;justify-content:center;align-items:center">
+              <!-- <ion-icon name="ios-paw" style="color:white;font-size:27px;color:white"></ion-icon> -->
+              <ion-icon name="custom-pills" style="color:darkorange;font-size:30px"></ion-icon>
+            </div>
+            <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+              Rostro
+            </div>
+          </div>
         </div>
-      </div>
-      <div style="position:relative">
-        <img src="assets/p02.jpg" style="border-radius:5px;width:100px;height:100px;object-fit:cover">
-        <div style="position:absolute;left:10px;bottom:10px;color:white;font-size:16px;overflow: hidden;height:40px">
-          Nuevo diseño en uñas
+
+
+        <div *ngIf="false" padding
+          style="background:white;padding-left:40px;padding-right:40px;margin-top:0px;display:flex;justify-content:space-around;">
+
+          <div (click)="openPage(estilo)"
+            style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+            <div
+              style="position:relative;height:40px;width:40px;border-radius:50%;background:white;border:1px solid #eee;display:flex;justify-content:center;align-items:center">
+              <ion-icon name="woman" style="color:hotpink;font-size:27px"></ion-icon>
+            </div>
+            <div style="width:100%;text-align:center;font-size:13.5px;font-weight:450;color:#555">
+              Estilo
+            </div>
+          </div>
+
+          <div (click)="openPage(muebles)"
+            style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+            <div
+              style="position:relative;height:40px;width:40px;border-radius:25px;background:white;display:flex;justify-content:center;align-items:center">
+              <img src="assets/drawer.svg" style="width:30px">
+            </div>
+            <div style="width:100%;text-align:center;font-size:13.5px;font-weight:450;color:#555">
+              Muebles
+            </div>
+          </div>
+
+
+          <div (click)="openPage(super)"
+            style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+            <div
+              style="position:relative;height:40px;width:40px;border-radius:25px;background:white;display:flex;justify-content:center;align-items:center">
+              <ion-icon name="cart" style="color:#488aff;font-size:30px"></ion-icon>
+            </div>
+            <div style="width:100%;text-align:center;font-size:13.5px;font-weight:450;color:#555">
+              Super
+            </div>
+          </div>
+
+
+          <div (click)="openPage(alquiler)"
+            style="display:flex;justify-content:center;align-items:center;flex-wrap:wrap;width:80px">
+            <div
+              style="position:relative;height:40px;width:40px;border-radius:50%;background:white;border:1px solid #eee;display:flex;justify-content:center;align-items:center">
+              <ion-icon name="ios-home" style="color:orange;font-size:27px"></ion-icon>
+            </div>
+            <div style="margin-top:10px;width:100%;text-align:center;font-size:13.5px;font-weight:450;color:#555">
+              Alquiler
+            </div>
+          </div>
         </div>
-      </div>
-      <div style="position:relative">
-        <img src="assets/p03.jpg" style="border-radius:5px;width:100px;height:100px;object-fit:cover">
-        <div style="position:absolute;left:10px;bottom:10px;color:white;font-size:16px;overflow: hidden;height:40px">
-          Los mejores helados de la temporada
-        </div>
-      </div>
-    </div>
+
+        <div style="height:20px"></div>
+
+      </ion-slide>
+
+    </ion-slides>
   </div>
 
 
-  <div style="padding-left:15px;padding-right:15px;padding-top:25px;padding-bottom:25px;margin-bottom:10px;background:white">
-    <div style="color:#555;font-size:20px;font-weight:600">
-      Idols Nails
-    </div>
-    <div style="margin-top:5px;margin-bottom:0px;display:flex;justify-content:space-between;width:100%">
-      <div>
-        <ion-icon name="time" style="color:#bbb"></ion-icon>
-        <span style="color:#bbb;size:16px;margin-left:5px">
-          Sábados 9:00am - 7:30pm
-        </span>
-      </div>
-      <ion-icon name="ios-arrow-dropright" style="font-size:20px;color:#ccc"></ion-icon>
-    </div>
-    <div style="margin-top:5px;margin-bottom:10px">
-      <ion-icon name="pin" style="color:orangered"></ion-icon>
-      <span style="color:#bbb;size:16px;margin-left:5px">
-        Los carreras 320
-      </span>
-    </div>
-    <hr>
-    <div style="margin-top:10px;width:100%;display:flex;justify-content:space-between;align-items:center">
-      <div style="position:relative">
-        <img src="assets/u01.jpg" style="border-radius:5px;width:100px;height:100px;object-fit:cover">
-        <div style="position:absolute;left:10px;bottom:10px;color:white;font-size:16px;overflow: hidden;height:40px">
-          Estiloso corte de cabello
-        </div>
-      </div>
-      <div style="position:relative">
-        <img src="assets/u02.jpg" style="border-radius:5px;width:100px;height:100px;object-fit:cover">
-        <div style="position:absolute;left:10px;bottom:10px;color:white;font-size:16px;overflow: hidden;height:40px">
-          Nuevo diseño en uñas
-        </div>
-      </div>
-      <div style="position:relative">
-        <img src="assets/u03.jpg" style="border-radius:5px;width:100px;height:100px;object-fit:cover">
-        <div style="position:absolute;left:10px;bottom:10px;color:white;font-size:16px;overflow: hidden;height:40px">
-          Los mejores helados de la temporada
-        </div>
-      </div>
-    </div>
-  </div>
 
 
+  <div padding>
 
-  <div style="padding-left:15px;padding-right:15px;padding-top:25px;padding-bottom:25px;margin-bottom:10px;background:white">
-    <div style="color:#444;font-size:20px;font-weight:600">
-      Tienda de la esquina
+      <div (click)="openContent()">
+        <div style="font-size:15px;color:#333;font-weight:600">
+            ✨🌷 Elegantes ideas para tus próximas uñas! Me encantan!✨🌺
+
+        </div>
+        <div style="display:flex;align-items:center">
+          <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
+          <div style="color:#999;font-size:15px">
+            (26)
+          </div>
+          <div style="color:darkorange;font-size:14px;margin-left:10px">
+            14 comentarios
+          </div>
+        </div>
+  
+        <div style="color:#999;font-size:15px">
+          7:30 - 18:30 abierto
+        </div>
+  
+        <div style="width:100%;display:flex;justify-content:space-between">
+          <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1553014954/nuevos-dise%C3%B1os-de-u%C3%B1as-decoradas-puntos.jpg"
+            style="width:32%;height:90px;object-fit:cover">
+          <img
+            src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1553014954/u%C3%B1as-cortas-decoradas-16.jpg"
+            style="width:32%;height:90px;object-fit:cover">
+          <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1553014954/Fotos-u%C3%B1as-pintadas-4.jpg"
+            style="width:32%;height:90px;object-fit:cover">
+        </div>
+      </div>
+  
+  
+      <div style="margin-top:20px">
+        <div style="font-size:15px;color:#333;font-weight:600">
+            <!-- ¿Te apetece un cambio de look? Apuesta por un corte de cabello. -->
+            Salon de belleza Susana </div>
+        <div style="display:flex;align-items:center">
+          <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
+          <div style="color:#999;font-size:15px">
+            (201)
+          </div>
+          <div style="color:darkorange;font-size:14px;margin-left:10px">
+            230 comentarios
+          </div>
+        </div>
+        <div style="color:#999;font-size:15px">
+          7:30 - 18:30 abierto
+        </div>
+        <div style="width:100%;display:flex;justify-content:space-between">
+          <div style="width:32%;">
+            <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1553015496/53399070_2514498915275201_4842733522122702848_n.jpg"
+              style="width:100%;height:90px;object-fit:cover">
+            <div>
+              Paseo de 1h...
+            </div>
+            <div style="color:darkorange;">
+              $4.500
+            </div>
+          </div>
+          <div style="width:32%;">
+            <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1553015496/48392591_2387142198010874_7933642024140406784_n.jpg"
+              style="width:100%;height:90px;object-fit:cover">
+            <div>
+              Cuidado de día...
+            </div>
+            <div style="color:darkorange;">
+              $6.000
+            </div>
+          </div>
+          <div style="width:32%;">
+            <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1553015496/51019918_2450395428352217_7899304615307378688_n.jpg"
+              style="width:100%;height:90px;object-fit:cover">
+            <div>
+              Alojamiento...
+            </div>
+            <div style="color:darkorange;">
+              $10.500
+            </div>
+          </div>
+          <!-- <div style="width:32%;">
+              <div style="margin:0px;width:100%;height:90px;border-radius:0px;background:red"></div>
+            <div style="color:darkorange;font-size:16px">
+              $15.000
+            </div>
+          </div>
+          <div style="width:32%;">
+              <div style="margin:0px;width:100%;height:90px;border-radius:0px;background:red"></div>
+            <div style="color:darkorange;font-size:16px">
+              $5.000
+            </div>
+          </div> -->
+          <!-- <div style="margin:0px;width:32%;height:90px;border-radius:0px;background:red"></div> -->
+          <!-- <div style="margin:0px;width:32%;height:90px;border-radius:0px;background:red"></div> -->
+        </div>
+      </div>
+  
+  
+      <div style="margin-top:20px">
+        <div style="font-size:15px;color:#333;font-weight:600">
+          Peluquería canina de pelos
+        </div>
+        <div style="display:flex;align-items:center">
+          <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
+          <div style="color:#999;font-size:15px">
+            (201)
+          </div>
+          <div style="color:darkorange;font-size:14px;margin-left:10px">
+            230 comentarios
+          </div>
+        </div>
+        <div style="color:#999;font-size:15px">
+          7:30 - 18:30 abierto
+        </div>
+        <div style="width:100%;display:flex;justify-content:space-between">
+          <div style="margin:0px;width:32%;height:90px;border-radius:0px;background:red"></div>
+          <div style="margin:0px;width:32%;height:90px;border-radius:0px;background:red"></div>
+          <div style="margin:0px;width:32%;height:90px;border-radius:0px;background:red"></div>
+        </div>
+      </div>
+  
     </div>
-    <div style="margin-top:5px;margin-bottom:0px">
-      <ion-icon name="time" style="color:#bbb"></ion-icon>
-      <span style="color:#bbb;size:16px;margin-left:5px">
-        Sábados 9:00am - 7:30pm
-      </span>
-    </div>
-    <div style="margin-top:5px;margin-bottom:10px">
-      <ion-icon name="pin" style="color:orangered"></ion-icon>
-      <span style="color:#bbb;size:16px;margin-left:5px">
-        Los carreras 320
-      </span>
-    </div>
-    <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
-      <img src="assets/01.jpg" style="border-radius:5px;width:100px;height:100px;object-fit:cover">
-      <img src="assets/01.jpg" style="border-radius:5px;width:100px;height:100px;object-fit:cover">
-      <img src="assets/01.jpg" style="border-radius:5px;width:100px;height:100px;object-fit:cover">
-    </div>
-  </div>
+  
+
 
 </ion-content>

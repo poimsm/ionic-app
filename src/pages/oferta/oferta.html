@@ -1,0 +1,183 @@
+<ion-header no-border>
+
+  <ion-navbar color="white">
+
+    <!-- <ion-title>oferta</ion-title> -->
+  </ion-navbar>
+
+</ion-header>
+
+<div *ngIf="showDesc"
+  style="background:rgb(10, 10, 10, 0.4);z-index:999;position:fixed;top:0px;left:0px;width:100%;height:100%">
+  <div (click)="showDesc = false" style="height:70%;width:100%;">
+  </div>
+  <div style="padding:15px;background:white;height:30%;overflow:scroll;font-size:14px;color:#777">
+    <div style="margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">
+      <div style="width:30px">
+      </div>
+      <div style="text-align:center;font-size:16px;color:#666;font-weight:500">
+        Descripción
+      </div>
+      <div (click)="showDesc = false" style="padding:5px">
+        <ion-icon name="close" style="font-size:18px;color:#666;"></ion-icon>
+      </div>
+    </div>
+    Harum fugit quibusdam voluptatibus vel inventore beatae fugiat, aliquam culpa quos facilis.
+  </div>
+</div>
+
+<ion-content>
+
+  <div
+    style="border-radius:0px;min-height:240px;width:100%;background-size:cover;background-repeat: no-repeat;background-position: center;"
+    [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553150695/gatoo.jpg' + ')' }">
+  </div>
+
+  <div padding>
+    <!-- <div style="font-size:16px;color:#444;font-weight:600">
+      Promocion dos por uno en gatos y servicio de limpieza libre
+    </div> -->
+
+    <div style="margin-top:0px;color:#777;font-size:16px">
+      <span style="color:orangered;font-weight:600">
+        $5.500
+      </span>
+      <span style="padding:2px;color:white;background:orange;margin-left:5px;font-size:13px">
+        -22%
+      </span>
+    </div>
+    <div style="margin-top:5px;color:#999;font-size:13px">
+      <span>
+        Precio en tienda:
+      </span>
+      <span>
+        $9.990
+      </span>
+    </div>
+
+    <div style="margin-top:5px;font-size:16px;color:#444;font-weight:600">
+      Cuidado del gato (nueva toalla de baño exclusiva para huéspedes), WiFi gratis, estacionamiento gratis!
+    </div>
+    <div style="margin-top:5px;display:flex;justify-content:space-between">
+      <div style="font-size:13px;color:#999">
+        un texto
+      </div>
+      <div style="font-size:13px;color:#999">
+        14 vendidos
+      </div>
+    </div>
+  </div>
+
+  <div style="height:10px;width:100%;background:rgb(248, 248, 248)">
+  </div>
+
+  <div padding>
+    <div style="margin-bottom:10px;font-size:15px;color:#444;">
+      Qué incluye
+    </div>
+    <div style="color:#888;font-size:14px;display:flex;align-items:center;font-weight:350">
+      <div style="margin-right:10px;height:5px;width:5px;background:#999;border-radius:50%">
+      </div>
+      Corte de uñas
+    </div>
+    <div style="color:#888;font-size:14px;display:flex;align-items:center;font-weight:350">
+      <div style="margin-right:10px;height:5px;width:5px;background:#999;border-radius:50%">
+      </div>
+      Limpieza del canal auditivo
+    </div>
+    <div style="color:#888;font-size:14px;display:flex;align-items:center;font-weight:350">
+      <div style="margin-right:10px;height:5px;width:5px;background:#999;border-radius:50%">
+      </div>
+      Suelas de afeitado
+    </div>
+    <div style="color:#888;font-size:14px;display:flex;align-items:center;font-weight:350">
+      <div style="margin-right:10px;height:5px;width:5px;background:#999;border-radius:50%">
+      </div>
+      Baño
+    </div>
+    <div style="color:#888;font-size:14px;display:flex;align-items:center;font-weight:350">
+      <div style="margin-right:10px;height:5px;width:5px;background:#999;border-radius:50%">
+      </div>
+      Masajes SPA
+    </div>
+    <div style="color:#888;font-size:14px;display:flex;align-items:center;font-weight:350">
+      <div style="margin-right:10px;height:5px;width:5px;background:#999;border-radius:50%">
+      </div>
+      Cuidado del cabello
+    </div>
+    <div style="color:#888;font-size:14px;display:flex;align-items:center;font-weight:350">
+      <div style="margin-right:10px;height:5px;width:5px;background:#999;border-radius:50%">
+      </div>
+      Secado y extracción (con artículos de tocador SPA importados de los Estados Unidos e Italia, cada gato ofrece una
+      nueva toalla de baño de alta gama)
+    </div>
+  </div>
+
+  <div style="height:10px;width:100%;background:rgb(248, 248, 248)">
+  </div>
+
+  <div padding>
+    <div style="margin-bottom:10px;font-size:15px;color:#444;">
+      Notas
+    </div>
+    <div style="margin-top:7px;color:#888;font-size:14px;display:flex;align-items:center;font-weight:350">
+      <!-- <div style="margin-right:10px;height:5px;width:5px;background:#999;border-radius:50%">
+        </div> -->
+      1. Este cupón se limita a la primera visita a la tienda para un nuevo gato.
+    </div>
+    <div style="margin-top:7px;color:#888;font-size:14px;display:flex;align-items:center;font-weight:350">
+      <!-- <div style="margin-right:10px;height:5px;width:5px;background:#999;border-radius:50%">
+        </div> -->
+      2. Gatos de pelo largo (como marionetas, Maine, Persia, etc.), gatos que pesan más de 10 kg y padecen enfermedades
+      de la piel, deben agregar $.2000 por artículo
+    </div>
+    <div style="margin-top:7px;color:#888;font-size:14px;display:flex;align-items:center;font-weight:350">
+      <!-- <div style="margin-right:10px;height:5px;width:5px;background:#999;border-radius:50%">
+        </div> -->
+      3. Para brindar un mejor servicio, haga una cita con 2 días de anticipación
+    </div>
+    <div style="margin-top:7px;color:#888;font-size:14px;display:flex;align-items:center;font-weight:350">
+      <!-- <div style="margin-right:10px;height:5px;width:5px;background:#999;border-radius:50%">
+        </div> -->
+      4. No se pueden utilizar gatos de más de 8 años, gatas preñadas y gatas agresivas.
+    </div>
+    <div style="margin-top:7px;color:#888;font-size:14px;display:flex;align-items:center;font-weight:350">
+      <!-- <div style="margin-right:10px;height:5px;width:5px;background:#999;border-radius:50%">
+        </div> -->
+      5. Una vez que la verificación del código de cupón del grupo sea exitosa, significa que la compra se realizó con
+      éxito. No puede solicitar "devolución en ningún momento" y "reembolso vencido"
+    </div>
+  </div>
+
+  <div style="height:10px;width:100%;background:rgb(248, 248, 248)">
+  </div>
+
+  <button ion-item (click)="showDesc = true" no-lines>
+    <ion-icon item-start name="document" style="color:darkorange;font-size:22px"></ion-icon>
+    <div style="font-size:15px">
+      Descripción
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px"></ion-icon>
+  </button>
+
+  <button ion-item (click)="openIntro()" no-lines>
+    <ion-icon item-start name="body" style="color:gold;font-size:22px"></ion-icon>
+    <div style="font-size:15px">
+      Introducción del vendedor
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px"></ion-icon>
+  </button>
+
+  <div style="height:10px;width:100%;background:rgb(248, 248, 248)">
+  </div>
+
+  <div style="width:100%;display:flex;justify-content:center;margin-bottom:50px;margin-top:20px">
+    <div
+      style="font-weight:500;font-size:13px;color:white;background:#ff6633;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
+      COMPRAR AHORA
+      <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
+    </div>
+  </div>
+
+
+</ion-content>

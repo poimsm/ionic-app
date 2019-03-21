@@ -14,6 +14,12 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+
+
+// ------------------------------------------
+//   ACTION SHEETS IGUAL A ISO
+// ------------------------------------------
+
 .action-sheet-md {
   text-align: center;
 }
@@ -46,7 +52,7 @@
   text-align: center;
   border-radius: 0;
   border-bottom: 0.55px solid #d6d6da;
-  font-size: 1.3rem;
+  font-size: 16px;
   font-weight: 400;
   color: #8f8f8f;
 }
@@ -86,6 +92,10 @@
   background: #fff;
 }
 
+// ------------------------------------------
+//   SLIDES - PAGINADOR - CAMBIO BULLET COLOR
+// ------------------------------------------
+
 .swiper-pagination-bullet {
   background: gray;
   opacity: 0.5;
@@ -98,4 +108,97 @@
 
 .alert-radio-label {
   white-space: normal!important;
+}
+
+
+// ------------------------------------------
+//   ICONOS
+// ------------------------------------------
+
+ion-icon {
+  &[class*="custom-"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    background: currentColor;
+    width: 1em;
+    height: 1em;
+  }
+
+  &[class*="dog"] {
+    mask-image: url(../assets/dog.svg);
+  }
+  &[class*="dog-head"] {
+    mask-image: url(../assets/dog-head.svg);
+  }
+  &[class*="cake"] {
+    mask-image: url(../assets/cake.svg);
+  }
+  &[class*="car"] {
+    mask-image: url(../assets/car.svg);
+  }
+  &[class*="food"] {
+    mask-image: url(../assets/food.svg);
+  }
+  &[class*="eyelashes"] {
+    mask-image: url(../assets/eyelashes.svg);
+  }
+  &[class*="groceries"] {
+    mask-image: url(../assets/groceries.svg);
+  }
+  &[class*="cart"] {
+    mask-image: url(../assets/cart.svg);
+  }
+  &[class*="car-wash"] {
+    mask-image: url(../assets/car-wash.svg);
+  }
+  &[class*="pills"] {
+    mask-image: url(../assets/pills.svg);
+  }
+  &[class*="dog-walk"] {
+    mask-image: url(../assets/dog-walk.svg);
+  }
+  &[class*="veterinario"] {
+    mask-image: url(../assets/veterinario.svg);
+  }
+  &[class*="love"] {
+    mask-image: url(../assets/love.svg);
+  }
+  &[class*="pet-shampoo"] {
+    mask-image: url(../assets/pet-shampoo.svg);
+  }
+  &[class*="dog-food"] {
+    mask-image: url(../assets/dog-food.svg);
+  }
+  &[class*="wax"] {
+    mask-image: url(../assets/wax.svg);
+  }
+  &[class*="hair"] {
+    mask-image: url(../assets/hair.svg);
+  }
+  &[class*="maditation"] {
+    mask-image: url(../assets/meditation.svg);
+  }
+  &[class*="nail"] {
+    mask-image: url(../assets/nail.svg);
+  }
+  &[class*="key"] {
+    mask-image: url(../assets/key.svg);
+  }
+  &[class*="car-key"] {
+    mask-image: url(../assets/car-key.svg);
+  }
+  &[class*="battery"] {
+    mask-image: url(../assets/battery.svg);
+  }
+  &[class*="tools"] {
+    mask-image: url(../assets/tools.svg);
+  }
+  &[class*="belt"] {
+    mask-image: url(../assets/belt.svg);
+  }
+  &[class*="rental"] {
+    mask-image: url(../assets/rental.svg);
+  }
+
 }

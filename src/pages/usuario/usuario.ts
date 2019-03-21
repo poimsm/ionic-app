@@ -6,6 +6,8 @@ import { MisPedidosPage } from '../mis-pedidos/mis-pedidos';
 import { AuthProvider } from '../../providers/auth/auth';
 import { TiendaEcommercePage } from '../tienda-ecommerce/tienda-ecommerce';
 import { LocalizacionProvider } from '../../providers/localizacion/localizacion';
+import { InscripcionPage } from '../inscripcion/inscripcion';
+import { TiendaMueblesPage } from '../tienda-muebles/tienda-muebles';
 
 @IonicPage()
 @Component({
@@ -17,6 +19,7 @@ export class UsuarioPage {
   user: any;
   token: string;
   ciudad: string;
+  isAdmin = false;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -25,7 +28,7 @@ export class UsuarioPage {
     private _localizacion: LocalizacionProvider
   ) {
     this.user = this.navParams.get('user');
-    
+
     if (this.user.isTienda) {
       this.tiendaID = this.user.tienda.id;
     }
@@ -60,6 +63,7 @@ export class UsuarioPage {
     }
     if (this.user.tienda.tipo == 'ecommerce') {
       this.navCtrl.push(TiendaEcommercePage, { id: this.tiendaID });
+      // this.navCtrl.push(TiendaMueblesPage, { id: this.tiendaID });
     }
   }
 
@@ -72,7 +76,7 @@ export class UsuarioPage {
     let titulo = '';
     let inputType = '';
     if (tipo == 'direccion') {
-      titulo = '¿Cuál es tu direccion actual?';
+      titulo = '¿Cuál es tu dirección?';
       inputType = 'text';
     }
 
@@ -122,6 +126,13 @@ export class UsuarioPage {
       ]
     });
     alert.present();
+  }
+
+  openInscripcion() {
+    this.navCtrl.push(InscripcionPage, {
+      id: this.user._id,
+      isSolicitud: this.user.isSolicitud
+    });
   }
 
   logout() {

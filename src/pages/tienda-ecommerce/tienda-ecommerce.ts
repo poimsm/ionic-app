@@ -31,12 +31,19 @@ import { AuthProvider } from "../../providers/auth/auth";
 })
 export class TiendaEcommercePage {
   @ViewChild("ciudadRef") ciudadRef: Select;
+  @ViewChild("tagRef") tagRef: Select;
 
   producto = TiendaProductoPage;
   tiendaID: string;
   tienda: any;
   imagenPerfil: string;
   ciudades = [];
+  tag: string;
+  tags = [
+    'Servicio a domicilio',
+    'Reparacion mecanica',
+    'Taller mecanico'
+  ]
 
   constructor(
     public toastCtrl: ToastController,
@@ -70,7 +77,7 @@ export class TiendaEcommercePage {
 
   openModal(tipo) {
     const modal = this.modalCtrl.create(GaleriaImagenPage, { tipo });
-    modal.onDidDismiss(data => {});
+    modal.onDidDismiss(data => { });
     modal.present();
   }
 
@@ -146,8 +153,11 @@ export class TiendaEcommercePage {
   }
 
   openSelect(tipo) {
-    if (tipo == "ciudad") {
+    if (tipo == 'ciudad') {
       this.ciudadRef.open();
+    }
+    if (tipo == 'tag') {
+      this.tagRef.open();
     }
   }
 
@@ -220,6 +230,12 @@ export class TiendaEcommercePage {
       inputType = "text";
     }
 
+    if (tipo == "titulo") {
+      titulo = "Ingrese un título";
+      subtitulo = "Sus publicaciones serán mostradas con una frase breve y descriptiva que represente la actividad de su negocio";
+      inputType = "text";
+    }
+
     if (tipo == "telefono") {
       titulo = "¿Teléfono de contacto?";
       inputType = "tel";
@@ -249,15 +265,19 @@ export class TiendaEcommercePage {
         {
           text: "Cancel",
           role: "cancel",
-          handler: data => {}
+          handler: data => { }
         },
         {
           text: "Ok",
           handler: data => {
             let body = {};
-            
+
             if (tipo == "nombre") {
               body = { nombre: data.nombre };
+            }
+
+            if (tipo == "titulo") {
+              body = { nombre: data.titulo };
             }
 
             if (tipo == "telefono") {
@@ -285,6 +305,39 @@ export class TiendaEcommercePage {
 
     let alert = this.alertCtrl.create(alertData);
     alert.present();
+  }
+
+  tagExisteToast() {
+    let toast = this.toastCtrl.create({
+      message: `Esta etiqueta ya está agregada`,
+      duration: 2500,
+      position: "middle"
+    });
+    toast.present();
+  }
+
+  onChange($event) {
+    
+    let tags = [];
+    let flag = false;
+
+    if (this.tienda.tags) {
+      tags = this.tienda.tags
+    }
+
+    tags.forEach(tag => {
+      if (tag == $event) {
+        flag = true;
+      }
+    });
+
+    if (flag) {
+      this.tagExisteToast();
+    } else {
+      tags.push($event);
+      this.actualizarTienda({ tags });
+    }
+   
   }
 
   actualizarTienda(body) {

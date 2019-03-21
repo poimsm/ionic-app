@@ -1,0 +1,176 @@
+<ion-header no-border>
+    <ion-navbar align-title="center" color="white">
+      <ion-buttons left>
+        <button ion-button icon-only menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  
+  
+  <ion-content style="background:rgb(250, 250, 250)">
+  
+    <ion-list text-wrap style="margin-top:10px">
+      <button ion-item>
+        <div item-start style="position:relative">
+          <div *ngIf="tienda?.imgPerfil" style="min-height:90px;width:90px;border-radius:5px;background-size:cover;background-repeat: no-repeat;background-position: center;"
+            [ngStyle]="{'background-image': 'url(' + tienda?.imgPerfil.url + ')' }">
+          </div>
+        </div>
+        <div style="color:#444;font-weight:600;font-size:20px">
+          {{tienda?.nombre}}
+        </div>
+      </button>
+    </ion-list>
+  
+    <div (click)="nuevoProducto()" padding style="margin-top:10px;background:white">
+      <button ion-button block color="orange3" mode="ios">
+        <ion-icon name="add" style="margin-right:10px;font-size:30px"></ion-icon>
+        <div style="font-weight:600;font-size:16px">
+          Nuevo producto
+        </div>
+      </button>
+    </div>
+  
+    <div style="margin-left:15px;margin-bottom:10px;margin-top:25px;font-size:11px;font-weight:600;color:#666">
+      MÉTRICAS
+    </div>
+    <button (click)="openMisProductos()" ion-item style="margin-top:10px">
+      <div style="font-size:16px;color:#555">
+        Mis productos
+      </div>
+      <!-- <div item-end style="font-size:14px;color:#777">
+        {{tienda?.productos}}
+      </div> -->
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+    </button>
+    <button ion-item no-lines style="margin:0px">
+      <div style="font-size:16px;color:#555">
+        Mis ventas
+      </div>
+      <div item-end style="font-size:14px;color:#777">
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+    </button>
+  
+    <div style="margin-left:15px;margin-bottom:10px;margin-top:25px;font-size:11px;font-weight:600;color:#666">
+      PERFIL
+    </div>
+    <button (click)="presentPrompt('nombre')" ion-item no-lines style="margin-top:10px">
+      <div style="font-size:16px;color:#555">
+        Nombre
+      </div>
+      <div *ngIf="tienda?.nombre" item-end style="font-size:14px;color:#777">
+        {{tienda?.nombre}}
+      </div>
+      <ion-icon *ngIf="!tienda?.nombre" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+    </button>
+    <button (click)="presentActionSheet()" ion-item no-lines  style="margin:0px">
+      <div style="font-size:16px;color:#555">
+        Imágen de perfil
+      </div>
+      <ion-icon *ngIf="!tienda?.imgPerfil" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
+      <div *ngIf="tienda?.imgPerfil" item-end style="font-size:14px;color:#777">
+        1
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+    </button>
+    <button (click)="presentPrompt('titulo')" ion-item no-lines  style="margin:0px">
+        <div style="font-size:16px;color:#555">
+          Título de perfil
+        </div>
+        <ion-icon *ngIf="!tienda?.imgPerfil" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
+        <div *ngIf="tienda?.imgPerfil" item-end style="font-size:14px;color:#777">
+          1
+        </div>
+        <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+      </button>
+    <ion-item style="display: none">
+      <ion-label>Ciudad</ion-label>
+      <ion-select [(ngModel)]="ciudad" #ciudadRef>
+        <ion-option *ngFor="let ciudad of ciudades" [value]="ciudad"> {{ciudad}} </ion-option>
+      </ion-select>
+    </ion-item>
+    <button ion-item style="margin-top:0px" no-lines >
+      <div style="font-size:16px;color:#555">
+        Ciudad
+      </div>
+      <ion-icon *ngIf="!tienda?.ciudad" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
+      <div *ngIf="tienda?.ciudad" item-end style="font-size:14px;color:#777">
+        {{tienda?.ciudad}}
+      </div>
+    </button>
+    <button (click)="presentPrompt('direccion')" ion-item  no-lines  style="margin-top:0px">
+      <div style="font-size:16px;color:#555">
+        Dirección
+      </div>
+      <ion-icon *ngIf="!tienda?.direccion" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
+      <div *ngIf="tienda?.direccion" item-end style="font-size:14px;color:#777">
+        {{tienda?.direccion}}
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+    </button>
+    <button (click)="presentPrompt('telefono')" ion-item no-lines style="margin:0px" no-lines>
+      <div style="font-size:16px;color:#555">
+        Teléfono
+      </div>
+      <ion-icon *ngIf="!tienda?.telefono" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
+      <div *ngIf="tienda?.telefono" item-end style="font-size:14px;color:#777">
+        {{tienda?.telefono}}
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+    </button>
+  
+  
+  
+  
+    <div style="margin-left:15px;margin-bottom:10px;margin-top:25px;font-size:11px;font-weight:600;color:#666">
+      TAGS
+    </div>
+    <ion-item style="display: none">
+      <ion-label>Seleccione</ion-label>
+      <ion-select (ionChange)="onChange($event)" #tagRef>
+        <ion-option *ngFor="let tag of tags" [value]="tag"> {{tag}} </ion-option>
+      </ion-select>
+    </ion-item>
+    <button (click)="openSelect('tag')" ion-item no-lines style="margin-top:10px">
+      <div style="font-size:16px;color:#555">
+        Agregar nueva etiqueta
+      </div>
+      <div *ngIf="tienda?.tags" item-end style="font-size:14px;color:#777">
+        {{tienda?.nombre}}
+      </div>
+      <ion-icon *ngIf="!tienda?.tags" item-end name="ios-warning" style="color:rgb(247, 187, 35);font-size:25px"></ion-icon>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+    </button>
+    <div style="padding-bottom:15px;background:white;display:flex;flex-wrap:wrap;width:100%">
+      <div *ngFor="let tag of tienda?.tags">
+        <div style="border-radius:10px;padding:5px;border:1px solid salmon;margin:5px;color:salmon;font-size:14px;">
+            {{tag}}
+        </div>     
+      </div>
+    </div>
+  
+  
+  
+  
+    <div style="display:flex;align-items:center;margin-left:15px;margin-bottom:10px;margin-top:25px;font-size:11px;font-weight:600;color:#666">
+      <div style="margin-right:5px;background:darkorange;width:20px;height:20px;border-radius:50%;display:flex;justify-content:center;align-items:center">
+        <ion-icon name="star" style="font-size:16px;color:white"></ion-icon>
+      </div>
+      <div style="font-weight:600;color:#555;font-size:14px">
+        Administradores
+      </div>
+    </div>
+    <button (click)="presentPrompt('admin')" *ngFor="let admin of tienda?.admins" ion-item style="margin:0px" no-lines>
+      <div style="font-size:16px;color:#555">
+        {{admin}}
+      </div>
+      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+    </button>
+  
+    <div style="height:30px"></div>
+  
+  </ion-content>

@@ -20,7 +20,11 @@ import { DataProvider } from '../../providers/data/data';
 import { OnceContentPage } from "../once-content/once-content";
 import { EcommerceContentPage } from '../ecommerce-content/ecommerce-content';
 import { ComidaContentPage } from '../comida-content/comida-content';
-import { CarroPagarPage } from '../carro-pagar/carro-pagar';
+import { LavadoPage } from "../lavado/lavado";
+import { MascotasPage } from "../mascotas/mascotas";
+import { SuperPage } from "../super/super";
+import { AlquilerPage } from "../alquiler/alquiler";
+import { MueblesPage } from "../muebles/muebles";
 
 
 @Component({
@@ -39,6 +43,11 @@ export class HomePage {
   estilo = EstiloPage;
   comida = ComidaPage;
   ecommerce = EcommercePage;
+  lavado = LavadoPage;
+  mascotas = MascotasPage;
+  super = SuperPage;
+  alquiler = AlquilerPage;
+  muebles = MueblesPage;
 
   cosas = [];
   algoDulce = [];
@@ -92,10 +101,9 @@ export class HomePage {
     this.ciudad = this._localizacion.ciudad;
 
     this.setLocalizacion();
-    this.getTortas();
-    this.getKuchenes();
-    this.getCupcakes();
-
+    this.getAlgoDulce();
+    this.getComida();
+    this.getEcommerce();
   }
 
   getTortas() {
@@ -176,6 +184,10 @@ export class HomePage {
     }
   }
 
+  openModelo(pagina) {
+    this.navCtrl.push(pagina);
+  }
+
   openEcommerce() {
     this.navCtrl.push(EcommercePage, {
       isCategoria: false,
@@ -200,12 +212,12 @@ export class HomePage {
   }
 
   reloadInicio() {
-    this.tortas = [];
-    this.kuchenes = [];
-    this.cupcakes = [];
-    this.getTortas();
-    this.getKuchenes();
-    this.getCupcakes();
+    this.productos = [];
+    this.comidas = [];
+    this.algoDulce = [];
+    this.getAlgoDulce();
+    this.getComida();
+    this.getEcommerce();
   }
 
   openContent(item, tipo) {

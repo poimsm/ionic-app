@@ -142,6 +142,11 @@ export class DataProvider {
     this.http.put(url, body).toPromise();
   }
 
+  crearSolicitud(id, body) {
+    const url = `${this.apiURL}/solicitud/crear/${id}`;
+    return this.http.post(url, body).toPromise();
+  }
+
   uploadImages(images) {
     const promesas = [];
     const url = `${this.apiURL}/images/upload-cloudinary`;

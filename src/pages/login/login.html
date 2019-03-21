@@ -1,4 +1,4 @@
-<ion-header *ngIf="loginFirst" no-border>
+<ion-header *ngIf="isInicio" no-border>
   <ion-navbar color="orange3" align-title="center">
     <ion-buttons left>
       <button ion-button icon-only (click)="close()">
@@ -8,7 +8,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content *ngIf="loginFirst" style="background: #ff6633">
+<ion-content *ngIf="isInicio" style="background: #ff6633">
   <div>
     <div style="padding-top:50px;height:250px;width:100%;color:white">
       <div style="width:100%;text-align:center;font-size:40px;font-weight:500">
@@ -28,14 +28,21 @@
         Iniciar sesión
       </button>
     </div>
+
+    <!-- <div (click)="negocio()" style="width:100%;margin-top:10px;display:flex;justify-content:center">
+      <div style="text-decoration: underline;color:white;font-size:16px;margin-top:10px">
+        Inscribir mi negocio
+      </div>
+    </div> -->
+    
   </div>
 </ion-content>
 
 
-<ion-header *ngIf="loginSecond" no-border>
+<ion-header *ngIf="isRegistrar" no-border>
   <ion-navbar color="orange2" align-title="center">
     <ion-buttons left>
-      <button ion-button (click)="loginFirst=true;loginSecond=false">
+      <button ion-button (click)="inicio()">
         <ion-icon name="md-arrow-round-back" style="font-size:25px"></ion-icon>
         <div style="margin-left:10px">
           Atras
@@ -47,10 +54,10 @@
 </ion-header>
 
 
-<ion-content *ngIf="loginSecond">
+<ion-content *ngIf="isRegistrar">
 
   <div style="margin-top:50px;padding:20px;background:orange;width:100%;display:flex;justify-content:center">
-    <div style="text-align:center;color:white;width:200px;font-size:26px;font-weight:600">
+    <div style="text-align:center;color:white;font-size:26px;font-weight:600">
       App de compras
       <div style="margin-left:40px;display:flex;align-items:center">
         joopiter
@@ -97,10 +104,10 @@
 </ion-content>
 
 
-<ion-header *ngIf="loginThird" no-border>
-  <ion-navbar color="white" align-title="center">
+<ion-header *ngIf="isSesion" no-border>
+  <ion-navbar color="orange2" align-title="center">
     <ion-buttons left>
-      <button ion-button (click)="loginFirst=true;loginThird=false">
+      <button ion-button (click)="inicio()">
         <ion-icon name="md-arrow-round-back" style="font-size:25px"></ion-icon>
         <div style="margin-left:10px">
           Atras
@@ -112,9 +119,19 @@
 </ion-header>
 
 
-<ion-content *ngIf="loginThird">
+<ion-content *ngIf="isSesion">
 
-  <div style="margin-left:20px;margin-top:100px;width:100%;text-align:left;font-size:15px;color:#777">
+  <div style="margin-top:50px;padding:20px;background:orange;width:100%;display:flex;justify-content:center">
+    <div style="text-align:center;color:white;font-size:26px;font-weight:600">
+      App de compras
+      <div style="margin-left:40px;display:flex;align-items:center">
+        joopiter
+        <img [src]="'https://res.cloudinary.com/ddon9fx1n/image/upload/v1551211039/icon512.png'" style="width:40px;height:40px">
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-left:20px;margin-top:20px;width:100%;text-align:left;font-size:15px;color:#777">
     <!-- Email -->
   </div>
   <ion-item style="font-size:18px">
@@ -142,6 +159,72 @@
     <div style="font-size:16px;color:white;background:#ffa98c;display:flex;align-items:center;padding:5px;padding-left:80px;padding-right:10px;border-radius:25px">
       Iniciar sesión
       <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:60px"></ion-icon>
+    </div>
+  </div>
+</ion-content>
+
+
+
+<ion-header *ngIf="isNegocio" no-border>
+  <ion-navbar color="orange2" align-title="center">
+    <ion-buttons left>
+      <button ion-button (click)="inicio()">
+        <ion-icon name="md-arrow-round-back" style="font-size:25px"></ion-icon>
+        <div style="margin-left:10px">
+          Atras
+        </div>
+      </button>
+    </ion-buttons>
+    <ion-title> Inscripcion </ion-title>
+  </ion-navbar>
+</ion-header>
+  
+  
+<ion-content *ngIf="isNegocio">
+  
+  <div style="margin-top:50px;padding:20px;background:orange;width:100%;display:flex;justify-content:center">
+    <div style="text-align:center;color:white;font-size:26px;font-weight:600">
+      App de compras
+      <div style="margin-left:40px;display:flex;align-items:center">
+        joopiter
+        <img [src]="'https://res.cloudinary.com/ddon9fx1n/image/upload/v1551211039/icon512.png'" style="width:40px;height:40px">
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:20px;padding:10px;width:100%;display:flex;justify-content:space-between">
+    <div style="width:48%;border-radius:2px;border:1px solid #eee;background:rgb(250, 250, 250);display:flex">
+      <ion-input [(ngModel)]="nombre" type="text" placeholder="Nombre" style="font-size:15px;border:0x solid white"></ion-input>
+    </div>
+    <div style="width:48%;border-radius:2px;border:1px solid #eee;background:rgb(250, 250, 250);display:flex">
+      <ion-input [(ngModel)]="apellido" type="text" placeholder="Apellido" style="font-size:15px;border:0x solid white"></ion-input>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;padding:10px;width:100%;display:flex;justify-content:flex-start">
+    <div style="width:100%;border-radius:2px;border:1px solid #eee;background:rgb(250, 250, 250);display:flex">
+      <ion-input [(ngModel)]="email" type="text" placeholder="Dirección de email" style="font-size:15px;border:0x solid white"></ion-input>
+    </div>
+  </div>
+
+  <div style="margin-top:0px;padding:10px;width:100%;display:flex;justify-content:flex-start">
+    <div style="width:100%;border-radius:2px;border:1px solid #eee;background:rgb(250, 250, 250);display:flex;justify-content:space-between;align-items:center">
+      <ion-input [(ngModel)]="password" [type]="passwordType" placeholder="Contraseña" style="font-size:15px;border:0x solid white"></ion-input>
+      <div (click)="showHide()" style="padding:10px;color:#777;font-weight:500">
+        Mostrar
+      </div>
+    </div>
+  </div> 
+
+  <div *ngIf="!obteniendoRespuesta" style="width:100%;display:flex;justify-content:center;margin-bottom:50px;margin-top:20px">
+    <div (click)="signUp()" style="font-size:16px;color:#fff;background:#ff6633;display:flex;align-items:center;padding:5px;padding-left:80px;padding-right:10px;border-radius:25px">
+      Crear una cuenta
+      <ion-icon name="ios-arrow-dropright-circle" style="color:#fff;font-size:34px;margin-left:60px"></ion-icon>
+    </div>
+  </div>
+  <div *ngIf="obteniendoRespuesta" style="width:100%;display:flex;justify-content:center;margin-bottom:50px;margin-top:20px">
+    <div style="font-size:16px;color:#fff;background:#ffa98c;display:flex;align-items:center;padding:5px;padding-left:80px;padding-right:10px;border-radius:25px">
+      Crear una cuenta
+      <ion-icon name="ios-arrow-dropright-circle" style="color:#fff;font-size:34px;margin-left:60px"></ion-icon>
     </div>
   </div>
 </ion-content>

@@ -101,7 +101,7 @@
       <ion-option *ngFor="let ciudad of ciudades" [value]="ciudad"> {{ciudad}} </ion-option>
     </ion-select>
   </ion-item>
-  <button ion-item style="margin-top:0px">
+  <button ion-item style="margin-top:0px" no-lines>
     <div style="font-size:16px;color:#555">
       Ciudad
     </div>
@@ -111,7 +111,7 @@
     </div>
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </button>
-  <button (click)="presentPrompt('direccion')" ion-item style="margin-top:0px">
+  <!-- <button (click)="presentPrompt('direccion')" ion-item style="margin-top:0px">
     <div style="font-size:16px;color:#555">
       Dirección
     </div>
@@ -120,7 +120,7 @@
       {{tienda?.direccion}}
     </div>
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
-  </button>
+  </button> -->
   <button (click)="presentPrompt('telefono')" ion-item style="margin:0px" no-lines>
     <div style="font-size:16px;color:#555">
       Teléfono
@@ -144,7 +144,7 @@
   </div>
   <button ion-item style="margin:0px" no-lines>
     <div style="font-size:16px;color:#555">
-      {{tienda?.admins[0].email}}
+      {{tienda?.admins[0]}}
     </div>
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </button>
