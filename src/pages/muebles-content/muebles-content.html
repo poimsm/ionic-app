@@ -19,7 +19,6 @@
       <ion-item>
         <img item-start src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552587340/log-01.jpg"
           style="width:90px;height:80px;object-fit:cover;border-radius:10px;border:1px solid #eee">
-        <!-- <div item-start style="width:90px;height:90px;border-radius:10px;background:red"></div> -->
         <div style="font-size:16px;color:#444;font-weight:500">
           Muebles modulares Rubik
           <div style="display:flex;align-items:center">
@@ -71,7 +70,7 @@
   </div>
 
   <ion-list no-lines>
-    <button ion-item>
+    <button ion-item (click)="openPromo('paquete')">
       <div item-start style="position:relative">
         <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552586651/restaurar_muebles_madera.jpg"
           style="width:80px;height:80px;object-fit:cover">
@@ -91,7 +90,7 @@
       </div>
     </button>
 
-    <button ion-item>
+    <button ion-item (click)="openPromo('oferta')">
       <div item-start style="position:relative">
         <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552586934/48537102455.jpg"
           style="width:80px;height:80px;object-fit:cover">
@@ -100,7 +99,7 @@
         Mueble para TV Kenzo Estilo Contemporaneo
       </div>
       <div style="color:darkorange;font-size:18px">
-        $5000
+        $15.000
         <span style="color:#999;font-size:13px">
           12 vendidos
         </span>
@@ -109,27 +108,7 @@
         style="margin:5px;padding:10px;padding-top:5px;padding-bottom:5px;border-radius:13px;color:white;font-size:14px;background: darkorange;display:inline-block">
         Comprar ahora
       </div>
-      <!-- <ion-icon name="ios-arrow-forward" item-end style="color:#bbb;font-size:18px"></ion-icon> -->
     </button>
-
-    <!-- <button ion-item>
-          <div item-start style="position:relative">
-            <div style="width:80px;height:80px;border-radius:0px;background:red"></div>
-          </div>
-          <div style="font-size:16px;color:#777">
-            Lavados eco-amigables 2x1     
-          </div>
-          <div style="color:darkorange;font-size:18px">
-            $5000
-            <span style="color:#999;font-size:13px">
-              12 vendidos
-            </span>     
-          </div>     
-          <div style="margin:5px;padding:10px;padding-top:5px;padding-bottom:5px;border-radius:13px;color:white;font-size:14px;background: darkorange;display:inline-block">
-            Comprar ahora      
-          </div>
-          <ion-icon name="ios-arrow-forward" item-end style="color:#bbb;font-size:18px"></ion-icon>
-        </button> -->
 
     <button ion-item>
       <div style="color:#999;font-size:16px">
@@ -143,8 +122,46 @@
   <div style="height:10px;width:100%;background:rgb(250, 250, 250)">
   </div>
 
+
   <div style="margin-top:10px;margin-left:15px;color:#555;font-size:17px;font-weight:500">
-    Productos
+      Modelos personalizables
+    </div>
+  
+    <ion-list no-lines>  
+      <button ion-item (click)="openCustom()">
+        <div item-start style="position:relative">
+          <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552588624/Velador-augusta-moderno1.jpg"
+            style="width:80px;height:80px;object-fit:cover">
+          </div>
+        <div style="font-size:16px;color:#777">
+            Mesa De Noche Habitacion Cajones Según Pedido
+        </div>
+        <div style="color:darkorange;font-size:18px">
+          $15.000
+          <span style="color:#999;font-size:13px">
+            12 vendidos
+          </span>
+        </div>
+        <div
+          style="margin:5px;padding:10px;padding-top:5px;padding-bottom:5px;border-radius:13px;color:white;font-size:14px;background: darkorange;display:inline-block">
+          Comprar ahora
+        </div>
+      </button>
+  
+      <button ion-item>
+        <div style="color:#999;font-size:16px">
+          Ver más promociones
+        </div>
+        <ion-icon name="ios-arrow-forward" item-end style="color:#bbb;font-size:18px"></ion-icon>
+      </button>
+    </ion-list>
+  
+  
+    <div style="height:10px;width:100%;background:rgb(250, 250, 250)">
+    </div>
+
+  <div style="margin-top:10px;margin-left:15px;color:#555;font-size:17px;font-weight:500">
+    Productos sólo en tienda
   </div>
 
   <ion-grid>
@@ -154,7 +171,7 @@
         <div style="border:1px solid #eee;border-radius:0px">
           <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552587649/c124e135c76d7c26b0.jpg"
             style="object-fit:cover;height:150px;width:100%">
-          <div style="padding:5px;width:100%;font-size:16px;color:#444;font-weight:600">
+          <div style="padding:5px;width:100%;font-size:14px;color:#444;font-weight:600">
             Mesa De Noche Habitacion 2 Cajones
           </div>
           <div style="border-top:0.5px dashed #eee;padding:5px;">
@@ -173,7 +190,7 @@
         <div style="border:1px solid #eee;border-radius:0px">
           <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552588171/mesa-de-centro-eleva.jpg"
             style="object-fit:cover;height:150px;width:100%">
-          <div style="padding:5px;width:100%;font-size:16px;color:#444;font-weight:600">
+          <div style="padding:5px;width:100%;font-size:14px;color:#444;font-weight:600">
             Mesa De Centro Elevable
           </div>
           <div style="border-top:0.5px dashed #eee;padding:5px;">
@@ -193,7 +210,7 @@
         <div style="border:1px solid #eee;border-radius:0px">
           <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552588449/mesa_madera_.jpg"
             style="object-fit:cover;height:150px;width:100%">
-          <div style="padding:5px;width:100%;font-size:16px;color:#444;font-weight:600">
+          <div style="padding:5px;width:100%;font-size:14px;color:#444;font-weight:600">
             Combo Comedor Mesa 1.20 + 4 Sillas
           </div>
           <div style="border-top:0.5px dashed #eee;padding:5px;">
@@ -212,7 +229,7 @@
         <div (click)="openOnce(once)" style="border:1px solid #eee;border-radius:0px">
           <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552588624/Velador-augusta-moderno1.jpg"
             style="object-fit:cover;height:150px;width:100%">
-          <div style="padding:5px;width:100%;font-size:16px;color:#444;font-weight:600">
+          <div style="padding:5px;width:100%;font-size:14px;color:#444;font-weight:600">
             Velador Augusta Moderno
           </div>
           <div style="border-top:0.5px dashed #eee;padding:5px;">

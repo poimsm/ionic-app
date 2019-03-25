@@ -1,0 +1,181 @@
+<ion-header no-border>
+
+  <ion-navbar color="white">
+    <!-- <ion-title>muebles-custom</ion-title> -->
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552588624/Velador-augusta-moderno1.jpg"
+    style="width:100%">
+
+  <div padding>
+    <!-- <div style="font-size:16px;color:#444;font-weight:600">
+      Promocion dos por uno en gatos y servicio de limpieza libre
+    </div> -->
+
+    <div style="margin-top:0px;color:#777;font-size:16px">
+      <span style="color:orangered;font-weight:600">
+        $35.000
+      </span>
+      <span style="padding:2px;color:white;background:orange;margin-left:5px;font-size:13px">
+        -22%
+      </span>
+    </div>
+    <div style="margin-top:5px;color:#999;font-size:13px">
+      <span>
+        Precio en tienda:
+      </span>
+      <span>
+        $41.990
+      </span>
+    </div>
+
+    <div style="margin-top:5px;font-size:16px;color:#444;font-weight:600">
+      Mesa De Noche Habitacion Cajones Según Pedido
+    </div>
+    <div style="margin-top:5px;display:flex;justify-content:space-between">
+      <div style="font-size:13px;color:#999">
+        un texto
+      </div>
+      <div style="font-size:13px;color:#999">
+        14 vendidos
+      </div>
+    </div>
+  </div>
+
+  <div style="height:10px;width:100%;background:rgb(248, 248, 248)">
+  </div>
+
+  <div padding>
+    <div style="font-size:15px;color:#666">
+      ¿Qué tipo de madera prefiere?
+    </div>
+  </div>
+
+  <ion-list text-wrap no-lines>
+    <button *ngFor="let wood of woods; let i = index" ion-item (click)="changeWood(i)">
+      <div>
+        {{wood.name}}
+      </div>
+      <div *ngIf="wood.isActive" style="width:100%;margin-top:5px;color:#777;font-size:13px">
+        {{wood.desc}}
+      </div>
+      <div item-end [ngStyle]="{'border': wood.isActive ? '2px solid #bbb' : '2px solid #fff' }" style="padding:2px;display: inherit;">
+        <div
+          style="border-radius:0px;min-height:25px;width:45px;background-size:cover;background-repeat: no-repeat;background-position: center;"
+          [ngStyle]="{'background-image': 'url(' + wood.img + ')' }">
+        </div>
+      </div>
+    </button>
+
+  
+
+  </ion-list>
+
+
+
+
+
+  <!-- <hr> -->
+  <div style="height:10px"></div>
+
+  <div padding>
+    <div style="font-size:15px;color:#666">
+      ¿Número de cajones?
+    </div>
+  </div>
+
+  <div style="margin-left:15px;display:flex;">
+    <div (click)="sum('-')" style="padding:4px;margin-right:5px;width:40px;text-align:center;color:#555;background:#eee">
+      -
+    </div>
+    <div
+      style="padding:4px;margin-right:5px;width:40px;text-align:center;color:#555;border-radius:5px;border:1px solid #eee">
+      {{numeroCajones}}
+    </div>
+    <div (click)="sum('+')" style="padding:4px;margin-right:5px;width:40px;text-align:center;color:#555;background:#eee">
+      +
+    </div>
+  </div>
+
+  <!-- <div style="margin-left:15px;">
+    <div style="display:inline-block;border:1px solid #bbb;padding:5px;font-size:14px;color:#444">
+      <span style="margin-right:25px">Seleccionar</span>
+      2
+      <ion-icon name="arrow-dropdown" style="color:#bbb;font-size:18px;margin-left:5px"></ion-icon>
+    </div>
+  </div> -->
+
+  <!-- <button ion-item no-linees>
+      <ion-label>
+        ¿Número de cajones?
+      </ion-label>
+      <ion-select [(ngModel)]="cajones" #cajonesRef>
+        <ion-option value="1">1</ion-option>
+        <ion-option value="2">2</ion-option>
+        <ion-option value="3">3</ion-option>
+        <ion-option value="4">4</ion-option>
+      </ion-select>
+    </button> -->
+
+  <!-- <hr> -->
+  <div style="height:10px"></div>
+
+  <div padding>
+    <div style="font-size:15px;color:#666">
+      ¿Qué color desea?
+    </div>
+  </div>
+
+  <div style="margin-left:15px;width:100%;display:flex;justify-content:flex-start">
+    <div *ngFor="let color of colores; let i = index" (click)="changeColor(i)" [ngStyle]="{'border': color.isActive ? '2px solid #bbb' : '2px solid #fff'}" style="padding:2px;border:2px solid #bbb;margin-right:20px">
+      <div [ngStyle]="{'background': color.name}" style="width:25px;height:25px"></div>
+    </div>
+  </div>
+
+  <!-- <hr> -->
+  <div style="height:10px"></div>
+  <div padding>
+    <div style="font-size:15px;color:#666">
+      ¿Qué tipo de tejido?
+    </div>
+  </div>
+
+  <div style="height:130px;background-repeat:no-repeat;"
+    [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553289260/tejido.png' + ')' }">
+  </div>
+
+
+  <div style="height:15px"></div>
+
+
+  <div style="height:10px;width:100%;background:rgb(248, 248, 248)">
+  </div>
+
+
+  <button ion-item (click)="openDimension()" no-lines>
+    <ion-icon item-start name="easel" style="color:darkorange;font-size:22px"></ion-icon>
+    <div style="font-size:15px">
+      Dimensiones
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px"></ion-icon>
+  </button>
+
+  <div style="height:10px;width:100%;background:rgb(248, 248, 248)">
+  </div>
+
+
+
+
+  <div style="width:100%;display:flex;justify-content:center;margin-bottom:50px;margin-top:20px">
+    <div
+      style="font-weight:500;font-size:13px;color:white;background:#ff6633;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
+      COMPRAR AHORA
+      <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
+    </div>
+  </div>
+
+</ion-content>

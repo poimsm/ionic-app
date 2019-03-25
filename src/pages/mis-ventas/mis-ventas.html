@@ -1,0 +1,26 @@
+<ion-header no-border>
+
+  <ion-navbar color="white">
+    <ion-title>Ventas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list text-wrap>
+    <ion-item *ngFor="let item of items">
+      <img item-start [src]="item" style="width:100px;height:100px;object-fit:cover">
+      <div>
+        <div style="font-size:17px;color:#555">
+          Mueble para TV Kenzo Estilo Contemporaneo
+        </div>
+        <div style="margin-top:5px;font-size:16px;font-weight:600;color:orange">
+          $5.500
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

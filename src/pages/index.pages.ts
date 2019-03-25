@@ -1,3 +1,9 @@
+export { MueblesDimensionPage } from './muebles-dimension/muebles-dimension';
+export { MueblesCustomPage } from './muebles-custom/muebles-custom';
+export { Muebles2Page } from './muebles2/muebles2';
+export { MisProductosContentPage } from './mis-productos-content/mis-productos-content';
+export { MisProductosPage } from './mis-productos/mis-productos';
+export { MisVentasPage } from './mis-ventas/mis-ventas';
 export { IntroduccionPage } from './introduccion/introduccion';
 export { OfertaPage } from './oferta/oferta';
 export { PaquetePage } from './paquete/paquete';
@@ -65,4 +71,3 @@ export { OncePage } from './once/once';
 export { UsuarioPage } from './usuario/usuario';
 export { LoginPage } from "./login/login";
 export { HomePage } from "./home/home";
-

@@ -2,6 +2,11 @@
 
   <ion-navbar color="white">
     <!-- <ion-title>lavado-content</ion-title> -->
+    <!-- <ion-buttons right>
+        <button ion-button icon-only>
+          <ion-icon name="bulb" style="color:darkorange"></ion-icon>
+        </button>
+      </ion-buttons> -->
   </ion-navbar>
 
 </ion-header>
@@ -9,14 +14,14 @@
 
 <ion-content>
 
-  <div padding>
+  <div padding style="margin-top:-25px">
 
     <ion-list text-wrap>
       <ion-item>
         <img item-start
           src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675605/9bbf1121d6595266dd37d89201d5fdbd.gif"
           style="height:80px;width:90px;border-radius:10px;object-fit:cover">
-        <div style="font-size:16px;color:#777">
+        <div style="font-size:16px;color:#777;">
           Clínica veterinara My Pets
           <div style="display:flex;align-items:center">
             <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
@@ -56,12 +61,90 @@
       Simon bolivar 802 - Valdivia
     </div>
 
+    <hr>
+
+    <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1553493541/redcompra-1024x332.png"
+      style="filter: grayscale(100%);margin-left:10px;width:80px">
+
+    <ion-scroll scrollX="true" style="margin-top:-15px;height:40px;width:100%">
+      <div style="display:flex;width:500px">
+        <div
+          style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
+          Estacionamiento
+        </div>
+        <div
+          style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
+          Wi-Fi
+        </div>
+        <div
+          style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
+          Prohibido fumar
+        </div>
+        <div
+          style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
+          Carga aquí tú batería
+        </div>
+        <div
+          style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
+          Sala de estar
+        </div>
+        <div
+          style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
+          TV
+        </div>
+      </div>
+    </ion-scroll>
+
   </div>
+
+
+  <!-- <div style="height:10px;width:100%;background:rgb(250, 250, 250)">
+  </div>
+
+  <div style="margin-top:10px;margin-left:15px;color:#555;font-size:14px;font-weight:500">
+      Servicios
+    </div>
+  <div padding>   
+
+    <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1553493541/redcompra-1024x332.png" style="margin-left:10px;width:80px">
+
+    <ion-scroll scrollX="true" style="margin-top:-15px;height:40px;width:100%">
+      <div style="display:flex;width:500px">
+        <div
+          style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
+          Estacionamiento
+        </div>
+        <div
+          style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
+          Wi-Fi
+        </div>
+        <div
+          style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
+          Prohibido fumar
+        </div>
+        <div
+          style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
+          Carga aquí tú batería
+        </div>
+        <div
+          style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
+          Sala de estar
+        </div>
+        <div
+          style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
+          TV
+        </div>
+      </div>
+    </ion-scroll>
+  </div> -->
 
 
   <div style="height:10px;width:100%;background:rgb(250, 250, 250)">
   </div>
 
+  <!-- <div style="margin-top:10px;margin-left:15px;color:#555;font-size:17px;font-weight:500">
+    Promociones
+  </div> -->
   <div style="margin-top:10px;margin-left:15px;color:#555;font-size:17px;font-weight:500">
     Promociones
   </div>
@@ -83,6 +166,10 @@
         style="margin:5px;padding:10px;padding-top:5px;padding-bottom:5px;border-radius:13px;color:white;font-size:14px;background: darkorange;display:inline-block">
         Comprar ahora
       </div>
+      <!-- <div
+        style="margin:5px;padding:10px;padding-top:5px;padding-bottom:5px;border-radius:0px;color:#444;font-size:14px;background: gold;display:inline-block">
+        Reservar ahora
+      </div> -->
     </button>
 
     <button ion-item (click)="openPromo('oferta')">
@@ -129,11 +216,76 @@
   </div> -->
 
 
+  <!-- <div style="height:10px;width:100%;background:rgb(250, 250, 250)">
+  </div>
+
+  <div style="margin-top:10px;margin-left:15px;color:#555;font-size:17px;font-weight:500">
+    Horario
+  </div>
+
+  <div padding style="color:#999">
+
+    <div>
+      Lunes: 10:00 - 18:00
+    </div>
+    <div>
+      Martes: 10:00 - 18:00
+    </div>
+    <div>
+      Miércoles: 10:00 - 18:00
+    </div>
+    <div>
+      Jueves: 10:00 - 18:00
+    </div>
+    <div>
+      Viernes: 10:00 - 18:00
+    </div>
+    <div>
+      Sábado: 10:00 - 18:00
+    </div>
+    <div>
+      Domingo: 10:00 - 18:00
+    </div>
+  </div>
+
+  <div style="height:10px;width:100%;background:rgb(250, 250, 250)">
+  </div> -->
+
+
+  <div style="height:10px;width:100%;background:rgb(250, 250, 250)">
+  </div>
+
+  <div style="margin-top:10px;margin-left:15px;color:#555;font-size:17px;font-weight:500">
+    Nuestro equipo
+  </div>
+  <ion-scroll scrollX="true" style="display:flex;height:180px;margin-left:10px">
+    <ion-grid>
+      <ion-row nowrap>
+        <ion-col *ngFor="let persona of equipo" col-4>
+          <div style="border:1px solid #eee;border-radius:5px">
+            <div
+              style="border-radius:5px 5px 0px 0px;min-height:100px; width:100%; background-size:cover;background-repeat: no-repeat;background-position: center;"
+              [ngStyle]="{'background-image': 'url(' + persona.img + ')' }">
+            </div>
+            <div style="padding:4px">
+              <div style="color:#555;font-size:14px;font-weight:500;height:20px;overflow:hidden;">
+                {{persona.nombre}}
+              </div>
+              <div style="color:#999;height:20px;overflow: hidden;">
+                {{persona.cargo}}
+              </div>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-scroll>
+
   <div style="height:10px;width:100%;background:rgb(250, 250, 250)">
   </div>
 
   <button ion-item no-lines>
-    <div style="margin-left:15px;color:#555;font-size:17px;font-weight:500">
+    <div style="margin-left:0px;color:#555;font-size:16px;font-weight:500">
       Comentarios (26)
     </div>
     <ion-icon name="ios-arrow-forward" item-end style="color:#bbb;font-size:18px"></ion-icon>
@@ -151,6 +303,20 @@
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam odit quam itaque illo rem id eos fugiat esse fuga
       explicabo sapiente assumenda, placeat enim exercitationem, quas alias accusantium recusandae reprehenderit.
     </div>
+    <div style="display:flex;justify-content:flex-start;padding-left:20px;padding-top:5px">
+      <div
+        style="height:60px;width:70px;margin-right:10px;background-size:cover;background-repeat:no-repeat;background-position:center;"
+        [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553510792/-qUYbkgS3zf8GMPRVObTKF87fS4iBkpU5A4hPdkdJk0vRWHtzp09SSRXX41mbWnzHB1FIzxqqv4y1DPjvSHfJsPMUtGpjXdtO1pf5OouG4AnY08TQIxe-DkxF3-YDtNHvJLBPMnbGaim65JmQfWVIQ.jpg' + ')' }">
+      </div>
+      <div
+        style="height:60px;width:70px;margin-right:10px;background-size:cover;background-repeat:no-repeat;background-position:center;"
+        [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553510792/mrlAiLjnqoSI4AyKm2xKq1dRVSgSQYHFzFj-HSK8DWWJBwrNOmnIwHEWfRy5wbABHB1FIzxqqv4y1DPjvSHfJsPMUtGpjXdtO1pf5OouG4AnY08TQIxe-DkxF3-YDtNHvJLBPMnbGaim65JmQfWVIQ.jpg' + ')' }">
+      </div>
+      <div
+        style="height:60px;width:70px;margin-right:10px;background-size:cover;background-repeat:no-repeat;background-position:center;"
+        [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553510792/-ona9n4gyzFRPiy_2xRJV_sMmtc4vbuYM1NW44vnLB5bYlzJpi_zp7Fotso-MdlkHB1FIzxqqv4y1DPjvSHfJsPMUtGpjXdtO1pf5OouG4AnY08TQIxe-DkxF3-YDtNHvJLBPMnbGaim65JmQfWVIQ.jpg' + ')' }">
+      </div>
+    </div>
   </div>
 
   <div padding>
@@ -163,6 +329,16 @@
     </div>
     <div style="margin-top:15px;margin-left:20px;font-size:14px;color:#777">
       Fugiat esse ercitationem, quas alias accusantium recusandae reprehenderit.
+    </div>
+    <div style="display:flex;justify-content:flex-start;padding-left:20px;padding-top:5px">
+      <div
+        style="height:60px;width:70px;margin-right:10px;background-size:cover;background-repeat:no-repeat;background-position:center;"
+        [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553510792/JPp6e4Piahyn1R3I2NAnhHQtafTYcRB655qo5meMF9ZNb47C7wcu_HF-6FtF-Dc2HB1FIzxqqv4y1DPjvSHfJsPMUtGpjXdtO1pf5OouG4AnY08TQIxe-DkxF3-YDtNHvJLBPMnbGaim65JmQfWVIQ.jpg' + ')' }">
+      </div>
+      <div
+        style="height:60px;width:70px;margin-right:10px;background-size:cover;background-repeat:no-repeat;background-position:center;"
+        [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553510792/X3tvLPYJ4PjIV7iBYPbGNlR-hmA88izuOcSiEedoAwNvjIgTf7l4C8rpvMLZ43pOHB1FIzxqqv4y1DPjvSHfJsPMUtGpjXdtO1pf5OouG4AnY08TQIxe-DkxF3-YDtNHvJLBPMnbGaim65JmQfWVIQ.jpg' + ')' }">
+      </div>
     </div>
   </div>
 

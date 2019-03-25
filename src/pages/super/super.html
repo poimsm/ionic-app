@@ -103,91 +103,28 @@
 
 
 
+
+
+
+
 <ion-content>
 
 
-  <div style="display:flex;flex-wrap:wrap;border-bottom:1px solid #eee;border-top:1px solid #eee">
-    <div style="height:160px;width:33%;border-right:1px solid #eee;">
-      <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552593137/165846.webp"
+  <div *ngFor="let producto of productos" style="display:flex;flex-wrap:wrap;border-bottom:1px solid #eee;border-top:1px solid #eee">
+    <div *ngFor="let data of producto.data" style="height:160px;width:33%;border-right:1px solid #eee;">
+      <img [src]="data.img"
       style="height:90px;object-fit:cover">
       <div style="padding:5px">
         <div style="font-weight:550;color:#666;font-size:15px">
-          Leche colun descre
+          {{data.titulo}}
         </div>
         <div style="margin-top:5px;color:#777;font-size:14px">
-          $1990
-        </div>
-      </div>
-    </div>
-    <div style="height:160px;width:33%;border-right:1px solid #eee;">
-      <img
-        src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552593138/Leche-Colun-light-chocolate-caja-200-cc-1-464856.webp"
-        style="height:90px;object-fit:cover">
-        <div style="padding:5px">
-        <div style="font-weight:550;color:#666;font-size:15px">
-          Leche colun descre
-        </div>
-        <div style="margin-top:5px;color:#777;font-size:14px">
-          $1990
-        </div>
-      </div>
-    </div>
-    <div style="height:160px;width:33%;border-right:0px solid #eee;">
-      <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552593138/Yogurt-Natural-sin-az%C3%BAcar.png"
-      style="height:90px;object-fit:cover">
-      <div style="padding:5px">
-        <div style="font-weight:550;color:#666;font-size:15px">
-          Leche colun descre
-        </div>
-        <div style="margin-top:5px;color:#777;font-size:14px">
-          $1990
+          {{data.precio}}
         </div>
       </div>
     </div>
   </div>
 
-
-
-
-  <div style="display:flex;flex-wrap:wrap;border-bottom:1px solid #eee;border-top:1px solid #eee">
-      <div style="height:160px;width:33%;border-right:1px solid #eee;">
-        <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552593137/yogurt_mora_vaso.png"
-        style="height:90px;object-fit:cover">
-        <div style="padding:5px">
-          <div style="font-weight:550;color:#666;font-size:15px">
-            Leche colun descre
-          </div>
-          <div style="margin-top:5px;color:#777;font-size:14px">
-            $1990
-          </div>
-        </div>
-      </div>
-      <div style="height:160px;width:33%;border-right:1px solid #eee;">
-        <img
-          src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552593137/20075565.webp"
-          style="height:90px;object-fit:cover">
-        <div style="padding:5px">
-          <div style="font-weight:550;color:#666;font-size:15px">
-            Leche colun descre
-          </div>
-          <div style="margin-top:5px;color:#777;font-size:14px">
-            $1990
-          </div>
-        </div>
-      </div>
-      <div style="height:160px;width:33%;border-right:0px solid #eee;">
-        <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552593542/leche-semidescremada-sin-lactosa-colun-de-chocolate.png"
-          style="height:90px;object-fit:cover">
-        <div style="padding:5px">
-          <div style="font-weight:550;color:#666;font-size:15px">
-            Leche colun descre
-          </div>
-          <div style="margin-top:5px;color:#777;font-size:14px">
-            $1990
-          </div>
-        </div>
-      </div>
-    </div>
 
 
 

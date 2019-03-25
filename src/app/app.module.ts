@@ -98,7 +98,13 @@ import {
   TiendaMueblesProductosPage,
   OfertaPage,
   PaquetePage,
-  IntroduccionPage
+  IntroduccionPage,
+  MisProductosPage,
+  MisVentasPage,
+  MisProductosContentPage,
+  Muebles2Page,
+  MueblesCustomPage,
+  MueblesDimensionPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -179,7 +185,13 @@ import { ConfigProvider } from "../providers/config/config";
     TiendaMueblesProductosPage,
     OfertaPage,
     PaquetePage,
-    IntroduccionPage
+    IntroduccionPage,
+    MisProductosPage,
+    MisVentasPage,
+    MisProductosContentPage,
+    Muebles2Page,
+    MueblesCustomPage,
+    MueblesDimensionPage
   ],
   imports: [
     BrowserModule,
@@ -262,7 +274,13 @@ import { ConfigProvider } from "../providers/config/config";
     TiendaMueblesProductosPage,
     OfertaPage,
     PaquetePage,
-    IntroduccionPage
+    IntroduccionPage,
+    MisProductosPage,
+    MisVentasPage,
+    MisProductosContentPage,
+    Muebles2Page,
+    MueblesCustomPage,
+    MueblesDimensionPage
   ],
   providers: [
     StatusBar,

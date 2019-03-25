@@ -1,0 +1,68 @@
+<ion-header no-border>
+
+  <ion-navbar color="white">
+    <!-- <ion-title>muebles-dimension</ion-title> -->
+    <ion-buttons right>
+      <button ion-button outline mode="ios">
+        Guardar
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+
+  <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1553322268/dimen02.png" style="width:100%">
+
+
+  <div style="margin-top:20px;width:100%;display:flex;justify-content:center;color:#666">
+    <div style="width:80px;text-align:center;padding:4px;border-radius:5px;border:1px solid #bbb;font-size:14px">
+      A: 100 cm
+    </div>
+  </div>
+  <ion-item>
+    <ion-range [(ngModel)]="brightness">
+      <div range-left style="font-size:16px;color:#777">
+        100 cm
+      </div>
+      <div range-right style="font-size:16px;color:#777">
+        150 cm
+      </div>
+    </ion-range>
+  </ion-item>
+  <div style="margin-top:20px;width:100%;display:flex;justify-content:center;color:#666">
+    <div style="width:80px;text-align:center;padding:4px;border-radius:5px;border:1px solid #bbb;font-size:14px">
+      B: 70 cm
+    </div>
+  </div>
+  <ion-item>
+    <ion-range [(ngModel)]="brightness2">
+      <div range-left style="font-size:16px;color:#777">
+        70 cm
+      </div>
+      <div range-right style="font-size:16px;color:#777">
+        120 cm
+      </div>
+    </ion-range>
+  </ion-item>
+  <div style="margin-top:20px;width:100%;display:flex;justify-content:center;color:#666">
+    <div style="width:80px;text-align:center;padding:4px;border-radius:5px;border:1px solid #bbb;font-size:14px">
+      C: 20 cm
+    </div>
+  </div>
+  <ion-item no-lines>
+    <ion-range [(ngModel)]="brightness3">
+      <div range-left style="font-size:16px;color:#777">
+        20 cm
+      </div>
+      <div range-right style="font-size:16px;color:#777">
+        40 cm
+      </div>
+    </ion-range>
+  </ion-item>
+  <div style="height:30px"></div>
+
+</ion-content>

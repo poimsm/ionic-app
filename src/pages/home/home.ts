@@ -25,6 +25,8 @@ import { MascotasPage } from "../mascotas/mascotas";
 import { SuperPage } from "../super/super";
 import { AlquilerPage } from "../alquiler/alquiler";
 import { MueblesPage } from "../muebles/muebles";
+import { TiendaMueblesPage } from "../tienda-muebles/tienda-muebles";
+import { Muebles2Page } from "../muebles2/muebles2";
 
 
 @Component({
@@ -48,6 +50,7 @@ export class HomePage {
   super = SuperPage;
   alquiler = AlquilerPage;
   muebles = MueblesPage;
+  muebles2 = Muebles2Page;
 
   cosas = [];
   algoDulce = [];
@@ -184,6 +187,10 @@ export class HomePage {
     }
   }
 
+  openSuper() {
+    this.navCtrl.push(SuperPage, { tipo: 'super' })
+  }
+
   openModelo(pagina) {
     this.navCtrl.push(pagina);
   }
@@ -200,7 +207,7 @@ export class HomePage {
     this.navCtrl.push(CarroPage);
   }
 
-  openUser() {
+  openUser2() {
     if (this.isAuth) {
       this.navCtrl.push(UsuarioPage, {
         user: this.user,
@@ -209,6 +216,10 @@ export class HomePage {
     } else {
       this.navCtrl.push(LoginPage);
     }
+  }
+
+  openUser() {
+    this.navCtrl.push(TiendaMueblesPage);
   }
 
   reloadInicio() {

@@ -23,6 +23,8 @@ import { TiendaEcommerceNuevoPage } from "../tienda-ecommerce-nuevo/tienda-ecomm
 import { TiendaEcommerceProductosPage } from "../tienda-ecommerce-productos/tienda-ecommerce-productos";
 import { LocalizacionProvider } from "../../providers/localizacion/localizacion";
 import { AuthProvider } from "../../providers/auth/auth";
+import { MisProductosPage } from "../mis-productos/mis-productos";
+import { MisVentasPage } from "../mis-ventas/mis-ventas";
 
 
 @IonicPage()
@@ -60,17 +62,17 @@ export class TiendaMueblesPage {
     private _localidazacion: LocalizacionProvider,
     private _auth: AuthProvider
   ) {
-    this.tiendaID = this.navParams.get("id");
-    this.ciudades = this._localidazacion.ciudades;
+    // this.tiendaID = this.navParams.get("id");
+    // this.ciudades = this._localidazacion.ciudades;
   }
 
   // ionViewDidLoad() {
   //   this.cargarTienda();
   // }
 
-  ionViewDidEnter() {
-    this.cargarTienda();
-  }
+  // ionViewDidEnter() {
+  //   this.cargarTienda();
+  // }
 
   cargarTienda() {
     this._data.fetchTienda(this.tiendaID).then(data => (this.tienda = data));
@@ -80,6 +82,14 @@ export class TiendaMueblesPage {
     const modal = this.modalCtrl.create(GaleriaImagenPage, { tipo });
     modal.onDidDismiss(data => { });
     modal.present();
+  }
+
+  misProductos() {
+    this.navCtrl.push(MisProductosPage);
+  }
+
+  misVentas() {
+    this.navCtrl.push(MisVentasPage);
   }
 
   nuevoProducto() {

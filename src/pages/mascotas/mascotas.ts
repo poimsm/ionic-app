@@ -19,7 +19,7 @@ export class MascotasPage {
   }
 
   openSuper() {
-    this.navCtrl.push(SuperPage);
+    this.navCtrl.push(SuperPage, { tipo: 'mascotas' });
   }
 
 }

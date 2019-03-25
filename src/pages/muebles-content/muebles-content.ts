@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { OfertaPage } from '../oferta/oferta';
+import { PaquetePage } from '../paquete/paquete';
+import { MueblesCustomPage } from '../muebles-custom/muebles-custom';
 
-/**
- * Generated class for the MueblesContentPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -18,8 +15,16 @@ export class MueblesContentPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MueblesContentPage');
+  openPromo(tipo) {
+    if (tipo == 'oferta') {
+      this.navCtrl.push(OfertaPage, { tipo: 'muebles' });
+    } else {
+      this.navCtrl.push(PaquetePage, { tipo: 'muebles' });
+    }
+  }
+
+  openCustom() {
+    this.navCtrl.push(MueblesCustomPage);
   }
 
 }
