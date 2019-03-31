@@ -200,5 +200,26 @@ ion-icon {
   &[class*="rental"] {
     mask-image: url(../assets/rental.svg);
   }
+  &[class*="face-mask"] {
+    mask-image: url(../assets/face-mask.svg);
+  }
+  &[class*="scissors"] {
+    mask-image: url(../assets/scissors.svg);
+  }
+  &[class*="blade"] {
+    mask-image: url(../assets/blade.svg);
+  }
+  &[class*="rock"] {
+    mask-image: url(../assets/rock.svg);
+  }
+  &[class*="hearing"] {
+    mask-image: url(../assets/hearing.svg);
+  }
+  &[class*="man-hair"] {
+    mask-image: url(../assets/man-hair.svg);
+  }
+  &[class*="woman-hair"] {
+    mask-image: url(../assets/woman-hair-2.svg);
+  }
 
 }

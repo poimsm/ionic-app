@@ -66,8 +66,8 @@
     <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1553493541/redcompra-1024x332.png"
       style="filter: grayscale(100%);margin-left:10px;width:80px">
 
-    <ion-scroll scrollX="true" style="margin-top:-15px;height:40px;width:100%">
-      <div style="display:flex;width:500px">
+    <!-- <ion-scroll scrollX="true" style="margin-top:-15px;height:40px;width:100%">
+      <div style="height:100%;display:flex;width:500px;align-items:center">
         <div
           style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
           Estacionamiento
@@ -93,7 +93,24 @@
           TV
         </div>
       </div>
-    </ion-scroll>
+    </ion-scroll> -->
+
+
+        <div *ngIf="true" style="margin-left:10px;display:flex;overflow-x:auto;height:30px;width:500px;align-items:center">
+          <div
+            style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
+            Estacionamiento
+          </div>
+          <div
+            style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
+            Wi-Fi
+          </div>
+          <div
+            style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
+            Prohibido fumar
+          </div>
+        </div>
+  
 
   </div>
 

@@ -27,6 +27,8 @@ import { AlquilerPage } from "../alquiler/alquiler";
 import { MueblesPage } from "../muebles/muebles";
 import { TiendaMueblesPage } from "../tienda-muebles/tienda-muebles";
 import { Muebles2Page } from "../muebles2/muebles2";
+import { BellezaPage } from "../belleza/belleza";
+import { TiendaMascotasPage } from "../tienda-mascotas/tienda-mascotas";
 
 
 @Component({
@@ -51,6 +53,7 @@ export class HomePage {
   alquiler = AlquilerPage;
   muebles = MueblesPage;
   muebles2 = Muebles2Page;
+  belleza = BellezaPage;
 
   cosas = [];
   algoDulce = [];
@@ -219,7 +222,8 @@ export class HomePage {
   }
 
   openUser() {
-    this.navCtrl.push(TiendaMueblesPage);
+    // this.navCtrl.push(TiendaMueblesPage);
+    this.navCtrl.push(TiendaMascotasPage);
   }
 
   reloadInicio() {

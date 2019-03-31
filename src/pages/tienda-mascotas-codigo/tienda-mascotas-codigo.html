@@ -1,0 +1,27 @@
+<ion-header no-border>
+
+  <ion-navbar color="white">
+    <!-- <ion-title>Código</ion-title> -->
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div style="padding:8px;padding-top:0px;padding-left:15px;color:#444;font-size:16px;font-weight:600">
+    Ingresar código
+  </div>
+
+  <ion-item no-lines>
+    <ion-input [(ngModel)]="codigo" type="tel" placeholder="Ej. 98302" style="font-size:40px;border:1px dashed #ccc;border-radius:0px">
+    </ion-input>
+  </ion-item>
+
+  <div style="height:20px">
+  </div>
+
+
+  <button color="orange3" ion-button block mode="ios">
+    Verificar
+  </button>
+</ion-content>

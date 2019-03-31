@@ -1,0 +1,41 @@
+<ion-header no-border>
+
+  <ion-navbar color="white">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="close()">
+        <ion-icon name="md-close" style="font-size:25px"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <div style="font-size:22px;font-weight:500;color:#666;text-align:center">
+    Recuerde
+  </div>
+
+  <div style="margin-top:30px;color:#999;font-size:16px">
+    Siempre verifique el código del cupón que el cliente le muestre usando este botón:
+  </div>
+
+  <div style="margin-top:10px;margin-bottom:10px;width:100%;display:flex;justify-content:center">
+    <button color="orange3" ion-button  outline mode="ios">
+      Código
+      <ion-icon name="search" style="margin-left:5px"></ion-icon>
+    </button>
+  </div>
+
+  <div style="margin-top:0px;color:#999;font-size:16px">
+    Así evita que un mismo código sea ocupado dos o más veces.
+  </div>
+
+</ion-content>
+
+<ion-footer padding>
+  <button (click)="close()" color="light" ion-button block mode="ios">
+    Aceptar
+  </button>
+</ion-footer>

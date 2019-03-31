@@ -1,0 +1,169 @@
+<ion-header *ngIf="!isOk" no-border>
+  <ion-navbar color="orange3">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="close()">
+        <ion-icon name="md-close" style="font-size:25px"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-header *ngIf="isOk" no-border>
+  <ion-navbar color="white">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="close()">
+        <ion-icon name="md-close" style="font-size:25px"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button ion-button icon-only>
+        <div style="font-size:18px;font-weight:400;color:#444">
+          {{step}}
+        </div>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content [ngStyle]="{'background': !isOk ? '#ff6633' : '#fff'}">
+
+  <div *ngIf="!isOk" padding>
+    <div style="margin-top:25%;font-size:32px;font-weight:600;color:#fff;width:100%;text-align:center">
+      ¡Hola! Antes de continuar
+    </div>
+    <div style="margin-top:30px;width:100%;text-align:center;font-size:15px;color:#fff;">
+      Necesitamos obtener algunos datos de su negocio para facilitarlos de manera pública a los usuarios
+    </div>
+    <div style="margin-top:20px;width:100%;display:flex;justify-content:center">
+      <div>
+        <img [src]="'https://res.cloudinary.com/ddon9fx1n/image/upload/v1551211039/icon512.png'"
+          style="width:70px;height:70px">
+        <div style="color:#fff;font-size:25px;width:100%;text-align:center">
+          joopiter
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isOk">
+
+    <div *ngIf="isOne">
+
+      <div style="padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:500">
+        ¿Nombre de su negocio?
+      </div>
+      <ion-item>
+        <ion-input [(ngModel)]="nombre" type="text" placeholder="Tu respuesta"></ion-input>
+      </ion-item>
+
+      <div style="margin-top:20px;padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:500">
+        ¿Teléfono de contacto?
+      </div>
+      <ion-item>
+        <ion-input [(ngModel)]="telefono" type="tel" placeholder="Tu respuesta"></ion-input>
+      </ion-item>
+
+      <div style="margin-top:20px;padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:500">
+        ¿Dirección de su negocio?
+      </div>
+      <ion-item>
+        <ion-input [(ngModel)]="direccion" type="text" placeholder="Tu respuesta"></ion-input>
+      </ion-item>
+
+    </div>
+
+
+    <div *ngIf="isTwo">
+
+      <div style="margin-top:0px;padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:500">
+        ¿Es posible pagar con tarjetas de débito o crédito en su local?
+      </div>
+      <button (click)="isTarjeta = true" ion-item no-lines>
+        <ion-icon *ngIf="!isTarjeta" item-start name="radio-button-off" style="font-size:22px;color:#bbb"></ion-icon>
+        <ion-icon *ngIf="isTarjeta" item-start name="radio-button-on" style="font-size:22px;color:darkorange">
+        </ion-icon>
+        <div style="font-size:15px">
+          Sí
+        </div>
+      </button>
+      <button (click)="isTarjeta = false" ion-item no-lines>
+        <ion-icon *ngIf="isTarjeta" item-start name="radio-button-off" style="font-size:22px;color:#bbb"></ion-icon>
+        <ion-icon *ngIf="!isTarjeta" item-start name="radio-button-on" style="font-size:22px;color:darkorange">
+        </ion-icon>
+        <div style="font-size:15px">
+          No
+        </div>
+      </button>
+
+      <div style="margin-top:20px;padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:500">
+        Seleccione los servicios que ofrece a sus clientes
+      </div>
+
+      <ion-list text-wrap>
+        <button *ngFor="let servicio of servicios; let i = index" (click)="addService(i)" ion-item>
+          <ion-icon *ngIf="!servicio.isActive" item-start name="square-outline" style="font-size:22px;color:#bbb">
+          </ion-icon>
+          <ion-icon *ngIf="servicio.isActive" item-start name="checkbox" style="font-size:22px;color:darkorange">
+          </ion-icon>
+          <div style="font-size:15px">
+            {{servicio.nombre}}
+          </div>
+        </button>
+      </ion-list>
+
+    </div>
+
+
+    <div *ngIf="isThree">
+
+      <div style="margin-top:0px;padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:500">
+        Eslogan o breve frase para describir la actividad de su negocio
+      </div>
+      <ion-item>
+        <ion-input [(ngModel)]="eslogan" type="text" placeholder="Tu respuesta"></ion-input>
+      </ion-item>
+
+
+      <div style="margin-top:20px;padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:500">
+        Subir imagen de perfil o logo
+      </div>
+      <div padding style="width:100%;display:flex;justify-content:center;flex-wrap:wrap">
+        <div (click)="presentActionSheet()"
+          style="margin:10px;width:80px;height:80px;border:1px dashed #eee;display:flex;justify-content:center;align-items:center">
+          <ion-icon name="md-camera" style="font-size:32px;color:#999"></ion-icon>
+        </div>
+        <div *ngFor="let imagen of imagenes">
+          <div
+            style="margin:10px;min-height:80px;width:80px;background-size:cover;background-repeat: no-repeat;background-position: center;"
+            [ngStyle]="{'background-image': 'url(' + imagen.url + ')' }">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div style="height:100px">
+  </div>
+
+</ion-content>
+
+<div *ngIf="!isOk">
+  <ion-footer padding style="background:#ff6633">
+    <button (click)="isOk = !isOK" color="light" ion-button block mode="ios">
+      Aceptar
+    </button>
+  </ion-footer>
+</div>
+
+<div *ngIf="isOk">
+  <ion-footer padding style="background:#fff">
+    <button (click)="next()" color="light" ion-button block mode="ios">
+      Continuar
+      <ion-icon name="arrow-round-forward" style="margin-left:10px;font-size:20px"></ion-icon>
+    </button>
+  </ion-footer>
+</div>

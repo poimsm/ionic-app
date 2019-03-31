@@ -104,7 +104,21 @@ import {
   MisProductosContentPage,
   Muebles2Page,
   MueblesCustomPage,
-  MueblesDimensionPage
+  MueblesDimensionPage,
+  BellezaPage,
+  BellezaContentPage,
+  TiendaMascotasPage,
+  TiendaMascotasProductosPage,
+  TiendaMascotasNuevoPage,
+  TiendaMascotasVentasPage,
+  TiendaMascotasCodigoPage,
+  TiendaMascotasNormalPage,
+  TiendaMascotasCuponPage,
+  TiendaMascotasPaquetePage,
+  TiendaMascotasAgendaPage,
+  TiendaMascotasDatosPage,
+  TiendaMascotasInfoPage,
+  TiendaMascotasStartPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -191,7 +205,21 @@ import { ConfigProvider } from "../providers/config/config";
     MisProductosContentPage,
     Muebles2Page,
     MueblesCustomPage,
-    MueblesDimensionPage
+    MueblesDimensionPage,
+    BellezaPage,
+    BellezaContentPage,
+    TiendaMascotasPage,
+    TiendaMascotasProductosPage,
+    TiendaMascotasNuevoPage,
+    TiendaMascotasVentasPage,
+    TiendaMascotasCodigoPage,
+    TiendaMascotasNormalPage,
+    TiendaMascotasCuponPage,
+    TiendaMascotasPaquetePage,
+    TiendaMascotasAgendaPage,
+    TiendaMascotasDatosPage,
+    TiendaMascotasInfoPage,
+    TiendaMascotasStartPage
   ],
   imports: [
     BrowserModule,
@@ -280,7 +308,21 @@ import { ConfigProvider } from "../providers/config/config";
     MisProductosContentPage,
     Muebles2Page,
     MueblesCustomPage,
-    MueblesDimensionPage
+    MueblesDimensionPage,
+    BellezaPage,
+    BellezaContentPage,
+    TiendaMascotasPage,
+    TiendaMascotasProductosPage,
+    TiendaMascotasNuevoPage,
+    TiendaMascotasVentasPage,
+    TiendaMascotasCodigoPage,
+    TiendaMascotasNormalPage,
+    TiendaMascotasCuponPage,
+    TiendaMascotasPaquetePage,
+    TiendaMascotasAgendaPage,
+    TiendaMascotasDatosPage,
+    TiendaMascotasInfoPage,
+    TiendaMascotasStartPage
   ],
   providers: [
     StatusBar,

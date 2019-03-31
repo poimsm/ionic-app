@@ -1,0 +1,55 @@
+<ion-header no-border>
+
+  <ion-navbar color="white">
+    <!-- <ion-title>Ventas</ion-title> -->
+    <ion-buttons right>
+        <button (click)="openPage(codigo)" color="orange3" ion-button mode="ios">
+          Código
+          <ion-icon name="search" style="margin-left:5px"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <!-- <div padding>
+    <ion-segment [(ngModel)]="tipo" mode="ios" color="orange3">
+      <ion-segment-button value="todo">
+        Todo
+      </ion-segment-button>
+      <ion-segment-button value="proximo">
+        Próximo
+      </ion-segment-button>
+      <ion-segment-button value="verificado">
+        Verificado
+      </ion-segment-button>
+    </ion-segment>
+  </div> -->
+
+  <ion-list text-wrap>
+    <button ion-item *ngFor="let item of productos">
+      <img item-start [src]="item.img" style="width:100px;height:100px;object-fit:cover">
+      <div>
+        <div style="font-size:17px;color:#555">
+          {{item.titulo}}
+        </div>
+        <div style="margin-top:5px;width:100%;display:flex;justify-content:space-between;align-items:center">
+          <div style="font-size:16px;font-weight:600;color:orange">
+            {{item.precio}}
+            <span style="color:#555">
+              {{item.cantidad}}
+            </span>
+          </div>
+          <div style="color:#555;color:dodgerblue">
+            {{item.hora}}
+          </div>
+        </div>
+
+      </div>
+    </button>
+  </ion-list>
+
+</ion-content>

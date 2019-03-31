@@ -1,3 +1,17 @@
+export { TiendaMascotasInfoPage } from './tienda-mascotas-info/tienda-mascotas-info';
+export { TiendaMascotasStartPage } from './tienda-mascotas-start/tienda-mascotas-start';
+export { TiendaMascotasDatosPage } from './tienda-mascotas-datos/tienda-mascotas-datos';
+export { TiendaMascotasAgendaPage } from './tienda-mascotas-agenda/tienda-mascotas-agenda';
+export { TiendaMascotasNormalPage } from './tienda-mascotas-normal/tienda-mascotas-normal';
+export { TiendaMascotasCuponPage } from './tienda-mascotas-cupon/tienda-mascotas-cupon';
+export { TiendaMascotasPaquetePage } from './tienda-mascotas-paquete/tienda-mascotas-paquete';
+export { TiendaMascotasCodigoPage } from './tienda-mascotas-codigo/tienda-mascotas-codigo';
+export { TiendaMascotasPage } from './tienda-mascotas/tienda-mascotas';
+export { TiendaMascotasProductosPage } from './tienda-mascotas-productos/tienda-mascotas-productos';
+export { TiendaMascotasNuevoPage } from './tienda-mascotas-nuevo/tienda-mascotas-nuevo';
+export { TiendaMascotasVentasPage } from './tienda-mascotas-ventas/tienda-mascotas-ventas';
+export { BellezaPage } from './belleza/belleza';
+export { BellezaContentPage } from './belleza-content/belleza-content';
 export { MueblesDimensionPage } from './muebles-dimension/muebles-dimension';
 export { MueblesCustomPage } from './muebles-custom/muebles-custom';
 export { Muebles2Page } from './muebles2/muebles2';
