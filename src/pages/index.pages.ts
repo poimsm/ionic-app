@@ -1,3 +1,4 @@
+export { SuperCategoryPage } from './super-category/super-category';
 export { TiendaMascotasInfoPage } from './tienda-mascotas-info/tienda-mascotas-info';
 export { TiendaMascotasStartPage } from './tienda-mascotas-start/tienda-mascotas-start';
 export { TiendaMascotasDatosPage } from './tienda-mascotas-datos/tienda-mascotas-datos';
@@ -85,3 +86,4 @@ export { OncePage } from './once/once';
 export { UsuarioPage } from './usuario/usuario';
 export { LoginPage } from "./login/login";
 export { HomePage } from "./home/home";
+

@@ -29,6 +29,7 @@ import { TiendaMueblesPage } from "../tienda-muebles/tienda-muebles";
 import { Muebles2Page } from "../muebles2/muebles2";
 import { BellezaPage } from "../belleza/belleza";
 import { TiendaMascotasPage } from "../tienda-mascotas/tienda-mascotas";
+import { SuperCategoryPage } from "../super-category/super-category";
 
 
 @Component({
@@ -189,9 +190,9 @@ export class HomePage {
         });
     }
   }
-
+  
   openSuper() {
-    this.navCtrl.push(SuperPage, { tipo: 'super' })
+    this.navCtrl.push(SuperCategoryPage, { tipo: 'super' })
   }
 
   openModelo(pagina) {

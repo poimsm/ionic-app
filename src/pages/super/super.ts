@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { SuperCategoryPage } from '../super-category/super-category';
 
 @IonicPage()
 @Component({
@@ -21,6 +22,9 @@ export class SuperPage {
     }
   }
 
+  openCategories(){
+    this.navCtrl.push(SuperCategoryPage);
+  }
   setSuper() {
     this.productos = [
       {

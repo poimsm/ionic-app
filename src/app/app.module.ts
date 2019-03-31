@@ -118,7 +118,8 @@ import {
   TiendaMascotasAgendaPage,
   TiendaMascotasDatosPage,
   TiendaMascotasInfoPage,
-  TiendaMascotasStartPage
+  TiendaMascotasStartPage,
+  SuperCategoryPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -219,7 +220,8 @@ import { ConfigProvider } from "../providers/config/config";
     TiendaMascotasAgendaPage,
     TiendaMascotasDatosPage,
     TiendaMascotasInfoPage,
-    TiendaMascotasStartPage
+    TiendaMascotasStartPage,
+    SuperCategoryPage
   ],
   imports: [
     BrowserModule,
@@ -322,7 +324,8 @@ import { ConfigProvider } from "../providers/config/config";
     TiendaMascotasAgendaPage,
     TiendaMascotasDatosPage,
     TiendaMascotasInfoPage,
-    TiendaMascotasStartPage
+    TiendaMascotasStartPage,
+    SuperCategoryPage
   ],
   providers: [
     StatusBar,
