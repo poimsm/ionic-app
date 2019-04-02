@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, Platform, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, Platform, ActionSheetController, ToastController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImageProvider } from '../../providers/image/image';
+import { DataProvider } from '../../providers/data/data';
+import { AuthProvider } from '../../providers/auth/auth';
 
 
 @IonicPage()
@@ -11,12 +13,13 @@ import { ImageProvider } from '../../providers/image/image';
 })
 export class TiendaMascotasStartPage {
 
-  nombre: string;
-  telefono: string;
-  direccion: string;
-  eslogan: string;
+  nombre = '';
+  telefono = '';
+  direccion = '';
+  eslogan = '';
   logo: object;
-  
+  tiendaID: string;
+  token: string;
 
   step = '1/3';
   isOK = false;
@@ -67,30 +70,63 @@ export class TiendaMascotasStartPage {
     private platform: Platform,
     private camera: Camera,
     private actionSheetCtrl: ActionSheetController,
-    private _img: ImageProvider
-    ) {
+    private _img: ImageProvider,
+    private _data: DataProvider,
+    private _auth: AuthProvider,
+    public toastCtrl: ToastController
+  ) {
+    this.tiendaID = this.navParams.get('tiendaID');
+    this.token = this.navParams.get('token');
   }
 
-  close() {
-    this.viewCtrl.dismiss();
+  close(ok) {
+    if (ok) {
+      const servActivos = [];
+      this.servicios.forEach(item => {
+        if (item.isActive) {
+          servActivos.push(item.nombre);
+        }
+      });
+      const data = {
+        nombre: this.nombre,
+        direccion: this.direccion,
+        telefono: this.telefono,
+        isTarjeta: this.isTarjeta,
+        servicios: servActivos,
+        eslogan: this.eslogan,
+        imgPerfil: this.logo,
+        isFirstLoggin: false
+      };
+      this._data.updateTienda(this.tiendaID, data)
+        .then(() => {
+          this.viewCtrl.dismiss({ ok: true });
+        });
+    } else {
+      this.viewCtrl.dismiss({ ok: false });
+    }
   }
 
-  next() {    
+  next() {
     if (this.isOne) {
-      this.step = '2/3';    
-      this.isOne = false;
-      this.isTwo = true;
-      this.isThree = false;      
+      if (this.nombre.length > 3 && this.telefono.length > 5 && this.direccion.length > 6) {
+        this.step = '2/3';
+        this.isOne = false;
+        this.isTwo = true;
+        this.isThree = false;
+      } else {
+        this.completarToast();
+      }
     } else if (this.isTwo) {
       this.step = '3/3';
       this.isOne = false;
       this.isTwo = false;
       this.isThree = true;
     } else if (this.isThree) {
-      this.step = '1/3';
-      this.isOne = true;
-      this.isTwo = false;
-      this.isThree = false;
+      if (this.eslogan.length > 3) {
+        this.close(true);
+      } else {
+        this.completarToast();
+      }
     }
   }
 
@@ -153,5 +189,13 @@ export class TiendaMascotasStartPage {
     }
   }
 
+  completarToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Favor completar datos',
+      duration: 2500,
+      position: 'middle'
+    });
+    toast.present();
+  }
 
 }

@@ -1,3 +1,8 @@
+export { BikeProgramarPage } from './bike-programar/bike-programar';
+export { BikeHistorialPage } from './bike-historial/bike-historial';
+export { BikeMapaPage } from './bike-mapa/bike-mapa';
+export { BikePage } from './bike/bike';
+export { BikeRiderPage } from './bike-rider/bike-rider';
 export { TiendaMascotasInfoPage } from './tienda-mascotas-info/tienda-mascotas-info';
 export { TiendaMascotasStartPage } from './tienda-mascotas-start/tienda-mascotas-start';
 export { TiendaMascotasDatosPage } from './tienda-mascotas-datos/tienda-mascotas-datos';

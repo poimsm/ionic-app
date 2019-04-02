@@ -100,8 +100,8 @@
         Seleccione los servicios que ofrece a sus clientes
       </div>
 
-      <ion-list text-wrap>
-        <button *ngFor="let servicio of servicios; let i = index" (click)="addService(i)" ion-item>
+      <!-- <ion-list text-wrap no-lines> -->
+        <button no-lines text-wrap *ngFor="let servicio of servicios; let i = index" (click)="addService(i)" ion-item>
           <ion-icon *ngIf="!servicio.isActive" item-start name="square-outline" style="font-size:22px;color:#bbb">
           </ion-icon>
           <ion-icon *ngIf="servicio.isActive" item-start name="checkbox" style="font-size:22px;color:darkorange">
@@ -110,7 +110,16 @@
             {{servicio.nombre}}
           </div>
         </button>
-      </ion-list>
+        <ion-item >
+          <div item-start style="display:flex;align-items:center">
+            <ion-icon name="square-outline" style="font-size:22px;color:#bbb"></ion-icon>
+            <div style="font-size:15px;color:#888;margin-left:10px">Otro:</div>
+          </div>
+          <ion-input [(ngModel)]="otroServicio" type="text" placeholder=""></ion-input>
+        </ion-item>
+      <!-- </ion-list> -->
+
+
 
     </div>
 

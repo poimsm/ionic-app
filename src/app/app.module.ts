@@ -118,7 +118,12 @@ import {
   TiendaMascotasAgendaPage,
   TiendaMascotasDatosPage,
   TiendaMascotasInfoPage,
-  TiendaMascotasStartPage
+  TiendaMascotasStartPage,
+  BikeMapaPage,
+  BikePage,
+  BikeRiderPage,
+  BikeHistorialPage,
+  BikeProgramarPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -219,7 +224,12 @@ import { ConfigProvider } from "../providers/config/config";
     TiendaMascotasAgendaPage,
     TiendaMascotasDatosPage,
     TiendaMascotasInfoPage,
-    TiendaMascotasStartPage
+    TiendaMascotasStartPage,
+    BikeMapaPage,
+    BikePage,
+    BikeRiderPage,
+    BikeHistorialPage,
+    BikeProgramarPage
   ],
   imports: [
     BrowserModule,
@@ -322,7 +332,12 @@ import { ConfigProvider } from "../providers/config/config";
     TiendaMascotasAgendaPage,
     TiendaMascotasDatosPage,
     TiendaMascotasInfoPage,
-    TiendaMascotasStartPage
+    TiendaMascotasStartPage,
+    BikeMapaPage,
+    BikePage,
+    BikeRiderPage,
+    BikeHistorialPage,
+    BikeProgramarPage
   ],
   providers: [
     StatusBar,
