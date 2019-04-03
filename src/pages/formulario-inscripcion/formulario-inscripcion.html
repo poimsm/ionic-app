@@ -1,0 +1,131 @@
+<ion-header no-border>
+
+    <ion-navbar color="light">
+      <ion-title>Inscripción</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content>
+  
+    <div *ngIf="isSolicitud">
+      <div padding style="margin-top:18px">
+        <div style="font-size:18px;color:#666;font-weight:500">
+          Ya tiene una inscripción pendiente
+        </div>
+        <div style="margin-top:10px;font-size:15px;color:#999">
+          Lo contactaremos una vez hallamos procesado la información del formulario de inscripción
+        </div>
+        <div style="margin-top:20px;width:100%;display:flex;justify-content:center">
+          <div style="color:#888;font-size:14px;display:flex;align-items:center">
+            <img [src]="'https://res.cloudinary.com/ddon9fx1n/image/upload/v1551211039/icon512.png'"
+              style="width:40px;height:40px">
+            <div>
+              Equipo Joopiter
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  
+    <div *ngIf="!isSolicitud">
+  
+  
+      <div padding>
+        <div style="font-size:16px;color:#666;font-weight:500">
+          ¿En qué categoría se ubica tu negocio?
+        </div>
+      </div>
+  
+      <ion-list>
+        <button ion-item>
+          <ion-label>
+            Categoría
+          </ion-label>
+          <ion-select [(ngModel)]="categoria" #categoriaRef>
+            <ion-option value="Muebles">Muebles</ion-option>
+            <ion-option value="Mascotas">Mascotas</ion-option>
+            <ion-option value="Alquiler">Alquiler</ion-option>
+            <ion-option value="Lavado">Lavado</ion-option>
+            <ion-option value="Once">Once</ion-option>
+          </ion-select>
+        </button>
+  
+        <div padding>
+          <div style="font-size:16px;color:#666;font-weight:500">
+            ¿Ciudad donde se encuentra tu negocio?
+          </div>
+        </div>
+  
+        <button ion-item>
+          <ion-label>
+            Ciudad
+          </ion-label>
+          <ion-select [(ngModel)]="ciudad">
+            <ion-option value="Valdivia">Valdivia</ion-option>
+            <ion-option value="Osorno">Osorno</ion-option>
+          </ion-select>
+        </button>
+  
+        <!-- <div padding style="margin-top:10px;color:#777;font-size:15px">
+        Completa los siguientes datos por favor:
+      </div> -->
+  
+        <div padding>
+          <div style="font-size:16px;color:#666;font-weight:500">
+            Completa los siguientes datos:
+          </div>
+        </div>
+  
+        <ion-item>
+          <ion-label color="primary" stacked>Nombre</ion-label>
+          <ion-input [(ngModel)]="nombre" type="text" placeholder="¿Nombre de tu negocio?"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary" stacked>Télefono</ion-label>
+          <ion-input [(ngModel)]="telefono" type="tel" placeholder="Teléfono de contacto"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary" stacked>Dirección</ion-label>
+          <ion-input [(ngModel)]="direccion" type="tex" placeholder="Dirección de tu negocio"></ion-input>
+        </ion-item>
+      </ion-list>
+  
+      <div padding style="margin-top:10px;color:#666;font-size:15px">
+        Una vez enviada la solicitud comprobaremos sus datos para que pueda publicar en la app
+      </div>
+  
+      <ion-list *ngIf="false" text-wrap no-lines>
+        <ion-item>
+          <div item-start style="font-size:16px;color:#555">1</div>
+          <div style="font-size:16px;color:#888">
+            Completa los datos
+          </div>
+        </ion-item>
+        <ion-item>
+          <div item-start style="font-size:16px;color:#555">2</div>
+          <div style="font-size:16px;color:#888">
+            Revisaremos tu solicitud
+          </div>
+        </ion-item>
+        <ion-item>
+          <div item-start style="font-size:16px;color:#555">3</div>
+          <div style="font-size:16px;color:#888">
+            Podrás crear un catalogo y más
+          </div>
+        </ion-item>
+      </ion-list>
+  
+      <div padding>
+        <button (click)="crear()" ion-button color="danger" mode='ios' block>
+          <!-- <div style="color:#444"> -->
+          Confirmar inscripción
+          <!-- </div> -->
+        </button>
+      </div>
+    </div>
+  
+  
+  </ion-content>

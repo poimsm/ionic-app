@@ -123,7 +123,9 @@ import {
   BikePage,
   BikeRiderPage,
   BikeHistorialPage,
-  BikeProgramarPage
+  BikeProgramarPage,
+  FormularioInscripcionPage,
+  FormularioStartPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -229,7 +231,9 @@ import { ConfigProvider } from "../providers/config/config";
     BikePage,
     BikeRiderPage,
     BikeHistorialPage,
-    BikeProgramarPage
+    BikeProgramarPage,
+    FormularioInscripcionPage,
+    FormularioStartPage
   ],
   imports: [
     BrowserModule,
@@ -337,7 +341,9 @@ import { ConfigProvider } from "../providers/config/config";
     BikePage,
     BikeRiderPage,
     BikeHistorialPage,
-    BikeProgramarPage
+    BikeProgramarPage,
+    FormularioInscripcionPage,
+    FormularioStartPage
   ],
   providers: [
     StatusBar,

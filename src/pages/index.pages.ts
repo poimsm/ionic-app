@@ -1,3 +1,5 @@
+export { FormularioInscripcionPage } from './formulario-inscripcion/formulario-inscripcion';
+export { FormularioStartPage } from './formulario-start/formulario-start';
 export { BikeProgramarPage } from './bike-programar/bike-programar';
 export { BikeHistorialPage } from './bike-historial/bike-historial';
 export { BikeMapaPage } from './bike-mapa/bike-mapa';

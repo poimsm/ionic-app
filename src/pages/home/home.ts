@@ -29,8 +29,8 @@ import { TiendaMueblesPage } from "../tienda-muebles/tienda-muebles";
 import { Muebles2Page } from "../muebles2/muebles2";
 import { BellezaPage } from "../belleza/belleza";
 import { TiendaMascotasPage } from "../tienda-mascotas/tienda-mascotas";
-import { TiendaMascotasStartPage } from "../tienda-mascotas-start/tienda-mascotas-start";
 import { BikePage } from "../bike/bike";
+import { FormularioStartPage } from "../formulario-start/formulario-start";
 
 
 @Component({
@@ -252,7 +252,7 @@ export class HomePage {
   }
 
   openModalStart() {
-    const modal = this.modalCtrl.create(TiendaMascotasStartPage, { tiendaID: this.user.tienda.id, token: this.token });
+    const modal = this.modalCtrl.create(FormularioStartPage, { tiendaID: this.user.tienda.id, token: this.token });
     modal.onDidDismiss(res => {
       if (res.ok) {
         this.navCtrl.push(TiendaMascotasPage, { tiendaID: this.user.tienda.id });
