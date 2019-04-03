@@ -5,13 +5,12 @@ import { ImageProvider } from '../../providers/image/image';
 import { DataProvider } from '../../providers/data/data';
 import { AuthProvider } from '../../providers/auth/auth';
 
-
 @IonicPage()
 @Component({
-  selector: 'page-tienda-mascotas-start',
-  templateUrl: 'tienda-mascotas-start.html',
+  selector: 'page-formulario-start',
+  templateUrl: 'formulario-start.html',
 })
-export class TiendaMascotasStartPage {
+export class FormularioStartPage {
 
   nombre = '';
   telefono = '';
@@ -223,6 +222,8 @@ export class TiendaMascotasStartPage {
     this.sabado = true;
     this.domingo = true;
 
+    this.dias = [];
+
     if (!this.lunesCerrado) {
       if (this.lunesInicio && this.lunesCierre) {
         this.dias.push({
@@ -241,7 +242,7 @@ export class TiendaMascotasStartPage {
       });
     }
     if (!this.martesCerrado) {
-      if (this.martesInicio && this.martesCerrado) {
+      if (this.martesInicio && this.martesCierre) {
         this.dias.push({
           nombre: 'Martes',
           inicio: this.martesInicio,
@@ -258,7 +259,7 @@ export class TiendaMascotasStartPage {
       });
     }
     if (!this.miercolesCerrado) {
-      if (this.miercolesInicio && this.miercolesCerrado) {
+      if (this.miercolesInicio && this.miercolesCierre) {
         this.dias.push({
           nombre: 'Miércoles',
           inicio: this.miercolesInicio,
@@ -275,7 +276,7 @@ export class TiendaMascotasStartPage {
       });
     }
     if (!this.juevesCerrado) {
-      if (this.juevesInicio && this.juevesCerrado) {
+      if (this.juevesInicio && this.juevesCierre) {
         this.dias.push({
           nombre: 'Jueves',
           inicio: this.juevesInicio,
@@ -292,7 +293,7 @@ export class TiendaMascotasStartPage {
       });
     }
     if (!this.viernesCerrado) {
-      if (this.viernesInicio && this.viernesCerrado) {
+      if (this.viernesInicio && this.viernesCierre) {
         this.dias.push({
           nombre: 'Viernes',
           inicio: this.viernesInicio,
@@ -309,7 +310,7 @@ export class TiendaMascotasStartPage {
       });
     }
     if (!this.sabadoCerrado) {
-      if (this.sabadoInicio && this.sabadoCerrado) {
+      if (this.sabadoInicio && this.sabadoCierre) {
         this.dias.push({
           nombre: 'Sábado',
           inicio: this.sabadoInicio,
@@ -326,7 +327,7 @@ export class TiendaMascotasStartPage {
       });
     }
     if (!this.domingoCerrado) {
-      if (this.domingoInicio && this.domingoCerrado) {
+      if (this.domingoInicio && this.domingoCierre) {
         this.dias.push({
           nombre: 'Domingo',
           inicio: this.domingoInicio,
@@ -342,6 +343,8 @@ export class TiendaMascotasStartPage {
         cerrado: true
       });
     }
+    console.log(this.dias);
+    
   }
 
   presentActionSheet() {

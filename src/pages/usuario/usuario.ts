@@ -6,8 +6,8 @@ import { MisPedidosPage } from '../mis-pedidos/mis-pedidos';
 import { AuthProvider } from '../../providers/auth/auth';
 import { TiendaEcommercePage } from '../tienda-ecommerce/tienda-ecommerce';
 import { LocalizacionProvider } from '../../providers/localizacion/localizacion';
-import { InscripcionPage } from '../inscripcion/inscripcion';
 import { TiendaMueblesPage } from '../tienda-muebles/tienda-muebles';
+import { FormularioInscripcionPage } from '../formulario-inscripcion/formulario-inscripcion';
 
 @IonicPage()
 @Component({
@@ -129,7 +129,7 @@ export class UsuarioPage {
   }
 
   openInscripcion() {
-    this.navCtrl.push(InscripcionPage, {
+    this.navCtrl.push(FormularioInscripcionPage, {
       id: this.user._id,
       isSolicitud: this.user.isSolicitud
     });

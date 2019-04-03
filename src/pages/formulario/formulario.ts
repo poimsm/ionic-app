@@ -49,7 +49,7 @@ export class FormularioPage {
     private _popups: PopupsProvider,
     private _auth: AuthProvider,
     private _config: ConfigProvider
-  ) { 
+  ) {
     this.apiURL = this._config.apiURL;
   }
 
@@ -292,12 +292,12 @@ export class FormularioPage {
 
   crearTienda(tipo) {
 
-    const email = 'mitienda03@joopiter.com';
+    const email = '0001@joopiter.com';
     const password = '292933';
     const ciudad = 'Valdivia'
 
     console.log('Pasoo');
-    
+
 
     if (tipo == 'algo dulce') {
 
@@ -396,6 +396,37 @@ export class FormularioPage {
                   tienda: {
                     id: data.id,
                     tipo: 'ecommerce'
+                  }
+                }
+                this._auth.actualizarUsuario(body, res.id)
+                  .then(() => console.log('LISTOOO'));
+              });
+          }
+        });
+    }
+
+    if (tipo == 'mascotas') {
+
+      this._auth.loginUpFormulario('admin01', email, password)
+        .then((res: any) => {
+          if (res.ok) {
+            const url = `${this.apiURL}/apps/tienda-crear`;
+
+            const body: any = {
+              tipo: 'mascotas',
+              usuario: res.id,
+              ciudad: ciudad,
+              admins: [email]
+            }
+
+            this.http.post(url, body).toPromise()
+              .then((data: any) => {
+                const body = {
+                  isTienda: true,
+                  tipo: 'cuenta tienda',
+                  tienda: {
+                    id: data.id,
+                    tipo: 'mascotas'
                   }
                 }
                 this._auth.actualizarUsuario(body, res.id)

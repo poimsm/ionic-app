@@ -107,6 +107,16 @@ export class AuthProvider {
     }
   }
 
+  updateStorage(token) {
+    return new Promise((resolve, reject) => {
+      this.getUser(token)
+      .then((resUser: any) => {
+        this.saveStorage(token, resUser.user);
+        resolve();
+      });
+    });
+  }
+
   loadStorage() {
     if (this.platform.is('cordova')) {
       this.storage.get('authData').then(res => {
@@ -163,6 +173,17 @@ export class AuthProvider {
     const url = `${this.apiURL}/users/check-email`;
     const body = { email };
     return this.http.post(url, body).toPromise();
+  }
+
+  updateUser(token, body, id) {
+    return new Promise((resolve, reject) => {
+      const url = `${this.apiURL}/users/actualizar/${id}`;
+      this.http.post(url, body).toPromise()
+      .then(() => {
+        this.updateStorage(token)
+        .then(() => resolve());
+      });
+    });   
   }
 
   actualizarUsuario(body, id) {

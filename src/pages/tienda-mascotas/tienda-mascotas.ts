@@ -10,6 +10,7 @@ import { TiendaMascotasAgendaPage } from '../tienda-mascotas-agenda/tienda-masco
 import { TiendaMascotasDatosPage } from '../tienda-mascotas-datos/tienda-mascotas-datos';
 import { TiendaMascotasInfoPage } from '../tienda-mascotas-info/tienda-mascotas-info';
 import { TiendaMascotasStartPage } from '../tienda-mascotas-start/tienda-mascotas-start';
+import { DataProvider } from '../../providers/data/data';
 
 
 @IonicPage()
@@ -25,15 +26,29 @@ export class TiendaMascotasPage {
   codigo = TiendaMascotasCodigoPage;
   agenda = TiendaMascotasAgendaPage;
   datos = TiendaMascotasDatosPage;
+  // data: any;
+  tiendaID: string;
+  tienda: any;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private actionSheetCtrl: ActionSheetController,
-    public modalCtrl: ModalController
-    ) {
-      // this.openModal('start');
-      this.openModalStart();
+    public modalCtrl: ModalController,
+    private _data: DataProvider
+  ) {
+    // this.openModal('start');
+    // this.openModalStart();
+    this.tiendaID = this.navParams.get('tiendaID');
+  }
+
+  ionViewDidEnter() {
+    this.cargarTienda();
+  }
+
+  cargarTienda() {
+    this._data.fetchTienda(this.tiendaID)
+      .then(data => (this.tienda = data));
   }
 
   nuevoActionSheet() {
@@ -59,8 +74,8 @@ export class TiendaMascotasPage {
       ]
     });
     actionSheet.present();
-  }  
-  
+  }
+
   openPage(page) {
     this.navCtrl.push(page)
   }
@@ -74,7 +89,12 @@ export class TiendaMascotasPage {
 
   openModalStart() {
     const modal = this.modalCtrl.create(TiendaMascotasStartPage);
-    modal.onDidDismiss(() => {
+    modal.onDidDismiss(res => {
+      if (res.ok) {
+
+      } else {
+        this.navCtrl.pop();
+      }
     });
     modal.present();
   }

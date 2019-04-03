@@ -30,6 +30,8 @@ import { Muebles2Page } from "../muebles2/muebles2";
 import { BellezaPage } from "../belleza/belleza";
 import { TiendaMascotasPage } from "../tienda-mascotas/tienda-mascotas";
 import { SuperCategoryPage } from "../super-category/super-category";
+import { BikePage } from "../bike/bike";
+import { FormularioStartPage } from "../formulario-start/formulario-start";
 
 
 @Component({
@@ -55,6 +57,7 @@ export class HomePage {
   muebles = MueblesPage;
   muebles2 = Muebles2Page;
   belleza = BellezaPage;
+  bike = BikePage;
 
   cosas = [];
   algoDulce = [];
@@ -211,20 +214,52 @@ export class HomePage {
     this.navCtrl.push(CarroPage);
   }
 
-  openUser2() {
+  openUser() {
     if (this.isAuth) {
-      this.navCtrl.push(UsuarioPage, {
-        user: this.user,
-        token: this.token
-      });
+
+      if (this.user.tipo == 'cuenta tienda') {
+        this.openTienda();
+      } else {
+        this.openUsuario();
+      }
+
     } else {
       this.navCtrl.push(LoginPage);
     }
   }
 
-  openUser() {
-    // this.navCtrl.push(TiendaMueblesPage);
-    this.navCtrl.push(TiendaMascotasPage);
+  openTienda() {
+    if (this.user.tienda.tipo == 'mascotas') {
+      this._data.fetchTienda(this.user.tienda.id).then((data: any) => {
+        
+        if (data.isFirstLoggin) {
+          this.openModalStart();
+        } else {
+          this.navCtrl.push(TiendaMascotasPage, { tiendaID: this.user.tienda.id });
+        }
+      });
+    }
+
+    if (this.user.tienda.tipo == 'super') {
+      console.log('Do your magic');      
+    }
+  }
+
+  openUsuario() {
+    this.navCtrl.push(UsuarioPage, {
+      user: this.user,
+      token: this.token
+    });
+  }
+
+  openModalStart() {
+    const modal = this.modalCtrl.create(FormularioStartPage, { tiendaID: this.user.tienda.id, token: this.token });
+    modal.onDidDismiss(res => {
+      if (res.ok) {
+        this.navCtrl.push(TiendaMascotasPage, { tiendaID: this.user.tienda.id });
+      }
+    });
+    modal.present();
   }
 
   reloadInicio() {
