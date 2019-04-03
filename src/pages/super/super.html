@@ -13,59 +13,21 @@
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let producto of productos" style="display:flex;flex-wrap:wrap;border-bottom:1px solid #eee;border-top:1px solid #eee">
-    <div *ngFor="let data of producto.data" style="height:160px;width:33%;border-right:1px solid #eee;">
-      <img [src]="data.img"
+  <div *ngFor="let tienda of supers" style="display:flex;flex-wrap:wrap;border-bottom:1px solid #eee;border-top:1px solid #eee">
+    <div  style="height:160px;width:100%;border-right:1px solid #eee;">
+      <img [src]="imgPerfil"
       style="height:90px;object-fit:cover">
       <div style="padding:5px">
         <div style="font-weight:550;color:#666;font-size:15px">
-          {{data.titulo}}
+          {{tienda.nombre}}
         </div>
         <div style="margin-top:5px;color:#777;font-size:14px">
-          {{data.precio}}
+          {{tienda.direccion}}
         </div>
       </div>
     </div>
   </div>
 
-  <div style="display:flex;flex-wrap:wrap;border-bottom:1px solid #eee;border-top:1px solid #eee">
-    <div style="height:160px;width:33%;border-right:1px solid #eee;">
-      <div style="height:90px;width:100%;background:red">
-      </div>
-      <div style="padding:5px">
-        <div style="font-weight:550;color:#666;font-size:15px">
-          Leche colun descre
-        </div>
-        <div style="margin-top:5px;color:#777;font-size:14px">
-          $1990
-        </div>
-      </div>
-    </div>
-    <div style="height:160px;width:33%;border-right:1px solid #eee;">
-      <div style="height:90px;width:100%;background:red">
-      </div>
-      <div style="padding:5px">
-        <div style="font-weight:550;color:#666;font-size:15px">
-          Leche colun descre
-        </div>
-        <div style="margin-top:5px;color:#777;font-size:14px">
-          $1990
-        </div>
-      </div>
-    </div>
-    <div style="height:160px;width:33%;border-right:0px solid #eee;">
-      <div style="height:90px;width:100%;background:red">
-      </div>
-      <div style="padding:5px">
-        <div style="font-weight:550;color:#666;font-size:15px">
-          Leche colun descre
-        </div>
-        <div style="margin-top:5px;color:#777;font-size:14px">
-          $1990
-        </div>
-      </div>
-    </div>
-  </div>
 
 
   <div style="display:flex;flex-wrap:wrap;border-bottom:1px solid #eee">

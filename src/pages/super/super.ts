@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SuperCategoryPage } from '../super-category/super-category';
+import { DataProvider } from "../../providers/data/data";
 
 @IonicPage()
 @Component({
@@ -8,18 +9,16 @@ import { SuperCategoryPage } from '../super-category/super-category';
   templateUrl: 'super.html',
 })
 export class SuperPage {
-
+  
   productos = [];
+  supers :any[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private _data: DataProvider) {
     
     const tipo = this.navParams.get('tipo');
-
-    if (tipo == 'super') {
-      this.setSuper();
-    } else {
-      this.setPetShop();
-    }
+    this._data = _data;
+    this.getSupers();
+    
   }
 
   openCategories(){
@@ -68,6 +67,28 @@ export class SuperPage {
     ];
   }
 
+    getSupers()
+    {
+      debugger;
+      this._data.fetchTiendas('super').then((data: any) => (console.log(data),this.supers = data));
+      /*this.supers = [
+        {
+          nombre: 'nombre 1',
+          imgPerfil: '',
+          telefono: 524755,
+          direccion: 'Por ahi'
+
+        },
+        {
+          nombre: 'nombre 2',
+          imgPerfil: '',
+          telefono: 524755,
+          direccion: 'Por ahi'
+
+        },
+        
+      ]*/
+    }
   setPetShop() {
     this.productos = [
       {

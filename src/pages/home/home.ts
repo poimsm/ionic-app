@@ -192,7 +192,7 @@ export class HomePage {
   }
   
   openSuper() {
-    this.navCtrl.push(SuperCategoryPage, { tipo: 'super' })
+    this.navCtrl.push(SuperPage, { tipo: 'super' })
   }
 
   openModelo(pagina) {

@@ -121,6 +121,12 @@ export class DataProvider {
     return this.http.post(url, body).toPromise();
   }
 
+  fetchTiendas(type) {
+    const url = `${this.apiURL}/apps/tiendas-por-tipo`;
+    return this.http.post(url, {...type}).toPromise();
+  }
+
+
   fetchTienda(id) {
     const url = `${this.apiURL}/apps/tienda-one/${id}`;
     return this.http.get(url).toPromise();

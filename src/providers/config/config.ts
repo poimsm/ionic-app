@@ -7,7 +7,7 @@ export class ConfigProvider {
 
   // -------  SET HERE  -------
 
-  ENTORNO = "prod";
+  ENTORNO = "dev";
 
   constructor(public http: HttpClient) {
     this.setAPI();
