@@ -1,0 +1,105 @@
+<ion-header no-border>
+  <ion-navbar color="white">
+    <!-- <ion-title>Tiendas</ion-title> -->
+    <ion-buttons right>
+      <button ion-button icon-only>
+        <ion-icon name="md-more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+
+  <!-- <ion-grid>
+    <ion-row>
+
+      <ion-col *ngFor="let tienda of supers" col-4>
+        <div style="border:0px solid #eee;border-radius:0px">
+          <img [src]="tienda.img"
+            style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:1px solid #eee">
+          <div style="padding:5px;width:100%;font-size:15px;color:#444;font-weight:600;overflow:hidden;height:25px">
+            {{tienda.nombre}}
+          </div>
+          <div style="border-top:0.5px dashed #eee;padding:5px;">
+            <div style="width:100%;display:flex;align-items:flex-end;justify-content:flex-end;font-size:15px">
+              <div style="color:darkorange;font-size:14px;margin-left:0px">
+                {{tienda.envios}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid> -->
+
+
+
+
+
+
+  <div style="margin-top:-15px;font-size:20px;color:#666;font-weight:600">
+    Supers
+  </div>
+  <ion-list no-lines>
+    <button *ngFor="let tienda of supers" (click)="openCategorias()" ion-item>
+      <img item-start [src]="tienda.img"
+        style="width:60px;height:60px;border-radius:10px;object-fit:cover;border:1px solid #eee">
+      <div style="font-size:16px;color:#777;">
+        {{tienda.nombre}}
+        <div style="margin-top:3px;display:flex;align-items:center">
+          <ion-icon name="star" style="color:gray;font-size:15px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:gray;font-size:15px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:gray;font-size:15px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:#eee;font-size:15px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:#eee;font-size:15px;margin-right:5px"></ion-icon>
+          <div style="color:#999;font-size:13px">
+            (26)
+          </div>
+        </div>
+        <div style="margin-top:4px;font-size:14px;">
+          {{tienda.comentarios}}
+        </div>
+        <div style="color:darkorange;font-size:14px;margin-left:0px">
+          {{tienda.envios}}
+        </div>
+      </div>
+    </button>
+  </ion-list>
+
+  <hr>
+
+  <div style="font-size:20px;color:#666;font-weight:600">
+    Pet Shops
+  </div>
+  <ion-list no-lines>
+    <button *ngFor="let tienda of petShops" (click)="openCategorias()" ion-item>
+      <img item-start [src]="tienda.img"
+        style="width:60px;height:60px;border-radius:10px;object-fit:cover;border:1px solid #eee">
+      <div style="font-size:16px;color:#777;">
+        {{tienda.nombre}}
+        <div style="margin-top:3px;display:flex;align-items:center">
+          <ion-icon name="star" style="color:gray;font-size:15px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:gray;font-size:15px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:gray;font-size:15px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:#eee;font-size:15px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:#eee;font-size:15px;margin-right:5px"></ion-icon>
+          <div style="color:#999;font-size:13px">
+            (26)
+          </div>
+        </div>
+        <div style="margin-top:4px;font-size:14px;">
+          {{tienda.comentarios}}
+        </div>
+        <div style="color:darkorange;font-size:14px;margin-left:0px">
+          {{tienda.envios}}
+        </div>
+      </div>
+    </button>
+  </ion-list>
+
+
+</ion-content>

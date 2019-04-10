@@ -1,0 +1,161 @@
+<ion-header no-border>
+  <ion-navbar color="white">
+    <ion-title>Pedidos</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only>
+        <ion-icon name="md-more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+  <!-- <div style="width:100%;display:flex;justify-content:center">
+    <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1554188075/0x0.png"
+      style="margin-bottom:15px;height:80px;object-fit:cover">
+  </div> -->
+
+
+  <div style="padding:10px;padding-left:15px;width:100%;background:rgb(248, 248, 248)">
+    ¿QUIÉN ENVÍA?
+  </div>
+
+  <button ion-item (click)="openMapa('envia')">
+    <ion-icon item-start name="body" style="color:darkorange;font-size:22px"></ion-icon>
+    <div *ngIf="!origen.ok" style="font-size:16px">
+      Calle y número
+    </div>
+    <div *ngIf="origen.ok">
+      {{origen.address}}
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px"></ion-icon>
+  </button>
+
+  <div style="padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:500">
+    ¿Piso, puerta...? (Opcional)
+  </div>
+  <ion-item>
+    <ion-input [(ngModel)]="puertaEnvia" type="text" placeholder="Tu respuesta"></ion-input>
+  </ion-item>
+
+
+  <div style="padding:10px;padding-left:15px;width:100%;background:rgb(248, 248, 248)">
+    ¿QUIÉN RECIBE?
+  </div>
+
+  <button ion-item (click)="openMapa('recibe')">
+    <ion-icon item-start name="body" style="color:darkorange;font-size:22px"></ion-icon>
+    <div *ngIf="!destino.ok" style="font-size:16px">
+      Calle y número
+    </div>
+    <div *ngIf="destino.ok">
+      {{destino.address}}
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px"></ion-icon>
+  </button>
+
+  <div style="padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:500">
+    ¿Piso, puerta...? (Opcional)
+  </div>
+  <ion-item>
+    <ion-input [(ngModel)]="puertaRecibe" type="text" placeholder="Tu respuesta"></ion-input>
+  </ion-item>
+
+  <div style="padding:10px;padding-left:15px;width:100%;background:rgb(248, 248, 248)">
+    DETALLES
+  </div>
+
+  <div style="padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:500">
+    Tu nombre
+  </div>
+  <ion-item>
+    <ion-input [(ngModel)]="nombre" type="text" placeholder="Tu respuesta"></ion-input>
+  </ion-item>
+
+  <div style="padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:500">
+    Tu teléfono
+  </div>
+  <ion-item>
+    <ion-input [(ngModel)]="telefono" type="tel" placeholder="Tu respuesta"></ion-input>
+  </ion-item>
+
+
+
+
+  <!-- <button ion-item (click)="openEnviaRecibe('envia')" no-lines>
+    <ion-icon item-start name="body" style="color:darkorange;font-size:22px"></ion-icon>
+    <div style="font-size:16px">
+      ¿Quién envía?
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px"></ion-icon>
+  </button>
+  <button ion-item (click)="openEnviaRecibe('recive')" no-lines>
+    <ion-icon item-start name="body" style="color:gold;font-size:22px"></ion-icon>
+    <div style="font-size:16px">
+      ¿Quién recive?
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px"></ion-icon>
+  </button> -->
+
+  <div style="height:10px;width:100%;background:rgb(248, 248, 248)">
+  </div>
+
+  <ion-item no-lines style="margin-top:0px">
+    <ion-icon item-start name="time" style="color:#bbb;font-size:22px"></ion-icon>
+    <ion-label>
+      <div style="padding:0px;font-size:16px">
+        ¿Programar entrega?
+      </div>
+    </ion-label>
+    <ion-toggle [(ngModel)]="isReservas" (ionChange)="onChange($event)" mode="ios"></ion-toggle>
+  </ion-item>
+
+  <div style="height:10px;width:100%;background:rgb(248, 248, 248)">
+  </div>
+
+  <div style="height:15px"></div>
+
+  <ion-item no-lines>
+    <ion-textarea style="border-radius:5px;border:1px solid #eee" rows="3" [(ngModel)]="nota"
+      placeholder="Agregar una nota"></ion-textarea>
+  </ion-item>
+
+  <div (click)="openInscripcion()"
+    style="margin-top:35px;margin-bottom:20px;width:100%;text-align:center;text-decoration:underline;color:#666;font-size:16px">
+    Registrar mi tienda
+  </div>
+
+
+</ion-content>
+
+
+
+
+
+
+<ion-footer style="background:white">
+  <div>
+    <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+
+      <div style="width:30%;display:flex;justify-content:center;border-right:1px solid #eee">
+        <ion-icon name="call" style="color:#bbb;font-size:20px"></ion-icon>
+      </div>
+
+      <div style="padding-right:0px;color:#999;font-size:16px">
+        Total:
+        <span style="color:orangered;font-weight:600;">
+          $2.300
+        </span>
+      </div>
+
+      <div style="padding:12px;background:orange;color:white;font-size:15px;font-weight:500">
+        <div style="width:100%;text-align:center">
+          Confirmar orden
+        </div>
+      </div>
+
+    </div>
+  </div>
+</ion-footer>

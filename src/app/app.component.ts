@@ -4,15 +4,15 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { AuthProvider } from "../providers/auth/auth";
 import { HomePage } from "../pages/home/home";
-import { LoginPage } from '../pages/login/login';
-import { UsuarioPage } from '../pages/usuario/usuario';
+import { LoginPage } from '../pages/usuario/login/login';
+import { UsuarioPage } from '../pages/usuario/usuario/usuario';
 import { PopupsProvider } from '../providers/popups/popups';
-import { UpgradePage } from '../pages/upgrade/upgrade';
-import { MisPedidosPage } from '../pages/mis-pedidos/mis-pedidos';
+import { UpgradePage } from '../pages/tools/upgrade/upgrade';
+import { MisPedidosPage } from '../pages/usuario/mis-pedidos/mis-pedidos';
 import { OncePage } from "../pages/index.pages";
 import { LocalizacionProvider } from '../providers/localizacion/localizacion';
-import { EcommercePage } from '../pages/ecommerce/ecommerce';
-import { ComidaPage } from '../pages/comida/comida';
+import { EcommercePage } from '../pages/app-ecommerce/ecommerce/ecommerce';
+import { ComidaPage } from '../pages/app-comida/comida/comida';
 
 @Component({
   templateUrl: "app.html"

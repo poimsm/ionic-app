@@ -1,36 +1,32 @@
 import { Component } from "@angular/core";
 import { NavController, Platform, ModalController } from 'ionic-angular';
-import { OncePage } from '../once/once';
-import { UsuarioPage } from '../usuario/usuario';
+import { OncePage } from '../app-once/once/once';
+import { UsuarioPage } from '../usuario/usuario/usuario';
 import { AuthProvider } from '../../providers/auth/auth';
-import { BandejaPage } from '../bandeja/bandeja';
-import { FormularioPage } from '../formulario/formulario';
+import { FormularioPage } from '../tools/formulario/formulario';
 import { PopupsProvider } from '../../providers/popups/popups';
-import { CarroPage } from '../carro/carro';
-import { FrutasPage } from '../frutas/frutas';
-import { NocturnoPage } from '../nocturno/nocturno';
-import { EstiloPage } from '../estilo/estilo';
-import { LocalizacionPage } from '../localizacion/localizacion';
-import { LoginPage } from '../login/login';
+import { CarroPage } from '../carro/carro/carro';
+import { EstiloPage } from '../experimental/estilo/estilo';
+import { LoginPage } from '../usuario/login/login';
 import { LocalizacionProvider } from '../../providers/localizacion/localizacion';
-import { ComidaPage } from '../comida/comida';
-import { EcommercePage } from "../ecommerce/ecommerce";
+import { ComidaPage } from '../app-comida/comida/comida';
+import { EcommercePage } from "../app-ecommerce/ecommerce/ecommerce";
 import { CarroProvider } from '../../providers/carro/carro';
 import { DataProvider } from '../../providers/data/data';
-import { OnceContentPage } from "../once-content/once-content";
-import { EcommerceContentPage } from '../ecommerce-content/ecommerce-content';
-import { ComidaContentPage } from '../comida-content/comida-content';
-import { LavadoPage } from "../lavado/lavado";
-import { MascotasPage } from "../mascotas/mascotas";
-import { SuperPage } from "../super/super";
-import { AlquilerPage } from "../alquiler/alquiler";
-import { MueblesPage } from "../muebles/muebles";
-import { TiendaMueblesPage } from "../tienda-muebles/tienda-muebles";
-import { Muebles2Page } from "../muebles2/muebles2";
-import { BellezaPage } from "../belleza/belleza";
-import { TiendaMascotasPage } from "../tienda-mascotas/tienda-mascotas";
-import { BikePage } from "../bike/bike";
-import { FormularioStartPage } from "../formulario-start/formulario-start";
+import { OnceContentPage } from "../app-once/once-content/once-content";
+import { EcommerceContentPage } from '../app-ecommerce/ecommerce-content/ecommerce-content';
+import { ComidaContentPage } from '../app-comida/comida-content/comida-content';
+import { LavadoPage } from "../experimental/lavado/lavado";
+import { MascotasPage } from "../app-mascotas/mascotas/mascotas";
+import { SuperPage } from "../app-super/super/super";
+import { AlquilerPage } from "../experimental/alquiler/alquiler";
+import { MueblesPage } from "../app-muebles/muebles/muebles";
+import { Muebles2Page } from "../app-muebles/muebles2/muebles2";
+import { BellezaPage } from "../experimental/belleza/belleza";
+import { TiendaMascotasPage } from "../app-mascotas/tienda-mascotas/tienda-mascotas";
+import { BikePage } from "../app-bike/bike/bike";
+import { FormularioStartPage } from "../tools/formulario-start/formulario-start";
+import { SuperTiendasPage } from "../app-super/super-tiendas/super-tiendas";
 
 
 @Component({
@@ -42,10 +38,7 @@ export class HomePage {
   once = OncePage;
   usuario = UsuarioPage;
   carro = CarroPage;
-  bandeja = BandejaPage;
   formulario = FormularioPage;
-  frutas = FrutasPage;
-  nocturno = NocturnoPage;
   estilo = EstiloPage;
   comida = ComidaPage;
   ecommerce = EcommercePage;
@@ -163,13 +156,13 @@ export class HomePage {
 
 
   openModal() {
-    const modal = this.modalCtrl.create(LocalizacionPage);
-    modal.onDidDismiss(data => {
-      if (data.ok) {
-        console.log(data.ciudad);
-      }
-    });
-    modal.present();
+    // const modal = this.modalCtrl.create(LocalizacionPage);
+    // modal.onDidDismiss(data => {
+    //   if (data.ok) {
+    //     console.log(data.ciudad);
+    //   }
+    // });
+    // modal.present();
   }
 
   openPage(pagina) {
@@ -194,7 +187,7 @@ export class HomePage {
   }
 
   openSuper() {
-    this.navCtrl.push(SuperPage, { tipo: 'super' })
+    this.navCtrl.push(SuperTiendasPage, { tipo: 'super' })
   }
 
   openModelo(pagina) {
@@ -229,7 +222,7 @@ export class HomePage {
 
   openTienda() {
     if (this.user.tienda.tipo == 'mascotas') {
-      this._data.fetchTienda(this.user.tienda.id).then((data: any) => {
+      this._data.getOneTienda_Mascota(this.user.tienda.id).then((data: any) => {
         
         if (data.isFirstLoggin) {
           this.openModalStart();

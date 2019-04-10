@@ -5,15 +5,11 @@ import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
 import { InAppBrowser } from "@ionic-native/in-app-browser";
 
-import { AngularFireModule } from "angularfire2";
-import { AngularFirestoreModule } from "angularfire2/firestore";
-import { AngularFireStorageModule } from "angularfire2/storage";
-import {
-  AngularFireDatabaseModule,
-  AngularFireDatabase
-} from "angularfire2/database";
-import { AngularFireAuthModule } from "angularfire2/auth";
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
 import { FirebaseMessaging } from "@ionic-native/firebase-messaging";
+// import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
 
 import { ImagePicker } from "@ionic-native/image-picker";
 import { PipesModule } from "../pipes/pipes.module";
@@ -21,6 +17,9 @@ import { Camera } from "@ionic-native/camera";
 import { IonicStorageModule } from "@ionic/storage";
 import { AppVersion } from "@ionic-native/app-version";
 import { FileTransfer } from "@ionic-native/file-transfer";
+import { Geolocation } from '@ionic-native/geolocation';
+import { AgmCoreModule } from '@agm/core';
+
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAUecL57weWVkb-4OR0TBCM1f18tHgqi5M",
@@ -37,11 +36,7 @@ import {
   OncePage,
   UsuarioPage,
   OnceContentPage,
-  CategoriasPage,
   DatosPersonalesPage,
-  BandejaPage,
-  LoginEmailPage,
-  BandejaContentPage,
   UpgradePage,
   FormularioPage,
   CarroContentPage,
@@ -50,38 +45,14 @@ import {
   CarroCompraExitosaPage,
   MisPedidosPage,
   MisPedidosContentPage,
-  FrutasContentPage,
-  FrutasPage,
-  NocturnoPage,
-  NocturnoContentPage,
-  TiendaGaleriaPage,
-  TiendaProductoPage,
-  GaleriaImagenPage,
-  GaleriaPage,
   EstiloPage,
   EstiloContentPage,
-  TiendaHorarioPage,
-  TiendaAlojamientoPage,
-  LocalizacionPage,
   WishlistPage,
   ComidaPage,
   ComidaContentPage,
-  TiendaComidaPage,
-  TiendaAlgoDulcePage,
-  TiendaComidaNuevoPage,
-  TiendaEnviosPage,
-  TiendaEnviosDeliveryPage,
-  TiendaEnviosEcommercePage,
-  TiendaEcommercePage,
-  TiendaEcommerceNuevoPage,
   EcommercePage,
   EcommerceContentPage,
-  TiendaEcommerceProductosPage,
-  TiendaComidaProductosPage,
-  TiendaAlgoDulceNuevoPage,
-  TiendaAlgoDulceProductosPage,
   InformacionesPage,
-  TiendaComidaListasPage,
   LavadoContentPage,
   LavadoPage,
   AlquilerPage,
@@ -93,15 +64,7 @@ import {
   MueblesPage,
   MueblesContentPage,
   InscripcionPage,
-  TiendaMueblesPage,
-  TiendaMueblesNuevoPage,
-  TiendaMueblesProductosPage,
-  OfertaPage,
-  PaquetePage,
   IntroduccionPage,
-  MisProductosPage,
-  MisVentasPage,
-  MisProductosContentPage,
   Muebles2Page,
   MueblesCustomPage,
   MueblesDimensionPage,
@@ -125,7 +88,12 @@ import {
   BikeHistorialPage,
   BikeProgramarPage,
   FormularioInscripcionPage,
-  FormularioStartPage
+  FormularioStartPage,
+  SuperTiendasPage,
+  SuperCategoriasPage,
+  SuperProductosPage,
+  BikeIntroPage,
+  BikeDireccionPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -136,6 +104,7 @@ import { CarroProvider } from "../providers/carro/carro";
 import { ImageProvider } from "../providers/image/image";
 import { LocalizacionProvider } from "../providers/localizacion/localizacion";
 import { ConfigProvider } from "../providers/config/config";
+import { BikeProvider } from '../providers/bike/bike';
 
 @NgModule({
   declarations: [
@@ -145,11 +114,7 @@ import { ConfigProvider } from "../providers/config/config";
     OncePage,
     UsuarioPage,
     OnceContentPage,
-    CategoriasPage,
     DatosPersonalesPage,
-    BandejaPage,
-    LoginEmailPage,
-    BandejaContentPage,
     UpgradePage,
     FormularioPage,
     CarroContentPage,
@@ -158,38 +123,14 @@ import { ConfigProvider } from "../providers/config/config";
     CarroCompraExitosaPage,
     MisPedidosPage,
     MisPedidosContentPage,
-    FrutasContentPage,
-    FrutasPage,
-    NocturnoPage,
-    NocturnoContentPage,
-    TiendaGaleriaPage,
-    TiendaProductoPage,
-    GaleriaImagenPage,
-    GaleriaPage,
     EstiloPage,
     EstiloContentPage,
-    TiendaHorarioPage,
-    TiendaAlojamientoPage,
-    LocalizacionPage,
     WishlistPage,
     ComidaPage,
     ComidaContentPage,
-    TiendaComidaPage,
-    TiendaAlgoDulcePage,
-    TiendaComidaNuevoPage,
-    TiendaEnviosPage,
-    TiendaEnviosDeliveryPage,
-    TiendaEnviosEcommercePage,
-    TiendaEcommercePage,
-    TiendaEcommerceNuevoPage,
     EcommercePage,
     EcommerceContentPage,
-    TiendaEcommerceProductosPage,
-    TiendaComidaProductosPage,
-    TiendaAlgoDulceNuevoPage,
-    TiendaAlgoDulceProductosPage,
     InformacionesPage,
-    TiendaComidaListasPage,
     LavadoContentPage,
     LavadoPage,
     AlquilerPage,
@@ -201,15 +142,7 @@ import { ConfigProvider } from "../providers/config/config";
     MueblesPage,
     MueblesContentPage,
     InscripcionPage,
-    TiendaMueblesPage,
-    TiendaMueblesNuevoPage,
-    TiendaMueblesProductosPage,
-    OfertaPage,
-    PaquetePage,
     IntroduccionPage,
-    MisProductosPage,
-    MisVentasPage,
-    MisProductosContentPage,
     Muebles2Page,
     MueblesCustomPage,
     MueblesDimensionPage,
@@ -233,19 +166,25 @@ import { ConfigProvider } from "../providers/config/config";
     BikeHistorialPage,
     BikeProgramarPage,
     FormularioInscripcionPage,
-    FormularioStartPage
+    FormularioStartPage,
+    SuperTiendasPage,
+    SuperCategoriasPage,
+    SuperProductosPage,
+    BikeIntroPage,
+    BikeDireccionPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp, { backButtonText: "Atras" }),
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    AngularFireStorageModule,
     AngularFirestoreModule,
     PipesModule,
     IonicStorageModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDrc_AM9eMidi_yXt0h7q-orH0vt9D13vk',
+      libraries: ['places']
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -255,11 +194,7 @@ import { ConfigProvider } from "../providers/config/config";
     OncePage,
     UsuarioPage,
     OnceContentPage,
-    CategoriasPage,
     DatosPersonalesPage,
-    BandejaPage,
-    LoginEmailPage,
-    BandejaContentPage,
     UpgradePage,
     FormularioPage,
     CarroContentPage,
@@ -268,38 +203,14 @@ import { ConfigProvider } from "../providers/config/config";
     CarroCompraExitosaPage,
     MisPedidosPage,
     MisPedidosContentPage,
-    FrutasContentPage,
-    FrutasPage,
-    NocturnoPage,
-    NocturnoContentPage,
-    TiendaGaleriaPage,
-    TiendaProductoPage,
-    GaleriaImagenPage,
-    GaleriaPage,
     EstiloPage,
     EstiloContentPage,
-    TiendaHorarioPage,
-    TiendaAlojamientoPage,
-    LocalizacionPage,
     WishlistPage,
     ComidaPage,
     ComidaContentPage,
-    TiendaComidaPage,
-    TiendaAlgoDulcePage,
-    TiendaComidaNuevoPage,
-    TiendaEnviosPage,
-    TiendaEnviosDeliveryPage,
-    TiendaEnviosEcommercePage,
-    TiendaEcommercePage,
-    TiendaEcommerceNuevoPage,
     EcommercePage,
     EcommerceContentPage,
-    TiendaEcommerceProductosPage,
-    TiendaComidaProductosPage,
-    TiendaAlgoDulceNuevoPage,
-    TiendaAlgoDulceProductosPage,
     InformacionesPage,
-    TiendaComidaListasPage,
     LavadoContentPage,
     LavadoPage,
     AlquilerPage,
@@ -311,15 +222,7 @@ import { ConfigProvider } from "../providers/config/config";
     MueblesPage,
     MueblesContentPage,
     InscripcionPage,
-    TiendaMueblesPage,
-    TiendaMueblesNuevoPage,
-    TiendaMueblesProductosPage,
-    OfertaPage,
-    PaquetePage,
     IntroduccionPage,
-    MisProductosPage,
-    MisVentasPage,
-    MisProductosContentPage,
     Muebles2Page,
     MueblesCustomPage,
     MueblesDimensionPage,
@@ -343,13 +246,17 @@ import { ConfigProvider } from "../providers/config/config";
     BikeHistorialPage,
     BikeProgramarPage,
     FormularioInscripcionPage,
-    FormularioStartPage
+    FormularioStartPage,
+    SuperTiendasPage,
+    SuperCategoriasPage,
+    SuperProductosPage,
+    BikeIntroPage,
+    BikeDireccionPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    AngularFireDatabase,
     DataProvider,
     ImagePicker,
     Camera,
@@ -362,7 +269,10 @@ import { ConfigProvider } from "../providers/config/config";
     InAppBrowser,
     ImageProvider,
     LocalizacionProvider,
-    ConfigProvider
+    ConfigProvider,
+    BikeProvider,
+    Geolocation
+    // AngularFireDatabase
   ]
 })
 export class AppModule { }

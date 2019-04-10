@@ -1,0 +1,219 @@
+<ion-header no-border>
+
+  <ion-navbar color="white">
+    <ion-buttons right>
+      <button (click)="openPage(codigo)" small ion-button outline mode="ios">
+        Publicar
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content>
+
+  <hr>
+  <div padding style="width:100%;display:flex;justify-content:center;flex-wrap:wrap">
+    <div (click)="presentActionSheet()"
+      style="margin:10px;width:80px;height:80px;border:1px dashed #eee;display:flex;justify-content:center;align-items:center">
+      <ion-icon name="md-camera" style="font-size:32px;color:#999"></ion-icon>
+    </div>
+    <div *ngFor="let imagen of imagenes">
+      <div
+        style="margin:10px;min-height:80px;width:80px;background-size:cover;background-repeat: no-repeat;background-position: center;"
+        [ngStyle]="{'background-image': 'url(' + imagen.url + ')' }">
+      </div>
+    </div>
+  </div>
+
+
+  <div style="padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:600">
+    ¿Título?
+  </div>
+  <ion-item>
+    <ion-input [(ngModel)]="titulo" type="text" placeholder="Tu respuesta"></ion-input>
+  </ion-item>
+
+  <div style="margin-top:20px;padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:600">
+    Agregar una breve reseña para describir el producto
+  </div>
+  <ion-item>
+    <ion-textarea rows="3" [(ngModel)]="descripcion" placeholder="Tu respuesta"></ion-textarea>
+  </ion-item>
+
+
+  <div style="margin-top:20px;padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:600">
+    Categoría
+  </div>
+
+  <button ion-item>
+    <ion-label>
+      Seleccionar
+    </ion-label>
+    <ion-select [(ngModel)]="categoria">
+      <ion-option *ngFor="let cat of categorias" [value]="cat"> {{cat}} </ion-option>
+    </ion-select>
+  </button>
+
+
+  <div style="margin-top:20px;padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:600">
+    Precio
+  </div>
+
+  <div style="margin-top:10px;margin-left:15px;font-size:16px;color:#666;font-weight:400">
+    Precio normal:
+  </div>
+  <div style="padding:10px;width:100%;display:flex;justify-content:center">
+    <div style="border-radius:3px;width:40%;border-bottom:1px solid #ccc;display:flex;align-items:center">
+      <div style="font-size:16px;font-weight:500;color:#999;padding:5px">
+        $
+      </div>
+      <ion-input [(ngModel)]="precioNormal" type="tel" placeholder="" style="font-size:16px;border:0x solid white">
+      </ion-input>
+    </div>
+  </div>
+
+  <div style="margin-top:10px;margin-left:15px;font-size:16px;color:#666;font-weight:400">
+    Precio de oferta:
+  </div>
+  <div style="padding:10px;width:100%;display:flex;justify-content:center">
+    <div style="border-radius:3px;width:40%;border-bottom:1px solid #ccc;display:flex;align-items:center">
+      <div style="font-size:16px;font-weight:500;color:#999;padding:5px">
+        $
+      </div>
+      <ion-input [(ngModel)]="precioOferta" type="tel" placeholder="" style="font-size:16px;border:0x solid white">
+      </ion-input>
+    </div>
+  </div>
+
+
+  <div style="margin-top:20px;padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:600">
+    Agregar lo que incluye el cupón
+  </div>
+  <div style="padding-left:15px;padding-right:15px;color:#555">
+    {{ejemploIncluye}}
+  </div>
+  <ion-item *ngFor="let item of incluir; let i = index" style="margin-top:15px">
+    <ion-input [(ngModel)]="item.text" type="text" [placeholder]="item.placeholder"></ion-input>
+  </ion-item>
+  <div style="margin-top:20px;width:100%;display:flex;justify-content:center">
+    <div (click)="addIncluir()"
+      style="padding:4px;padding-left:40px;padding-right:40px;border:1px dashed darkorange;color:darkorange;border-radius:10px">
+      + Agregar otro
+    </div>
+  </div>
+
+
+  <div style="margin-top:20px;padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:600">
+    Agregar condiciones
+  </div>
+  <div style="padding-left:15px;padding-right:15px;color:#555">
+    {{ejemploCondiciones}}
+  </div>
+  <ion-item *ngFor="let condicion of condiciones; let i = index" style="margin-top:15px">
+    <ion-input [(ngModel)]="condicion.text" type="text" [placeholder]="condicion.placeholder"></ion-input>
+  </ion-item>
+  <div style="margin-top:20px;width:100%;display:flex;justify-content:center">
+    <div (click)="addCondicion()"
+      style="padding:4px;padding-left:40px;padding-right:40px;border:1px dashed darkorange;color:darkorange;border-radius:10px">
+      + Agregar otro
+    </div>
+  </div>
+
+  <ion-item no-lines style="margin-top:10px">
+    <ion-label>
+      <div style="padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:600">
+        ¿Activar reservaciones?
+      </div>
+    </ion-label>
+    <ion-toggle [(ngModel)]="isReservas" (ionChange)="onChange($event)" mode="ios"></ion-toggle>
+  </ion-item>
+
+  <div padding *ngIf="isReservas">
+
+    <div style="margin-top:0px;margin-bottom:20px;padding-left:15px;padding-right:15px;color:#555">
+      Crea horas para que tus clientes puedan agendar
+    </div>
+
+    <div *ngFor="let dia of dias; let i = index">
+
+      <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+        <div style="padding:8px;padding-left:15px;color:#444;font-size:16px;font-weight:600">
+          {{dia.dia}}
+        </div>
+        <button (click)="openHora(dia.dia)" ion-button outline small mode="ios">
+          Agregar horas
+        </button>
+      </div>
+
+      <div style="margin-top:10px;margin-bottom:30px;width:100%;display:flex;justify-content:flex-start;flex-wrap:wrap">
+        <div *ngFor="let hora of dia.horas; let j = index"
+          style="position:relative;margin-top:10px;margin-left:10px;margin-right:20px">
+          <div
+            style="border-radius:3px;padding:6px;padding-left:10px;padding-right:10px;background:whitesmoke;font-size:13px;color:#333">
+            {{hora.hora}} <span style="color:orangered">X{{hora.cantidad}}</span>
+          </div>
+          <div (click)="delHora(i,j)" style="position:absolute;top:-7px;right:-10px;">
+            <ion-icon name="close-circle" style="font-size:20px;color:#bbb"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div style="height:40px">
+  </div>
+
+</ion-content>
+
+
+
+
+<div *ngIf="showHour" style="z-index:999;position:fixed;top:0px;left:0px;height:100%;width:100%;">
+  <div style="position:relative;height:100%;width:100%">
+    <div (click)="closeHora(false)"
+      style="position:absolute;top:0px;left:0px;background:rgba(0, 0, 0, 0.5);height:100%;width:100%">
+    </div>
+    <div
+      style="border-radius:1px;position:absolute;top: 50%;left: 50%; transform: translate(-50%, -50%);width:250px;background:white;">
+      <div padding style="background:orange;color:white;width:100%;text-align:center;font-size:40px;font-weight:500">
+        {{hora24}}
+      </div>
+      <div padding>
+        <div style="width:100%;display:flex;justify-content:space-around">
+          <ion-icon (click)="changeHora('+')" name="ios-arrow-up" style="font-size:28px;color:#bbb"></ion-icon>
+          <ion-icon (click)="changeMin('+')" name="ios-arrow-up" style="font-size:28px;color:#bbb"></ion-icon>
+          <ion-icon (click)="changeTiempo('+')" name="ios-arrow-up" style="font-size:28px;color:#bbb"></ion-icon>
+        </div>
+        <div style="margin-top:10px;margin-bottom:10px;width:100%;display:flex;justify-content:space-around">
+          <div style="font-size:16px;color:#555">
+            {{hora}}
+          </div>
+          <div style="font-size:16px;color:#555">
+            {{min}}
+          </div>
+          <div style="font-size:16px;color:#555">
+            {{tiempo}}
+          </div>
+        </div>
+        <div style="width:100%;display:flex;justify-content:space-around">
+          <ion-icon (click)="changeHora('-')" name="ios-arrow-down" style="font-size:28px;color:#bbb"></ion-icon>
+          <ion-icon (click)="changeMin('-')" name="ios-arrow-down" style="font-size:28px;color:#bbb"></ion-icon>
+          <ion-icon (click)="changeTiempo('-')" name="ios-arrow-down" style="font-size:28px;color:#bbb"></ion-icon>
+        </div>
+      </div>
+      <hr>
+      <div padding style="width:100%;text-align:right">
+        <span (click)="closeHora(false)" style="margin-left:20px;color:#488aff;font-size:13px;font-weight:500">
+          CANCELAR
+        </span>
+        <span (click)="closeHora(true)" style="margin-left:20px;color:#488aff;font-size:13px;font-weight:500">
+          ACEPTAR
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

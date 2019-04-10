@@ -272,5 +272,54 @@ export class DataProvider {
     });
     toast.present();
   }
+  
+  // ------------------------------------
+  //             INSCRIPCIONES
+  // ------------------------------------
+
+  // ------------------------------------
+  //             IMAGENES
+  // ------------------------------------
+
+  // ------------------------------------
+  //             MASCOTAS
+  // ------------------------------------
+  
+  updateTienda_Mascota(id, body) {
+    const url = `${this.apiURL}/mascotas/update/${id}`;
+    return this.http.put(url, body).toPromise();
+  }
+
+  crearCupon_Mascota(body) {
+    const url = `${this.apiURL}/mascotas/crear-cupon`;
+    this.http.post(url, body).toPromise()
+      .then(() => this.productoCreado());
+  }
+  
+  getTiendas_Mascota() {
+    const url = `${this.apiURL}/mascotas/all`;
+    return this.http.get(url).toPromise();
+  }
+
+  getOneTienda_Mascota(id) {
+    const url = `${this.apiURL}/mascotas/one/${id}`;
+    return this.http.get(url).toPromise();
+  }
+
+  getTiendasSegunCategoria_Mascota(categoria) {
+    const url = `${this.apiURL}/mascotas/categoria/?categoria=${categoria}`;
+    return this.http.get(url).toPromise();
+  }
+
+  
+
+  // ------------------------------------
+  //             BELLEZA
+  // ------------------------------------
+
+  // ------------------------------------
+  //             ESTILO
+  // ------------------------------------
+
 
 }

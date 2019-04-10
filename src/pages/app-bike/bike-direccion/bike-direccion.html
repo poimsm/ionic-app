@@ -1,0 +1,35 @@
+<ion-header no-border>
+
+  <ion-navbar color="white">
+    <ion-title>Definir dirección</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+    <ion-item>
+        <ion-label floating>Enter Address</ion-label>
+        <ion-input id="txtHome" type="text"></ion-input>
+    </ion-item>
+
+  <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+  </agm-map>
+
+  <!-- <ion-item>
+    <ion-label floating>Enter address</ion-label>
+    <ion-input type="text" id="textHome"></ion-input>
+
+  </ion-item>
+
+
+  <ion-item>
+    <ion-icon item-start name="search" style="font-size:26px;color:#bbb"></ion-icon>
+    <ion-input [(ngModel)]="nombre" type="text" placeholder="Tu respuesta"></ion-input>
+  </ion-item>
+  <button ion-button (click)="openMapa()">
+    Mapa
+  </button> -->
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-header no-border>
+    <ion-navbar color="white">
+      <ion-title>Bebidas</ion-title>
+      <ion-buttons right>
+        <button ion-button icon-only>
+          <ion-icon name="md-more"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+
+
+<ion-content padding>
+
+    <ion-grid>
+        <ion-row>
+    
+          <ion-col *ngFor="let producto of productos" col-6 col-md-4 col-xl-3>
+            <div style="border:1px solid #eee;border-radius:0px">
+              <div style="border-radius:0px;min-height:150px; background-size:cover;background-repeat: no-repeat;background-position: center;"
+                [ngStyle]="{'background-image': 'url(' + producto.img + ')' }">
+              </div>
+              <div style="padding:5px;width:100%;font-size:16px;color:#444;font-weight:600">
+                {{producto.titulo}}
+              </div>
+              <div style="border-top:0.5px dashed #eee;padding:5px;">
+                <div style="width:100%;display:flex;align-items:flex-end;justify-content:flex-end;font-size:15px">
+                  <div style="color:#555;font-size:16px">
+                      ${{producto.precio}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ion-col>
+    
+        </ion-row>
+      </ion-grid>
+
+
+</ion-content>

@@ -1,0 +1,52 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>formulario</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <!-- <button (click)="modificarDB()" color="orange3" ion-button>
+    Modificar DATABSE
+  </button> -->
+
+  <button (click)="crearTienda('mascotas')" color="orange3" ion-button>
+    Crear tienda mascotas
+  </button>
+
+  <button (click)="crearTienda('ecommerce')" color="primary" ion-button>
+    Crear tienda ecommerce
+  </button>
+
+  <button (click)="crearTienda('comida')" color="secondary" ion-button>
+    Crear tienda comida
+  </button>
+
+  <button (click)="crearTienda('algo dulce')" color="danger" ion-button>
+    Crear tienda algo dulce
+  </button>
+
+  <button (click)="desayunoSorpresa()" ion-button>
+    Crear desayuno sorpresa
+  </button>
+
+  <button (click)="nocturno()" ion-button>
+    Crear producto delivery nocturno
+  </button>
+
+  <ion-item>
+    <ion-label>Fruta</ion-label>
+    <ion-toggle [(ngModel)]="isFruta"></ion-toggle>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Once</ion-label>
+    <ion-toggle [(ngModel)]="isOnce"></ion-toggle>
+  </ion-item>
+
+  
+
+</ion-content>
