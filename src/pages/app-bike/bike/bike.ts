@@ -6,7 +6,6 @@ import { BikeProvider } from '../../../providers/bike/bike';
 
 declare var google: any;
 
-
 @IonicPage()
 @Component({
   selector: 'page-bike',
@@ -17,13 +16,14 @@ export class BikePage {
   nota: string;
   telefono: string;
   nombre: string;
-  puertaRecibe: string;
-  puertaEnvia: string;
-  enviaAdress: any;
-  recibeAdress: any;
+  puertaEntregar: string;
+  puertaRecoger: string;
   service: any;
   origen: any = {ok: false};
   destino: any = {ok: false};
+
+  rapido = true;
+  programar = false;
 
 
   constructor(
@@ -39,7 +39,7 @@ export class BikePage {
     const modal = this.modalCtrl.create(BikeMapaPage, { tipo });
     modal.onDidDismiss(data => {
       if (data.position.ok) {
-        if (data.tipo == 'envia') {          
+        if (data.tipo == 'recoger') {          
           this.origen = data.position;
         } else {
           this.destino = data.position;
@@ -71,9 +71,21 @@ export class BikePage {
     this.navCtrl.push(BikeProgramarPage);
   }
 
-  onChange(event) {
+  onChangeRapido(event) {
     if (event.checked) {
+      this.programar = false;
+    } else {
+      this.programar = true;
       this.navCtrl.push(BikeProgramarPage);
+    }
+  }
+
+  onChangeProgramar(event) {
+    if (event.checked) {
+      this.rapido = false;
+      this.navCtrl.push(BikeProgramarPage);
+    } else {
+      this.rapido = true;
     }
   }
 

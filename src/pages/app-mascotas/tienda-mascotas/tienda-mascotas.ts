@@ -29,6 +29,8 @@ export class TiendaMascotasPage {
   // data: any;
   tiendaID: string;
   tienda: any;
+  hoy: any;
+  horario: string;
 
   constructor(
     public navCtrl: NavController,
@@ -44,11 +46,28 @@ export class TiendaMascotasPage {
 
   ionViewDidEnter() {
     this.cargarTienda();
+    // this._data.getToday_Mascota()
+    // .then((data: any) => {
+    //   this.hoy = data.today;      
+    // });
   }
 
   cargarTienda() {
-    this._data.fetchTienda(this.tiendaID)
-      .then(data => (this.tienda = data));
+    this._data.getOneTienda_Mascota(this.tiendaID)
+      .then(data => {
+        this.tienda = data;
+        this.tienda.horario
+
+        this.tienda.horario.forEach(item => {
+          if (item.nombre == this.hoy) {
+            if (item.cerrado) {
+              this.horario = 'Hoy cerrado'
+            } else {
+              this.horario = `${item.inicio} - ${item.cierre}`;
+            }
+          }
+        });
+      });
   }
 
   nuevoActionSheet() {

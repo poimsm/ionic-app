@@ -105,6 +105,7 @@ import { ImageProvider } from "../providers/image/image";
 import { LocalizacionProvider } from "../providers/localizacion/localizacion";
 import { ConfigProvider } from "../providers/config/config";
 import { BikeProvider } from '../providers/bike/bike';
+import { MascotasProvider } from '../providers/mascotas/mascotas';
 
 @NgModule({
   declarations: [
@@ -271,7 +272,8 @@ import { BikeProvider } from '../providers/bike/bike';
     LocalizacionProvider,
     ConfigProvider,
     BikeProvider,
-    Geolocation
+    Geolocation,
+    MascotasProvider
     // AngularFireDatabase
   ]
 })

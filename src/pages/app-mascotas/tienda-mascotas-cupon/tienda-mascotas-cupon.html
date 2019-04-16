@@ -2,7 +2,7 @@
 
   <ion-navbar color="white">
     <ion-buttons right>
-      <button (click)="openPage(codigo)" small ion-button outline mode="ios">
+      <button (click)="save()" small ion-button outline mode="ios">
         Publicar
       </button>
     </ion-buttons>
@@ -36,12 +36,11 @@
   </ion-item>
 
   <div style="margin-top:20px;padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:600">
-    Agregar una breve reseña para describir el producto
+    Breve descripción
   </div>
   <ion-item>
     <ion-textarea rows="3" [(ngModel)]="descripcion" placeholder="Tu respuesta"></ion-textarea>
   </ion-item>
-
 
   <div style="margin-top:20px;padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:600">
     Categoría
@@ -53,6 +52,28 @@
     </ion-label>
     <ion-select [(ngModel)]="categoria">
       <ion-option *ngFor="let cat of categorias" [value]="cat"> {{cat}} </ion-option>
+    </ion-select>
+  </button>
+
+  <div style="margin-top:20px;padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:600">
+    Subcategoría
+  </div>
+
+  <button ion-item *ngIf="categoria == 'Estilo'">
+    <ion-label>
+      Seleccionar
+    </ion-label>
+    <ion-select [(ngModel)]="subcategoria">
+      <ion-option *ngFor="let cat of subEstilo" [value]="cat"> {{cat}} </ion-option>
+    </ion-select>
+  </button>
+
+  <button ion-item *ngIf="categoria == 'Belleza'">
+    <ion-label>
+      Seleccionar
+    </ion-label>
+    <ion-select [(ngModel)]="subcategoria">
+      <ion-option *ngFor="let cat of subBelleza" [value]="cat"> {{cat}} </ion-option>
     </ion-select>
   </button>
 
@@ -94,8 +115,8 @@
   <div style="padding-left:15px;padding-right:15px;color:#555">
     {{ejemploIncluye}}
   </div>
-  <ion-item *ngFor="let item of incluir; let i = index" style="margin-top:15px">
-    <ion-input [(ngModel)]="item.text" type="text" [placeholder]="item.placeholder"></ion-input>
+  <ion-item *ngFor="let item of incluye; let i = index" style="margin-top:15px">
+    <ion-input [(ngModel)]="item.texto" type="text" [placeholder]="item.placeholder"></ion-input>
   </ion-item>
   <div style="margin-top:20px;width:100%;display:flex;justify-content:center">
     <div (click)="addIncluir()"
@@ -112,7 +133,7 @@
     {{ejemploCondiciones}}
   </div>
   <ion-item *ngFor="let condicion of condiciones; let i = index" style="margin-top:15px">
-    <ion-input [(ngModel)]="condicion.text" type="text" [placeholder]="condicion.placeholder"></ion-input>
+    <ion-input [(ngModel)]="condicion.texto" type="text" [placeholder]="condicion.placeholder"></ion-input>
   </ion-item>
   <div style="margin-top:20px;width:100%;display:flex;justify-content:center">
     <div (click)="addCondicion()"

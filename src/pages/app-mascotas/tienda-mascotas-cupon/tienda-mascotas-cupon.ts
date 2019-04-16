@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, ActionSheetController } from 'ionic-angular';
-import { TiendaMascotasAgendaPage } from '../tienda-mascotas-agenda/tienda-mascotas-agenda';
+import { IonicPage, NavController, NavParams, Platform, ActionSheetController, ToastController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImageProvider } from '../../../providers/image/image';
+import { MascotasProvider } from '../../../providers/mascotas/mascotas';
+
 
 
 @IonicPage()
@@ -18,6 +19,7 @@ export class TiendaMascotasCuponPage {
   precioOferta: string;
   isReservas = false;
   showHour = false;
+  allGood = true;
 
   imagenes = [];
   reservas = [];
@@ -30,23 +32,21 @@ export class TiendaMascotasCuponPage {
 
   dias: any = [
     {
-      dia: 'Jueves 20',
       horas: []
     },
     {
-      dia: 'Viernes 21',
       horas: []
     },
     {
-      dia: 'Sábado 22',
       horas: []
     },
   ];
 
+
   ejemploIncluye = 'Ejemplo: (1) Corte de uñas, (2) limpieza del canal auditivo, (3) baño, (4) masajes SPA, (5) ... etc';
   ejemploCondiciones = '  Ejemplo: (1) Este cupón se limita solo a la primera visitada a la tienda para cada nuevo gato, (2) gatos de pelo largo, gatos que pesan más de 10kg y padecen de enfermedades a la piel deben pagar $2.000 adicionales, (3)... etc..';
 
-  incluir = [
+  incluye = [
     {
       texto: '',
       placeholder: `(1) Tu respuesta`
@@ -60,18 +60,34 @@ export class TiendaMascotasCuponPage {
     }
   ];
 
+  incluye_OK = [];
+  condiciones_OK = [];
+
   categorias = [
-    'Belleza: uñas',
-    'Belleza: cabello',
-    'Belleza: cuerpo',
-    'Belleza: piel',
-    'Belleza: rostro',
-    'Estilo: corte pelo mujer',
-    'Estilo: corte pelo hombre',
-    'Estilo: barba',
-    'Estilo: tattoo',
-    'Estilo: perforaciones',
-  ]
+    'Estilo',
+    'Belleza'
+  ];
+
+  subBelleza = [
+    'Uñas',
+    'Cabello',
+    'Cuerpo',
+    'Piel',
+    'Rostro'
+  ];
+
+  subEstilo = [
+    'Corte pelo mujer',
+    'Corte pelo hombre',
+    'Barba',
+    'Tattoo',
+    'Perforaciones',
+  ];
+
+  subcategoria: string;
+  categoria: string;
+
+  tiendaID: string;
 
   constructor(
     public navCtrl: NavController,
@@ -79,8 +95,17 @@ export class TiendaMascotasCuponPage {
     private platform: Platform,
     private camera: Camera,
     private actionSheetCtrl: ActionSheetController,
-    private _img: ImageProvider
+    private _img: ImageProvider,
+    private _mascotas: MascotasProvider,
+    private toastCtrl: ToastController
   ) {
+    this.tiendaID = this.navParams.get('tiendaID');
+    _mascotas.getServerTime().then((data: any) => {
+      this.dias.forEach((item, i) => {
+        item.dia = data[i].dia;
+        item.fecha = data[i].fecha;
+      });
+    });
   }
 
   onChange(event) {
@@ -157,8 +182,8 @@ export class TiendaMascotasCuponPage {
   }
 
   addIncluir() {
-    const i = this.incluir.length + 1;
-    this.incluir.push({
+    const i = this.incluye.length + 1;
+    this.incluye.push({
       texto: '',
       placeholder: `(${i}) Tu respuesta`
     });
@@ -177,7 +202,7 @@ export class TiendaMascotasCuponPage {
   }
 
   delHora(indexDia, indexHora) {
-    this.dias[indexDia].horas.splice(indexHora,1);
+    this.dias[indexDia].horas.splice(indexHora, 1);
   }
 
   addHora(dia) {
@@ -202,7 +227,7 @@ export class TiendaMascotasCuponPage {
           indexHour = i;
         }
       });
-    }    
+    }
 
     if (foundHour) {
       this.dias[indexDay].horas[indexHour].cantidad += 1;
@@ -271,5 +296,64 @@ export class TiendaMascotasCuponPage {
     }
   }
 
+  faltaCompletar() {
+    let toast = this.toastCtrl.create({
+      message: 'Favor completar datos',
+      duration: 2500,
+      position: 'middle'
+    });
+    toast.present();
+  }
+  // || this.imagenes.length == 0
+  validarFormulario() {    
+    this.allGood = true;
+    if (!(this.titulo && this.descripcion && this.categoria && this.precioNormal && this.precioOferta)) {
+      this.faltaCompletar();
+      this.allGood = false;
+    }
+    if (!(this.incluye.length > 1 && this.condiciones.length > 1)) {
+      this.faltaCompletar();
+      this.allGood = false;
+    }
+  }
+
+  prepararDatos() {
+
+    this.incluye.forEach((item,i) => {
+      this.incluye_OK[i] = item.texto;
+    });
+
+    this.condiciones.forEach((item,i) => {
+      this.condiciones_OK[i] = item.texto;
+    });
+  }
+
+  save() {
+
+    this.validarFormulario();
+
+    if (this.allGood) {
+
+      this.prepararDatos();
+
+      let code = Math.floor(Math.random()*90000) + 10000;
+
+      const data: any = {
+        codigo: code,
+        titulo: this.titulo,
+        descripcion: this.descripcion,
+        categoria: this.subcategoria,
+        precio: {
+          normal: this.precioNormal,
+          oferta: this.precioOferta
+        },
+        incluye: this.incluye_OK,
+        condiciones: this.condiciones_OK
+      }
+
+      this._mascotas.crearCupon(this.tiendaID, data, this.isReservas, this.dias);
+              
+    }
+  }
 
 }

@@ -1,18 +1,194 @@
-<!--
-  Generated template for the BikeRiderPage page.
+<ion-header no-border>
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
+  <ion-navbar color="orange4">
+    <ion-title>Rider</ion-title>
 
-  <ion-navbar>
-    <ion-title>bike-rider</ion-title>
+    <ion-buttons right>
+      <button small ion-button outline color="white" mode="ios">
+        Horario
+      </button>
+      <button ion-button icon-only color="white" mode="ios">
+        <div>
+          <ion-icon name="contact"></ion-icon>
+          <div style="font-size:12px;color:white">
+            Disponible
+          </div>
+        </div>
+
+      </button>
+    </ion-buttons>
+
   </ion-navbar>
+
+  <ion-toolbar color="white">
+    <ion-segment [(ngModel)]="vista" color="orange4" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="orden">
+        <ion-icon name="clipboard"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="mapa">
+        <ion-icon name="map"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+  <div [style.height]="isHidden? '0%': '100%'" [style.visibility]="isHidden? 'hidden': 'visible'" id='map'>mmmm</div>
+
+
+  <div *ngIf="vista == 'mapa'">
+
+    <!-- <div *ngIf="!notFound" id='map'>Hmmm</div> -->
+
+    <h1 *ngIf="!notFound">Soy el mapa</h1>
+
+    <div *ngIf="notFound" style="width:100%;height:100%;display:flex;justify-content:center;align-items:center">
+      <div padding>
+        <div style="font-size:30px;color:#666;">
+          No hay nuevos pedidos
+        </div>
+        <div style="font-size:16px;color:#777">
+          Si espera un momento, ¡puede que algo salga!
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf="vista == 'orden'" style="width:100%;height:100%">
+
+    <div *ngIf="notFound" style="width:100%;height:100%;display:flex;justify-content:center;align-items:center">
+      <div padding>
+        <div style="font-size:30px;color:#666;">
+          No hay nuevos pedidos
+        </div>
+        <div style="font-size:16px;color:#777">
+          Si espera un momento, ¡puede que algo salga!
+        </div>
+      </div>
+    </div>
+
+
+    <div *ngIf="!notFound">
+
+      <div *ngIf="orden.isActive"
+        style="margin-bottom:5px;width:100%;padding:10px;background:rgb(2, 2, 26);color:white;font-size:16px;font-weight:500">
+        Nueva orden de entraga
+      </div>
+
+      <div *ngIf="!orden.isActive"
+        style="margin-bottom:5px;width:100%;padding:10px;background:red;color:white;font-size:16px;font-weight:500">
+        Orden aceptada
+      </div>
+
+      <div *ngIf="!orden.isActive" style="width:100%;display:flex;justify-content:center;align-items:center">
+        <div
+          style="width:35px;height:35px;border-radius:50%;border:1px solid #ccc;display:flex;justify-content:center;align-items:center">
+          <div style="font-size:16px;color:#777;font-weight:500">
+            <ion-icon name="pin" style="color:#bbb;font-size:20px"></ion-icon>
+          </div>
+        </div>
+
+        <div style="width:60px;border-top:1px solid #ccc;">
+        </div>
+
+        <div
+          style="width:35px;height:35px;border-radius:50%;background:#ccc;border:1px solid #ccc;display:flex;justify-content:center;align-items:center">
+          <div style="font-size:16px;color:#777;font-weight:500">
+            <ion-icon name="create" style="color:#fff;font-size:20px"></ion-icon>
+          </div>
+        </div>
+
+        <div style="width:60px;border-top:1px solid #ccc;">
+        </div>
+
+        <div
+          style="width:35px;height:35px;border-radius:50%;border:1px solid #ccc;display:flex;justify-content:center;align-items:center">
+          <div style="font-size:16px;color:#777;font-weight:500">
+            <ion-icon name="person" style="color:#bbb;font-size:20px"></ion-icon>
+          </div>
+        </div>
+
+      </div>
+
+      <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1554988173/tools/450_1000.png"
+        style="width:100%;height:100px;object-fit:cover">
+
+      <div padding>
+        <div style="font-size:20px;color:#666;">
+          <span style="font-size:16px">DISTANCIA TOTAL:</span>
+          <span style="font-weight:600">{{orden.datos.distancia}}</span>
+        </div>
+
+        <div style="font-size:16px;color:#555;font-weight:500;margin-top:20px">
+          <ion-icon name="flag" style="font-size:20px;color:#bbb;margin-right:5px"></ion-icon>
+          Recoger
+        </div>
+        <div style="margin-top:10px;font-size:16px;color:#666">
+          {{orden.recoger.address}}
+        </div>
+        <div style="font-size:14px;color:#666">
+          {{orden.recoger.door}}
+        </div>
+        <div style="margin-top:10px;font-size:16px;color:#666">
+          <ion-icon name="contact" style="font-size:20px;color:#bbb;margin-right:5px"></ion-icon>
+          {{orden.recoger.persona.nombre}}
+        </div>
+        <div style="margin-top:10px;font-size:16px;color:#666">
+          {{orden.recoger.persona.telefono}}
+        </div>
+
+        <hr>
+
+
+        <div style="margin-top:20px;font-size:16px;color:#555;font-weight:500;margin-top:20px">
+          <ion-icon name="flag" style="font-size:20px;color:#bbb;margin-right:5px"></ion-icon>
+          Entregar
+        </div>
+        <div style="margin-top:10px;font-size:16px;color:#666">
+          {{orden.entregar.address}}
+        </div>
+        <div style="font-size:14px;color:#666">
+          {{orden.entregar.door}}
+        </div>
+        <div style="margin-top:10px;font-size:16px;color:#666">
+          <ion-icon name="contact" style="font-size:20px;color:#bbb;margin-right:5px"></ion-icon>
+          {{orden.entregar.persona.nombre}}
+        </div>
+        <div style="margin-top:10px;font-size:16px;color:#666">
+          {{orden.entregar.persona.telefono}}
+        </div>
+
+        <div style="height:100px">
+        </div>
+
+        <!-- <div style="margin-top:20px;font-size:16px;color:#555;font-weight:500;margin-top:20px">
+          <ion-icon name="time" style="font-size:20px;color:#bbb;margin-right:5px"></ion-icon>
+          Tiempo
+        </div>
+        <div style="margin-top:10px;font-size:16px;color:#666">
+          Recoger: 20:15 hrs. - Ser puntual
+        </div> -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- <div id='map'></div> -->
 
 </ion-content>
+
+
+<div *ngIf="!notFound && vista == 'orden'">
+  <ion-footer padding style="background:white">
+    <button (click)="changeOrderState()" *ngIf="orden.isActive" ion-button mode="md" color="danger" block>
+      Tomar pedido
+    </button>
+    <button (click)="changeOrderState()" *ngIf="!orden.isActive" ion-button mode="md" color="light" block>
+      Firma del cliente
+    </button>
+  </ion-footer>
+</div>

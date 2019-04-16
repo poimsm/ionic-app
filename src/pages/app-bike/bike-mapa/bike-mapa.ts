@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 // import { google } from '@google/maps';
 declare var google: any;
 
-
 @IonicPage()
 @Component({
   selector: 'page-bike-mapa',

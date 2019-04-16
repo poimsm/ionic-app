@@ -26,8 +26,8 @@
           src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675605/9bbf1121d6595266dd37d89201d5fdbd.gif"
           style="height:80px;width:90px;border-radius:10px;object-fit:cover">
         <div style="font-size:16px;color:#777;">
-          Clínica veterinara My Pets
-          <div style="display:flex;align-items:center">
+          {{tienda?.nombre}}
+          <!-- <div style="display:flex;align-items:center">
             <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
             <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
             <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
@@ -39,7 +39,7 @@
           </div>
           <div style="color:darkorange;font-size:14px;margin-left:10px">
             14 comentarios
-          </div>
+          </div> -->
         </div>
       </button>
     </ion-list>
@@ -48,39 +48,45 @@
       <div
         style="display:flex;align-items:center;color:#999;font-size:15px;height:40px;width:50%;border-right:1px solid #eee">
         <ion-icon name="time" style="color:#bbb;font-size:20px;margin-right:20px"></ion-icon>
-        7:30 - 18:30 horario
+        <div *ngIf="horario == 'Hoy cerrado'">
+          {{horario}}
+        </div>
+        <div *ngIf="horario != 'Hoy cerrado'">
+          {{horario}}
+          <div>
+            horario
+          </div>
+        </div>
       </div>
 
       <div style="color:#999;font-size:15px;height:40px;display:flex;align-items:center;justify-content:center">
         <ion-icon name="call" style="margin-left:20px;color:rgb(250, 100, 45);font-size:20px;margin-right:20px">
         </ion-icon>
-        97683325
+        {{tienda?.telefono}}
       </div>
     </div>
 
     <div style="color:#999;font-size:15px;height:40px;display:flex;align-items:center;">
       <ion-icon name="pin" style="color:#bbb;font-size:20px;margin-right:20px"></ion-icon>
-      Simon bolivar 802 - Valdivia
+      {{tienda?.direccion}}
     </div>
 
     <hr>
 
     <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1553493541/redcompra-1024x332.png"
-      style="filter: grayscale(100%);margin-left:10px;width:80px">
+      style="filter: grayscale(100%);margin-left:0px;width:80px">
 
-    <div *ngIf="true" style="margin-left:10px;display:flex;overflow-x:auto;height:30px;width:500px;align-items:center">
-      <div
-        style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
-        Estacionamiento
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;flex-wrap:wrap">
+        <div *ngFor="let servicio of tienda?.servicios"
+          style="margin-bottom:5px;width:50%;display:flex;align-items:flex-start">
+          <ion-icon name="checkmark-circle-outline" style="color:#bbb;font-size:16px"></ion-icon>
+          <div style="color:#999;font-size:13px;margin-left:5px">
+            {{servicio}}
+          </div>
+        </div>
       </div>
-      <div
-        style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
-        Wi-Fi
-      </div>
-      <div
-        style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
-        Prohibido fumar
-      </div>
+      <ion-icon name="ios-arrow-forward" style="margin-right:10px;color:#bbb;font-size:20px"></ion-icon>
     </div>
 
 
@@ -102,7 +108,7 @@
   <button (click)="openPage(misProductos)" ion-item style="margin:10px;background:orangered" no-lines>
     <ion-icon item-start name="flash" style="color:white;font-size:30px"></ion-icon>
     <div style="color:white;font-size:18px;font-weight:500">
-      Ver mis productos (8)
+      Ver mis productos (4)
     </div>
     <ion-icon item-end name="ios-arrow-forward" style="color:white;font-size:20px"></ion-icon>
   </button>
@@ -110,7 +116,7 @@
   <button (click)="openPage(misVentas)" ion-item style="margin:10px;background:orange" no-lines>
     <ion-icon item-start name="trending-up" style="color:white;font-size:30px"></ion-icon>
     <div style="color:white;font-size:18px;font-weight:500">
-      Ver mis ventas (3)
+      Ver mis ventas (42)
     </div>
     <ion-icon item-end name="ios-arrow-forward" style="color:white;font-size:20px"></ion-icon>
   </button>
