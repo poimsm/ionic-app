@@ -27,6 +27,7 @@ import { TiendaMascotasPage } from "../app-mascotas/tienda-mascotas/tienda-masco
 import { BikePage } from "../app-bike/bike/bike";
 import { FormularioStartPage } from "../tools/formulario-start/formulario-start";
 import { SuperTiendasPage } from "../app-super/super-tiendas/super-tiendas";
+import { MascotasProvider } from "../../providers/mascotas/mascotas";
 
 
 @Component({
@@ -76,7 +77,8 @@ export class HomePage {
     public modalCtrl: ModalController,
     private _localizacion: LocalizacionProvider,
     private _carro: CarroProvider,
-    private _data: DataProvider
+    private _data: DataProvider,
+    private _mascota: MascotasProvider
 
   ) {
     if (!this.platform.is('cordova')) {
@@ -222,7 +224,7 @@ export class HomePage {
 
   openTienda() {
     if (this.user.tienda.tipo == 'mascotas') {
-      this._data.getOneTienda_Mascota(this.user.tienda.id).then((data: any) => {
+      this._mascota.getOneTienda(this.user.tienda.id).then((data: any) => {
         
         if (data.isFirstLoggin) {
           this.openModalStart();

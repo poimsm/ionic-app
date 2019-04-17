@@ -5,7 +5,6 @@ import { ImageProvider } from '../../../providers/image/image';
 import { MascotasProvider } from '../../../providers/mascotas/mascotas';
 
 
-
 @IonicPage()
 @Component({
   selector: 'page-tienda-mascotas-cupon',
@@ -100,7 +99,7 @@ export class TiendaMascotasCuponPage {
     private toastCtrl: ToastController
   ) {
     this.tiendaID = this.navParams.get('tiendaID');
-    _mascotas.getServerTime().then((data: any) => {
+    _mascotas.getTresDias().then((data: any) => {
       this.dias.forEach((item, i) => {
         item.dia = data[i].dia;
         item.fecha = data[i].fecha;
@@ -336,8 +335,9 @@ export class TiendaMascotasCuponPage {
 
       this.prepararDatos();
 
-      let code = Math.floor(Math.random()*90000) + 10000;
+      let code = Math.floor(Math.random()*900000) + 100000;
 
+      // imgs: this.imagenes
       const data: any = {
         codigo: code,
         titulo: this.titulo,
@@ -349,6 +349,10 @@ export class TiendaMascotasCuponPage {
         },
         incluye: this.incluye_OK,
         condiciones: this.condiciones_OK
+      }
+
+      if (this.isReservas) {
+        data.isReservas = true;
       }
 
       this._mascotas.crearCupon(this.tiendaID, data, this.isReservas, this.dias);

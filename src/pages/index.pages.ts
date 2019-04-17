@@ -1,3 +1,4 @@
+
 // ---------------------------
 //         EXPERIMENTAL
 // ---------------------------
@@ -27,6 +28,9 @@ export { UsuarioPage } from './usuario/usuario/usuario';
 export { MisPedidosContentPage } from './usuario/mis-pedidos-content/mis-pedidos-content';
 export { MisPedidosPage } from './usuario/mis-pedidos/mis-pedidos';
 export { LoginPage } from "./usuario/login/login";
+export { UsuarioHistorialCuponPage } from './usuario/usuario-historial-cupon/usuario-historial-cupon';
+export { UsuarioHistorialPaquetePage } from './usuario/usuario-historial-paquete/usuario-historial-paquete';
+export { UsuarioHistorialPage } from './usuario/usuario-historial/usuario-historial';
 
 // ---------------------------
 //         TOOLS

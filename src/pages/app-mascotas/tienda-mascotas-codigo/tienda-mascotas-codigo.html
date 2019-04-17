@@ -1,27 +1,134 @@
 <ion-header no-border>
 
   <ion-navbar color="white">
-    <!-- <ion-title>Código</ion-title> -->
+    <ion-title>Escanear código</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  <div style="padding:8px;padding-top:0px;padding-left:15px;color:#444;font-size:16px;font-weight:600">
-    Ingresar código
+<ion-content>
+  <!-- <div *ngIf="codigoCreado" style="width:100%;height:100%;display:flex;justify-content:center;align-items:center">
+    <div>
+      <qrcode [qrdata]="codigoCreado" [size]="200" [level]="'M'"></qrcode>
+      <div style="font-size:16px;color:#777;margin-top:10px">
+        Código: {{codigoCreado}}
+      </div>
+    </div>
+  </div> -->
+
+  <div *ngIf="showProduct">
+
+    <div
+      style="border-radius:0px;min-height:240px;width:100%;background-size:cover;background-repeat: no-repeat;background-position: center;"
+      [ngStyle]="{'background-image': 'url(' + data.img + ')' }">
+    </div>
+
+    <div padding>
+      <!-- <div style="font-size:16px;color:#444;font-weight:600">
+        Promocion dos por uno en gatos y servicio de limpieza libre
+      </div> -->
+
+      <div style="margin-top:0px;color:#777;font-size:16px">
+        <span style="color:orangered;font-weight:600">
+          {{data.precio}}
+        </span>
+        <span style="padding:2px;color:white;background:orange;margin-left:5px;font-size:13px">
+          -22%
+        </span>
+      </div>
+      <div style="margin-top:5px;color:#999;font-size:13px">
+        <span>
+          Precio en tienda:
+        </span>
+        <span>
+          {{data.precioTienda}}
+        </span>
+      </div>
+
+      <div style="margin-top:5px;font-size:16px;color:#444;font-weight:600">
+        {{data.titulo}}
+      </div>
+      <div style="margin-top:5px;display:flex;justify-content:space-between">
+        <div style="font-size:13px;color:#999">
+          un texto
+        </div>
+        <div style="font-size:13px;color:#999">
+          14 vendidos
+        </div>
+      </div>
+    </div>
+
+    <div style="width:100%;text-align:center;color:#999;font-size:16px;padding-right:15px">
+      <ion-icon name="cut" style="font-size:22px;margin-right:5px;color:#bbb"></ion-icon>
+      Utilizado
+    </div>
+    <div style="height:10px;width:100%;border-top:2px dashed #bbb">
+    </div>
+
+    <div padding>
+      <div style="margin-bottom:10px;font-size:15px;color:salmon;">
+        Ticket Cliente
+      </div>
+      <div style="width:100%">
+        <div style="font-size:14px;color:#999;">
+          NOMBRE
+        </div>
+        <div style="margin-top:5px;margin-bottom:10px;font-size:16px;color:#333;font-weight:600">
+          Oscar Garcia Fuentes
+        </div>
+        <hr>
+        <div style="margin-top:10px;font-size:14px;color:#999;">
+          EMAIL
+        </div>
+        <div style="margin-top:5px;margin-bottom:10px;font-size:16px;color:#333;font-weight:600">
+          poimsm@gmail.com
+        </div>
+        <hr>
+        <div style="margin-top:10px;font-size:14px;color:#999;">
+          HORA DE RESERVA
+        </div>
+        <div style="margin-top:5px;margin-bottom:10px;font-size:16px;color:#333;font-weight:600">
+          Lunes 14 de Junio, 1:30 PM
+        </div>
+      </div>
+    </div>
+
+    <div style="height:100px">
+    </div>
+
   </div>
 
-  <ion-item no-lines>
-    <ion-input [(ngModel)]="codigo" type="tel" placeholder="Ej. 98302" style="font-size:40px;border:1px dashed #ccc;border-radius:0px">
-    </ion-input>
-  </ion-item>
 
-  <div style="height:20px">
+
+
+
+  <div padding *ngIf="showSearch"
+    style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-wrap:wrap">
+    <img src="assets/qr-code (1).svg" style="width:110px">
+
+    <div style="width:100%;text-align:center;color:#999;font-size:16px;margin-bottom:15px">
+      Algumm texto de ayuda para orientar al cliente a leer el codigo
+    </div>
+
   </div>
 
-
-  <button color="orange3" ion-button block mode="ios">
-    Verificar
-  </button>
 </ion-content>
+
+
+
+
+<ion-footer>
+  <div padding>
+    <button *ngIf="showSearch" (click)="crearCodigo()" icon-left color="orange3" ion-button block mode="ios">
+      <ion-icon name="qr-scanner" style="font-size:22px;margin-right:5px"></ion-icon>
+      Escanéar código
+    </button>
+
+    <button *ngIf="showProduct" (click)="showSearch = true; showProduct = false" icon-left color="orange3" ion-button
+      block mode="ios">
+      <ion-icon name="cut" style="font-size:22px;margin-right:5px;"></ion-icon>
+      Marcar como Utilizado
+    </button>
+  </div>
+</ion-footer>

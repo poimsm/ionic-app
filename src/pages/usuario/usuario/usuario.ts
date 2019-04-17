@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { MisPedidosPage } from '../mis-pedidos/mis-pedidos';
 import { AuthProvider } from '../../../providers/auth/auth';
 import { LocalizacionProvider } from '../../../providers/localizacion/localizacion';
+import { UsuarioHistorialPage } from '../usuario-historial/usuario-historial';
 
 @IonicPage()
 @Component({
@@ -62,7 +63,7 @@ export class UsuarioPage {
   }
 
   openHistorial() {
-    this.navCtrl.push(MisPedidosPage);
+    this.navCtrl.push(UsuarioHistorialPage);
   }
 
   presentPrompt(tipo) {

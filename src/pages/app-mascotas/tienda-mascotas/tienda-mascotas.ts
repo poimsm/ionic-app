@@ -10,7 +10,7 @@ import { TiendaMascotasAgendaPage } from '../tienda-mascotas-agenda/tienda-masco
 import { TiendaMascotasDatosPage } from '../tienda-mascotas-datos/tienda-mascotas-datos';
 import { TiendaMascotasInfoPage } from '../tienda-mascotas-info/tienda-mascotas-info';
 import { TiendaMascotasStartPage } from '../tienda-mascotas-start/tienda-mascotas-start';
-import { DataProvider } from '../../../providers/data/data';
+import { MascotasProvider } from '../../../providers/mascotas/mascotas';
 
 
 @IonicPage()
@@ -37,23 +37,25 @@ export class TiendaMascotasPage {
     public navParams: NavParams,
     private actionSheetCtrl: ActionSheetController,
     public modalCtrl: ModalController,
-    private _data: DataProvider
+    private _mascota: MascotasProvider
   ) {
-    // this.openModal('start');
-    // this.openModalStart();
     this.tiendaID = this.navParams.get('tiendaID');
   }
 
   ionViewDidEnter() {
     this.cargarTienda();
-    // this._data.getToday_Mascota()
-    // .then((data: any) => {
-    //   this.hoy = data.today;      
-    // });
+    this.cargarToday();
+  }
+
+  cargarToday() {
+    this._mascota.getToday()
+    .then((data: any) => {
+      this.hoy = data.today;
+    });
   }
 
   cargarTienda() {
-    this._data.getOneTienda_Mascota(this.tiendaID)
+    this._mascota.getOneTienda(this.tiendaID)
       .then(data => {
         this.tienda = data;
         this.tienda.horario
@@ -77,13 +79,13 @@ export class TiendaMascotasPage {
         {
           text: "Cupón",
           handler: () => {
-            this.navCtrl.push(TiendaMascotasCuponPage);
+            this.navCtrl.push(TiendaMascotasCuponPage, { tiendaID: this.tiendaID });
           }
         },
         {
           text: "Paquete",
           handler: () => {
-            this.navCtrl.push(TiendaMascotasPaquetePage);
+            this.navCtrl.push(TiendaMascotasPaquetePage, { tiendaID: this.tiendaID });
           }
         },
         {

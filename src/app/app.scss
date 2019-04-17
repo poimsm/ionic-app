@@ -221,5 +221,8 @@ ion-icon {
   &[class*="woman-hair"] {
     mask-image: url(../assets/woman-hair-2.svg);
   }
+  &[class*="qr-code"] {
+    mask-image: url(../assets/qr-code.svg);
+  }
 
 }

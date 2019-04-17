@@ -4,6 +4,9 @@ import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
 import { InAppBrowser } from "@ionic-native/in-app-browser";
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { QRCodeModule } from 'angularx-qrcode';
+
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -93,7 +96,10 @@ import {
   SuperCategoriasPage,
   SuperProductosPage,
   BikeIntroPage,
-  BikeDireccionPage
+  BikeDireccionPage,
+  UsuarioHistorialCuponPage,
+  UsuarioHistorialPaquetePage,
+  UsuarioHistorialPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -172,7 +178,10 @@ import { MascotasProvider } from '../providers/mascotas/mascotas';
     SuperCategoriasPage,
     SuperProductosPage,
     BikeIntroPage,
-    BikeDireccionPage
+    BikeDireccionPage,
+    UsuarioHistorialCuponPage,
+    UsuarioHistorialPaquetePage,
+    UsuarioHistorialPage
   ],
   imports: [
     BrowserModule,
@@ -185,7 +194,8 @@ import { MascotasProvider } from '../providers/mascotas/mascotas';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDrc_AM9eMidi_yXt0h7q-orH0vt9D13vk',
       libraries: ['places']
-    })
+    }),
+    QRCodeModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -252,7 +262,10 @@ import { MascotasProvider } from '../providers/mascotas/mascotas';
     SuperCategoriasPage,
     SuperProductosPage,
     BikeIntroPage,
-    BikeDireccionPage
+    BikeDireccionPage,
+    UsuarioHistorialCuponPage,
+    UsuarioHistorialPaquetePage,
+    UsuarioHistorialPage
   ],
   providers: [
     StatusBar,
@@ -273,7 +286,9 @@ import { MascotasProvider } from '../providers/mascotas/mascotas';
     ConfigProvider,
     BikeProvider,
     Geolocation,
-    MascotasProvider
+    MascotasProvider,
+    BarcodeScanner,
+
     // AngularFireDatabase
   ]
 })
