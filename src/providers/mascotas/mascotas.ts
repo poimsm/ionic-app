@@ -70,8 +70,8 @@ export class MascotasProvider {
     return this.http.get(url).toPromise();
   }
 
-  buscarPorCodigo(id, code) {
-    const url = `${this.apiURL}/mascotas/encontrar-por-codigo/?code=${code}&id=${id}`;
+  buscarCompraPorCodigo(id, code) {
+    const url = `${this.apiURL}/mascotas/buscar-por-codigo/?code=${code}&id=${id}`;
     return this.http.get(url).toPromise();
   }
 

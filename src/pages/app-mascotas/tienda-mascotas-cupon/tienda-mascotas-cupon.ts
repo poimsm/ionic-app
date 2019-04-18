@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Platform, ActionSheetController, T
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImageProvider } from '../../../providers/image/image';
 import { MascotasProvider } from '../../../providers/mascotas/mascotas';
+import { TiendaMascotasAgendaPage } from '../tienda-mascotas-agenda/tienda-mascotas-agenda';
 
 
 @IonicPage()
@@ -16,7 +17,7 @@ export class TiendaMascotasCuponPage {
   descripcion: string;
   precioNormal: string;
   precioOferta: string;
-  isReservas = false;
+  isReserva = false;
   showHour = false;
   allGood = true;
 
@@ -110,7 +111,7 @@ export class TiendaMascotasCuponPage {
   onChange(event) {
     if (event.checked) {
       // this.showHour = true;
-      // this.navCtrl.push(TiendaMascotasAgendaPage);
+      this.navCtrl.push(TiendaMascotasAgendaPage);
     }
   }
 
@@ -337,25 +338,28 @@ export class TiendaMascotasCuponPage {
 
       let code = Math.floor(Math.random()*900000) + 100000;
 
-      // imgs: this.imagenes
+      let porcentaje = Math.ceil(Number(this.precioNormal)/Number(this.precioNormal)*100);
       const data: any = {
         codigo: code,
+        mascota: this.tiendaID,
         titulo: this.titulo,
         descripcion: this.descripcion,
         categoria: this.subcategoria,
+        imgs: this.imagenes,
         precio: {
           normal: this.precioNormal,
-          oferta: this.precioOferta
+          oferta: this.precioOferta,
+          descuento: porcentaje
         },
         incluye: this.incluye_OK,
         condiciones: this.condiciones_OK
       }
 
-      if (this.isReservas) {
-        data.isReservas = true;
+      if (this.isReserva) {
+        data.isReserva = true;
       }
 
-      this._mascotas.crearCupon(this.tiendaID, data, this.isReservas, this.dias);
+      this._mascotas.crearCupon(this.tiendaID, data, this.isReserva, this.dias);
               
     }
   }

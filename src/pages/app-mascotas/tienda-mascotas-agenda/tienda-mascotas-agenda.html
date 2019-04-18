@@ -1,8 +1,45 @@
-<ion-header no-border>
+<ion-header>
 
   <ion-navbar color="white">
-    <!-- <ion-title>tienda-mascotas-agenda</ion-title> -->
+    <ion-title>Calendario</ion-title>
+    <ion-buttons right>
+      <button small ion-button outline mode="ios">
+        Guardar
+      </button>
+      <button ion-button icon-only mode="ios">
+        <ion-icon name="ios-settings" style="color:#bbb"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
+
+
+  <div style="background:white;margin-top:10px">
+    <!-- <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+        <div style="padding:8px;padding-left:15px;color:#444;font-size:16px;font-weight:600">
+          Calendario
+        </div>
+        <div style="padding:4px;margin-right:15px;color:#ff6633;font-weight:500;font-size:12px">
+          VER MÁS
+        </div>
+      </div> -->
+    <ion-scroll scrollX="true" style="display:flex;height:70px;margin-left:10px">
+      <ion-grid>
+        <ion-row nowrap>
+          <ion-col *ngFor="let item of semana;let i = index" col-3>
+            <div (click)="addDia(i)" [ngStyle]="{'background': item.isActive ? 'darkorange' : 'white'}"
+              style="width:100%;height:50px;display:flex;align-items:center;justify-content:center">
+              <div [ngStyle]="{'color': item.isActive ? 'white' : '#777'}" style="font-size:20px;">
+                {{item.dia}}
+                <div style="font-size:16px;width:100%;text-align:center">
+                  {{item.num}}
+                </div>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-scroll>
+  </div>
 
 </ion-header>
 
@@ -13,139 +50,33 @@
 
 <ion-content>
 
-  <div style="width:100%;text-align:center;font-size:22px;color:#555">
-    Calendario
-  </div>
-
-  <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
-      <div style="padding:8px;padding-left:15px;color:#444;font-size:16px;font-weight:600">
-        Lo más popular
-      </div>
-      <div style="padding:4px;margin-right:15px;color:#ff6633;font-weight:500;font-size:12px">
-        VER MÁS
-      </div>
-    </div>
 
 
-  <!-- <div style="background:white;margin-top:10px">
-    <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
-      <div style="padding:8px;padding-left:15px;color:#444;font-size:16px;font-weight:600">
-        Lo más popular
-      </div>
-      <div style="padding:4px;margin-right:15px;color:#ff6633;font-weight:500;font-size:12px">
-        VER MÁS
-      </div>
-    </div>
-    <ion-scroll scrollX="true" style="display:flex;height:50px;margin-left:10px">
-      <ion-grid>
-        <ion-row nowrap>
-          <ion-col *ngFor="let dia of semana" (click)="openContent(item, 'comida')" col-2>
-            <div style="color:#555;font-size:18px;font-weight:500;height:20px;overflow: hidden;">
-              {{dia.nombre}}
+
+
+  <div style="height:20px"></div>
+
+
+  <div *ngFor="let hora of horas; let i = index">
+
+    <div (click)="addHora(i)" style="width:100%;">
+      <div style="margin-left:20px">
+        <div [ngStyle]="{'background': hora.isActive ? 'gold':'white'}" style="height:55px;width:100%;margin-left:45px">
+          </div>
+          <div style="width:100%;display:flex;align-items:center;justify-content:flex-start">
+            <div style="font-size:14px;color:#555">
+              {{hora.text}}
             </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-scroll>
-  </div> -->
-
-  <!-- <ion-list>
-    <ion-item>     
-    </ion-item>
-  </ion-list> -->
-
-  <div style="height:10px;width:100%;background:rgb(248, 248, 248)">
-  </div>
-
-  <div padding>
-    <div style="margin-bottom:0px;width:100%;display:flex;justify-content:space-between;align-items:center">
-      <div style="padding:8px;padding-left:15px;color:#444;font-size:16px;font-weight:600">
-        Jueves 20
+            <div style="flex:1 1 auto;">
+              <div [ngStyle]="{'background': hora.isActive ? 'gold':'white'}"
+                style="margin-left:10px;height:17px;width:100%;border-bottom:2px solid #eee">
+              </div>
+            </div>
+          </div>
       </div>
-      <button ion-button outline small mode="ios">
-        Agregar horas
-      </button>
-    </div>
-    <div style="width:100%;display:flex;justify-content:space-around;align-items:center">
-      <button ion-button small mode="ios" color="light">
-        11:30
-      </button>
-      <button ion-button small mode="ios" color="light">
-        13:30
-      </button>
-      <button ion-button small mode="ios" color="light">
-        14:30
-      </button>
-      <button ion-button small mode="ios" color="light">
-        16:30
-      </button>
-      <button ion-button small mode="ios" color="light">
-        17:30
-      </button>
     </div>
   </div>
 
-
-
-  <div padding>
-    <div style="margin-bottom:0px;width:100%;display:flex;justify-content:space-between;align-items:center">
-      <div style="padding:8px;padding-left:15px;color:#444;font-size:16px;font-weight:600">
-        Viernes 21
-      </div>
-      <button ion-button outline small mode="ios">
-        Agregar horas
-      </button>
-    </div>
-    <div style="width:100%;display:flex;justify-content:space-around;align-items:center">
-      <button ion-button small mode="ios" color="light">
-        11:30
-      </button>
-      <button ion-button small mode="ios" color="light">
-        13:30
-      </button>
-      <button ion-button small mode="ios" color="light">
-        14:30
-      </button>
-      <button ion-button small mode="ios" color="light">
-        16:30
-      </button>
-      <button ion-button small mode="ios" color="light">
-        17:30
-      </button>
-    </div>
-  </div>
-
-
-  <div padding>
-    <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
-      <div style="padding:8px;padding-left:15px;color:#444;font-size:16px;font-weight:600">
-        Sábado 22
-      </div>
-      <button ion-button outline small mode="ios">
-        Agregar horas
-      </button>
-      <!-- <div style="font-size:13px;color:darkorange;padding:3px;padding-left:10px;padding-right:10px;border-radius:10px;border:1px dashed darkorange">
-            + Agregar horas
-          </div> -->
-    </div>
-    <div style="width:100%;display:flex;justify-content:space-around;align-items:center">
-      <button ion-button small mode="ios" color="light">
-        11:30
-      </button>
-      <button ion-button small mode="ios" color="light">
-        13:30
-      </button>
-      <button ion-button small mode="ios" color="light">
-        14:30
-      </button>
-      <button ion-button small mode="ios" color="light">
-        16:30
-      </button>
-      <button ion-button small mode="ios" color="light">
-        17:30
-      </button>
-    </div>
-  </div>
 
 
 

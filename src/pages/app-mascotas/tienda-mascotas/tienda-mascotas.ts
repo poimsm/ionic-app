@@ -101,6 +101,10 @@ export class TiendaMascotasPage {
     this.navCtrl.push(page)
   }
 
+  openCodigo() {
+    this.navCtrl.push(TiendaMascotasCodigoPage, {tiendaID: this.tiendaID});
+  }
+
   openModal(tipo) {
     const modal = this.modalCtrl.create(TiendaMascotasInfoPage, { tipo });
     modal.onDidDismiss(() => {

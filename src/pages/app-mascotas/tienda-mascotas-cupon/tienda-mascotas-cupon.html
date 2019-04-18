@@ -148,10 +148,29 @@
         ¿Activar reservaciones?
       </div>
     </ion-label>
-    <ion-toggle [(ngModel)]="isReservas" (ionChange)="onChange($event)" mode="ios"></ion-toggle>
+    <ion-toggle [(ngModel)]="isReserva" (ionChange)="onChange($event)" mode="ios"></ion-toggle>
   </ion-item>
 
-  <div padding *ngIf="isReservas">
+
+
+
+  <div style="margin-top:10px;margin-left:15px;font-size:16px;color:#666;font-weight:400">
+      Completar una semana entera:
+    </div>
+    <div style="padding:10px;width:100%;display:flex;justify-content:center">
+      <div style="border-radius:3px;width:40%;border-bottom:1px solid #ccc;display:flex;align-items:center">
+        <div style="font-size:16px;font-weight:500;color:#999;padding:5px">
+          Inicio
+        </div>
+        <ion-input [(ngModel)]="precioOferta" type="tel" placeholder="" style="font-size:16px;border:0x solid white">
+        </ion-input>
+      </div>
+    </div>
+
+
+
+
+  <div padding *ngIf="isReserva">
 
     <div style="margin-top:0px;margin-bottom:20px;padding-left:15px;padding-right:15px;color:#555">
       Crea horas para que tus clientes puedan agendar
