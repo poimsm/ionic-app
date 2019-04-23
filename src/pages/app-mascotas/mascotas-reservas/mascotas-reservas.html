@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>mascotas-reservas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngFor="let dia of semana; let j = index">
+
+    <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+      <div style="padding:8px;padding-left:15px;color:#444;font-size:16px;font-weight:600">
+        {{dia.dia}}
+      </div>
+      <button (click)="openHora(dia.dia)" ion-button outline small mode="ios">
+        {{dia.num}}
+      </button>
+    </div>
+    <div style="margin-top:10px;margin-bottom:30px;width:100%;display:flex;justify-content:flex-start;flex-wrap:wrap">
+      <div *ngFor="let hora of dia.bloque" style="margin-top:10px;margin-left:10px;margin-right:20px">
+        <div
+          style="border-radius:3px;padding:6px;padding-left:10px;padding-right:10px;background:whitesmoke;font-size:13px;color:#333">
+          {{hora.text1}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</ion-content>

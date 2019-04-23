@@ -99,7 +99,10 @@ import {
   BikeDireccionPage,
   UsuarioHistorialCuponPage,
   UsuarioHistorialPaquetePage,
-  UsuarioHistorialPage
+  UsuarioHistorialPage,
+  MascotasOfertaPage,
+  MascotasPaquetePage,
+  MascotasReservasPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -112,6 +115,8 @@ import { LocalizacionProvider } from "../providers/localizacion/localizacion";
 import { ConfigProvider } from "../providers/config/config";
 import { BikeProvider } from '../providers/bike/bike';
 import { MascotasProvider } from '../providers/mascotas/mascotas';
+import { SemanaProvider } from '../providers/semana/semana';
+import { MaquetaProvider } from '../providers/maqueta/maqueta';
 
 @NgModule({
   declarations: [
@@ -181,7 +186,10 @@ import { MascotasProvider } from '../providers/mascotas/mascotas';
     BikeDireccionPage,
     UsuarioHistorialCuponPage,
     UsuarioHistorialPaquetePage,
-    UsuarioHistorialPage
+    UsuarioHistorialPage,
+    MascotasOfertaPage,
+    MascotasPaquetePage,
+    MascotasReservasPage
   ],
   imports: [
     BrowserModule,
@@ -265,7 +273,10 @@ import { MascotasProvider } from '../providers/mascotas/mascotas';
     BikeDireccionPage,
     UsuarioHistorialCuponPage,
     UsuarioHistorialPaquetePage,
-    UsuarioHistorialPage
+    UsuarioHistorialPage,
+    MascotasOfertaPage,
+    MascotasPaquetePage,
+    MascotasReservasPage
   ],
   providers: [
     StatusBar,
@@ -288,6 +299,8 @@ import { MascotasProvider } from '../providers/mascotas/mascotas';
     Geolocation,
     MascotasProvider,
     BarcodeScanner,
+    SemanaProvider,
+    MaquetaProvider,
 
     // AngularFireDatabase
   ]

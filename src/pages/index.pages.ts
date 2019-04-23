@@ -93,6 +93,9 @@ export { TiendaMascotasVentasPage } from './app-mascotas/tienda-mascotas-ventas/
 export { MascotasPage } from './app-mascotas/mascotas/mascotas';
 export { MascotasContentPage } from './app-mascotas/mascotas-content/mascotas-content';
 export { IntroduccionPage } from './app-mascotas/introduccion/introduccion';
+export { MascotasOfertaPage } from './app-mascotas/mascotas-oferta/mascotas-oferta';
+export { MascotasPaquetePage } from './app-mascotas/mascotas-paquete/mascotas-paquete';
+export { MascotasReservasPage } from './app-mascotas/mascotas-reservas/mascotas-reservas';
 
 // ---------------------------
 //         BIKE

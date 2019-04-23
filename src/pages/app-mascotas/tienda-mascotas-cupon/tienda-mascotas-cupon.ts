@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, ActionSheetController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, ActionSheetController, ToastController, ModalController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImageProvider } from '../../../providers/image/image';
 import { MascotasProvider } from '../../../providers/mascotas/mascotas';
 import { TiendaMascotasAgendaPage } from '../tienda-mascotas-agenda/tienda-mascotas-agenda';
+import { SemanaProvider } from '../../../providers/semana/semana';
 
 
 @IonicPage()
@@ -23,24 +24,11 @@ export class TiendaMascotasCuponPage {
 
   imagenes = [];
   reservas = [];
-  hora24 = '18:30';
-  hora = 6;
-  min = 30;
-  tiempo = 'PM';
 
-  dia: string;
+  dias = [];
 
-  dias: any = [
-    {
-      horas: []
-    },
-    {
-      horas: []
-    },
-    {
-      horas: []
-    },
-  ];
+  showIncluye = false;
+  showCondiciones = false;
 
 
   ejemploIncluye = 'Ejemplo: (1) Corte de uñas, (2) limpieza del canal auditivo, (3) baño, (4) masajes SPA, (5) ... etc';
@@ -62,6 +50,7 @@ export class TiendaMascotasCuponPage {
 
   incluye_OK = [];
   condiciones_OK = [];
+  semana_OK = [];
 
   categorias = [
     'Estilo',
@@ -97,8 +86,11 @@ export class TiendaMascotasCuponPage {
     private actionSheetCtrl: ActionSheetController,
     private _img: ImageProvider,
     private _mascotas: MascotasProvider,
-    private toastCtrl: ToastController
-  ) {
+    private toastCtrl: ToastController,
+    private modalCtrl: ModalController,
+    private _semana: SemanaProvider
+  ) {    
+
     this.tiendaID = this.navParams.get('tiendaID');
     _mascotas.getTresDias().then((data: any) => {
       this.dias.forEach((item, i) => {
@@ -109,136 +101,25 @@ export class TiendaMascotasCuponPage {
   }
 
   onChange(event) {
-    if (event.checked) {
-      // this.showHour = true;
-      this.navCtrl.push(TiendaMascotasAgendaPage);
-    }
+    event.checked ? this.presentSemana(): console.log('s');    
   }
 
-  changeHora(tipo) {
-    if (tipo == '+') {
-      if (this.hora == 12) {
-        this.hora = 0;
-      } else {
-        this.hora += 1;
-      }
-    }
-    if (tipo == '-') {
-      if (this.hora == 0) {
-        this.hora = 12;
-      } else {
-        this.hora -= 1;
-      }
-    }
-    this.actualizarHora24();
-  }
+  presentSemana() {    
+    const modal = this.modalCtrl.create(TiendaMascotasAgendaPage);
+    modal.present();
+  }  
 
-  changeMin(tipo) {
-    if (tipo == '+') {
-      if (this.min == 45) {
-        this.min = 0;
-      } else {
-        this.min += 15;
-      }
-    }
-    if (tipo == '-') {
-      if (this.min == 0) {
-        this.min = 45;
-      } else {
-        this.min -= 15;
-      }
-    }
-    this.actualizarHora24();
-  }
-
-  changeTiempo(tipo) {
-    if (tipo == '+') {
-      if (this.tiempo == 'PM') {
-        this.tiempo = 'AM';
-      } else {
-        this.tiempo = 'PM';
-      }
-    }
-    if (tipo == '-') {
-      if (this.tiempo == 'PM') {
-        this.tiempo = 'AM';
-      } else {
-        this.tiempo = 'PM';
-      }
-    }
-    this.actualizarHora24();
-  }
-
-  actualizarHora24() {
-    let hora = this.hora;
-    let min = this.min.toString();
-    if (this.tiempo == 'PM') {
-      hora += 12;
-    }
-    if (this.min == 0) {
-      min = '00';
-    }
-    this.hora24 = `${hora}:${min}`;
-  }
-
-  addIncluir() {
-    const i = this.incluye.length + 1;
-    this.incluye.push({
+  addCondicion() {
+    const i = this.condiciones.length + 1;
+    this.condiciones.push({
       texto: '',
       placeholder: `(${i}) Tu respuesta`
     });
   }
 
-  openHora(dia) {
-    this.dia = dia;
-    this.showHour = true;
-  }
-
-  closeHora(add) {
-    if (add) {
-      this.addHora(this.dia);
-    }
-    this.showHour = false;
-  }
-
-  delHora(indexDia, indexHora) {
-    this.dias[indexDia].horas.splice(indexHora, 1);
-  }
-
-  addHora(dia) {
-
-    const hora = this.hora24;
-    let foundDay = false;
-    let foundHour = false;
-    let indexDay = 0;
-    let indexHour = 0;
-
-    this.dias.forEach((item, i) => {
-      if (item.dia == dia) {
-        foundDay = true;
-        indexDay = i;
-      }
-    });
-
-    if (this.dias[indexDay].horas.length > 0) {
-      this.dias[indexDay].horas.forEach((item, i) => {
-        if (item.hora == hora) {
-          foundHour = true;
-          indexHour = i;
-        }
-      });
-    }
-
-    if (foundHour) {
-      this.dias[indexDay].horas[indexHour].cantidad += 1;
-    } else {
-      this.dias[indexDay].horas.push({ hora, cantidad: 1 });
-    }
-  }
-
-  addCondicion() {
-    const i = this.condiciones.length + 1;
-    this.condiciones.push({
+  addIncluir() {
+    const i = this.incluye.length + 1;
+    this.incluye.push({
       texto: '',
       placeholder: `(${i}) Tu respuesta`
     });
@@ -326,6 +207,8 @@ export class TiendaMascotasCuponPage {
     this.condiciones.forEach((item,i) => {
       this.condiciones_OK[i] = item.texto;
     });
+
+    
   }
 
   save() {
@@ -335,13 +218,11 @@ export class TiendaMascotasCuponPage {
     if (this.allGood) {
 
       this.prepararDatos();
+      
+      let porcentaje = Math.ceil((Number(this.precioNormal)-Number(this.precioOferta))/Number(this.precioNormal)*100);
 
-      let code = Math.floor(Math.random()*900000) + 100000;
-
-      let porcentaje = Math.ceil(Number(this.precioNormal)/Number(this.precioNormal)*100);
       const data: any = {
-        codigo: code,
-        mascota: this.tiendaID,
+        tienda: this.tiendaID,
         titulo: this.titulo,
         descripcion: this.descripcion,
         categoria: this.subcategoria,
@@ -351,8 +232,9 @@ export class TiendaMascotasCuponPage {
           oferta: this.precioOferta,
           descuento: porcentaje
         },
+        semana: this._semana.obtener_semana(),
         incluye: this.incluye_OK,
-        condiciones: this.condiciones_OK
+        notas: this.condiciones_OK
       }
 
       if (this.isReserva) {

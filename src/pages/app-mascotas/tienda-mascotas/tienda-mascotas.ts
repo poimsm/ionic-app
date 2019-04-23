@@ -49,9 +49,9 @@ export class TiendaMascotasPage {
 
   cargarToday() {
     this._mascota.getToday()
-    .then((data: any) => {
-      this.hoy = data.today;
-    });
+      .then((data: any) => {
+        this.hoy = data.today;
+      });
   }
 
   cargarTienda() {
@@ -82,12 +82,12 @@ export class TiendaMascotasPage {
             this.navCtrl.push(TiendaMascotasCuponPage, { tiendaID: this.tiendaID });
           }
         },
-        {
-          text: "Paquete",
-          handler: () => {
-            this.navCtrl.push(TiendaMascotasPaquetePage, { tiendaID: this.tiendaID });
-          }
-        },
+        // {
+        //   text: "Paquete",
+        //   handler: () => {
+        //     this.navCtrl.push(TiendaMascotasPaquetePage, { tiendaID: this.tiendaID });
+        //   }
+        // },
         {
           text: "Cancelar",
           role: "cancel"
@@ -98,11 +98,11 @@ export class TiendaMascotasPage {
   }
 
   openPage(page) {
-    this.navCtrl.push(page)
+    this.navCtrl.push(page, { tiendaID: this.tiendaID })
   }
 
   openCodigo() {
-    this.navCtrl.push(TiendaMascotasCodigoPage, {tiendaID: this.tiendaID});
+    this.navCtrl.push(TiendaMascotasCodigoPage, { tiendaID: this.tiendaID });
   }
 
   openModal(tipo) {

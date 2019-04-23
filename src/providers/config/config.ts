@@ -9,6 +9,8 @@ export class ConfigProvider {
 
   ENTORNO = "dev";
 
+  MAQUETA = true;
+
   constructor(public http: HttpClient) {
     this.setAPI();
   }

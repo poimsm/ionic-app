@@ -75,6 +75,16 @@ export class MascotasProvider {
     return this.http.get(url).toPromise();
   }
 
+  cuponUtilizado(id, code) {
+    const url = `${this.apiURL}/mascotas/marcar-cupon-como-utilizado/?code=${code}&id=${id}`;
+    return this.http.get(url).toPromise();
+  }
+
+  getCuponesPorTienda(tiendaID) {
+    const url = `${this.apiURL}/mascotas/buscar-cupones-por-tienda/?id=${tiendaID}`;
+    return this.http.get(url).toPromise();
+  }
+
   getAllTiendas() {
     const url = `${this.apiURL}/mascotas/all`;
     return this.http.get(url).toPromise();
