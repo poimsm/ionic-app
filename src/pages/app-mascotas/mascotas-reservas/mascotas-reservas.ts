@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -9,49 +9,87 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class MascotasReservasPage {
   cuponID: string;
   semana: any;
+  seleccionPrevia: any;
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams) {
-    this.semana = this.navParams.get('semana');
-    // this.semana = this.corregirDatos(this.navParams.get('semana'));
+    public navParams: NavParams,
+    private viewCtrl: ViewController
+  ) {
+
+    this.semana = this.tomarHorasActivas(this.navParams.get('semana'));
     this.cuponID = this.navParams.get('cuponID');
-    console.log(this.semana);
-    console.log(this.cuponID);
+    this.seleccionPrevia = this.navParams.get('seleccionPrevia');
+
+    if (this.seleccionPrevia) {
+      let indexDia = this.seleccionPrevia.index.indexDia;
+      let indexHora = this.seleccionPrevia.index.indexHora;
+      this.seleccionarHora(indexDia, indexHora);
+    }
 
   }
 
-  corregirDatos(semana) {
-    let semana_OK = [];
-    semana.forEach(item => {
-      
-      if (item.bloque) {
 
-        let horas = [];
-
-        item.bloque.forEach((bloque, i) => {
-          let hora
-          if (i % 2 == 0) {
-            hora = bloque.text2
-          } else if (i == 0) {
-            hora = bloque.text1
-          } else {
-            hora = bloque.text1
-
+  tomarHorasActivas(semana) {
+    let semana_con_horas_activas = [];
+    semana.forEach(dia => {
+      let horasActivas = [];
+      dia.horas.forEach(hora => {
+        if (hora.isActive) {
+          const data = {
+            hora: hora.hora,
+            isActive: true,
+            isSelected: false
           }
-        });
-        
-       
-
-        let data = {
-          dia: item.dia,
-          num: item.num,
-          horas: ''
+          horasActivas.push(data)
         }
-        semana_OK.push(item);
+      });
+      const data = {
+        dia: dia.dia,
+        num: dia.num,
+        horas: horasActivas
       }
+      semana_con_horas_activas.push(data);
     });
-    return semana_OK;
+
+    return semana_con_horas_activas;
   }
+
+  seleccionarHora(indexDia, indexHora) {
+
+    this.semana.forEach(dia => {
+      dia.horas.forEach(hora => {
+        hora.isSelected = false;
+      });
+    });
+
+    this.semana[indexDia].horas[indexHora].isSelected = true;
+  }
+
+  close() {
+
+    let flag = false;
+    let selection = {}
+
+    this.semana.forEach((dia, i) => {
+      dia.horas.forEach((hora, j) => {
+        if (hora.isSelected) {
+          flag = true;
+          selection = {
+            index: {
+              indexDia: i,
+              indexHora: j
+            },
+            dia: dia.dia,
+            num: dia.num,
+            hora: hora.hora
+          }
+        }
+      });
+    });
+
+    this.viewCtrl.dismiss({ ok: flag, selection });
+  }
+
 
 }

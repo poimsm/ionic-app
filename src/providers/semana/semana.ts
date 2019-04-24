@@ -10,9 +10,8 @@ export class SemanaProvider {
 
   preIndex = 0;
   horas = [];
-  horas_bloque = [];
-  horas_Model = [];
-  horas_bloque_Model = [];
+  horas_tem = [];
+
   week = [];
   calendario = [];
 
@@ -32,7 +31,7 @@ export class SemanaProvider {
     this.generarHoras(15);
   }
 
-  obtenerSemana() {
+  obtenerSemanaSERVER() {
     const url = `${this.apiURL}/mascotas/obtener-semana`;
     return this.http.get(url).toPromise();
   }
@@ -43,9 +42,7 @@ export class SemanaProvider {
   }
 
   construirSemana() {
-    this.obtenerSemana().then((data: any) => {
-
-
+    this.obtenerSemanaSERVER().then((data: any) => {
 
       data.forEach(item => {
         this.semana.push({
@@ -55,7 +52,7 @@ export class SemanaProvider {
           horas: []
         });
       });
-     
+
       this.obtenerHoy().then(data => {
         this.hoy = data;
         this.actualizarDiaPasadoFlag(0);
@@ -74,21 +71,28 @@ export class SemanaProvider {
   }
 
   generarHoras(skip) {
+
     let horas = [];
+
     let hora = 0;
     let minutos = 0;
+
     let text = '';
     let text_hora = '';
     let text_min = '';
 
+    // horas comienzan a las 8 AM
     for (let j = 8; j <= 19; j++) {
       hora = j;
+
       if (hora < 10) {
         text_hora = `0${hora}`;
       } else {
         text_hora = `${hora}`;
       }
+
       for (let i = 0; i <= 45; i += skip) {
+
         minutos = i;
         if (minutos == 0) {
           text_min = `0${minutos}`;
@@ -100,28 +104,13 @@ export class SemanaProvider {
           text,
           isActive: false
         }
+
         horas.push(data);
       }
     }
 
-    let horas_bloque = [];
-    let counter = 0;
-    for (let i = 0; i < horas.length; i++) {
-      if (counter < horas.length) {
-        let data = {
-          text1: horas[counter].text,
-          text2: horas[counter + 1].text,
-          isActive: false
-        }
-        counter = counter + 2;
-        horas_bloque.push(data);
-      }
-    }
     this.horas = JSON.parse(JSON.stringify(horas));
-    this.horas_Model = JSON.parse(JSON.stringify(horas));
-
-    this.horas_bloque = JSON.parse(JSON.stringify(horas_bloque));
-    this.horas_bloque_Model = JSON.parse(JSON.stringify(horas_bloque));
+    this.horas_tem = JSON.parse(JSON.stringify(horas));
   }
 
   addHora(index, diaPasado) {
@@ -138,7 +127,6 @@ export class SemanaProvider {
     } else {
       this.horas[index].isActive = true;
     }
-    this.addBloque(index);
   }
 
   addDia(index) {
@@ -150,60 +138,59 @@ export class SemanaProvider {
     });
 
     this.semana[index].isActive = true;
-    this.week = this.semana.slice();
 
-    this.week[this.preIndex].horasBloque = JSON.parse(JSON.stringify(this.horas_bloque));
-    this.week[this.preIndex].horas = JSON.parse(JSON.stringify(this.horas));
+    this.semana[this.preIndex].horas = JSON.parse(JSON.stringify(this.horas));
 
-    if (this.week[index].horas) {
-      this.horas = JSON.parse(JSON.stringify(this.week[index].horas));
-      this.horas_bloque = JSON.parse(JSON.stringify(this.week[index].horasBloque));
+    if (this.semana[index].horas.length > 0) {
+      this.horas = JSON.parse(JSON.stringify(this.semana[index].horas));
     } else {
-      this.horas = JSON.parse(JSON.stringify(this.horas_Model));
-      this.horas_bloque = JSON.parse(JSON.stringify(this.horas_bloque_Model));
+      this.horas = JSON.parse(JSON.stringify(this.horas_tem));
     }
     this.preIndex = index;
   }
 
   close() {
     this.addDia(this.preIndex);
-    console.log(this.semana);
-    
-  }
-
-  addBloque(index) {
-    if (this.horas_bloque[index-1].isActive) {
-      this.horas_bloque[index-1].isActive = false;
-    } else {
-      this.horas_bloque[index-1].isActive = true;
-    }
   }
 
   obtener_semana() {
-    let semana_ok = [];
-    this.semana.forEach(dia => {
+    // Todas las horas activas estan desplazada una posicion
 
-      if (dia.horas) {
+    let semana_ok = [];
+    let dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+
+    this.semana.forEach((dia, i) => {
+
+      let flag = false;
+
+      dia.horas.forEach(item => {
+        if (item.isActive) {
+          flag = true;
+        }
+      });
+
+      if (flag) {
         let horas = [];
 
-        dia.horas.forEach(hora => {
+        dia.horas.forEach((hora, i) => {
           if (hora.isActive) {
-           horas.push(hora);
+            const horaActiva = {
+              hora: dia.horas[i - 1].text,
+              isActive: true
+            }
+            horas.push(horaActiva);
           }
         });
-  
-        let data = {
-          dia: dia.dia,
-          num: dia.num,
-          horas: horas        
-        }
-       semana_ok.push(data);
-      }
-     
-    });
 
-    console.log('OK',semana_ok);
-    
+        let data = {
+          dia: dias[i],
+          num: dia.num,
+          horas: horas
+        }
+        semana_ok.push(data);
+      }
+
+    });
 
     return semana_ok;
   }

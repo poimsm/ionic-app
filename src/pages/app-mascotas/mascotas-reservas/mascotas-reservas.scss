@@ -1,3 +1,15 @@
 page-mascotas-reservas {
 
+    .selected {
+        background: darkorange;
+        color: white;
+        font-weight: 500;        
+    }
+
+    .no-selected {
+        background: white;
+        color: #222;
+        border: 1px solid #eee;  
+    }
+
 }

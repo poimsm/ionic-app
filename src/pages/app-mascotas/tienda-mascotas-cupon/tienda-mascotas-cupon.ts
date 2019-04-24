@@ -207,8 +207,7 @@ export class TiendaMascotasCuponPage {
     this.condiciones.forEach((item,i) => {
       this.condiciones_OK[i] = item.texto;
     });
-
-    
+        
   }
 
   save() {

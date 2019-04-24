@@ -128,23 +128,9 @@
   <div *ngIf="data?.isReserva">
     <div style="height:10px;width:100%;background:rgb(248, 248, 248)">
     </div>
-    <div style="margin-top:15px;margin-left:15px;margin-bottom:10px;font-size:15px;color:salmon;">
-      ¡Crea una reserva!
-    </div>
-    <button ion-item (click)="openReservas(data._id, data.semana)" no-lines>
-      <div style="display:flex;justify-content:flex-start;align-items:center">
-        <div style="color:#bbb">
-          JUEVES
-        </div>
-        <button ion-button small mode="ios" color="light" style="margin-right:5px">
-          13:30
-        </button>
-        <button ion-button small mode="ios" color="light" style="margin-right:5px">
-          14:30
-        </button>
-        <button ion-button small mode="ios" color="light" style="margin-right:5px">
-          16:30
-        </button>
+    <button ion-item (click)="openReservas()" no-lines>
+      <div style="margin-top:15px;margin-left:15px;margin-bottom:10px;font-size:15px;color:salmon;">
+        ¡Crea una reserva!..
       </div>
       <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:18px"></ion-icon>
     </button>
@@ -155,7 +141,7 @@
   </div>
 
 
-  <div style="width:100%;display:flex;justify-content:center;margin-bottom:50px;margin-top:20px">
+  <div *ngIf="from != 'tienda-mascotas'" style="width:100%;display:flex;justify-content:center;margin-bottom:50px;margin-top:20px">
     <div
       style="font-weight:500;font-size:13px;color:white;background:#ff6633;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
       COMPRAR AHORA
@@ -164,15 +150,6 @@
   </div>
 
 
-
-
-  <!-- <div style="width:100%;display:flex;justify-content:center;margin-bottom:50px;margin-top:20px">
-        <div
-          style="font-weight:500;font-size:13px;color:white;background:darkorange;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
-           RESERVAR AHORA
-          <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
-        </div>
-      </div> -->
 
 
 </ion-content>

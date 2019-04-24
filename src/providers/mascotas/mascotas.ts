@@ -119,6 +119,11 @@ export class MascotasProvider {
     // pendiente
   }
 
+  comprarCupon(id, body) {
+    const url = `${this.apiURL}/mascotas/comprar-cupon/?id=${id}`;
+    return this.http.post(url, body).toPromise();
+  }
+
   productoCreado() {
     let toast = this.toastCtrl.create({
       message: 'Producto creado con exito',

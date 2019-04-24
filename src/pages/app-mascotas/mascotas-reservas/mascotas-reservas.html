@@ -1,31 +1,35 @@
-<ion-header>
+<ion-header no-border>
 
-  <ion-navbar>
-    <ion-title>mascotas-reservas</ion-title>
+  <ion-navbar color="white">
+      <ion-buttons left>
+          <button ion-button icon-only (click)="close()">
+            <ion-icon name="md-close" style="font-size:25px"></ion-icon>
+          </button>
+        </ion-buttons>
+    <ion-title>Seleccionar Hora</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <div *ngFor="let dia of semana; let j = index">
+  <div *ngFor="let dia of semana; let i = index">
 
-    <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
-      <div style="padding:8px;padding-left:15px;color:#444;font-size:16px;font-weight:600">
-        {{dia.dia}}
-      </div>
-      <button (click)="openHora(dia.dia)" ion-button outline small mode="ios">
-        {{dia.num}}
-      </button>
+    <div style="padding:8px;padding-left:15px;color:#444;font-size:16px;font-weight:600">
+      {{dia.dia}}
+      {{dia.num}}
     </div>
+
     <div style="margin-top:10px;margin-bottom:30px;width:100%;display:flex;justify-content:flex-start;flex-wrap:wrap">
-      <div *ngFor="let hora of dia.bloque" style="margin-top:10px;margin-left:10px;margin-right:20px">
+      <div *ngFor="let hora of dia.horas; let j = index" (click)="seleccionarHora(i, j)" style="margin-top:10px;margin-left:10px;margin-right:20px">
         <div
-          style="border-radius:3px;padding:6px;padding-left:10px;padding-right:10px;background:whitesmoke;font-size:13px;color:#333">
-          {{hora.text1}}
+        [ngClass]="{'selected': hora.isSelected, 'no-selected': !hora.isSelected}"
+          style="border-radius:3px;padding:6px;padding-left:10px;padding-right:10px;font-size:13px;">
+          {{hora.hora}}
         </div>
       </div>
     </div>
+
   </div>
 
 
