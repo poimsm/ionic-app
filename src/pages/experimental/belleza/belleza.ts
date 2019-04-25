@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { SeccionesProvider } from '../../../providers/secciones/secciones';
 
-/**
- * Generated class for the BellezaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,7 +10,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class BellezaPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private _secciones: SeccionesProvider
+    ) {
+      _secciones.cambiarTipo('belleza');
   }
 
   ionViewDidLoad() {

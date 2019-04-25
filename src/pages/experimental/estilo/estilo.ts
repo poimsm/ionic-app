@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { SeccionesProvider } from '../../../providers/secciones/secciones';
 
 
 @IonicPage()
@@ -15,7 +16,12 @@ export class EstiloPage {
     'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552586651/restaurar_muebles_madera.jpg'
 
   ]
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private _secciones: SeccionesProvider
+    ) {
+      _secciones.cambiarTipo('estilo');
   }
 
   ionViewDidLoad() {

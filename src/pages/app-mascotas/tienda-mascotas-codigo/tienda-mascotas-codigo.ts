@@ -27,7 +27,7 @@ export class TiendaMascotasCodigoPage {
   }
 
 
-  escanerCodigo() {
+  escanearCodigo() {
     this.showSearch = false;
     this.showProduct = true;
     // this.barcodeScanner.scan().then(barcodeData => {
@@ -40,11 +40,11 @@ export class TiendaMascotasCodigoPage {
     // }).catch(err => {
     //   console.log('Error', err);
     // });
-    this.buscar('5cb5da249ee27e0fec280576', '94004');
+    this.buscar('5cbf8da8cffe5277448ba7dc', '94004');
   }
 
   buscar(id, code) {
-    this._mascotas.buscarCompraPorCodigo(id, code)
+    this._mascotas.buscarCuponPorCodigo(id, code)
       .then(data => {
         this.data = data;
         console.log(data);

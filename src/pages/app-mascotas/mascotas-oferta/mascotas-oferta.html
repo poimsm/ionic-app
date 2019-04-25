@@ -141,8 +141,8 @@
   </div>
 
 
-  <div *ngIf="from != 'tienda-mascotas'" style="width:100%;display:flex;justify-content:center;margin-bottom:50px;margin-top:20px">
-    <div
+  <div *ngIf="from == 'tienda-mascotas'" style="width:100%;display:flex;justify-content:center;margin-bottom:50px;margin-top:20px">
+    <div (click)="comprar()"
       style="font-weight:500;font-size:13px;color:white;background:#ff6633;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
       COMPRAR AHORA
       <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>

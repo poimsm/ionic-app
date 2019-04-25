@@ -118,9 +118,16 @@ import { MascotasProvider } from '../providers/mascotas/mascotas';
 import { SemanaProvider } from '../providers/semana/semana';
 import { MaquetaProvider } from '../providers/maqueta/maqueta';
 
+// Custom Components
+import { SeccionesComponent } from "../components/secciones/secciones";
+import { SeccionesProvider } from '../providers/secciones/secciones';
+
+
+
 @NgModule({
   declarations: [
     MyApp,
+    SeccionesComponent,
     HomePage,
     LoginPage,
     OncePage,
@@ -301,6 +308,7 @@ import { MaquetaProvider } from '../providers/maqueta/maqueta';
     BarcodeScanner,
     SemanaProvider,
     MaquetaProvider,
+    SeccionesProvider,
 
     // AngularFireDatabase
   ]

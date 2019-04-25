@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MascotasContentPage } from '../mascotas-content/mascotas-content';
 import { SuperPage } from '../../app-super/super/super';
+import { SeccionesProvider } from '../../../providers/secciones/secciones';
+import { Subscription } from 'rxjs/Subscription';
 
 
 @IonicPage()
@@ -11,7 +13,26 @@ import { SuperPage } from '../../app-super/super/super';
 })
 export class MascotasPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  tiendas = [];
+  subscription: Subscription;
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private _secciones: SeccionesProvider
+  ) {
+    _secciones.cambiarTipo('mascotas');
+  }
+
+  ionViewWillEnter() {
+    this.subscription = this._secciones.tiendas.subscribe(data => {
+      console.log(data)
+    }
+      );
+  }
+
+  ionViewWillLeave() {
+    this.subscription.unsubscribe();
   }
 
   openContent() {

@@ -33,7 +33,7 @@ export class MascotasContentPage {
 
   openPromo(tipo) {
     if (tipo == 'oferta') {
-      this.navCtrl.push(MascotasOfertaPage, { tipo: 'mascotas' });
+      this.navCtrl.push(MascotasOfertaPage, { tipo: 'mascotas', from: 'mascotas-content' });
     } else {
       this.navCtrl.push(MascotasPaquetePage, { tipo: 'mascotas' });
     }

@@ -1,0 +1,125 @@
+<div *ngIf="tipo == 'mascotas'">
+  <ion-slides>
+    <ion-slide>
+      <div style="display:flex;align-items:center;justify-content:space-around">
+
+        <div (click)="buscarTiendasMascotas('Clínica')">
+          <ion-icon name="custom-love" style="color:salmon;font-size:30px"></ion-icon>
+          <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Clínica
+          </div>
+        </div>
+
+        <div (click)="buscarTiendasMascotas('Paseo')">
+          <ion-icon name="custom-dog-walk" style="color:slateblue;font-size:30px"></ion-icon>
+          <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Paseo
+          </div>
+        </div>
+
+        <div (click)="buscarTiendasMascotas('Pet shop')">
+          <ion-icon name="custom-cart" style="color:darkorange;font-size:30px"></ion-icon>
+          <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Pet shop
+          </div>
+        </div>
+
+        <div (click)="buscarTiendasMascotas('Baño')">
+          <ion-icon name="custom-pet-shampoo" style="color:dodgerblue;font-size:30px"></ion-icon>
+          <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Baño
+          </div>
+        </div>
+      </div>
+
+    </ion-slide>
+  </ion-slides>
+</div>
+
+
+
+<div *ngIf="tipo == 'belleza'">
+  <ion-slides>
+    <ion-slide>
+      <div style="display:flex;align-items:center;justify-content:space-around">
+
+        <div (click)="buscarTiendasBelleza('Uñas')">
+          <ion-icon name="custom-nail" style="color:salmon;font-size:35px"></ion-icon>
+          <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Uñas
+          </div>
+        </div>
+
+        <div (click)="buscarTiendasBelleza('Cabello')">
+          <ion-icon name="custom-hair" style="color:saddlebrown;font-size:30px"></ion-icon>
+          <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Cabello
+          </div>
+        </div>
+
+        <div (click)="buscarTiendasBelleza('Cuerpo')">
+          <ion-icon name="custom-maditation" style="color:dodgerblue;font-size:30px"></ion-icon>
+          <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Cuerpo
+          </div>
+        </div>
+
+        <div (click)="buscarTiendasBelleza('Piel')">
+          <ion-icon name="custom-wax" style="color:salmon;font-size:30px"></ion-icon>
+          <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Piel
+          </div>
+        </div>
+      </div>
+
+    </ion-slide>
+  </ion-slides>
+</div>
+
+
+
+<div *ngIf="tipo == 'estilo'">
+  <ion-slides>
+    <ion-slide>
+      <div style="display:flex;align-items:center;justify-content:space-around">
+
+        <div (click)="buscarTiendasEstilo('Corte cabello mujer')">
+          <ion-icon name="custom-woman-hair" style="color:salmon;font-size:35px"></ion-icon>
+          <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Corte cabello
+          </div>
+        </div>
+
+        <div (click)="buscarTiendasEstilo('Corte cabello hombre')">
+          <ion-icon name="custom-man-hair" style="color:saddlebrown;font-size:30px"></ion-icon>
+          <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Corte cabello
+          </div>
+        </div>
+
+        <div (click)="buscarTiendasEstilo('Barba')">
+          <ion-icon name="custom-blade" style="color:dodgerblue;font-size:30px"></ion-icon>
+          <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Barba
+          </div>
+        </div>
+
+        <div (click)="buscarTiendasEstilo('Tattoo')">
+          <ion-icon name="custom-rock" style="color:salmon;font-size:30px"></ion-icon>
+          <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Tattoo
+          </div>
+        </div>
+
+        <div (click)="buscarTiendasEstilo('Perfo')">
+          <ion-icon name="custom-hearing" style="color:darkorange;font-size:30px"></ion-icon>
+          <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+            Perfo
+          </div>
+        </div>
+
+      </div>
+
+    </ion-slide>
+  </ion-slides>
+</div>

@@ -61,7 +61,7 @@ export class MascotasOfertaPage {
         this.reserva_seleccionada = data.selection;
         if (this.cliente_esta_comprando) {
           // this.navCtrl.push()
-          this.comprar();
+          this.crearCompra();
         }
       }
     });
@@ -82,13 +82,18 @@ export class MascotasOfertaPage {
     }
   }
 
-  comprar() {
+  iniciarCompra() {
 
     this.cliente_esta_comprando = true;
 
-    this.checkear();
+    if (this.data.isReserva && this.reserva_seleccionada) {
+      this.crearCompra();
+    } else {
+      this.openReservas();
+    }
+  }
 
-
+  crearCompra() {
     const compra = {
       tipo: 'cupon',
       cupon: this.data,
@@ -106,13 +111,13 @@ export class MascotasOfertaPage {
     }
 
     this._mascota.comprarCupon(this.data._id, compra)
-    .then((data: any) => {
-      if (data.ok) {
-        console.log('Compra Exitosa');
-      } else {
-        console.log('Ups, una persona justo acaba de reservar tu hora..');       
-      }
-    });
+      .then((data: any) => {
+        if (data.ok) {
+          console.log('Compra Exitosa');
+        } else {
+          console.log('Ups, una persona justo acaba de reservar tu hora..');
+        }
+      });
   }
 
 

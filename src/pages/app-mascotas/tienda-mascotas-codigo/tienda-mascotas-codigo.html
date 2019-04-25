@@ -13,7 +13,7 @@
 
     <div
       style="border-radius:0px;min-height:240px;width:100%;background-size:cover;background-repeat: no-repeat;background-position: center;"
-      [ngStyle]="{'background-image': 'url(' + data?.cupon.img + ')' }">
+      [ngStyle]="{'background-image': 'url(' + data?.cupon.imgs[0].img + ')' }">
     </div>
 
     <div padding>
@@ -105,7 +105,7 @@
 
 <ion-footer>
   <div padding>
-    <button *ngIf="showSearch" (click)="escanerCodigo()" icon-left color="orange3" ion-button block mode="ios">
+    <button *ngIf="showSearch" (click)="escanearCodigo()" icon-left color="orange3" ion-button block mode="ios">
       <ion-icon name="qr-scanner" style="font-size:22px;margin-right:5px"></ion-icon>
       Escanéar código
     </button>
