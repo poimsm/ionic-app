@@ -224,5 +224,8 @@ ion-icon {
   &[class*="qr-code"] {
     mask-image: url(../assets/qr-code.svg);
   }
+  &[class*="coupon"] {
+    mask-image: url(../assets/coupon.svg);
+  }
 
 }

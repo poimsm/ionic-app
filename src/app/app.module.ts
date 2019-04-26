@@ -102,7 +102,9 @@ import {
   UsuarioHistorialPage,
   MascotasOfertaPage,
   MascotasPaquetePage,
-  MascotasReservasPage
+  MascotasReservasPage,
+  TiendaMascotasGaleriaPage,
+  TiendaMascotasMapaPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -121,6 +123,8 @@ import { MaquetaProvider } from '../providers/maqueta/maqueta';
 // Custom Components
 import { SeccionesComponent } from "../components/secciones/secciones";
 import { SeccionesProvider } from '../providers/secciones/secciones';
+import { FormularioHorarioComponent } from "../components/formulario-horario/formulario-horario";
+import { ControlProvider } from '../providers/control/control';
 
 
 
@@ -128,6 +132,7 @@ import { SeccionesProvider } from '../providers/secciones/secciones';
   declarations: [
     MyApp,
     SeccionesComponent,
+    FormularioHorarioComponent,
     HomePage,
     LoginPage,
     OncePage,
@@ -196,7 +201,9 @@ import { SeccionesProvider } from '../providers/secciones/secciones';
     UsuarioHistorialPage,
     MascotasOfertaPage,
     MascotasPaquetePage,
-    MascotasReservasPage
+    MascotasReservasPage,
+    TiendaMascotasGaleriaPage,
+    TiendaMascotasMapaPage
   ],
   imports: [
     BrowserModule,
@@ -283,7 +290,9 @@ import { SeccionesProvider } from '../providers/secciones/secciones';
     UsuarioHistorialPage,
     MascotasOfertaPage,
     MascotasPaquetePage,
-    MascotasReservasPage
+    MascotasReservasPage,
+    TiendaMascotasGaleriaPage,
+    TiendaMascotasMapaPage
   ],
   providers: [
     StatusBar,
@@ -309,6 +318,7 @@ import { SeccionesProvider } from '../providers/secciones/secciones';
     SemanaProvider,
     MaquetaProvider,
     SeccionesProvider,
+    ControlProvider,
 
     // AngularFireDatabase
   ]

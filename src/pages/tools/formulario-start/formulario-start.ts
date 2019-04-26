@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, Platform, ActionSheetController, ToastController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImageProvider } from '../../../providers/image/image';
 import { DataProvider } from '../../../providers/data/data';
 import { AuthProvider } from '../../../providers/auth/auth';
+
+import { Content } from 'ionic-angular';
+import { ControlProvider } from '../../../providers/control/control';
+
 
 @IonicPage()
 @Component({
@@ -11,6 +15,7 @@ import { AuthProvider } from '../../../providers/auth/auth';
   templateUrl: 'formulario-start.html',
 })
 export class FormularioStartPage {
+  @ViewChild('pageTop') pageTop: Content;
 
   nombre = '';
   telefono = '';
@@ -20,15 +25,14 @@ export class FormularioStartPage {
   tiendaID: string;
   token: string;
 
-  step = '1/4';
-  isOK = false;
-  isOne = true;
-  isTwo = false;
-  isThree = false;
-  isFour = false;
   isTarjeta = true;
 
+  comenzoElFormulario = false;
+
   dias = [];
+  steps = [];
+  step: string;
+  indexStep = 0;
 
   servicios = [
     {
@@ -63,13 +67,8 @@ export class FormularioStartPage {
     },
     {
       isActive: false,
-      nombreCorto: 'Puedes entrar con la mascota',
+      nombreCorto: 'Puedes entrar con mascotas',
       nombre: 'Pet Friendly: puedes entrar con la mascota a la tienda'
-    },
-    {
-      isActive: false,
-      nombreCorto: 'Prohibido Fumar',
-      nombre: 'Prohibido fumar'
     },
     {
       isActive: false,
@@ -78,46 +77,78 @@ export class FormularioStartPage {
     },
     {
       isActive: false,
+      nombreCorto: 'Televisión',
+      nombre: 'Televisión'
+    },
+    {
+      isActive: false,
       nombreCorto: 'Revistas Para Leer',
       nombre: 'Revistas para leer mientras esperas'
     },
     {
       isActive: false,
-      nombreCorto: 'Televisión',
-      nombre: 'Televisión'
+      nombreCorto: 'Café disponible',
+      nombre: 'Café disponible mientras esperas'
+    },
+    {
+      isActive: false,
+      nombreCorto: 'Agua disponible',
+      nombre: 'Agua disponible mientras esperas'
     }
   ];
 
-  lunesCerrado = false;
-  martesCerrado = false;
-  miercolesCerrado = false;
-  juevesCerrado = false;
-  viernesCerrado = false;
-  sabadoCerrado = false;
-  domingoCerrado = false;
-
-  lunes = true;
-  martes = true;
-  miercoles = true;
-  jueves = true;
-  viernes = true;
-  sabado = true;
-  domingo = true;
-
-  lunesInicio: string;
-  lunesCierre: string;
-  martesInicio: string;
-  martesCierre: string;
-  miercolesInicio: string;
-  miercolesCierre: string;
-  juevesInicio: string;
-  juevesCierre: string;
-  viernesInicio: string;
-  viernesCierre: string;
-  sabadoInicio: string;
-  sabadoCierre: string;
-  domingoInicio: string;
-  domingoCierre: string;
+  secciones = [
+    {
+      seccion: 'Belleza',
+      categorias: [
+        {
+          nombre: 'Rostro',
+          nombreCorto: 'Rostro',
+          isActive: false
+        },
+        {
+          nombre: 'Piel',
+          nombreCorto: 'Rostro',
+          isActive: false
+        },
+        {
+          nombre: 'Uñas',
+          nombreCorto: 'Rostro',
+          isActive: false
+        },
+        {
+          nombre: 'Cabello',
+          nombreCorto: 'Rostro',
+          isActive: false
+        },
+      ]
+    },
+    {
+      seccion: 'Estilo',
+      categorias: [
+        {
+          nombre: 'Corte de cabello',
+          nombreCorto: 'Rostro',
+          isActive: false
+        },
+        {
+          nombre: 'Tatuajes',
+          nombreCorto: 'Rostro',
+          isActive: false
+        },
+        {
+          nombre: 'Barbería',
+          nombreCorto: 'Rostro',
+          isActive: false
+        },
+        {
+          nombre: 'Perforaciones',
+          nombreCorto: 'Rostro',
+          isActive: false
+        },
+      ]
+    }
+  ];
 
 
   constructor(
@@ -129,28 +160,64 @@ export class FormularioStartPage {
     private actionSheetCtrl: ActionSheetController,
     private _img: ImageProvider,
     private _data: DataProvider,
-    private _auth: AuthProvider,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    private _control: ControlProvider
   ) {
     this.tiendaID = this.navParams.get('tiendaID');
     this.token = this.navParams.get('token');
+    this.crearSteps();
   }
-  
-  close(ok) {
-    if (ok) {
+
+  seleccionarCategoria(index) {
+    this.secciones.forEach(element => {
+      
+    });
+  }
+
+  crearSteps() {
+    for (let i = 0; i <= 2; i++) {
+      this.steps.push({
+        step: i + 1,
+        isActive: false
+      })
+    }
+    this.steps[0].isActive = true;
+    this.step = `1/3`;
+  }
+
+  changeStep(action) {
+
+    if (this.indexStep == 0 && action == 'back') {
+      this.comenzoElFormulario = false;
+      return;
+    }
+
+    this.steps[this.indexStep].isActive = false;
+
+    if (action == 'back') {
+      this.indexStep -= 1;
+    } else {
+      this.indexStep += 1;
+    }
+
+    this.steps[this.indexStep].isActive = true;
+    this.step = `${this.indexStep + 1}/3`;
+  }
+
+  close(crearTienda) {
+    if (crearTienda) {
       const servActivos = [];
       this.servicios.forEach(item => {
         if (item.isActive) {
           servActivos.push(item.nombreCorto);
         }
-      });      
+      });
       const data = {
         nombre: this.nombre,
         direccion: this.direccion,
         telefono: this.telefono,
         isTarjeta: this.isTarjeta,
         servicios: servActivos,
-        eslogan: this.eslogan,
         logo: this.logo,
         horario: this.dias,
         isFirstLoggin: false
@@ -164,43 +231,54 @@ export class FormularioStartPage {
     }
   }
 
-  next() {
-    if (this.isOne) {
-      if (this.nombre.length > 3 && this.telefono.length > 5 && this.direccion.length > 6) {
-        this.step = '2/4';
-        this.isOne = false;
-        this.isTwo = true;
-        this.isThree = false;
-        this.isFour = false;
-      } else {
-        this.completarToast();
+  pasoActual() {
+    let step: number;
+    this.steps.forEach((stepNow, i) => {
+      if (stepNow.isActive) {
+        step = i + 1;
       }
-    } else if (this.isTwo) {
-      this.step = '3/4';
-      this.isOne = false;
-      this.isTwo = false;
-      this.isThree = true;
-      this.isFour = false;
-    } else if (this.isThree) {
-      this.step = '4/4';
-      this.isOne = false;
-      this.isTwo = false;
-      this.isThree = false;
-      this.isFour = true;
-    } else if (this.isFour) {
-      this.checkHorario();
-      if (
-        this.lunes &&
-        this.martes &&
-        this.miercoles &&
-        this.jueves &&
-        this.viernes &&
-        this.sabado &&
-        this.domingo) {
+    });
+    return step;
+  }
+
+  next() {
+
+    let allGood = false;
+
+    let step = this.pasoActual();
+
+    if (step == 1) {
+
+      if (this.nombre.length > 3 && this.telefono.length > 5 && this.direccion.length > 6) {
+        allGood = true;
+      }
+
+    } else if (step == 2) {
+
+      let servicios_listo = this.revisarServicios();
+
+      if (servicios_listo) {
         this.close(true);
       } else {
         this.completarToast();
       }
+
+    } else if (step == 3) {
+
+      let horario_listo = this._control.revisarFormularioHorario();
+
+      if (horario_listo) {
+        this.close(true);
+      } else {
+        this.completarToast();
+      }
+    }
+
+    if (allGood) {
+      this.pageTop.scrollToTop();
+      this.changeStep('next');
+    } else {
+      this.completarToast();
     }
   }
 
@@ -212,140 +290,17 @@ export class FormularioStartPage {
     }
   }
 
-  checkHorario() {
-
-    this.lunes = true;
-    this.martes = true;
-    this.miercoles = true;
-    this.jueves = true;
-    this.viernes = true;
-    this.sabado = true;
-    this.domingo = true;
-
-    this.dias = [];
-
-    if (!this.lunesCerrado) {
-      if (this.lunesInicio && this.lunesCierre) {
-        this.dias.push({
-          nombre: 'Lunes',
-          inicio: this.lunesInicio,
-          cierre: this.lunesCierre,
-          cerrado: false
-        });
-      } else {
-        this.lunes = false;
+  revisarServicios() {
+    let agrego_un_servicio_al_menos = false;
+    this.servicios.forEach(servicio => {
+      if (servicio.isActive) {
+        agrego_un_servicio_al_menos = true;
       }
-    } else {
-      this.dias.push({
-        nombre: 'Lunes',
-        cerrado: true
-      });
-    }
-    if (!this.martesCerrado) {
-      if (this.martesInicio && this.martesCierre) {
-        this.dias.push({
-          nombre: 'Martes',
-          inicio: this.martesInicio,
-          cierre: this.martesCierre,
-          cerrado: false
-        });
-      } else {
-        this.martes = false;
-      }
-    } else {
-      this.dias.push({
-        nombre: 'Martes',
-        cerrado: true
-      });
-    }
-    if (!this.miercolesCerrado) {
-      if (this.miercolesInicio && this.miercolesCierre) {
-        this.dias.push({
-          nombre: 'Miércoles',
-          inicio: this.miercolesInicio,
-          cierre: this.miercolesCierre,
-          cerrado: false
-        });
-      } else {
-        this.miercoles = false;
-      }
-    } else {
-      this.dias.push({
-        nombre: 'Miércoles',
-        cerrado: true
-      });
-    }
-    if (!this.juevesCerrado) {
-      if (this.juevesInicio && this.juevesCierre) {
-        this.dias.push({
-          nombre: 'Jueves',
-          inicio: this.juevesInicio,
-          cierre: this.juevesCierre,
-          cerrado: false
-        });
-      } else {
-        this.jueves = false;
-      }
-    } else {
-      this.dias.push({
-        nombre: 'Jueves',
-        cerrado: true
-      });
-    }
-    if (!this.viernesCerrado) {
-      if (this.viernesInicio && this.viernesCierre) {
-        this.dias.push({
-          nombre: 'Viernes',
-          inicio: this.viernesInicio,
-          cierre: this.viernesCierre,
-          cerrado: false
-        });
-      } else {
-        this.viernes = false;
-      }
-    } else {
-      this.dias.push({
-        nombre: 'Viernes',
-        cerrado: true
-      });
-    }
-    if (!this.sabadoCerrado) {
-      if (this.sabadoInicio && this.sabadoCierre) {
-        this.dias.push({
-          nombre: 'Sábado',
-          inicio: this.sabadoInicio,
-          cierre: this.sabadoCierre,
-          cerrado: false
-        });
-      } else {
-        this.sabado = false;
-      }
-    } else {
-      this.dias.push({
-        nombre: 'Sábado',
-        cerrado: true
-      });
-    }
-    if (!this.domingoCerrado) {
-      if (this.domingoInicio && this.domingoCierre) {
-        this.dias.push({
-          nombre: 'Domingo',
-          inicio: this.domingoInicio,
-          cierre: this.domingoCierre,
-          cerrado: false
-        });
-      } else {
-        this.domingo = false;
-      }
-    } else {
-      this.dias.push({
-        nombre: 'Domingo',
-        cerrado: true
-      });
-    }
-    console.log(this.dias);
-    
+    });
+    return agrego_un_servicio_al_menos;
   }
+
+
 
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
