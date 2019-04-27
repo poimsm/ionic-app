@@ -15,18 +15,23 @@ export class MascotasPage {
 
   tiendas = [];
   subscription: Subscription;
+  tipo: string;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private _secciones: SeccionesProvider
   ) {
-    _secciones.cambiarTipo('mascotas');
+    this.tipo = this.navParams.get('tipo')
+    _secciones.cambiarTipo(this.tipo);
+    console.log(this.tipo);
+    
   }
 
   ionViewWillEnter() {
     this.subscription = this._secciones.tiendas.subscribe(data => {
-      console.log(data)
+      console.log(data);
+      this.tiendas = data;
     }
       );
   }

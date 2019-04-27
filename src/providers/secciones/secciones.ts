@@ -21,7 +21,7 @@ export class SeccionesProvider {
   }
 
   buscarTiendasDeEstiloPorCategorias(categoria) {
-    const url = `${this.apiURL}/mascotas/buscar-tiendas-por-categoria?categoria=${categoria}`;
+    const url = `${this.apiURL}/mascotas/buscar-tiendas-por-categoria/?categoria=${categoria}`;
     this.http.get(url).toPromise()
       .then(data => {
         this.tiendas.next(data);

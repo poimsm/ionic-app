@@ -15,9 +15,9 @@ export class SeccionesComponent {
 
   buscarTiendasMascotas(categoria) {
     console.log('hoola')
-    this._secciones.buscarTiendasDeEstiloPorCategorias('Tattoo');
+    // this._secciones.buscarTiendasDeEstiloPorCategorias(categoria);
 
-    // this._secciones.buscarTiendasDeMascotasPorCategorias(categoria);
+    this._secciones.buscarTiendasDeMascotasPorCategorias(categoria);
   }
 
   buscarTiendasEstilo(categoria) {

@@ -82,11 +82,11 @@
 
   <div padding>
 
-    <div (click)="openContent()">
+    <div *ngFor="let tienda of tiendas" (click)="openContent()">
       <div style="font-size:15px;color:#333;font-weight:600;display:flex;align-items:center">
-        Clínica veterinara My Pets
+        {{tienda.nombre}}
 
-        <ion-icon name="custom-coupon" style="color:gold;font-size:16px;margin-left:5px"></ion-icon>
+        <ion-icon *ngIf="tienda.isCupon" name="custom-coupon" style="color:gold;font-size:16px;margin-left:5px"></ion-icon>
 
       </div>
       <div style="display:flex;align-items:center">
@@ -96,140 +96,34 @@
         <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
         <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
         <div style="color:#999;font-size:15px">
-          (26)
+          ({{tienda.starts}})
         </div>
         <div style="color:darkorange;font-size:14px;margin-left:10px">
-          14 comentarios
+          {{tienda.comentarios}} comentarios
         </div>
       </div>
 
-      <div style="display:inline-block;font-size:11px;padding:2px;color:salmon;border:1px solid salmon">
+      <div *ngIf="tienda.isReserva" style="display:inline-block;font-size:11px;padding:2px;color:salmon;border:1px solid salmon">
         Reservaciones
       </div>
 
-      <!-- <div style="display:inline-block;font-size:11px;padding:2px;color:springgreen;border:1px solid springgreen">
+      <div *ngIf="false" style="display:inline-block;font-size:11px;padding:2px;color:springgreen;border:1px solid springgreen">
         Cupón
-      </div> -->
+      </div>
 
       <div style="color:#999;font-size:15px">
         7:30 - 18:30 abierto
       </div>
 
-      <div style="width:100%;display:flex;justify-content:space-between">
-        <div style="height:90px;width:32%;background-size:cover;background-repeat:no-repeat;background-position:center"
-          [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675605/9bbf1121d6595266dd37d89201d5fdbd.gif' + ')' }">
-        </div>
-        <div style="height:90px;width:32%;background-size:cover;background-repeat:no-repeat;background-position:center"
-          [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675426/8a46f25e88ce90b04d1c2d67845cf18f42660.jpg' + ')' }">
-        </div>
-        <div style="height:90px;width:32%;background-size:cover;background-repeat:no-repeat;background-position:center"
-          [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675378/wer3656.jpg' + ')' }">
+      <div  style="width:100%;display:flex;justify-content:space-between">
+        <div *ngFor="let item of tienda.tresImgs" style="height:90px;width:32%;background-size:cover;background-repeat:no-repeat;background-position:center"
+          [ngStyle]="{'background-image': 'url(' + item.img + ')' }">
+          <!-- <img [src]="item.img" style="height:100px;width:30%;object-fit:cover"> -->
+
         </div>
       </div>
     </div>
 
-
-    <div style="margin-top:20px" (click)="openContent()">
-      <div style="font-size:15px;color:#333;font-weight:600">
-        Cuidado y paseo de perros Duko
-      </div>
-      <div style="display:flex;align-items:center">
-        <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
-        <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
-        <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
-        <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
-        <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
-        <div style="color:#999;font-size:15px">
-          (201)
-        </div>
-        <div style="color:darkorange;font-size:14px;margin-left:10px">
-          230 comentarios
-        </div>
-      </div>
-      <div style="color:#999;font-size:15px">
-        7:30 - 18:30 abierto
-      </div>
-      <div style="width:100%;display:flex;justify-content:space-between">
-        <div style="width:32%;">
-          <div
-            style="height:90px;width:100%;background-size:cover;background-repeat:no-repeat;background-position:center"
-            [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552678637/pasear-perro-482x320.jpg' + ')' }">
-          </div>
-          <div>
-            Paseo de 1h...
-          </div>
-          <div style="color:darkorange;">
-            $4.500
-          </div>
-        </div>
-        <div style="width:32%;">
-          <div
-            style="height:90px;width:100%;background-size:cover;background-repeat:no-repeat;background-position:center"
-            [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552678637/pasear-perro-482x320.jpg' + ')' }">
-          </div>
-          <div>
-            Cuidado de día...
-          </div>
-          <div style="color:darkorange;">
-            $6.000
-          </div>
-        </div>
-        <div style="width:32%;">
-          <div
-            style="height:90px;width:100%;background-size:cover;background-repeat:no-repeat;background-position:center"
-            [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552678637/pasear-perro-482x320.jpg' + ')' }">
-          </div>
-          <div>
-            Alojamiento...
-          </div>
-          <div style="color:darkorange;">
-            $10.500
-          </div>
-        </div>
-        <!-- <div style="width:32%;">
-            <div style="margin:0px;width:100%;height:90px;border-radius:0px;background:red"></div>
-          <div style="color:darkorange;font-size:16px">
-            $15.000
-          </div>
-        </div>
-        <div style="width:32%;">
-            <div style="margin:0px;width:100%;height:90px;border-radius:0px;background:red"></div>
-          <div style="color:darkorange;font-size:16px">
-            $5.000
-          </div>
-        </div> -->
-        <!-- <div style="margin:0px;width:32%;height:90px;border-radius:0px;background:red"></div> -->
-        <!-- <div style="margin:0px;width:32%;height:90px;border-radius:0px;background:red"></div> -->
-      </div>
-    </div>
-
-
-    <div style="margin-top:20px" (click)="openContent()">
-      <div style="font-size:15px;color:#333;font-weight:600">
-        Peluquería canina de pelos
-      </div>
-      <div style="display:flex;align-items:center">
-        <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
-        <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
-        <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
-        <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
-        <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
-        <div style="color:#999;font-size:15px">
-          (201)
-        </div>
-        <div style="color:darkorange;font-size:14px;margin-left:10px">
-          230 comentarios
-        </div>
-      </div>
-      <div style="color:#999;font-size:15px">
-        7:30 - 18:30 abierto
-      </div>
-      <div style="width:100%;display:flex;justify-content:space-between">
-        <div style="margin:0px;width:32%;height:90px;border-radius:0px;background:red"></div>
-        <div style="margin:0px;width:32%;height:90px;border-radius:0px;background:red"></div>
-        <div style="margin:0px;width:32%;height:90px;border-radius:0px;background:red"></div>
-      </div>
-    </div>
 
   </div>
 

@@ -110,6 +110,10 @@ export class HomePage {
     this.getEcommerce();
   }
 
+  openMascotas(tipo) {
+    this.navCtrl.push(MascotasPage, {tipo});
+  }
+
   getTortas() {
     this._data.fetchAlgoDulceHomeCategoria(this.ciudad, 'Tortas')
       .then((data: any) => this.tortas = data);

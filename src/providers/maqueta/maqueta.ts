@@ -104,5 +104,34 @@ export class MaquetaProvider {
   }
 
 
+  crearTiendaMascota() {
+    const data = {
+      nombre: 'Clinica veterinaria My Pets',
+      starts: 26,
+      startsAvg: 3,
+      comentarios: 14,
+      isCupon: true,
+      isReserva: true,
+      horario: '10:30 - 18:30 Abierto',
+      tresImgs: [
+        {
+          isActive: true,
+          img: 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675605/9bbf1121d6595266dd37d89201d5fdbd.gif'
+        },
+        {
+          isActive: true,
+          img: 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675426/8a46f25e88ce90b04d1c2d67845cf18f42660.jpg'
+        },
+        {
+          isActive: true,
+          img: 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675378/wer3656.jpg'
+        }
+      ]
+    };
+    
+    return data;
+  }
+
+
 
 }

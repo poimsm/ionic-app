@@ -19,7 +19,7 @@ export class MascotasProvider {
   updateTienda(id, body) {
     const url = `${this.apiURL}/mascotas/update/${id}`;
     return this.http.put(url, body).toPromise();
-  }  
+  }
 
   updateTiendaCategorias(id, body) {
     const url = `${this.apiURL}/mascotas/actualizar-categorias-de-la-tienda/${id}`;
@@ -36,16 +36,11 @@ export class MascotasProvider {
     return this.http.post(url, body).toPromise();
   }
 
-  crearCupon(tiendaID, body, isReservas, dias) {
+  crearCupon(tiendaID, body) {
     const url = `${this.apiURL}/mascotas/crear-cupon`;
     this.http.post(url, body).toPromise()
-      .then((data: any) => {
-        this.updateTiendaCategorias(tiendaID, { productoID: data._id, categoria: body.categoria });
-        if (isReservas) {
-          this.crearReservas(dias, data._id);
-        } else {
-          this.productoCreado();
-        }
+      .then(() => {
+        this.updateTiendaCategorias(tiendaID, { categoria: body.categoria });
       });
   }
 
@@ -114,7 +109,7 @@ export class MascotasProvider {
     const url = `${this.apiURL}/mascotas/actualizar-credenciales-tienda/${id}`;
     return this.http.put(url, body).toPromise();
   }
-  
+
   borrarCupon() {
     // pendiente
   }

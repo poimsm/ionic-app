@@ -141,7 +141,7 @@
         Selecciona 2 categorias principales:
       </div>
 
-      <div *ngFor="let seccion of secciones" style="width:100%">
+      <div *ngFor="let seccion of secciones; let i = index" style="width:100%">
        
         <div style="font-size:14px;color:#777;width:100%;text-align:center;margin-top:15px">
           Sección {{seccion.seccion}}
@@ -149,8 +149,10 @@
 
         <div style="width:100%;display:flex;align-items:center;justify-content:center;flex-wrap:wrap">
 
-          <div *ngFor="let categoria of seccion.categorias"
-            style="margin:10px;padding-left:10px;padding-right:10px;padding:5px;border-radius:15px;font-size:15px;color:#444;border:1px solid #eee">
+          <div *ngFor="let categoria of seccion.categorias; let j = index"
+            (click)="agregarCategoria(i,j)"
+            [ngClass]="{'selected': categoria.isActive, 'not-selected': !categoria.isActive}"
+            style="margin:10px;padding-left:10px;padding-right:10px;padding:5px;border-radius:15px;font-size:15px;">
             {{categoria.nombre}}
           </div>
 

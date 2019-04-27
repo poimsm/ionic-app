@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, ViewController, Platform, ActionSh
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImageProvider } from '../../../providers/image/image';
 import { DataProvider } from '../../../providers/data/data';
-import { AuthProvider } from '../../../providers/auth/auth';
 
 import { Content } from 'ionic-angular';
 import { ControlProvider } from '../../../providers/control/control';
@@ -150,6 +149,9 @@ export class FormularioStartPage {
     }
   ];
 
+  tresImgs = [{ isActive: false }, { isActive: false }, { isActive: false }];
+
+  misCategorias = [];
 
   constructor(
     public navCtrl: NavController,
@@ -168,10 +170,48 @@ export class FormularioStartPage {
     this.crearSteps();
   }
 
-  seleccionarCategoria(index) {
-    this.secciones.forEach(element => {
-      
+  agregarCategoria(i, j) {
+
+    let cat = this.secciones[i].categorias[j].nombre;
+
+    let existe = false;
+    let index = 0;
+
+    this.misCategorias.forEach(miCategoria => {
+      if (miCategoria == cat) {
+        existe = true;
+        index = this.misCategorias.indexOf(cat);
+      }
     });
+
+    if (this.misCategorias.length == 2) {
+      if (existe) {
+        this.misCategorias.splice(index, 1);
+      } else {
+        this.misCategorias.splice(1, 1);
+        this.misCategorias.push(cat);
+      }
+
+    } else {
+      if (existe) {
+        this.misCategorias.splice(index, 1);
+      } else {
+        this.misCategorias.push(cat);
+      }
+    }
+
+    this.secciones.forEach(seccion => {
+      seccion.categorias.forEach(categoria => {
+        if (this.misCategorias[0] == categoria.nombre) {
+          categoria.isActive = true;
+        } else if (this.misCategorias[1] == categoria.nombre) {
+          categoria.isActive = true;
+        } else {
+          categoria.isActive = false;
+        }
+      });
+    });
+
   }
 
   crearSteps() {
@@ -220,7 +260,10 @@ export class FormularioStartPage {
         servicios: servActivos,
         logo: this.logo,
         horario: this.dias,
-        isFirstLoggin: false
+        isFirstLoggin: false,
+        categorias: this.misCategorias,
+        tresImgs: this.tresImgs,
+        isActive: false
       };
       this._data.updateTienda_Mascota(this.tiendaID, data)
         .then(() => {
@@ -248,35 +291,26 @@ export class FormularioStartPage {
     let step = this.pasoActual();
 
     if (step == 1) {
-
-      if (this.nombre.length > 3 && this.telefono.length > 5 && this.direccion.length > 6) {
-        allGood = true;
-      }
+      // allGood = true;
+      allGood = this.revisarCredenciales();
 
     } else if (step == 2) {
 
-      let servicios_listo = this.revisarServicios();
-
-      if (servicios_listo) {
-        this.close(true);
-      } else {
-        this.completarToast();
+      if (this.revisarServicios() && this.revisarMisCategorias()) {
+        allGood = true
       }
 
     } else if (step == 3) {
 
-      let horario_listo = this._control.revisarFormularioHorario();
-
-      if (horario_listo) {
-        this.close(true);
-      } else {
-        this.completarToast();
-      }
+      allGood = this._control.revisarFormularioHorario();
     }
 
     if (allGood) {
+
       this.pageTop.scrollToTop();
-      this.changeStep('next');
+
+      (step == 3) ? this.close(true) : this.changeStep('next');
+
     } else {
       this.completarToast();
     }
@@ -298,6 +332,22 @@ export class FormularioStartPage {
       }
     });
     return agrego_un_servicio_al_menos;
+  }
+
+  revisarMisCategorias() {
+    if (this.misCategorias.length == 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  revisarCredenciales() {
+    let flag = false;
+    if (this.logo && this.nombre.length > 3 && this.telefono.length > 5 && this.direccion.length > 6) {
+      flag = true;
+    }
+    return flag;
   }
 
 

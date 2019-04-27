@@ -233,14 +233,15 @@ export class TiendaMascotasCuponPage {
         },
         semana: this._semana.obtener_semana(),
         incluye: this.incluye_OK,
-        notas: this.condiciones_OK
+        notas: this.condiciones_OK,
+        isReserva: false
       }
 
       if (this.isReserva) {
         data.isReserva = true;
       }
 
-      this._mascotas.crearCupon(this.tiendaID, data, this.isReserva, this.dias);
+      this._mascotas.crearCupon(this.tiendaID, data);
               
     }
   }
