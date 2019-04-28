@@ -28,6 +28,7 @@ import { BikePage } from "../app-bike/bike/bike";
 import { FormularioStartPage } from "../tools/formulario-start/formulario-start";
 import { SuperTiendasPage } from "../app-super/super-tiendas/super-tiendas";
 import { MascotasProvider } from "../../providers/mascotas/mascotas";
+import { MascotasExpPage } from "../experimental/mascotas-exp/mascotas-exp";
 
 
 @Component({
@@ -112,6 +113,18 @@ export class HomePage {
 
   openMascotas(tipo) {
     this.navCtrl.push(MascotasPage, {tipo});
+  }
+
+  openMaquete(tipo) {
+    if (tipo == 'mascotas') {
+      this.navCtrl.push(MascotasExpPage);
+    }
+    if (tipo == 'estilo') {
+      this.navCtrl.push(EstiloPage);
+    }
+    if (tipo == 'belleza') {
+      this.navCtrl.push(BellezaPage);
+    }
   }
 
   getTortas() {

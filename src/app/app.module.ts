@@ -104,7 +104,11 @@ import {
   MascotasPaquetePage,
   MascotasReservasPage,
   TiendaMascotasGaleriaPage,
-  TiendaMascotasMapaPage
+  TiendaMascotasMapaPage,
+  MascotaContentExpPage,
+  MascotasExpPage,
+  OfertaExpPage,
+  PaqueteExpPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -203,7 +207,11 @@ import { ControlProvider } from '../providers/control/control';
     MascotasPaquetePage,
     MascotasReservasPage,
     TiendaMascotasGaleriaPage,
-    TiendaMascotasMapaPage
+    TiendaMascotasMapaPage,
+    MascotaContentExpPage,
+    MascotasExpPage,
+    OfertaExpPage,
+    PaqueteExpPage
   ],
   imports: [
     BrowserModule,
@@ -292,7 +300,11 @@ import { ControlProvider } from '../providers/control/control';
     MascotasPaquetePage,
     MascotasReservasPage,
     TiendaMascotasGaleriaPage,
-    TiendaMascotasMapaPage
+    TiendaMascotasMapaPage,
+    MascotaContentExpPage,
+    MascotasExpPage,
+    OfertaExpPage,
+    PaqueteExpPage
   ],
   providers: [
     StatusBar,

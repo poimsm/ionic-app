@@ -227,5 +227,8 @@ ion-icon {
   &[class*="coupon"] {
     mask-image: url(../assets/coupon.svg);
   }
+  &[class*="money-bag"] {
+    mask-image: url(../assets/money-bag.svg);
+  }
 
 }

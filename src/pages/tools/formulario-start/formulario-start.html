@@ -62,14 +62,14 @@
       </ion-item>
 
       <div style="margin-top:20px;padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:500">
-        ¿Teléfono de contacto?
+        Teléfono de contacto:
       </div>
       <ion-item>
         <ion-input [(ngModel)]="telefono" type="tel" placeholder="Tu respuesta"></ion-input>
       </ion-item>
 
       <div style="margin-top:20px;padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:500">
-        ¿Dirección de su negocio?
+        Dirección de su negocio:
       </div>
       <ion-item>
         <ion-input [(ngModel)]="direccion" type="text" placeholder="Tu respuesta"></ion-input>
@@ -142,22 +142,29 @@
       </div>
 
       <div *ngFor="let seccion of secciones; let i = index" style="width:100%">
-       
+
         <div style="font-size:14px;color:#777;width:100%;text-align:center;margin-top:15px">
           Sección {{seccion.seccion}}
         </div>
 
         <div style="width:100%;display:flex;align-items:center;justify-content:center;flex-wrap:wrap">
 
-          <div *ngFor="let categoria of seccion.categorias; let j = index"
-            (click)="agregarCategoria(i,j)"
+          <div *ngFor="let categoria of seccion.categorias; let j = index" (click)="agregarCategoria(i,j)"
             [ngClass]="{'selected': categoria.isActive, 'not-selected': !categoria.isActive}"
             style="margin:10px;padding-left:10px;padding-right:10px;padding:5px;border-radius:15px;font-size:15px;">
             {{categoria.nombre}}
           </div>
-
         </div>
+      </div>
 
+      <div style="margin-top:20px;padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:500">
+        ¿Qué hace tu tienda? <span style="font-weight:400;color:#555">(Breve descripción)</span>
+      </div>
+      <ion-item>
+        <ion-input [(ngModel)]="descripcion" type="text" placeholder="Tu respuesta"></ion-input>
+      </ion-item>
+      <div style="width:100%;text-align:right;color:#999">
+        0/55
       </div>
 
     </div>

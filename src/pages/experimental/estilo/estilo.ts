@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SeccionesProvider } from '../../../providers/secciones/secciones';
+import { EstiloContentPage } from '../estilo-content/estilo-content';
 
 
 @IonicPage()
@@ -24,8 +25,8 @@ export class EstiloPage {
       _secciones.cambiarTipo('estilo');
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EstiloPage');
+  openContent() {
+    this.navCtrl.push(EstiloContentPage);
   }
 
 }

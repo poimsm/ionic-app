@@ -153,6 +153,8 @@ export class FormularioStartPage {
 
   misCategorias = [];
 
+  descripcion: string;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -256,6 +258,7 @@ export class FormularioStartPage {
         nombre: this.nombre,
         direccion: this.direccion,
         telefono: this.telefono,
+        descripcion: this.descripcion,
         isTarjeta: this.isTarjeta,
         servicios: servActivos,
         logo: this.logo,

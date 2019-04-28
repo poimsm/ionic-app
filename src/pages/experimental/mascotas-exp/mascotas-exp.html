@@ -1,18 +1,253 @@
-<!--
-  Generated template for the MascotasExpPage page.
+<ion-header no-border>
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>mascotas-exp</ion-title>
+  <ion-navbar color="white">
+    <ion-title>Mascotas</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only>
+        <ion-icon name="pin" style="color:rgb(253, 131, 86)"></ion-icon>
+      </button>
+      <button ion-button icon-only>
+        <ion-icon name="md-more"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+  <div style="margin-bottom:15px;height:10px;width:100%;background:rgb(248, 248, 248)">
+  </div>
+  <div>
+    <ion-slides>
+      <ion-slide>
+        <div style="display:flex;align-items:center;justify-content:space-around">
+
+          <div (click)="buscarTiendasMascotas('Clínica')">
+            <ion-icon name="custom-love" style="color:salmon;font-size:30px"></ion-icon>
+            <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+              Clínica
+            </div>
+          </div>
+
+          <div (click)="buscarTiendasMascotas('Paseo')">
+            <ion-icon name="custom-dog-walk" style="color:slateblue;font-size:30px"></ion-icon>
+            <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+              Paseo
+            </div>
+          </div>
+
+          <div (click)="buscarTiendasMascotas('Pet shop')">
+            <ion-icon name="custom-cart" style="color:darkorange;font-size:30px"></ion-icon>
+            <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+              Pet shop
+            </div>
+          </div>
+
+          <div (click)="buscarTiendasMascotas('Baño')">
+            <ion-icon name="custom-pet-shampoo" style="color:dodgerblue;font-size:30px"></ion-icon>
+            <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+              Baño
+            </div>
+          </div>
+        </div>
+
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+
+  <div style="background:white;margin-top:10px">
+    <div style="width:100%;display:flex;justify-content:space-between;align-items:center">
+      <div style="padding:8px;padding-left:15px;color:#444;font-size:18px;font-weight:600">
+        Pet shops
+      </div>
+      <div style="padding:4px;margin-right:15px;color:#ff6633;font-weight:500;font-size:12px">
+        VER MÁS
+      </div>
+    </div>
+    <ion-scroll scrollX="true" style="display:flex;height:170px;margin-left:10px">
+      <ion-grid>
+        <ion-row nowrap>
+          <ion-col col-5 (click)="openSuper()">
+            <div style="position:relative">
+              <div
+                style="height:120px;width:100%;background-size:cover;background-repeat:no-repeat;background-position:center"
+                [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552674962/Blonde-in-a-Pet-Store.jpg.330.jpg' + ')' }">
+              </div>
+            </div>
+            <div style="margin-top:5px;color:#555;font-size:15px;font-weight:500;height:20px;overflow: hidden;">
+              Tienda de animales
+            </div>
+          </ion-col>
+          <ion-col col-5 (click)="openSuper()">
+            <div style="position:relative">
+              <div
+                style="height:120px;width:100%;background-size:cover;background-repeat:no-repeat;background-position:center"
+                [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552674962/Littlest_Pet_Shop.png' + ')' }">
+              </div>
+            </div>
+            <div style="margin-top:5px;color:#555;font-size:15px;font-weight:500;height:20px;overflow: hidden;">
+              Littlest Pet Shop
+            </div>
+          </ion-col>
+          <ion-col col-5 (click)="openSuper()">
+            <div style="position:relative">
+              <div
+                style="height:120px;width:100%;background-size:cover;background-repeat:no-repeat;background-position:center"
+                [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552674962/pet23235.jpg' + ')' }">
+              </div>
+            </div>
+            <div style="margin-top:5px;color:#555;font-size:15px;font-weight:500;height:20px;overflow: hidden;">
+              Monadas Mascotas
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-scroll>
+  </div>
+
+
+  <hr>
+
+  <div padding>
+
+
+    <div (click)="openContent()" style="margin-bottom:20px">
+      <div style="font-size:15px;color:#333;font-weight:600;display:flex;align-items:center">
+        Personalización de peindado en estrellas de diamente
+      </div>
+      <div style="margin-top:2px;display:flex;align-items:center">
+        <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+        <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+        <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+        <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
+        <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
+        <div style="color:#999;font-size:15px">
+          (26)
+        </div>
+        <div style="color:darkorange;font-size:14px;margin-left:10px">
+          14 comentarios
+        </div>
+      </div>
+
+      <div style="margin-top:2px;display:inline-block;font-size:11px;padding:2px;color:#888;border:1px solid #ccc">
+        Reservaciones
+      </div>
+
+      <div style="margin-top:2px;color:#999;font-size:15px;display:flex;align-items:center">
+        Carretara Donnuts
+        <ion-icon name="custom-coupon" style="color:gold;font-size:16px;margin-left:5px"></ion-icon>
+        <ion-icon name="custom-money-bag" style="color:sandybrown;font-size:16px;margin-left:5px"></ion-icon>
+      </div>
+
+      <div style="margin-top:2px;width:100%;display:flex;justify-content:space-between">
+        <div style="height:90px;width:32%;background-size:cover;background-repeat:no-repeat;background-position:center"
+          [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675605/9bbf1121d6595266dd37d89201d5fdbd.gif' + ')' }">
+        </div>
+        <div style="height:90px;width:32%;background-size:cover;background-repeat:no-repeat;background-position:center"
+          [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675426/8a46f25e88ce90b04d1c2d67845cf18f42660.jpg' + ')' }">
+        </div>
+        <div style="height:90px;width:32%;background-size:cover;background-repeat:no-repeat;background-position:center"
+          [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675378/wer3656.jpg' + ')' }">
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div (click)="openContent()" style="margin-bottom:20px">
+        <div style="font-size:15px;color:#333;font-weight:600;display:flex;align-items:center">
+        Personalización de peindado en estrellas de diamente
+      </div>
+      <div style="margin-top:2px;display:flex;align-items:center">
+        <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+        <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+        <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+        <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
+        <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
+        <div style="color:#999;font-size:15px">
+          (26)
+        </div>
+        <div style="color:darkorange;font-size:14px;margin-left:10px">
+          14 comentarios
+        </div>
+      </div>
+
+      <div style="margin-top:2px;display:inline-block;font-size:11px;padding:2px;color:#888;border:1px solid #ccc">
+        Reservaciones
+      </div>
+
+      <div style="margin-top:2px;color:#999;font-size:15px;display:flex;align-items:center">
+        Carretara Donnuts
+        <ion-icon name="custom-coupon" style="color:gold;font-size:16px;margin-left:5px"></ion-icon>
+        <ion-icon name="custom-money-bag" style="color:sandybrown;font-size:16px;margin-left:5px"></ion-icon>
+      </div>
+
+      <div style="margin-top:2px;width:100%;display:flex;justify-content:space-between">
+        <div style="height:90px;width:32%;background-size:cover;background-repeat:no-repeat;background-position:center"
+          [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675605/9bbf1121d6595266dd37d89201d5fdbd.gif' + ')' }">
+        </div>
+        <div style="height:90px;width:32%;background-size:cover;background-repeat:no-repeat;background-position:center"
+          [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675426/8a46f25e88ce90b04d1c2d67845cf18f42660.jpg' + ')' }">
+        </div>
+        <div style="height:90px;width:32%;background-size:cover;background-repeat:no-repeat;background-position:center"
+          [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675378/wer3656.jpg' + ')' }">
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div (click)="openContent()" style="margin-bottom:20px">
+        <div style="font-size:15px;color:#333;font-weight:600;display:flex;align-items:center">
+        Personalización de peindado en estrellas de diamente
+      </div>
+      <div style="margin-top:2px;display:flex;align-items:center">
+        <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+        <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+        <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+        <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
+        <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
+        <div style="color:#999;font-size:15px">
+          (26)
+        </div>
+        <div style="color:darkorange;font-size:14px;margin-left:10px">
+          14 comentarios
+        </div>
+      </div>
+
+      <div style="margin-top:2px;display:inline-block;font-size:11px;padding:2px;color:#888;border:1px solid #ccc">
+        Reservaciones
+      </div>
+
+      <div style="margin-top:2px;color:#999;font-size:15px;display:flex;align-items:center">
+        Carretara Donnuts
+        <ion-icon name="custom-coupon" style="color:gold;font-size:16px;margin-left:5px"></ion-icon>
+        <ion-icon name="custom-money-bag" style="color:sandybrown;font-size:16px;margin-left:5px"></ion-icon>
+      </div>
+
+      <div style="margin-top:2px;width:100%;display:flex;justify-content:space-between">
+        <div style="height:90px;width:32%;background-size:cover;background-repeat:no-repeat;background-position:center"
+          [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675605/9bbf1121d6595266dd37d89201d5fdbd.gif' + ')' }">
+        </div>
+        <div style="height:90px;width:32%;background-size:cover;background-repeat:no-repeat;background-position:center"
+          [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675426/8a46f25e88ce90b04d1c2d67845cf18f42660.jpg' + ')' }">
+        </div>
+        <div style="height:90px;width:32%;background-size:cover;background-repeat:no-repeat;background-position:center"
+          [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675378/wer3656.jpg' + ')' }">
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
 
 </ion-content>

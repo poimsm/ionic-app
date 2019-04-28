@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the MascotasExpPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { MascotaContentExpPage } from '../mascota-content-exp/mascota-content-exp';
 
 @IonicPage()
 @Component({
@@ -18,8 +12,8 @@ export class MascotasExpPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MascotasExpPage');
+  openContent() {
+    this.navCtrl.push(MascotaContentExpPage);
   }
 
 }

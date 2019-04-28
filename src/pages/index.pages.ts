@@ -12,6 +12,10 @@ export { LavadoPage } from './experimental/lavado/lavado';
 export { WishlistPage } from './experimental/wishlist/wishlist';
 export { EstiloPage } from './experimental/estilo/estilo';
 export { EstiloContentPage } from './experimental/estilo-content/estilo-content';
+export { MascotaContentExpPage } from './experimental/mascota-content-exp/mascota-content-exp';
+export { MascotasExpPage } from './experimental/mascotas-exp/mascotas-exp';
+export { OfertaExpPage } from './experimental/oferta-exp/oferta-exp';
+export { PaqueteExpPage } from './experimental/paquete-exp/paquete-exp';
 
 // ---------------------------
 //         HOME
