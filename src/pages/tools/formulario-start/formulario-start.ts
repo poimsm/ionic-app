@@ -28,7 +28,6 @@ export class FormularioStartPage {
 
   comenzoElFormulario = false;
 
-  dias = [];
   steps = [];
   step: string;
   indexStep = 0;
@@ -152,6 +151,7 @@ export class FormularioStartPage {
   tresImgs = [{ isActive: false }, { isActive: false }, { isActive: false }];
 
   misCategorias = [];
+  tipos = [];
 
   descripcion: string;
 
@@ -216,6 +216,20 @@ export class FormularioStartPage {
 
   }
 
+  obtenerTipos() {
+    this.tipos = [];
+    this.secciones.forEach(seccion => {
+      seccion.categorias.forEach(categoria => {
+        if (
+          this.misCategorias[0] == categoria.nombre ||
+          this.misCategorias[1] == categoria.nombre
+        ) {
+          this.tipos.push(seccion.seccion);
+        }
+      });
+    });
+  }
+
   crearSteps() {
     for (let i = 0; i <= 2; i++) {
       this.steps.push({
@@ -262,7 +276,8 @@ export class FormularioStartPage {
         isTarjeta: this.isTarjeta,
         servicios: servActivos,
         logo: this.logo,
-        horario: this.dias,
+        tipos: this.tipos,
+        horario: this._control.horario,
         isFirstLoggin: false,
         categorias: this.misCategorias,
         tresImgs: this.tresImgs,
@@ -341,6 +356,7 @@ export class FormularioStartPage {
     if (this.misCategorias.length == 0) {
       return false;
     } else {
+      this.obtenerTipos();
       return true;
     }
   }

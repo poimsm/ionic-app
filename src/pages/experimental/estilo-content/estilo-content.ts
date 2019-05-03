@@ -11,6 +11,8 @@ import { OfertaExpPage } from '../oferta-exp/oferta-exp';
 })
 export class EstiloContentPage {
 
+  showBeneficio = false;
+
   equipo = [
     {
       nombre: 'Eduardo',

@@ -7,12 +7,8 @@ import { Subject } from 'rxjs/Subject';
 export class ControlProvider {
   apiURL: string;
 
-  // tiendas: any;
-  tipo: string;
-
-  tiendas = new Subject<any>();
-
-  formularioHorario_allGood: boolean;
+  horarioAllGood: boolean;
+  horario = [];
 
 
   constructor(public http: HttpClient,
@@ -21,38 +17,10 @@ export class ControlProvider {
     this.apiURL = this._config.apiURL;
   }
 
-  buscarTiendasDeEstiloPorCategorias(categoria) {
-    const url = `${this.apiURL}/mascotas/buscar-tiendas-por-categoria?categoria=${categoria}`;
-    this.http.get(url).toPromise()
-      .then(data => {
-        this.tiendas.next(data);
-      });
-  }
-
-  buscarTiendasDeBellezaPorCategorias(categoria) {
-    const url = `${this.apiURL}/mascotas/all`;
-    this.http.get(url).toPromise()
-      .then(data => {
-        this.tiendas.next(data);
-      });
-  }
-
-  buscarTiendasDeMascotasPorCategorias(categoria) {
-    const url = `${this.apiURL}/mascotas/all`;
-    this.http.get(url).toPromise()
-      .then(data => {
-        this.tiendas.next(data);
-      });
-  }
-
-  cambiarTipo(tipo) {
-    this.tipo = tipo;
-  }
-
   revisarFormularioHorario() {
-    return this.formularioHorario_allGood;
-  }
 
+    return this.horarioAllGood;
+  }
   
 
 }

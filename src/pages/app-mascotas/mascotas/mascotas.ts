@@ -14,38 +14,48 @@ import { Subscription } from 'rxjs/Subscription';
 export class MascotasPage {
 
   tiendas = [];
-  subscription: Subscription;
+  subTiendasInit: Subscription;
+  subsTiendasCategoria: Subscription;
+
   tipo: string;
+  categoria: string;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private _secciones: SeccionesProvider
   ) {
-    this.tipo = this.navParams.get('tipo')
+    this.tipo = this.navParams.get('tipo');
     _secciones.cambiarTipo(this.tipo);
-    console.log(this.tipo);
-    
+    this.initTiendas();
   }
 
   ionViewWillEnter() {
-    this.subscription = this._secciones.tiendas.subscribe(data => {
+    this.loadTiendas();
+  }
+
+  initTiendas() {
+    this._secciones.buscarTiendasPorTipo();
+    this.subTiendasInit = this._secciones.todasLasTiendas.subscribe(data => {
       console.log(data);
       this.tiendas = data;
-    }
-      );
+    });
+  }
+
+  loadTiendas() {
+    this.subsTiendasCategoria = this._secciones.tiendas.subscribe(data => {
+      console.log(data);
+      this.tiendas = data;
+    });
   }
 
   ionViewWillLeave() {
-    this.subscription.unsubscribe();
+    this.subTiendasInit.unsubscribe();
+    this.subsTiendasCategoria.unsubscribe();
   }
 
   openContent() {
     this.navCtrl.push(MascotasContentPage);
   }
 
-  openSuper() {
-    this.navCtrl.push(SuperPage, { tipo: 'mascotas' });
-  }
-
-}
+ }

@@ -53,11 +53,12 @@ export class FormularioHorarioComponent {
       this.viernes &&
       this.sabado &&
       this.domingo
-      ) {
-        this._control.formularioHorario_allGood = true;
-      } else {
-        this._control.formularioHorario_allGood = false;
-      }
+    ) {
+      this._control.horario = this.dias;
+      this._control.horarioAllGood = true;
+    } else {
+      this._control.horarioAllGood = false;
+    }
   }
 
 
@@ -78,7 +79,7 @@ export class FormularioHorarioComponent {
     if (!this.lunesCerrado) {
       if (this.lunesInicio && this.lunesCierre) {
         this.dias.push({
-          nombre: 'Lunes',
+          dia: 'Lunes',
           inicio: this.lunesInicio,
           cierre: this.lunesCierre,
           cerrado: false
@@ -88,14 +89,14 @@ export class FormularioHorarioComponent {
       }
     } else {
       this.dias.push({
-        nombre: 'Lunes',
+        dia: 'Lunes',
         cerrado: true
       });
     }
     if (!this.martesCerrado) {
       if (this.martesInicio && this.martesCierre) {
         this.dias.push({
-          nombre: 'Martes',
+          dia: 'Martes',
           inicio: this.martesInicio,
           cierre: this.martesCierre,
           cerrado: false
@@ -105,14 +106,14 @@ export class FormularioHorarioComponent {
       }
     } else {
       this.dias.push({
-        nombre: 'Martes',
+        dia: 'Martes',
         cerrado: true
       });
     }
     if (!this.miercolesCerrado) {
       if (this.miercolesInicio && this.miercolesCierre) {
         this.dias.push({
-          nombre: 'Miércoles',
+          dia: 'Miércoles',
           inicio: this.miercolesInicio,
           cierre: this.miercolesCierre,
           cerrado: false
@@ -122,14 +123,14 @@ export class FormularioHorarioComponent {
       }
     } else {
       this.dias.push({
-        nombre: 'Miércoles',
+        dia: 'Miércoles',
         cerrado: true
       });
     }
     if (!this.juevesCerrado) {
       if (this.juevesInicio && this.juevesCierre) {
         this.dias.push({
-          nombre: 'Jueves',
+          dia: 'Jueves',
           inicio: this.juevesInicio,
           cierre: this.juevesCierre,
           cerrado: false
@@ -139,14 +140,14 @@ export class FormularioHorarioComponent {
       }
     } else {
       this.dias.push({
-        nombre: 'Jueves',
+        dia: 'Jueves',
         cerrado: true
       });
     }
     if (!this.viernesCerrado) {
       if (this.viernesInicio && this.viernesCierre) {
         this.dias.push({
-          nombre: 'Viernes',
+          dia: 'Viernes',
           inicio: this.viernesInicio,
           cierre: this.viernesCierre,
           cerrado: false
@@ -156,14 +157,14 @@ export class FormularioHorarioComponent {
       }
     } else {
       this.dias.push({
-        nombre: 'Viernes',
+        dia: 'Viernes',
         cerrado: true
       });
     }
     if (!this.sabadoCerrado) {
       if (this.sabadoInicio && this.sabadoCierre) {
         this.dias.push({
-          nombre: 'Sábado',
+          dia: 'Sábado',
           inicio: this.sabadoInicio,
           cierre: this.sabadoCierre,
           cerrado: false
@@ -173,14 +174,14 @@ export class FormularioHorarioComponent {
       }
     } else {
       this.dias.push({
-        nombre: 'Sábado',
+        dia: 'Sábado',
         cerrado: true
       });
     }
     if (!this.domingoCerrado) {
       if (this.domingoInicio && this.domingoCierre) {
         this.dias.push({
-          nombre: 'Domingo',
+          dia: 'Domingo',
           inicio: this.domingoInicio,
           cierre: this.domingoCierre,
           cerrado: false
@@ -190,12 +191,12 @@ export class FormularioHorarioComponent {
       }
     } else {
       this.dias.push({
-        nombre: 'Domingo',
+        dia: 'Domingo',
         cerrado: true
       });
     }
-    
-    this.revisarSiCompletoTodo();    
+
+    this.revisarSiCompletoTodo();
   }
 
 }

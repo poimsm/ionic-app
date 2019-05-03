@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { PaqueteExpPage } from '../paquete-exp/paquete-exp';
+import { OfertaExpPage } from '../oferta-exp/oferta-exp';
 
-/**
- * Generated class for the BellezaContentPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -15,11 +11,38 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class BellezaContentPage {
 
+  showBeneficio = false;
+
+  equipo = [
+    {
+      nombre: 'Eduardo',
+      cargo: 'Veterinario',
+      img: 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553485595/dgfhjo.jpg'
+    },
+    {
+      nombre: 'Camila',
+      cargo: 'Estudiante',
+      img: 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553485595/ImageServlet.jpg'
+    },
+    {
+      nombre: 'Daniela',
+      cargo: 'Recepcionista',
+      img: 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553485595/depositphotos_136696658-stock-video-beauty-salon-receptionist-answering-clients.jpg'
+    }
+  ];
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad BellezaContentPage');
+  openPaquete() {
+    this.navCtrl.push(PaqueteExpPage, { tipo: 'estilo' });
   }
 
+  openCupon() {
+    this.navCtrl.push(OfertaExpPage, { tipo: 'estilo' });
+  }
+
+
 }
+
+

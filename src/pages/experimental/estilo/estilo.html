@@ -29,16 +29,22 @@
           <div (click)="buscarTiendasEstilo('Corte cabello mujer')">
             <ion-icon name="custom-woman-hair" style="color:salmon;font-size:35px"></ion-icon>
             <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
-              Corte cabello
+              Cabello
             </div>
           </div>
 
-          <div (click)="buscarTiendasEstilo('Corte cabello hombre')">
+          <!-- <div (click)="buscarTiendasEstilo('Corte cabello hombre')">
             <ion-icon name="custom-man-hair" style="color:saddlebrown;font-size:30px"></ion-icon>
             <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
               Corte cabello
             </div>
-          </div>
+          </div> -->
+          <div (click)="buscarTiendas('Uñas')">
+              <ion-icon name="custom-nail" style="color:salmon;font-size:35px"></ion-icon>
+              <div style="margin-top:8px;width:100%;text-align:center;font-size:13px;font-weight:450;color:#555">
+                Uñas
+              </div>
+            </div>
 
           <div (click)="buscarTiendasEstilo('Barba')">
             <ion-icon name="custom-blade" style="color:dodgerblue;font-size:30px"></ion-icon>
@@ -78,21 +84,21 @@
         VER MÁS
       </div>
     </div>
-    <ion-scroll scrollX="true" style="display:flex;height:180px;margin-left:10px">
+    <ion-scroll scrollX="true" style="display:flex;height:160px;margin-left:10px">
       <ion-grid>
         <ion-row nowrap>
-          <ion-col *ngFor="let item of popular" (click)="openContent(item, 'comida')" col-5>
+          <ion-col *ngFor="let item of popular" col-4>
             <div style="position:relative">
               <div
-                style="border-radius:0px;min-height:120px; width:100%; background-size:cover;background-repeat: no-repeat;background-position: center;"
-                [ngStyle]="{'background-image': 'url(' + item + ')' }">
+                style="border-radius:0px;min-height:90px; width:100%; background-size:cover;background-repeat: no-repeat;background-position: center;"
+                [ngStyle]="{'background-image': 'url(' + item.img + ')' }">
               </div>
             </div>
-            <div style="color:#555;font-size:15px;font-weight:500;height:20px;overflow: hidden;">
-              Mostrador de 3 rayos
+            <div style="color:#555;font-size:15px;font-weight:500;height:38px;overflow:hidden">
+              {{item.text}}
             </div>
             <div>
-              $10.000
+              {{item.precio}}
             </div>
           </ion-col>
         </ion-row>
@@ -113,13 +119,13 @@
         <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
         <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
         <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
-        <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
+        <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
         <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
         <div style="color:#999;font-size:15px">
-          (26)
+          (17)
         </div>
         <div style="color:darkorange;font-size:14px;margin-left:10px">
-          14 comentarios
+          12 comentarios
         </div>
       </div>
 
@@ -151,7 +157,7 @@
 
     <div (click)="openContent()" style="margin-bottom:20px">
       <div style="font-size:15px;color:#333;font-weight:600;display:flex;align-items:center">
-        Salon de belleza Susana
+        Estudio de tatuajes profesional y perforado
       </div>
       <div style="margin-top:2px;display:flex;align-items:center">
         <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
@@ -160,7 +166,7 @@
         <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
         <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
         <div style="color:#999;font-size:15px">
-          (26)
+          (21)
         </div>
         <div style="color:darkorange;font-size:14px;margin-left:10px">
           14 comentarios
@@ -172,23 +178,68 @@
       </div>
 
       <div style="margin-top:2px;color:#999;font-size:15px;display:flex;align-items:center">
-        Salon de belleza Susana
+          Grit N Glory
         <ion-icon name="custom-coupon" style="color:gold;font-size:16px;margin-left:5px"></ion-icon>
         <ion-icon name="custom-money-bag" style="color:sandybrown;font-size:16px;margin-left:5px"></ion-icon>
       </div>
 
       <div style="margin-top:2px;width:100%;display:flex;justify-content:space-between">
         <div style="height:90px;width:32%;background-size:cover;background-repeat:no-repeat;background-position:center"
-          [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553015496/53399070_2514498915275201_4842733522122702848_n.jpg' + ')' }">
+          [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1556473402/maqueta/20180621_dT6XiEx7IiC9hxc.jpg' + ')' }">
         </div>
         <div style="height:90px;width:32%;background-size:cover;background-repeat:no-repeat;background-position:center"
-          [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553015496/48392591_2387142198010874_7933642024140406784_n.jpg' + ')' }">
+          [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1556473565/maqueta/20180621_Ifdqb7vDyKmGPec.jpg' + ')' }">
         </div>
         <div style="height:90px;width:32%;background-size:cover;background-repeat:no-repeat;background-position:center"
-          [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553015496/51019918_2450395428352217_7899304615307378688_n.jpg' + ')' }">
+          [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1556473402/maqueta/wesley-maik-sketch-blackwork-tattoodobr13_x15jm251T8.jpg' + ')' }">
         </div>
       </div>
     </div>
+
+
+
+
+
+    <div (click)="openContent()" style="margin-bottom:20px">
+        <div style="font-size:15px;color:#333;font-weight:600;display:flex;align-items:center">
+            Un autentico lugar de la vieja escuela... En espera para tí.
+        </div>
+        <div style="margin-top:2px;display:flex;align-items:center">
+          <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
+          <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
+          <div style="color:#999;font-size:15px">
+            (56)
+          </div>
+          <div style="color:darkorange;font-size:14px;margin-left:10px">
+            18 comentarios
+          </div>
+        </div>
+  
+        <div style="margin-top:2px;display:inline-block;font-size:11px;padding:2px;color:#888;border:1px solid #ccc">
+          Reservaciones
+        </div>
+  
+        <div style="margin-top:2px;color:#999;font-size:15px;display:flex;align-items:center">
+            Barbería PlayDC
+          <ion-icon name="custom-coupon" style="color:gold;font-size:16px;margin-left:5px"></ion-icon>
+          <ion-icon name="custom-money-bag" style="color:sandybrown;font-size:16px;margin-left:5px"></ion-icon>
+        </div>
+  
+        <div style="margin-top:2px;width:100%;display:flex;justify-content:space-between">
+          <div style="height:90px;width:32%;background-size:cover;background-repeat:no-repeat;background-position:center"
+            [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1556485466/maqueta/56879384_2197060550380700_1968519992932564992_n.jpg' + ')' }">
+          </div>
+          <div style="height:90px;width:32%;background-size:cover;background-repeat:no-repeat;background-position:center"
+            [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1556485466/maqueta/56168061_2195556237197798_7025453442596339712_n.jpg' + ')' }">
+          </div>
+          <div style="height:90px;width:32%;background-size:cover;background-repeat:no-repeat;background-position:center"
+            [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1556485465/maqueta/56490452_2195556327197789_7496206043198783488_n.jpg' + ')' }">
+          </div>
+        </div>
+      </div>
 
 
 

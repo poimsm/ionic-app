@@ -13,19 +13,8 @@ export class SeccionesComponent {
     this.tipo = _secciones.tipo;
   }
 
-  buscarTiendasMascotas(categoria) {
-    console.log('hoola')
-    // this._secciones.buscarTiendasDeEstiloPorCategorias(categoria);
-
-    this._secciones.buscarTiendasDeMascotasPorCategorias(categoria);
-  }
-
-  buscarTiendasEstilo(categoria) {
-    this._secciones.buscarTiendasDeEstiloPorCategorias(categoria);
-  }
-
-  buscarTiendasBelleza(categoria) {
-    this._secciones.buscarTiendasDeBellezaPorCategorias(categoria);
+  buscarTiendas(categoria) {
+    this._secciones.buscarTiendasPorCategorias(categoria);
   }
 
 }

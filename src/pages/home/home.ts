@@ -112,7 +112,7 @@ export class HomePage {
   }
 
   openMascotas(tipo) {
-    this.navCtrl.push(MascotasPage, {tipo});
+    this.navCtrl.push(MascotasPage, { tipo });
   }
 
   openMaquete(tipo) {
@@ -184,11 +184,10 @@ export class HomePage {
     // modal.present();
   }
 
-  openPage(pagina) {
+  openPage(pagina, tipo) {
     if (this._localizacion.ciudad) {
       this.navCtrl.push(pagina, {
-        isCategoria: false,
-        categoria: 'none',
+        tipo,
         ciudad: this._localizacion.ciudad
       });
     } else {
@@ -196,8 +195,7 @@ export class HomePage {
         .then((data: any) => {
           if (data.ok) {
             this.navCtrl.push(pagina, {
-              isCategoria: false,
-              categoria: 'none',
+              tipo,
               ciudad: data.ciudad
             });
           }
@@ -242,7 +240,7 @@ export class HomePage {
   openTienda() {
     if (this.user.tienda.tipo == 'mascotas') {
       this._mascota.getOneTienda(this.user.tienda.id).then((data: any) => {
-        
+
         if (data.isFirstLoggin) {
           this.openModalStart();
         } else {
@@ -252,7 +250,7 @@ export class HomePage {
     }
 
     if (this.user.tienda.tipo == 'super') {
-      console.log('Do your magic');      
+      console.log('Do your magic');
     }
   }
 

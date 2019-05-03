@@ -10,8 +10,9 @@ export class SeccionesProvider {
 
   // tiendas: any;
   tipo: string;
-
+  categoria: string;
   tiendas = new Subject<any>();
+  todasLasTiendas = new Subject<any>();
 
 
   constructor(public http: HttpClient,
@@ -20,29 +21,23 @@ export class SeccionesProvider {
     this.apiURL = this._config.apiURL;
   }
 
-  buscarTiendasDeEstiloPorCategorias(categoria) {
-    const url = `${this.apiURL}/mascotas/buscar-tiendas-por-categoria/?categoria=${categoria}`;
+  buscarTiendasPorCategorias(categoria) {
+    const url = `${this.apiURL}/mascotas/buscar-tiendas-por-categoria/?categoria=${categoria}&tipo=${this.tipo}`;
     this.http.get(url).toPromise()
       .then(data => {
         this.tiendas.next(data);
       });
   }
 
-  buscarTiendasDeBellezaPorCategorias(categoria) {
-    const url = `${this.apiURL}/mascotas/all`;
+  buscarTiendasPorTipo() {
+    const url = `${this.apiURL}/mascotas/buscar-tiendas-por-categoria/?categoria=todo&tipo=${this.tipo}`;
     this.http.get(url).toPromise()
       .then(data => {
-        this.tiendas.next(data);
+        this.todasLasTiendas.next(data);
       });
   }
 
-  buscarTiendasDeMascotasPorCategorias(categoria) {
-    const url = `${this.apiURL}/mascotas/all`;
-    this.http.get(url).toPromise()
-      .then(data => {
-        this.tiendas.next(data);
-      });
-  }
+
 
   cambiarTipo(tipo) {
     this.tipo = tipo;
