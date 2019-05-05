@@ -3,12 +3,12 @@
   <ion-navbar color="white">
 
     <div style="display:flex;align-items:center">
-      <div *ngIf="data"
+      <div
         style="border:1px solid #eee;border-radius:10px;min-height:35px;width:35px;background-size:cover;background-repeat: no-repeat;background-position: center;"
-        [ngStyle]="{'background-image': 'url(' + data?.tienda.logo + ')' }">
+        [ngStyle]="{'background-image': 'url(' + tienda.logo.url + ')' }">
       </div>
       <div style="margin-left:10px;color:#666;font-weight:550;font-size:15px">
-        {{data?.tienda.nombre}}
+        {{tienda.nombre}}
       </div>
     </div>
 
@@ -31,16 +31,24 @@
         <ion-icon name="close" style="font-size:18px;color:#666;"></ion-icon>
       </div>
     </div>
-    {{data?.descripcion}}
+    {{cupon.descripcion}}
   </div>
 </div>
 
 <ion-content>
 
-  <div *ngIf="data"
-    style="border-radius:0px;min-height:240px;width:100%;background-size:cover;background-repeat: no-repeat;background-position: center;"
-    [ngStyle]="{'background-image': 'url(' + data.imgs[0].img + ')' }">
+  <div>
+    <ion-slides pager>
+      <ion-slide *ngFor="let img of cupon.imgs">
+        <div
+          style="width:100%;min-height:330px; background-size:cover;background-repeat: no-repeat;background-position: center;"
+          [ngStyle]="{'background-image': 'url(' + img.url + ')' }">
+        </div>
+        <div style="height:30px"></div>
+      </ion-slide>
+    </ion-slides>
   </div>
+
 
   <div padding>
     <!-- <div style="font-size:16px;color:#444;font-weight:600">
@@ -49,10 +57,10 @@
 
     <div style="margin-top:0px;color:#777;font-size:16px">
       <span style="color:orangered;font-weight:600">
-        ${{data.precio.oferta}}
+        ${{cupon.precio.oferta}}
       </span>
       <span style="padding:2px;color:white;background:orange;margin-left:5px;font-size:13px">
-        -{{data.precio.descuento}}%
+        -{{cupon.precio.descuento}}%
       </span>
     </div>
     <div style="margin-top:5px;color:#999;font-size:13px">
@@ -60,19 +68,19 @@
         Precio normal:
       </span>
       <span>
-        ${{data.precio.normal}}
+        ${{cupon.precio.normal}}
       </span>
     </div>
 
     <div style="margin-top:5px;font-size:16px;color:#444;font-weight:600">
-      {{data.titulo}}
+      {{cupon.titulo}}
     </div>
     <div style="margin-top:5px;display:flex;justify-content:space-between">
       <div style="font-size:13px;color:#999">
         un texto
       </div>
       <div style="font-size:13px;color:#999">
-        {{data.buys}} vendidos
+        {{cupon.buys}} vendidos
       </div>
     </div>
   </div>
@@ -84,7 +92,7 @@
     <div style="margin-bottom:10px;font-size:15px;color:#444;">
       Qué incluye
     </div>
-    <div *ngFor="let item of data?.incluye"
+    <div *ngFor="let item of cupon?.incluye"
       style="color:#888;font-size:14px;display:flex;align-items:center;font-weight:350">
       <div style="margin-right:10px;height:5px;width:5px;background:#999;border-radius:50%">
       </div>
@@ -99,7 +107,7 @@
     <div style="margin-bottom:10px;font-size:15px;color:#444;">
       Notas
     </div>
-    <div *ngFor="let item of data.notas"
+    <div *ngFor="let item of cupon.notas"
       style="margin-top:7px;color:#888;font-size:14px;display:flex;align-items:center;font-weight:350">
       {{item}}
     </div>
@@ -125,7 +133,7 @@
   </button>
 
 
-  <div *ngIf="data?.isReserva">
+  <div *ngIf="cupon?.isReserva">
     <div style="height:10px;width:100%;background:rgb(248, 248, 248)">
     </div>
     <button ion-item (click)="openReservas()" no-lines>
@@ -141,8 +149,18 @@
   </div>
 
 
-  <div *ngIf="from == 'tienda-mascotas'" style="width:100%;display:flex;justify-content:center;margin-bottom:50px;margin-top:20px">
+  <div *ngIf="mostrarBotonPagar"
+    style="width:100%;display:flex;justify-content:center;margin-bottom:50px;margin-top:20px">
     <div (click)="comprar()"
+      style="font-weight:500;font-size:13px;color:white;background:#ff6633;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
+      COMPRAR AHORA
+      <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>
+    </div>
+  </div>
+
+  <div *ngIf="!mostrarBotonPagar"
+    style="width:100%;display:flex;justify-content:center;margin-bottom:50px;margin-top:20px">
+    <div
       style="font-weight:500;font-size:13px;color:white;background:#ff6633;display:flex;align-items:center;padding:5px;padding-left:40px;padding-right:15px;border-radius:25px">
       COMPRAR AHORA
       <ion-icon name="ios-arrow-dropright-circle" style="color:white;font-size:34px;margin-left:10px"></ion-icon>

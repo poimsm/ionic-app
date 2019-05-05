@@ -38,9 +38,10 @@
 
     <ion-list text-wrap>
       <ion-item>
-        <img item-start
-          src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1556491438/maqueta/logotipo-barberia-retro_1415-688.jpg"
-          style="height:80px;width:90px;border-radius:10px;object-fit:cover">
+        <div item-start
+          style="min-height:80px;width:90px;border-radius:10px;background-size:cover;background-repeat: no-repeat;background-position: center;"
+          [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1556491438/maqueta/logotipo-barberia-retro_1415-688.jpg' + ')' }">
+        </div>
         <div style="font-size:16px;color:#777;">
           Barbería PLayDC
           <div style="display:flex;align-items:center">
@@ -149,9 +150,10 @@
 
   <ion-list no-lines>
     <button ion-item (click)="openCupon()">
-      <img item-start
-        src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1556492024/maqueta/150e624469047b3413080f1eb08d68767cd28e07.XL2.jpg"
-        style="height:80px;width:80px;object-fit:cover">
+      <div item-start
+        style="min-height:80px;width:80px;background-size:cover;background-repeat: no-repeat;background-position: center;"
+        [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1556492024/maqueta/150e624469047b3413080f1eb08d68767cd28e07.XL2.jpg' + ')' }">
+      </div>
       <div style="font-size:16px;color:#777">
         Barba completa + Limpieza facial completa + Corte de pelo profesional
       </div>
@@ -168,8 +170,10 @@
     </button>
 
     <button ion-item (click)="openCupon()">
-      <img item-start src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1556492033/maqueta/sdfs4556764.jpg"
-        style="height:80px;width:80px;object-fit:cover">
+      <div item-start
+        style="min-height:80px;width:80px;background-size:cover;background-repeat: no-repeat;background-position: center;"
+        [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1556492033/maqueta/sdfs4556764.jpg' + ')' }">
+      </div>
       <div style="font-size:16px;color:#777">
         Corte + Lavado + Masaje capilar para caballeros, barbería clásica.
       </div>
@@ -229,9 +233,11 @@
 
   <div padding>
     <div style="display:flex;align-items:center;width:100%">
-      <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552589801/adadafff.jpg"
-        style="height:35px;width:35px;border-radius:50%;object-fit:cover">
 
+      <div item-start
+        style="min-height:35px;width:35px;border-radius:50%;background-size:cover;background-repeat: no-repeat;background-position: center;"
+        [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552589801/adadafff.jpg' + ')' }">
+      </div>
       <div
         style="margin-left:10px;font-weight:500;font-size:15px;width:100%;display:flex;align-items:center;justify-content:space-between">
         <div>
@@ -283,11 +289,13 @@
 
   <div padding>
     <div style="width:100%;display:flex;align-items:center">
-      <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552590009/28477__162_a_2.jpg"
-        style="height:35px;width:35px;border-radius:50%;object-fit:cover">
+      <div item-start
+        style="min-height:35px;width:35px;border-radius:50%;background-size:cover;background-repeat: no-repeat;background-position: center;"
+        [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1552590009/28477__162_a_2.jpg' + ')' }">
+      </div>
       <div
         style="margin-left:10px;font-weight:500;font-size:15px;width:100%;display:flex;align-items:center;justify-content:space-between">
-          <div>
+        <div>
           Ferh Fuentes
           <div style="padding:3px;">
             <div style="display:inline-block;font-size:14px;color:darkorange">
@@ -311,7 +319,7 @@
             </div>
 
           </div>
-          
+
         </div>
         <div>
           <ion-icon name="ios-thumbs-up-outline" style="color:#bbb;font-size:22px;margin-right:5px"></ion-icon>

@@ -112,6 +112,17 @@ export class TiendaMascotasPage {
     this.navCtrl.push(page, { tiendaID: this.tiendaID })
   }
 
+  openProductos() {
+    this.navCtrl.push(TiendaMascotasProductosPage, {
+       tiendaID: this.tiendaID,
+      tienda: this.tienda
+      });
+  }
+
+  openAgenda() {
+    this.navCtrl.push(TiendaMascotasAgendaPage, { tiendaID: this.tiendaID });
+  }
+
   openCodigo() {
     this.navCtrl.push(TiendaMascotasCodigoPage, { tiendaID: this.tiendaID });
   }
@@ -137,7 +148,7 @@ export class TiendaMascotasPage {
 
   presentActionSheet(index) {
 
-    this.indexTresImg =  index;
+    this.indexTresImg = index;
 
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Select Image Source',
@@ -191,7 +202,7 @@ export class TiendaMascotasPage {
   }
 
   agregarTresImgs(data) {
-    
+
     this.tresImgs[this.indexTresImg].img = data.img;
     this.tresImgs[this.indexTresImg].isActive = true;
 
@@ -209,7 +220,7 @@ export class TiendaMascotasPage {
     }
 
     this._mascota.updateTienda(this.tiendaID, updateTiendaData)
-    .then(() => this.reloadTienda());    
+      .then(() => this.reloadTienda());
   }
 
 

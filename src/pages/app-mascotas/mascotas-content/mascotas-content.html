@@ -1,15 +1,29 @@
 <ion-header no-border>
 
   <ion-navbar color="white">
-    <!-- <ion-title>lavado-content</ion-title> -->
-    <!-- <ion-buttons right>
-        <button ion-button icon-only>
-          <ion-icon name="bulb" style="color:darkorange"></ion-icon>
-        </button>
-      </ion-buttons> -->
   </ion-navbar>
 
 </ion-header>
+
+
+<div *ngIf="showBeneficio"
+  style="background:rgb(10, 10, 10, 0.4);z-index:999;position:fixed;top:0px;left:0px;width:100%;height:100%">
+  <div (click)="showBeneficio = false" style="height:70%;width:100%;">
+  </div>
+  <div style="padding:15px;background:white;height:30%;overflow:scroll;font-size:14px;color:#777">
+    <div style="margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">
+      <div style="width:30px">
+      </div>
+      <div style="text-align:center;font-size:16px;color:#666;font-weight:500">
+        Beneficio
+      </div>
+      <div (click)="showBeneficio = false" style="padding:5px">
+        <ion-icon name="close" style="font-size:18px;color:#666;"></ion-icon>
+      </div>
+    </div>
+    {{tienda.beneficios[0]}}
+  </div>
+</div>
 
 
 <ion-content>
@@ -19,22 +33,27 @@
     <ion-list text-wrap>
       <ion-item>
         <img item-start
-          src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675605/9bbf1121d6595266dd37d89201d5fdbd.gif"
+          src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1556491438/maqueta/logotipo-barberia-retro_1415-688.jpg"
           style="height:80px;width:90px;border-radius:10px;object-fit:cover">
         <div style="font-size:16px;color:#777;">
-          Clínica veterinara My Pets
+          {{tienda.nombre}}
           <div style="display:flex;align-items:center">
-            <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
-            <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
-            <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
-            <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
-            <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
+            <ion-icon name="star" [ngStyle]="{'color': (tienda.startAvg >= 1)? 'orange' : '#eee' }"
+              style="font-size:20px;margin-right:5px"></ion-icon>
+            <ion-icon name="star" [ngStyle]="{'color': (tienda.startAvg >= 2)? 'orange' : '#eee' }"
+              style="font-size:20px;margin-right:5px"></ion-icon>
+            <ion-icon name="star" [ngStyle]="{'color': (tienda.startAvg >= 3)? 'orange' : '#eee' }"
+              style="font-size:20px;margin-right:5px"></ion-icon>
+            <ion-icon name="star" [ngStyle]="{'color': (tienda.startAvg >= 4)? 'orange' : '#eee' }"
+              style="font-size:20px;margin-right:5px"></ion-icon>
+            <ion-icon name="star" [ngStyle]="{'color': (tienda.startAvg >= 5)? 'orange' : '#eee' }"
+              style="font-size:20px;margin-right:5px"></ion-icon>
             <div style="color:#999;font-size:15px">
-              (26)
+              ({{tienda.starts}})
             </div>
           </div>
           <div style="color:darkorange;font-size:14px;margin-left:10px">
-            14 comentarios
+            {{tienda.comentarios}} comentarios
           </div>
         </div>
       </ion-item>
@@ -50,174 +69,74 @@
       <div style="color:#999;font-size:15px;height:40px;display:flex;align-items:center;justify-content:center">
         <ion-icon name="call" style="margin-left:20px;color:rgb(250, 100, 45);font-size:20px;margin-right:20px">
         </ion-icon>
-
-        97683325
-        <!-- <ion-icon name="call" style="color:rgb(250, 100, 45);font-size:30px;margin-right:5px"></ion-icon> -->
+        {{tienda.telefono}}
       </div>
     </div>
 
     <div style="display:flex;justify-content:space-between;align-items:center">
       <div style="color:#999;font-size:15px;height:40px;display:flex;align-items:center;">
         <ion-icon name="pin" style="color:#bbb;font-size:20px;margin-right:20px"></ion-icon>
-        Simon bolivar 802 - Valdivia
+        {{tienda.direccion}}
       </div>
       <ion-icon name="ios-arrow-forward" style="margin-right:5px;color:#bbb;font-size:20px"></ion-icon>
     </div>
 
     <hr>
 
-    <div style="width:100%">
+    <div *ngIf="tienda.isTarjeta" style="width:100%">
       <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1553493541/redcompra-1024x332.png"
         style="filter: grayscale(100%);margin-left:0px;width:80px">
     </div>
 
     <div style="display:flex;align-items:center;justify-content:space-between">
       <div style="display:flex;flex-wrap:wrap">
-        <!-- <div style="width:100%">
-          <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1553493541/redcompra-1024x332.png"
-            style="filter: grayscale(100%);margin-left:0px;width:80px">
-        </div> -->
-        <div style="margin-bottom:5px;width:50%;display:flex;align-items:flex-start">
+
+        <div *ngFor="let servicio of servicios" style="margin-bottom:5px;width:50%;display:flex;align-items:flex-start">
           <ion-icon name="checkmark-circle-outline" style="color:#bbb;font-size:16px"></ion-icon>
           <div style="color:#999;font-size:13px;margin-left:5px">
-            Puedes entrar con la mascota
+            {{servicio}}
           </div>
         </div>
-        <div style="margin-bottom:5px;width:50%;display:flex;align-items:flex-start">
-          <ion-icon name="checkmark-circle-outline" style="color:#bbb;font-size:16px"></ion-icon>
-          <div style="color:#999;font-size:13px;margin-left:5px">
-            Estacionamiento privado
-          </div>
-        </div>
-        <div style="margin-bottom:5px;width:50%;display:flex;align-items:flex-start">
-          <ion-icon name="checkmark-circle-outline" style="color:#bbb;font-size:16px"></ion-icon>
-          <div style="color:#999;font-size:13px;margin-left:5px">
-            Televisión
-          </div>
-        </div>
-        <div style="margin-bottom:5px;width:50%;display:flex;align-items:flex-start">
-          <ion-icon name="checkmark-circle-outline" style="color:#bbb;font-size:16px"></ion-icon>
-          <div style="color:#999;font-size:13px;margin-left:5px">
-            Prohibido Fumar
-          </div>
-        </div>
+
       </div>
       <ion-icon name="ios-arrow-forward" style="margin-right:10px;color:#bbb;font-size:20px"></ion-icon>
     </div>
-
-
-    <!-- <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1553493541/redcompra-1024x332.png"
-      style="filter: grayscale(100%);margin-left:0px;width:80px">
-
-    <div style="margin-left:10px;display:flex;overflow:scroll;white-space:nowrap;height:30px;align-items:center">
-      <div
-        style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
-        Estacionamiento Privado
-      </div>
-      <div
-        style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
-        Estación De Carga Para Móviles
-      </div>
-      <div
-        style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
-        Prohibido Fumar
-      </div>
-      <div
-      style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
-      Estación De Carga Para Móviles
-    </div>
-    <div
-      style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
-      Prohibido Fumar
-    </div>
-    </div> -->
   </div>
 
 
-  <!-- <div style="height:10px;width:100%;background:rgb(250, 250, 250)">
+
+  <div *ngIf="tienda.isBeneficio" style="height:10px;width:100%;background:rgb(250, 250, 250)">
   </div>
 
-  <div style="margin-top:10px;margin-left:15px;color:#555;font-size:14px;font-weight:500">
-      Servicios
+  <button *ngIf="tienda.isBeneficio" ion-item no-lines (click)="showBeneficio = true">
+    <ion-icon item-start name="custom-money-bag" style="color:sandybrown;font-size:20px;margin-left:5px"></ion-icon>
+    <div style="color:#999;font-size:14px">
+      {{tienda.beneficios[0]}}
     </div>
-  <div padding>   
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
 
-    <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1553493541/redcompra-1024x332.png" style="margin-left:10px;width:80px">
-
-    <ion-scroll scrollX="true" style="margin-top:-15px;height:40px;width:100%">
-      <div style="display:flex;width:500px">
-        <div
-          style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
-          Estacionamiento
-        </div>
-        <div
-          style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
-          Wi-Fi
-        </div>
-        <div
-          style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
-          Prohibido fumar
-        </div>
-        <div
-          style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
-          Carga aquí tú batería
-        </div>
-        <div
-          style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
-          Sala de estar
-        </div>
-        <div
-          style="display:inline-block;font-weight:350;font-size:12px;padding:3px;border:0.5px solid #999;color:#888;margin-right:10px">
-          TV
-        </div>
-      </div>
-    </ion-scroll>
-  </div> -->
-
-
-  <div style="height:10px;width:100%;background:rgb(250, 250, 250)">
+  <div *ngIf="tienda.isCupon" style="height:10px;width:100%;background:rgb(250, 250, 250)">
   </div>
 
-  <!-- <div style="margin-top:10px;margin-left:15px;color:#555;font-size:17px;font-weight:500">
-    Promociones
-  </div> -->
-  <div style="margin-top:10px;margin-left:15px;color:#555;font-size:17px;font-weight:500">
+  <div *ngIf="tienda.isCupon" style="margin-top:10px;margin-left:15px;color:#555;font-size:17px;font-weight:500">
     Promociones
   </div>
 
-  <ion-list no-lines>
-    <button ion-item (click)="openPromo('pack')">
-      <img item-start src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552679372/images.jpg"
-        style="height:80px;width:80px;object-fit:cover">
-      <div style="font-size:16px;color:#777">
-        Paquete de esterilización por castración sin dolor
-      </div>
-      <div style="color:darkorange;font-size:18px">
-        $12.3000
-        <span style="color:#999;font-size:13px">
-          122 vendidos
-        </span>
-      </div>
-      <div
-        style="margin:5px;padding:10px;padding-top:5px;padding-bottom:5px;border-radius:13px;color:white;font-size:14px;background: darkorange;display:inline-block">
-        Comprar ahora
-      </div>
-      <!-- <div
-        style="margin:5px;padding:10px;padding-top:5px;padding-bottom:5px;border-radius:0px;color:#444;font-size:14px;background: gold;display:inline-block">
-        Reservar ahora
-      </div> -->
-    </button>
 
-    <button ion-item (click)="openPromo('oferta')">
-      <img item-start src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1553150695/gatoo.jpg"
-        style="height:80px;width:80px;object-fit:cover">
+  <ion-list *ngIf="tienda.isCupon" no-lines>
+    <button *ngFor="let cupon of cupones" ion-item (click)="openCupon()">
+      <div item-start
+        style="height:80px;width:80px;background-size:cover;background-repeat:no-repeat;background-position:center;"
+        [ngStyle]="{'background-image': 'url(' + cupon.imgs[0].url + ')' }">
+      </div>
       <div style="font-size:16px;color:#777">
-        Cuidado del gato (nueva toalla de baño exclusiva para huéspedes), WiFi gratis, estacionamiento gratis!
+        {{cupon.titulo}}
       </div>
       <div style="color:darkorange;font-size:18px">
-        $5.500
+        ${{cupon.precio.oferta}}
         <span style="color:#999;font-size:13px">
-          14 vendidos
+          {{cupon.buys}} vendidos
         </span>
       </div>
       <div
@@ -226,75 +145,16 @@
       </div>
     </button>
 
-    <button ion-item>
-      <div style="color:#999;font-size:16px">
-        Ver más promociones
-      </div>
-      <ion-icon name="ios-arrow-forward" item-end style="color:#bbb;font-size:18px"></ion-icon>
-    </button>
   </ion-list>
 
-  <!-- <div style="margin-top:10px;margin-left:15px;color:#555;font-size:17px;font-weight:500">
-    Introducción del comerciante
+
+  <div *ngIf="tienda.isEquipo" style="height:10px;width:100%;background:rgb(250, 250, 250)">
   </div>
 
-  <div padding>
-
-    <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675434/6e9c5ba2d675b89a298be66daf2d450066353.jpg"
-      style="margin-top:10px;height:240px;width:100%;object-fit:cover">
-    <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675420/sdfdsf56543.jpg"
-      style="margin-top:10px;height:240px;width:100%;object-fit:cover">
-    <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675378/wer3656.jpg"
-      style="margin-top:10px;height:240px;width:100%;object-fit:cover">
-    <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675605/9bbf1121d6595266dd37d89201d5fdbd.gif"
-      style="margin-top:10px;height:240px;width:100%;object-fit:cover">
-
-  </div> -->
-
-
-  <!-- <div style="height:10px;width:100%;background:rgb(250, 250, 250)">
-  </div>
-
-  <div style="margin-top:10px;margin-left:15px;color:#555;font-size:17px;font-weight:500">
-    Horario
-  </div>
-
-  <div padding style="color:#999">
-
-    <div>
-      Lunes: 10:00 - 18:00
-    </div>
-    <div>
-      Martes: 10:00 - 18:00
-    </div>
-    <div>
-      Miércoles: 10:00 - 18:00
-    </div>
-    <div>
-      Jueves: 10:00 - 18:00
-    </div>
-    <div>
-      Viernes: 10:00 - 18:00
-    </div>
-    <div>
-      Sábado: 10:00 - 18:00
-    </div>
-    <div>
-      Domingo: 10:00 - 18:00
-    </div>
-  </div>
-
-  <div style="height:10px;width:100%;background:rgb(250, 250, 250)">
-  </div> -->
-
-
-  <div style="height:10px;width:100%;background:rgb(250, 250, 250)">
-  </div>
-
-  <div style="margin-top:10px;margin-left:15px;color:#555;font-size:17px;font-weight:500">
+  <div *ngIf="tienda.isEquipo" style="margin-top:10px;margin-left:15px;color:#555;font-size:17px;font-weight:500">
     Nuestro equipo
   </div>
-  <ion-scroll scrollX="true" style="display:flex;height:180px;margin-left:10px">
+  <ion-scroll *ngIf="tienda.isEquipo" scrollX="true" style="display:flex;height:180px;margin-left:10px">
     <ion-grid>
       <ion-row nowrap>
         <ion-col *ngFor="let persona of equipo" col-4>
@@ -322,60 +182,61 @@
 
   <button ion-item no-lines>
     <div style="margin-left:0px;color:#555;font-size:16px;font-weight:500">
-      Comentarios (26)
+      Comentarios ({{tienda.comentarios}})
     </div>
     <ion-icon name="ios-arrow-forward" item-end style="color:#bbb;font-size:18px"></ion-icon>
   </button>
 
-  <div padding>
-    <div style="display:flex;align-items:center">
+  <div padding *ngFor="let comentario of comentarios">
+    <div style="display:flex;align-items:center;width:100%">
       <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552589801/adadafff.jpg"
-      style="height:35px;width:35px;border-radius:50%;object-fit:cover">
-    
-      <div style="margin-left:10px;color:#555;font-weight:500;font-size:14px">
-        Danielasd
+        style="height:35px;width:35px;border-radius:50%;object-fit:cover">
+
+      <div
+        style="margin-left:10px;font-weight:500;font-size:15px;width:100%;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          Danielsd
+          <div style="padding:3px;">
+            <div style="display:inline-block;font-size:14px;color:darkorange">
+              3
+            </div>
+            <ion-icon name="star" style="display:inline-block;color:darkorange;font-size:18px;"></ion-icon>
+
+            <div
+              style="background:#bbb;display:inline-block;width:5px;height:5px;margin-bottom:2px;margin-left:2px;margin-right:2px;border-radius:50%">
+            </div>
+
+            <div style="display:inline-block;font-weight:400;color:gray;font-size:12px;">
+              5 RESEÑAS
+            </div>
+            <div
+              style="background:#bbb;display:inline-block;width:5px;height:5px;margin-bottom:2px;margin-left:2px;margin-right:2px;border-radius:50%">
+            </div>
+
+            <div style="display:inline-block;font-weight:400;font-size:14px;color:gray;">
+              hace 3 horas
+            </div>
+
+          </div>
+
+        </div>
+        <div>
+          <ion-icon name="ios-thumbs-up-outline" style="color:#bbb;font-size:22px;margin-right:5px"></ion-icon>
+        </div>
       </div>
     </div>
-    <div style="margin-top:15px;margin-left:20px;font-size:14px;color:#777">
+    <div style="margin-top:15px;margin-left:20px;font-size:14.5px;color:#777">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam odit quam itaque illo rem id eos fugiat esse fuga
       explicabo sapiente assumenda, placeat enim exercitationem, quas alias accusantium recusandae reprehenderit.
     </div>
     <div style="display:flex;justify-content:flex-start;padding-left:20px;padding-top:5px">
       <div
         style="height:60px;width:70px;margin-right:10px;background-size:cover;background-repeat:no-repeat;background-position:center;"
-        [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553510792/-qUYbkgS3zf8GMPRVObTKF87fS4iBkpU5A4hPdkdJk0vRWHtzp09SSRXX41mbWnzHB1FIzxqqv4y1DPjvSHfJsPMUtGpjXdtO1pf5OouG4AnY08TQIxe-DkxF3-YDtNHvJLBPMnbGaim65JmQfWVIQ.jpg' + ')' }">
+        [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1556493295/maqueta/52599268_2138836749536414_2309583698095243264_n.jpg' + ')' }">
       </div>
       <div
         style="height:60px;width:70px;margin-right:10px;background-size:cover;background-repeat:no-repeat;background-position:center;"
-        [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553510792/mrlAiLjnqoSI4AyKm2xKq1dRVSgSQYHFzFj-HSK8DWWJBwrNOmnIwHEWfRy5wbABHB1FIzxqqv4y1DPjvSHfJsPMUtGpjXdtO1pf5OouG4AnY08TQIxe-DkxF3-YDtNHvJLBPMnbGaim65JmQfWVIQ.jpg' + ')' }">
-      </div>
-      <div
-        style="height:60px;width:70px;margin-right:10px;background-size:cover;background-repeat:no-repeat;background-position:center;"
-        [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553510792/-ona9n4gyzFRPiy_2xRJV_sMmtc4vbuYM1NW44vnLB5bYlzJpi_zp7Fotso-MdlkHB1FIzxqqv4y1DPjvSHfJsPMUtGpjXdtO1pf5OouG4AnY08TQIxe-DkxF3-YDtNHvJLBPMnbGaim65JmQfWVIQ.jpg' + ')' }">
-      </div>
-    </div>
-  </div>
-
-  <div padding>
-    <div style="display:flex;align-items:center">
-      <img src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552590009/28477__162_a_2.jpg"
-      style="height:35px;width:35px;border-radius:50%;object-fit:cover">
-    
-      <div style="margin-left:10px;color:#555;font-weight:500;font-size:15px">
-        Ferh Fuentes
-      </div>
-    </div>
-    <div style="margin-top:15px;margin-left:20px;font-size:14px;color:#777">
-      Fugiat esse ercitationem, quas alias accusantium recusandae reprehenderit.
-    </div>
-    <div style="display:flex;justify-content:flex-start;padding-left:20px;padding-top:5px">
-      <div
-        style="height:60px;width:70px;margin-right:10px;background-size:cover;background-repeat:no-repeat;background-position:center;"
-        [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553510792/JPp6e4Piahyn1R3I2NAnhHQtafTYcRB655qo5meMF9ZNb47C7wcu_HF-6FtF-Dc2HB1FIzxqqv4y1DPjvSHfJsPMUtGpjXdtO1pf5OouG4AnY08TQIxe-DkxF3-YDtNHvJLBPMnbGaim65JmQfWVIQ.jpg' + ')' }">
-      </div>
-      <div
-        style="height:60px;width:70px;margin-right:10px;background-size:cover;background-repeat:no-repeat;background-position:center;"
-        [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553510792/X3tvLPYJ4PjIV7iBYPbGNlR-hmA88izuOcSiEedoAwNvjIgTf7l4C8rpvMLZ43pOHB1FIzxqqv4y1DPjvSHfJsPMUtGpjXdtO1pf5OouG4AnY08TQIxe-DkxF3-YDtNHvJLBPMnbGaim65JmQfWVIQ.jpg' + ')' }">
+        [ngStyle]="{'background-image': 'url(' + 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1556493295/maqueta/52513914_2138836799536409_3769148541738418176_n.jpg' + ')' }">
       </div>
     </div>
   </div>
@@ -384,11 +245,4 @@
   <div style="height:30px"></div>
 
 
-
 </ion-content>
-
-<!-- <ion-footer padding no-border>
-  <div style="width:100%;">
-
-  </div>
-</ion-footer> -->

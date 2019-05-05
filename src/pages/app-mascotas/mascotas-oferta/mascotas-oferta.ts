@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { IntroduccionPage } from '../introduccion/introduccion';
-import { ConfigProvider } from '../../../providers/config/config';
-import { MaquetaProvider } from '../../../providers/maqueta/maqueta';
 import { MascotasReservasPage } from '../mascotas-reservas/mascotas-reservas';
 import { MascotasProvider } from '../../../providers/mascotas/mascotas';
 
@@ -13,47 +11,33 @@ import { MascotasProvider } from '../../../providers/mascotas/mascotas';
 })
 export class MascotasOfertaPage {
 
-  tipo: string;
-  from: string;
-  data: any;
-  payload: object;
+  cupon: any;
+  tienda: any;
 
   reserva_OK: any;
   reserva_seleccionada: any;
   user: any;
+
+  mostrarBotonPagar: boolean;
 
   cliente_esta_comprando = false;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private _config: ConfigProvider,
-    public _maqueta: MaquetaProvider,
     private modalCtrl: ModalController,
     private _mascota: MascotasProvider
   ) {
-    this.tipo = this.navParams.get('tipo');
-    this.payload = this.navParams.get('payload');
-    this.from = this.navParams.get('from');
-
-    this.setData();
+    this.mostrarBotonPagar = this.navParams.get('mostrarBotonPagar');
+    this.cupon = this.navParams.get('cupon');
+    this.tienda = this.navParams.get('tienda');
   }
 
-  setData() {
-    if (this.tipo === 'mascotas' && this._config.MAQUETA) {
-      this.data = this._maqueta.crearCuponMascotas();
-    }
-    if (this.from === 'tienda-mascotas') {
-      this.data = this.payload;
-    }
-  }
 
   openReservas() {
 
     let modal = this.modalCtrl.create(MascotasReservasPage, {
-      cuponID: this.data._id,
-      semana: this.data.semana,
-      seleccionPrevia: this.reserva_seleccionada
+      cuponID: this.cupon._id
     });
 
     modal.onDidDismiss(data => {
@@ -75,7 +59,7 @@ export class MascotasOfertaPage {
   }
 
   checkear() {
-    if (this.data.isReserva && this.reserva_seleccionada) {
+    if (this.cupon.isReserva && this.reserva_seleccionada) {
       return;
     } else {
       this.openReservas();
@@ -86,7 +70,7 @@ export class MascotasOfertaPage {
 
     this.cliente_esta_comprando = true;
 
-    if (this.data.isReserva && this.reserva_seleccionada) {
+    if (this.cupon.isReserva && this.reserva_seleccionada) {
       this.crearCompra();
     } else {
       this.openReservas();
@@ -96,7 +80,7 @@ export class MascotasOfertaPage {
   crearCompra() {
     const compra = {
       tipo: 'cupon',
-      cupon: this.data,
+      cupon: this.cupon,
       cliente: {
         id: this.user._id,
         nombre: this.user.name,
@@ -110,12 +94,12 @@ export class MascotasOfertaPage {
       }
     }
 
-    this._mascota.comprarCupon(this.data._id, compra)
+    this._mascota.comprarCupon(this.cupon._id, compra)
       .then((data: any) => {
         if (data.ok) {
           console.log('Compra Exitosa');
         } else {
-          console.log('Ups, una persona justo acaba de reservar tu hora..');
+          console.log('Ups, una persona acaba de reservar tu hora..');
         }
       });
   }

@@ -1,0 +1,81 @@
+<ion-header>
+
+  <ion-navbar color="orange4">
+    <ion-buttons left>
+      <button (click)="close()" ion-button icon-only>
+        <ion-icon name="md-close" style="color:white"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Configuraciones</ion-title>
+  </ion-navbar>
+
+
+</ion-header>
+
+
+<ion-content>
+  
+  <ion-list text-wrap>
+    <ion-item no-lines>
+
+      <ion-icon item-start name="time" style="color:#bbb"></ion-icon>
+
+      <div style="margin-bottom:5px;color:#444;font-size:18px">
+        Reservación
+      </div>
+      <div style="color:#888;font-size:14px">
+        Definir tiempo de antelación mínimo para hacer reservaciones
+      </div>
+
+    </ion-item>
+
+    <div style="width:100%;display:flex;justify-content:flex-end;padding-right:15px">
+      <div style="margin-top:10px;display:flex;align-items:center;justify-content:flex-end">
+        <div
+          style="font-size:20px;color:#666;border:1px solid #eee;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center">
+          -
+        </div>
+        <div style="font-size:16px;color:#666;margin-right:22px;margin-left:22px">
+          3 horas
+        </div>
+        <div
+          style="font-size:20px;color:#666;border:1px solid #eee;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center">
+          +
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+
+
+    <ion-item *ngIf="false">
+
+      <div style="color:#888;font-size:16px">
+        Definir cuánto dura cada cita:
+      </div>
+
+      <div style="margin-top:10px;display:flex;align-items:center;justify-content:flex-end">
+        <div
+          style="font-size:20px;color:#666;border:1px solid #eee;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center">
+          -
+        </div>
+        <div style="font-size:16px;color:#666;margin-right:22px;margin-left:22px">
+          15 min
+        </div>
+        <div
+          style="font-size:20px;color:#666;border:1px solid #eee;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center">
+          +
+        </div>
+      </div>
+
+    </ion-item>
+
+
+
+
+  </ion-list>
+
+
+
+</ion-content>

@@ -10,30 +10,31 @@ import { MascotasPaquetePage } from '../mascotas-paquete/mascotas-paquete';
 })
 export class MascotasContentPage {
 
-  equipo = [
-    {
-      nombre: 'Eduardo',
-      cargo: 'Veterinario',
-      img: 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553485595/dgfhjo.jpg'
-    },
-    {
-      nombre: 'Camila',
-      cargo: 'Estudiante',
-      img: 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553485595/ImageServlet.jpg'
-    },
-    {
-      nombre: 'Daniela',
-      cargo: 'Recepcionista',
-      img: 'https://res.cloudinary.com/ddon9fx1n/image/upload/v1553485595/depositphotos_136696658-stock-video-beauty-salon-receptionist-answering-clients.jpg'
-    }
-  ]
+  equipo = [];
+  cupones = [];
+  comentarios = [];
+  tienda: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams
+  ) {
+    this.tienda = this.navParams.get('tienda');
   }
+
+
+  openCupon(cupon) {
+    this.navCtrl.push(MascotasOfertaPage, { 
+      tienda: this.tienda,
+      mostrarBotonPagar: true,
+      cupon: cupon
+    });
+  }
+
 
   openPromo(tipo) {
     if (tipo == 'oferta') {
-      this.navCtrl.push(MascotasOfertaPage, { tipo: 'mascotas', from: 'mascotas-content' });
+      this.navCtrl.push(MascotasOfertaPage, { tipo: 'mascotas', mostrarBotonPagar: true });
     } else {
       this.navCtrl.push(MascotasPaquetePage, { tipo: 'mascotas' });
     }

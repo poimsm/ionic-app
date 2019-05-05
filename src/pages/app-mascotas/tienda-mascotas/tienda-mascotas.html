@@ -32,24 +32,12 @@
 
     <ion-list text-wrap>
       <button ion-item (click)="openPage(datos)">
-        <img item-start
-          src="https://res.cloudinary.com/ddon9fx1n/image/upload/v1552675605/9bbf1121d6595266dd37d89201d5fdbd.gif"
-          style="height:80px;width:90px;border-radius:10px;object-fit:cover">
+        <div *ngIf="tienda" item-start
+          style="min-height:80px;width:90px;border-radius:10px;border:1px solid #eee;background-size:cover;background-repeat: no-repeat;background-position: center;"
+          [ngStyle]="{'background-image': 'url(' + tienda?.logo.url + ')' }">
+        </div>
         <div style="font-size:16px;color:#777;">
           {{tienda?.nombre}}
-          <!-- <div style="display:flex;align-items:center">
-            <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
-            <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
-            <ion-icon name="star" style="color:orange;font-size:20px;margin-right:5px"></ion-icon>
-            <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
-            <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
-            <div style="color:#999;font-size:15px">
-              (26)
-            </div>
-          </div>
-          <div style="color:darkorange;font-size:14px;margin-left:10px">
-            14 comentarios
-          </div> -->
         </div>
       </button>
     </ion-list>
@@ -88,11 +76,12 @@
 
     <div style="display:flex;align-items:center;justify-content:space-between">
       <div style="display:flex;flex-wrap:wrap">
-        <div *ngFor="let servicio of tienda?.servicios"
-          style="margin-bottom:5px;width:50%;display:flex;align-items:flex-start">
-          <ion-icon name="checkmark-circle-outline" style="color:#bbb;font-size:16px"></ion-icon>
-          <div style="color:#999;font-size:13px;margin-left:5px">
-            {{servicio}}
+        <div *ngFor="let servicio of tienda?.servicios; let i = index" style="margin-bottom:5px;width:50%">
+          <div *ngIf="i <= 3" style="display:flex;align-items:flex-start">
+            <ion-icon name="checkmark-circle-outline" style="color:#bbb;font-size:16px"></ion-icon>
+            <div style="color:#999;font-size:13px;margin-left:5px">
+              {{servicio}}
+            </div>
           </div>
         </div>
       </div>
@@ -114,8 +103,9 @@
 
   <div padding>
     <div style="font-size:15px;color:#333;font-weight:600;display:flex;align-items:center">
-      Clínica veterinara My Pets
-      <ion-icon *ngIf="tienda?.isCupon" name="custom-coupon" style="color:gold;font-size:16px;margin-left:5px"></ion-icon>
+      {{tienda?.descripcion}}
+      <ion-icon *ngIf="tienda?.isCupon" name="custom-coupon" style="color:gold;font-size:16px;margin-left:5px">
+      </ion-icon>
     </div>
     <div style="display:flex;align-items:center">
       <ion-icon name="star" style="color:#eee;font-size:20px;margin-right:5px"></ion-icon>
@@ -137,24 +127,33 @@
     </div>
 
     <div style="margin-top:3px;color:#999;font-size:15px">
-      7:30 - 18:30 abierto
+      {{tienda?.nombre}}
     </div>
 
     <div style="margin-top:3px;width:100%;display:flex;justify-content:space-around;align-items:center">
-      
-      <img *ngIf="tienda?.tresImgs[0].isActive" (click)="presentActionSheet(0)" [src]="tienda?.tresImgs[0].img" style="height:100px;width:30%;object-fit:cover">
+
+      <div *ngIf="tienda?.tresImgs[0].isActive" (click)="presentActionSheet(0)"
+        style="height:100px;width:30%;background-size:cover;background-repeat:no-repeat;background-position:center;"
+        [ngStyle]="{'background-image': 'url(' + tienda?.tresImgs[0].url + ')' }">
+      </div>
       <div *ngIf="!tienda?.tresImgs[0].isActive" (click)="presentActionSheet(0)"
         style="border:1px solid red;width:30%;height:100px;display:flex;align-items:center;justify-content:center">
         <ion-icon item-start name="md-images" style="color:#bbb;font-size:50px"></ion-icon>
       </div>
 
-      <img *ngIf="tienda?.tresImgs[1].isActive" (click)="presentActionSheet(1)" [src]="tienda?.tresImgs[1].img" style="height:100px;width:30%;object-fit:cover">
+      <div *ngIf="tienda?.tresImgs[1].isActive" (click)="presentActionSheet(1)"
+        style="height:100px;width:30%;background-size:cover;background-repeat:no-repeat;background-position:center;"
+        [ngStyle]="{'background-image': 'url(' + tienda?.tresImgs[1].url + ')' }">
+      </div>
       <div *ngIf="!tienda?.tresImgs[1].isActive" (click)="presentActionSheet(1)"
         style="border:1px solid #eee;width:30%;height:100px;display:flex;align-items:center;justify-content:center">
         <ion-icon item-start name="md-images" style="color:#bbb;font-size:50px"></ion-icon>
       </div>
 
-      <img *ngIf="tienda?.tresImgs[2].isActive" (click)="presentActionSheet(2)" [src]="tienda?.tresImgs[2].img" style="height:100px;width:30%;object-fit:cover">
+      <div *ngIf="tienda?.tresImgs[2].isActive" (click)="presentActionSheet(2)"
+        style="height:100px;width:30%;background-size:cover;background-repeat:no-repeat;background-position:center;"
+        [ngStyle]="{'background-image': 'url(' + tienda?.tresImgs[2].url + ')' }">
+      </div>
       <div *ngIf="!tienda?.tresImgs[2].isActive" (click)="presentActionSheet(2)"
         style="border:1px solid #eee;width:30%;height:100px;display:flex;align-items:center;justify-content:center">
         <ion-icon item-start name="md-images" style="color:#bbb;font-size:50px"></ion-icon>
@@ -177,10 +176,10 @@
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </button>
 
-  <button (click)="openPage(misProductos)" ion-item style="margin:10px;background:white" no-lines>
+  <button (click)="openProductos()" ion-item style="margin:10px;background:white" no-lines>
     <ion-icon item-start name="flash" style="color:#bbb;font-size:30px"></ion-icon>
     <div style="color:#666;font-size:18px;font-weight:500">
-      Cupones (4)
+      Cupones
     </div>
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </button>
@@ -188,16 +187,16 @@
   <button (click)="openPage(misVentas)" ion-item style="margin:10px;background:white" no-lines>
     <ion-icon item-start name="trending-up" style="color:#bbb;font-size:30px"></ion-icon>
     <div style="color:#666;font-size:18px;font-weight:500">
-      Ventas (42)
+      Ventas
     </div>
     <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
   </button>
 
   <div style="margin-top:10px;height:10px;width:100%;background:rgb(250, 250, 250)">
-    </div>
+  </div>
 
-  <button (click)="nuevoActionSheet()" ion-item style="margin:10px;background:white" no-lines>
-    <ion-icon item-start name="md-images" style="color:#bbb;font-size:30px"></ion-icon>
+  <button (click)="openAgenda()" ion-item style="margin:10px;background:white" no-lines>
+    <ion-icon item-start name="md-calendar" style="color:#bbb;font-size:30px"></ion-icon>
     <div style="color:#666;font-size:18px;font-weight:500">
       Mi agenda
     </div>
@@ -205,21 +204,21 @@
   </button>
 
   <button (click)="nuevoActionSheet()" ion-item style="margin:10px;background:white" no-lines>
-      <ion-icon item-start name="md-images" style="color:#bbb;font-size:30px"></ion-icon>
-      <div style="color:#666;font-size:18px;font-weight:500">
-        Beneficios
-      </div>
-      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
-    </button>
+    <ion-icon item-start name="custom-money-bag" style="color:#bbb;font-size:30px"></ion-icon>
+    <div style="color:#666;font-size:18px;font-weight:500">
+      Beneficios
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
 
   <button (click)="nuevoActionSheet()" ion-item style="margin:10px;background:white" no-lines>
-      <ion-icon item-start name="md-images" style="color:#bbb;font-size:30px"></ion-icon>
-      <div style="color:#666;font-size:18px;font-weight:500">
-        Mi equipo
-      </div>
-      <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
-    </button>
-  
+    <ion-icon item-start name="md-person-add" style="color:#bbb;font-size:30px"></ion-icon>
+    <div style="color:#666;font-size:18px;font-weight:500">
+      Mi equipo
+    </div>
+    <ion-icon item-end name="ios-arrow-forward" style="color:#bbb;font-size:20px"></ion-icon>
+  </button>
+
 
 
 

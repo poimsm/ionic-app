@@ -108,7 +108,8 @@ import {
   MascotaContentExpPage,
   MascotasExpPage,
   OfertaExpPage,
-  PaqueteExpPage
+  PaqueteExpPage,
+  TiendaMascotasAgendaConfigPage
 } from "../pages/index.pages";
 import { MyApp } from "./app.component";
 import { DataProvider } from "../providers/data/data";
@@ -129,6 +130,7 @@ import { SeccionesComponent } from "../components/secciones/secciones";
 import { SeccionesProvider } from '../providers/secciones/secciones';
 import { FormularioHorarioComponent } from "../components/formulario-horario/formulario-horario";
 import { ControlProvider } from '../providers/control/control';
+import { AgendaProvider } from '../providers/agenda/agenda';
 
 
 
@@ -211,7 +213,8 @@ import { ControlProvider } from '../providers/control/control';
     MascotaContentExpPage,
     MascotasExpPage,
     OfertaExpPage,
-    PaqueteExpPage
+    PaqueteExpPage,
+    TiendaMascotasAgendaConfigPage
   ],
   imports: [
     BrowserModule,
@@ -304,7 +307,8 @@ import { ControlProvider } from '../providers/control/control';
     MascotaContentExpPage,
     MascotasExpPage,
     OfertaExpPage,
-    PaqueteExpPage
+    PaqueteExpPage,
+    TiendaMascotasAgendaConfigPage
   ],
   providers: [
     StatusBar,
@@ -331,6 +335,7 @@ import { ControlProvider } from '../providers/control/control';
     MaquetaProvider,
     SeccionesProvider,
     ControlProvider,
+    AgendaProvider,
 
     // AngularFireDatabase
   ]

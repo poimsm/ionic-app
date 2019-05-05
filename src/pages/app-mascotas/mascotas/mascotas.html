@@ -69,9 +69,9 @@
       </div>
 
       <div style="margin-top:2px;width:100%;display:flex;justify-content:space-between">
-        <div *ngFor="let item of tienda.tresImgs"
+        <div *ngFor="let img of tienda.tresImgs"
           style="height:90px;width:32%;background-size:cover;background-repeat:no-repeat;background-position:center"
-          [ngStyle]="{'background-image': 'url(' + item.img + ')' }">
+          [ngStyle]="{'background-image': 'url(' + img.url + ')' }">
         </div>
       </div>
     </div>

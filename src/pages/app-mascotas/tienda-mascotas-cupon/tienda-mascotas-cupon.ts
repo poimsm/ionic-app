@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, Platform, ActionSheetController, T
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImageProvider } from '../../../providers/image/image';
 import { MascotasProvider } from '../../../providers/mascotas/mascotas';
-import { TiendaMascotasAgendaPage } from '../tienda-mascotas-agenda/tienda-mascotas-agenda';
 import { SemanaProvider } from '../../../providers/semana/semana';
 
 
@@ -25,7 +24,6 @@ export class TiendaMascotasCuponPage {
   imagenes = [];
   reservas = [];
 
-  dias = [];
 
   showIncluye = false;
   showCondiciones = false;
@@ -92,22 +90,7 @@ export class TiendaMascotasCuponPage {
   ) {    
 
     this.tiendaID = this.navParams.get('tiendaID');
-    _mascotas.getTresDias().then((data: any) => {
-      this.dias.forEach((item, i) => {
-        item.dia = data[i].dia;
-        item.fecha = data[i].fecha;
-      });
-    });
   }
-
-  onChange(event) {
-    event.checked ? this.presentSemana(): console.log('s');    
-  }
-
-  presentSemana() {    
-    const modal = this.modalCtrl.create(TiendaMascotasAgendaPage);
-    modal.present();
-  }  
 
   addCondicion() {
     const i = this.condiciones.length + 1;

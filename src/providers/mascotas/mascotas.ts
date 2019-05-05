@@ -100,12 +100,7 @@ export class MascotasProvider {
     return this.http.get(url).toPromise();
   }
 
-  getTresDias() {
-    const url = `${this.apiURL}/mascotas/obtener-tres-dias`;
-    return this.http.get(url).toPromise();
-  }
-
-  updateCredencialesTienda(id, body) {
+    updateCredencialesTienda(id, body) {
     const url = `${this.apiURL}/mascotas/actualizar-credenciales-tienda/${id}`;
     return this.http.put(url, body).toPromise();
   }

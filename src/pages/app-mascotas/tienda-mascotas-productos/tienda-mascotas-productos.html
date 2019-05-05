@@ -1,7 +1,7 @@
-<ion-header>
+<ion-header no-border>
 
-  <ion-navbar>
-    <ion-title>tienda-mascotas-productos</ion-title>
+  <ion-navbar color="white">
+    <ion-title>Cupones</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -10,16 +10,18 @@
 <ion-content>
 
   <ion-list no-lines>
-
-    <button *ngFor="let cupon of data" ion-item (click)="openCupon(cupon)">
-      <img item-start [src]="cupon.imgs[0].img" style="height:80px;width:80px;object-fit:cover">
+    <button *ngFor="let cupon of cupones" ion-item (click)="openCupon(cupon)">
+      <div item-start
+        style="height:80px;width:80px;background-size:cover;background-repeat:no-repeat;background-position:center;"
+        [ngStyle]="{'background-image': 'url(' + cupon.imgs[0].url + ')' }">
+      </div>
       <div style="font-size:16px;color:#777">
         {{cupon.titulo}}
       </div>
       <div style="color:darkorange;font-size:18px">
-        $ {{cupon.precio.normal}}
+        ${{cupon.precio.oferta}}
         <span style="color:#999;font-size:13px">
-          14 vendidos
+          {{cupon.buys}} vendidos
         </span>
       </div>
       <div

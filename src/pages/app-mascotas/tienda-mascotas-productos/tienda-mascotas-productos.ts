@@ -9,8 +9,9 @@ import { MascotasOfertaPage } from '../mascotas-oferta/mascotas-oferta';
   templateUrl: 'tienda-mascotas-productos.html',
 })
 export class TiendaMascotasProductosPage {
-  data = [];
+  cupones = [];
   tiendaID: string;
+  tienda: any;
 
   constructor(
     public navCtrl: NavController,
@@ -18,25 +19,21 @@ export class TiendaMascotasProductosPage {
     public _mascotas: MascotasProvider
   ) {
     this.tiendaID = this.navParams.get('tiendaID');
-    this.obtenerData();
+    this.tienda = this.navParams.get('tienda');
+    this.loadCupones();
   }
 
-  obtenerData() {
+  loadCupones() {
     this._mascotas.getCuponesPorTienda(this.tiendaID)
-      .then((data: any) => this.data = data);
+      .then((data: any) => this.cupones = data);
   }
 
   openCupon(cupon) {
     this.navCtrl.push(MascotasOfertaPage, {
-      tipo: 'mascotas',
-      payload: cupon,
-      from: 'tienda-mascotas'
+      cupon: cupon,
+      tienda: this.tienda,
+      mostrarCuponPagar: false
     });
-  }
-  
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TiendaMascotasProductosPage');
   }
 
 }

@@ -2,10 +2,10 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, Platform, ActionSheetController, ToastController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ImageProvider } from '../../../providers/image/image';
-import { DataProvider } from '../../../providers/data/data';
-
 import { Content } from 'ionic-angular';
 import { ControlProvider } from '../../../providers/control/control';
+import { AgendaProvider } from '../../../providers/agenda/agenda';
+import { MascotasProvider } from '../../../providers/mascotas/mascotas';
 
 
 @IonicPage()
@@ -148,7 +148,6 @@ export class FormularioStartPage {
     }
   ];
 
-  tresImgs = [{ isActive: false }, { isActive: false }, { isActive: false }];
 
   misCategorias = [];
   tipos = [];
@@ -163,9 +162,10 @@ export class FormularioStartPage {
     private camera: Camera,
     private actionSheetCtrl: ActionSheetController,
     private _img: ImageProvider,
-    private _data: DataProvider,
     public toastCtrl: ToastController,
-    private _control: ControlProvider
+    private _control: ControlProvider,
+    private _agenda: AgendaProvider,
+    private _mascota: MascotasProvider
   ) {
     this.tiendaID = this.navParams.get('tiendaID');
     this.token = this.navParams.get('token');
@@ -260,6 +260,7 @@ export class FormularioStartPage {
     this.step = `${this.indexStep + 1}/3`;
   }
 
+  
   close(crearTienda) {
     if (crearTienda) {
       const servActivos = [];
@@ -280,10 +281,10 @@ export class FormularioStartPage {
         horario: this._control.horario,
         isFirstLoggin: false,
         categorias: this.misCategorias,
-        tresImgs: this.tresImgs,
         isActive: false
       };
-      this._data.updateTienda_Mascota(this.tiendaID, data)
+      this._agenda.inicializarAgenda(this.tiendaID);
+      this._mascota.updateTienda(this.tiendaID, data)
         .then(() => {
           this.viewCtrl.dismiss({ ok: true });
         });
@@ -368,8 +369,6 @@ export class FormularioStartPage {
     }
     return flag;
   }
-
-
 
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
