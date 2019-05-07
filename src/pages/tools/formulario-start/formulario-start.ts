@@ -102,21 +102,25 @@ export class FormularioStartPage {
         {
           nombre: 'Rostro',
           nombreCorto: 'Rostro',
+          desc: 'Hola esto es una descripcion 1',
           isActive: false
         },
         {
           nombre: 'Piel',
           nombreCorto: 'Rostro',
+          desc: 'Hola esto es una descripcion 2',
           isActive: false
         },
         {
           nombre: 'Uñas',
           nombreCorto: 'Rostro',
+          desc: 'Hola esto es una descripcion 3',
           isActive: false
         },
         {
           nombre: 'Cabello',
           nombreCorto: 'Rostro',
+          desc: 'Hola esto es una descripcion',
           isActive: false
         },
       ]
@@ -127,30 +131,38 @@ export class FormularioStartPage {
         {
           nombre: 'Corte de cabello',
           nombreCorto: 'Rostro',
+          desc: 'Hola esto es una descripcion',
           isActive: false
         },
         {
           nombre: 'Tatuajes',
           nombreCorto: 'Rostro',
+          desc: 'Hola esto es una descripcion',
           isActive: false
         },
         {
           nombre: 'Barbería',
           nombreCorto: 'Rostro',
+          desc: 'Hola esto es una descripcion',
           isActive: false
         },
         {
           nombre: 'Perforaciones',
           nombreCorto: 'Rostro',
+          desc: 'Hola esto es una descripcion',
           isActive: false
         },
       ]
     }
   ];
 
-
+  otroServicio: string;
   misCategorias = [];
   tipos = [];
+  descCat: string;
+  nombreCat: string;
+  descLength = 0;
+  descInput: string;
 
   descripcion: string;
 
@@ -171,6 +183,7 @@ export class FormularioStartPage {
     this.token = this.navParams.get('token');
     this.crearSteps();
   }
+
 
   agregarCategoria(i, j) {
 
@@ -214,6 +227,31 @@ export class FormularioStartPage {
       });
     });
 
+    this.descCat = '';
+    this.nombreCat = '';
+    let length = this.misCategorias.length;
+
+    this.secciones.forEach(seccion => {
+      seccion.categorias.forEach(categoria => {
+        if (this.misCategorias[length - 1] == categoria.nombre) {
+          this.descCat = categoria.desc;
+          this.nombreCat = categoria.nombre;
+        }
+      });
+    });
+
+  }
+
+  detectarLongitud() {
+    if (this.descInput) {
+      if (this.descInput.length >= 55) {
+        this.descripcion = this.descInput.substring(0, 55);
+        this.descLength = 55;
+      } else {
+        this.descripcion = this.descInput;
+        this.descLength = this.descripcion.length;
+      }
+    }
   }
 
   obtenerTipos() {
@@ -260,7 +298,7 @@ export class FormularioStartPage {
     this.step = `${this.indexStep + 1}/3`;
   }
 
-  
+
   close(crearTienda) {
     if (crearTienda) {
       const servActivos = [];
@@ -276,6 +314,7 @@ export class FormularioStartPage {
         descripcion: this.descripcion,
         isTarjeta: this.isTarjeta,
         servicios: servActivos,
+        otroServicio: this.otroServicio,
         logo: this.logo,
         tipos: this.tipos,
         horario: this._control.horario,
@@ -310,8 +349,8 @@ export class FormularioStartPage {
     let step = this.pasoActual();
 
     if (step == 1) {
-      // allGood = true;
-      allGood = this.revisarCredenciales();
+      allGood = true;
+      // allGood = this.revisarCredenciales();
 
     } else if (step == 2) {
 

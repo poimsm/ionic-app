@@ -230,5 +230,20 @@ ion-icon {
   &[class*="money-bag"] {
     mask-image: url(../assets/money-bag.svg);
   }
+  &[class*="delivery-bike"] {
+    mask-image: url(../assets/delivery-bike.svg);
+  }
+  &[class*="scooter"] {
+    mask-image: url(../assets/scooter.svg);
+  }
+  &[class*="mitten"] {
+    mask-image: url(../assets/mitten.svg);
+  }
+  &[class*="massage-spa"] {
+    mask-image: url(../assets/massage-spa.svg);
+  }
+  &[class*="barefoot"] {
+    mask-image: url(../assets/barefoot.svg);
+  }
 
 }

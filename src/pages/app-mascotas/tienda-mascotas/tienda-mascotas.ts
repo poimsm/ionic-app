@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, Platform, NavParams, ActionSheetController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, Platform, NavParams, ActionSheetController, ModalController, LoadingController } from 'ionic-angular';
 import { TiendaMascotasVentasPage } from '../tienda-mascotas-ventas/tienda-mascotas-ventas';
 import { TiendaMascotasProductosPage } from '../tienda-mascotas-productos/tienda-mascotas-productos';
 import { TiendaMascotasNuevoPage } from '../tienda-mascotas-nuevo/tienda-mascotas-nuevo';
@@ -37,6 +37,8 @@ export class TiendaMascotasPage {
 
   tresImgs = [];
 
+  loadingData = true;
+
   indexTresImg = 0;
 
   constructor(
@@ -47,39 +49,54 @@ export class TiendaMascotasPage {
     private _mascota: MascotasProvider,
     private platform: Platform,
     private _img: ImageProvider,
-    private camera: Camera
-
+    private camera: Camera,
+    public loadingCtrl: LoadingController
   ) {
     this.tiendaID = this.navParams.get('tiendaID');
   }
 
   ionViewDidEnter() {
-    this.reloadTienda();
-    this.reloadToday();
+    this.loadTienda();
+  } 
+
+  presentLoadingDefault() {
+    
   }
 
-  reloadToday() {
-    this._mascota.getToday()
-      .then((data: any) => {
-        this.hoy = data.today;
-      });
-  }
+  loadTienda() {
 
-  reloadTienda() {
+    let loading = this.loadingCtrl.create({
+      content: 'Porfavor espere...'
+    });
+  
+    loading.present(); 
+
     this._mascota.getOneTienda(this.tiendaID)
       .then((data: any) => {
+
+        loading.dismiss();
+
         this.tienda = data;
         this.tresImgs = data.tresImgs;
 
-        this.tienda.horario.forEach(item => {
-          if (item.nombre == this.hoy) {
-            if (item.cerrado) {
+        this.displayHorario(this.tienda.horario);
+      });
+  }
+
+  displayHorario(horario) {
+    this._mascota.getToday()
+      .then((data: any) => {       
+        
+        horario.forEach(dia => {
+          if (dia.dia == data.today) {
+            
+            if (dia.cerrado) {
               this.horario = 'Hoy cerrado'
             } else {
-              this.horario = `${item.inicio} - ${item.cierre}`;
+              this.horario = `${dia.inicio} - ${dia.cierre}`;
             }
           }
-        });
+        });        
       });
   }
 
@@ -114,9 +131,9 @@ export class TiendaMascotasPage {
 
   openProductos() {
     this.navCtrl.push(TiendaMascotasProductosPage, {
-       tiendaID: this.tiendaID,
+      tiendaID: this.tiendaID,
       tienda: this.tienda
-      });
+    });
   }
 
   openAgenda() {
@@ -220,7 +237,7 @@ export class TiendaMascotasPage {
     }
 
     this._mascota.updateTienda(this.tiendaID, updateTiendaData)
-      .then(() => this.reloadTienda());
+      .then(() => this.loadTienda());
   }
 
 

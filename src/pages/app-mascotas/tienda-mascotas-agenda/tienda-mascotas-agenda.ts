@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { TiendaMascotasAgendaConfigPage } from '../tienda-mascotas-agenda-config/tienda-mascotas-agenda-config';
 import { AgendaProvider } from '../../../providers/agenda/agenda';
 
@@ -18,7 +18,8 @@ export class TiendaMascotasAgendaPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private _agenda: AgendaProvider,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    public loadingCtrl: LoadingController
   ) {
     this.tiendaID = this.navParams.get('tiendaID');
     this.obtenerDias();
@@ -33,8 +34,15 @@ export class TiendaMascotasAgendaPage {
   }
 
   obtenerDias() {
+    let loading = this.loadingCtrl.create({
+      content: 'Porfavor espere...'
+    });
+  
+    loading.present();
+  
     this._agenda.construirDias(this.tiendaID)
       .then((dias: any) => {
+        loading.dismiss();
         this.dias = dias;
         this.dias[1].isActive = true;
       });
@@ -52,7 +60,11 @@ export class TiendaMascotasAgendaPage {
   activarHora(indexDia, indexHora, isActual) {
 
     if (!isActual) {
-      return
+      return;
+    }
+
+    if (indexHora == 0) {
+      return;
     }
 
     this.dias[indexDia].horas[indexHora].isActive = !this.dias[indexDia].horas[indexHora].isActive;
